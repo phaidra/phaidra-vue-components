@@ -130,6 +130,15 @@ export default {
     PDLicense
   },
   methods: {
+    getRoleLabel: function (role) {
+      var id = role.substring(role.indexOf(':') + 1)
+      var roleTerms = this.vocabularies['https://phaidra.org/vocabulary/role'].terms
+      for (var i = 0; i < roleTerms.length; i++) {
+        if (roleTerms[i]['@id'] === id) {
+          return roleTerms[i]['skos:prefLabel'][0]['@value']
+        }
+      }
+    },
     getTitles: function () {
       var titles = []
       var doc = this.indexdata
@@ -168,7 +177,7 @@ export default {
           if (!rolesHash[sortedContr[i].role]) {
             rolesHash[sortedContr[i].role] = {
               role: sortedContr[i].role,
-              label: sortedContr[i].role === 'aut' ? this.$t('Author') : this.$t(this.$store.state.search.marcRoles[sortedContr[i].role]),
+              label: getRoleLabel(sortedContr[i].role),
               entities: []
             }
           }

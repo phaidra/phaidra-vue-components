@@ -324,10 +324,6 @@ export default {
       f.value = event.target.files[0].name
       f.file = event.target.files[0]
     }
-  },
-  mounted: function () {
-    this.$store.dispatch('loadRoles')
-    this.$store.dispatch('loadIso6392')
   }
 }
 </script>

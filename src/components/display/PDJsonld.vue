@@ -239,7 +239,6 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.dispatch('loadRoles')
     if (this.pid) {
       this.loadMetadata(this.pid)
     }

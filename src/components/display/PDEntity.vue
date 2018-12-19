@@ -41,9 +41,6 @@ export default {
         }
       }
     }
-  },
-  mounted: function () {
-    this.$store.dispatch('loadRoles')
   }
 }
 </script>

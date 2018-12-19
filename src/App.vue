@@ -1,8 +1,30 @@
 <template>
   <div id="app">
-    <h1>phaidra-vue-components</h1>
-    <p-i-form :definition="form"></p-i-form>
-    <p-d-jsonld :pid="pid"></p-d-jsonld>
+    <v-app>
+      <v-container>
+        <v-layout column>
+          <v-flex>
+            <h3>Phaidra Vue Components</h3>
+            <v-flex row>
+              <v-text-field :value="pid" :label="'PID'" box ></v-text-field>
+              <v-btn raised color="primary lighten-2" @click="load()">Load</v-btn>
+            </v-flex>
+          </v-flex>
+          <v-flex>
+            <h4>Display</h4>
+            <p-d-jsonld :pid="pid"></p-d-jsonld>
+          </v-flex>
+          <v-flex>
+            <h4>Edit</h4>
+            <p-i-form :definition="loadedform"></p-i-form>
+          </v-flex>
+          <v-flex>
+            <h4>Submit</h4>
+            <p-i-form :definition="form"></p-i-form>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-app>
   </div>
 </template>
 
@@ -19,6 +41,9 @@ export default {
   data () {
     return {
       form: {
+        sections: []
+      },
+      loadedform: {
         sections: []
       },
       pid: ''
