@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+ 
     <p-d-jsonld-layout>
       <template v-for="(o, p) in objectjson" >
 
@@ -8,7 +8,7 @@
         </template>
 
         <template v-else-if="p.startsWith('role:')" slot="role">
-          <p-d-entity :role="p" :entity="e" v-for="(e, j) in o" :key="'entity'+j" ></p-d-entity>
+          <p-d-entity :role="p" :entity="e" v-for="(e, j) in o" :key="'entity'+p+j" ></p-d-entity>
         </template>
 
         <template v-else-if="p==='bf:note'" slot="bf:note">
@@ -118,8 +118,12 @@
         <template v-else-if="p==='dcterms:subject'" slot="phaidra:Subject">
           
           <template v-for="(subject, j) in o">
-            <v-card flat v-if="subject['@type']==='phaidra:Subject'" :key="'psubject'+j" class="ma-3">
-              <h3 class="display-2 grey--text">Subject</h3>
+            <v-card  class="mt-3" v-if="subject['@type']==='phaidra:Subject'" :key="'psubject'+j">
+              <v-toolbar dense flat>
+                <v-layout>
+                  <v-toolbar-title class="font-weight-light">Subject</v-toolbar-title>
+                </v-layout>
+              </v-toolbar>
               <v-card-text class="ma-2"><p-d-jsonld  :jsonld="subject" ></p-d-jsonld></v-card-text>
             </v-card>
             <p-d-rdfs-label v-else :p="p" :o="subject" :key="'subject'+j" ></p-d-rdfs-label>
@@ -143,7 +147,7 @@
         </template>
       </template>
     </p-d-jsonld-layout>
-  </v-container>
+
 </template>
 
 <script>
@@ -156,7 +160,6 @@ import PDDimension from '@/components/display/PDDimension'
 import PDGeoreference from '@/components/display/PDGeoreference'
 import PDEntity from '@/components/display/PDEntity'
 import PDUri from '@/components/display/PDUri'
-import PDExactMatch from '@/components/display/PDExactMatch'
 import PDFunder from '@/components/display/PDFunder'
 import PDProject from '@/components/display/PDProject'
 import PDJsonldLayout from '@/components/display/PDJsonldLayout'
@@ -184,20 +187,10 @@ export default {
     PDDimension,
     PDGeoreference,
     PDUri,
-    PDExactMatch,
     PDFunder,
     PDProject
   },
   methods: {
-    getRoleLabel: function (role) {
-      var id = role.substring(role.indexOf(':') + 1)
-      var roleTerms = this.vocabularies['https://phaidra.org/vocabulary/role'].terms
-      for (var i = 0; i < roleTerms.length; i++) {
-        if (roleTerms[i]['@id'] === id) {
-          return roleTerms[i]['skos:prefLabel'][0]['@value']
-        }
-      }
-    },
     loadMetadata: function (pid) {
       var self = this
       var url = self.$store.state.settings.instance.api + '/object/' + pid + '/metadata?mode=resolved'

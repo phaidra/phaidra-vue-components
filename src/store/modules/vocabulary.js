@@ -9,13 +9,6 @@ const state = {
       ],
       loaded: true
     },
-    'iso639-2': {
-      terms: [
-        { '@id': 'deu', 'skos:prefLabel': { 'eng': 'German', 'deu': 'Deutsch' } },
-        { '@id': 'eng', 'skos:prefLabel': { 'eng': 'English', 'deu': 'English' } }
-      ],
-      loaded: true
-    },
     'https://phaidra.org/vocabulary/role': {
       terms: [
         { '@id': 'initiator', 'skos:prefLabel': { 'eng': 'Initiator' } },
@@ -156,20 +149,14 @@ const state = {
 }
 
 const mutations = {
-  setIso6392Terms (state, data) {
-    state.vocabularies['iso639-2']['terms'] = data
+  setLangTerms (state, data) {
+    state.vocabularies['lang']['terms'] = data
   },
   setRolesTerms (state, marcRoles) {
     for (var role in marcRoles) {
       state.vocabularies['https://phaidra.org/vocabulary/role'].terms.push({ '@id': role, 'skos:prefLabel': {'eng': marcRoles[role]} })
     }
     state.vocabularies['https://phaidra.org/vocabulary/role'].loaded = true
-  },
-  initStore (state) {
-    state.vocabularies['https://phaidra.org/vocabulary/role'] = {
-      terms: [],
-      loaded: false
-    }
   }
 }
 
@@ -179,8 +166,28 @@ const actions = {
   }
 }
 
+const getters = {
+  getLocalizedTermLabel: (state) => (voc, id, lang) => {
+    var terms = state.vocabularies[voc].terms
+    for (var i = 0; i < terms.length; i++) {
+      if (terms[i]['@id'] === id) {
+        return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng']
+      }
+    }
+  },
+  getTerm: (state) => (voc, id) => {
+    var terms = state.vocabularies[voc].terms
+    for (var i = 0; i < terms.length; i++) {
+      if (terms[i]['@id'] === id) {
+        return terms[i]
+      }
+    }
+  }
+}
+
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

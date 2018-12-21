@@ -2,7 +2,7 @@
   <v-flex>
     <v-layout row>
       <v-flex class="primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex xs9>{{ o['schema:value'] }} {{ getTerm(o['schema:unitCode']) }}</v-flex>
+      <v-flex xs9><span v-for="(v, i) in o['schema:value']" :key="'v'+i">{{ v }}</span> <span v-for="(v, i) in o['schema:unitCode']" :key="'v'+i">{{ getLocalizedTermLabel(v) }}</span></v-flex>
     </v-layout>
   </v-flex>
 </template>
@@ -25,12 +25,8 @@ export default {
     }
   },
   methods: {
-    getTerm: function (value) {
-      for (var i = 0; i < this.vocabularies['un-cefact'].terms.length; i++) {
-        if (this.vocabularies['un-cefact'].terms[i]['@id'] === value) {
-          return this.vocabularies['un-cefact'].terms[i]['skos:prefLabel'][0]['@value']
-        }
-      }
+    getLocalizedTermLabel: function (value) {
+      this.$store.getters.getLocalizedTermLabel('un-cefact', value, this.$i18n.locale)      
     }
   }
 }

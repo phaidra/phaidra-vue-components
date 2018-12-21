@@ -18,13 +18,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${item['skos:prefLabel'][$i18n.locale] ? item['skos:prefLabel'][$i18n.locale] : item['skos:prefLabel']['eng']}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${item['skos:prefLabel'][$i18n.locale] ? item['skos:prefLabel'][$i18n.locale] : item['skos:prefLabel']['eng']}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-select>
@@ -73,12 +73,11 @@ export default {
     }
   },
   methods: {
+    getLocalizedTermLabel: function (value) {
+      this.$store.getters.getLocalizedTermLabel('un-cefact', value, this.$i18n.locale)      
+    },
     getTerm: function (value) {
-      for (var i = 0; i < this.vocabularies['un-cefact'].terms.length; i++) {
-        if (this.vocabularies['un-cefact'].terms[i]['@id'] === value) {
-          return this.vocabularies['un-cefact'].terms[i]
-        }
-      }
+      this.$store.getters.getTerm('un-cefact', value)      
     }
   }
 }

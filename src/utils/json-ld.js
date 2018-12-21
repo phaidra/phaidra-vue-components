@@ -225,7 +225,7 @@ export default {
   },
   validate_object (object) {
     if (!object['@type']) {
-      console.error('JSON-LD validation: missing @type attribute', object)
+      // console.error('JSON-LD validation: missing @type attribute', object)
       return false
     }
     return true
@@ -442,7 +442,7 @@ export default {
           break
 
         default:
-          console.error('form2json: unrecognized predicate ', f.predicate, f)
+          // console.error('form2json: unrecognized predicate ', f.predicate, f)
       }
     }
     return jsonld

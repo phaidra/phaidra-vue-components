@@ -1,42 +1,23 @@
 <template>
   <v-container grid-list-lg>
-
-    <v-toolbar color="primary lighten-3" tabs dark>
-      <v-toolbar-title>KSA Submit - Photo</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-menu bottom left>
-        <v-btn slot="activator" dark icon >
-          <v-icon>more_vert</v-icon>
-        </v-btn>
-
-        <v-list>
-          <v-list-tile @click="" >
-            <v-list-tile-title>{{ $t('Create template') }}</v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile @click="" >
-            <v-list-tile-title>{{ $t('Load template') }}</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
-
-      <v-tabs v-model="activetab" slot="extension" slider-color="primary" color="primary lighten-3" align-with-title>
-        <v-tab ripple >Form</v-tab>
-        <v-tab ripple @click="generateJson()">Debug</v-tab>
-      </v-tabs>
-    </v-toolbar>
+    <v-tabs v-model="activetab" align-with-title>
+      <v-tab ripple >Form</v-tab>
+      <v-tab ripple @click="generateJson()">Debug</v-tab>
+    </v-tabs>
+  
     <v-tabs-items v-model="activetab">
       <v-tab-item class="pa-3">
 
         <v-layout v-for="(s) in this.form.sections" :key="s.id" column wrap class="ma-3">
           
           <v-card >
-            <v-card-title class="headline grey lighten-2 white--text">
+            <v-card-title class="headline grey white--text">
               <span>{{ $t(s.title) }}</span>
               <v-spacer></v-spacer>
-              <v-btn v-if="s.multiplicable" flat icon v-on:click.native="addSection(s)" class="grey lighten-2 white--text">
+              <v-btn v-if="s.multiplicable" flat icon v-on:click.native="addSection(s)" class="grey white--text">
                 <icon name="material-content-add" width="24px" height="24px"></icon>
               </v-btn>
-              <v-btn v-if="s.multiplicable" flat icon v-on:click.native="removeSection(s)" class="grey lighten-2 white--text">
+              <v-btn v-if="s.multiplicable" flat icon v-on:click.native="removeSection(s)" class="grey white--text">
                 <icon name="material-content-remove" width="24px" height="24px"></icon>
               </v-btn>
             </v-card-title>
@@ -254,7 +235,7 @@ export default {
       })
       .catch(function (error) {
         self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-        console.error('Error:', error)
+        //console.error('Error:', error)
         self.loading = false
         self.$vuetify.goTo(0)
       })

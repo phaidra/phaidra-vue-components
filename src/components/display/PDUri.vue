@@ -39,7 +39,7 @@ export default {
       switch (p) {
 
         case 'dcterms:language':
-          vocabulary = 'http://id.loc.gov/vocabulary/iso639-2'
+          vocabulary = 'lang'
           break
 
         case 'dcterms:type':
@@ -58,20 +58,10 @@ export default {
           console.error('p-d-uri resolve: unrecognized predicate ', p, v)
       }
 
-      return this.getTerm(vocabulary, v)
+      return this.getLocalizedTermLabel(vocabulary, v)
     },
-    getTerm: function (vocabulary, value) {
-      for (var i = 0; i < this.vocabularies[vocabulary].terms.length; i++) {
-        if (this.vocabularies[vocabulary].terms[i]['@id'] === value) {
-          var termLabels = this.vocabularies[vocabulary].terms[i]['skos:prefLabel']
-          for (var j = 0; j < termLabels.length; j++) {
-            if (termLabels[j]['@language'] === this.langCode2to3[this.$i18n.locale]) {
-              return termLabels[j]['@value']
-            }
-          }
-          return termLabels[0]['@value']
-        }
-      }
+    getLocalizedTermLabel: function (vocabulary, value) {
+      this.$store.getters.getLocalizedTermLabel(vocabulary, value, this.$i18n.locale)      
     }
   }
 }

@@ -23,19 +23,19 @@
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
         :items="vocabularies['lang'].terms" 
-        :value="getLangTerm(language)"
+        :value="getTerm('lang', language)"
         box
         return-object
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title inset v-html="`${item['skos:prefLabel'][$i18n.locale] ? item['skos:prefLabel'][$i18n.locale] : item['skos:prefLabel']['eng']}`"></v-list-tile-title>
+            <v-list-tile-title inset v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title inset v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title inset v-html="`${item['skos:prefLabel'][$i18n.locale] ? item['skos:prefLabel'][$i18n.locale] : item['skos:prefLabel']['eng']}`"></v-list-tile-title>
+            <v-list-tile-title inset v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-select>                      
@@ -106,12 +106,11 @@ export default {
     }
   },
   methods: {
-    getLangTerm: function (value) {
-      for (var i = 0; i < this.vocabularies['lang'].terms.length; i++) {
-        if (this.vocabularies['lang'].terms[i]['@id'] === value) {
-          return this.vocabularies['lang'].terms[i]
-        }
-      }
+    getLocalizedTermLabel: function (value) {
+      this.$store.getters.getLocalizedTermLabel(this.vocabulary, value, this.$i18n.locale)
+    },
+    getTerm: function (value) {
+      this.$store.getters.getTerm(this.vocabulary, value)
     }
   }
 }

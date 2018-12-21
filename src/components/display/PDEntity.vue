@@ -1,7 +1,7 @@
 <template>
   <v-flex>
     <v-layout v-if="entity" row>
-      <v-flex class="primary--text" xs3>{{ getRoleLabel(this.role) }}</v-flex>
+      <v-flex class="primary--text" xs3>{{ getLocalizedTermLabel(this.role) }}</v-flex>
       <v-flex xs9>
         <v-layout column>
           <v-flex>
@@ -32,14 +32,9 @@ export default {
     }
   },
   methods: {
-    getRoleLabel: function (role) {
+    getLocalizedTermLabel: function (role) {
       var id = role.substring(role.indexOf(':') + 1)
-      var roleTerms = this.vocabularies['https://phaidra.org/vocabulary/role'].terms
-      for (var i = 0; i < roleTerms.length; i++) {
-        if (roleTerms[i]['@id'] === id) {
-          return roleTerms[i]['skos:prefLabel'][0]['@value']
-        }
-      }
+      return this.$store.getters.getLocalizedTermLabel('https://phaidra.org/vocabulary/role', id, this.$i18n.locale)
     }
   }
 }

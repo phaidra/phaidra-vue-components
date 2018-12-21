@@ -17,13 +17,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${item['skos:prefLabel'][$i18n.locale] ? item['skos:prefLabel'][$i18n.locale] : item['skos:prefLabel']['eng']}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${item['skos:prefLabel'][$i18n.locale] ? item['skos:prefLabel'][$i18n.locale] : item['skos:prefLabel']['eng']}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-autocomplete>
@@ -57,15 +57,14 @@ export default {
     }
   },
   methods: {
+    getLocalizedTermLabel: function (value) {
+      this.$store.getters.getLocalizedTermLabel(this.vocabulary, value, this.$i18n.locale)
+    },
     getTerm: function (value) {
-      for (var i = 0; i < this.vocabularies[this.vocabulary].terms.length; i++) {
-        if (this.vocabularies[this.vocabulary].terms[i]['@id'] === value) {
-          return this.vocabularies[this.vocabulary].terms[i]
-        }
-      }
+      this.$store.getters.getTerm(this.vocabulary, value)
     },
     autocompleteFilter: function (item, queryText, itemText) {
-      const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
+      const lab = getLocalizedTermLabel(item['@id']).toLowerCase()
       const query = queryText.toLowerCase()
       return lab.indexOf(query) > -1
     }

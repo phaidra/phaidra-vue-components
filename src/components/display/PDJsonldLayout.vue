@@ -1,5 +1,5 @@
 <template>
-  <v-container  grid-list-lg>
+  <v-container>
     <v-layout column>
       <slot name="dce:title"></slot>
       <slot name="role"></slot>
