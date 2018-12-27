@@ -8,8 +8,11 @@
 </template>
 
 <script>
+import { vocabulary } from '@/mixins/vocabulary'
+
 export default {
   name: 'p-d-uri',
+  mixins: [vocabulary],
   props: {
     o: {
       type: String,
@@ -26,11 +29,6 @@ export default {
         'de': 'deu',
         'it': 'ita'
       }
-    }
-  },
-  computed: {
-    vocabularies: function () {
-      return this.$store.state.vocabulary.vocabularies
     }
   },
   methods: {
@@ -55,14 +53,11 @@ export default {
           break
 
         default:
-          console.error('p-d-uri resolve: unrecognized predicate ', p, v)
+          //console.error('p-d-uri resolve: unrecognized predicate ', p, v)
       }
 
       return this.getLocalizedTermLabel(vocabulary, v)
     },
-    getLocalizedTermLabel: function (vocabulary, value) {
-      this.$store.getters.getLocalizedTermLabel(vocabulary, value, this.$i18n.locale)      
-    }
   }
 }
 </script>

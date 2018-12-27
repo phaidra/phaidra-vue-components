@@ -14,8 +14,11 @@
 </template>
 
 <script>
+import { vocabulary } from '@/mixins/vocabulary'
+
 export default {
   name: 'p-d-entity',
+  mixins: [vocabulary],
   props: {
     entity: {
       type: Object,
@@ -24,11 +27,6 @@ export default {
     role: {
       type: String,
       required: true
-    }
-  },
-  computed: {
-    vocabularies: function () {
-      return this.$store.state.vocabulary.vocabularies
     }
   },
   methods: {

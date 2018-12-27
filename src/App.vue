@@ -27,7 +27,7 @@
                 </v-layout>
               </v-toolbar>
               <v-card-text>
-                <p-d-jsonld v-if="pid" :pid="pid" ref="display"></p-d-jsonld>
+                <p-d-jsonld :pid="pid" ref="display"></p-d-jsonld>
               </v-card-text>
             </v-card>
           </v-flex>
@@ -63,19 +63,9 @@ export default {
       form: {
         sections: [
           {
-            title: 'General',
+            title: 'Test submit',
             id: 'general',
-            fields: [
-              {
-                id: 211,
-                predicate: 'schema:height',
-                metadataset: 'analog',
-                component: 'p-dimension',
-                label: 'Height',
-                unit: 'CMT',
-                value: ''
-              }
-            ]
+            fields: []
           }
         ]
       },
@@ -88,9 +78,18 @@ export default {
   },
   methods: {
     load: function() {
-      this.$store.commit('setInstanceApi', this.apibaseurl)
-      this.$refs.display.loadMetadata(this.pid);
+      this.$refs.display.loadMetadata(this.pid)
     }
+  },
+  mounted: function () {
+    this.$store.commit('setInstanceApi', this.apibaseurl)
+
+    this.form.sections[0].fields.push(this.$store.getters.getField('file', 'digital'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('resource-type', 'digital'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('title', 'digital'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('description', 'digital'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('role', 'digital'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('license', 'digital'))
   }
 }
 </script>

@@ -8,8 +8,11 @@
 </template>
 
 <script>
+import { vocabulary } from '@/mixins/vocabulary'
+
 export default {
   name: 'p-d-exact-match',
+  mixins: [vocabulary],
   props: {
     o: {
       type: Object,
@@ -28,11 +31,6 @@ export default {
       }
     }
   },
-  computed: {
-    vocabularies: function () {
-      return this.$store.state.vocabulary.vocabularies
-    }
-  },
   methods: {
     resolve: function (p, v) {
       var vocabulary = ''
@@ -47,9 +45,6 @@ export default {
       }
 
       return this.getLocalizedTermLabel(vocabulary, v)
-    },
-    getLocalizedTermLabel: function (vocabulary, value) {
-      this.$store.getters.getLocalizedTermLabel(vocabulary, value, this.$i18n.locale)      
     }
   }
 }

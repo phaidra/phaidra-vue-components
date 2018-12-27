@@ -13,18 +13,18 @@
         v-on:input="$emit('input-unit', $event)" 
         :label="$t('Unit')"
         :items="vocabularies['un-cefact'].terms" 
-        :value="getTerm(unit)"
+        :value="getTerm('un-cefact', unit)"
         box
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel('un-cefact', item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel('un-cefact', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-select>
@@ -49,14 +49,11 @@
 <script>
 import '@/compiled-icons/material-content-add'
 import '@/compiled-icons/material-content-remove'
+import { vocabulary } from '@/mixins/vocabulary'
 
 export default {
   name: 'p-i-dimension',
-  computed: {
-    vocabularies: function () {
-      return this.$store.state.vocabulary.vocabularies
-    }
-  },
+  mixins: [vocabulary],
   props: {
     unit: {
       type: String
@@ -70,14 +67,6 @@ export default {
     },
     multiplicable: {
       type: Boolean
-    }
-  },
-  methods: {
-    getLocalizedTermLabel: function (value) {
-      this.$store.getters.getLocalizedTermLabel('un-cefact', value, this.$i18n.locale)      
-    },
-    getTerm: function (value) {
-      this.$store.getters.getTerm('un-cefact', value)      
     }
   }
 }

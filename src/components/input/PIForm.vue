@@ -186,6 +186,7 @@ export default {
       activetab: null,
       jsonlds: {},
       metadata: {},
+      contentmodel: 'unknown',
       form: this.definition,
       loading: false
     }
@@ -215,7 +216,7 @@ export default {
           }
         }
       }
-      fetch(self.$store.state.settings.instance.api + '/container/create', {
+      fetch(self.$store.state.settings.instance.api + '/' + this.contentmodel + '/create', {
         method: 'POST',
         mode: 'cors',
         headers: {

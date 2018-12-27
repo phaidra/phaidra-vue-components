@@ -45,13 +45,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title inset v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title inset v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title inset v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-select>                      
@@ -77,9 +77,11 @@
   import qs from 'qs'
   import '@/compiled-icons/material-content-add'
   import '@/compiled-icons/material-content-remove'
+  import { vocabulary } from '@/mixins/vocabulary'
 
   export default {
     name: 'p-i-text-field-suggest',
+    mixins: [vocabulary],
     props: {
       value: {
         type: String,
@@ -118,11 +120,6 @@
         search: null
       }
     },
-    computed: {
-      vocabularies: function () {
-        return this.$store.state.vocabulary.vocabularies
-      }
-    },
     watch: {
       search (val) {
         val && this.querySuggestionsDebounce(val)
@@ -132,14 +129,8 @@
       htmlToPlaintext: function (text) {
         return text ? String(text).replace(/<[^>]+>/gm, '') : ''
       },
-      getLocalizedTermLabel: function (value) {
-        this.$store.getters.getLocalizedTermLabel(this.vocabulary, value, this.$i18n.locale)
-      },
-      getTerm: function (value) {
-        this.$store.getters.getTerm(this.vocabulary, value)
-      },
       autocompleteFilter: function (item, queryText, itemText) {
-        const lab = getLocalizedTermLabel(item['@id']).toLowerCase()
+        const lab = getLocalizedTermLabel('lang', item['@id']).toLowerCase()
         const query = queryText.toLowerCase()
         return lab.indexOf(query) > -1
       },
@@ -184,7 +175,7 @@
           self.loading = false
         })
         .catch(function (error) {
-          console.log(error)
+          //console.log(error)
           self.loading = false
         })
       }

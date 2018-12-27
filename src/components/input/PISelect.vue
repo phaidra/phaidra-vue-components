@@ -2,7 +2,7 @@
   <v-layout row>
     <v-flex xs8>
       <v-autocomplete
-        :value="getTerm(value)"
+        :value="getTerm(vocabulary, value)"
         :required="required"
         v-on:input="$emit('input', $event )"
         :rules="required ? [ v => !!v || 'Required'] : []"
@@ -17,13 +17,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel(vocabulary, item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel(vocabulary, item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-autocomplete>
@@ -48,23 +48,14 @@
 <script>
 import '@/compiled-icons/material-content-add'
 import '@/compiled-icons/material-content-remove'
+import { vocabulary } from '@/mixins/vocabulary'
 
 export default {
   name: 'p-i-select',
-  computed: {
-    vocabularies: function () {
-      return this.$store.state.vocabulary.vocabularies
-    }
-  },
+  mixins: [vocabulary],
   methods: {
-    getLocalizedTermLabel: function (value) {
-      this.$store.getters.getLocalizedTermLabel(this.vocabulary, value, this.$i18n.locale)
-    },
-    getTerm: function (value) {
-      this.$store.getters.getTerm(this.vocabulary, value)
-    },
-    autocompleteFilter: function (item, queryText, itemText) {
-      const lab = getLocalizedTermLabel(item['@id']).toLowerCase()
+    autocompleteFilter: function (item, queryText) {
+      const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
       const query = queryText.toLowerCase()
       return lab.indexOf(query) > -1
     }

@@ -1,6 +1,6 @@
 <template>
  
-    <p-d-jsonld-layout>
+    <p-d-jsonld-layout v-if="pid">
       <template v-for="(o, p) in objectjson" >
 
         <template v-if="p==='dce:title'" slot="dce:title">
@@ -163,10 +163,11 @@ import PDUri from '@/components/display/PDUri'
 import PDFunder from '@/components/display/PDFunder'
 import PDProject from '@/components/display/PDProject'
 import PDJsonldLayout from '@/components/display/PDJsonldLayout'
+import { vocabulary } from '@/mixins/vocabulary'
 
 export default {
-
   name: 'p-d-jsonld',
+  mixins: [vocabulary],
   props: {
     pid: {
       type: String
@@ -203,7 +204,7 @@ export default {
         self.metadata = json.metadata
       })
       .catch(function (error) {
-        console.log(error)
+        //console.log(error)
       })
 
       return promise
@@ -215,9 +216,6 @@ export default {
     }
   },
   computed: {
-    vocabularies: function () {
-      return this.$store.state.vocabulary.vocabularies
-    },
     objectjson: function () {
       if (this.pid) {
         if (this.metadata) {
@@ -226,6 +224,7 @@ export default {
       } else {
         return this.jsonld
       }
+      return {}
     },
     instance () {
       return this.$store.state.settings.instance

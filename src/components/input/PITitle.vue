@@ -29,13 +29,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title inset v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title inset v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title inset v-html="`${getLocalizedTermLabel(item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-select>                      
@@ -68,14 +68,11 @@ import '@/compiled-icons/material-content-add'
 import '@/compiled-icons/material-content-remove'
 import '@/compiled-icons/material-hardware-arrow-down'
 import '@/compiled-icons/material-hardware-arrow-up'
+import { vocabulary } from '@/mixins/vocabulary'
 
 export default {
   name: 'p-i-title',
-  computed: {
-    vocabularies: function () {
-      return this.$store.state.vocabulary.vocabularies
-    }
-  },
+  mixins: [vocabulary],
   props: {
     title: {
       type: String
@@ -103,14 +100,6 @@ export default {
     return {
       datepicker: false,
       selectedDate: ''
-    }
-  },
-  methods: {
-    getLocalizedTermLabel: function (value) {
-      this.$store.getters.getLocalizedTermLabel(this.vocabulary, value, this.$i18n.locale)
-    },
-    getTerm: function (value) {
-      this.$store.getters.getTerm(this.vocabulary, value)
     }
   }
 }

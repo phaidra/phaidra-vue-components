@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import vocabulary from './modules/vocabulary'
+import fields from './modules/fields'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     },
   },
   modules: {
-    vocabulary
+    vocabulary,
+    fields
   },
   strict: debug
 })
