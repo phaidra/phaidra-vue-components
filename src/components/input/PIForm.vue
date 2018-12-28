@@ -186,7 +186,6 @@ export default {
       activetab: null,
       jsonlds: {},
       metadata: {},
-      contentmodel: 'unknown',
       form: this.definition,
       loading: false
     }
@@ -195,6 +194,11 @@ export default {
     definition: {
       type: Object,
       required: true
+    },
+    contentmodel: {
+      type: String,
+      required: true,
+      default: 'unknown'
     }
   },
   methods: {
@@ -220,7 +224,7 @@ export default {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'Authorization': 'Basic ' + base64.encode(self.$store.state.settings.instance.adminuser + ':' + self.$store.state.settings.instance.adminpass),
+          //'Authorization': 'Basic ' + base64.encode(self.$store.state.settings.instance.adminuser + ':' + self.$store.state.settings.instance.adminpass),
           'X-XSRF-TOKEN': this.$store.state.user.token
         },
         body: httpFormData

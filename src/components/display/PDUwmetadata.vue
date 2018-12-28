@@ -115,7 +115,6 @@
 import PDLicense from '@/components/display/PDLicense'
 
 export default {
-
   name: 'p-d-uwmetadata',
   props: {
     pid: {

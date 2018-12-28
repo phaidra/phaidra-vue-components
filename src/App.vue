@@ -7,24 +7,35 @@
           <v-flex xs4>
             <v-text-field :value="apibaseurl" :label="'API'"></v-text-field>
           </v-flex>
-          <v-flex xs2>
-            <v-text-field :value="pid" :label="'PID'" :placeholder="'o:123456789'"></v-text-field>
-          </v-flex>
           <v-flex xs2> 
-            <v-text-field :value="username" :label="'Username'" ></v-text-field>
+            <v-text-field v-model="credentials.username" :label="'Username'" ></v-text-field>
           </v-flex>
           <v-flex xs2>
-            <v-text-field :value="password" :label="'Password'" :type="'password'"></v-text-field>
+            <v-text-field 
+              v-model="credentials.password" 
+              :label="'Password'" 
+              :append-icon="psvis ? 'visibility' : 'visibility_off'"
+              :append-icon-cb="toggleVisibility"
+              :type="psvis ? 'password' : 'text'"
+            ></v-text-field>
           </v-flex>
+          <v-flex xs1>
+            <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
+          </v-flex>
+          <v-flex v-if="user" xs2>
+            <h3 class="font-weight-light pt-4">Logged in as {{ user }}</h3>
+          </v-flex>
+
         </v-layout> 
         <v-layout justify-center>
           <v-flex xs6>
             <v-card>
               <v-toolbar flat>
-                <v-layout row justify-space-between>
-                  <v-toolbar-title>Display</v-toolbar-title>
-                  <v-btn raised class="right" color="primary lighten-2" @click="load()">Load</v-btn>
-                </v-layout>
+                <v-toolbar-title>Display</v-toolbar-title>
+                <v-divider class="mx-3" inset vertical></v-divider>
+                <v-text-field :value="pid" :placeholder="'o:123456789'"></v-text-field>
+                <v-spacer></v-spacer>
+                <v-btn raised single-line class="right" color="primary lighten-2" @click="load()">Load</v-btn>
               </v-toolbar>
               <v-card-text>
                 <p-d-jsonld :pid="pid" ref="display"></p-d-jsonld>
@@ -34,10 +45,18 @@
           <v-flex xs6>            
             <v-card>
               <v-toolbar flat>
-                <v-toolbar-title>Edit</v-toolbar-title>
+                <v-toolbar-title>Submit</v-toolbar-title>
+                <v-divider class="mx-3" inset vertical></v-divider>
+                <v-select
+                  :items="contentmodels"
+                  v-model="contentmodel"
+                  label="Object type"
+                  single-line
+                ></v-select>
+                <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <p-i-form :definition="form"></p-i-form>
+                <p-i-form :definition="form" :contentmodel="contentmodel"></p-i-form>
               </v-card-text>
             </v-card>
           </v-flex>
@@ -58,6 +77,11 @@ export default {
     PIForm,
     PDJsonld
   },
+  computed: {
+    user: function() {
+      return this.$store.state.user.firstname + ' ' + this.$store.state.user.lastname
+    }
+  },
   data () {
     return {
       form: {
@@ -71,14 +95,25 @@ export default {
       },
       pid: 'o:493283',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
-      username: '',
-      password: '',
-      version: version
+      credentials: {
+        username: '',
+        password: ''
+      },
+      version: version,
+      contentmodel: 'unknown',
+      contentmodels: [ { text: 'Data', value: 'unknown' }, { text: 'Picture', value: 'picture' } ],
+      psvis: true
     }
   },
   methods: {
     load: function() {
       this.$refs.display.loadMetadata(this.pid)
+    },
+    login: function () {
+      this.$store.dispatch('login', this.credentials)
+    },
+    toggleVisibility: function () {
+      this.psvis = !this.psvis
     }
   },
   mounted: function () {

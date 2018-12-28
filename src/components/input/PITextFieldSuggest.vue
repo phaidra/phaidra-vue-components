@@ -130,7 +130,7 @@
         return text ? String(text).replace(/<[^>]+>/gm, '') : ''
       },
       autocompleteFilter: function (item, queryText, itemText) {
-        const lab = getLocalizedTermLabel('lang', item['@id']).toLowerCase()
+        const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
         const query = queryText.toLowerCase()
         return lab.indexOf(query) > -1
       },
