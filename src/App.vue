@@ -3,7 +3,10 @@
     <v-app>
       <v-container fluid grid-list-lg>
         <h4 class="text-lg-right subheading mb-3">Phaidra Vue Components {{version}}</h4>
-        <v-layout row>
+        <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" v-if="alert.msg" transition="slide-y-transition" :key="i">
+          <v-layout>{{$t(alert.msg)}}<v-spacer></v-spacer><icon name="material-navigation-close" color="grey lighten-1" @click.native="dismiss(alert)"></icon></v-layout>
+        </v-alert>
+        <v-layout row>  
           <v-flex xs4>
             <v-text-field :value="apibaseurl" :label="'API'"></v-text-field>
           </v-flex>
@@ -23,7 +26,7 @@
             <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
           </v-flex>
           <v-flex v-if="user" xs2>
-            <h3 class="font-weight-light pt-4">Logged in as {{ user }}</h3>
+            <h3 class="font-weight-light pt-4">Logged in as [{{ user }}]</h3>
           </v-flex>
 
         </v-layout> 
@@ -56,7 +59,7 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <p-i-form :definition="form" :contentmodel="contentmodel"></p-i-form>
+                <p-i-form :definition="form" :contentmodel="contentmodel" v-on:created="created($event)"></p-i-form>
               </v-card-text>
             </v-card>
           </v-flex>
@@ -79,7 +82,10 @@ export default {
   },
   computed: {
     user: function() {
-      return this.$store.state.user.firstname + ' ' + this.$store.state.user.lastname
+      return this.$store.state.user.lastname ? this.$store.state.user.firstname + ' ' + this.$store.state.user.lastname : null
+    },
+    alerts: function () {
+      return this.$store.state.alerts.alerts
     }
   },
   data () {
@@ -87,8 +93,21 @@ export default {
       form: {
         sections: [
           {
-            title: 'Test submit',
-            id: 'general',
+            title: 'General metadata',
+            id: 1,
+            fields: []
+          },
+          {
+            title: 'Digitized object',
+            type: 'phaidra:DigitizedObject',
+            id: 2,
+            fields: []
+          },
+          {
+            title: 'Subject',
+            type: 'phaidra:Subject',
+            id: 3,
+            multiplicable: true,
             fields: []
           }
         ]
@@ -112,19 +131,35 @@ export default {
     login: function () {
       this.$store.dispatch('login', this.credentials)
     },
+    logout: function () {
+      this.$store.dispatch('logout')
+    },
+    created: function (event) {
+      this.pid = event
+      this.load()
+    },
     toggleVisibility: function () {
       this.psvis = !this.psvis
+    },    
+    dismiss: function (alert) {
+      this.$store.commit('clearAlert', alert)
     }
   },
   mounted: function () {
     this.$store.commit('setInstanceApi', this.apibaseurl)
 
-    this.form.sections[0].fields.push(this.$store.getters.getField('file', 'digital'))
-    this.form.sections[0].fields.push(this.$store.getters.getField('resource-type', 'digital'))
-    this.form.sections[0].fields.push(this.$store.getters.getField('title', 'digital'))
-    this.form.sections[0].fields.push(this.$store.getters.getField('description', 'digital'))
-    this.form.sections[0].fields.push(this.$store.getters.getField('role', 'digital'))
-    this.form.sections[0].fields.push(this.$store.getters.getField('license', 'digital'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('file'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('resource-type'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('title'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('description'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('role'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('license'))
+
+    this.form.sections[1].fields.push(this.$store.getters.getField('title'))
+    this.form.sections[1].fields.push(this.$store.getters.getField('description'))
+    
+    this.form.sections[2].fields.push(this.$store.getters.getField('title'))
+    this.form.sections[2].fields.push(this.$store.getters.getField('description'))
   }
 }
 </script>

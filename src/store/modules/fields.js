@@ -280,7 +280,6 @@ const state = {
     {
       id: 'license',
       predicate: 'edm:rights',
-      metadataset: 'digital',
       component: 'p-select',
       vocabulary: 'licenses',
       label: 'License',
@@ -290,7 +289,6 @@ const state = {
     {
       id: 'rights',
       predicate: 'dce:rights',
-      metadataset: 'digital',
       component: 'p-text-field',
       multiline: true,
       multilingual: true,
@@ -309,12 +307,11 @@ const state = {
 }
 
 const getters = {
-  getField: (state) => (id, metadataset, ordergroup) => {
+  getField: (state) => (id, ordergroup) => {
     for (var i = 0; i < state.fields.length; i++) {
       if (state.fields[i]['id'] === id) {
         var field = JSON.parse(JSON.stringify(state.fields[i]))
         field.id = field.id + '_' + uuid.generate();
-        field.metadataset = metadataset
         field.ordergroup = ordergroup
         return field
       }

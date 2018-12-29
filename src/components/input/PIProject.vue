@@ -97,19 +97,17 @@
         </v-layout>
       </v-flex>
       
-      <v-flex xs1 style="border-right: 2px">
-        <v-container fill-height>
-          <v-layout class="vertical-center" row>
-            <v-flex>
-              <v-btn v-if="multiplicable" flat icon slot="activator" v-on:click.native="$emit('add', $event)">
-                <icon name="material-content-add" width="24px" height="24px"></icon>
-              </v-btn>
-              <v-btn v-if="multiplicable" flat icon slot="activator" v-on:click.native="$emit('remove', $event)">
-                <icon name="material-content-remove" width="24px" height="24px"></icon>
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+      <v-flex xs1 v-if="actions.length">
+        <v-menu open-on-hover bottom offset-y>
+          <v-btn slot="activator" icon>
+            <icon name="material-navigation-more-vert" width="24px" height="24px"></icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+              <v-list-tile-title>{{ action.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </v-flex>
 
     </v-layout>
@@ -120,10 +118,11 @@
 import '@/compiled-icons/material-content-add'
 import '@/compiled-icons/material-content-remove'
 import { vocabulary } from '@/mixins/vocabulary'
+import { fieldproperties } from '@/mixins/fieldproperties'
 
 export default {
   name: 'p-i-project',
-  mixins: [vocabulary],
+  mixins: [vocabulary, fieldproperties],
   props: {
     name: {
       type: String
@@ -142,9 +141,6 @@ export default {
     },
     homepage: {
       type: String
-    },
-    multiplicable: {
-      type: Boolean
     }
   }
 }

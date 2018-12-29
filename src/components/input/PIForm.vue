@@ -2,7 +2,7 @@
   <v-container grid-list-lg>
     <v-tabs v-model="activetab" align-with-title>
       <v-tab ripple >Form</v-tab>
-      <v-tab ripple @click="generateJson()">Debug</v-tab>
+      <v-tab ripple @click="generateJson()">Metadata preview</v-tab>
     </v-tabs>
   
     <v-tabs-items v-model="activetab">
@@ -153,7 +153,6 @@
 </template>
 
 <script>
-import base64 from 'base-64'
 import VueJsonPretty from 'vue-json-pretty'
 import arrays from '@/utils/arrays'
 import jsonLd from '@/utils/json-ld'
@@ -208,13 +207,26 @@ export default {
       this.generateJson()
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.metadata))
-      for (var i = 0; i < this.form.sections.length; i++) {
-        var s = this.form.sections[i]
-        if (s.type === 'member') {
-          for (var j = 0; j < s.fields.length; j++) {
+      if (this.contentmodel === 'container') {
+        for (var i = 0; i < this.form.sections.length; i++) {
+          var s = this.form.sections[i]
+          if (s.type === 'member') {
+            for (var j = 0; j < s.fields.length; j++) {
+              if (s.fields[j].component === 'input-file') {
+                if (s.fields[j].file !== '') {
+                  httpFormData.append('member_' + s.id, s.fields[j].file)
+                }
+              }
+            }
+          }
+        }
+      } else {
+         for (i = 0; i < this.form.sections.length; i++) {
+          s = this.form.sections[i]
+          for (j = 0; j < s.fields.length; j++) {
             if (s.fields[j].component === 'input-file') {
               if (s.fields[j].file !== '') {
-                httpFormData.append('member_' + s.id, s.fields[j].file)
+                httpFormData.append('file', s.fields[j].file)
               }
             }
           }
@@ -235,7 +247,7 @@ export default {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
-        self.$router.push({ name: 'detail', params: { pid: json.pid } })
+        this.$emit('created', json.pid)
         self.$vuetify.goTo(0)
       })
       .catch(function (error) {

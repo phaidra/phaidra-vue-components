@@ -40,39 +40,29 @@
         </template>
       </v-select>                      
     </v-flex>
-    <v-flex xs2>
-      <v-container fill-height>
-        <v-layout row>
-          <v-flex>
-            <v-btn v-if="multiplicable" flat icon slot="activator" v-on:click.native="$emit('add', $event)">
-              <icon name="material-content-add" width="24px" height="24px"></icon>
-            </v-btn>
-            <v-btn v-if="multiplicable" flat icon slot="activator" v-on:click.native="$emit('remove', $event)">
-              <icon name="material-content-remove" width="24px" height="24px"></icon>
-            </v-btn>
-            <v-btn v-if="ordered" flat icon slot="activator" v-on:click.native="$emit('down', $event)">
-              <icon name="material-hardware-arrow-down" width="24px" height="24px"></icon>
-            </v-btn>
-            <v-btn v-if="ordered" flat icon slot="activator" v-on:click.native="$emit('up', $event)">
-              <icon name="material-hardware-arrow-up" width="24px" height="24px"></icon>
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-container>
+    <v-flex xs1 v-if="actions.length">
+      <v-menu open-on-hover bottom offset-y>
+        <v-btn slot="activator" icon>
+          <icon name="material-navigation-more-vert" width="24px" height="24px"></icon>
+        </v-btn>
+        <v-list>
+          <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+            <v-list-tile-title>{{ action.title }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import '@/compiled-icons/material-content-add'
-import '@/compiled-icons/material-content-remove'
-import '@/compiled-icons/material-hardware-arrow-down'
-import '@/compiled-icons/material-hardware-arrow-up'
+import '@/compiled-icons/material-navigation-more-vert'
 import { vocabulary } from '@/mixins/vocabulary'
+import { fieldproperties } from '@/mixins/fieldproperties'
 
 export default {
   name: 'p-i-title',
-  mixins: [vocabulary],
+  mixins: [vocabulary, fieldproperties],
   props: {
     title: {
       type: String
@@ -86,13 +76,7 @@ export default {
     required: {
       type: Boolean
     },
-    multiplicable: {
-      type: Boolean
-    },
     multilingual: {
-      type: Boolean
-    },
-    ordered: {
       type: Boolean
     }
   },
