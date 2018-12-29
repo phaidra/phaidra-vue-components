@@ -272,7 +272,7 @@ export default {
         jsonlds[jsonldid] = {}
       }
 
-      this.form2json(jsonlds[jsonldid], s)
+      this.fields2json(jsonlds[jsonldid], s)
     }
 
     Object.keys(jsonlds).forEach(function (key) {
@@ -292,7 +292,47 @@ export default {
 
     return jsonlds
   },
-  form2json (jsonld, formData) {
+  form2json (formData) {
+    var jsonlds = {}
+
+    for (var i = 0; i < formData.sections.length; i++) {
+      var s = formData.sections[i]
+      var jsonldid
+      if (s.type === 'phaidra:Subject') {
+        jsonldid = 'subject-' + i
+        jsonlds[jsonldid] = {
+          '@type': 'phaidra:Subject'
+        }
+        this.fields2json(jsonlds[jsonldid], s)
+      } else { 
+        if (s.type === 'phaidra:DigitizedObject') {
+          jsonldid = 'digitized-object'
+          jsonlds[jsonldid] = {}
+          this.fields2json(jsonlds[jsonldid], s)
+        }else{
+          this.fields2json(jsonlds, s)
+        }
+      }
+    }
+
+    Object.keys(jsonlds).forEach(function (key) {
+      if (key === 'digitized-object') {
+        jsonlds['prov:wasDerivedFrom'] = jsonlds[key]
+        jsonlds['prov:wasDerivedFrom']['@type'] = 'phaidra:DigitizedObject'
+        delete jsonlds[key]
+      }
+      if (key.startsWith('subject-')) {
+        if (!jsonlds['dcterms:subject']) {
+          jsonlds['dcterms:subject'] = []
+        }
+        jsonlds['dcterms:subject'].push(jsonlds[key])
+        delete jsonlds[key]
+      }
+    })
+
+    return jsonlds
+  },
+  fields2json (jsonld, formData) {
     for (var j = 0; j < formData.fields.length; j++) {
       var f = formData.fields[j]
 

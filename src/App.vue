@@ -4,7 +4,7 @@
       <v-container fluid grid-list-lg>
         <h4 class="text-lg-right subheading mb-3">Phaidra Vue Components {{version}}</h4>
         <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" v-if="alert.msg" transition="slide-y-transition" :key="i">
-          <v-layout>{{$t(alert.msg)}}<v-spacer></v-spacer><icon name="material-navigation-close" color="grey lighten-1" @click.native="dismiss(alert)"></icon></v-layout>
+          <v-layout>{{alert.msg}}<v-spacer></v-spacer><icon name="material-navigation-close" color="grey lighten-1" @click.native="dismiss(alert)"></icon></v-layout>
         </v-alert>
         <v-layout row>  
           <v-flex xs4>
@@ -18,7 +18,7 @@
               v-model="credentials.password" 
               :label="'Password'" 
               :append-icon="psvis ? 'visibility' : 'visibility_off'"
-              :append-icon-cb="toggleVisibility"
+              @click:append="toggleVisibility"
               :type="psvis ? 'password' : 'text'"
             ></v-text-field>
           </v-flex>
@@ -36,7 +36,7 @@
               <v-toolbar flat>
                 <v-toolbar-title>Display</v-toolbar-title>
                 <v-divider class="mx-3" inset vertical></v-divider>
-                <v-text-field :value="pid" :placeholder="'o:123456789'"></v-text-field>
+                <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
                 <v-spacer></v-spacer>
                 <v-btn raised single-line class="right" color="primary lighten-2" @click="load()">Load</v-btn>
               </v-toolbar>
@@ -72,6 +72,7 @@
 <script>
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
+import '@/compiled-icons/material-navigation-close'
 import {version} from '../package.json';
 
 export default {
@@ -112,7 +113,7 @@ export default {
           }
         ]
       },
-      pid: 'o:493283',
+      pid: '',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
         username: '',
@@ -136,6 +137,7 @@ export default {
     },
     created: function (event) {
       this.pid = event
+      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + this.pid + ' created' }])
       this.load()
     },
     toggleVisibility: function () {

@@ -247,7 +247,7 @@ export default {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
-        this.$emit('created', json.pid)
+        self.$emit('created', json.pid)
         self.$vuetify.goTo(0)
       })
       .catch(function (error) {
@@ -258,7 +258,11 @@ export default {
       })
     },
     generateJson: function () {
-      this.jsonlds = jsonLd.containerForm2json(this.form)
+      if (this.contentmodel === 'container') {
+        this.jsonlds = jsonLd.containerForm2json(this.form)
+      } else {
+        this.jsonlds = jsonLd.form2json(this.form)
+      }
       this.metadata = { metadata: { 'json-ld': this.jsonlds } }
       this.$refs.prettyprint.$forceUpdate()
     },
