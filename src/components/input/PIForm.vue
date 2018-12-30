@@ -14,12 +14,19 @@
             <v-card-title class="headline grey white--text">
               <span>{{ $t(s.title) }}</span>
               <v-spacer></v-spacer>
-              <v-btn v-if="s.multiplicable" flat icon v-on:click.native="addSection(s)" class="grey white--text">
-                <icon name="material-content-add" width="24px" height="24px"></icon>
-              </v-btn>
-              <v-btn v-if="s.multiplicable" flat icon v-on:click.native="removeSection(s)" class="grey white--text">
-                <icon name="material-content-remove" width="24px" height="24px"></icon>
-              </v-btn>
+              <v-menu v-if="s.multiplicable" open-on-hover bottom offset-y>
+                <v-btn slot="activator" icon dark>
+                  <icon name="material-navigation-more-vert" color="white" width="24px" height="24px"></icon>
+                </v-btn>
+                <v-list>
+                  <v-list-tile @click="addSection(s)">
+                    <v-list-tile-title>{{ $t('Duplicate') }}</v-list-tile-title>
+                  </v-list-tile>
+                  <v-list-tile @click="removeSection(s)">
+                    <v-list-tile-title>{{ $t('Remove') }}</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
             </v-card-title>
             <v-card-text class="mt-4">
               <v-layout v-for="(f) in s.fields" :key="f.id" row wrap>
