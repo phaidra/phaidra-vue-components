@@ -17,12 +17,15 @@ export default {
   'phaidra:DigitizationNote': 'Digitization note',
 
   'dce:subject': 'Subject',
-  'opaque:ethnographic': 'Ethnographic term',
   'dcterms:language': 'Language',
   'dcterms:type': 'Resource type',
   'bf:physicalLocation': 'Physical location',
   'bf:shelfMark': 'Call number',
   'dcterms:provenance': 'Provenance',
+
+  'ebucore:filename': 'Filename',
+  'ebucore:hasMimeType': 'MIME Type',
+
   'opaque:cco_accessionNumber': 'Accession number',
   'schema:width': 'Width',
   'schema:height': 'Height',

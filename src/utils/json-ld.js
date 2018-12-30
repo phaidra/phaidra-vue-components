@@ -277,7 +277,7 @@ export default {
 
     Object.keys(jsonlds).forEach(function (key) {
       if (key === 'digitized-object') {
-        jsonlds['container']['prov:wasDerivedFrom'] = jsonlds[key]
+        jsonlds['container']['prov:wasDerivedFrom'].push(jsonlds[key])
         jsonlds['container']['prov:wasDerivedFrom']['@type'] = 'phaidra:DigitizedObject'
         delete jsonlds[key]
       }
@@ -381,7 +381,6 @@ export default {
           }
           break
 
-        case 'opaque:ethnographic':
         case 'dce:subject':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'skos:Concept'))

@@ -85,7 +85,7 @@ const state = {
       id: 'language',
       predicate: 'dcterms:language',
       component: 'p-select',
-      vocabulary: 'iso639-2',
+      vocabulary: 'lang',
       required: true,
       multiplicable: true,
       label: 'Language',

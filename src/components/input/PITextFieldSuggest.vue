@@ -10,7 +10,6 @@
         :search-input.sync="search"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-        :filter="autocompleteFilter"
         cache-items
         hide-no-data
         hide-selected
@@ -124,11 +123,6 @@
     methods: {
       htmlToPlaintext: function (text) {
         return text ? String(text).replace(/<[^>]+>/gm, '') : ''
-      },
-      autocompleteFilter: function (item, queryText, itemText) {
-        const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
-        const query = queryText.toLowerCase()
-        return lab.indexOf(query) > -1
       },
       querySuggestionsDebounce (value) {
         this.showList = true

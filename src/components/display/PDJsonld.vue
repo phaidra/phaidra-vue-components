@@ -1,6 +1,6 @@
 <template>
  
-    <p-d-jsonld-layout v-if="pid">
+    <p-d-jsonld-layout v-if="objectjson">
       <template v-for="(o, p) in objectjson" >
 
         <template v-if="p==='dce:title'" slot="dce:title">
@@ -12,15 +12,11 @@
         </template>
 
         <template v-else-if="p==='bf:note'" slot="bf:note">
-          <p-d-rdfs-label :p="p" :o="item" v-for="(item, j) in o" :key="'text'+j" ></p-d-rdfs-label>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'text'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='dce:subject'" slot="dce:subject">
-          <p-d-rdfs-label :p="p" :o="item" v-for="(item, j) in o" :key="'subject'+j" ></p-d-rdfs-label>
-        </template>
-
-        <template v-else-if="p==='opaque:ethnographic'" slot="dce:subject">
-          <p-d-rdfs-label :p="p" :o="item" v-for="(item, j) in o" :key="'et'+j" ></p-d-rdfs-label>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'subject'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='dcterms:language'" slot="dcterms:language">
@@ -36,7 +32,7 @@
         </template>
 
         <template v-else-if="p==='edm:rights'" slot="edm:type">
-          <p-d-license :dclicense="item" :key="p"></p-d-license>
+          <p-d-license :dclicense="item" v-for="(item, j) in o" :key="'license'+j"></p-d-license>
         </template>
 
         <template v-else-if="p==='dce:rights'" slot="dce:rights">
@@ -49,10 +45,6 @@
 
         <template v-else-if="p==='frapo:hasFundingAgency'" slot="frapo:hasFundingAgency">
           <p-d-funder :p="p" :o="item" v-for="(item, j) in o" :key="'funder'+j" ></p-d-funder>
-        </template>
-
-        <template v-else-if="p==='opaque:ethnographic'" slot="dce:subject">
-          <p-d-rdfs-label :p="p" :o="item" v-for="(item, j) in o" :key="'et'+j" ></p-d-rdfs-label>
         </template>
 
         <template v-else-if="p==='bf:physicalLocation'" slot="bf:physicalLocation">
@@ -72,7 +64,15 @@
         </template>
 
         <template v-else-if="p==='dcterms:provenance'" slot="dcterms:provenance">
-          <p-d-rdfs-label :p="p" :o="item" v-for="(item, j) in o" :key="'prov'+j" ></p-d-rdfs-label>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'prov'+j" ></p-d-skos-preflabel>
+        </template>
+
+        <template v-else-if="p==='ebucore:filename'" slot="ebucore:filename">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'filename'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='ebucore:hasMimeType'" slot="ebucore:hasMimeType">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'mime'+j"></p-d-value>
         </template>
 
         <template v-else-if="p==='opaque:cco_accessionNumber'" slot="opaque:cco_accessionNumber">
@@ -80,15 +80,15 @@
         </template>
 
         <template v-else-if="p==='vra:hasInscription'" slot="vra:hasInscription">
-          <p-d-rdfs-label v-if="item['skos:prefLabel']" :p="p" :o="item" v-for="(item, j) in o" :key="'inscr'+j" ></p-d-rdfs-label>
+          <p-d-skos-preflabel v-if="item['skos:prefLabel']" :p="p" :o="item" v-for="(item, j) in o" :key="'inscr'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='vra:material'" slot="vra:material">
-          <p-d-rdfs-label :p="p" :o="item" v-for="(item, j) in o" :key="'material'+j" ></p-d-rdfs-label>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'material'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='vra:hasTechnique'" slot="vra:hasTechnique">
-          <p-d-rdfs-label :p="p" :o="item" v-for="(item, j) in o" :key="'techn'+j" ></p-d-rdfs-label>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'techn'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='schema:width'" slot="schema:width">
@@ -107,34 +107,34 @@
           <p-d-dimension :p="p" :o="item" v-for="(item, j) in o" :key="'weight'+j" ></p-d-dimension>
         </template>
 
-        <template v-else-if="p==='ebucore:filename'" slot="ebucore:filename">
-          <p-d-value :p="p" :o="o" :key="p" ></p-d-value>
-        </template>
-
-        <template v-else-if="p==='ebucore:hasMimeType'" slot="ebucore:hasMimeType">
-          <p-d-value :p="p" :o="o" :key="p"></p-d-value>
-        </template>
-
         <template v-else-if="p==='dcterms:subject'" slot="phaidra:Subject">
           
           <template v-for="(subject, j) in o">
-            <v-card  class="mt-3" v-if="subject['@type']==='phaidra:Subject'" :key="'psubject'+j">
+            <v-card class="mt-3" v-if="subject['@type']==='phaidra:Subject'" :key="'psubject'+j">
               <v-toolbar dense flat>
                 <v-layout>
                   <v-toolbar-title class="font-weight-light">Subject</v-toolbar-title>
                 </v-layout>
               </v-toolbar>
-              <v-card-text class="ma-2"><p-d-jsonld  :jsonld="subject" ></p-d-jsonld></v-card-text>
+              <v-card-text class="ma-2">
+                <p-d-jsonld :jsonld="subject" ></p-d-jsonld>
+              </v-card-text>
             </v-card>
-            <p-d-rdfs-label v-else :p="p" :o="subject" :key="'subject'+j" ></p-d-rdfs-label>
+            <p-d-skos-preflabel v-else :p="p" :o="subject" :key="'subject'+j" ></p-d-skos-preflabel>
           </template>
             
         </template>
 
         <template v-else-if="p==='prov:wasDerivedFrom'" slot="prov:wasDerivedFrom">
-          <v-card flat :key="p" class="ma-3">
-            <h3 class="display-2 grey--text">Digitized object</h3>
-            <v-card-text class="ma-2"><p-d-jsonld :jsonld="o" :key="p"></p-d-jsonld></v-card-text>
+          <v-card class="mt-3" :key="p">
+            <v-toolbar dense flat>
+                <v-layout>
+                  <v-toolbar-title class="font-weight-light">Digitized object</v-toolbar-title>
+                </v-layout>
+              </v-toolbar>
+              <v-card-text class="ma-2">
+                <p-d-jsonld :jsonld="o" :key="p"></p-d-jsonld>
+              </v-card-text>
           </v-card>
         </template>
 
@@ -153,7 +153,7 @@
 <script>
 import PDLicense from '@/components/display/PDLicense'
 import PDTitle from '@/components/display/PDTitle'
-import PDRdfsLabel from '@/components/display/PDRdfsLabel'
+import PDSkosPreflabel from '@/components/display/PDSkosPreflabel'
 import PDLangValue from '@/components/display/PDLangValue'
 import PDValue from '@/components/display/PDValue'
 import PDDimension from '@/components/display/PDDimension'
@@ -182,7 +182,7 @@ export default {
     PDLicense,
     PDEntity,
     PDJsonldLayout,
-    PDRdfsLabel,
+    PDSkosPreflabel,
     PDLangValue,
     PDValue,
     PDDimension,

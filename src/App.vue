@@ -8,15 +8,18 @@
         </v-alert>
         <v-layout row>  
           <v-flex xs4>
-            <v-text-field :value="apibaseurl" :label="'API'"></v-text-field>
+            <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
+          </v-flex>
+          <v-flex xs4>
+            <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
           </v-flex>
           <v-flex xs2> 
-            <v-text-field v-model="credentials.username" :label="'Username'" ></v-text-field>
+            <v-text-field v-model="credentials.username" :label="'username'" ></v-text-field>
           </v-flex>
           <v-flex xs2>
             <v-text-field 
               v-model="credentials.password" 
-              :label="'Password'" 
+              :label="'password'" 
               :append-icon="psvis ? 'visibility' : 'visibility_off'"
               @click:append="toggleVisibility"
               :type="psvis ? 'password' : 'text'"
@@ -113,7 +116,8 @@ export default {
           }
         ]
       },
-      pid: '',
+      pid: 'o:504415',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
         username: '',
@@ -149,19 +153,33 @@ export default {
   },
   mounted: function () {
     this.$store.commit('setInstanceApi', this.apibaseurl)
+    this.$store.commit('setInstanceSolr', this.solrbaseurl)
 
     this.form.sections[0].fields.push(this.$store.getters.getField('file'))
     this.form.sections[0].fields.push(this.$store.getters.getField('resource-type'))
     this.form.sections[0].fields.push(this.$store.getters.getField('title'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('language'))
     this.form.sections[0].fields.push(this.$store.getters.getField('description'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('keyword'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('project'))
+    this.form.sections[0].fields.push(this.$store.getters.getField('funder'))
     this.form.sections[0].fields.push(this.$store.getters.getField('role'))
     this.form.sections[0].fields.push(this.$store.getters.getField('license'))
 
     this.form.sections[1].fields.push(this.$store.getters.getField('title'))
     this.form.sections[1].fields.push(this.$store.getters.getField('description'))
+    this.form.sections[1].fields.push(this.$store.getters.getField('inscription'))
+    this.form.sections[1].fields.push(this.$store.getters.getField('height'))
+    this.form.sections[1].fields.push(this.$store.getters.getField('shelf-mark'))
+    this.form.sections[1].fields.push(this.$store.getters.getField('technique-getty-aat'))
+    this.form.sections[1].fields.push(this.$store.getters.getField('digitization-note'))
+    this.form.sections[1].fields.push(this.$store.getters.getField('reproduction-note'))
     
     this.form.sections[2].fields.push(this.$store.getters.getField('title'))
     this.form.sections[2].fields.push(this.$store.getters.getField('description'))
+    this.form.sections[2].fields.push(this.$store.getters.getField('temporal-coverage'))
+    this.form.sections[2].fields.push(this.$store.getters.getField('spatial-text'))
+    
   }
 }
 </script>

@@ -13,7 +13,8 @@ export default new Vuex.Store({
   state: {
     settings: { 
       instance: {
-        api: ""
+        api: '',
+        solr: ''
       }
     }
   },
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     setInstanceApi (state, api) {
       state.settings.instance.api = api
     },
+    setInstanceSolr (state, solr) {
+      state.settings.instance.solr = solr
+    }
   },
   modules: {
     vocabulary,

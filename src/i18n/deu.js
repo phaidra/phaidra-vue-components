@@ -531,12 +531,15 @@ export default {
   'phaidra:DigitizationNote': 'Digitization note',
 
   'dce:subject': 'Subjekt',
-  'opaque:ethnographic': 'Soziokulturelle Kategorie',
   'dcterms:language': 'Sprache',
-  'dcterms:type': 'Resource type',
+  'dcterms:type': 'Resource Type',
   'bf:physicalLocation': 'Standort',
   'bf:shelfMark': 'Signatur',
   'dcterms:provenance': 'Provenienz',
+
+  'ebucore:filename': 'Dateiname',
+  'ebucore:hasMimeType': 'MIME Typ',
+
   'opaque:cco_accessionNumber': 'Aktenvermerk',
   'schema:width': 'Breite',
   'schema:height': 'Höhe',

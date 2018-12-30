@@ -247,7 +247,11 @@ export default {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
-        self.$emit('created', json.pid)
+        if (response.status === 200){
+          if (json.pid) {
+            self.$emit('created', json.pid)
+          }
+        }
         self.$vuetify.goTo(0)
       })
       .catch(function (error) {

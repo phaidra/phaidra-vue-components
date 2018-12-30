@@ -22,15 +22,6 @@ export default {
       type: String
     }
   },
-  data () {
-    return {
-      langCode2to3: {
-        'en': 'eng',
-        'de': 'deu',
-        'it': 'ita'
-      }
-    }
-  },
   methods: {
     resolve: function (p, v) {
       var vocabulary = ''

@@ -19,6 +19,9 @@
       <slot name="frapo:isOutputOf"></slot>
       <slot name="dcterms:provenance"></slot>
 
+      <slot name="ebucore:filename"></slot>
+      <slot name="ebucore:hasMimeType"></slot>
+
       <slot name="phaidra:Subject"></slot>
 
       <slot name="opaque:cco_accessionNumber"></slot>
@@ -31,10 +34,7 @@
       <slot name="schema:width"></slot>
       <slot name="schema:height"></slot>
       <slot name="schema:depth"></slot>
-      <slot name="schema:weight"></slot>
-      
-      <slot name="ebucore:filename"></slot>
-      <slot name="ebucore:hasMimeType"></slot>
+      <slot name="schema:weight"></slot>      
 
       <slot name="prov:wasDerivedFrom"></slot>
       
