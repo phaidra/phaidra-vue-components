@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import vocabulary from './modules/vocabulary'
-import fields from './modules/fields'
 import user from './modules/user'
 import alerts from './modules/alerts'
 
@@ -28,7 +27,6 @@ export default new Vuex.Store({
   },
   modules: {
     vocabulary,
-    fields,
     user,
     alerts
   },

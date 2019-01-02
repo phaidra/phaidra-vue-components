@@ -1,5 +1,10 @@
 # phaidra-vue-components
 
+## Prerequisities
+
+You might need more watchers, see [Webpack documentation](https://webpack.js.org/configuration/watch/#not-enough-watchers)
+
+
 ## Project setup
 ```
 npm install

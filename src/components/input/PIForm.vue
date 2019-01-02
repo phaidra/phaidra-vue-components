@@ -1,12 +1,12 @@
 <template>
   <v-container grid-list-lg>
     <v-tabs v-model="activetab" align-with-title>
-      <v-tab ripple >Form</v-tab>
+      <v-tab ripple v-if="form.sections.length > 0" ><template v-if="mode==='edit'">{{ loadedPid + ' - ' + $t('edit') }}</template><template v-else >{{ $t('Submit') }}</template> {{ ' ' + $t('metadata') }}</v-tab>
       <v-tab ripple @click="generateJson()">Metadata preview</v-tab>
     </v-tabs>
   
     <v-tabs-items v-model="activetab">
-      <v-tab-item class="pa-3">
+      <v-tab-item class="pa-3" v-if="form.sections.length > 0">
 
         <v-layout v-for="(s) in this.form.sections" :key="s.id" column wrap class="ma-3">
           
@@ -146,7 +146,8 @@
 
         <v-layout row wrap class="ma-3">
           <v-spacer></v-spacer>
-          <v-btn raised :loading="loading" :disabled="loading" color="primary lighten-2" @click="submit()">Submit</v-btn>
+          <v-btn v-if="mode==='edit'" raised :loading="loading" :disabled="loading" color="primary lighten-2" @click="save()">Save</v-btn>
+          <v-btn v-else raised :loading="loading" :disabled="loading" color="primary lighten-2" @click="submit()">Submit</v-btn>
         </v-layout>
   
       </v-tab-item>
@@ -192,22 +193,53 @@ export default {
       activetab: null,
       jsonlds: {},
       metadata: {},
-      form: this.definition,
-      loading: false
+      loadedMetadata: [],
+      form: this.submitform,
+      loading: false,
+      loadedPid: ''
     }
   },
   props: {
-    definition: {
-      type: Object,
+    mode: {
+      type: String,
       required: true
+    },
+    submitform: {
+      type: Object
     },
     contentmodel: {
       type: String,
-      required: true,
       default: 'unknown'
+    },
+    pid: {
+      type: String
     }
   },
   methods: {
+    loadMetadata: function (pid) {      
+      this.loadedPid = pid
+      this.loadedMetadata = []
+      var self = this
+      var url = self.$store.state.settings.instance.api + '/object/' + pid + '/metadata?mode=resolved'
+      var promise = fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+      })
+      .then(function (response) { return response.json() })
+      .then(function (json) {
+        if (json.metadata['JSON-LD']) {
+          self.form = self.json2form(json.metadata['JSON-LD'])
+        }
+      })
+      .catch(function (error) {
+        //console.log(error)
+      })
+
+      return promise
+    },
+    json2form: function (jsonld) {
+      return jsonLd.json2form(jsonld)
+    },
     submit: function () {
       var self = this
       this.loading = true
@@ -249,15 +281,47 @@ export default {
         body: httpFormData
       })
       .then(response => response.json())
-      .then(function (json) {
+      .then(function (response, json) {
         if (json.alerts && json.alerts.length > 0) {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
         if (response.status === 200){
           if (json.pid) {
-            self.$emit('created', json.pid)
+            self.$emit('object-created', json.pid)
           }
+        }
+        self.$vuetify.goTo(0)
+      })
+      .catch(function (error) {
+        self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        //console.error('Error:', error)
+        self.loading = false
+        self.$vuetify.goTo(0)
+      })
+    },
+    save: function () {
+      var self = this
+      this.loading = true
+      this.generateJson()
+      var httpFormData = new FormData()
+      httpFormData.append('metadata', JSON.stringify(this.metadata))      
+      fetch(self.$store.state.settings.instance.api + '/' + this.loadedPid + '/metadata', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'X-XSRF-TOKEN': this.$store.state.user.token
+        },
+        body: httpFormData
+      })
+      .then(response => response.json())
+      .then(function (response, json) {
+        if (json.alerts && json.alerts.length > 0) {
+          self.$store.commit('setAlerts', json.alerts)
+        }
+        self.loading = false
+        if (response.status === 200){
+          self.$emit('object-saved', self.loadedPid)
         }
         self.$vuetify.goTo(0)
       })
@@ -336,6 +400,11 @@ export default {
     setFilename: function (f, event) {
       f.value = event.target.files[0].name
       f.file = event.target.files[0]
+    }
+  },
+  mounted: function () {
+    if (this.mode === 'edit' && this.pid) {
+      this.loadMetadata(this.pid)
     }
   }
 }

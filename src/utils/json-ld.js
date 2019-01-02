@@ -1,4 +1,36 @@
+import fields from '@/utils/fields'
+
 export default {
+  json2form: function (jsonld) {
+    var form = {
+      sections: [
+        {
+          title: 'General metadata',
+          id: 1,
+          fields: []
+        }
+      ]
+    }
+
+    Object.entries(jsonld).forEach(([key, value]) => {
+
+      if (key === 'bf:note') {
+        for (var i = 0; i < value.length; i++) {
+          if (value[i]['@type'] === 'bf:Note') {
+            for (var j = 0; j < value[i]['skos:prefLabel'].length; j++) {
+              var f = fields.getField('description')
+              f.value = value[i]['skos:prefLabel'][j]['@value']
+              f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+              form.sections[0].fields.push(f)
+            }
+          }
+        }
+      }
+      
+    })
+
+    return form;
+  },
   get_json_dce_title (title, subtitle, language) {
     var h = {
       '@type': 'bf:Title',
