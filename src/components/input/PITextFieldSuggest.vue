@@ -1,7 +1,7 @@
 <template>
   <v-layout row>
     <v-flex xs8>
-      <v-autocomplete
+      <v-combobox
         v-model="model"
         v-on:input="$emit('input', htmlToPlaintext($event))"
         v-on:change="$emit('input', htmlToPlaintext($event))"
@@ -29,7 +29,7 @@
             <v-list-tile-title inset>{{ htmlToPlaintext(item) }}</v-list-tile-title>
           </v-list-tile-content>
         </template>
-      </v-autocomplete>
+      </v-combobox>
     </v-flex>
     <v-flex xs2 v-if="multilingual">
       <v-select 
@@ -111,7 +111,7 @@
       return {
         items: [],
         loading: false,
-        model: null,
+        model: this.value,
         search: null
       }
     },

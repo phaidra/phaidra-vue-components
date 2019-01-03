@@ -153,7 +153,7 @@ export default {
   data () {
     return {
       datepicker: false,
-      selectedDate: '',
+      selectedDate: this.date,
       datemodel: '',
       vocabulary: 'https://phaidra.org/vocabulary/role'
     }
@@ -163,7 +163,7 @@ export default {
       this.loading = !this.vocabularies[this.vocabulary].loaded
       // emit input to set skos:prefLabel in parent
       if (this.role) {
-        this.$emit('input', getTerm(this.role))
+        this.$emit('input', this.getTerm('https://phaidra.org/vocabulary/role', this.role))
       }
     })
   }

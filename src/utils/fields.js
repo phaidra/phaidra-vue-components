@@ -38,17 +38,6 @@ const fields = [
     language: 'eng'
   },
   {
-    id: 'digitization-note',
-    predicate: 'bf:note',
-    type: 'phaidra:DigitizationNote',
-    component: 'p-text-field',
-    multilingual: true,
-    multiline: true,
-    label: 'Digitization note',
-    value: '',
-    language: 'eng'
-  },
-  {
     id: 'note',
     predicate: 'bf:note',
     type: 'phaidra:Remark',
@@ -56,6 +45,17 @@ const fields = [
     multilingual: true,
     multiline: true,
     label: 'Note',
+    value: '',
+    language: 'eng'
+  },
+  {
+    id: 'digitization-note',
+    predicate: 'bf:note',
+    type: 'phaidra:DigitizationNote',
+    component: 'p-text-field',
+    multilingual: true,
+    multiline: true,
+    label: 'Digitization note',
     value: '',
     language: 'eng'
   },
@@ -88,8 +88,7 @@ const fields = [
     required: true,
     multiplicable: true,
     label: 'Language',
-    value: 'eng',
-    'skos:prefLabel': []
+    value: 'eng'
   },
   {
     id: 'role',
@@ -304,6 +303,41 @@ const fields = [
   }
 ]
 
+const predicateOrder = [
+  'dce:title',
+  'role',
+  'bf:note',
+        
+  'dcterms:language',
+  'dce:subject',
+  'schema:temporalCoverage',
+  'dcterms:spatial',
+
+  'dcterms:type',
+
+  'dcterms:issued',
+  'edm:rights',
+  'dce:rights',
+  'frapo:hasFundingAgency',
+  'frapo:isOutputOf',
+  'dcterms:provenance',
+
+  'ebucore:filename',
+  'ebucore:hasMimeType',
+
+  'opaque:cco_accessionNumber',
+  'bf:shelfMark',
+  'bf:physicalLocation',
+
+  'vra:hasInscription',
+  'vra:material',
+  'vra:hasTechnique',
+  'schema:width',
+  'schema:height',
+  'schema:depth',
+  'schema:weight'
+]
+
 export default {
   getField: function (id, ordergroup) {
     for (var i = 0; i < fields.length; i++) {
@@ -314,5 +348,8 @@ export default {
         return field
       }
     }
+  },
+  getPredicateOrder: function () {
+    return predicateOrder
   }
 }
