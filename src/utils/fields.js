@@ -300,6 +300,20 @@ const fields = [
     component: 'input-file',
     label: 'Filename',
     value: ''
+  },
+  {
+    id: 'filename-readonly',
+    predicate: 'ebucore:filename',
+    component: 'p-filename-readonly',
+    label: '',
+    value: ''
+  },
+  {
+    id: 'readonly',
+    predicate: '',
+    component: 'p-unknown-readonly',
+    label: '',
+    value: ''
   }
 ]
 

@@ -31,7 +31,7 @@
             <v-card-text class="mt-4">
               <v-layout v-for="(f) in s.fields" :key="f.id" row wrap>
 
-                <v-flex offset-xs1 v-if="f.component == 'p-text-field'" >
+                <v-flex offset-xs1 v-if="f.component === 'p-text-field'" >
                   <p-i-text-field             
                     v-bind.sync="f"
                     v-on:input="f.value=$event"
@@ -41,7 +41,7 @@
                   ></p-i-text-field>
                 </v-flex>
 
-                <v-flex offset-xs1 v-else-if="f.component == 'p-text-field-suggest'" >
+                <v-flex offset-xs1 v-else-if="f.component === 'p-text-field-suggest'" >
                   <p-i-text-field-suggest
                     v-bind.sync="f"
                     v-on:input="f.value=$event"
@@ -51,7 +51,7 @@
                   ></p-i-text-field-suggest>
                 </v-flex>
 
-                <v-flex offset-xs1 v-if="f.component == 'p-title'" >
+                <v-flex offset-xs1 v-if="f.component === 'p-title'" >
                   <p-i-title            
                     v-bind.sync="f"
                     v-on:input-title="f.title=$event"
@@ -64,7 +64,7 @@
                   ></p-i-title>
                 </v-flex>
 
-                <v-flex offset-xs1 xs4 v-else-if="f.component == 'p-select'" >
+                <v-flex offset-xs1 xs4 v-else-if="f.component === 'p-select'" >
                   <p-i-select 
                     v-bind.sync="f" 
                     v-on:input="selectInput(f, $event)"
@@ -73,7 +73,7 @@
                   ></p-i-select>        
                 </v-flex>
 
-                <v-flex offset-xs1 v-else-if="f.component == 'p-entity'" >
+                <v-flex offset-xs1 v-else-if="f.component === 'p-entity'" >
                   <p-i-entity
                     v-bind.sync="f"
                     v-on:input-firstname="f.firstname=$event"
@@ -89,7 +89,7 @@
                   ></p-i-entity>
                 </v-flex>
 
-                <v-flex offset-xs1 v-else-if="f.component == 'p-gbv-suggest-getty'" >
+                <v-flex offset-xs1 v-else-if="f.component === 'p-gbv-suggest-getty'" >
                   <p-i-gbv-suggest-getty
                     v-bind.sync="f" 
                     v-on:input="f.value=$event"
@@ -99,7 +99,7 @@
                   ></p-i-gbv-suggest-getty>        
                 </v-flex>
 
-                <v-flex offset-xs1 v-else-if="f.component == 'p-dimension'" >
+                <v-flex offset-xs1 v-else-if="f.component === 'p-dimension'" >
                   <p-i-dimension
                     v-bind.sync="f" 
                     v-on:input-value="f.value=$event"
@@ -109,7 +109,7 @@
                   ></p-i-dimension>        
                 </v-flex>
 
-                <v-flex offset-xs1 v-else-if="f.component == 'p-project'" >
+                <v-flex offset-xs1 v-else-if="f.component === 'p-project'" >
                   <p-i-project
                     v-bind.sync="f" 
                     v-on:input-name="f.name=$event"
@@ -123,7 +123,7 @@
                   ></p-i-project>        
                 </v-flex>
 
-                <v-flex offset-xs1 v-else-if="f.component == 'p-funder'" >
+                <v-flex offset-xs1 v-else-if="f.component === 'p-funder'" >
                   <p-i-funder
                     v-bind.sync="f" 
                     v-on:input-name="f.name=$event"
@@ -134,7 +134,15 @@
                   ></p-i-funder>        
                 </v-flex>
 
-                <v-flex offset-xs1 v-else-if="f.component == 'input-file'" >
+                <v-flex offset-xs1 v-else-if="f.component === 'p-filename-readonly'" >
+                  <p-i-filename-readonly v-bind.sync="f"></p-i-filename-readonly>
+                </v-flex>
+
+                <v-flex offset-xs1 v-else-if="f.component === 'p-unknown-readonly'" >
+                  <p-i-unknown-readonly v-bind.sync="f"></p-i-unknown-readonly>
+                </v-flex>
+
+                <v-flex offset-xs1 v-else-if="f.component === 'input-file'" >
                   <input type="file" @input="setFilename(f, $event)">
                 </v-flex>
 
@@ -173,6 +181,8 @@ import PIGbvSuggestGetty from '@/components/input/PIGbvSuggestGetty'
 import PIDimension from '@/components/input/PIDimension'
 import PIProject from '@/components/input/PIProject'
 import PIFunder from '@/components/input/PIFunder'
+import PIFilenameReadonly from '@/components/input/PIFilenameReadonly'
+import PIUnknownReadonly from '@/components/input/PIUnknownReadonly'
 
 export default {
   name: 'p-i-form',
@@ -186,6 +196,8 @@ export default {
     PIDimension,
     PIProject,
     PIFunder,
+    PIFilenameReadonly,
+    PIUnknownReadonly,
     VueJsonPretty
   },
   data () {
