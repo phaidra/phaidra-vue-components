@@ -10,9 +10,11 @@ export const fieldproperties = {
   computed: {
     actions: function () {
       var arr = []
+      if (this.multiplicable || this.removable) {
+        arr.push( { title: 'Remove', event: 'remove' } )
+      }
       if (this.multiplicable) {
         arr.push( { title: 'Duplicate', event: 'add' } )
-        arr.push( { title: 'Remove', event: 'remove' } )
       }
       if (this.ordered) {
         arr.push( { title: 'Move up', event: 'up' } )

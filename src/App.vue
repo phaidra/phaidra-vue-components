@@ -208,7 +208,7 @@ export default {
     this.form.sections[1].fields.push(fields.getField('inscription'))
     this.form.sections[1].fields.push(fields.getField('height'))
     this.form.sections[1].fields.push(fields.getField('shelf-mark'))
-    this.form.sections[1].fields.push(fields.getField('technique-getty-aat'))
+    this.form.sections[1].fields.push(fields.getField('technique-getty-aat-select'))
     this.form.sections[1].fields.push(fields.getField('digitization-note'))
     this.form.sections[1].fields.push(fields.getField('reproduction-note'))
     

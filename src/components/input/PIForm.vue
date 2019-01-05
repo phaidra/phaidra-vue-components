@@ -142,6 +142,13 @@
                   <p-i-unknown-readonly v-bind.sync="f"></p-i-unknown-readonly>
                 </v-flex>
 
+                <v-flex offset-xs1 v-else-if="f.component === 'p-vocab-ext-readonly'" >
+                  <p-i-vocab-ext-readonly 
+                    v-bind.sync="f"
+                    v-on:remove="removeField(s.fields, f)"
+                  ></p-i-vocab-ext-readonly>
+                </v-flex>
+
                 <v-flex offset-xs1 v-else-if="f.component === 'input-file'" >
                   <input type="file" @input="setFilename(f, $event)">
                 </v-flex>
@@ -182,6 +189,7 @@ import PIDimension from '@/components/input/PIDimension'
 import PIProject from '@/components/input/PIProject'
 import PIFunder from '@/components/input/PIFunder'
 import PIFilenameReadonly from '@/components/input/PIFilenameReadonly'
+import PIVocabExtReadonly from '@/components/input/PIVocabExtReadonly'
 import PIUnknownReadonly from '@/components/input/PIUnknownReadonly'
 
 export default {
@@ -197,6 +205,7 @@ export default {
     PIProject,
     PIFunder,
     PIFilenameReadonly,
+    PIVocabExtReadonly,
     PIUnknownReadonly,
     VueJsonPretty
   },

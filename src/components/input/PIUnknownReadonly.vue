@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex>
       <v-flex class="primary--text" xs3>{{ label }}</v-flex>
-      <vue-json-pretty :data="value"></vue-json-pretty>
+      <vue-json-pretty :data="jsonld"></vue-json-pretty>
     </v-flex>
   </v-layout>
 </template>
@@ -16,8 +16,8 @@ export default {
     VueJsonPretty
   },
   props: {
-    value: {
-      type: String
+    jsonld: {
+      type: Array
     },
     label: {
       type: String,

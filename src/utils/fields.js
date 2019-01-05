@@ -178,7 +178,7 @@ const fields = [
     value: ''
   },
   {
-    id: 'technique-getty-aat',
+    id: 'technique-getty-aat-select',
     predicate: 'vra:hasTechnique',
     type: 'vra:Technique',
     component: 'p-select',
@@ -313,7 +313,16 @@ const fields = [
     predicate: '',
     component: 'p-unknown-readonly',
     label: '',
-    value: ''
+    jsonld: ''
+  },
+  {
+    id: 'vocab-ext-readonly',
+    predicate: '',
+    component: 'p-vocab-ext-readonly',
+    label: '',
+    'skos:prefLabel': [],
+    'rdfs:label': [],
+    'skos:exactMatch': []
   }
 ]
 

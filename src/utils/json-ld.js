@@ -96,12 +96,10 @@ export default {
                 // TODO add classification
                 //f = fields.getField('classification')
                 //components.push(f)
-              }
-              break
-
-            case 'dcterms:subject':
-              if (value[i]['@type'] === 'phaidra:Subject') {
-                // ignore, handled elsewhere
+              } else {
+                if (value[i]['@type'] === 'phaidra:Subject') {
+                  // ignore, handled elsewhere
+                }
               }
               break
 
@@ -319,21 +317,15 @@ export default {
                 components.push(f)
               } else {
                 // vra:hasTechnique - getty aat
-                // TODO: fix readonly
                 if (value[i]['@type'] === 'vra:Technique' && (value[i]['skos:exactMatch'])) {
-                  /*
-                  f = fields.getField('technique-getty-aat')
-                  for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
-                    f.value = value[i]['skos:prefLabel'][j]['@value']
-                    f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
-                  }
-                  */
-                  f = fields.getField('readonly')
-                  f.value = value[i]
+                  f = fields.getField('vocab-ext-readonly')
+                  f['skos:exactMatch'] = value[i]['skos:exactMatch']
+                  f['skos:prefLabel'] = value[i]['skos:prefLabel']
+                  f['rdfs:label'] = value[i]['rdfs:label']
                   f.predicate = key
-                  f.label = key
+                  f.label = 'Technique'
                   components.push(f)
-                  f = fields.getField('technique-getty-aat')
+                  f = fields.getField('technique-getty-aat-select')
                   components.push(f)
                 }
               }
@@ -410,7 +402,7 @@ export default {
                 // unknown predicate
 
                 f = fields.getField('readonly')
-                f.value = value[i]
+                f.jsonld = value[i]
                 f.predicate = key
                 f.label = key
                 components.push(f)
@@ -561,7 +553,7 @@ export default {
 
     return h
   },
-  get_json_object (rdfslabels, preflabels, type, identifiers) {
+  get_json_object (preflabels, rdfslabels, type, identifiers) {
     var h = {}
 
     if (type) {
@@ -578,9 +570,9 @@ export default {
     }
 
     if (rdfslabels) {
-      h['skos:prefLabel'] = []
+      h['rdfs:label'] = []
       for (var i = 0; i < rdfslabels.length; i++) {
-        h['skos:prefLabel'].push(rdfslabels[i])
+        h['rdfs:label'].push(rdfslabels[i])
       }
     }
 
@@ -597,15 +589,15 @@ export default {
     }
 
     h['skos:prefLabel'] = []
-    for (var i = 0; i < rdfslabels.length; i++) {
-      h['skos:prefLabel'].push(rdfslabels[i])
+    for (var i = 0; i < preflabels.length; i++) {
+      h['skos:prefLabel'].push(preflabels[i])
     }
 
-    if (preflabels) {
-      if (preflabels.length > 0) {
+    if (rdfslabels) {
+      if (rdfslabels.length > 0) {
         h['skos:prefLabel'] = []
-        for (var j = 0; j < preflabels.length; j++) {
-          h['skos:prefLabel'].push(preflabels[j])
+        for (var j = 0; j < rdfslabels.length; j++) {
+          h['skos:prefLabel'].push(rdfslabels[j])
         }
       }
     }
@@ -958,10 +950,14 @@ export default {
 
         case 'vra:hasTechnique':
           if (f.component === 'p-select' && f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'vra:Technique', f.value))
+            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'vra:Technique', [ f.value ]))
           } else {
-            if (f.value) {
-              this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'vra:Technique'))
+            if (f.component === 'p-vocab-ext-readonly') {
+              this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], f['rdfs:label'], 'vra:Technique', f['skos:exactMatch']))
+            } else {
+              if (f.value) {
+                this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'vra:Technique'))
+              }
             }
           }
           break
