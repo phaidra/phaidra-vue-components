@@ -6,9 +6,11 @@
           
           <h4 class="text-lg-right subheading mb-3">Phaidra Vue Components {{version}}</h4>
         
-          <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" v-if="alert.msg" transition="slide-y-transition" :key="i">
-            <v-layout>{{alert.msg}}<v-spacer></v-spacer><icon name="material-navigation-close" color="grey lighten-1" @click.native="dismiss(alert)"></icon></v-layout>
-          </v-alert>
+          <v-flex xs4>
+            <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" v-if="alert.msg" transition="slide-y-transition" :key="i">
+              <v-layout>{{alert.msg}}<v-spacer></v-spacer><icon name="material-navigation-close" color="grey lighten-1" @click.native="dismiss(alert)"></icon></v-layout>
+            </v-alert>
+          </v-flex>
 
           <v-layout row>  
             <v-flex xs4>
@@ -172,14 +174,10 @@ export default {
       this.$store.dispatch('logout')
     },
     objectCreated: function (event) {
-      this.pid = event
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + this.pid + ' created' }])
-      this.loadDisplay()
     },
     objectSaved: function (event) {
-      this.pid = event
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Metadata for object ' + this.pid + ' saved' }])
-      this.loadDisplay()
     },
     toggleVisibility: function () {
       this.psvis = !this.psvis

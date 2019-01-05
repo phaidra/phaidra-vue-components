@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-lg>
+  <v-container grid-list-lg v-if="form">
     <v-tabs v-model="activetab" align-with-title>
       <v-tab ripple v-if="form.sections.length > 0" ><template v-if="mode==='edit'">{{ loadedPid + ' - ' + $t('edit') }}</template><template v-else >{{ $t('Submit') }}</template> {{ ' ' + $t('metadata') }}</v-tab>
       <v-tab ripple @click="generateJson()">Metadata preview</v-tab>
@@ -316,7 +316,6 @@ export default {
       })
       .catch(function (error) {
         self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-        //console.error('Error:', error)
         self.loading = false
         self.$vuetify.goTo(0)
       })
@@ -327,7 +326,7 @@ export default {
       this.generateJson()
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.metadata))      
-      fetch(self.$store.state.settings.instance.api + '/' + this.loadedPid + '/metadata', {
+      fetch(self.$store.state.settings.instance.api + '/object/' + this.loadedPid + '/metadata', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -336,19 +335,21 @@ export default {
         body: httpFormData
       })
       .then(response => response.json())
-      .then(function (response, json) {
+      .then(function (json) {
         if (json.alerts && json.alerts.length > 0) {
+          if (json.status === 401) {
+            json.alerts.push({ type: 'danger', msg: 'Please log in' })
+          }
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
-        if (response.status === 200){
+        if (json.status === 200){
           self.$emit('object-saved', self.loadedPid)
         }
         self.$vuetify.goTo(0)
       })
       .catch(function (error) {
         self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-        //console.error('Error:', error)
         self.loading = false
         self.$vuetify.goTo(0)
       })

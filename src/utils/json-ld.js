@@ -85,17 +85,16 @@ export default {
               break
 
             // dcterms:subject
-            // TODO: fix readonly
             case 'dcterms:subject':
               if (value[i]['@type'] === 'skos:Concept') {
-                f = fields.getField('readonly')
-                f.value = value[i]
+                f = fields.getField('vocab-ext-readonly')
+                f['skos:exactMatch'] = value[i]['skos:exactMatch']
+                f['skos:prefLabel'] = value[i]['skos:prefLabel']
+                f['rdfs:label'] = value[i]['rdfs:label']
                 f.predicate = key
-                f.label = key
+                f.label = 'Classification'
                 components.push(f)
-                // TODO add classification
-                //f = fields.getField('classification')
-                //components.push(f)
+                // TODO: add classification
               } else {
                 if (value[i]['@type'] === 'phaidra:Subject') {
                   // ignore, handled elsewhere
@@ -129,17 +128,12 @@ export default {
               } else {
                 if (value[i]['@type'] === 'schema:Place' && value[i]['skos:exactMatch']){
                   // dcterms:spatial - getty
-                  // TODO fix readonly
-                  /*
-                  f = fields.getField('spatial-getty-tgn-readonly')
-                  for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
-                    f.value = value[i]['skos:prefLabel'][j]['@value']
-                  }
-                  */
-                  f = fields.getField('readonly')
-                  f.value = value[i]
+                  f = fields.getField('vocab-ext-readonly')
+                  f['skos:exactMatch'] = value[i]['skos:exactMatch']
+                  f['skos:prefLabel'] = value[i]['skos:prefLabel']
+                  f['rdfs:label'] = value[i]['rdfs:label']
                   f.predicate = key
-                  f.label = key
+                  f.label = 'Place'
                   components.push(f)
                   f = fields.getField('spatial-getty-tgn')
                   components.push(f)
@@ -238,7 +232,6 @@ export default {
               break
 
             // ebucore:filename
-            // TODO fix readonly
             case 'ebucore:filename':
               f = fields.getField('filename-readonly')
               f.predicate = key
