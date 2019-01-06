@@ -376,12 +376,12 @@ export default {
                   f.role = pred_role[1]
                   if (value[i]['schema:familyName']) {
                     for (j = 0; j < value[i]['schema:familyName'].length; j++) {
-                      f.firstname = value[i]['schema:familyName'][j]['@value']
+                      f.lastname = value[i]['schema:familyName'][j]['@value']
                     }
                   }
                   if (value[i]['schema:givenName']) {
                     for (j = 0; j < value[i]['schema:givenName'].length; j++) {
-                      f.lastname = value[i]['schema:givenName'][j]['@value']
+                      f.firstname = value[i]['schema:givenName'][j]['@value']
                     }
                   }
                   if (value[i]['dcterms:date']) {
@@ -815,7 +815,9 @@ export default {
       } else { 
         if (s.type === 'phaidra:DigitizedObject') {
           jsonldid = 'digitized-object'
-          jsonlds[jsonldid] = {}
+          jsonlds[jsonldid] = {
+            '@type': 'phaidra:DigitizedObject'
+          }
           this.fields2json(jsonlds[jsonldid], s)
         }else{
           this.fields2json(jsonlds, s)
@@ -825,8 +827,10 @@ export default {
 
     Object.keys(jsonlds).forEach(function (key) {
       if (key === 'digitized-object') {
-        jsonlds['prov:wasDerivedFrom'] = jsonlds[key]
-        jsonlds['prov:wasDerivedFrom']['@type'] = 'phaidra:DigitizedObject'
+        if (!jsonlds['prov:wasDerivedFrom']) {
+          jsonlds['prov:wasDerivedFrom'] = []
+        }
+        jsonlds['prov:wasDerivedFrom'].push(jsonlds[key])
         delete jsonlds[key]
       }
       if (key.startsWith('subject-')) {
@@ -960,7 +964,7 @@ export default {
         case 'schema:depth':
         case 'schema:weight':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_quantitativevalue(f.value, f.unitCode))
+            this.push_object(jsonld, f.predicate, this.get_json_quantitativevalue(f.value, f.unit))
           }
           break
 

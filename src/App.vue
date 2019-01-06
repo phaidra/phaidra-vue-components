@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <v-container fluid grid-list-lg>
+      <v-container justify-center grid-list-lg>
         <v-layout column>  
           
           <h4 class="text-lg-right subheading mb-3">Phaidra Vue Components {{version}}</h4>
@@ -39,61 +39,108 @@
             </v-flex>
           </v-layout> 
 
-          <v-layout row>
-            <v-flex xs6>
-              <v-layout column>
-                <v-flex xs12>
-                  <v-card>
-                    <v-toolbar flat>
-                      <v-toolbar-title>Display</v-toolbar-title>
-                      <v-divider class="mx-3" inset vertical></v-divider>
-                      <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
-                      <v-spacer></v-spacer>
-                      <v-btn raised single-line class="right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
-                    </v-toolbar>
-                    <v-card-text>
-                      <p-d-jsonld :pid="pid" ref="display"></p-d-jsonld>
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12>
-                  <v-card>
-                    <v-toolbar flat>
-                      <v-toolbar-title>Edit</v-toolbar-title>
-                      <v-divider class="mx-3" inset vertical></v-divider>
-                      <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
-                      <v-spacer></v-spacer>
-                      <v-btn raised single-line class="right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
-                    </v-toolbar>
-                    <v-card-text>
-                      <p-i-form :mode="'edit'" ref="edit" v-on:object-saved="objectSaved($event)"></p-i-form>
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-              </v-layout>
+          <v-layout row> 
+            <v-flex xs2>
+              <v-navigation-drawer permanent>
+                <v-toolbar flat>
+                  <v-list>
+                    <v-list-tile>
+                      <v-list-tile-title class="title">{{ $t('Examples') }}</v-list-tile-title>
+                    </v-list-tile>
+                  </v-list>
+                </v-toolbar>
+                <v-divider></v-divider>
+                <v-list>
+                  <v-item-group v-model="window" class="shrink mr-4" mandatory tag="v-flex">
+                    <v-item>
+                      <div slot-scope="{ active, toggle }">
+                        <v-list-tile @click="toggle">
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ $t('Display') }}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile>
+                      </div>
+                    </v-item>
+                    <v-item>
+                      <div slot-scope="{ active, toggle }">
+                        <v-list-tile @click="toggle">
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ $t('Edit') }}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile>
+                      </div>
+                    </v-item>
+                    <v-item>
+                      <div slot-scope="{ active, toggle }">
+                        <v-list-tile @click="toggle">
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ $t('Submit') }}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile>
+                      </div>
+                    </v-item>
+                  </v-item-group>
+                </v-list>
+              </v-navigation-drawer>
             </v-flex>
-            <v-flex xs6>
-              <v-layout column>
-                <v-flex xs6>
-                  <v-card>
-                    <v-toolbar flat>
-                      <v-toolbar-title>Submit</v-toolbar-title>
-                      <v-divider class="mx-3" inset vertical></v-divider>
-                      <v-select
-                        :items="contentmodels"
-                        v-model="contentmodel"
-                        label="Object type"
-                        single-line
-                      ></v-select>
-                      <v-spacer></v-spacer>
-                    </v-toolbar>
-                    <v-card-text>
-                      <p-i-form :mode="'submit'" :submitform="form" :contentmodel="contentmodel" v-on:object-created="objectCreated($event)"></p-i-form>
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-              </v-layout>
+
+            <v-flex>
+              <v-window v-model="window">
+                <v-window-item>
+                  <v-flex>
+                    <v-card>
+                      <v-toolbar flat>
+                        <v-toolbar-title>Display</v-toolbar-title>
+                        <v-divider class="mx-3" inset vertical></v-divider>
+                        <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                        <v-spacer></v-spacer>
+                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <p-d-jsonld :pid="pid" ref="display"></p-d-jsonld>
+                      </v-card-text>
+                    </v-card>
+                  </v-flex>
+                </v-window-item>
+                <v-window-item>
+                  <v-flex>
+                    <v-card>
+                      <v-toolbar flat>
+                        <v-toolbar-title>Edit</v-toolbar-title>
+                        <v-divider class="mx-3" inset vertical></v-divider>
+                        <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                        <v-spacer></v-spacer>
+                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <p-i-form :mode="'edit'" ref="edit" v-on:object-saved="objectSaved($event)"></p-i-form>
+                      </v-card-text>
+                    </v-card>
+                  </v-flex>
+                </v-window-item>
+                <v-window-item>
+                  <v-flex>
+                    <v-card>
+                      <v-toolbar flat>
+                        <v-toolbar-title>Submit</v-toolbar-title>
+                        <v-divider class="mx-3" inset vertical></v-divider>
+                        <v-select
+                          :items="contentmodels"
+                          v-model="contentmodel"
+                          label="Object type"
+                          single-line
+                        ></v-select>
+                        <v-spacer></v-spacer>
+                      </v-toolbar>
+                      <v-card-text>
+                        <p-i-form :mode="'submit'" :submitform="form" :contentmodel="contentmodel" v-on:object-created="objectCreated($event)"></p-i-form>
+                      </v-card-text>
+                    </v-card>
+                  </v-flex>
+                </v-window-item>
+              </v-window>
             </v-flex>
+
           </v-layout>
         </v-layout>
       </v-container>
@@ -124,6 +171,7 @@ export default {
   },
   data () {
     return {
+      window: 0,
       loadedform: {},
       form: {
         sections: [
@@ -147,7 +195,7 @@ export default {
           }
         ]
       },
-      pid: 'o:504415',
+      pid: '',
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
