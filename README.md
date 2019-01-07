@@ -7,8 +7,10 @@ Create a new Vue project
 vue create test-phaidra-components
 ```
 
-Install dependencies
+Install additional dependencies
 ```bash
+npm install --save-dev stylus
+npm install --save-dev stylus-loader
 npm install --save vuetify
 npm install --save vuex
 npm install --save vue-i18n
@@ -65,7 +67,7 @@ Vue.use(Vuetify, {
 })
 ```
 
-Copy the template of App.vue from phaidra-vue-components library, use this js instead:
+Copy the template of App.vue from phaidra-vue-components library, in the template remove `{{version}}` from heading, as for the js part, use this js instead:
 ```js
 import fields from 'phaidra-vue-components/src/utils/fields'
 
