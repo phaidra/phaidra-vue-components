@@ -222,10 +222,10 @@ export default {
       this.$store.dispatch('logout')
     },
     objectCreated: function (event) {
-      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + this.pid + ' created' }])
+      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + event + ' created' }])
     },
     objectSaved: function (event) {
-      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Metadata for object ' + this.pid + ' saved' }])
+      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Metadata for object ' + event + ' saved' }])
     },
     toggleVisibility: function () {
       this.psvis = !this.psvis
