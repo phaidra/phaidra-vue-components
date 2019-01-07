@@ -16,7 +16,7 @@
               <v-spacer></v-spacer>
               <v-menu v-if="s.multiplicable" open-on-hover bottom offset-y>
                 <v-btn slot="activator" icon dark>
-                  <icon name="material-navigation-more-vert" color="white" width="24px" height="24px"></icon>
+                  <v-icon dark>more_vert</v-icon>
                 </v-btn>
                 <v-list>
                   <v-list-tile @click="addSection(s)">

@@ -43,7 +43,7 @@
     <v-flex xs1 v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <v-btn slot="activator" icon>
-          <icon name="material-navigation-more-vert" width="24px" height="24px"></icon>
+          <v-icon>more_vert</v-icon>
         </v-btn>
         <v-list>
           <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
@@ -56,7 +56,6 @@
 </template>
 
 <script>
-import '../../compiled-icons/material-navigation-more-vert'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 

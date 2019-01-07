@@ -7,8 +7,8 @@
           <h4 class="text-lg-right subheading mb-3">Phaidra Vue Components {{version}}</h4>
         
           <v-flex xs4>
-            <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" v-if="alert.msg" transition="slide-y-transition" :key="i">
-              <v-layout>{{alert.msg}}<v-spacer></v-spacer><icon name="material-navigation-close" color="grey lighten-1" @click.native="dismiss(alert)"></icon></v-layout>
+            <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
+              <v-layout row><v-flex class="pa-3">{{alert.msg}}</v-flex><v-spacer></v-spacer><v-btn icon @click.native="dismiss(alert)"><v-icon>close</v-icon></v-btn></v-layout>
             </v-alert>
           </v-flex>
 
@@ -151,7 +151,6 @@
 <script>
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
-import './compiled-icons/material-navigation-close'
 import {version} from '../package.json'
 import fields from '@/utils/fields'
 
