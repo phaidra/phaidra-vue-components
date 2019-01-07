@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import PDLicense from '@/components/display/PDLicense'
+import PDLicense from './PDLicense'
 
 export default {
   name: 'p-d-uwmetadata',

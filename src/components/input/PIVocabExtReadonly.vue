@@ -26,7 +26,7 @@
   </v-layout>
 </template>
 <script>
-import { fieldproperties } from '@/mixins/fieldproperties'
+import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-vocab-ext-readonly',

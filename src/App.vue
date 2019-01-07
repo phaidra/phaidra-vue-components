@@ -151,9 +151,9 @@
 <script>
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
-import '@/compiled-icons/material-navigation-close'
-import {version} from '../package.json';
-import fields from '@/utils/fields';
+import './compiled-icons/material-navigation-close'
+import {version} from '../package.json'
+import fields from '@/utils/fields'
 
 export default {
   name: 'app',

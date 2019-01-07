@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { vocabulary } from '@/mixins/vocabulary'
+import { vocabulary } from '../../mixins/vocabulary'
 
 export default {
   name: 'p-d-entity',

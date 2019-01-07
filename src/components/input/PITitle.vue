@@ -56,9 +56,9 @@
 </template>
 
 <script>
-import '@/compiled-icons/material-navigation-more-vert'
-import { vocabulary } from '@/mixins/vocabulary'
-import { fieldproperties } from '@/mixins/fieldproperties'
+import '../../compiled-icons/material-navigation-more-vert'
+import { vocabulary } from '../../mixins/vocabulary'
+import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-title',

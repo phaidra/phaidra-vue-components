@@ -151,19 +151,19 @@
 </template>
 
 <script>
-import PDLicense from '@/components/display/PDLicense'
-import PDTitle from '@/components/display/PDTitle'
-import PDSkosPreflabel from '@/components/display/PDSkosPreflabel'
-import PDLangValue from '@/components/display/PDLangValue'
-import PDValue from '@/components/display/PDValue'
-import PDDimension from '@/components/display/PDDimension'
-import PDGeoreference from '@/components/display/PDGeoreference'
-import PDEntity from '@/components/display/PDEntity'
-import PDUri from '@/components/display/PDUri'
-import PDFunder from '@/components/display/PDFunder'
-import PDProject from '@/components/display/PDProject'
-import PDJsonldLayout from '@/components/display/PDJsonldLayout'
-import { vocabulary } from '@/mixins/vocabulary'
+import PDLicense from './PDLicense'
+import PDTitle from './PDTitle'
+import PDSkosPreflabel from './PDSkosPreflabel'
+import PDLangValue from './PDLangValue'
+import PDValue from './PDValue'
+import PDDimension from './PDDimension'
+import PDGeoreference from './PDGeoreference'
+import PDEntity from './PDEntity'
+import PDUri from './PDUri'
+import PDFunder from './PDFunder'
+import PDProject from './PDProject'
+import PDJsonldLayout from './PDJsonldLayout'
+import { vocabulary } from '../../mixins/vocabulary'
 
 export default {
   name: 'p-d-jsonld',

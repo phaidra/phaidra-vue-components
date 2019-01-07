@@ -1,4 +1,4 @@
-import languages from '@/utils/lang'
+import languages from '../../utils/lang'
 
 const state = {
   vocabularies: {

@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import '@/compiled-icons/material-content-add'
-import '@/compiled-icons/material-content-remove'
-import { vocabulary } from '@/mixins/vocabulary'
-import { fieldproperties } from '@/mixins/fieldproperties'
+import '../../compiled-icons/material-content-add'
+import '../../compiled-icons/material-content-remove'
+import { vocabulary } from '../../mixins/vocabulary'
+import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-dimension',

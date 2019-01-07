@@ -1,4 +1,4 @@
-import uuid from '@/utils/uuid'
+import uuid from './uuid'
 
 const fields = [
   {

@@ -1,5 +1,4 @@
-import fields from '@/utils/fields'
-import { nextTick } from 'q';
+import fields from './fields'
 
 export default {
   json2components: function (jsonld) {
