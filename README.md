@@ -54,7 +54,7 @@ Add material icons and font to public/index.html
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
 ```
 
-Create src/plugins.vuetify.js
+Create src/plugins/vuetify.js
 ```
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
