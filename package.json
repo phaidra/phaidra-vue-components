@@ -60,5 +60,5 @@
     "*.json",
     "*.js"
   ],
-  "main": ".dist/phaidra-vue-components.common.js"
+  "main": "./dist/phaidra-vue-components.common.js"
 }
