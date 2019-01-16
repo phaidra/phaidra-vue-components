@@ -176,6 +176,20 @@ export default {
 }
 ```
 
+If you are using a store in your app, you need to add the necessary phaidra-vue-components store modules to your store:
+store/index.js
+```js
+import vocabulary from 'phaidra-vue-components/src/store/modules/vocabulary'
+...
+export default new Vuex.Store({
+...
+  modules: {
+...    ,
+    vocabulary
+  }
+})
+```
+
 Issue
 ```
 npm run serve
