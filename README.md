@@ -7,8 +7,10 @@ Create a new Vue project
 vue create test-phaidra-components
 ```
 
-Install dependencies
+Install additional dependencies
 ```bash
+npm install --save-dev stylus
+npm install --save-dev stylus-loader
 npm install --save vuetify
 npm install --save vuex
 npm install --save vue-i18n
@@ -20,8 +22,8 @@ main.js
 import Vue from 'vue'
 import './plugins/vuetify'
 import Vuetify from 'vuetify'
-import store from 'phaidra-vue-components/src/store'
 import VueI18n from 'vue-i18n'
+import store from 'phaidra-vue-components/src/store'
 import eng from 'phaidra-vue-components/src/i18n/eng'
 import deu from 'phaidra-vue-components/src/i18n/deu'
 import ita from 'phaidra-vue-components/src/i18n/ita'
@@ -54,7 +56,7 @@ Add material icons and font to public/index.html
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
 ```
 
-Create src/plugins.vuetify.js
+Create src/plugins/vuetify.js
 ```
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
@@ -65,7 +67,7 @@ Vue.use(Vuetify, {
 })
 ```
 
-Copy the template of App.vue from phaidra-vue-components library, use this js instead:
+Copy the template of App.vue from phaidra-vue-components library, in the template remove `{{version}}` from heading, as for the js part, use this js instead:
 ```js
 import fields from 'phaidra-vue-components/src/utils/fields'
 
@@ -172,6 +174,20 @@ export default {
     
   }
 }
+```
+
+If you are using a store in your app, you need to add the necessary phaidra-vue-components store modules to your store:
+store/index.js
+```js
+import vocabulary from 'phaidra-vue-components/src/store/modules/vocabulary'
+...
+export default new Vuex.Store({
+...
+  modules: {
+...    ,
+    vocabulary
+  }
+})
 ```
 
 Issue
