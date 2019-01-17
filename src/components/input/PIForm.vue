@@ -1,12 +1,12 @@
 <template>
-  <v-container grid-list-lg v-if="form">
+  <v-container grid-list-lg v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
-      <v-tab ripple v-if="form.sections.length > 0" ><template v-if="mode==='edit'">{{ loadedPid + ' - ' + $t('edit') }}</template><template v-else >{{ $t('Submit') }}</template> {{ ' ' + $t('metadata') }}</v-tab>
+      <v-tab ripple><template v-if="mode==='edit'"><span class="text-lowercase">{{ loadedPid }}</span>&nbsp;-&nbsp;<span>{{ $t('edit') }}</span></template><template v-else >{{ $t('Submit') }}</template>&nbsp;{{ $t('metadata') }}</v-tab>
       <v-tab ripple @click="generateJson()">Metadata preview</v-tab>
     </v-tabs>
   
     <v-tabs-items v-model="activetab">
-      <v-tab-item class="pa-3" v-if="form.sections.length > 0">
+      <v-tab-item class="pa-3" v-if="form">
 
         <v-layout v-for="(s) in this.form.sections" :key="s.id" column wrap class="ma-3">
           
@@ -215,7 +215,7 @@ export default {
       jsonlds: {},
       metadata: {},
       loadedMetadata: [],
-      form: this.submitform,
+      editform: {},
       loading: false,
       loadedPid: ''
     }
@@ -236,6 +236,15 @@ export default {
       type: String
     }
   },
+  computed: {
+    form: function () {
+      if (this.mode === 'submit') {
+        return this.submitform
+      } else {
+        return this.editform
+      }
+    }
+  },
   methods: {
     loadMetadata: function (pid) {      
       this.loadedPid = pid
@@ -249,7 +258,7 @@ export default {
       .then(function (response) { return response.json() })
       .then(function (json) {
         if (json.metadata['JSON-LD']) {
-          self.form = self.json2form(json.metadata['JSON-LD'])
+          self.editform = self.json2form(json.metadata['JSON-LD'])
         }
       })
       .catch(function (error) {
