@@ -13,30 +13,37 @@
           </v-flex>
 
           <v-layout row>  
-            <v-flex xs4>
+            <v-flex xs3>
               <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
             </v-flex>
-            <v-flex xs4>
+            <v-flex xs3>
               <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
             </v-flex>
-            <v-flex xs2> 
-              <v-text-field v-model="credentials.username" :label="'username'" ></v-text-field>
-            </v-flex>
-            <v-flex xs2>
-              <v-text-field 
-                v-model="credentials.password" 
-                :label="'password'" 
-                :append-icon="psvis ? 'visibility' : 'visibility_off'"
-                @click:append="toggleVisibility"
-                :type="psvis ? 'password' : 'text'"
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs1>
-              <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
-            </v-flex>
-            <v-flex v-if="user" xs2>
-              <h3 class="font-weight-light pt-4">Logged in as [{{ user }}]</h3>
-            </v-flex>
+            <template v-if="token">
+              <v-flex xs6>
+                <h3 class="font-weight-light pt-4">Logged in [{{ token }}]</h3>
+              </v-flex>
+              <v-flex xs1>
+                <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="logout()">Logout</v-btn>
+              </v-flex>
+            </template>
+            <template v-else>
+              <v-flex xs2> 
+                <v-text-field v-model="credentials.username" :label="'username'" ></v-text-field>
+              </v-flex>
+              <v-flex xs2>
+                <v-text-field 
+                  v-model="credentials.password" 
+                  :label="'password'" 
+                  :append-icon="psvis ? 'visibility' : 'visibility_off'"
+                  @click:append="toggleVisibility"
+                  :type="psvis ? 'password' : 'text'"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs1>
+                <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
+              </v-flex>
+            </template>
           </v-layout> 
 
           <v-layout row> 
@@ -161,8 +168,8 @@ export default {
     PDJsonld
   },
   computed: {
-    user: function() {
-      return this.$store.state.user.lastname ? this.$store.state.user.firstname + ' ' + this.$store.state.user.lastname : null
+    token: function() {
+      return this.$store.state.user.token
     },
     alerts: function () {
       return this.$store.state.alerts.alerts
@@ -181,7 +188,7 @@ export default {
           },
           {
             title: 'Digitized object',
-            type: 'phaidra:DigitizedObject',
+            type: 'digitized-object',
             id: 2,
             fields: []
           },

@@ -101,10 +101,8 @@ export default {
               }
               break
 
-            case 'prov:wasDerivedFrom':
-              if (value[i]['@type'] === 'phaidra:DigitizedObject') {
-                // ignore, handled elsewhere
-              }
+            case 'prov:wasDerivedFrom':             
+              // ignore, handled elsewhere
               break
 
             // schema:temporalCoverage
@@ -443,9 +441,7 @@ export default {
       var i
       if (key === 'prov:wasDerivedFrom') {
         for (i = 0; i < value.length; i++) {
-          if (value[i]['@type'] === 'phaidra:DigitizedObject') {
-            levels.analog.push( { components: this.json2components(value[i]) } )
-          }
+          levels.analog.push( { components: this.json2components(value[i]) } )
         }
       }
     })
@@ -481,7 +477,7 @@ export default {
       form.sections.push(
         {
           title: 'Digitized object',
-          type: 'phaidra:DigitizedObject',
+          type: 'digitized-object',
           id: 'analog-'+i,
           fields: analogFields
         }
@@ -770,11 +766,9 @@ export default {
           '@type': 'phaidra:Subject'
         }
       }
-      if (s.type === 'phaidra:DigitizedObject') {
+      if (s.type === 'digitized-object') {
         jsonldid = 'digitized-object'
-        jsonlds[jsonldid] = {
-          '@type': 'phaidra:DigitizedObject'
-        }
+        jsonlds[jsonldid] = {}
       }
 
       this.fields2json(jsonlds[jsonldid], s)
@@ -812,11 +806,9 @@ export default {
         }
         this.fields2json(jsonlds[jsonldid], s)
       } else { 
-        if (s.type === 'phaidra:DigitizedObject') {
+        if (s.type === 'digitized-object') {
           jsonldid = 'digitized-object'
-          jsonlds[jsonldid] = {
-            '@type': 'phaidra:DigitizedObject'
-          }
+          jsonlds[jsonldid] = {}
           this.fields2json(jsonlds[jsonldid], s)
         }else{
           this.fields2json(jsonlds, s)

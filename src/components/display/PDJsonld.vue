@@ -126,16 +126,18 @@
         </template>
 
         <template v-else-if="p==='prov:wasDerivedFrom'" slot="prov:wasDerivedFrom">
-          <v-card class="mt-3" :key="p">
-            <v-toolbar dense flat>
-                <v-layout>
-                  <v-toolbar-title class="font-weight-light">Digitized object</v-toolbar-title>
-                </v-layout>
-              </v-toolbar>
-              <v-card-text class="ma-2">
-                <p-d-jsonld :jsonld="o" :key="p"></p-d-jsonld>
-              </v-card-text>
-          </v-card>
+          <template v-for="(derivedfrom, j) in o">
+            <v-card class="mt-3" :key="'derivedfrom' + j">
+              <v-toolbar dense flat>
+                  <v-layout>
+                    <v-toolbar-title class="font-weight-light">Digitized object</v-toolbar-title>
+                  </v-layout>
+                </v-toolbar>
+                <v-card-text class="ma-2">
+                  <p-d-jsonld :jsonld="derivedfrom" :key="p"></p-d-jsonld>
+                </v-card-text>
+            </v-card>
+          </template>
         </template>
 
         <template v-else-if="p==='@type'"></template>

@@ -339,7 +339,7 @@ export default {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+          'X-XSRF-TOKEN': this.$store.state.token
         },
         body: httpFormData
       })
@@ -421,8 +421,13 @@ export default {
       f.coordinates = event.coordinates
     },
     selectInput: function (f, event) {
-      f.value = event['@id']
-      f['skos:prefLabel'] = event['skos:prefLabel']
+      if (event) {
+        f.value = event['@id']
+        f['skos:prefLabel'] = event['skos:prefLabel']
+      } else {
+        f.value = ''
+        f['skos:prefLabel'] = ''
+      }
     },
     roleInput: function (f, event) {
       f.role = event['@id']
