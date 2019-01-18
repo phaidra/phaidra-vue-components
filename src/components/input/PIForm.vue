@@ -311,12 +311,12 @@ export default {
         body: httpFormData
       })
       .then(response => response.json())
-      .then(function (response, json) {
+      .then(function (json) {
         if (json.alerts && json.alerts.length > 0) {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
-        if (response.status === 200){
+        if (json.status === 200){
           if (json.pid) {
             self.$emit('object-created', json.pid)
           }
