@@ -339,7 +339,7 @@ export default {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'X-XSRF-TOKEN': this.$store.state.token
+          'X-XSRF-TOKEN': this.$store.state.user.token
         },
         body: httpFormData
       })
