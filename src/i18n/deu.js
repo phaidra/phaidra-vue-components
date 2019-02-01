@@ -28,6 +28,7 @@ export default {
   'License': 'Lizenz',
   'Size': 'Größe',
   'Type': 'Typ',
+  'Type of date': 'Typ des Datums',
   'Access': 'Zugang',
   'Roles': 'Rollen',
   'Image': 'Bild',

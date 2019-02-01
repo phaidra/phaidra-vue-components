@@ -12,6 +12,9 @@ export default new Vuex.Store({
       instance: {
         api: '',
         solr: ''
+      },
+      global: {
+        suggesters: {}
       }
     },
     user: {
@@ -53,6 +56,9 @@ export default new Vuex.Store({
     },
     setInstanceSolr (state, solr) {
       state.settings.instance.solr = solr
+    },
+    setSuggester (state, data) {
+      Vue.set(state.settings.global.suggesters, data.suggester, data.url)
     }
   },
   actions: {

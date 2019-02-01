@@ -101,10 +101,6 @@ export default {
               }
               break
 
-            case 'prov:wasDerivedFrom':             
-              // ignore, handled elsewhere
-              break
-
             // schema:temporalCoverage
             case 'schema:temporalCoverage':
               f = fields.getField('temporal-coverage')             
@@ -362,6 +358,16 @@ export default {
                 components.push(f)
               }
               break
+            
+            // phaidra:dateAccessioned
+            case 'phaidra:dateAccessioned':
+              if (typeof value[i] === 'string') {
+                f = fields.getField('date-edtf')
+                f.type = 'dateAccessioned'
+                f.value = value[i]
+                components.push(f)
+              }
+              break
 
             default:
 
@@ -389,13 +395,23 @@ export default {
                   components.push(f)
                 }
               }else{
-                // unknown predicate
-
-                f = fields.getField('readonly')
-                f.jsonld = value[i]
-                f.predicate = key
-                f.label = key
-                components.push(f)
+                if (key.startsWith('dcterms')) {
+                  var pred_date = key.split(':')
+                  // only edtf now (later time can be edm:TimeSpan)
+                  if (pred_date[1] && (typeof value[i] === 'string')) {
+                    f = fields.getField('date-edtf')
+                    f.type = pred_date[1]
+                    f.value = value[i]
+                    components.push(f)
+                  }
+                } else {
+                  // unknown predicate
+                  f = fields.getField('readonly')
+                  f.jsonld = value[i]
+                  f.predicate = key
+                  f.label = key
+                  components.push(f)
+                }
               }
               break
           }
@@ -430,28 +446,21 @@ export default {
     var levels = {
       digital: {
         components: []
-      },
-      analog: [],
-      subject: []
+      }
     }
 
     levels.digital.components = this.json2components(jsonld)
 
     Object.entries(jsonld).forEach(([key, value]) => {
       var i
-      if (key === 'prov:wasDerivedFrom') {
-        for (i = 0; i < value.length; i++) {
-          levels.analog.push( { components: this.json2components(value[i]) } )
-        }
-      }
-    })
-
-    Object.entries(jsonld).forEach(([key, value]) => {
-      var i
       if (key === 'dcterms:subject') {
+        levels['subject'] = []
         for (i = 0; i < value.length; i++) {
           if (value[i]['@type'] === 'phaidra:Subject') {
-            levels.subject.push( { components: this.json2components(value[i]) } )
+            var subcomp = this.json2components(value[i])
+            if (subcomp.length > 0) {
+              levels.subject.push( { components: subcomp } )
+            }
           }
         }
       }
@@ -471,20 +480,7 @@ export default {
       }
     )
 
-    var i
-    for (i = 0; i < levels.analog.length; i++) {
-      var analogFields = this.getOrderedComponents(levels.analog[i].components)
-      form.sections.push(
-        {
-          title: 'Digitized object',
-          type: 'digitized-object',
-          id: 'analog-'+i,
-          fields: analogFields
-        }
-      )
-    }
-
-    for (i = 0; i < levels.subject.length; i++) {
+    for (var i = 0; i < levels.subject.length; i++) {
       var subjectFields = this.getOrderedComponents(levels.subject[i].components)
       form.sections.push(
         {
@@ -766,27 +762,18 @@ export default {
           '@type': 'phaidra:Subject'
         }
       }
-      if (s.type === 'digitized-object') {
-        jsonldid = 'digitized-object'
-        jsonlds[jsonldid] = {}
-      }
-
+      // this should be more recursive - member can also have subject metadata
       this.fields2json(jsonlds[jsonldid], s)
     }
 
     Object.keys(jsonlds).forEach(function (key) {
-      if (key === 'digitized-object') {
-        if (!jsonlds['container']['prov:wasDerivedFrom']) {
-          jsonlds['container']['prov:wasDerivedFrom'] = []
-        }
-        jsonlds['container']['prov:wasDerivedFrom'].push(jsonlds[key])
-        delete jsonlds[key]
-      }
       if (key.startsWith('subject-')) {
-        if (!jsonlds['container']['dcterms:subject']) {
-          jsonlds['container']['dcterms:subject'] = []
+        if (Object.keys(jsonlds[key]).length > 1) {
+          if (!jsonlds['container']['dcterms:subject']) {
+            jsonlds['container']['dcterms:subject'] = []
+          }
+          jsonlds['container']['dcterms:subject'].push(jsonlds[key])
         }
-        jsonlds['container']['dcterms:subject'].push(jsonlds[key])
         delete jsonlds[key]
       }
     })
@@ -795,8 +782,8 @@ export default {
   },
   form2json (formData) {
     var jsonlds = {}
-
-    for (var i = 0; i < formData.sections.length; i++) {
+    var i
+    for (i = 0; i < formData.sections.length; i++) {
       var s = formData.sections[i]
       var jsonldid
       if (s.type === 'phaidra:Subject') {
@@ -805,30 +792,19 @@ export default {
           '@type': 'phaidra:Subject'
         }
         this.fields2json(jsonlds[jsonldid], s)
-      } else { 
-        if (s.type === 'digitized-object') {
-          jsonldid = 'digitized-object'
-          jsonlds[jsonldid] = {}
-          this.fields2json(jsonlds[jsonldid], s)
-        }else{
-          this.fields2json(jsonlds, s)
-        }
+      }else {
+        this.fields2json(jsonlds, s)
       }
     }
 
     Object.keys(jsonlds).forEach(function (key) {
-      if (key === 'digitized-object') {
-        if (!jsonlds['prov:wasDerivedFrom']) {
-          jsonlds['prov:wasDerivedFrom'] = []
-        }
-        jsonlds['prov:wasDerivedFrom'].push(jsonlds[key])
-        delete jsonlds[key]
-      }
       if (key.startsWith('subject-')) {
-        if (!jsonlds['dcterms:subject']) {
-          jsonlds['dcterms:subject'] = []
+        if (Object.keys(jsonlds[key]).length > 1) {
+          if (!jsonlds['dcterms:subject']) {
+            jsonlds['dcterms:subject'] = []
+          }
+          jsonlds['dcterms:subject'].push(jsonlds[key])
         }
-        jsonlds['dcterms:subject'].push(jsonlds[key])
         delete jsonlds[key]
       }
     })
@@ -956,6 +932,16 @@ export default {
         case 'schema:weight':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_quantitativevalue(f.value, f.unit))
+          }
+          break
+
+        case 'date':
+          if (f.value) {
+            if (f.type === 'dateAccessioned') {
+              this.push_literal(jsonld, 'phaidra:dateAccessioned', f.value)
+            } else {
+              this.push_literal(jsonld, 'dcterms:' + f.type, f.value)
+            }
           }
           break
 

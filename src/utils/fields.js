@@ -38,6 +38,14 @@ const fields = [
     language: 'eng'
   },
   {
+    id: 'date-edtf',
+    predicate: 'date',
+    component: 'p-date-edtf',
+    multiplicable: true,
+    value: '',
+    type: 'created'
+  },
+  {
     id: 'note',
     predicate: 'bf:note',
     type: 'phaidra:Remark',

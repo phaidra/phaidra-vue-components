@@ -188,7 +188,7 @@ export default {
           },
           {
             title: 'Digitized object',
-            type: 'digitized-object',
+            type: 'phaidra:Subject',
             id: 2,
             fields: []
           },
@@ -243,12 +243,14 @@ export default {
   mounted: function () {
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
+    this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
 
     this.form.sections[0].fields.push(fields.getField('file'))
     this.form.sections[0].fields.push(fields.getField('resource-type'))
     this.form.sections[0].fields.push(fields.getField('title'))
     this.form.sections[0].fields.push(fields.getField('language'))
     this.form.sections[0].fields.push(fields.getField('description'))
+    this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('keyword'))
     this.form.sections[0].fields.push(fields.getField('project'))
     this.form.sections[0].fields.push(fields.getField('funder'))
@@ -267,6 +269,7 @@ export default {
     this.form.sections[2].fields.push(fields.getField('title'))
     this.form.sections[2].fields.push(fields.getField('description'))
     this.form.sections[2].fields.push(fields.getField('temporal-coverage'))
+    this.form.sections[2].fields.push(fields.getField('spatial-getty-tgn'))
     this.form.sections[2].fields.push(fields.getField('spatial-text'))
   }
 }

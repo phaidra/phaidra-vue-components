@@ -2,12 +2,24 @@ import languages from '../../utils/lang'
 
 const state = {
   vocabularies: {
-    'lang': {
+    'https://phaidra.org/vocabulary/datetype': {
       terms: [
-        { '@id': 'deu', 'skos:prefLabel': { 'eng': 'German', 'deu': 'Deutsch' } },
-        { '@id': 'eng', 'skos:prefLabel': { 'eng': 'English', 'deu': 'English' } }
+        { '@id': 'date', 'skos:prefLabel': { 'eng': 'Date', 'deu': 'Date' } },
+        { '@id': 'created', 'skos:prefLabel': { 'eng': 'Date created', 'deu': 'Date created' } },
+        { '@id': 'modified', 'skos:prefLabel': { 'eng': 'Date modified', 'deu': 'Date modified' } },
+        { '@id': 'available', 'skos:prefLabel': { 'eng': 'Date available', 'deu': 'Date available' } },
+        { '@id': 'issued', 'skos:prefLabel': { 'eng': 'Date issued', 'deu': 'Date issued' } },
+        { '@id': 'valid', 'skos:prefLabel': { 'eng': 'Date valid', 'deu': 'Date valid' } },
+        { '@id': 'dateAccepted', 'skos:prefLabel': { 'eng': 'Date accepted', 'deu': 'Date accepted' } },
+        { '@id': 'dateCopyrighted', 'skos:prefLabel': { 'eng': 'Date copyrighted', 'deu': 'Date copyrighted' } },
+        { '@id': 'dateSubmitted', 'skos:prefLabel': { 'eng': 'Date submitted', 'deu': 'Date submitted' } },
+        { '@id': 'dateAccessioned', 'skos:prefLabel': { 'eng': 'Date accessioned', 'deu': 'Eingangsdatum' } }
       ],
       loaded: true
+    },
+    'lang': {
+      terms: [],
+      loaded: false
     },
     'https://phaidra.org/vocabulary/role': {
       terms: [
@@ -151,6 +163,7 @@ const state = {
 const mutations = {
   setLangTerms (state, data) {
     state.vocabularies['lang']['terms'] = data
+    state.vocabularies['lang']['loaded'] = true
   },
   setRolesTerms (state, marcRoles) {
     for (var role in marcRoles) {

@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex xs4>
+    <v-flex xs8>
       <v-autocomplete
         v-model="model"
         v-on:input="$emit('input', $event)"
@@ -15,10 +15,8 @@
         :label="$t(label)"
         box
         clearable
+        :messages="resolved"
       ></v-autocomplete>
-    </v-flex>
-    <v-flex xs4>
-      <v-text-field :value="name" :hint="value" disabled persistent-hint></v-text-field>
     </v-flex>
     <v-flex xs1 v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
@@ -81,7 +79,7 @@ export default {
       preflabel: '',
       rdfslabel: '',
       coordinates: [],
-      name: ''
+      resolved: ''
     }
   },
   methods: {
@@ -107,10 +105,10 @@ export default {
         .then(function (json) {
           self.loading = false
           self.preflabel = json[uri]['skos:prefLabel']
-          for (var i = 0; i < self.preflabel.length; i++) {
-            self.name = self.preflabel[i]['@value']
-          }
           self.rdfslabel = json[uri]['rdfs:label']
+          for (var i = 0; i < self.rdfslabel.length; i++) {
+            self.resolved = '<a href="' + uri + '" target="_blank">' + self.rdfslabel[i]['@value'] + '</a>'
+          }
           self.coordinates = json[uri]['schema:GeoCoordinates']
           self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel, coordinates: self.coordinates })
         })

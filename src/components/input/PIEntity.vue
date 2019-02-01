@@ -57,28 +57,6 @@
         </template>
       </v-autocomplete>                      
     </v-flex>
-    <v-flex xs2 v-if="showdate">
-      <v-menu
-        ref="datepicker"
-        v-model="datepicker"
-        :return-value.sync="datemodel"
-        lazy
-        transition="fade-transition"
-        offset-y
-        full-width
-        min-width="290px"
-        box
-      >
-        <v-text-field
-          slot="activator"
-          v-model="selectedDate"
-          :label="$t('Date')"
-          append-icon="event"
-          box
-        ></v-text-field>
-        <v-date-picker v-model="selectedDate" :value="date" v-on:input="$emit('input-date', $event)" :reactive="true"></v-date-picker>
-      </v-menu>
-    </v-flex>
     <v-flex xs1 v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <v-btn slot="activator" icon>
@@ -117,9 +95,6 @@ export default {
     role: {
       type: String
     },
-    date: {
-      type: String
-    },
     type: {
       type: String
     },
@@ -129,10 +104,6 @@ export default {
     disablerole: {
       type: Boolean,
       default: false
-    },
-    showdate: {
-      type: Boolean,
-      default: true
     },
     showidentifier: {
       type: Boolean,
@@ -148,9 +119,6 @@ export default {
   },
   data () {
     return {
-      datepicker: false,
-      selectedDate: this.date,
-      datemodel: '',
       vocabulary: 'https://phaidra.org/vocabulary/role'
     }
   },

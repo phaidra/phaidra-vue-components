@@ -5,95 +5,102 @@
       <v-flex xs10>
 
         <v-layout column>
+          <v-flex>
+            <v-layout row>
+              <v-flex xs8>
+                <v-text-field
+                  :value="name"
+                  :label="$t('Project name')"
+                  v-on:input="$emit('input-name', $event)"
+                  box
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs3>
+                <v-autocomplete
+                  :value="getTerm('lang', nameLanguage)"
+                  v-on:input="$emit('input-name-language', $event )"
+                  :items="vocabularies['lang'].terms"
+                  :filter="autocompleteFilter"
+                  hide-no-data
+                  :label="$t('Language')"
+                  box
+                  return-object
+                  clearable
+                >
+                  <template slot="item" slot-scope="{ item }">
+                    <v-list-tile-content two-line>
+                      <v-list-tile-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
+                      <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
+                    </v-list-tile-content>
+                  </template>
+                  <template slot="selection" slot-scope="{ item }">
+                    <v-list-tile-content>
+                      <v-list-tile-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
+                    </v-list-tile-content>
+                  </template>
+                </v-autocomplete>
+              </v-flex>
+                  
+            </v-layout>
 
-          <v-layout row>
-            <v-flex xs6>
-              <v-text-field
-                :value="name"
-                :label="$t('Project name')"
-                v-on:input="$emit('input-name', $event)"
-                box
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs2>
-              <v-select 
-                v-on:input="$emit('input-name-language', $event)" 
-                :label="$t('Language')"
-                :items="vocabularies['lang'].terms" 
-                :value="getTerm('lang', nameLanguage)"
-                box
-                return-object
-              >
-                <template slot="item" slot-scope="{ item }">
-                  <v-list-tile-content two-line>
-                    <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-                    <v-list-tile-sub-title inset v-html="`${item['@id']}`"></v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </template>
-                <template slot="selection" slot-scope="{ item }">
-                  <v-list-tile-content>
-                    <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-                  </v-list-tile-content>
-                </template>
-              </v-select>                      
-            </v-flex>
+            <v-layout row>
+              <v-flex xs8>
+                <v-text-field
+                  :value="description"
+                  :label="'Project description'"
+                  v-on:input="$emit('input-description', $event)"
+                  box
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs3>
+                <v-autocomplete
+                  :value="getTerm('lang', descriptionLanguage)"
+                  v-on:input="$emit('input-description-language', $event )"
+                  :items="vocabularies['lang'].terms"
+                  :filter="autocompleteFilter"
+                  hide-no-data
+                  :label="$t('Language')"
+                  box
+                  return-object
+                  clearable
+                >
+                  <template slot="item" slot-scope="{ item }">
+                    <v-list-tile-content two-line>
+                      <v-list-tile-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
+                      <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
+                    </v-list-tile-content>
+                  </template>
+                  <template slot="selection" slot-scope="{ item }">
+                    <v-list-tile-content>
+                      <v-list-tile-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
+                    </v-list-tile-content>
+                  </template>
+                </v-autocomplete>
+              </v-flex>
                 
-          </v-layout>
+            </v-layout>
 
-          <v-layout row>
-            <v-flex xs6>
-              <v-text-field
-                :value="description"
-                :label="'Project description'"
-                v-on:input="$emit('input-description', $event)"
-                box
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs2>
-              <v-select 
-                v-on:input="$emit('input-description-language', $event)" 
-                :label="'Language'"
-                :items="vocabularies['lang'].terms" 
-                :value="getTerm('lang', descriptionLanguage)"
-                box
-              >
-                <template slot="item" slot-scope="{ item }">
-                  <v-list-tile-content two-line>
-                    <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-                    <v-list-tile-sub-title inset v-html="`${item['@id']}`"></v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </template>
-                <template slot="selection" slot-scope="{ item }">
-                  <v-list-tile-content>
-                    <v-list-tile-title inset v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-                  </v-list-tile-content>
-                </template>
-              </v-select>                      
-            </v-flex>
-               
-          </v-layout>
+            <v-layout row>
 
-          <v-layout row>
+              <v-flex xs6>
+                <v-text-field
+                  :value="identifier"
+                  :label="'Project identifier'"
+                  v-on:input="$emit('input-identifier', $event)"
+                  box
+                ></v-text-field>
+              </v-flex>
 
-            <v-flex xs6>
-              <v-text-field
-                :value="identifier"
-                :label="'Project identifier'"
-                v-on:input="$emit('input-identifier', $event)"
-                box
-              ></v-text-field>
-            </v-flex>
-
-            <v-flex xs6>
-              <v-text-field
-                :value="homepage"
-                :label="'Project homepage'"
-                v-on:input="$emit('input-homepage', $event)"
-                box
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
-          
+              <v-flex xs6>
+                <v-text-field
+                  :value="homepage"
+                  :label="'Project homepage'"
+                  v-on:input="$emit('input-homepage', $event)"
+                  box
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-flex>  
         </v-layout>
       </v-flex>
       

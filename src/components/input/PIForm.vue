@@ -35,7 +35,7 @@
                   <p-i-text-field             
                     v-bind.sync="f"
                     v-on:input="f.value=$event"
-                    v-on:input-language="f.language=$event['@id']"
+                    v-on:input-language="setSelected(f, 'language', $event)"
                     v-on:add="addField(s.fields, f)"
                     v-on:remove="removeField(s.fields, f)"
                   ></p-i-text-field>
@@ -45,7 +45,7 @@
                   <p-i-text-field-suggest
                     v-bind.sync="f"
                     v-on:input="f.value=$event"
-                    v-on:input-language="f.language=$event['@id']"
+                    v-on:input-language="setSelected(f, 'language', $event)"
                     v-on:add="addField(s.fields, f)"
                     v-on:remove="removeField(s.fields, f)"
                   ></p-i-text-field-suggest>
@@ -56,7 +56,7 @@
                     v-bind.sync="f"
                     v-on:input-title="f.title=$event"
                     v-on:input-subtitle="f.subtitle=$event"
-                    v-on:input-language="f.language=$event['@id']"
+                    v-on:input-language="setSelected(f, 'language', $event)"
                     v-on:add="addField(s.fields, f)"
                     v-on:remove="removeField(s.fields, f)"
                     v-on:up="sortFieldUp(s.fields, f)"
@@ -71,6 +71,16 @@
                     v-on:add="addField(s.fields, f)"
                     v-on:remove="removeField(s.fields, f)"
                   ></p-i-select>        
+                </v-flex>
+
+                <v-flex offset-xs1 v-else-if="f.component === 'p-date-edtf'" >
+                  <p-i-date-edtf
+                    v-bind.sync="f" 
+                    v-on:input-date="f.value=$event"
+                    v-on:input-date-type="setSelected(f, 'type', $event)"
+                    v-on:add="addField(s.fields, f)"
+                    v-on:remove="removeField(s.fields, f)"
+                  ></p-i-date-edtf>        
                 </v-flex>
 
                 <v-flex offset-xs1 v-else-if="f.component === 'p-entity'" >
@@ -103,7 +113,7 @@
                   <p-i-dimension
                     v-bind.sync="f" 
                     v-on:input-value="f.value=$event"
-                    v-on:input-unit="f.unitCode=$event['@id']"
+                    v-on:input-unit="setSelected(f, 'unitCode', $event)"
                     v-on:add="addField(s.fields, f)"
                     v-on:remove="removeField(s.fields, f)"
                   ></p-i-dimension>        
@@ -113,9 +123,9 @@
                   <p-i-project
                     v-bind.sync="f" 
                     v-on:input-name="f.name=$event"
-                    v-on:input-name-language="f.nameLanguage=$event['@id']"
+                    v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                     v-on:input-description="f.description=$event"
-                    v-on:input-description-language="f.descriptionLanguage=$event['@id']"
+                    v-on:input-description-language="setSelected(f, 'descriptionLanguage', $event)"
                     v-on:input-identifier="f.identifier=$event"
                     v-on:input-homepage="f.homepage=$event"
                     v-on:add="addField(s.fields, f)"
@@ -127,7 +137,7 @@
                   <p-i-funder
                     v-bind.sync="f" 
                     v-on:input-name="f.name=$event"
-                    v-on:input-name-language="f.nameLanguage=$event['@id']"
+                    v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                     v-on:input-identifier="f.identifier=$event"
                     v-on:add="addField(s.fields, f)"
                     v-on:remove="removeField(s.fields, f)"
@@ -183,6 +193,7 @@ import PITextField from './PITextField'
 import PITextFieldSuggest from './PITextFieldSuggest'
 import PITitle from './PITitle'
 import PIEntity from './PIEntity'
+import PIDateEdtf from './PIDateEdtf'
 import PISelect from './PISelect'
 import PIGbvSuggestGetty from './PIGbvSuggestGetty'
 import PIDimension from './PIDimension'
@@ -199,6 +210,7 @@ export default {
     PITextFieldSuggest,
     PITitle,
     PIEntity,
+    PIDateEdtf,
     PISelect,
     PIGbvSuggestGetty,
     PIDimension,
@@ -383,6 +395,11 @@ export default {
     removeField: function (arr, f) {
       arrays.remove(arr, f)
     },
+    setSelected: function (f, property, event) {
+      if (event) {
+        f[property] = event['@id']
+      }
+    },
     sortFieldUp: function (arr, f) {
       var i = arr.indexOf(f)
       if (arr[i - 1]) {
@@ -442,6 +459,7 @@ export default {
     if (this.mode === 'edit' && this.pid) {
       this.loadMetadata(this.pid)
     }
+    this.$store.dispatch('loadIso6392')
   }
 }
 </script>
