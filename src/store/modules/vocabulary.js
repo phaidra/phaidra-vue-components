@@ -174,7 +174,7 @@ const mutations = {
 }
 
 const actions = {
-  loadIso6392 ({ commit }) {
+  loadLanguages ({ commit }) {
     commit('setLangTerms', languages.get_lang())
   }
 }

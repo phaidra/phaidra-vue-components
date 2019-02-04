@@ -3,6 +3,7 @@ import uuid from './uuid'
 const fields = [
   {
     id: 'resource-type',
+    fieldname: 'Resource type',
     predicate: 'dcterms:type',
     component: 'p-select',
     vocabulary: 'http://purl.org/coar/resource_type',
@@ -10,10 +11,12 @@ const fields = [
     multiplicable: false,
     label: 'Resource type',
     value: '',
-    'skos:prefLabel': []
+    'skos:prefLabel': [],
+    definition: 'The nature of the resource.'
   },
   {
     id: 'title',
+    fieldname: 'Title',
     predicate: 'dce:title',
     component: 'p-title',
     required: true,
@@ -23,10 +26,12 @@ const fields = [
     label: 'Title',
     title: '',
     subtitle: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'A name given to the resource. Typically, a Title will be a name by which the resource is formally known.'
   },
   {
     id: 'description',
+    fieldname: 'Description',
     predicate: 'bf:note',
     type: 'bf:Note',
     component: 'p-text-field',
@@ -35,18 +40,23 @@ const fields = [
     multiline: true,
     label: 'Description',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
     id: 'date-edtf',
+    fieldname: 'Date',
     predicate: 'date',
     component: 'p-date-edtf',
     multiplicable: true,
+    label: 'Date',
     value: '',
-    type: 'created'
+    type: 'created',
+    definition: 'A point or period of time associated with an event in the lifecycle of the resource.'
   },
   {
     id: 'note',
+    fieldname: 'Note',
     predicate: 'bf:note',
     type: 'phaidra:Remark',
     component: 'p-text-field',
@@ -54,10 +64,12 @@ const fields = [
     multiline: true,
     label: 'Note',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
     id: 'digitization-note',
+    fieldname: 'Digitization note',
     predicate: 'bf:note',
     type: 'phaidra:DigitizationNote',
     component: 'p-text-field',
@@ -65,10 +77,12 @@ const fields = [
     multiline: true,
     label: 'Digitization note',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
     id: 'condition-note',
+    fieldname: 'Condition',
     predicate: 'bf:note',
     type: 'phaidra:ConditionNote',
     component: 'p-text-field',
@@ -76,30 +90,36 @@ const fields = [
     multiline: true,
     label: 'Condition',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
     id: 'reproduction-note',
+    fieldname: 'Reproduction note',
     predicate: 'bf:note',
     type: 'phaidra:ReproductionNote',
     component: 'p-select',
     vocabulary: 'original-copy',
     label: 'Reproduction note',
     value: '',
-    'skos:prefLabel': []
+    'skos:prefLabel': [],
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
     id: 'language',
+    fieldname: 'Language',
     predicate: 'dcterms:language',
     component: 'p-select',
     vocabulary: 'lang',
     required: true,
     multiplicable: true,
     label: 'Language',
-    value: 'eng'
+    value: 'eng',
+    definition: 'A language of the resource.'
   },
   {
     id: 'role',
+    fieldname: 'Contribution',
     predicate: 'role',
     type: 'schema:Person',
     component: 'p-entity',
@@ -110,21 +130,25 @@ const fields = [
     firstname: '',
     lastname: '',
     role: '',
-    date: ''
+    date: '',
+    definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
   },
   {
     id: 'keyword',
+    fieldname: 'Keywords',
     predicate: 'dce:subject',
     component: 'p-text-field-suggest',
     suggester: 'keywordsuggester',
     multiplicable: true,
     multilingual: true,
-    label: 'Keyword',
+    label: 'Keywords',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'The topic of the resource, represented using keywords.'
   },
   {
     id: 'project',
+    fieldname: 'Project',
     predicate: 'frapo:isOutputOf',
     component: 'p-project',
     name: '',
@@ -132,71 +156,87 @@ const fields = [
     description: '',
     descriptionLanguage: 'eng',
     identifier: '',
-    homepage: ''
+    homepage: '',
+    definition: 'An administrative entity that enabled an endeavour such as a research investigation.'
   },
   {
     id: 'funder',
+    fieldname: 'Funder',
     predicate: 'frapo:hasFundingAgency',
     component: 'p-funder',
     name: '',
     nameLanguage: 'eng',
-    identifier: ''
+    identifier: '',
+    definition: 'A funding agency that provided funding for the resource.'
   },
   {
     id: 'shelf-mark',
+    fieldname: 'Shelf mark',
     predicate: 'bf:shelfMark',
     component: 'p-text-field',
     multiplicable: true,
     label: 'Call number',
-    value: ''
+    value: '',
+    definition: 'Piece/item identifier, such as a call or other type of number.'
   },
   {
     id: 'temporal-coverage',
-    predicate: 'schema:temporalCoverage',
+    fieldname: 'Temporal coverage',
+    predicate: 'dcterms:temporal',
     component: 'p-text-field',
     label: 'Temporal coverage',
     multilingual: true,
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Temporal characteristics of the resource. Indicates the period that the content applies to, i.e. that it describes.'
   },
   {
     id: 'provenance',
+    fieldname: 'Provenance',
     predicate: 'dcterms:provenance',
     component: 'p-text-field',
     multiline: true,
     multilingual: true,
     label: 'Provenance',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'A statement of any changes in ownership and custody of a resource since its creation that are significant for its authenticity, integrity, and interpretation.'
   },
   {
     id: 'physical-location',
+    fieldname: 'Physical location',
     predicate: 'bf:physicalLocation',
     component: 'p-text-field',
     label: 'Physical location',
     multilingual: true,
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Location in the holding agency where the item is shelved or stored.'
   },
   {
     id: 'accession-number',
+    fieldname: 'Accession number',
     predicate: 'opaque:cco_accessionNumber',
     component: 'p-text-field',
     label: 'Accession number',
-    value: ''
+    value: '',
+    definition: 'Use for identification number assigned to a particular donation or acquisition.'
   },
   {
     id: 'technique-getty-aat-select',
+    fieldname: 'Technique (Getty AAT)',
     predicate: 'vra:hasTechnique',
     type: 'vra:Technique',
     component: 'p-select',
     vocabulary: 'getty-aat-photo',
     label: 'Technique',
     value: '',
-    'skos:prefLabel': []
+    'skos:prefLabel': [],
+    definition: 'The production or manufacturing processes, techniques, and methods incorporated in the fabrication or alteration of the work or image.'
   },
   {
     id: 'technique-text',
+    fieldname: 'Technique',
     predicate: 'vra:hasTechnique',
     type: 'vra:Technique',
     component: 'p-text-field',
@@ -205,10 +245,12 @@ const fields = [
     label: 'Technique',
     value: '',
     language: 'eng',
-    'skos:prefLabel': []
+    'skos:prefLabel': [],
+    definition: 'The production or manufacturing processes, techniques, and methods incorporated in the fabrication or alteration of the work or image.'
   },
   {
     id: 'material',
+    fieldname: 'Material',
     predicate: 'vra:material',
     type: 'vra:Material',
     component: 'p-text-field',
@@ -216,34 +258,52 @@ const fields = [
     multiplicable: true,
     label: 'Material description',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'The substance of which a work or an image is composed.'
   },
   {
     id: 'height',
+    fieldname: 'Height',
     predicate: 'schema:height',
     component: 'p-dimension',
     label: 'Height',
     unit: 'CMT',
-    value: ''
+    value: '',
+    definition: 'The height of the item.'
   },
   {
     id: 'width',
+    fieldname: 'Width',
     predicate: 'schema:width',
     component: 'p-dimension',
     label: 'Width',
     unit: 'CMT',
-    value: ''
+    value: '',
+    definition: 'The width of the item.'
   },
   {
     id: 'depth',
+    fieldname: 'Depth',
     predicate: 'schema:depth',
     component: 'p-dimension',
     label: 'Depth',
     unit: 'CMT',
-    value: ''
+    value: '',
+    definition: 'The depth of the item.'
+  },
+  {
+    id: 'weight',
+    fieldname: 'Weight',
+    predicate: 'schema:weight',
+    component: 'p-dimension',
+    label: 'Weight',
+    unit: 'KGM',
+    value: '',
+    definition: 'The weight of the item.'
   },
   {
     id: 'inscription',
+    fieldname: 'Inscription/Stamp',
     predicate: 'vra:hasInscription',
     component: 'p-text-field-suggest',
     suggester: 'inscriptionsuggester',
@@ -251,10 +311,12 @@ const fields = [
     multilingual: true,
     label: 'Inscription/Stamp',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'All marks or written words added to the object at the time of production or in its subsequent history, including signatures, dates, dedications, texts, and colophons, as well as marks, such as the stamps of silversmiths, publishers, or printers.'
   },
   {
     id: 'spatial-getty-tgn',
+    fieldname: 'Place (Getty TGN)',
     predicate: 'dcterms:spatial',
     component: 'p-gbv-suggest-getty',
     multiplicable: true,
@@ -262,75 +324,95 @@ const fields = [
     label: 'Place',
     value: '',
     'rdfs:label': [],
-    'skos:prefLabel': []
+    'skos:prefLabel': [],
+    definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
   },
   {
     id: 'spatial-text',
+    fieldname: 'Place',
     predicate: 'dcterms:spatial',
     component: 'p-text-field',
     multilingual: true,
     multiplicable: true,
     label: 'Place',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
   },    
   {
     id: 'mime-type',
+    fieldname: 'MIME type',
     predicate: 'ebucore:hasMimeType',
     component: 'p-select',
     vocabulary: 'mime-types',
     label: 'MIME type',
     value: '',
-    'skos:prefLabel': []
+    'skos:prefLabel': [],
+    definition: 'The definition of the container if available as a MIME type.'
   },
   {
     id: 'license',
+    fieldname: 'License',
     predicate: 'edm:rights',
     component: 'p-select',
     vocabulary: 'licenses',
     label: 'License',
     value: '',
-    'skos:prefLabel': []
+    'skos:prefLabel': [],
+    definition: 'The value will indicate the copyright, usage and access rights that apply to this digital representation.'
   },
   {
     id: 'rights',
+    fieldname: 'Rights statement',
     predicate: 'dce:rights',
     component: 'p-text-field',
     multiline: true,
     multilingual: true,
     label: 'Rights statement',
     value: '',
-    language: 'eng'
+    language: 'eng',
+    definition: 'Information about rights held in and over the resource. Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.'
   },
   {
     id: 'file',
+    fieldname: 'Filename',
     predicate: 'ebucore:filename',
     component: 'input-file',
     label: 'Filename',
-    value: ''
+    value: '',
+    definition: 'The name of the file containing the Resource.'
   },
   {
     id: 'filename-readonly',
+    fieldname: 'Filename readonly',
     predicate: 'ebucore:filename',
     component: 'p-filename-readonly',
     label: '',
-    value: ''
+    value: '',
+    readonly: true,
+    definition: 'Filename readonly.'
   },
   {
     id: 'readonly',
+    fieldname: 'Readonly',
     predicate: '',
     component: 'p-unknown-readonly',
     label: '',
-    jsonld: ''
+    jsonld: '',
+    readonly: true,
+    definition: 'Readonly.'
   },
   {
     id: 'vocab-ext-readonly',
+    fieldname: 'Vocabulary value readonly',
     predicate: '',
     component: 'p-vocab-ext-readonly',
     label: '',
     'skos:prefLabel': [],
     'rdfs:label': [],
-    'skos:exactMatch': []
+    'skos:exactMatch': [],
+    readonly: true,
+    definition: 'Vocabulary value readonly.'
   }
 ]
 
@@ -370,6 +452,20 @@ const predicateOrder = [
 ]
 
 export default {
+  getFields: function () {
+    return fields
+  },
+  getEditableFields: function () {
+    var editable = fields.filter(item => !(item.readonly))
+    // hack: some bug in vuetify autocomplete can't handle the value property
+    var newarr = []
+    for (var i = 0; i < editable.length; i++) {
+      var field = JSON.parse(JSON.stringify(editable[i]))
+      delete field['value']
+      newarr.push(field)
+    }
+    return newarr;
+  },
   getField: function (id, ordergroup) {
     for (var i = 0; i < fields.length; i++) {
       if (fields[i]['id'] === id) {

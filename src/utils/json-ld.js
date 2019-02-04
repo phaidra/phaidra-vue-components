@@ -101,8 +101,8 @@ export default {
               }
               break
 
-            // schema:temporalCoverage
-            case 'schema:temporalCoverage':
+            // dcterms:temporal
+            case 'dcterms:temporal':
               f = fields.getField('temporal-coverage')             
               f.value = value[i]['@value']
               f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'              
@@ -854,7 +854,7 @@ export default {
           break
 
         case 'dce:rights':
-        case 'schema:temporalCoverage':
+        case 'dcterms:temporal':
           if (f.value) {
             this.push_value(jsonld, f.predicate, this.get_json_valueobject(f.value, f.language))
           }

@@ -120,7 +120,12 @@
                         <v-btn raised single-line class="right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <p-i-form :mode="'edit'" ref="edit" v-on:object-saved="objectSaved($event)"></p-i-form>
+                        <p-i-form 
+                          ref="edit"
+                          :form="editform"
+                          v-on:load-form="editform = $event"
+                          v-on:object-saved="objectSaved($event)"
+                        ></p-i-form>
                       </v-card-text>
                     </v-card>
                   </v-flex>
@@ -140,7 +145,11 @@
                         <v-spacer></v-spacer>
                       </v-toolbar>
                       <v-card-text>
-                        <p-i-form :mode="'submit'" :submitform="form" :contentmodel="contentmodel" v-on:object-created="objectCreated($event)"></p-i-form>
+                        <p-i-form
+                          :form="form"
+                          :contentmodel="contentmodel" 
+                          v-on:object-created="objectCreated($event)"
+                        ></p-i-form>
                       </v-card-text>
                     </v-card>
                   </v-flex>
@@ -179,6 +188,7 @@ export default {
     return {
       window: 0,
       loadedform: {},
+      editform: {},
       form: {
         sections: [
           {
