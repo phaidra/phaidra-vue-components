@@ -236,6 +236,7 @@ export default {
     },
     logout: function () {
       this.$store.dispatch('logout')
+      document.cookie = 'X-XSRF-TOKEN=';
     },
     objectCreated: function (event) {
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + event + ' created' }])
@@ -248,9 +249,22 @@ export default {
     },    
     dismiss: function (alert) {
       this.$store.commit('clearAlert', alert)
+    },
+    getCookie: function (name) {
+      var value = "; " + document.cookie
+      var parts = value.split("; " + name + "=")
+      if (parts.length == 2) {
+        var val = parts.pop().split(";").shift()
+        return val === ' ' ? null : val
+      }
     }
   },
   mounted: function () {
+    var token = this.getCookie('X-XSRF-TOKEN')
+    if (token) {
+      this.$store.commit('setToken', token)
+    }
+
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
@@ -279,7 +293,7 @@ export default {
     this.form.sections[2].fields.push(fields.getField('title'))
     this.form.sections[2].fields.push(fields.getField('description'))
     this.form.sections[2].fields.push(fields.getField('temporal-coverage'))
-    this.form.sections[2].fields.push(fields.getField('spatial-getty-tgn'))
+    this.form.sections[2].fields.push(fields.getField('spatial-getty'))
     this.form.sections[2].fields.push(fields.getField('spatial-text'))
   }
 }

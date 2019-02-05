@@ -27,8 +27,52 @@
           <p-d-uri :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-uri>
         </template>
 
+        <template v-else-if="p==='edm:hasType'" slot="edm:hasType">
+          <p-d-uri :p="p" :o="item" v-for="(item, j) in o" :key="'genre'+j" ></p-d-uri>
+        </template>
+
+        <template v-else-if="p==='dcterms:date'" slot="dcterms:date">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'date'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='dcterms:created'" slot="dcterms:created">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'created'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='dcterms:modified'" slot="dcterms:modified">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'modified'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='dcterms:available'" slot="dcterms:available">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'available'+j" ></p-d-value>
+        </template>
+
         <template v-else-if="p==='dcterms:issued'" slot="dcterms:issued">
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'issued'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='dcterms:valid'" slot="dcterms:valid">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'valid'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='dcterms:dateAccepted'" slot="dcterms:dateAccepted">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'dateAccepted'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='dcterms:dateCopyrighted'" slot="dcterms:dateCopyrighted">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'dateCopyrighted'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='dcterms:dateSubmitted'" slot="dcterms:dateSubmitted">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'dateSubmitted'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='phaidra:dateAccessioned'" slot="phaidra:dateAccessioned">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'phaidra:dateAccessioned'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='schema:temporalCoverage'" slot="schema:temporalCoverage">
+          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'temporal'+j" ></p-d-lang-value>
         </template>
 
         <template v-else-if="p==='edm:rights'" slot="edm:type">
@@ -55,16 +99,24 @@
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'callnr'+j" ></p-d-value>
         </template>
 
-        <template v-else-if="p==='schema:temporalCoverage'" slot="schema:temporalCoverage">
-          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'temporal'+j" ></p-d-lang-value>
+        <template v-else-if="p==='dcterms:provenance'" slot="dcterms:provenance">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'prov'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='dcterms:spatial'" slot="dcterms:spatial">
-          <p-d-georeference :p="p" :o="item" v-for="(item, j) in o" :key="'geo'+j" ></p-d-georeference>
+          <p-d-georeference :p="p" :o="item" v-for="(item, j) in o" :key="'spatial'+j" ></p-d-georeference>
         </template>
 
-        <template v-else-if="p==='dcterms:provenance'" slot="dcterms:provenance">
-          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'prov'+j" ></p-d-skos-preflabel>
+        <template v-else-if="p==='vra:placeOfCreation'" slot="vra:placeOfCreation">
+          <p-d-georeference :p="p" :o="item" v-for="(item, j) in o" :key="'placeOfCreation'+j" ></p-d-georeference>
+        </template>
+
+        <template v-else-if="p==='vra:placeOfRepository'" slot="vra:placeOfRepository">
+          <p-d-georeference :p="p" :o="item" v-for="(item, j) in o" :key="'placeOfRepository'+j" ></p-d-georeference>
+        </template>
+
+        <template v-else-if="p==='vra:placeOfSite'" slot="vra:placeOfSite">
+          <p-d-georeference :p="p" :o="item" v-for="(item, j) in o" :key="'placeOfSite'+j" ></p-d-georeference>
         </template>
 
         <template v-else-if="p==='ebucore:filename'" slot="ebucore:filename">

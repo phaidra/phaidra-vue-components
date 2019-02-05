@@ -7,10 +7,21 @@
       
       <slot name="dcterms:language"></slot>
       <slot name="dce:subject"></slot>
-      <slot name="schema:temporalCoverage"></slot>
-      <slot name="dcterms:spatial"></slot>
-
+      
       <slot name="dcterms:type"></slot>
+      <slot name="edm:hasType"></slot>
+
+      <slot name="dcterms:date"></slot>
+      <slot name="dcterms:created"></slot>
+      <slot name="dcterms:modified"></slot>
+      <slot name="dcterms:available"></slot>
+      <slot name="dcterms:issued"></slot>
+      <slot name="dcterms:valid"></slot>
+      <slot name="dcterms:dateAccepted"></slot>
+      <slot name="dcterms:dateCopyrighted"></slot>
+      <slot name="dcterms:dateSubmitted"></slot>
+      <slot name="phaidra:dateAccessioned"></slot>
+      <slot name="schema:temporalCoverage"></slot>
 
       <slot name="dcterms:issued"></slot>
       <slot name="edm:rights"></slot>
@@ -18,6 +29,11 @@
       <slot name="frapo:hasFundingAgency"></slot>
       <slot name="frapo:isOutputOf"></slot>
       <slot name="dcterms:provenance"></slot>
+
+      <slot name="dcterms:spatial"></slot>
+      <slot name="vra:placeOfCreation"></slot>
+      <slot name="vra:placeOfRepository"></slot>
+      <slot name="vra:placeOfSite"></slot>
 
       <slot name="ebucore:filename"></slot>
       <slot name="ebucore:hasMimeType"></slot>

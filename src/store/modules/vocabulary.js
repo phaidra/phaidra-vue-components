@@ -4,16 +4,25 @@ const state = {
   vocabularies: {
     'https://phaidra.org/vocabulary/datetype': {
       terms: [
-        { '@id': 'date', 'skos:prefLabel': { 'eng': 'Date', 'deu': 'Date' } },
-        { '@id': 'created', 'skos:prefLabel': { 'eng': 'Date created', 'deu': 'Date created' } },
-        { '@id': 'modified', 'skos:prefLabel': { 'eng': 'Date modified', 'deu': 'Date modified' } },
-        { '@id': 'available', 'skos:prefLabel': { 'eng': 'Date available', 'deu': 'Date available' } },
-        { '@id': 'issued', 'skos:prefLabel': { 'eng': 'Date issued', 'deu': 'Date issued' } },
-        { '@id': 'valid', 'skos:prefLabel': { 'eng': 'Date valid', 'deu': 'Date valid' } },
-        { '@id': 'dateAccepted', 'skos:prefLabel': { 'eng': 'Date accepted', 'deu': 'Date accepted' } },
-        { '@id': 'dateCopyrighted', 'skos:prefLabel': { 'eng': 'Date copyrighted', 'deu': 'Date copyrighted' } },
-        { '@id': 'dateSubmitted', 'skos:prefLabel': { 'eng': 'Date submitted', 'deu': 'Date submitted' } },
-        { '@id': 'dateAccessioned', 'skos:prefLabel': { 'eng': 'Date accessioned', 'deu': 'Eingangsdatum' } }
+        { '@id': 'dcterms:date', 'skos:prefLabel': { 'eng': 'Date', 'deu': 'Date' } },
+        { '@id': 'dcterms:created', 'skos:prefLabel': { 'eng': 'Date created', 'deu': 'Date created' } },
+        { '@id': 'dcterms:modified', 'skos:prefLabel': { 'eng': 'Date modified', 'deu': 'Date modified' } },
+        { '@id': 'dcterms:available', 'skos:prefLabel': { 'eng': 'Date available', 'deu': 'Date available' } },
+        { '@id': 'dcterms:issued', 'skos:prefLabel': { 'eng': 'Date issued', 'deu': 'Date issued' } },
+        { '@id': 'dcterms:valid', 'skos:prefLabel': { 'eng': 'Date valid', 'deu': 'Date valid' } },
+        { '@id': 'dcterms:dateAccepted', 'skos:prefLabel': { 'eng': 'Date accepted', 'deu': 'Date accepted' } },
+        { '@id': 'dcterms:dateCopyrighted', 'skos:prefLabel': { 'eng': 'Date copyrighted', 'deu': 'Date copyrighted' } },
+        { '@id': 'dcterms:dateSubmitted', 'skos:prefLabel': { 'eng': 'Date submitted', 'deu': 'Date submitted' } },
+        { '@id': 'phaidra:dateAccessioned', 'skos:prefLabel': { 'eng': 'Date accessioned', 'deu': 'Eingangsdatum' } }
+      ],
+      loaded: true
+    },
+    'https://phaidra.org/vocabulary/placetype': {
+      terms: [
+        { '@id': 'dcterms:spatial', 'skos:prefLabel': { 'eng': 'Depicted/Represented place' } },
+        { '@id': 'vra:placeOfCreation', 'skos:prefLabel': { 'eng': 'Place of creation' } },
+        { '@id': 'vra:placeOfRepository', 'skos:prefLabel': { 'eng': 'Place of repository' } },
+        { '@id': 'vra:placeOfSite', 'skos:prefLabel': { 'eng': 'Place of site' } }
       ],
       loaded: true
     },
@@ -96,10 +105,20 @@ const state = {
       ],
       loaded: true
     },
-    'http://purl.org/coar/resource_type': {
+    'resource-type': {
       terms: [
         { '@id': 'http://purl.org/coar/resource_type/c_ecc8', 'skos:prefLabel': {'eng': 'still image'} },
         { '@id': 'http://purl.org/coar/resource_type/c_18cc', 'skos:prefLabel': {'eng': 'sound'} }
+      ],
+      loaded: true
+    },
+    'genre': {
+      terms: [
+        { '@id': 'http://d-nb.info/gnd/4012400-9', 'skos:prefLabel': {'eng': 'Diplomarbeit', 'deu': 'Diplomarbeit'} },
+        { '@id': 'http://d-nb.info/gnd/1105859770', 'skos:prefLabel': {'eng': 'Masterarbeit', 'deu': 'Masterarbeit'} },
+        { '@id': 'http://d-nb.info/gnd/4012494-0', 'skos:prefLabel': {'eng': 'Dissertation', 'deu': 'Dissertation'} },
+        { '@id': 'http://d-nb.info/gnd/4168514-3', 'skos:prefLabel': {'eng': 'Magisterarbeit', 'deu': 'Magisterarbeit'} },
+        { '@id': 'http://d-nb.info/gnd/4158652-9', 'skos:prefLabel': {'eng': 'Habilitation', 'deu': 'Habilitation'} },
       ],
       loaded: true
     },
@@ -140,13 +159,13 @@ const state = {
     },
     'licenses': {
       terms: [
-        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': {'eng': 'All rights reserved', '@language': 'eng'} },
-        { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': {'eng': 'CC BY 4.0 International', '@language': 'eng'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC 4.0 International', '@language': 'eng'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-ND 4.0 International', '@language': 'eng'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-SA 4.0 International', '@language': 'eng'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-ND 4.0 International', '@language': 'eng'} },
-        { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-SA 4.0 International', '@language': 'eng'} }
+        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': {'eng': 'All rights reserved'} },
+        { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': {'eng': 'CC BY 4.0 International'} },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC 4.0 International'} },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-ND 4.0 International'} },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-SA 4.0 International'} },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-ND 4.0 International'} },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-SA 4.0 International'} }
       ],
       loaded: true
     },

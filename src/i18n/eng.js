@@ -11,6 +11,7 @@ export default {
   'PHAIDRA_IS': 'Phaidra is the repository for the permanent secure storage of digital assets at the University of Vienna.',
 
   'bf:Note': 'Description',
+  'bf:Summary': 'Abstract',
   'phaidra:Remark': 'Remark',
   'phaidra:ConditionNote': 'Condition',
   'phaidra:ReproductionNote': 'Reproduction note',
@@ -19,8 +20,26 @@ export default {
   'dce:subject': 'Subject',
   'dcterms:language': 'Language',
   'dcterms:type': 'Resource type',
+  'edm:hasType': 'Type/Genre',
   'bf:physicalLocation': 'Physical location',
   'bf:shelfMark': 'Call number',
+
+  'dcterms:date': 'Date',
+  'dcterms:created': 'Date created',
+  'dcterms:modified': 'Date modified',
+  'dcterms:available': 'Date available',
+  'dcterms:issued': 'Date issued',
+  'dcterms:valid': 'Date valid',
+  'dcterms:dateAccepted': 'Date accepted',
+  'dcterms:dateCopyrighted': 'Date copyrighted',
+  'dcterms:dateSubmitted': 'Date submitted',
+  'phaidra:dateAccessioned': 'Date accessioned',
+
+  'dcterms:spatial': 'Depicted/Represented place',
+  'vra:placeOfCreation': 'Place of creation',
+  'vra:placeOfRepository': 'Place of repository',
+  'vra:placeOfSite': 'Place of site',
+
   'dcterms:provenance': 'Provenance',
 
   'ebucore:filename': 'Filename',
@@ -34,7 +53,6 @@ export default {
   'schema:temporalCoverage': 'Temporal coverage',
   'vra:hasTechnique': 'Technique',
   'vra:material': 'Material',
-  'dcterms:spatial': 'Georeference',
   'vra:hasInscription': 'Inscription',
 
   uwm_etheses: 'E-Theses',

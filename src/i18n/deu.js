@@ -526,14 +526,32 @@ export default {
   'File': 'Datei',
 
   'bf:Note': 'Beschreibung',
+  'bf:Summary': 'Abstrakt',
   'phaidra:Remark': 'Notiz',
   'phaidra:ConditionNote': 'Zustand',
   'phaidra:ReproductionNote': 'Reproduction note',
   'phaidra:DigitizationNote': 'Digitization note',
 
+  'dcterms:date': 'Date',
+  'dcterms:created': 'Date created',
+  'dcterms:modified': 'Date modified',
+  'dcterms:available': 'Date available',
+  'dcterms:issued': 'Date issued',
+  'dcterms:valid': 'Date valid',
+  'dcterms:dateAccepted': 'Date accepted',
+  'dcterms:dateCopyrighted': 'Date copyrighted',
+  'dcterms:dateSubmitted': 'Date submitted',
+  'phaidra:dateAccessioned': 'Date accessioned',
+
+  'dcterms:spatial': 'Depicted/Represented place',
+  'vra:placeOfCreation': 'Place of creation',
+  'vra:placeOfRepository': 'Place of repository',
+  'vra:placeOfSite': 'Place of site',
+
   'dce:subject': 'Subjekt',
   'dcterms:language': 'Sprache',
   'dcterms:type': 'Resource Type',
+  'edm:hasType': 'Typ/Genre',
   'bf:physicalLocation': 'Standort',
   'bf:shelfMark': 'Signatur',
   'dcterms:provenance': 'Provenienz',
@@ -549,6 +567,5 @@ export default {
   'schema:temporalCoverage': 'Zeitliche Abdeckung',
   'vra:hasTechnique': 'Technik',
   'vra:material': 'Material',
-  'dcterms:spatial': 'Georeferenz',
   'vra:hasInscription': 'Inschrift'
 }

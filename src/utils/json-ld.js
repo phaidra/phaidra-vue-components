@@ -41,6 +41,9 @@ export default {
                 case 'bf:Note':
                   f = fields.getField('description')
                   break;
+                case 'bf:Summary':
+                  f = fields.getField('abstract')
+                  break;
                 case 'phaidra:Remark':
                   f = fields.getField('note')
                   break;
@@ -109,10 +112,15 @@ export default {
               components.push(f)
               break
 
-            // dcterms:spatial
+            // spatial
             case 'dcterms:spatial':
+            case 'vra:placeOfCreation':
+            case 'vra:placeOfRepository':
+            case 'vra:placeOfSite':
               if (value[i]['@type'] === 'schema:Place' && !(value[i]['skos:exactMatch'])){
+                // freetext
                 f = fields.getField('spatial-text')
+                f.type = key
                 for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
                   f.value = value[i]['skos:prefLabel'][j]['@value']
                   f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
@@ -120,15 +128,16 @@ export default {
                 components.push(f)
               } else {
                 if (value[i]['@type'] === 'schema:Place' && value[i]['skos:exactMatch']){
-                  // dcterms:spatial - getty
+                  // getty
                   f = fields.getField('vocab-ext-readonly')
+                  f.type = key
                   f['skos:exactMatch'] = value[i]['skos:exactMatch']
                   f['skos:prefLabel'] = value[i]['skos:prefLabel']
                   f['rdfs:label'] = value[i]['rdfs:label']
                   f.predicate = key
                   f.label = 'Place'
                   components.push(f)
-                  f = fields.getField('spatial-getty-tgn')
+                  f = fields.getField('spatial-getty')
                   components.push(f)
                 }
               }
@@ -137,20 +146,25 @@ export default {
             // dcterms:type
             case 'dcterms:type':
               f = fields.getField('resource-type')
-              for (j = 0; j < value[i].length; j++) {              
-                f.value = value[i]
+              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
+                f.value = value[i]['skos:exactMatch'][j]
               }
               components.push(f)
               break
 
-            // TODO: dcterms:issued
+            // edm:hasType
+            case 'edm:hasType':
+              f = fields.getField('genre')
+              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
+                f.value = value[i]['skos:exactMatch'][j]
+              }
+              components.push(f)
+              break
 
             // edm:rights
             case 'edm:rights':
-              f = fields.getField('license')
-              for (j = 0; j < value[i].length; j++) {              
-                f.value = value[i]
-              }
+              f = fields.getField('license')             
+              f.value = value[i]
               components.push(f)
               break
 
@@ -349,21 +363,31 @@ export default {
             case 'schema:depth':
               if (value[i]['@type'] === 'schema:QuantitativeValue') {
                 f = fields.getField('depth')
-                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {              
+                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {
                   f.unit = value[i]['schema:unitCode'][j]
                 }
-                for (j = 0; j < value[i]['schema:value'].length; j++) {              
+                for (j = 0; j < value[i]['schema:value'].length; j++) {
                   f.value = value[i]['schema:value'][j]
                 }
                 components.push(f)
               }
               break
-            
-            // phaidra:dateAccessioned
+
+            // dates
+            case 'dcterms:date':
+            case 'dcterms:created':
+            case 'dcterms:modified':
+            case 'dcterms:available':
+            case 'dcterms:issued':
+            case 'dcterms:valid':
+            case 'dcterms:dateAccepted':
+            case 'dcterms:dateCopyrighted':
+            case 'dcterms:dateSubmitted':
             case 'phaidra:dateAccessioned':
+              // only edtf now (later time can be edm:TimeSpan)
               if (typeof value[i] === 'string') {
                 f = fields.getField('date-edtf')
-                f.type = 'dateAccessioned'
+                f.type = key
                 f.value = value[i]
                 components.push(f)
               }
@@ -387,31 +411,15 @@ export default {
                       f.firstname = value[i]['schema:givenName'][j]['@value']
                     }
                   }
-                  if (value[i]['dcterms:date']) {
-                    for (j = 0; j < value[i]['dcterms:date'].length; j++) {
-                      f.date = value[i]['dcterms:date'][j]
-                    }
-                  }
                   components.push(f)
                 }
               }else{
-                if (key.startsWith('dcterms')) {
-                  var pred_date = key.split(':')
-                  // only edtf now (later time can be edm:TimeSpan)
-                  if (pred_date[1] && (typeof value[i] === 'string')) {
-                    f = fields.getField('date-edtf')
-                    f.type = pred_date[1]
-                    f.value = value[i]
-                    components.push(f)
-                  }
-                } else {
-                  // unknown predicate
-                  f = fields.getField('readonly')
-                  f.jsonld = value[i]
-                  f.predicate = key
-                  f.label = key
-                  components.push(f)
-                }
+                // unknown predicate
+                f = fields.getField('readonly')
+                f.jsonld = value[i]
+                f.predicate = key
+                f.label = key
+                components.push(f)
               }
               break
           }
@@ -836,8 +844,9 @@ export default {
           break
 
         case 'dcterms:type':
+        case 'edm:hasType':
           if (f.value) {
-            this.push_literal(jsonld, f.predicate, f.value)
+            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
           }
           break
 
@@ -937,11 +946,7 @@ export default {
 
         case 'date':
           if (f.value) {
-            if (f.type === 'dateAccessioned') {
-              this.push_literal(jsonld, 'phaidra:dateAccessioned', f.value)
-            } else {
-              this.push_literal(jsonld, 'dcterms:' + f.type, f.value)
-            }
+            this.push_literal(jsonld, f.type, f.value)
           }
           break
 
@@ -951,12 +956,12 @@ export default {
           }
           break
 
-        case 'dcterms:spatial':
-          if (f.component === 'p-gbv-suggest-getty' && f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_spatial(f['skos:prefLabel'], f['skos:prefLabel'], f.coordinates, 'schema:Place', [f.value]))
+        case 'spatial':
+          if (f.component === 'p-spatial-getty' && f.value) {
+            this.push_object(jsonld, f.type, this.get_json_spatial(f['skos:prefLabel'], f['skos:prefLabel'], f.coordinates, 'schema:Place', [f.value]))
           } else {
             if (f.value) {
-              this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'schema:Place'))
+              this.push_object(jsonld, f.type, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'schema:Place'))
             }
           }
           break

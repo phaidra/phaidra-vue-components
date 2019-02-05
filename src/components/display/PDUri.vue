@@ -32,7 +32,11 @@ export default {
           break
 
         case 'dcterms:type':
-          vocabulary = 'http://purl.org/coar/resource_type'
+          vocabulary = 'resource-type'
+          break
+
+        case 'edm:hasType':
+          vocabulary = 'genre'
           break
 
         case 'edm:rights':

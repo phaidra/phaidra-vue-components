@@ -1,6 +1,30 @@
 <template>
   <v-layout row>
-    <v-flex xs8>
+    <v-flex xs3>
+      <v-autocomplete
+        v-on:input="$emit('input-place-type', $event)" 
+        :label="$t('Type of place')" 
+        :items="vocabularies['https://phaidra.org/vocabulary/placetype'].terms" 
+        :value="getTerm('https://phaidra.org/vocabulary/placetype', type)"
+        :filter="autocompleteFilter"
+        box
+        return-object
+        clearable
+      >
+        <template slot="item" slot-scope="{ item }">
+          <v-list-tile-content two-line>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/placetype', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
+          </v-list-tile-content>
+        </template>
+        <template slot="selection" slot-scope="{ item }">
+          <v-list-tile-content>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/placetype', item['@id'])}`"></v-list-tile-title>
+          </v-list-tile-content>
+        </template>
+      </v-autocomplete>
+    </v-flex>
+    <v-flex xs6>
       <v-autocomplete
         v-model="model"
         v-on:input="$emit('input', $event)"
@@ -35,21 +59,21 @@
 
 <script>
 import qs from 'qs'
+import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
-  name: 'p-i-gbv-suggest-getty',
-  mixins: [fieldproperties],
+  name: 'p-i-spatial-getty',
+  mixins: [vocabulary, fieldproperties],
   props: {
     value: {
       type: String,
       required: true
     },
-    label: {
-      type: String,
-      required: true
+    type: {
+      type: String
     },
-    voc: {
+    label: {
       type: String,
       required: true
     },
@@ -83,6 +107,11 @@ export default {
     }
   },
   methods: {
+    autocompleteFilter: function (item, queryText, itemText) {
+      const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
+      const query = queryText.toLowerCase()
+      return lab.indexOf(query) > -1
+    },
     resolve: function (uri) {
       var self = this
 
@@ -134,7 +163,7 @@ export default {
       self.loading = true
 
       var params = {
-        voc: self.voc,
+        voc: 'tgn',
         count: 20,
         searchstring: q
       }
@@ -157,6 +186,15 @@ export default {
       })
       .finally(() => (self.loading = false))
     }
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      this.loading = !this.vocabularies['https://phaidra.org/vocabulary/placetype'].loaded
+      // emit input to set skos:prefLabel in parent
+      if (this.type) {
+        this.$emit('input-place-type', this.getTerm('https://phaidra.org/vocabulary/placetype', this.type))
+      }
+    })
   }
 }
 </script>

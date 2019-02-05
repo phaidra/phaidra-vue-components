@@ -6,13 +6,24 @@ const fields = [
     fieldname: 'Resource type',
     predicate: 'dcterms:type',
     component: 'p-select',
-    vocabulary: 'http://purl.org/coar/resource_type',
+    vocabulary: 'resource-type',
     required: true,
     multiplicable: false,
     label: 'Resource type',
     value: '',
     'skos:prefLabel': [],
     definition: 'The nature of the resource.'
+  },
+  {
+    id: 'genre',
+    fieldname: 'Genre',
+    predicate: 'edm:hasType',
+    component: 'p-select',
+    vocabulary: 'genre',
+    label: 'Genre',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Master thesis, Comedy'
   },
   {
     id: 'title',
@@ -42,6 +53,20 @@ const fields = [
     value: '',
     language: 'eng',
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
+  },
+  {
+    id: 'abstract',
+    fieldname: 'Abstract',
+    predicate: 'bf:note',
+    type: 'bf:Summary',
+    component: 'p-text-field',
+    multiplicable: true,
+    multilingual: true,
+    multiline: true,
+    label: 'Abstract',
+    value: '',
+    language: 'eng',
+    definition: 'Summary or abstract of the resource described.'
   },
   {
     id: 'date-edtf',
@@ -315,14 +340,15 @@ const fields = [
     definition: 'All marks or written words added to the object at the time of production or in its subsequent history, including signatures, dates, dedications, texts, and colophons, as well as marks, such as the stamps of silversmiths, publishers, or printers.'
   },
   {
-    id: 'spatial-getty-tgn',
+    id: 'spatial-getty',
     fieldname: 'Place (Getty TGN)',
-    predicate: 'dcterms:spatial',
-    component: 'p-gbv-suggest-getty',
+    predicate: 'spatial',
+    component: 'p-spatial-getty',
     multiplicable: true,
     voc: 'tgn',
     label: 'Place',
     value: '',
+    type: '',
     'rdfs:label': [],
     'skos:prefLabel': [],
     definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
@@ -330,12 +356,13 @@ const fields = [
   {
     id: 'spatial-text',
     fieldname: 'Place',
-    predicate: 'dcterms:spatial',
-    component: 'p-text-field',
+    predicate: 'spatial',
+    component: 'p-spatial-text',
     multilingual: true,
     multiplicable: true,
     label: 'Place',
     value: '',
+    type: '',
     language: 'eng',
     definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
   },    
@@ -420,20 +447,35 @@ const predicateOrder = [
   'dce:title',
   'role',
   'bf:note',
-        
+  
   'dcterms:language',
   'dce:subject',
-  'schema:temporalCoverage',
-  'dcterms:spatial',
 
   'dcterms:type',
+  'edm:hasType',
 
+  'dcterms:date',
+  'dcterms:created',
+  'dcterms:modified',
+  'dcterms:available',
   'dcterms:issued',
+  'dcterms:valid',
+  'dcterms:dateAccepted',
+  'dcterms:dateCopyrighted',
+  'dcterms:dateSubmitted',
+  'phaidra:dateAccessioned',
+  'schema:temporalCoverage',
+
   'edm:rights',
   'dce:rights',
   'frapo:hasFundingAgency',
   'frapo:isOutputOf',
   'dcterms:provenance',
+
+  'dcterms:spatial',
+  'vra:placeOfCreation',
+  'vra:placeOfRepository',
+  'vra:placeOfSite',
 
   'ebucore:filename',
   'ebucore:hasMimeType',

@@ -99,14 +99,25 @@
                     ></p-i-entity>
                   </v-flex>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-gbv-suggest-getty'" :key="f.id">
-                    <p-i-gbv-suggest-getty
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-spatial-getty'" :key="f.id">
+                    <p-i-spatial-getty
                       v-bind.sync="f" 
                       v-on:input="f.value=$event"
+                      v-on:input-place-type="setSelected(f, 'type', $event)"
                       v-on:resolve="updatePlace(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-gbv-suggest-getty>        
+                    ></p-i-spatial-getty>        
+                  </v-flex>
+
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-spatial-text'" :key="f.id">
+                    <p-i-spatial-text
+                      v-bind.sync="f" 
+                      v-on:input="f.value=$event"
+                      v-on:input-place-type="setSelected(f, 'type', $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-spatial-text>        
                   </v-flex>
 
                   <v-flex offset-xs1 v-else-if="f.component === 'p-dimension'" :key="f.id">
@@ -166,7 +177,7 @@
                 </template>
 
                 <v-flex v-if="addbutton" offset-xs1 class="pb-4">
-                  <v-dialog v-model="addfielddialog" fullscreen>
+                  <v-dialog v-model="s['adddialogue']" fullscreen>
                     <v-btn slot="activator" fab depressed small color="grey lighten-3">
                       <v-icon color="grey darken-1">add</v-icon>
                     </v-btn>
@@ -204,7 +215,7 @@
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="grey" dark @click="addfielddialog = false">{{ $t('Cancel') }}</v-btn>
+                        <v-btn color="grey" dark @click="s['adddialogue'] = false">{{ $t('Cancel') }}</v-btn>
                         <v-btn color="primary" @click="addFields(s)">{{ $t('Add') }}</v-btn>
                       </v-card-actions>
                     </v-card>
@@ -244,7 +255,8 @@ import PITitle from './PITitle'
 import PIEntity from './PIEntity'
 import PIDateEdtf from './PIDateEdtf'
 import PISelect from './PISelect'
-import PIGbvSuggestGetty from './PIGbvSuggestGetty'
+import PISpatialGetty from './PISpatialGetty'
+import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
 import PIProject from './PIProject'
 import PIFunder from './PIFunder'
@@ -261,7 +273,8 @@ export default {
     PIEntity,
     PIDateEdtf,
     PISelect,
-    PIGbvSuggestGetty,
+    PISpatialGetty,
+    PISpatialText,
     PIDimension,
     PIProject,
     PIFunder,
@@ -280,7 +293,6 @@ export default {
       loading: false,
       loadedPid: '',
       fab: false,
-      addfielddialog: false,
       addfieldselection: [],
       metadatafields: fields.getEditableFields() 
     }
@@ -486,10 +498,14 @@ export default {
     selectInput: function (f, event) {
       if (event) {
         f.value = event['@id']
-        f['skos:prefLabel'] = event['skos:prefLabel']
+        var labels = event['skos:prefLabel']
+        f['skos:prefLabel'] = []
+        Object.entries(labels).forEach(([key, value]) => {
+          f['skos:prefLabel'].push({ '@value': value, '@language': key })
+        })
       } else {
         f.value = ''
-        f['skos:prefLabel'] = ''
+        f['skos:prefLabel'] = []
       }
     },
     roleInput: function (f, event) {
@@ -514,7 +530,7 @@ export default {
         section.fields.push(fields.getField(this.addfieldselection[i].id))
       }
       this.addfieldselection = []
-      this.addfielddialog = false
+      section['adddialogue'] = false
     }
   },
   mounted: function () {

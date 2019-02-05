@@ -16,10 +16,12 @@ import PDUwmetadata from './display/PDUwmetadata.vue'
 import PDValue from './display/PDValue.vue'
 import PIDimension from './input/PIDimension.vue'
 import PIEntity from './input/PIEntity.vue'
+import PIDateEdtf from './input/PIDateEdtf.vue'
 import PIFilenameReadonly from './input/PIFilenameReadonly.vue'
 import PIForm from './input/PIForm.vue'
 import PIFunder from './input/PIFunder.vue'
-import PIGbvSuggestGetty from './input/PIGbvSuggestGetty.vue'
+import PISpatialGetty from './input/PISpatialGetty.vue'
+import PISpatialText from './input/PISpatialText.vue'
 import PIProject from './input/PIProject.vue'
 import PISelect from './input/PISelect.vue'
 import PITextField from './input/PITextField.vue'
@@ -46,10 +48,12 @@ const Components = {
   PDValue,
   PIDimension,
   PIEntity,
+  PIDateEdtf,
   PIFilenameReadonly,
   PIForm,
   PIFunder,
-  PIGbvSuggestGetty,
+  PISpatialGetty,
+  PISpatialText,
   PIProject,
   PISelect,
   PITextField,

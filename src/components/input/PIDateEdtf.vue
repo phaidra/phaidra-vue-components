@@ -98,7 +98,7 @@ export default {
       this.loading = !this.vocabularies['https://phaidra.org/vocabulary/datetype'].loaded
       // emit input to set skos:prefLabel in parent
       if (this.type) {
-        this.$emit('input', this.getTerm('https://phaidra.org/vocabulary/datetype', this.role))
+        this.$emit('input-date-type', this.getTerm('https://phaidra.org/vocabulary/datetype', this.type))
       }
     })
   }
