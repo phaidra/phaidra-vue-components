@@ -31,8 +31,7 @@ export default {
   },
   methods: {
     getLocalizedTermLabel: function (role) {
-      var id = role.substring(role.indexOf(':') + 1)
-      return this.$store.getters.getLocalizedTermLabel('https://phaidra.org/vocabulary/role', id, this.$i18n.locale)
+      return this.$store.getters.getLocalizedTermLabel('https://phaidra.org/vocabulary/role', role, this.$i18n.locale)
     }
   }
 }

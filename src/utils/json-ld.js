@@ -404,10 +404,9 @@ export default {
 
               // role
               if (key.startsWith('role')) {
-                var pred_role = key.split(':')
-                if (pred_role[1] && (value[i]['@type'] === 'schema:Person')) {
+                if (value[i]['@type'] === 'schema:Person') {
                   f = fields.getField('role')
-                  f.role = pred_role[1]
+                  f.role = key
                   if (value[i]['schema:familyName']) {
                     for (j = 0; j < value[i]['schema:familyName'].length; j++) {
                       f.lastname = value[i]['schema:familyName'][j]['@value']
@@ -495,17 +494,19 @@ export default {
       }
     )
 
-    for (var i = 0; i < levels.subject.length; i++) {
-      var subjectFields = this.getOrderedComponents(levels.subject[i].components)
-      form.sections.push(
-        {
-          title: 'Subject',
-          type: 'phaidra:Subject',
-          id: 'subject-'+i,
-          fields: subjectFields
-        }
-      )
-    }  
+    if (levels['subject']) {
+      for (var i = 0; i < levels.subject.length; i++) {
+        var subjectFields = this.getOrderedComponents(levels.subject[i].components)
+        form.sections.push(
+          {
+            title: 'Subject',
+            type: 'phaidra:Subject',
+            id: 'subject-'+i,
+            fields: subjectFields
+          }
+        )
+      }
+    }
 
     return form
   },
@@ -861,7 +862,7 @@ export default {
 
         case 'role':
           if (f.role && (f.firstname || f.lastname || f.institution || f.identifier)) {
-            this.push_object(jsonld, 'role:' + f.role, this.get_json_role(f.type, f.firstname, f.lastname, f.institution, f.date, f.identifier ? [f.identifier] : null))
+            this.push_object(jsonld, f.role, this.get_json_role(f.type, f.firstname, f.lastname, f.institution, f.date, f.identifier ? [f.identifier] : null))
           }
           break
 
