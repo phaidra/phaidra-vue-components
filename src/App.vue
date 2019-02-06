@@ -104,7 +104,12 @@
                         <v-btn raised single-line class="right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <p-d-jsonld :pid="pid" ref="display"></p-d-jsonld>
+                        <p-d-jsonld 
+                          ref="display"
+                          :pid="pid"
+                          :jsonld="displayjsonld"
+                          v-on:load-jsonld="displayjsonld = $event"
+                        ></p-d-jsonld>
                       </v-card-text>
                     </v-card>
                   </v-flex>
@@ -187,7 +192,7 @@ export default {
   data () {
     return {
       window: 0,
-      loadedform: {},
+      displayjsonld: {},
       editform: {},
       form: {
         sections: [
@@ -229,6 +234,7 @@ export default {
       this.$refs.display.loadMetadata(this.pid)
     },
     loadEdit: function() {
+      this.editform = {}
       this.$refs.edit.loadMetadata(this.pid)
     },
     login: function () {
@@ -236,7 +242,7 @@ export default {
     },
     logout: function () {
       this.$store.dispatch('logout')
-      document.cookie = 'X-XSRF-TOKEN=';
+      document.cookie = 'X-XSRF-TOKEN='
     },
     objectCreated: function (event) {
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + event + ' created' }])
@@ -286,7 +292,7 @@ export default {
     this.form.sections[1].fields.push(fields.getField('inscription'))
     this.form.sections[1].fields.push(fields.getField('height'))
     this.form.sections[1].fields.push(fields.getField('shelf-mark'))
-    this.form.sections[1].fields.push(fields.getField('technique-getty-aat-select'))
+    this.form.sections[1].fields.push(fields.getField('technique-getty'))
     this.form.sections[1].fields.push(fields.getField('digitization-note'))
     this.form.sections[1].fields.push(fields.getField('reproduction-note'))
     

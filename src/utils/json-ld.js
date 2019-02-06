@@ -90,7 +90,7 @@ export default {
             case 'dcterms:subject':
               if (value[i]['@type'] === 'skos:Concept') {
                 f = fields.getField('vocab-ext-readonly')
-                f['skos:exactMatch'] = value[i]['skos:exactMatch']
+                f.value = value[i]['skos:exactMatch']
                 f['skos:prefLabel'] = value[i]['skos:prefLabel']
                 f['rdfs:label'] = value[i]['rdfs:label']
                 f.predicate = key
@@ -129,15 +129,22 @@ export default {
               } else {
                 if (value[i]['@type'] === 'schema:Place' && value[i]['skos:exactMatch']){
                   // getty
-                  f = fields.getField('vocab-ext-readonly')
-                  f.type = key
-                  f['skos:exactMatch'] = value[i]['skos:exactMatch']
+                  f = fields.getField('spatial-getty-readonly')
+                  if (value[i]['skos:exactMatch']) {
+                    for (j = 0; j < value[i]['skos:exactMatch'].length; j++) { 
+                      f.value = value[i]['skos:exactMatch'][j]
+                    }
+                  }
                   f['skos:prefLabel'] = value[i]['skos:prefLabel']
                   f['rdfs:label'] = value[i]['rdfs:label']
+                  f.coordinates = value[i]['schema:geo']
                   f.predicate = key
-                  f.label = 'Place'
+                  f.type = key
+                  f.label = key
                   components.push(f)
                   f = fields.getField('spatial-getty')
+                  f.predicate = key
+                  f.type = key
                   components.push(f)
                 }
               }
@@ -325,7 +332,7 @@ export default {
                   f.predicate = key
                   f.label = 'Technique'
                   components.push(f)
-                  f = fields.getField('technique-getty-aat-select')
+                  f = fields.getField('technique-getty')
                   components.push(f)
                 }
               }
@@ -562,14 +569,18 @@ export default {
     }
 
     if (rdfslabels) {
-      h['rdfs:label'] = []
-      for (var i = 0; i < rdfslabels.length; i++) {
-        h['rdfs:label'].push(rdfslabels[i])
+      if (rdfslabels.length > 0) {
+        h['rdfs:label'] = []
+        for (var i = 0; i < rdfslabels.length; i++) {
+          h['rdfs:label'].push(rdfslabels[i])
+        }
       }
     }
 
     if (identifiers) {
-      h['skos:exactMatch'] = identifiers
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
     }
     return h
   },
@@ -580,36 +591,34 @@ export default {
       h['@type'] = type
     }
 
-    h['skos:prefLabel'] = []
-    for (var i = 0; i < preflabels.length; i++) {
-      h['skos:prefLabel'].push(preflabels[i])
+    if (preflabels) {
+      if (preflabels.length > 0) {
+        h['skos:prefLabel'] = []
+        for (var i = 0; i < preflabels.length; i++) {
+          h['skos:prefLabel'].push(preflabels[i])
+        }
+      }
     }
 
     if (rdfslabels) {
       if (rdfslabels.length > 0) {
-        h['skos:prefLabel'] = []
+        h['rdfs:label'] = []
         for (var j = 0; j < rdfslabels.length; j++) {
-          h['skos:prefLabel'].push(rdfslabels[j])
+          h['rdfs:label'].push(rdfslabels[j])
         }
       }
     }
 
     if (identifiers) {
-      h['skos:exactMatch'] = identifiers
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
     }
 
     if (coordinates) {
-      h['schema:geo'] = [
-        {
-          '@type': 'schema:GeoCoordinates',
-          'schema:latitude': [
-            coordinates['schema:latitude']
-          ],
-          'schema:longitude': [
-            coordinates['schema:longitude']
-          ]
-        }
-      ]
+      if (coordinates.length > 0) {
+        h['schema:geo'] = coordinates
+      }
     }
 
     return h
@@ -945,6 +954,16 @@ export default {
           break
 
         case 'date':
+        case 'dcterms:date':
+        case 'dcterms:created':
+        case 'dcterms:modified':
+        case 'dcterms:available':
+        case 'dcterms:issued':
+        case 'dcterms:valid':
+        case 'dcterms:dateAccepted':
+        case 'dcterms:dateCopyrighted':
+        case 'dcterms:dateSubmitted':
+        case 'phaidra:dateAccessioned':
           if (f.value) {
             this.push_literal(jsonld, f.type, f.value)
           }
@@ -957,8 +976,12 @@ export default {
           break
 
         case 'spatial':
-          if (f.component === 'p-spatial-getty' && f.value) {
-            this.push_object(jsonld, f.type, this.get_json_spatial(f['skos:prefLabel'], f['skos:prefLabel'], f.coordinates, 'schema:Place', [f.value]))
+        case 'dcterms:spatial':
+        case 'vra:placeOfCreation':
+        case 'vra:placeOfRepository':
+        case 'vra:placeOfSite':
+          if (((f.component === 'p-spatial-getty') || (f.component === 'p-spatial-getty-readonly')) && f.value) {
+            this.push_object(jsonld, f.type, this.get_json_spatial(f['rdfs:label'], f['skos:prefLabel'], f.coordinates, 'schema:Place', [f.value]))
           } else {
             if (f.value) {
               this.push_object(jsonld, f.type, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'schema:Place'))

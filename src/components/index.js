@@ -11,7 +11,7 @@ import PDLicense from './display/PDLicense.vue'
 import PDProject from './display/PDProject.vue'
 import PDSkosPreflabel from './display/PDSkosPreflabel.vue'
 import PDTitle from './display/PDTitle.vue'
-import PDUri from './display/PDUri.vue'
+import PDLabeledValue from './display/PDLabeledValue.vue'
 import PDUwmetadata from './display/PDUwmetadata.vue'
 import PDValue from './display/PDValue.vue'
 import PIDimension from './input/PIDimension.vue'
@@ -29,6 +29,7 @@ import PITextFieldSuggest from './input/PITextFieldSuggest.vue'
 import PITitle from './input/PITitle.vue'
 import PIUnknownReadonly from './input/PIUnknownReadonly.vue'
 import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
+import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 
 const Components = {
   PDDimension,
@@ -43,7 +44,7 @@ const Components = {
   PDProject,
   PDSkosPreflabel,
   PDTitle,
-  PDUri,
+  PDLabeledValue,
   PDUwmetadata,
   PDValue,
   PIDimension,
@@ -60,7 +61,8 @@ const Components = {
   PITextFieldSuggest,
   PITitle,
   PIUnknownReadonly,
-  PIVocabExtReadonly
+  PIVocabExtReadonly,
+  PISpatialGettyReadonly
 }
 
 Object.keys(Components).forEach(name => {

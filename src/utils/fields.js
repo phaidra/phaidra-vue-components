@@ -248,7 +248,7 @@ const fields = [
     definition: 'Use for identification number assigned to a particular donation or acquisition.'
   },
   {
-    id: 'technique-getty-aat-select',
+    id: 'technique-getty',
     fieldname: 'Technique (Getty AAT)',
     predicate: 'vra:hasTechnique',
     type: 'vra:Technique',
@@ -437,9 +437,22 @@ const fields = [
     label: '',
     'skos:prefLabel': [],
     'rdfs:label': [],
-    'skos:exactMatch': [],
+    value: '',
     readonly: true,
     definition: 'Vocabulary value readonly.'
+  },
+  {
+    id: 'spatial-getty-readonly',
+    fieldname: 'Getty spatial object  readonly',
+    predicate: '',
+    component: 'p-spatial-getty-readonly',
+    label: '',
+    'skos:prefLabel': [],
+    'rdfs:label': [],
+    coordinates: [],
+    value: '',
+    readonly: true,
+    definition: 'Getty spatial object readonly.'
   }
 ]
 
@@ -464,7 +477,7 @@ const predicateOrder = [
   'dcterms:dateCopyrighted',
   'dcterms:dateSubmitted',
   'phaidra:dateAccessioned',
-  'schema:temporalCoverage',
+  'date',
 
   'edm:rights',
   'dce:rights',
@@ -476,6 +489,7 @@ const predicateOrder = [
   'vra:placeOfCreation',
   'vra:placeOfRepository',
   'vra:placeOfSite',
+  'spatial',
 
   'ebucore:filename',
   'ebucore:hasMimeType',

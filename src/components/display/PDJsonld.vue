@@ -1,7 +1,7 @@
 <template>
  
-    <p-d-jsonld-layout v-if="objectjson">
-      <template v-for="(o, p) in objectjson" >
+    <p-d-jsonld-layout v-if="jsonld">
+      <template v-for="(o, p) in jsonld" >
 
         <template v-if="p==='dce:title'" slot="dce:title">
           <p-d-title :o="t" v-for="(t, j) in o" :key="'title'+j"></p-d-title>
@@ -20,15 +20,15 @@
         </template>
 
         <template v-else-if="p==='dcterms:language'" slot="dcterms:language">
-          <p-d-uri :p="p" :o="item" v-for="(item, j) in o" :key="'lan'+j" ></p-d-uri>
+          <p-d-labeled-value :p="p" :o="item" v-for="(item, j) in o" :key="'lan'+j" ></p-d-labeled-value>
         </template>
 
         <template v-else-if="p==='dcterms:type'" slot="dcterms:type">
-          <p-d-uri :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-uri>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='edm:hasType'" slot="edm:hasType">
-          <p-d-uri :p="p" :o="item" v-for="(item, j) in o" :key="'genre'+j" ></p-d-uri>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'genre'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='dcterms:date'" slot="dcterms:date">
@@ -71,16 +71,8 @@
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'phaidra:dateAccessioned'+j" ></p-d-value>
         </template>
 
-        <template v-else-if="p==='schema:temporalCoverage'" slot="schema:temporalCoverage">
+        <template v-else-if="p==='dcterms:temporal'" slot="dcterms:temporal">
           <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'temporal'+j" ></p-d-lang-value>
-        </template>
-
-        <template v-else-if="p==='edm:rights'" slot="edm:type">
-          <p-d-license :dclicense="item" v-for="(item, j) in o" :key="'license'+j"></p-d-license>
-        </template>
-
-        <template v-else-if="p==='dce:rights'" slot="dce:rights">
-          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-lang-value>
         </template>
 
         <template v-else-if="p==='frapo:isOutputOf'" slot="frapo:isOutputOf">
@@ -124,7 +116,7 @@
         </template>
 
         <template v-else-if="p==='ebucore:hasMimeType'" slot="ebucore:hasMimeType">
-          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'mime'+j"></p-d-value>
+          <p-d-labeled-value :p="p" :o="item" v-for="(item, j) in o" :key="'mime'+j"></p-d-labeled-value>
         </template>
 
         <template v-else-if="p==='opaque:cco_accessionNumber'" slot="opaque:cco_accessionNumber">
@@ -132,7 +124,7 @@
         </template>
 
         <template v-else-if="p==='vra:hasInscription'" slot="vra:hasInscription">
-          <p-d-skos-preflabel v-if="item['skos:prefLabel']" :p="p" :o="item" v-for="(item, j) in o" :key="'inscr'+j" ></p-d-skos-preflabel>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'inscr'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='vra:material'" slot="vra:material">
@@ -157,6 +149,14 @@
 
         <template v-else-if="p==='schema:weight'" slot="schema:weight">
           <p-d-dimension :p="p" :o="item" v-for="(item, j) in o" :key="'weight'+j" ></p-d-dimension>
+        </template>
+
+        <template v-else-if="p==='edm:rights'" slot="edm:rights">
+          <p-d-license :p="p" :o="item" v-for="(item, j) in o" :key="'license'+j"></p-d-license>
+        </template>
+
+        <template v-else-if="p==='dce:rights'" slot="dce:rights">
+          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-lang-value>
         </template>
 
         <template v-else-if="p==='dcterms:subject'" slot="phaidra:Subject">
@@ -213,7 +213,7 @@ import PDValue from './PDValue'
 import PDDimension from './PDDimension'
 import PDGeoreference from './PDGeoreference'
 import PDEntity from './PDEntity'
-import PDUri from './PDUri'
+import PDLabeledValue from './PDLabeledValue'
 import PDFunder from './PDFunder'
 import PDProject from './PDProject'
 import PDJsonldLayout from './PDJsonldLayout'
@@ -233,15 +233,15 @@ export default {
   },
   components: {
     PDTitle,
-    PDLicense,
     PDEntity,
     PDJsonldLayout,
     PDSkosPreflabel,
     PDLangValue,
+    PDLicense,
     PDValue,
     PDDimension,
     PDGeoreference,
-    PDUri,
+    PDLabeledValue,
     PDFunder,
     PDProject
   },
@@ -255,33 +255,13 @@ export default {
       })
       .then(function (response) { return response.json() })
       .then(function (json) {
-        self.metadata = json.metadata
+        self.$emit('load-jsonld', json.metadata['JSON-LD'])
       })
       .catch(function (error) {
         //console.log(error)
       })
 
       return promise
-    }
-  },
-  data () {
-    return {
-      metadata: []
-    }
-  },
-  computed: {
-    objectjson: function () {
-      if (this.pid) {
-        if (this.metadata) {
-          return this.metadata['JSON-LD']
-        }
-      } else {
-        return this.jsonld
-      }
-      return {}
-    },
-    instance () {
-      return this.$store.state.settings.instance
     }
   },
   mounted: function () {

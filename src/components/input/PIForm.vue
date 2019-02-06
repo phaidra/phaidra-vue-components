@@ -170,6 +170,13 @@
                     ></p-i-vocab-ext-readonly>
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-spatial-getty-readonly'" :key="f.id">
+                    <p-i-spatial-getty-readonly 
+                      v-bind.sync="f"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-spatial-getty-readonly>
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'input-file'" :key="f.id">
                     <input type="file" @input="setFilename(f, $event)">
                   </v-flex>
@@ -261,6 +268,7 @@ import PIDimension from './PIDimension'
 import PIProject from './PIProject'
 import PIFunder from './PIFunder'
 import PIFilenameReadonly from './PIFilenameReadonly'
+import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
 import PIUnknownReadonly from './PIUnknownReadonly'
 
@@ -280,6 +288,7 @@ export default {
     PIFunder,
     PIFilenameReadonly,
     PIVocabExtReadonly,
+    PISpatialGettyReadonly,
     PIUnknownReadonly,
     VueJsonPretty
   },
@@ -317,7 +326,7 @@ export default {
     }
   },
   methods: {
-    loadMetadata: function (pid) {      
+    loadMetadata: function (pid) {
       this.loadedPid = pid
       this.loadedMetadata = []
       var self = this

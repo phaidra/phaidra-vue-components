@@ -2,10 +2,15 @@
   <v-flex>
     <template v-if="o['skos:prefLabel']">
       <v-layout row>
-        <template v-for="(l, i) in o['skos:prefLabel']">
-          <v-flex class="primary--text" xs3 :key="'l'+i">{{ $t(p) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-flex>
-          <v-flex xs9 :key="'t'+i">{{ l['@value'] }}</v-flex>
-        </template>
+        <v-flex class="primary--text" xs3>{{ $t(p) }}<template v-for="(l) in o['skos:prefLabel']"><template v-if="l['@language']"> ({{ l['@language'] }})</template></template></v-flex>
+        <v-flex>
+          <v-layout column>
+            <v-flex v-for="(l, i) in o['skos:prefLabel']" :key="'gplv'+i">{{ l['@value'] }}</v-flex>
+            <template v-if="o['rdfs:label']">
+              <v-flex class="grey--text" v-for="(l, i) in o['rdfs:label']" :key="'gl'+i">[{{ l['@value'] }}]</v-flex>
+            </template>
+          </v-layout>
+        </v-flex>
       </v-layout>
     </template>
   </v-flex>

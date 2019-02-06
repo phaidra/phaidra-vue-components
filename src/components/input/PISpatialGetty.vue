@@ -138,7 +138,19 @@ export default {
           for (var i = 0; i < self.rdfslabel.length; i++) {
             self.resolved = '<a href="' + uri + '" target="_blank">' + self.rdfslabel[i]['@value'] + '</a>'
           }
-          self.coordinates = json[uri]['schema:GeoCoordinates']
+          if(json[uri]['schema:GeoCoordinates']){
+            self.coordinates = [
+              {
+                '@type': 'schema:GeoCoordinates',
+                'schema:latitude': [
+                  json[uri]['schema:GeoCoordinates']['schema:latitude']
+                ],
+                'schema:longitude': [
+                  json[uri]['schema:GeoCoordinates']['schema:longitude']
+                ]
+              }
+            ]
+          }
           self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel, coordinates: self.coordinates })
         })
         .catch(function (error) {

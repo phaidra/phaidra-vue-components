@@ -2,7 +2,7 @@
   <v-flex>
     <v-layout>
       <v-flex class="primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex xs9>{{ resolve(p, o) }}</v-flex>
+      <v-flex xs9>{{ resolve(p, o) }} <span class="grey--text">[{{o}}]</span></v-flex>
     </v-layout>
   </v-flex>
 </template>
@@ -11,7 +11,7 @@
 import { vocabulary } from '../../mixins/vocabulary'
 
 export default {
-  name: 'p-d-uri',
+  name: 'p-d-labeled-value',
   mixins: [vocabulary],
   props: {
     o: {
@@ -29,18 +29,6 @@ export default {
 
         case 'dcterms:language':
           vocabulary = 'lang'
-          break
-
-        case 'dcterms:type':
-          vocabulary = 'resource-type'
-          break
-
-        case 'edm:hasType':
-          vocabulary = 'genre'
-          break
-
-        case 'edm:rights':
-          vocabulary = 'licenses'
           break
 
         case 'ebucore:hasMimeType':

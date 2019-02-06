@@ -159,13 +159,13 @@ const state = {
     },
     'licenses': {
       terms: [
-        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': {'eng': 'All rights reserved'} },
-        { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': {'eng': 'CC BY 4.0 International'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC 4.0 International'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-ND 4.0 International'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-SA 4.0 International'} },
-        { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-ND 4.0 International'} },
-        { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-SA 4.0 International'} }
+        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': {'eng': '© All rights reserved'}, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': {'eng': 'CC BY 4.0 International'}, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC 4.0 International'}, 'img': 'cc-by-nc.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-ND 4.0 International'}, 'img': 'cc-by-nc-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-SA 4.0 International'}, 'img': 'cc-by-nc-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-ND 4.0 International'}, 'img': 'cc-by-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-SA 4.0 International'}, 'img': 'cc-by-sa.png' }
       ],
       loaded: true
     },
@@ -212,6 +212,14 @@ const getters = {
     for (var i = 0; i < terms.length; i++) {
       if (terms[i]['@id'] === id) {
         return terms[i]
+      }
+    }
+  },
+  getTermProperty: (state) => (voc, id, prop) => {
+    var terms = state.vocabularies[voc].terms
+    for (var i = 0; i < terms.length; i++) {
+      if (terms[i]['@id'] === id) {
+        return terms[i][prop]
       }
     }
   }

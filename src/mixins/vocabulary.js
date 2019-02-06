@@ -11,6 +11,9 @@ export const vocabulary = {
     getTerm: function (vocabulary, value) {
       return this.$store.getters.getTerm(vocabulary, value)
     },
+    getTermProperty: function (vocabulary, id, property) {
+      return this.$store.getters.getTermProperty(vocabulary, id, property)
+    },
     autocompleteFilter: function (item, queryText) {
       const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
       const query = queryText.toLowerCase()

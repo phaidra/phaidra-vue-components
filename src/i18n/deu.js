@@ -542,6 +542,7 @@ export default {
   'dcterms:dateCopyrighted': 'Date copyrighted',
   'dcterms:dateSubmitted': 'Date submitted',
   'phaidra:dateAccessioned': 'Date accessioned',
+  'edm:rights': 'Lizenz',
 
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',
@@ -564,7 +565,7 @@ export default {
   'schema:height': 'Höhe',
   'schema:depth': 'Tiefe',
   'schema:weight': 'Gewicht',
-  'schema:temporalCoverage': 'Zeitliche Abdeckung',
+  'dcterms:temporal': 'Zeitliche Abdeckung',
   'vra:hasTechnique': 'Technik',
   'vra:material': 'Material',
   'vra:hasInscription': 'Inschrift'

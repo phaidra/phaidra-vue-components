@@ -23,6 +23,7 @@ export default {
   'edm:hasType': 'Type/Genre',
   'bf:physicalLocation': 'Physical location',
   'bf:shelfMark': 'Call number',
+  'edm:rights': 'License',
 
   'dcterms:date': 'Date',
   'dcterms:created': 'Date created',
@@ -50,7 +51,7 @@ export default {
   'schema:height': 'Height',
   'schema:depth': 'Depth',
   'schema:weight': 'Weight',
-  'schema:temporalCoverage': 'Temporal coverage',
+  'dcterms:temporal': 'Temporal coverage',
   'vra:hasTechnique': 'Technique',
   'vra:material': 'Material',
   'vra:hasInscription': 'Inscription',
