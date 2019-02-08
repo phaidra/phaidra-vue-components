@@ -2,7 +2,8 @@
   <v-container grid-list-lg v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
       <v-tab ripple><template v-if="loadedPid"><span class="text-lowercase">{{ loadedPid }}</span>&nbsp;-&nbsp;<span>{{ $t('edit') }}</span></template><template v-else >{{ $t('Submit') }}</template>&nbsp;{{ $t('metadata') }}</v-tab>
-      <v-tab ripple @click="generateJson()">Metadata preview</v-tab>
+      <v-tab ripple @click="generateJson()">{{ $t('Metadata preview') }}</v-tab>
+      <v-tab v-if="templating" ripple @click="loadTemplates()">{{ $t('Templates') }}</v-tab>
     </v-tabs>
   
     <v-tabs-items v-model="activetab">
@@ -235,15 +236,31 @@
 
         </v-layout>
 
-        <v-layout row wrap class="ma-3">
-          <v-spacer></v-spacer>
-          <v-btn v-if="loadedPid" raised :loading="loading" :disabled="loading" color="primary" @click="save()">Save</v-btn>
-          <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()">Submit</v-btn>
+        <v-layout align-center justify-end row class="ma-3">
+          <v-dialog v-if="templating" v-model="templatedialog" width="500">
+            <v-btn class="mr-3" slot="activator" dark raised :loading="loading" :disabled="loading" color="grey">{{ $t('Save as template') }}</v-btn>
+            <v-card>
+              <v-card-title class="headline grey lighten-2" primary-title>{{ $t('Save as template') }}</v-card-title>
+              <v-card-text>
+                <v-text-field v-model="templatename" :label="$t('Template name')" ></v-text-field>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn :loading="loading" :disabled="loading" color="grey" dark @click="templatedialog= false">{{ $t('Cancel') }}</v-btn>
+                <v-btn :loading="loading" :disabled="loading" color="primary" @click="saveAsTemplate()">{{ $t('Save') }}</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-btn v-if="loadedPid" raised :loading="loading" :disabled="loading" color="primary" @click="save()">{{ $t('Save') }}</v-btn>
+          <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()">{{ $t('Submit') }}</v-btn>
         </v-layout>
   
       </v-tab-item>
       <v-tab-item class="ma-4">
         <vue-json-pretty :data="metadata" ref="prettyprint"></vue-json-pretty>
+      </v-tab-item>
+      <v-tab-item class="ma-4">
+        <p-t-list ref="templates" v-on:load-template="f.form=$event"></p-t-list>
       </v-tab-item>
     </v-tabs-items>
 
@@ -271,6 +288,7 @@ import PIFilenameReadonly from './PIFilenameReadonly'
 import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
 import PIUnknownReadonly from './PIUnknownReadonly'
+import PTList from '../templates/PTList'
 
 export default {
   name: 'p-i-form',
@@ -290,7 +308,8 @@ export default {
     PIVocabExtReadonly,
     PISpatialGettyReadonly,
     PIUnknownReadonly,
-    VueJsonPretty
+    VueJsonPretty,
+    PTList
   },
   data () {
     return {
@@ -303,6 +322,8 @@ export default {
       loadedPid: '',
       fab: false,
       addfieldselection: [],
+      templatedialog: '',
+      templatename: '',
       metadatafields: fields.getEditableFields() 
     }
   },
@@ -323,9 +344,44 @@ export default {
     addbutton: {
       type: Boolean,
       default: true
+    },
+    templating: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
+    loadTemplates: function () {
+      this.$refs.templates.loadTemplates()
+    },
+    saveAsTemplate: function () {
+      var self = this
+      var httpFormData = new FormData()
+      this.loading = true
+      httpFormData.append('name', this.templatename)
+      httpFormData.append('form', JSON.stringify(this.form))
+      var url = self.$store.state.settings.instance.api + '/jsonld/template/add'
+      var promise = fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'X-XSRF-TOKEN': this.$store.state.user.token
+        },
+        body: httpFormData
+      })
+      .then(function (response) { return response.json() })
+      .then(function (json) {
+        if (json.alerts && json.alerts.length > 0) {
+          self.$store.commit('setAlerts', json.alerts)
+        }
+        self.loading = false
+        self.templatedialog = false
+      })
+      .catch(function (error) {
+        //console.log(error)
+      })
+      return promise
+    },
     loadMetadata: function (pid) {
       this.loadedPid = pid
       this.loadedMetadata = []
