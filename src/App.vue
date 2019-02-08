@@ -154,6 +154,7 @@
                           :form="form"
                           :contentmodel="contentmodel" 
                           v-on:object-created="objectCreated($event)"
+                          v-on:load-form="form = $event"
                         ></p-i-form>
                       </v-card-text>
                     </v-card>

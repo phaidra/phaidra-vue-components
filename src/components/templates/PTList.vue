@@ -3,15 +3,14 @@
   <v-data-table
     :headers="headers"
     :items="templates"
-    :loading="true"
+    :loading="loading"
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
       <td>{{ props.item.name }}</td>
       <td class="text-xs-right">{{ props.item.created }}</td>
       <td class="text-xs-right">{{ props.item.tid }}</td>
-      <td class="text-xs-center" @click="$emit('load-template', props.item.tid)">{{ $t('load') }}</td>
-      <td class="justify-left" @click="deleteTemplate(props.item.tid)"><v-icon small>delete</v-icon></td>
+      <td class="text-xs-right" ><v-btn flat color="primary" @click="loadTemplate(props.item.tid)">{{ $t('load') }}</v-btn><v-btn flat color="grey" @click="deleteTemplate(props.item.tid)">{{ $t('delete') }}</v-btn></td>
     </template>
   </v-data-table>
 
@@ -27,8 +26,7 @@ export default {
         { text: 'Name', align: 'left', value: 'name' },
         { text: 'Created', align: 'right', value: 'created' },
         { text: 'Template ID', align: 'right', value: 'tid' },
-        { text: 'Load', align: 'right', value: 'load', sortable: false },
-        { text: 'Delete', align: 'right', value: 'delete', sortable: false  }
+        { text: 'Actions', align: 'right', value: 'load', sortable: false }
       ],
       templates: [],
       loading: false
@@ -77,6 +75,7 @@ export default {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
+        self.loadTemplates()
       })
       .catch(function (error) {
         //console.log(error)

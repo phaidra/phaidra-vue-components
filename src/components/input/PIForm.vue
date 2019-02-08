@@ -260,7 +260,7 @@
         <vue-json-pretty :data="metadata" ref="prettyprint"></vue-json-pretty>
       </v-tab-item>
       <v-tab-item class="ma-4">
-        <p-t-list ref="templates" v-on:load-template="f.form=$event"></p-t-list>
+        <p-t-list ref="templates" v-on:load-template="loadTemplate($event)"></p-t-list>
       </v-tab-item>
     </v-tabs-items>
 
@@ -353,6 +353,10 @@ export default {
   methods: {
     loadTemplates: function () {
       this.$refs.templates.loadTemplates()
+    },
+    loadTemplate: function (form) {
+      this.$emit('load-form', form)
+      this.activetab = 0
     },
     saveAsTemplate: function () {
       var self = this
