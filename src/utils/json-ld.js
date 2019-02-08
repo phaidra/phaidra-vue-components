@@ -1,4 +1,5 @@
 import fields from './fields'
+import vocabulary from '../store/modules/vocabulary'
 
 export default {
   json2components: function (jsonld) {
@@ -310,6 +311,19 @@ export default {
                   f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
                 }
                 components.push(f)
+              } else {
+                // vra:material - vocab
+                if (value[i]['@type'] === 'vra:material' && (value[i]['skos:exactMatch'])) {
+                  f = fields.getField('vocab-ext-readonly')
+                  f['skos:exactMatch'] = value[i]['skos:exactMatch']
+                  f['skos:prefLabel'] = value[i]['skos:prefLabel']
+                  f['rdfs:label'] = value[i]['rdfs:label']
+                  f.predicate = key
+                  f.label = 'Material'
+                  components.push(f)
+                  f = fields.getField('material-vocab')
+                  components.push(f)
+                }
               }
               break
 
@@ -323,7 +337,7 @@ export default {
                 }
                 components.push(f)
               } else {
-                // vra:hasTechnique - getty aat
+                // vra:hasTechnique - vocab
                 if (value[i]['@type'] === 'vra:Technique' && (value[i]['skos:exactMatch'])) {
                   f = fields.getField('vocab-ext-readonly')
                   f['skos:exactMatch'] = value[i]['skos:exactMatch']
@@ -332,7 +346,7 @@ export default {
                   f.predicate = key
                   f.label = 'Technique'
                   components.push(f)
-                  f = fields.getField('technique-getty')
+                  f = fields.getField('technique-vocab')
                   components.push(f)
                 }
               }
@@ -767,6 +781,10 @@ export default {
     var jsonlds = {}
     jsonlds['container'] = {}
 
+    var rt = fields.getField('resource-type')
+    rt.value = 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9'
+    formData.sections[0].fields.push(rt.value)
+
     for (var i = 0; i < formData.sections.length; i++) {
       var s = formData.sections[i]
       var jsonldid = 'container'
@@ -799,8 +817,10 @@ export default {
     return jsonlds
   },
   form2json (formData) {
-    var jsonlds = {}
     var i
+
+    var jsonlds = {}
+
     for (i = 0; i < formData.sections.length; i++) {
       var s = formData.sections[i]
       var jsonldid

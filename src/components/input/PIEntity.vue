@@ -37,8 +37,8 @@
         :disabled="disablerole" 
         v-on:input="$emit('input-role', $event)" 
         :label="$t('Role')" 
-        :items="vocabularies['https://phaidra.org/vocabulary/role'].terms" 
-        :value="getTerm('https://phaidra.org/vocabulary/role', role)"
+        :items="vocabularies['rolepredicate'].terms" 
+        :value="getTerm('rolepredicate', role)"
         :filter="autocompleteFilter"
         box
         return-object
@@ -46,13 +46,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/role', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/role', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-autocomplete>                      
@@ -119,7 +119,7 @@ export default {
   },
   data () {
     return {
-      vocabulary: 'https://phaidra.org/vocabulary/role'
+      vocabulary: 'rolepredicate'
     }
   },
   mounted: function () {
@@ -127,7 +127,7 @@ export default {
       this.loading = !this.vocabularies[this.vocabulary].loaded
       // emit input to set skos:prefLabel in parent
       if (this.role) {
-        this.$emit('input', this.getTerm('https://phaidra.org/vocabulary/role', this.role))
+        this.$emit('input', this.getTerm('rolepredicate', this.role))
       }
     })
   }

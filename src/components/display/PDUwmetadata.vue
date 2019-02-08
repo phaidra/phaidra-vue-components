@@ -131,7 +131,7 @@ export default {
   methods: {
     getRoleLabel: function (role) {
       var id = role.substring(role.indexOf(':') + 1)
-      var roleTerms = this.vocabularies['https://phaidra.org/vocabulary/role'].terms
+      var roleTerms = this.vocabularies['rolepredicate'].terms
       for (var i = 0; i < roleTerms.length; i++) {
         if (roleTerms[i]['@id'] === id) {
           return roleTerms[i]['skos:prefLabel'][0]['@value']

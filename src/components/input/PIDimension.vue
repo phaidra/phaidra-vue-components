@@ -12,19 +12,19 @@
       <v-select 
         v-on:input="$emit('input-unit', $event)" 
         :label="$t('Unit')"
-        :items="vocabularies['un-cefact'].terms" 
-        :value="getTerm('un-cefact', unit)"
+        :items="vocabularies['uncefact'].terms" 
+        :value="getTerm('uncefact', unit)"
         box
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel('un-cefact', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel('uncefact', item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel('un-cefact', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel('uncefact', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-select>

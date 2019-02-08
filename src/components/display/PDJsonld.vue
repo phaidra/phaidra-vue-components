@@ -3,7 +3,15 @@
     <p-d-jsonld-layout v-if="jsonld">
       <template v-for="(o, p) in jsonld" >
 
-        <template v-if="p==='dce:title'" slot="dce:title">
+        <template v-if="p==='dcterms:type'" slot="dcterms:type">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-skos-preflabel>
+        </template>
+
+        <template v-else-if="p==='edm:hasType'" slot="edm:hasType">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'genre'+j" ></p-d-skos-preflabel>
+        </template>
+
+        <template v-else-if="p==='dce:title'" slot="dce:title">
           <p-d-title :o="t" v-for="(t, j) in o" :key="'title'+j"></p-d-title>
         </template>
 
@@ -21,14 +29,6 @@
 
         <template v-else-if="p==='dcterms:language'" slot="dcterms:language">
           <p-d-labeled-value :p="p" :o="item" v-for="(item, j) in o" :key="'lan'+j" ></p-d-labeled-value>
-        </template>
-
-        <template v-else-if="p==='dcterms:type'" slot="dcterms:type">
-          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-skos-preflabel>
-        </template>
-
-        <template v-else-if="p==='edm:hasType'" slot="edm:hasType">
-          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="'genre'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='dcterms:date'" slot="dcterms:date">

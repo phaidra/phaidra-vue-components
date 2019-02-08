@@ -2,7 +2,7 @@
   <v-flex>
     <v-layout row>
       <v-flex class="primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex xs9><span v-for="(v, i) in o['schema:value']" :key="'v'+i">{{ v }}</span> <span v-for="(v, i) in o['schema:unitCode']" :key="'u'+i">{{ getLocalizedTermLabel('un-cefact', v) }}</span></v-flex>
+      <v-flex xs9><span v-for="(v, i) in o['schema:value']" :key="'v'+i">{{ v }}</span> <span v-for="(v, i) in o['schema:unitCode']" :key="'u'+i">{{ getLocalizedTermLabel('uncefact', v) }}</span></v-flex>
     </v-layout>
   </v-flex>
 </template>

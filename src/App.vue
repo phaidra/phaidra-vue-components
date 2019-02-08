@@ -224,9 +224,41 @@ export default {
         password: ''
       },
       version: version,
-      contentmodel: 'unknown',
-      contentmodels: [ { text: 'Data', value: 'unknown' }, { text: 'Picture', value: 'picture' } ],
+      contentmodel: 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36',
+      contentmodels: [
+        { 
+          text: 'Data', 
+          value: 'https://pid.phaidra.org/vocabulary/resourcetype/VR5J-0CBC',
+        }, 
+        { 
+          text: 'Picture', 
+          value: 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36' 
+        }, 
+        { 
+          text: 'Audio', 
+          value: 'https://pid.phaidra.org/vocabulary/resourcetype/MXND-R5ZY' 
+        }, 
+        { 
+          text: 'Video', 
+          value: 'https://pid.phaidra.org/vocabulary/resourcetype/S7JC-WBBH' 
+        }, 
+        { 
+          text: 'Document',
+           value: 'https://pid.phaidra.org/vocabulary/resourcetype/B4CB-FN5F' 
+        }
+      ],
       psvis: true
+    }
+  },
+  watch: {
+    contentmodel: function (val) {
+      for (var i = 0; i < this.form.sections.length; i++) {
+        for (var j = 0; j < this.form.sections[i].fields.length; j++) {
+          if (this.form.sections[i].fields[j].predicate === 'dcterms:type') {
+            this.form.sections[i].fields[j].value = this.contentmodel
+          }
+        }
+      }
     }
   },
   methods: {
@@ -275,8 +307,13 @@ export default {
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
 
+    var rt = fields.getField('resource-type')
+    if (this.contentmodel) {
+      rt.value = this.contentmodel
+    }
+    this.form.sections[0].fields.push(rt)
     this.form.sections[0].fields.push(fields.getField('file'))
-    this.form.sections[0].fields.push(fields.getField('resource-type'))
+    this.form.sections[0].fields.push(fields.getField('genre'))
     this.form.sections[0].fields.push(fields.getField('title'))
     this.form.sections[0].fields.push(fields.getField('language'))
     this.form.sections[0].fields.push(fields.getField('description'))
@@ -290,9 +327,12 @@ export default {
     this.form.sections[1].fields.push(fields.getField('title'))
     this.form.sections[1].fields.push(fields.getField('description'))
     this.form.sections[1].fields.push(fields.getField('inscription'))
+    this.form.sections[1].fields.push(fields.getField('technique-vocab'))
+    this.form.sections[1].fields.push(fields.getField('technique-text'))
+    this.form.sections[1].fields.push(fields.getField('material-vocab'))
+    this.form.sections[1].fields.push(fields.getField('material-text'))
     this.form.sections[1].fields.push(fields.getField('height'))
     this.form.sections[1].fields.push(fields.getField('shelf-mark'))
-    this.form.sections[1].fields.push(fields.getField('technique-getty'))
     this.form.sections[1].fields.push(fields.getField('digitization-note'))
     this.form.sections[1].fields.push(fields.getField('reproduction-note'))
     

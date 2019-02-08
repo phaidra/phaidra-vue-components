@@ -349,6 +349,20 @@ export default {
     json2form: function (jsonld) {
       return jsonLd.json2form(jsonld)
     },
+    getObjectType: function(contentmodel) {
+      switch (contentmodel) {
+        case 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36':
+          return 'picture'
+        case 'https://pid.phaidra.org/vocabulary/resourcetype/MXND-R5ZY':
+          return 'audio'
+        case 'https://pid.phaidra.org/vocabulary/resourcetype/S7JC-WBBH':
+          return 'video'
+        case 'https://pid.phaidra.org/vocabulary/resourcetype/B4CB-FN5F':
+          return 'document'
+        default:
+          return 'data'
+      }
+    },
     submit: function () {
       var self = this
       this.loading = true
@@ -380,7 +394,7 @@ export default {
           }
         }
       }
-      fetch(self.$store.state.settings.instance.api + '/' + this.contentmodel + '/create', {
+      fetch(self.$store.state.settings.instance.api + '/' + this.getObjectType(this.contentmodel) + '/create', {
         method: 'POST',
         mode: 'cors',
         headers: {

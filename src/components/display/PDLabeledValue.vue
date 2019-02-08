@@ -32,7 +32,7 @@ export default {
           break
 
         case 'ebucore:hasMimeType':
-          vocabulary = 'mime-types'
+          vocabulary = 'mimetypes'
           break
 
         default:

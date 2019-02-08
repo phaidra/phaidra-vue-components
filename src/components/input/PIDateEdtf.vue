@@ -4,8 +4,8 @@
       <v-autocomplete
         v-on:input="$emit('input-date-type', $event)" 
         :label="$t('Type of date')" 
-        :items="vocabularies['https://phaidra.org/vocabulary/datetype'].terms" 
-        :value="getTerm('https://phaidra.org/vocabulary/datetype', type)"
+        :items="vocabularies['datepredicate'].terms" 
+        :value="getTerm('datepredicate', type)"
         :filter="autocompleteFilter"
         box
         return-object
@@ -13,13 +13,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/datetype', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel('datepredicate', item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/datetype', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel('datepredicate', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-autocomplete>
@@ -95,10 +95,10 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-      this.loading = !this.vocabularies['https://phaidra.org/vocabulary/datetype'].loaded
+      this.loading = !this.vocabularies['datepredicate'].loaded
       // emit input to set skos:prefLabel in parent
       if (this.type) {
-        this.$emit('input-date-type', this.getTerm('https://phaidra.org/vocabulary/datetype', this.type))
+        this.$emit('input-date-type', this.getTerm('datepredicate', this.type))
       }
     })
   }

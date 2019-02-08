@@ -4,8 +4,8 @@
       <v-autocomplete
         v-on:input="$emit('input-place-type', $event)" 
         :label="$t('Type of place')" 
-        :items="vocabularies['https://phaidra.org/vocabulary/placetype'].terms" 
-        :value="getTerm('https://phaidra.org/vocabulary/placetype', type)"
+        :items="vocabularies['placepredicate'].terms" 
+        :value="getTerm('placepredicate', type)"
         :filter="autocompleteFilter"
         box
         return-object
@@ -13,13 +13,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/placetype', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-tile-title>
             <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel('https://phaidra.org/vocabulary/placetype', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-autocomplete>
@@ -201,10 +201,10 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-      this.loading = !this.vocabularies['https://phaidra.org/vocabulary/placetype'].loaded
+      this.loading = !this.vocabularies['placepredicate'].loaded
       // emit input to set skos:prefLabel in parent
       if (this.type) {
-        this.$emit('input-place-type', this.getTerm('https://phaidra.org/vocabulary/placetype', this.type))
+        this.$emit('input-place-type', this.getTerm('placepredicate', this.type))
       }
     })
   }

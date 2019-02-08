@@ -1,6 +1,6 @@
 {
   "name": "phaidra-vue-components",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/phaidra/phaidra-vue-components.git"

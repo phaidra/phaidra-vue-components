@@ -14,6 +14,7 @@
         box
         return-object
         clearable
+        :disabled="disabled"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
@@ -71,6 +72,10 @@ export default {
     vocabulary: {
       type: String,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

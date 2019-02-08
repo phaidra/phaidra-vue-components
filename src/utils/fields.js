@@ -6,9 +6,10 @@ const fields = [
     fieldname: 'Resource type',
     predicate: 'dcterms:type',
     component: 'p-select',
-    vocabulary: 'resource-type',
+    vocabulary: 'resourcetype',
     required: true,
     multiplicable: false,
+    disabled: true,
     label: 'Resource type',
     value: '',
     'skos:prefLabel': [],
@@ -124,7 +125,7 @@ const fields = [
     predicate: 'bf:note',
     type: 'phaidra:ReproductionNote',
     component: 'p-select',
-    vocabulary: 'original-copy',
+    vocabulary: 'reproduction',
     label: 'Reproduction note',
     value: '',
     'skos:prefLabel': [],
@@ -247,12 +248,12 @@ const fields = [
     definition: 'Use for identification number assigned to a particular donation or acquisition.'
   },
   {
-    id: 'technique-getty',
-    fieldname: 'Technique (Getty AAT)',
+    id: 'technique-vocab',
+    fieldname: 'Technique (vocabulary)',
     predicate: 'vra:hasTechnique',
     type: 'vra:Technique',
     component: 'p-select',
-    vocabulary: 'getty-aat-photo',
+    vocabulary: 'technique',
     label: 'Technique',
     value: '',
     'skos:prefLabel': [],
@@ -273,14 +274,26 @@ const fields = [
     definition: 'The production or manufacturing processes, techniques, and methods incorporated in the fabrication or alteration of the work or image.'
   },
   {
-    id: 'material',
+    id: 'material-vocab',
+    fieldname: 'Material (vocabulary)',
+    predicate: 'vra:material',
+    type: 'vra:Material',
+    component: 'p-select',
+    vocabulary: 'material',
+    label: 'Material',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'The substance of which a work or an image is composed.'
+  },
+  {
+    id: 'material-text',
     fieldname: 'Material',
     predicate: 'vra:material',
     type: 'vra:Material',
     component: 'p-text-field',
     multilingual: true,
     multiplicable: true,
-    label: 'Material description',
+    label: 'Material',
     value: '',
     language: 'eng',
     definition: 'The substance of which a work or an image is composed.'
@@ -370,7 +383,7 @@ const fields = [
     fieldname: 'MIME type',
     predicate: 'ebucore:hasMimeType',
     component: 'p-select',
-    vocabulary: 'mime-types',
+    vocabulary: 'mimetypes',
     label: 'MIME type',
     value: '',
     'skos:prefLabel': [],
@@ -456,15 +469,16 @@ const fields = [
 ]
 
 const predicateOrder = [
+
+  'dcterms:type',
+  'edm:hasType',
+  
   'dce:title',
   'role',
   'bf:note',
   
   'dcterms:language',
   'dce:subject',
-
-  'dcterms:type',
-  'edm:hasType',
 
   'dcterms:date',
   'dcterms:created',
