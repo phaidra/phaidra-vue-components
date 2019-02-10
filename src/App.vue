@@ -316,6 +316,9 @@ export default {
     this.form.sections[0].fields.push(fields.getField('file'))
     this.form.sections[0].fields.push(fields.getField('genre'))
     this.form.sections[0].fields.push(fields.getField('title'))
+    var translatedtitle = fields.getField('title')
+    translatedtitle.type = 'bf:ParallelTitle'
+    this.form.sections[0].fields.push(translatedtitle)
     this.form.sections[0].fields.push(fields.getField('language'))
     this.form.sections[0].fields.push(fields.getField('description'))
     this.form.sections[0].fields.push(fields.getField('date-edtf'))

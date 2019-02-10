@@ -3,7 +3,7 @@
     <v-flex xs4>
       <v-text-field
         :value="title"
-        :label="$t('Title')"
+        :label="$t(type)"
         v-on:input="$emit('input-title', $event)"
         box
       ></v-text-field>
@@ -65,6 +65,9 @@ export default {
   mixins: [vocabulary, fieldproperties],
   props: {
     title: {
+      type: String
+    },
+    type: {
       type: String
     },
     subtitle: {

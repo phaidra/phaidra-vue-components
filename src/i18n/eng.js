@@ -10,6 +10,9 @@ export default {
   'SEARCH_PLACEHOLDER': 'Search',
   'PHAIDRA_IS': 'Phaidra is the repository for the permanent secure storage of digital assets at the University of Vienna.',
 
+  'bf:Title': 'Title',
+  'bf:ParallelTitle': 'Translated title',
+
   'bf:Note': 'Description',
   'bf:Summary': 'Abstract',
   'phaidra:Remark': 'Remark',

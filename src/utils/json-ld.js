@@ -19,7 +19,7 @@ export default {
 
             // dce:title
             case 'dce:title':
-              if ((value[i]['@type'] === 'bf:Title') || (value[i]['@type'] === 'bf:Title')) {
+              if ((value[i]['@type'] === 'bf:Title') || (value[i]['@type'] === 'bf:ParallelTitle')) {
                 f = fields.getField('title')
                 f.type = value[i]['@type']
                 if (value[i]['bf:mainTitle']) {

@@ -525,6 +525,9 @@ export default {
   'Depicted object': 'Abgebildetes Objekt',
   'File': 'Datei',
 
+  'bf:Title': 'Titel',
+  'bf:ParallelTitle': 'Translated title',
+
   'bf:Note': 'Beschreibung',
   'bf:Summary': 'Abstrakt',
   'phaidra:Remark': 'Notiz',
