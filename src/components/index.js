@@ -29,7 +29,7 @@ import PITextFieldSuggest from './input/PITextFieldSuggest.vue'
 import PITitle from './input/PITitle.vue'
 import PIUnknownReadonly from './input/PIUnknownReadonly.vue'
 import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
-import PISpatialGettyReadonly from './PISpatialGettyReadonly'
+import PISpatialGettyReadonly from './input/PISpatialGettyReadonly'
 
 const Components = {
   PDDimension,
