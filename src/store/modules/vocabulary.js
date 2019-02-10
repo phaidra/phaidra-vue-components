@@ -406,6 +406,13 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/reproduction/2RTV-67M7', 'skos:prefLabel': { 'eng': 'copy' } }
       ],
       loaded: true
+    },
+    'basisklassifikation': {
+      terms: [
+        { '@id': 'https://pid.phaidra.org/vocabulary/basisklassifikation/GR90-276C', 'skos:notation': '31.01', 'skos:prefLabel': { 'eng': 'Geschichte der Mathematik' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/basisklassifikation/D03J-KDQG', 'skos:notation': '71.02', 'skos:prefLabel': { 'eng': 'Theorie der Soziologie' } }
+      ],
+      loaded: true
     }
   }
 }

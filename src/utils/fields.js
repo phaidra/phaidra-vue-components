@@ -31,6 +31,7 @@ const fields = [
     fieldname: 'Title',
     predicate: 'dce:title',
     component: 'p-title',
+    type: 'bf:Title',
     required: true,
     multiplicable: true,
     multilingual: true,
@@ -172,9 +173,36 @@ const fields = [
     definition: 'The topic of the resource, represented using keywords.'
   },
   {
+    id: 'subject',
+    fieldname: 'Subject',
+    predicate: 'dcterms:subject',
+    type: 'skos:Concept',
+    component: 'p-select',
+    vocabulary: '',
+    multiplicable: true,
+    label: 'Subject',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'The topic of the resource, represented using a controlled vocabulary.'
+  },
+  {
+    id: 'study-plan',
+    fieldname: 'Study plan',
+    predicate: 'frapo:isOutputOf',
+    type: 'aaiso:Programme',
+    component: 'p-study-plan',
+    multiplicable: true,
+    multilingual: true,
+    notation: '',
+    name: '',
+    nameLanguage: 'eng',
+    definition: 'Study plan.'
+  },
+  {
     id: 'project',
     fieldname: 'Project',
     predicate: 'frapo:isOutputOf',
+    type: 'foaf:Project',
     component: 'p-project',
     name: '',
     nameLanguage: 'eng',
@@ -246,6 +274,15 @@ const fields = [
     label: 'Accession number',
     value: '',
     definition: 'Use for identification number assigned to a particular donation or acquisition.'
+  },
+  {
+    id: 'number-of-pages',
+    fieldname: 'Number of pages',
+    predicate: 'schema:numberOfPages',
+    component: 'p-literal',
+    label: 'Number of pages',
+    value: '',
+    definition: 'The number of pages in the book in the resource.'
   },
   {
     id: 'technique-vocab',
@@ -479,6 +516,7 @@ const predicateOrder = [
   
   'dcterms:language',
   'dce:subject',
+  'dcterms:subject',
 
   'dcterms:date',
   'dcterms:created',
@@ -503,6 +541,8 @@ const predicateOrder = [
   'vra:placeOfRepository',
   'vra:placeOfSite',
   'spatial',
+
+  'schema:numberOfPages',
 
   'ebucore:filename',
   'ebucore:hasMimeType',

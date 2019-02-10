@@ -33,6 +33,8 @@
       <slot name="vra:placeOfRepository"></slot>
       <slot name="vra:placeOfSite"></slot>
 
+      <slot name="schema:numberOfPages"></slot>
+
       <slot name="ebucore:filename"></slot>
       <slot name="ebucore:hasMimeType"></slot>
 

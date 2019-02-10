@@ -549,13 +549,16 @@ export default {
   'vra:placeOfRepository': 'Place of repository',
   'vra:placeOfSite': 'Place of site',
 
-  'dce:subject': 'Subjekt',
+  'dce:subject': 'Stichwort',
+  'dcterms:subject': 'Subjekt',
   'dcterms:language': 'Sprache',
   'dcterms:type': 'Resource Type',
   'edm:hasType': 'Typ/Genre',
   'bf:physicalLocation': 'Standort',
   'bf:shelfMark': 'Signatur',
   'dcterms:provenance': 'Provenienz',
+
+  'schema:numberOfPages': 'Seitenanzahl',
 
   'ebucore:filename': 'Dateiname',
   'ebucore:hasMimeType': 'MIME Typ',

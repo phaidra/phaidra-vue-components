@@ -76,7 +76,14 @@
         </template>
 
         <template v-else-if="p==='frapo:isOutputOf'" slot="frapo:isOutputOf">
-          <p-d-project :p="p" :o="item" v-for="(item, j) in o" :key="'project'+j" ></p-d-project>
+          <template v-for="(item, j) in o">
+            <template v-if="item['@type']==='aaiso:Programme'">
+              <p-d-study-plan :p="p" :o="item" :key="'study-plan'+j" ></p-d-study-plan>
+            </template>
+            <template v-else-if="item['@type']==='foaf:Project'">
+              <p-d-project :p="p" :o="item" :key="'project'+j" ></p-d-project>
+            </template>
+          </template>
         </template>
 
         <template v-else-if="p==='frapo:hasFundingAgency'" slot="frapo:hasFundingAgency">
@@ -151,6 +158,10 @@
           <p-d-dimension :p="p" :o="item" v-for="(item, j) in o" :key="'weight'+j" ></p-d-dimension>
         </template>
 
+        <template v-else-if="p==='schema:numberOfPages'" slot="schema:numberOfPages">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="'numberOfPages'+j" ></p-d-value>
+        </template>
+
         <template v-else-if="p==='edm:rights'" slot="edm:rights">
           <p-d-license :p="p" :o="item" v-for="(item, j) in o" :key="'license'+j"></p-d-license>
         </template>
@@ -216,6 +227,7 @@ import PDEntity from './PDEntity'
 import PDLabeledValue from './PDLabeledValue'
 import PDFunder from './PDFunder'
 import PDProject from './PDProject'
+import PDStudyPlan from './PDStudyPlan'
 import PDJsonldLayout from './PDJsonldLayout'
 import { vocabulary } from '../../mixins/vocabulary'
 
@@ -243,7 +255,8 @@ export default {
     PDGeoreference,
     PDLabeledValue,
     PDFunder,
-    PDProject
+    PDProject,
+    PDStudyPlan
   },
   methods: {
     loadMetadata: function (pid) {

@@ -129,6 +129,9 @@ export default {
   name: 'p-i-project',
   mixins: [vocabulary, fieldproperties],
   props: {
+    type: {
+      type: String
+    },
     name: {
       type: String
     },

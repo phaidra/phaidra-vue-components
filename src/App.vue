@@ -319,7 +319,12 @@ export default {
     this.form.sections[0].fields.push(fields.getField('language'))
     this.form.sections[0].fields.push(fields.getField('description'))
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
+    this.form.sections[0].fields.push(fields.getField('number-of-pages'))
     this.form.sections[0].fields.push(fields.getField('keyword'))
+    var subject = fields.getField('subject')
+    subject.vocabulary = 'basisklassifikation'
+    this.form.sections[0].fields.push(subject)
+    this.form.sections[0].fields.push(fields.getField('study-plan'))
     this.form.sections[0].fields.push(fields.getField('project'))
     this.form.sections[0].fields.push(fields.getField('funder'))
     this.form.sections[0].fields.push(fields.getField('role'))

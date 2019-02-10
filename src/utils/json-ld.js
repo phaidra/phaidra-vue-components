@@ -19,8 +19,9 @@ export default {
 
             // dce:title
             case 'dce:title':
-              if (value[i]['@type'] === 'bf:Title') {
+              if ((value[i]['@type'] === 'bf:Title') || (value[i]['@type'] === 'bf:Title')) {
                 f = fields.getField('title')
+                f.type = value[i]['@type']
                 if (value[i]['bf:mainTitle']) {
                   for (j = 0; j < value[i]['bf:mainTitle'].length; j++) {
                     f.title = value[i]['bf:mainTitle'][j]['@value']
@@ -91,7 +92,7 @@ export default {
             case 'dcterms:subject':
               if (value[i]['@type'] === 'skos:Concept') {
                 f = fields.getField('vocab-ext-readonly')
-                f.value = value[i]['skos:exactMatch']
+                f['skos:exactMatch'] = value[i]['skos:exactMatch']
                 f['skos:prefLabel'] = value[i]['skos:prefLabel']
                 f['rdfs:label'] = value[i]['rdfs:label']
                 f.predicate = key
@@ -230,6 +231,22 @@ export default {
                   }
                 }           
                 components.push(f)
+              } else {
+                if (value[i]['@type'] === 'aaiso:Programme'){
+                  f = fields.getField('study-plan')
+                  if (value[i]['skos:prefLabel']) {
+                    for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
+                      f.name = value[i]['skos:prefLabel'][j]['@value']
+                      f.nameLanguage = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+                    }
+                  }
+                  if (value[i]['skos:notation']) {
+                    for (j = 0; j < value[i]['skos:notation'].length; j++) {              
+                      f.notation = value[i]['skos:notation'][j]
+                    }
+                  }
+                  components.push(f)
+                }
               }
               break
 
@@ -244,6 +261,14 @@ export default {
                 }
                 components.push(f)
               }
+              break
+
+            // schema:numberOfPages
+            case 'schema:numberOfPages':
+              f = fields.getField('number-of-pages')
+              f.label = key
+              f.value = value[i]
+              components.push(f)
               break
 
             // ebucore:filename
@@ -524,9 +549,9 @@ export default {
 
     return form
   },
-  get_json_dce_title (title, subtitle, language) {
+  get_json_dce_title (type, title, subtitle, language) {
     var h = {
-      '@type': 'bf:Title',
+      '@type': type,
       'bf:mainTitle': [
         {
           '@value': title
@@ -731,6 +756,25 @@ export default {
     }
     return h
   },
+  get_json_study_plan (name, nameLanguage, notations) {
+    var h = {
+      '@type': 'aaiso:Programme'
+    }
+    if (name) {
+      h['skos:prefLabel'] = [
+        {
+          '@value': name
+        }
+      ]
+    }
+    if (nameLanguage) {
+      h['skos:prefLabel'][0]['@language'] = nameLanguage
+    }
+    if (notations) {
+      h['skos:notation'] = notations
+    }
+    return h
+  },
   get_json_funder (name, nameLanguage, identifiers) {
     var h = {
       '@type': 'frapo:FundingAgency'
@@ -857,7 +901,7 @@ export default {
 
         case 'dce:title':
           if (f.title) {
-            this.push_object(jsonld, f.predicate, this.get_json_dce_title(f.title, f.subtitle, f.language))
+            this.push_object(jsonld, f.predicate, this.get_json_dce_title(f.type, f.title, f.subtitle, f.language))
           }
           break
 
@@ -905,9 +949,25 @@ export default {
           }
           break
 
+        case 'dcterms:subject':
+          if ((f.type === 'skos:Concept') && f.value) {
+            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+          }
+          break
+
         case 'frapo:isOutputOf':
-          if (f.name || f.identifier || f.description || f.homepage) {
-            this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, [f.identifier], f.homepage))
+          if (f.type === 'aaiso:Programme'){
+            // study plan
+            if (f.name || f.notation) {
+              this.push_object(jsonld, f.predicate, this.get_json_study_plan(f.name, f.nameLanguage, [f.notation]))
+            }
+          } else {
+            // project
+            if (f.type === 'foaf:Project') {
+              if (f.name || f.identifier || f.description || f.homepage) {
+                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, [f.identifier], f.homepage))
+              }
+            }
           }
           break
 
@@ -1007,6 +1067,12 @@ export default {
             if (f.value) {
               this.push_object(jsonld, f.type, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'schema:Place'))
             }
+          }
+          break
+
+        case 'schema:numberOfPages':
+          if (f.value) {
+            this.push_literal(jsonld, f.predicate, f.value)
           }
           break
 

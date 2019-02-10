@@ -17,7 +17,8 @@ export default {
   'phaidra:ReproductionNote': 'Reproduction note',
   'phaidra:DigitizationNote': 'Digitization note',
 
-  'dce:subject': 'Subject',
+  'dce:subject': 'Keywords',
+  'dcterms:subject': 'Subject',
   'dcterms:language': 'Language',
   'dcterms:type': 'Resource type',
   'edm:hasType': 'Type/Genre',
@@ -42,6 +43,8 @@ export default {
   'vra:placeOfSite': 'Place of site',
 
   'dcterms:provenance': 'Provenance',
+
+  'schema:numberOfPages': 'Number of pages',
 
   'ebucore:filename': 'Filename',
   'ebucore:hasMimeType': 'MIME Type',

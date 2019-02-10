@@ -131,6 +131,26 @@
                     ></p-i-dimension>        
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-literal'" :key="f.id">
+                    <p-i-literal
+                      v-bind.sync="f" 
+                      v-on:input-value="f.value=$event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-literal>        
+                  </v-flex>
+
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-study-plan'" :key="f.id">
+                    <p-i-study-plan
+                      v-bind.sync="f" 
+                      v-on:input-name="f.name=$event"
+                      v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
+                      v-on:input-notation="f.notation=$event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-study-plan>        
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'p-project'" :key="f.id">
                     <p-i-project
                       v-bind.sync="f" 
@@ -288,6 +308,8 @@ import PIFilenameReadonly from './PIFilenameReadonly'
 import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
 import PIUnknownReadonly from './PIUnknownReadonly'
+import PILiteral from './PILiteral'
+import PIStudyPlan from './PIStudyPlan'
 import PTList from '../templates/PTList'
 
 export default {
@@ -302,8 +324,10 @@ export default {
     PISpatialGetty,
     PISpatialText,
     PIDimension,
+    PIStudyPlan,
     PIProject,
     PIFunder,
+    PILiteral,
     PIFilenameReadonly,
     PIVocabExtReadonly,
     PISpatialGettyReadonly,
