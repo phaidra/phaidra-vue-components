@@ -3,9 +3,8 @@
     <v-flex xs8>
       <v-text-field
         :value="prefLabel"
-        :hint="this['skos:exactMatch'][0]"
         :persistent-hint="true"
-        :messages="rdfsLabels"
+        :messages="this['skos:exactMatch'][0] + (notation ? ' Notation: ' + notation : '')"
         :label="$t(label)"
         readonly
         box
@@ -52,6 +51,15 @@ export default {
         }
       }
       return prefLabel
+    },
+    notation: function() {
+      var i
+      if (this['skos:notation']) {
+        for (i = 0; i < this['skos:notation'].length; i++) {
+          return this['skos:notation'][i]
+        }
+      }
+      return false
     }
   },
   props: {
@@ -65,6 +73,9 @@ export default {
     'skos:exactMatch': {
       type: Array,
       required: true
+    },
+    'skos:notation': {
+      type: Array
     },
     label: {
       type: String,

@@ -32,7 +32,7 @@ const state = {
         { '@id': 'role:act', 'skos:prefLabel': { 'eng': 'Actor' } },
         { '@id': 'role:adp', 'skos:prefLabel': { 'eng': 'Adapter' } },
         { '@id': 'role:rcp', 'skos:prefLabel': { 'eng': 'Addressee' } },
-        { '@id': 'role:advisor', 'skos:prefLabel': { 'eng': 'Adviser' } },
+        { '@id': 'role:advisor', 'skos:prefLabel': { 'eng': 'Advisor' } },
         { '@id': 'role:anl', 'skos:prefLabel': { 'eng': 'Analyst' } },
         { '@id': 'role:anm', 'skos:prefLabel': { 'eng': 'Animator' } },
         { '@id': 'role:ann', 'skos:prefLabel': { 'eng': 'Annotator' } },

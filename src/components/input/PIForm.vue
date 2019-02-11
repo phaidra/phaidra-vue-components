@@ -210,7 +210,7 @@
                       <v-icon color="grey darken-1">add</v-icon>
                     </v-btn>
                     <v-card>
-                      <v-card-title class="headline grey lighten-2" primary-title>{{ $t('Add metadata fields to section ') + s.id }}</v-card-title>
+                      <v-card-title class="headline grey lighten-2" primary-title>{{ $t('Add metadata fields to ') + $t(s.title) }}</v-card-title>
                       <v-card-text>
                         <v-autocomplete
                           v-model="addfieldselection"
@@ -221,7 +221,6 @@
                           multiple
                           small-chips
                           return-object
-                          :menu-props="{'closeOnClick':true, 'closeOnContentClick':true, 'maxHeight':500}"
                         >
                           <template slot="selection" slot-scope="data">
                             <v-chip :selected="data.selected" close class="chip--select-multi" @input="removeFieldChip(data.item)">
@@ -450,6 +449,8 @@ export default {
           return 'video'
         case 'https://pid.phaidra.org/vocabulary/resourcetype/B4CB-FN5F':
           return 'document'
+        case 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9':
+          return 'container'
         default:
           return 'data'
       }
@@ -460,7 +461,7 @@ export default {
       this.generateJson()
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.metadata))
-      if (this.contentmodel === 'container') {
+      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9') {
         for (var i = 0; i < this.form.sections.length; i++) {
           var s = this.form.sections[i]
           if (s.type === 'member') {
@@ -548,7 +549,7 @@ export default {
       })
     },
     generateJson: function () {
-      if (this.contentmodel === 'container') {
+      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9') {
         this.jsonlds = jsonLd.containerForm2json(this.form)
       } else {
         this.jsonlds = jsonLd.form2json(this.form)
@@ -612,11 +613,19 @@ export default {
     selectInput: function (f, event) {
       if (event) {
         f.value = event['@id']
-        var labels = event['skos:prefLabel']
+        var preflabels = event['skos:prefLabel']
         f['skos:prefLabel'] = []
-        Object.entries(labels).forEach(([key, value]) => {
+        Object.entries(preflabels).forEach(([key, value]) => {
           f['skos:prefLabel'].push({ '@value': value, '@language': key })
         })
+        var rdfslabels = event['rdfs:label']
+        if (rdfslabels) {
+          f['rdfs:label'] = []
+          Object.entries(rdfslabels).forEach(([key, value]) => {
+            f['rdfs:label'].push({ '@value': value, '@language': key })
+          })
+        }
+        f['skos:notation'] = event['skos:notation']
       } else {
         f.value = ''
         f['skos:prefLabel'] = []

@@ -25,26 +25,14 @@
       </v-autocomplete>
     </v-flex>
     <v-flex xs4>
-      <v-menu
-        ref="datepicker"
-        v-model="datepicker"
-        :return-value.sync="datemodel"
-        lazy
-        transition="fade-transition"
-        offset-y
-        full-width
-        min-width="290px"
+      <v-text-field       
+        :value="value" 
+        v-on:input="$emit('input-date', $event)"
+        :required="required"
+        :hint="'Format YYYY-MM-DD'"
+        :rules="[rules.date]"
         box
-      >
-        <v-text-field
-          slot="activator"
-          v-model="selectedDate"
-          :label="$t('Date')"
-          append-icon="event"
-          box
-        ></v-text-field>
-        <v-date-picker v-model="selectedDate" :value="date" v-on:input="$emit('input-date', $event)" :reactive="true"></v-date-picker>
-      </v-menu>
+      ></v-text-field>
     </v-flex>
     <v-flex xs1 v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
@@ -69,7 +57,7 @@ export default {
   name: 'p-i-date-edtf',
   mixins: [vocabulary, fieldproperties],
   props: {
-    date: {
+    value: {
       type: String
     },
     type: {
@@ -84,13 +72,60 @@ export default {
       const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
       const query = queryText.toLowerCase()
       return lab.indexOf(query) > -1
+    },
+    isValidDate: function(dateString) {
+
+      // First check for the pattern
+      var regex_date = /^(\d{4})(-\d{1,2})?(-\d{1,2})?$/
+
+      if(!regex_date.test(dateString))
+      {
+          return false
+      }
+
+      var m = dateString.match(regex_date)
+
+      var year    = parseInt(m[1], 10)
+
+      if (m[2]) {
+        var month   = parseInt(m[2].substring(1), 10)
+        // Check the ranges of month
+        if (month) {
+          if(month == 0 || month > 12)
+          {
+              return false
+          }
+        }
+      }
+
+      if (m[3]) {
+        var day     = parseInt(m[3].substring(1), 10)
+
+        if (day) {
+          var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
+
+          // Adjust for leap years
+          if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+          {
+              monthLength[1] = 29
+          }
+
+          // Check the range of the day
+          return day > 0 && day <= monthLength[month - 1]
+        }
+      }
+
+      return true
     }
   },
   data () {
     return {
-      datepicker: false,
-      selectedDate: this.date,
-      datemodel: ''
+      rules: {
+        required: value => !!value || 'Required.',
+        date: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidDate(value) || 'Invalid date.'
+        }
+      }
     }
   },
   mounted: function () {

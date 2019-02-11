@@ -23,7 +23,6 @@
       <slot name="phaidra:dateAccessioned"></slot>
       <slot name="dcterms:temporal"></slot>
 
-      <slot name="dcterms:issued"></slot>
       <slot name="frapo:hasFundingAgency"></slot>
       <slot name="frapo:isOutputOf"></slot>
       <slot name="dcterms:provenance"></slot>

@@ -95,6 +95,7 @@ export default {
                 f['skos:exactMatch'] = value[i]['skos:exactMatch']
                 f['skos:prefLabel'] = value[i]['skos:prefLabel']
                 f['rdfs:label'] = value[i]['rdfs:label']
+                f['skos:notation'] = value[i]['skos:notation']
                 f.predicate = key
                 f.label = 'Classification'
                 components.push(f)
@@ -624,6 +625,44 @@ export default {
     }
     return h
   },
+  get_json_concept (preflabels, rdfslabels, type, identifiers, notations) {
+    var h = {}
+
+    if (type) {
+      h['@type'] = type
+    }
+
+    if (preflabels) {
+      if (preflabels.length > 0) {
+        h['skos:prefLabel'] = []
+        for (var j = 0; j < preflabels.length; j++) {
+          h['skos:prefLabel'].push(preflabels[j])
+        }
+      }
+    }
+
+    if (rdfslabels) {
+      if (rdfslabels.length > 0) {
+        h['rdfs:label'] = []
+        for (var i = 0; i < rdfslabels.length; i++) {
+          h['rdfs:label'].push(rdfslabels[i])
+        }
+      }
+    }
+
+    if (identifiers) {
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
+    }
+
+    if (notations) {
+      if (notations.length > 0) {
+        h['skos:notation'] = notations
+      }
+    }
+    return h
+  },
   get_json_spatial (rdfslabels, preflabels, coordinates, type, identifiers) {
     var h = {}
 
@@ -951,7 +990,7 @@ export default {
 
         case 'dcterms:subject':
           if ((f.type === 'skos:Concept') && f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+            this.push_object(jsonld, f.predicate, this.get_json_concept(f['skos:prefLabel'], f['rdfs:label'], 'skos:Concept', [f.value], [f['skos:notation']]))
           }
           break
 

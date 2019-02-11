@@ -246,6 +246,10 @@ export default {
         { 
           text: 'Document',
            value: 'https://pid.phaidra.org/vocabulary/resourcetype/B4CB-FN5F' 
+        }, 
+        { 
+          text: 'Container',
+           value: 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9' 
         }
       ],
       psvis: true
@@ -330,7 +334,9 @@ export default {
     this.form.sections[0].fields.push(fields.getField('study-plan'))
     this.form.sections[0].fields.push(fields.getField('project'))
     this.form.sections[0].fields.push(fields.getField('funder'))
-    this.form.sections[0].fields.push(fields.getField('role'))
+    var r = fields.getField('role')
+    r.role = 'role:coadvisor'
+    this.form.sections[0].fields.push(r)
     this.form.sections[0].fields.push(fields.getField('license'))
 
     this.form.sections[1].fields.push(fields.getField('title'))
