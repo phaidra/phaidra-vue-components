@@ -481,7 +481,8 @@ const fields = [
   {
     id: 'vocab-ext-readonly',
     fieldname: 'Vocabulary value readonly',
-    predicate: '',
+    predicate: 'dcterms:subject',
+    type: 'skos:Concept',
     component: 'p-vocab-ext-readonly',
     label: '',
     'skos:prefLabel': [],

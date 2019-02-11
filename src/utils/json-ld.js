@@ -95,7 +95,12 @@ export default {
                 f['skos:exactMatch'] = value[i]['skos:exactMatch']
                 f['skos:prefLabel'] = value[i]['skos:prefLabel']
                 f['rdfs:label'] = value[i]['rdfs:label']
-                f['skos:notation'] = value[i]['skos:notation']
+                for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {    
+                  f.value = value[i]['skos:exactMatch'][j]
+                }
+                for (j = 0; j < value[i]['skos:notation'].length; j++) {    
+                  f['skos:notation'] = value[i]['skos:notation'][j]
+                }
                 f.predicate = key
                 f.label = 'Classification'
                 components.push(f)
