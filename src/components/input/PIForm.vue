@@ -435,6 +435,13 @@ export default {
     },
     getObjectType: function(contentmodel) {
       switch (contentmodel) {
+        case 'picture':
+        case 'audio':
+        case 'video':
+        case 'document':
+        case 'data':
+        case 'container':
+          return contentmodel
         case 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36':
           return 'picture'
         case 'https://pid.phaidra.org/vocabulary/resourcetype/MXND-R5ZY':
