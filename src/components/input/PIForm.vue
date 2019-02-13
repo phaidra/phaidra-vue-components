@@ -604,13 +604,13 @@ export default {
       if (event) {
         f[property] = event['@id']
       }
-      this.$emit('form-input-' + f.id, f)
+      this.$emit('form-input-' + f.component, f)
     },
     updatePlace: function (f, event) {
       f['skos:prefLabel'] = event['skos:prefLabel']
       f['rdfs:label'] = event['rdfs:label']
       f.coordinates = event.coordinates
-      this.$emit('form-input-' + f.id, f)
+      this.$emit('form-input-' + f.component, f)
     },
     selectInput: function (f, event) {
       if (event) {
@@ -632,17 +632,17 @@ export default {
         f.value = ''
         f['skos:prefLabel'] = []
       }
-      this.$emit('form-input-' + f.id, f)
+      this.$emit('form-input-' + f.component, f)
     },
     roleInput: function (f, event) {
       f.role = event['@id']
       f['skos:prefLabel'] = event['skos:prefLabel']
-      this.$emit('form-input-' + f.id, f)
+      this.$emit('form-input-' + f.component, f)
     },
     setFilename: function (f, event) {
       f.value = event.target.files[0].name
       f.file = event.target.files[0]
-      this.$emit('form-input-' + f.id, f)
+      this.$emit('form-input-' + f.component, f)
     },
     addFieldAutocompleteFilter: function (item, queryText) {
       const lab = this.$t(item['fieldname']).toLowerCase()
