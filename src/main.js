@@ -15,7 +15,7 @@ Vue.use(VueI18n)
 
 const messages = { eng, deu, ita }
 const i18n = new VueI18n({
-  locale: 'deu',
+  locale: 'eng',
   messages: messages
 })
 

@@ -568,11 +568,6 @@ export default {
     removeField: function (arr, f) {
       arrays.remove(arr, f)
     },
-    setSelected: function (f, property, event) {
-      if (event) {
-        f[property] = event['@id']
-      }
-    },
     sortFieldUp: function (arr, f) {
       var i = arr.indexOf(f)
       if (arr[i - 1]) {
@@ -605,10 +600,17 @@ export default {
     removeSection: function (s) {
       arrays.remove(this.form.sections, s)
     },
+    setSelected: function (f, property, event) {
+      if (event) {
+        f[property] = event['@id']
+      }
+      this.$emit('form-input-' + f.id, f)
+    },
     updatePlace: function (f, event) {
       f['skos:prefLabel'] = event['skos:prefLabel']
       f['rdfs:label'] = event['rdfs:label']
       f.coordinates = event.coordinates
+      this.$emit('form-input-' + f.id, f)
     },
     selectInput: function (f, event) {
       if (event) {
@@ -630,14 +632,17 @@ export default {
         f.value = ''
         f['skos:prefLabel'] = []
       }
+      this.$emit('form-input-' + f.id, f)
     },
     roleInput: function (f, event) {
       f.role = event['@id']
       f['skos:prefLabel'] = event['skos:prefLabel']
+      this.$emit('form-input-' + f.id, f)
     },
     setFilename: function (f, event) {
       f.value = event.target.files[0].name
       f.file = event.target.files[0]
+      this.$emit('form-input-' + f.id, f)
     },
     addFieldAutocompleteFilter: function (item, queryText) {
       const lab = this.$t(item['fieldname']).toLowerCase()
