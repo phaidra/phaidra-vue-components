@@ -125,11 +125,9 @@ const fields = [
     fieldname: 'Reproduction note',
     predicate: 'bf:note',
     type: 'phaidra:ReproductionNote',
-    component: 'p-select',
-    vocabulary: 'reproduction',
+    component: 'p-text-field',
     label: 'Reproduction note',
     value: '',
-    'skos:prefLabel': [],
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
