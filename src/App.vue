@@ -342,6 +342,9 @@ export default {
     this.form.sections[1].fields.push(fields.getField('title'))
     this.form.sections[1].fields.push(fields.getField('description'))
     this.form.sections[1].fields.push(fields.getField('inscription'))
+    var accessiondate = fields.getField('date-edtf')
+    accessiondate.type = 'phaidra:dateAccessioned'
+    this.form.sections[1].fields.push(accessiondate)
     this.form.sections[1].fields.push(fields.getField('technique-vocab'))
     this.form.sections[1].fields.push(fields.getField('technique-text'))
     this.form.sections[1].fields.push(fields.getField('material-vocab'))

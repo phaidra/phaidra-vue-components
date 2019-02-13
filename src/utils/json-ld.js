@@ -336,7 +336,7 @@ export default {
             // vra:material
             case 'vra:material':
               if (value[i]['@type'] === 'vra:Material') {
-                f = fields.getField('material')
+                f = fields.getField('material-text')
                 for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
                   f.value = value[i]['skos:prefLabel'][j]['@value']
                   f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
