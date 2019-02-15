@@ -161,7 +161,7 @@ const fields = [
     id: 'keyword',
     fieldname: 'Keywords',
     predicate: 'dce:subject',
-    component: 'p-text-field-suggest',
+    component: 'p-keyword',
     suggester: 'keywordsuggester',
     multiplicable: true,
     multilingual: true,

@@ -31,6 +31,7 @@ import PIUnknownReadonly from './input/PIUnknownReadonly.vue'
 import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
 import PISpatialGettyReadonly from './input/PISpatialGettyReadonly'
 import PILiteral from './input/PILiteral'
+import PIKeyword from './input/PIKeyword'
 
 const Components = {
   PDDimension,
@@ -64,7 +65,8 @@ const Components = {
   PIUnknownReadonly,
   PIVocabExtReadonly,
   PISpatialGettyReadonly,
-  PILiteral
+  PILiteral,
+  PIKeyword
 }
 
 Object.keys(Components).forEach(name => {

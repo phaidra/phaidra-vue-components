@@ -7,11 +7,18 @@ import eng from './i18n/eng'
 import deu from './i18n/deu'
 import ita from './i18n/ita'
 import App from './App.vue'
+import moment from 'moment'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuetify)
 Vue.use(VueI18n)
+
+Vue.filter('time', function (value) {
+  if (value) {
+    return moment.unix(String(value)).format('DD.MM.YYYY hh:mm:ss')
+  }
+})
 
 const messages = { eng, deu, ita }
 const i18n = new VueI18n({

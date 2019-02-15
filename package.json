@@ -1,6 +1,6 @@
 {
   "name": "phaidra-vue-components",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "repository": {
     "type": "git",
     "url": "git://github.com/phaidra/phaidra-vue-components.git"
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "base-64": "^0.1.0",
+    "moment": "^2.24.0",
     "vue": "^2.6.5",
     "vue-i18n": "^8.8.1",
     "vue-json-pretty": "^1.4.1",

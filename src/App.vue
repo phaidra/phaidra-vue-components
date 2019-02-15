@@ -305,6 +305,7 @@ export default {
   mounted: function () {
     var token = this.getCookie('X-XSRF-TOKEN')
     if (token) {
+      // TODO init userdata if setting token from cookie
       this.$store.commit('setToken', token)
     }
 

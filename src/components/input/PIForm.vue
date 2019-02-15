@@ -52,6 +52,16 @@
                     ></p-i-text-field-suggest>
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-keyword'" :key="f.id">
+                    <p-i-keyword
+                      v-bind.sync="f"
+                      v-on:input="f.value=$event"
+                      v-on:input-language="setSelected(f, 'language', $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-keyword>
+                  </v-flex>
+
                   <v-flex offset-xs1 v-if="f.component === 'p-title'" :key="f.id">
                     <p-i-title            
                       v-bind.sync="f"
@@ -309,6 +319,7 @@ import PIVocabExtReadonly from './PIVocabExtReadonly'
 import PIUnknownReadonly from './PIUnknownReadonly'
 import PILiteral from './PILiteral'
 import PIStudyPlan from './PIStudyPlan'
+import PIKeyword from './PIKeyword'
 import PTList from '../templates/PTList'
 
 export default {
@@ -327,6 +338,7 @@ export default {
     PIProject,
     PIFunder,
     PILiteral,
+    PIKeyword,
     PIFilenameReadonly,
     PIVocabExtReadonly,
     PISpatialGettyReadonly,
