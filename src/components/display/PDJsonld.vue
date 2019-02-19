@@ -167,7 +167,7 @@
         </template>
 
         <template v-else-if="p==='dce:rights'" slot="dce:rights">
-          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'type'+j" ></p-d-lang-value>
+          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'rights'+j" ></p-d-lang-value>
         </template>
 
         <template v-else-if="p==='dcterms:subject'" slot="phaidra:Subject">

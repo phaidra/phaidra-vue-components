@@ -110,6 +110,16 @@
                     ></p-i-entity>
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-subject-gnd'" :key="f.id">
+                    <p-i-subject-gnd
+                      v-bind.sync="f" 
+                      v-on:input="f.value=$event"
+                      v-on:resolve="updateSubject(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-subject-gnd>        
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'p-spatial-getty'" :key="f.id">
                     <p-i-spatial-getty
                       v-bind.sync="f" 
@@ -308,6 +318,7 @@ import PITitle from './PITitle'
 import PIEntity from './PIEntity'
 import PIDateEdtf from './PIDateEdtf'
 import PISelect from './PISelect'
+import PISubjectGnd from './PISubjectGnd'
 import PISpatialGetty from './PISpatialGetty'
 import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
@@ -331,6 +342,7 @@ export default {
     PIEntity,
     PIDateEdtf,
     PISelect,
+    PISubjectGnd,
     PISpatialGetty,
     PISpatialText,
     PIDimension,
@@ -616,6 +628,11 @@ export default {
       if (event) {
         f[property] = event['@id']
       }
+      this.$emit('form-input-' + f.component, f)
+    },
+    updateSubject: function (f, event) {
+      f['skos:prefLabel'] = event['skos:prefLabel']
+      f['rdfs:label'] = event['rdfs:label']
       this.$emit('form-input-' + f.component, f)
     },
     updatePlace: function (f, event) {

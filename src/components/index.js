@@ -20,6 +20,7 @@ import PIDateEdtf from './input/PIDateEdtf.vue'
 import PIFilenameReadonly from './input/PIFilenameReadonly.vue'
 import PIForm from './input/PIForm.vue'
 import PIFunder from './input/PIFunder.vue'
+import PISubjectGnd from './input/PISubjectGnd.vue'
 import PISpatialGetty from './input/PISpatialGetty.vue'
 import PISpatialText from './input/PISpatialText.vue'
 import PIProject from './input/PIProject.vue'
@@ -55,6 +56,7 @@ const Components = {
   PIFilenameReadonly,
   PIForm,
   PIFunder,
+  PISubjectGnd,
   PISpatialGetty,
   PISpatialText,
   PIProject,

@@ -184,6 +184,21 @@ const fields = [
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {
+    id: 'gnd-subject',
+    fieldname: 'Subject',
+    predicate: 'dcterms:subject',
+    type: 'skos:Concept',
+    component: 'p-subject-gnd',
+    multiplicable: true,
+    label: 'Subject (GND)',
+    value: '',
+    type: 'SubjectHeading',
+    exacttype: '',
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    definition: 'The topic of the resource, represented using a controlled vocabulary.'
+  },
+  {
     id: 'study-plan',
     fieldname: 'Study plan',
     predicate: 'frapo:isOutputOf',

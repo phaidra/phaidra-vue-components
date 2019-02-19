@@ -192,7 +192,7 @@ export default {
   },
   data () {
     return {
-      window: 0,
+      window: 2,
       displayjsonld: {},
       editform: {},
       form: {
@@ -312,6 +312,7 @@ export default {
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
+    this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
 
     var rt = fields.getField('resource-type')
     if (this.contentmodel) {
@@ -328,6 +329,10 @@ export default {
     this.form.sections[0].fields.push(fields.getField('description'))
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
+    var gnd = fields.getField('gnd-subject')
+    gnd.exacttype = 'EthnographicName'
+    gnd.label = 'Ethnografikum (GND)'
+    this.form.sections[0].fields.push(gnd)
     this.form.sections[0].fields.push(fields.getField('keyword'))
     var subject = fields.getField('subject')
     subject.vocabulary = 'basisklassifikation'
