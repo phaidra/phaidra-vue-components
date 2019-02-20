@@ -196,6 +196,7 @@ const fields = [
     exactvoc: '',
     'rdfs:label': [],
     'skos:prefLabel': [],
+    loadedpreflabel: '',
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {

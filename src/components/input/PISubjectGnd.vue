@@ -59,6 +59,9 @@ export default {
       type: String,
       required: true
     },
+    initquery: {
+      type: String
+    },
     required: {
       type: Boolean
     },
@@ -112,11 +115,15 @@ export default {
           self.loading = false
           self.preflabel = json[uri]['skos:prefLabel']
           self.rdfslabel = json[uri]['rdfs:label']
-          var rdfslabelarr = []
-          for (var i = 0; i < self.rdfslabel.length; i++) {
-            rdfslabelarr.push(self.rdfslabel[i]['@value'])
+          if (self.rdfslabel) {
+            var rdfslabelarr = []
+            for (var i = 0; i < self.rdfslabel.length; i++) {
+              rdfslabelarr.push(self.rdfslabel[i]['@value'])
+            }
+            self.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'
+          } else {
+            self.resolved = ''
           }
-          self.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'          
           self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel })
         })
         .catch(function (error) {
@@ -170,6 +177,13 @@ export default {
         console.log(error)
       })
       .finally(() => (self.loading = false))
+    }
+  },
+  mounted: function () {
+    if (this.initquery) {
+      this.items = [{ value: this.value, text: this.initquery }]
+      this.model = { value: this.value, text: this.initquery }
+      this.resolve(this.value)
     }
   }
 }

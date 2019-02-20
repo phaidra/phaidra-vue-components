@@ -77,6 +77,9 @@ export default {
       type: String,
       required: true
     },
+    initquery: {
+      type: String
+    },
     required: {
       type: Boolean
     },
@@ -207,6 +210,11 @@ export default {
         this.$emit('input-place-type', this.getTerm('placepredicate', this.type))
       }
     })
+    if (this.initquery) {
+      this.items = [{ value: this.value, text: this.initquery }]
+      this.model = { value: this.value, text: this.initquery }
+      this.resolve(this.value)
+    }
   }
 }
 </script>

@@ -8,7 +8,7 @@
   >
     <template slot="items" slot-scope="props">
       <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.created | time }}</td>
+      <td class="text-xs-right">{{ props.item.created | unixtime }}</td>
       <td class="text-xs-right">{{ props.item.tid }}</td>
       <td class="text-xs-right" ><v-btn flat color="primary" @click="loadTemplate(props.item.tid)">{{ $t('load') }}</v-btn><v-btn flat color="grey" @click="deleteTemplate(props.item.tid)">{{ $t('delete') }}</v-btn></td>
     </template>

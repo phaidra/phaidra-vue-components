@@ -632,11 +632,25 @@ export default {
     },
     updateSubject: function (f, event) {
       f['skos:prefLabel'] = event['skos:prefLabel']
+      if (f['skos:prefLabel']) {
+        if (f['skos:prefLabel'].length > 0) {
+          // needed to init the search input if loading from template
+          // will be synced with component's initquery prop
+          f.initquery = f['skos:prefLabel'][0]['@value']
+        }
+      }
       f['rdfs:label'] = event['rdfs:label']
       this.$emit('form-input-' + f.component, f)
     },
     updatePlace: function (f, event) {
       f['skos:prefLabel'] = event['skos:prefLabel']
+      if (f['skos:prefLabel']) {
+        if (f['skos:prefLabel'].length > 0) {
+          // needed to init the search input if loading from template
+          // will be synced with component's initquery prop
+          f.initquery = f['skos:prefLabel'][0]['@value']
+        }
+      }
       f['rdfs:label'] = event['rdfs:label']
       f.coordinates = event.coordinates
       this.$emit('form-input-' + f.component, f)

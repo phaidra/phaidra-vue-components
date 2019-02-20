@@ -330,7 +330,7 @@ export default {
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
     var gnd = fields.getField('gnd-subject')
-    gnd.exacttype = 'EthnographicName'
+    gnd.exactvoc = 'EthnographicName'
     gnd.label = 'Ethnografikum (GND)'
     this.form.sections[0].fields.push(gnd)
     this.form.sections[0].fields.push(fields.getField('keyword'))

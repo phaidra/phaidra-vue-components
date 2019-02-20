@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(VueI18n)
 
-Vue.filter('time', function (value) {
+Vue.filter('unixtime', function (value) {
   if (value) {
     return moment.unix(String(value)).format('DD.MM.YYYY hh:mm:ss')
   }
