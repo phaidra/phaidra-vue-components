@@ -170,7 +170,7 @@
           <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="'rights'+j" ></p-d-lang-value>
         </template>
 
-        <template v-else-if="p==='dcterms:subject'" slot="phaidra:Subject">
+        <template v-else-if="p==='dcterms:subject'" slot="dcterms:subject">
           
           <template v-for="(subject, j) in o">
             <v-card class="mt-3" v-if="subject['@type']==='phaidra:Subject'" :key="'psubject'+j">
@@ -186,21 +186,6 @@
             <p-d-skos-preflabel v-else :p="p" :o="subject" :key="'subject'+j" ></p-d-skos-preflabel>
           </template>
             
-        </template>
-
-        <template v-else-if="p==='prov:wasDerivedFrom'" slot="prov:wasDerivedFrom">
-          <template v-for="(derivedfrom, j) in o">
-            <v-card class="mt-3" :key="'derivedfrom' + j">
-              <v-toolbar dense flat>
-                  <v-layout>
-                    <v-toolbar-title class="font-weight-light">Digitized object</v-toolbar-title>
-                  </v-layout>
-                </v-toolbar>
-                <v-card-text class="ma-2">
-                  <p-d-jsonld :jsonld="derivedfrom" :key="p"></p-d-jsonld>
-                </v-card-text>
-            </v-card>
-          </template>
         </template>
 
         <template v-else-if="p==='@type'"></template>

@@ -4,7 +4,7 @@
       <v-text-field
         :value="prefLabel"
         :persistent-hint="true"
-        :messages="this['skos:exactMatch'][0] + (notation ? ' Notation: ' + notation : '')"
+        :messages="messages"
         :label="$t(label)"
         readonly
         box
@@ -60,6 +60,16 @@ export default {
         }
       }
       return false
+    },
+    messages: function() {
+      var ret
+      if (this['skos:exactMatch']) {
+        ret = '<a href="' + this['skos:exactMatch'][0] + '" target="_blank">' + this['skos:exactMatch'][0] + '</a>'
+      }
+      if (this['skos:notation']) {
+        ret = ret + (ret ? ret + ' ' : '') + 'Notation: ' + notation  
+      }
+      return ret
     }
   },
   props: {

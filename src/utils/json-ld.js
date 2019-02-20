@@ -95,11 +95,15 @@ export default {
                 f['skos:exactMatch'] = value[i]['skos:exactMatch']
                 f['skos:prefLabel'] = value[i]['skos:prefLabel']
                 f['rdfs:label'] = value[i]['rdfs:label']
-                for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {    
-                  f.value = value[i]['skos:exactMatch'][j]
+                if (value[i]['skos:exactMatch']) {
+                  for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {    
+                    f.value = value[i]['skos:exactMatch'][j]
+                  }
                 }
-                for (j = 0; j < value[i]['skos:notation'].length; j++) {    
-                  f['skos:notation'] = value[i]['skos:notation'][j]
+                if (value[i]['skos:notation']) {
+                  for (j = 0; j < value[i]['skos:notation'].length; j++) {    
+                    f['skos:notation'] = value[i]['skos:notation'][j]
+                  }
                 }
                 f.predicate = key
                 f.label = 'Classification'
@@ -995,7 +999,7 @@ export default {
 
         case 'dcterms:subject':
           if ((f.type === 'skos:Concept') && f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_concept(f['skos:prefLabel'], f['rdfs:label'], 'skos:Concept', [f.value], [f['skos:notation']]))
+            this.push_object(jsonld, f.predicate, this.get_json_concept(f['skos:prefLabel'], f['rdfs:label'], 'skos:Concept', [f.value], f['skos:notation'] ? [f['skos:notation']] : null))
           }
           break
 

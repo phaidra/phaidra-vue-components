@@ -52,7 +52,7 @@
       <slot name="edm:rights"></slot>
       <slot name="dce:rights"></slot>
 
-      <slot name="phaidra:Subject"></slot>
+      <slot name="dcterms:subject"></slot>
 
       <slot name="unknown-predicate"></slot>
     </v-layout>

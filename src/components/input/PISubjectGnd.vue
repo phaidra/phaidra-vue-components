@@ -46,10 +46,13 @@ export default {
       required: true
     },
     type: {
+      type: String
+    },
+    voc: {
       type: String,
       default: 'SubjectHeading'
     },
-    exacttype: {
+    exactvoc: {
       type: String
     },
     label: {
@@ -113,7 +116,7 @@ export default {
           for (var i = 0; i < self.rdfslabel.length; i++) {
             rdfslabelarr.push(self.rdfslabel[i]['@value'])
           }
-          self.resolved = '<a href="' + uri + '" target="_blank">' + rdfslabelarr.join(' / ') + '</a>'          
+          self.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'          
           self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel })
         })
         .catch(function (error) {
@@ -142,12 +145,12 @@ export default {
         searchterm: q
       }
 
-      if (this.type) {
-        params['type'] = this.type
+      if (this.voc) {
+        params['type'] = this.voc
       }
 
-      if (this.exacttype) {
-        params['exact_type'] = this.exacttype
+      if (this.exactvoc) {
+        params['exact_type'] = this.exactvoc
       }
 
       var query = qs.stringify(params)

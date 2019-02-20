@@ -185,15 +185,15 @@ const fields = [
   },
   {
     id: 'gnd-subject',
-    fieldname: 'Subject',
+    fieldname: 'Subject (GND)',
     predicate: 'dcterms:subject',
     type: 'skos:Concept',
     component: 'p-subject-gnd',
     multiplicable: true,
     label: 'Subject (GND)',
     value: '',
-    type: 'SubjectHeading',
-    exacttype: '',
+    voc: 'SubjectHeading',
+    exactvoc: '',
     'rdfs:label': [],
     'skos:prefLabel': [],
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
