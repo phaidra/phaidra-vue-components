@@ -1,5 +1,4 @@
 import fields from './fields'
-import vocabulary from '../store/modules/vocabulary'
 
 export default {
   json2components: function (jsonld) {
