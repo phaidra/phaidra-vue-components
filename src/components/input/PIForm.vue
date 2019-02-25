@@ -99,6 +99,7 @@
                       v-bind.sync="f"
                       v-on:input-firstname="f.firstname=$event"
                       v-on:input-lastname="f.lastname=$event"
+                      v-on:input-name="f.name=$event"
                       v-on:input-institution="f.institution=$event"
                       v-on:input-identifier="f.identifier=$event"
                       v-on:input-role="roleInput(f, $event)"

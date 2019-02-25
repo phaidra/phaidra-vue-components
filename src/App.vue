@@ -343,6 +343,9 @@ export default {
     var r = fields.getField('role')
     r.role = 'role:coadvisor'
     this.form.sections[0].fields.push(r)
+    var r2 = fields.getField('role')
+    r2.showname = true
+    this.form.sections[0].fields.push(r2)
     this.form.sections[0].fields.push(fields.getField('license'))
 
     this.form.sections[1].fields.push(fields.getField('title'))

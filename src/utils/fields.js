@@ -154,6 +154,7 @@ const fields = [
     label: 'Contributions',
     firstname: '',
     lastname: '',
+    name: '',
     role: '',
     definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
   },

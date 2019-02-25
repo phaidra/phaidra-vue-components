@@ -2,2689 +2,3899 @@ export default {
   get_lang () {
     return [
       {
-        '@id': 'tai',
-        'skos:prefLabel': {
-          'deu': 'Thaisprachen (Andere)',
-          'fra': 'tai, langues',
-          'eng': 'Tai languages'
+        "@id": "tai",
+        "skos:prefLabel": {
+          "eng": "Tai languages",
+          "deu": "Thaisprachen (Andere)",
+          "fra": "tai, langues"
         }
       },
       {
-        '@id': 'zxx',
-        'skos:prefLabel': {
-          'deu': 'Kein linguistischer Inhalt',
-          'eng': 'No linguistic content | Not applicable',
-          'fra': 'pas de contenu linguistique | non applicable'
+        "@id": "zxx",
+        "skos:prefLabel": {
+          "eng": "No linguistic content | Not applicable",
+          "deu": "Kein linguistischer Inhalt",
+          "fra": "pas de contenu linguistique | non applicable"
         }
       },
       {
-        '@id': 'bnt',
-        'skos:prefLabel': {
-          'deu': 'Bantusprachen (Andere)',
-          'fra': 'bantou, langues',
-          'eng': 'Bantu languages'
+        "@id": "bnt",
+        "skos:prefLabel": {
+          "eng": "Bantu languages",
+          "deu": "Bantusprachen (Andere)",
+          "fra": "bantou, langues"
         }
       },
       {
-        '@id': 'bul',
-        'skos:prefLabel': {
-          'fra': 'bulgare',
-          'deu': 'Bulgarisch',
-          'eng': 'Bulgarian'
+        "@id": "bul",
+        "skos:prefLabel": {
+          "eng": "Bulgarian",
+          "deu": "Bulgarisch",
+          "fra": "bulgare"
         }
       },
       {
-        '@id': 'fil',
-        'skos:prefLabel': {
-          'eng': 'Filipino | Pilipino',
-          'fra': 'filipino | pilipino',
-          'deu': 'Pilipino'
+        "@id": "fil",
+        "skos:prefLabel": {
+          "eng": "Filipino | Pilipino",
+          "deu": "Pilipino",
+          "fra": "filipino | pilipino"
         }
       },
       {
-        '@id': 'nya',
-        'skos:prefLabel': {
-          'eng': 'Chichewa | Chewa | Nyanja',
-          'fra': 'chichewa | chewa | nyanja',
-          'deu': 'Nyanja-Sprache'
+        "@id": "nya",
+        "skos:prefLabel": {
+          "eng": "Chichewa | Chewa | Nyanja",
+          "deu": "Nyanja-Sprache",
+          "fra": "chichewa | chewa | nyanja"
         }
       },
       {
-        '@id': 'sco',
-        'skos:prefLabel': {
-          'deu': 'Schottisch',
-          'fra': 'écossais',
-          'eng': 'Scots'
+        "@id": "sco",
+        "skos:prefLabel": {
+          "eng": "Scots",
+          "deu": "Schottisch",
+          "fra": "écossais"
         }
       },
       {
-        '@id': 'baq',
-        'skos:prefLabel': {
-          'deu': 'Baskisch',
-          'eng': 'Basque',
-          'fra': 'basque'
+        "@id": "baq",
+        "skos:prefLabel": {
+          "eng": "Basque",
+          "deu": "Baskisch",
+          "fra": "basque"
         }
       },
       {
-        '@id': 'mnc',
-        'skos:prefLabel': {
-          'fra': 'mandchou',
-          'deu': 'Mandschurisch',
-          'eng': 'Manchu'
+        "@id": "mnc",
+        "skos:prefLabel": {
+          "eng": "Manchu",
+          "deu": "Mandschurisch",
+          "fra": "mandchou"
         }
       },
       {
-        '@id': 'ath',
-        'skos:prefLabel': {
-          'deu': 'Athapaskische Sprachen (Andere)',
-          'eng': 'Athapascan languages',
-          'fra': 'athapascanes, langues'
+        "@id": "ath",
+        "skos:prefLabel": {
+          "eng": "Athapascan languages",
+          "deu": "Athapaskische Sprachen (Andere)",
+          "fra": "athapascanes, langues"
         }
       },
       {
-        '@id': 'new',
-        'skos:prefLabel': {
-          'deu': 'Newari',
-          'eng': 'Nepal Bhasa | Newari',
-          'fra': 'nepal bhasa | newari'
+        "@id": "new",
+        "skos:prefLabel": {
+          "eng": "Nepal Bhasa | Newari",
+          "deu": "Newari",
+          "fra": "nepal bhasa | newari"
         }
       },
       {
-        '@id': 'ron',
-        'skos:prefLabel': {
-          'deu': 'Rumänisch',
-          'eng': 'Romanian | Moldavian | Moldovan',
-          'fra': 'roumain | moldave'
+        "@id": "ron",
+        "skos:prefLabel": {
+          "eng": "Romanian | Moldavian | Moldovan",
+          "deu": "Rumänisch",
+          "fra": "roumain | moldave"
         }
       },
       {
-        '@id': 'ice',
-        'skos:prefLabel': {
-          'fra': 'islandais',
-          'eng': 'Icelandic',
-          'deu': 'Isländisch'
+        "@id": "ice",
+        "skos:prefLabel": {
+          "eng": "Icelandic",
+          "deu": "Isländisch",
+          "fra": "islandais"
         }
       },
       {
-        '@id': 'myv',
-        'skos:prefLabel': {
-          'eng': 'Erzya',
-          'deu': 'Erza-Mordwinisch',
-          'fra': 'erza'
+        "@id": "myv",
+        "skos:prefLabel": {
+          "eng": "Erzya",
+          "deu": "Erza-Mordwinisch",
+          "fra": "erza"
         }
       },
       {
-        '@id': 'ven',
-        'skos:prefLabel': {
-          'fra': 'venda',
-          'eng': 'Venda',
-          'deu': 'Venda-Sprache'
+        "@id": "ven",
+        "skos:prefLabel": {
+          "eng": "Venda",
+          "deu": "Venda-Sprache",
+          "fra": "venda"
         }
       },
       {
-        '@id': 'mic',
-        'skos:prefLabel': {
-          'eng': 'Mi\'kmaq | Micmac',
-          'fra': 'mi\'kmaq | micmac',
-          'deu': 'Micmac-Sprache'
+        "@id": "mic",
+        "skos:prefLabel": {
+          "eng": "Mi'kmaq | Micmac",
+          "deu": "Micmac-Sprache",
+          "fra": "mi'kmaq | micmac"
         }
       },
       {
-        '@id': 'mun',
-        'skos:prefLabel': {
-          'fra': 'mounda, langues',
-          'deu': 'Mundasprachen (Andere)',
-          'eng': 'Munda languages'
+        "@id": "mun",
+        "skos:prefLabel": {
+          "eng": "Munda languages",
+          "deu": "Mundasprachen (Andere)",
+          "fra": "mounda, langues"
         }
       },
       {
-        '@id': 'mad',
-        'skos:prefLabel': {
-          'deu': 'Maduresisch',
-          'eng': 'Madurese',
-          'fra': 'madourais'
+        "@id": "mad",
+        "skos:prefLabel": {
+          "eng": "Madurese",
+          "deu": "Maduresisch",
+          "fra": "madourais"
         }
       },
       {
-        '@id': 'map',
-        'skos:prefLabel': {
-          'eng': 'Austronesian languages',
-          'deu': 'Austronesische Sprachen (Andere)',
-          'fra': 'austronésiennes, langues'
+        "@id": "map",
+        "skos:prefLabel": {
+          "eng": "Austronesian languages",
+          "deu": "Austronesische Sprachen (Andere)",
+          "fra": "austronésiennes, langues"
         }
       },
       {
-        '@id': 'sal',
-        'skos:prefLabel': {
-          'eng': 'Salishan languages',
-          'fra': 'salishennes, langues',
-          'deu': 'Salish-Sprache'
+        "@id": "sal",
+        "skos:prefLabel": {
+          "eng": "Salishan languages",
+          "deu": "Salish-Sprache",
+          "fra": "salishennes, langues"
         }
       },
       {
-        '@id': 'sun',
-        'skos:prefLabel': {
-          'deu': 'Sundanesisch',
-          'fra': 'soundanais',
-          'eng': 'Sundanese'
+        "@id": "sun",
+        "skos:prefLabel": {
+          "eng": "Sundanese",
+          "deu": "Sundanesisch",
+          "fra": "soundanais"
         }
       },
       {
-        '@id': 'luo',
-        'skos:prefLabel': {
-          'eng': 'Luo (Kenya and Tanzania)',
-          'fra': 'luo (Kenya et Tanzanie)',
-          'deu': 'Luo-Sprache'
+        "@id": "luo",
+        "skos:prefLabel": {
+          "eng": "Luo (Kenya and Tanzania)",
+          "deu": "Luo-Sprache",
+          "fra": "luo (Kenya et Tanzanie)"
         }
       },
       {
-        '@id': 'elx',
-        'skos:prefLabel': {
-          'deu': 'Elamisch',
-          'eng': 'Elamite',
-          'fra': 'élamite'
+        "@id": "elx",
+        "skos:prefLabel": {
+          "eng": "Elamite",
+          "deu": "Elamisch",
+          "fra": "élamite"
         }
       },
       {
-        '@id': 'paa',
-        'skos:prefLabel': {
-          'deu': 'Papuasprachen (Andere)',
-          'fra': 'papoues, langues',
-          'eng': 'Papuan languages'
+        "@id": "paa",
+        "skos:prefLabel": {
+          "eng": "Papuan languages",
+          "deu": "Papuasprachen (Andere)",
+          "fra": "papoues, langues"
         }
       },
       {
-        '@id': 'wen',
-        'skos:prefLabel': {
-          'deu': 'Sorbisch (Andere)',
-          'eng': 'Sorbian languages',
-          'fra': 'sorabes, langues'
+        "@id": "wen",
+        "skos:prefLabel": {
+          "eng": "Sorbian languages",
+          "deu": "Sorbisch (Andere)",
+          "fra": "sorabes, langues"
         }
       },
       {
-        '@id': 'zap',
-        'skos:prefLabel': {
-          'fra': 'zapotèque',
-          'eng': 'Zapotec',
-          'deu': 'Zapotekisch'
+        "@id": "zap",
+        "skos:prefLabel": {
+          "eng": "Zapotec",
+          "deu": "Zapotekisch",
+          "fra": "zapotèque"
         }
       },
       {
-        '@id': 'bho',
-        'skos:prefLabel': {
-          'fra': 'bhojpuri',
-          'deu': 'Bhojpuri'
+        "@id": "bho",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Bhojpuri",
+          "fra": "bhojpuri"
         }
       },
       {
-        '@id': 'mlt',
-        'skos:prefLabel': {
-          'eng': 'Maltese',
-          'deu': 'Maltesisch',
-          'fra': 'maltais'
+        "@id": "mlt",
+        "skos:prefLabel": {
+          "eng": "Maltese",
+          "deu": "Maltesisch",
+          "fra": "maltais"
         }
       },
       {
-        '@id': 'bua',
-        'skos:prefLabel': {
-          'fra': 'bouriate',
-          'deu': 'Burjatisch',
-          'eng': 'Buriat'
+        "@id": "bua",
+        "skos:prefLabel": {
+          "eng": "Buriat",
+          "deu": "Burjatisch",
+          "fra": "bouriate"
         }
       },
       {
-        '@id': 'ewo',
-        'skos:prefLabel': {
-          'deu': 'Ewondo',
-          'fra': 'éwondo'
+        "@id": "ewo",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Ewondo",
+          "fra": "éwondo"
         }
       },
       {
-        '@id': 'tsi',
-        'skos:prefLabel': {
-          'eng': 'Tsimshian',
-          'fra': 'tsimshian',
-          'deu': 'Tsimshian-Sprache'
+        "@id": "tsi",
+        "skos:prefLabel": {
+          "eng": "Tsimshian",
+          "deu": "Tsimshian-Sprache",
+          "fra": "tsimshian"
         }
       },
       {
-        '@id': 'fan',
-        'skos:prefLabel': {
-          'eng': 'Fang',
-          'deu': 'Pangwe-Sprache',
-          'fra': 'fang'
+        "@id": "fan",
+        "skos:prefLabel": {
+          "eng": "Fang",
+          "deu": "Pangwe-Sprache",
+          "fra": "fang"
         }
       },
       {
-        '@id': 'mao',
-        'skos:prefLabel': {
-          'fra': 'maori',
-          'eng': 'Maori',
-          'deu': 'Maori-Sprache'
+        "@id": "mao",
+        "skos:prefLabel": {
+          "eng": "Maori",
+          "deu": "Maori-Sprache",
+          "fra": "maori"
         }
       },
       {
-        '@id': 'sms',
-        'skos:prefLabel': {
-          'eng': 'Skolt Sami',
-          'fra': 'sami skolt',
-          'deu': 'Skoltsaamisch'
+        "@id": "sms",
+        "skos:prefLabel": {
+          "eng": "Skolt Sami",
+          "deu": "Skoltsaamisch",
+          "fra": "sami skolt"
         }
       },
       {
-        '@id': 'kut',
-        'skos:prefLabel': {
-          'fra': 'kutenai',
-          'eng': 'Kutenai',
-          'deu': 'Kutenai-Sprache'
+        "@id": "kut",
+        "skos:prefLabel": {
+          "eng": "Kutenai",
+          "deu": "Kutenai-Sprache",
+          "fra": "kutenai"
         }
       },
       {
-        '@id': 'mno',
-        'skos:prefLabel': {
-          'deu': 'Manobo-Sprachen',
-          'fra': 'manobo, langues',
-          'eng': 'Manobo languages'
+        "@id": "mno",
+        "skos:prefLabel": {
+          "eng": "Manobo languages",
+          "deu": "Manobo-Sprachen",
+          "fra": "manobo, langues"
         }
       },
       {
-        '@id': 'lun',
-        'skos:prefLabel': {
-          'eng': 'Lunda',
-          'fra': 'lunda',
-          'deu': 'Lunda-Sprache'
+        "@id": "lun",
+        "skos:prefLabel": {
+          "eng": "Lunda",
+          "deu": "Lunda-Sprache",
+          "fra": "lunda"
         }
       },
       {
-        '@id': 'den',
-        'skos:prefLabel': {
-          'fra': 'esclave (athapascan)',
-          'eng': 'Slave (Athapascan)',
-          'deu': 'Slave-Sprache'
+        "@id": "den",
+        "skos:prefLabel": {
+          "eng": "Slave (Athapascan)",
+          "deu": "Slave-Sprache",
+          "fra": "esclave (athapascan)"
         }
       },
       {
-        '@id': 'scn',
-        'skos:prefLabel': {
-          'fra': 'sicilien',
-          'eng': 'Sicilian',
-          'deu': 'Sizilianisch'
+        "@id": "scn",
+        "skos:prefLabel": {
+          "eng": "Sicilian",
+          "deu": "Sizilianisch",
+          "fra": "sicilien"
         }
       },
       {
-        '@id': 'tkl',
-        'skos:prefLabel': {
-          'eng': 'Tokelau',
-          'fra': 'tokelau',
-          'deu': 'Tokelauanisch'
+        "@id": "tkl",
+        "skos:prefLabel": {
+          "eng": "Tokelau",
+          "deu": "Tokelauanisch",
+          "fra": "tokelau"
         }
       },
       {
-        '@id': 'pra',
-        'skos:prefLabel': {
-          'eng': 'Prakrit languages',
-          'deu': 'Prakrit',
-          'fra': 'prâkrit, langues'
+        "@id": "pra",
+        "skos:prefLabel": {
+          "eng": "Prakrit languages",
+          "deu": "Prakrit",
+          "fra": "prâkrit, langues"
         }
       },
       {
-        '@id': 'gil',
-        'skos:prefLabel': {
-          'fra': 'kiribati',
-          'deu': 'Gilbertesisch',
-          'eng': 'Gilbertese'
+        "@id": "gil",
+        "skos:prefLabel": {
+          "eng": "Gilbertese",
+          "deu": "Gilbertesisch",
+          "fra": "kiribati"
         }
       },
       {
-        '@id': 'bra',
-        'skos:prefLabel': {
-          'deu': 'Braj-Bhakha',
-          'fra': 'braj',
-          'eng': 'Braj'
+        "@id": "bra",
+        "skos:prefLabel": {
+          "eng": "Braj",
+          "deu": "Braj-Bhakha",
+          "fra": "braj"
         }
       },
       {
-        '@id': 'rom',
-        'skos:prefLabel': {
-          'fra': 'tsigane',
-          'deu': 'Romani (Sprache)',
-          'eng': 'Romany'
+        "@id": "rom",
+        "skos:prefLabel": {
+          "eng": "Romany",
+          "deu": "Romani (Sprache)",
+          "fra": "tsigane"
         }
       },
       {
-        '@id': 'cat',
-        'skos:prefLabel': {
-          'deu': 'Katalanisch',
-          'fra': 'catalan | valencien',
-          'eng': 'Catalan | Valencian'
+        "@id": "cat",
+        "skos:prefLabel": {
+          "eng": "Catalan | Valencian",
+          "deu": "Katalanisch",
+          "fra": "catalan | valencien"
         }
       },
       {
-        '@id': 'son',
-        'skos:prefLabel': {
-          'deu': 'Songhai-Sprache',
-          'fra': 'songhai, langues',
-          'eng': 'Songhai languages'
+        "@id": "son",
+        "skos:prefLabel": {
+          "eng": "Songhai languages",
+          "deu": "Songhai-Sprache",
+          "fra": "songhai, langues"
         }
       },
       {
-        '@id': 'tut',
-        'skos:prefLabel': {
-          'eng': 'Altaic languages',
-          'fra': 'altaïques, langues',
-          'deu': 'Altaische Sprachen (Andere)'
+        "@id": "tut",
+        "skos:prefLabel": {
+          "eng": "Altaic languages",
+          "deu": "Altaische Sprachen (Andere)",
+          "fra": "altaïques, langues"
         }
       },
       {
-        '@id': 'arp',
-        'skos:prefLabel': {
-          'deu': 'Arapaho-Sprache',
-          'fra': 'arapaho',
-          'eng': 'Arapaho'
+        "@id": "arp",
+        "skos:prefLabel": {
+          "eng": "Arapaho",
+          "deu": "Arapaho-Sprache",
+          "fra": "arapaho"
         }
       },
       {
-        '@id': 'vot',
-        'skos:prefLabel': {
-          'deu': 'Wotisch',
-          'eng': 'Votic',
-          'fra': 'vote'
+        "@id": "vot",
+        "skos:prefLabel": {
+          "eng": "Votic",
+          "deu": "Wotisch",
+          "fra": "vote"
         }
       },
       {
-        '@id': 'bej',
-        'skos:prefLabel': {
-          'deu': 'Bedauye',
-          'fra': 'bedja',
-          'eng': 'Beja | Bedawiyet'
+        "@id": "bej",
+        "skos:prefLabel": {
+          "eng": "Beja | Bedawiyet",
+          "deu": "Bedauye",
+          "fra": "bedja"
         }
       },
       {
-        '@id': 'swa',
-        'skos:prefLabel': {
-          'deu': 'Swahili',
-          'fra': 'swahili'
+        "@id": "swa",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Swahili",
+          "fra": "swahili"
         }
       },
       {
-        '@id': 'ale',
-        'skos:prefLabel': {
-          'fra': 'aléoute',
-          'deu': 'Aleutisch',
-          'eng': 'Aleut'
+        "@id": "ale",
+        "skos:prefLabel": {
+          "eng": "Aleut",
+          "deu": "Aleutisch",
+          "fra": "aléoute"
         }
       },
       {
-        '@id': 'min',
-        'skos:prefLabel': {
-          'fra': 'minangkabau',
-          'deu': 'Minangkabau-Sprache',
-          'eng': 'Minangkabau'
+        "@id": "min",
+        "skos:prefLabel": {
+          "eng": "Minangkabau",
+          "deu": "Minangkabau-Sprache",
+          "fra": "minangkabau"
         }
       },
       {
-        '@id': 'pam',
-        'skos:prefLabel': {
-          'eng': 'Pampanga | Kapampangan',
-          'deu': 'Pampanggan-Sprache',
-          'fra': 'pampangan'
+        "@id": "pam",
+        "skos:prefLabel": {
+          "eng": "Pampanga | Kapampangan",
+          "deu": "Pampanggan-Sprache",
+          "fra": "pampangan"
         }
       },
       {
-        '@id': 'spa',
-        'skos:prefLabel': {
-          'eng': 'Spanish | Castilian',
-          'deu': 'Spanisch',
-          'fra': 'espagnol | castillan'
+        "@id": "spa",
+        "skos:prefLabel": {
+          "eng": "Spanish | Castilian",
+          "deu": "Spanisch",
+          "fra": "espagnol | castillan"
         }
       },
       {
-        '@id': 'san',
-        'skos:prefLabel': {
-          'fra': 'sanskrit',
-          'deu': 'Sanskrit'
+        "@id": "san",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Sanskrit",
+          "fra": "sanskrit"
         }
       },
       {
-        '@id': 'kur',
-        'skos:prefLabel': {
-          'fra': 'kurde',
-          'deu': 'Kurdisch',
-          'eng': 'Kurdish'
+        "@id": "kur",
+        "skos:prefLabel": {
+          "eng": "Kurdish",
+          "deu": "Kurdisch",
+          "fra": "kurde"
         }
       },
       {
-        '@id': 'chg',
-        'skos:prefLabel': {
-          'eng': 'Chagatai',
-          'fra': 'djaghataï',
-          'deu': 'Tschagataisch'
+        "@id": "chg",
+        "skos:prefLabel": {
+          "eng": "Chagatai",
+          "deu": "Tschagataisch",
+          "fra": "djaghataï"
         }
       },
       {
-        '@id': 'bin',
-        'skos:prefLabel': {
-          'deu': 'Edo-Sprache',
-          'fra': 'bini | edo',
-          'eng': 'Bini | Edo'
+        "@id": "bin",
+        "skos:prefLabel": {
+          "eng": "Bini | Edo",
+          "deu": "Edo-Sprache",
+          "fra": "bini | edo"
         }
       },
       {
-        '@id': 'orm',
-        'skos:prefLabel': {
-          'deu': 'Galla-Sprache',
-          'fra': 'galla',
-          'eng': 'Oromo'
+        "@id": "orm",
+        "skos:prefLabel": {
+          "eng": "Oromo",
+          "deu": "Galla-Sprache",
+          "fra": "galla"
         }
       },
       {
-        '@id': 'tyv',
-        'skos:prefLabel': {
-          'fra': 'touva',
-          'deu': 'Tuwinisch',
-          'eng': 'Tuvinian'
+        "@id": "tyv",
+        "skos:prefLabel": {
+          "eng": "Tuvinian",
+          "deu": "Tuwinisch",
+          "fra": "touva"
         }
       },
       {
-        '@id': 'snd',
-        'skos:prefLabel': {
-          'fra': 'sindhi',
-          'deu': 'Sindhi-Sprache',
-          'eng': 'Sindhi'
+        "@id": "snd",
+        "skos:prefLabel": {
+          "eng": "Sindhi",
+          "deu": "Sindhi-Sprache",
+          "fra": "sindhi"
         }
       },
       {
-        '@id': 'lol',
-        'skos:prefLabel': {
-          'deu': 'Mongo-Sprache',
-          'fra': 'mongo',
-          'eng': 'Mongo'
+        "@id": "lol",
+        "skos:prefLabel": {
+          "eng": "Mongo",
+          "deu": "Mongo-Sprache",
+          "fra": "mongo"
         }
       },
       {
-        '@id': 'mon',
-        'skos:prefLabel': {
-          'fra': 'mongol',
-          'deu': 'Mongolisch',
-          'eng': 'Mongolian'
+        "@id": "mon",
+        "skos:prefLabel": {
+          "eng": "Mongolian",
+          "deu": "Mongolisch",
+          "fra": "mongol"
         }
       },
       {
-        '@id': 'vai',
-        'skos:prefLabel': {
-          'eng': 'Vai',
-          'deu': 'Vai-Sprache',
-          'fra': 'vaï'
+        "@id": "vai",
+        "skos:prefLabel": {
+          "eng": "Vai",
+          "deu": "Vai-Sprache",
+          "fra": "vaï"
         }
       },
       {
-        '@id': 'gba',
-        'skos:prefLabel': {
-          'deu': 'Gbaya-Sprache',
-          'fra': 'gbaya',
-          'eng': 'Gbaya'
+        "@id": "gba",
+        "skos:prefLabel": {
+          "eng": "Gbaya",
+          "deu": "Gbaya-Sprache",
+          "fra": "gbaya"
         }
       },
       {
-        '@id': 'mac',
-        'skos:prefLabel': {
-          'fra': 'macédonien',
-          'deu': 'Makedonisch',
-          'eng': 'Macedonian'
+        "@id": "mac",
+        "skos:prefLabel": {
+          "eng": "Macedonian",
+          "deu": "Makedonisch",
+          "fra": "macédonien"
         }
       },
       {
-        '@id': 'nwc',
-        'skos:prefLabel': {
-          'fra': 'newari classique',
-          'deu': 'Alt-Newari',
-          'eng': 'Classical Newari | Old Newari | Classical Nepal Bhasa'
+        "@id": "nwc",
+        "skos:prefLabel": {
+          "eng": "Classical Newari | Old Newari | Classical Nepal Bhasa",
+          "deu": "Alt-Newari",
+          "fra": "newari classique"
         }
       },
       {
-        '@id': 'ndo',
-        'skos:prefLabel': {
-          'deu': 'Ndonga',
-          'fra': 'ndonga'
+        "@id": "ndo",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Ndonga",
+          "fra": "ndonga"
         }
       },
       {
-        '@id': 'cai',
-        'skos:prefLabel': {
-          'fra': 'amérindiennes de l\'Amérique centrale, langues',
-          'deu': 'Indianersprachen, Zentralamerika (Andere)',
-          'eng': 'Central American Indian languages'
+        "@id": "cai",
+        "skos:prefLabel": {
+          "eng": "Central American Indian languages",
+          "deu": "Indianersprachen, Zentralamerika (Andere)",
+          "fra": "amérindiennes de l'Amérique centrale, langues"
         }
       },
       {
-        '@id': 'roa',
-        'skos:prefLabel': {
-          'deu': 'Romanische Sprachen (Andere)',
-          'fra': 'romanes, langues',
-          'eng': 'Romance languages'
+        "@id": "roa",
+        "skos:prefLabel": {
+          "eng": "Romance languages",
+          "deu": "Romanische Sprachen (Andere)",
+          "fra": "romanes, langues"
         }
       },
       {
-        '@id': 'pan',
-        'skos:prefLabel': {
-          'eng': 'Panjabi | Punjabi',
-          'deu': 'Pandschabi-Sprache',
-          'fra': 'pendjabi'
+        "@id": "pan",
+        "skos:prefLabel": {
+          "eng": "Panjabi | Punjabi",
+          "deu": "Pandschabi-Sprache",
+          "fra": "pendjabi"
         }
       },
       {
-        '@id': 'cop',
-        'skos:prefLabel': {
-          'eng': 'Coptic',
-          'deu': 'Koptisch',
-          'fra': 'copte'
+        "@id": "cop",
+        "skos:prefLabel": {
+          "eng": "Coptic",
+          "deu": "Koptisch",
+          "fra": "copte"
         }
       },
       {
-        '@id': 'lua',
-        'skos:prefLabel': {
-          'eng': 'Luba-Lulua',
-          'fra': 'luba-lulua',
-          'deu': 'Lulua-Sprache'
+        "@id": "lua",
+        "skos:prefLabel": {
+          "eng": "Luba-Lulua",
+          "deu": "Lulua-Sprache",
+          "fra": "luba-lulua"
         }
       },
       {
-        '@id': 'kro',
-        'skos:prefLabel': {
-          'deu': 'Kru-Sprachen (Andere)',
-          'fra': 'krou, langues',
-          'eng': 'Kru languages'
+        "@id": "kro",
+        "skos:prefLabel": {
+          "eng": "Kru languages",
+          "deu": "Kru-Sprachen (Andere)",
+          "fra": "krou, langues"
         }
       },
       {
-        '@id': 'lin',
-        'skos:prefLabel': {
-          'deu': 'Lingala',
-          'fra': 'lingala'
+        "@id": "lin",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Lingala",
+          "fra": "lingala"
         }
       },
       {
-        '@id': 'bad',
-        'skos:prefLabel': {
-          'fra': 'banda, langues',
-          'eng': 'Banda languages',
-          'deu': 'Banda-Sprachen (Ubangi-Sprachen)'
+        "@id": "bad",
+        "skos:prefLabel": {
+          "eng": "Banda languages",
+          "deu": "Banda-Sprachen (Ubangi-Sprachen)",
+          "fra": "banda, langues"
         }
       },
       {
-        '@id': 'afr',
-        'skos:prefLabel': {
-          'fra': 'afrikaans',
-          'deu': 'Afrikaans'
+        "@id": "afr",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Afrikaans",
+          "fra": "afrikaans"
         }
       },
       {
-        '@id': 'apa',
-        'skos:prefLabel': {
-          'fra': 'apaches, langues',
-          'eng': 'Apache languages',
-          'deu': 'Apachen-Sprachen'
+        "@id": "apa",
+        "skos:prefLabel": {
+          "eng": "Apache languages",
+          "deu": "Apachen-Sprachen",
+          "fra": "apaches, langues"
         }
       },
       {
-        '@id': 'inh',
-        'skos:prefLabel': {
-          'eng': 'Ingush',
-          'fra': 'ingouche',
-          'deu': 'Inguschisch'
+        "@id": "inh",
+        "skos:prefLabel": {
+          "eng": "Ingush",
+          "deu": "Inguschisch",
+          "fra": "ingouche"
         }
       },
       {
-        '@id': 'dra',
-        'skos:prefLabel': {
-          'eng': 'Dravidian languages',
-          'deu': 'Drawidische Sprachen (Andere)',
-          'fra': 'dravidiennes, langues'
+        "@id": "dra",
+        "skos:prefLabel": {
+          "eng": "Dravidian languages",
+          "deu": "Drawidische Sprachen (Andere)",
+          "fra": "dravidiennes, langues"
         }
       },
       {
-        '@id': 'sai',
-        'skos:prefLabel': {
-          'eng': 'South American Indian languages',
-          'fra': 'sud-amérindiennes, langues',
-          'deu': 'Indianersprachen, Südamerika (Andere)'
+        "@id": "sai",
+        "skos:prefLabel": {
+          "eng": "South American Indian languages",
+          "deu": "Indianersprachen, Südamerika (Andere)",
+          "fra": "sud-amérindiennes, langues"
         }
       },
       {
-        '@id': 'pro',
-        'skos:prefLabel': {
-          'eng': 'Provençal, Old (to 1500) | Occitan, Old (to 1500)',
-          'fra': 'provençal ancien (jusqu\'à 1500) | occitan ancien (jusqu\'à 1500)',
-          'deu': 'Altokzitanisch'
+        "@id": "pro",
+        "skos:prefLabel": {
+          "eng": "Provençal, Old (to 1500) | Occitan, Old (to 1500)",
+          "deu": "Altokzitanisch",
+          "fra": "provençal ancien (jusqu'à 1500) | occitan ancien (jusqu'à 1500)"
         }
       },
       {
-        '@id': 'guj',
-        'skos:prefLabel': {
-          'fra': 'goudjrati',
-          'deu': 'Gujarati-Sprache',
-          'eng': 'Gujarati'
+        "@id": "guj",
+        "skos:prefLabel": {
+          "eng": "Gujarati",
+          "deu": "Gujarati-Sprache",
+          "fra": "goudjrati"
         }
       },
       {
-        '@id': 'lub',
-        'skos:prefLabel': {
-          'eng': 'Luba-Katanga',
-          'fra': 'luba-katanga',
-          'deu': 'Luba-Katanga-Sprache'
+        "@id": "lub",
+        "skos:prefLabel": {
+          "eng": "Luba-Katanga",
+          "deu": "Luba-Katanga-Sprache",
+          "fra": "luba-katanga"
         }
       },
       {
-        '@id': 'khm',
-        'skos:prefLabel': {
-          'fra': 'khmer central',
-          'deu': 'Kambodschanisch',
-          'eng': 'Central Khmer'
+        "@id": "khm",
+        "skos:prefLabel": {
+          "eng": "Central Khmer",
+          "deu": "Kambodschanisch",
+          "fra": "khmer central"
         }
       },
       {
-        '@id': 'mlg',
-        'skos:prefLabel': {
-          'eng': 'Malagasy',
-          'deu': 'Malagassi-Sprache',
-          'fra': 'malgache'
+        "@id": "mlg",
+        "skos:prefLabel": {
+          "eng": "Malagasy",
+          "deu": "Malagassi-Sprache",
+          "fra": "malgache"
         }
       },
       {
-        '@id': 'tur',
-        'skos:prefLabel': {
-          'deu': 'Türkisch',
-          'eng': 'Turkish',
-          'fra': 'turc'
+        "@id": "tur",
+        "skos:prefLabel": {
+          "eng": "Turkish",
+          "deu": "Türkisch",
+          "fra": "turc"
         }
       },
       {
-        '@id': 'yor',
-        'skos:prefLabel': {
-          'fra': 'yoruba',
-          'eng': 'Yoruba',
-          'deu': 'Yoruba-Sprache'
+        "@id": "yor",
+        "skos:prefLabel": {
+          "eng": "Yoruba",
+          "deu": "Yoruba-Sprache",
+          "fra": "yoruba"
         }
       },
       {
-        '@id': 'phi',
-        'skos:prefLabel': {
-          'deu': 'Philippinisch-Austronesisch (Andere)',
-          'fra': 'philippines, langues',
-          'eng': 'Philippine languages'
+        "@id": "phi",
+        "skos:prefLabel": {
+          "eng": "Philippine languages",
+          "deu": "Philippinisch-Austronesisch (Andere)",
+          "fra": "philippines, langues"
         }
       },
       {
-        '@id': 'est',
-        'skos:prefLabel': {
-          'deu': 'Estnisch',
-          'fra': 'estonien',
-          'eng': 'Estonian'
+        "@id": "est",
+        "skos:prefLabel": {
+          "eng": "Estonian",
+          "deu": "Estnisch",
+          "fra": "estonien"
         }
       },
       {
-        '@id': 'lim',
-        'skos:prefLabel': {
-          'eng': 'Limburgan | Limburger | Limburgish',
-          'deu': 'Limburgisch',
-          'fra': 'limbourgeois'
+        "@id": "lim",
+        "skos:prefLabel": {
+          "eng": "Limburgan | Limburger | Limburgish",
+          "deu": "Limburgisch",
+          "fra": "limbourgeois"
         }
       },
       {
-        '@id': 'dzo',
-        'skos:prefLabel': {
-          'fra': 'dzongkha',
-          'deu': 'Dzongkha'
+        "@id": "dzo",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Dzongkha",
+          "fra": "dzongkha"
         }
       },
       {
-        '@id': 'cau',
-        'skos:prefLabel': {
-          'eng': 'Caucasian languages',
-          'fra': 'caucasiennes, langues',
-          'deu': 'Kaukasische Sprachen (Andere)'
+        "@id": "cau",
+        "skos:prefLabel": {
+          "eng": "Caucasian languages",
+          "deu": "Kaukasische Sprachen (Andere)",
+          "fra": "caucasiennes, langues"
         }
       },
       {
-        '@id': 'tmh',
-        'skos:prefLabel': {
-          'eng': 'Tamashek',
-          'deu': 'Tamaeq',
-          'fra': 'tamacheq'
+        "@id": "tmh",
+        "skos:prefLabel": {
+          "eng": "Tamashek",
+          "deu": "Tamaeq",
+          "fra": "tamacheq"
         }
       },
       {
-        '@id': 'ita',
-        'skos:prefLabel': {
-          'eng': 'Italian',
-          'deu': 'Italienisch',
-          'fra': 'italien'
+        "@id": "ita",
+        "skos:prefLabel": {
+          "eng": "Italian",
+          "deu": "Italienisch",
+          "fra": "italien"
         }
       },
       {
-        '@id': 'som',
-        'skos:prefLabel': {
-          'fra': 'somali',
-          'deu': 'Somali'
+        "@id": "som",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Somali",
+          "fra": "somali"
         }
       },
       {
-        '@id': 'may',
-        'skos:prefLabel': {
-          'eng': 'Malay',
-          'fra': 'malais',
-          'deu': 'Malaiisch'
+        "@id": "may",
+        "skos:prefLabel": {
+          "eng": "Malay",
+          "deu": "Malaiisch",
+          "fra": "malais"
         }
       },
       {
-        '@id': 'chr',
-        'skos:prefLabel': {
-          'deu': 'Cherokee-Sprache',
-          'eng': 'Cherokee',
-          'fra': 'cherokee'
+        "@id": "chr",
+        "skos:prefLabel": {
+          "eng": "Cherokee",
+          "deu": "Cherokee-Sprache",
+          "fra": "cherokee"
         }
       },
       {
-        '@id': 'smi',
-        'skos:prefLabel': {
-          'eng': 'Sami languages',
-          'deu': 'Saamisch',
-          'fra': 'sames, langues'
+        "@id": "smi",
+        "skos:prefLabel": {
+          "eng": "Sami languages",
+          "deu": "Saamisch",
+          "fra": "sames, langues"
         }
       },
       {
-        '@id': 'nap',
-        'skos:prefLabel': {
-          'eng': 'Neapolitan',
-          'fra': 'napolitain',
-          'deu': 'Neapel / Mundart'
+        "@id": "nap",
+        "skos:prefLabel": {
+          "eng": "Neapolitan",
+          "deu": "Neapel / Mundart",
+          "fra": "napolitain"
         }
       },
       {
-        '@id': 'hrv',
-        'skos:prefLabel': {
-          'eng': 'Croatian',
-          'fra': 'croate',
-          'deu': 'Kroatisch'
+        "@id": "hrv",
+        "skos:prefLabel": {
+          "eng": "Croatian",
+          "deu": "Kroatisch",
+          "fra": "croate"
         }
       },
       {
-        '@id': 'ltz',
-        'skos:prefLabel': {
-          'fra': 'luxembourgeois',
-          'deu': 'Luxemburgisch',
-          'eng': 'Luxembourgish | Letzeburgesch'
+        "@id": "ltz",
+        "skos:prefLabel": {
+          "eng": "Luxembourgish | Letzeburgesch",
+          "deu": "Luxemburgisch",
+          "fra": "luxembourgeois"
         }
       },
       {
-        '@id': 'run',
-        'skos:prefLabel': {
-          'deu': 'Rundi-Sprache',
-          'eng': 'Rundi',
-          'fra': 'rundi'
+        "@id": "run",
+        "skos:prefLabel": {
+          "eng": "Rundi",
+          "deu": "Rundi-Sprache",
+          "fra": "rundi"
         }
       },
       {
-        '@id': 'ira',
-        'skos:prefLabel': {
-          'eng': 'Iranian languages',
-          'deu': 'Iranische Sprachen (Andere)',
-          'fra': 'iraniennes, langues'
+        "@id": "ira",
+        "skos:prefLabel": {
+          "eng": "Iranian languages",
+          "deu": "Iranische Sprachen (Andere)",
+          "fra": "iraniennes, langues"
         }
       },
       {
-        '@id': 'ido',
-        'skos:prefLabel': {
-          'deu': 'Ido',
-          'fra': 'ido'
+        "@id": "ido",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Ido",
+          "fra": "ido"
         }
       },
       {
-        '@id': 'sam',
-        'skos:prefLabel': {
-          'eng': 'Samaritan Aramaic',
-          'fra': 'samaritain',
-          'deu': 'Samaritanisch'
+        "@id": "sam",
+        "skos:prefLabel": {
+          "eng": "Samaritan Aramaic",
+          "deu": "Samaritanisch",
+          "fra": "samaritain"
         }
       },
       {
-        '@id': 'kok',
-        'skos:prefLabel': {
-          'deu': 'Konkani',
-          'fra': 'konkani'
+        "@id": "kok",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Konkani",
+          "fra": "konkani"
         }
       },
       {
-        '@id': 'kha',
-        'skos:prefLabel': {
-          'fra': 'khasi',
-          'deu': 'Khasi-Sprache',
-          'eng': 'Khasi'
+        "@id": "kha",
+        "skos:prefLabel": {
+          "eng": "Khasi",
+          "deu": "Khasi-Sprache",
+          "fra": "khasi"
         }
       },
       {
-        '@id': 'man',
-        'skos:prefLabel': {
-          'deu': 'Malinke-Sprache',
-          'eng': 'Mandingo',
-          'fra': 'mandingue'
+        "@id": "man",
+        "skos:prefLabel": {
+          "eng": "Mandingo",
+          "deu": "Malinke-Sprache",
+          "fra": "mandingue"
         }
       },
       {
-        '@id': 'kmb',
-        'skos:prefLabel': {
-          'deu': 'Kimbundu-Sprache',
-          'fra': 'kimbundu',
-          'eng': 'Kimbundu'
+        "@id": "kmb",
+        "skos:prefLabel": {
+          "eng": "Kimbundu",
+          "deu": "Kimbundu-Sprache",
+          "fra": "kimbundu"
         }
       },
       {
-        '@id': 'dua',
-        'skos:prefLabel': {
-          'eng': 'Duala',
-          'deu': 'Duala-Sprachen',
-          'fra': 'douala'
+        "@id": "dua",
+        "skos:prefLabel": {
+          "eng": "Duala",
+          "deu": "Duala-Sprachen",
+          "fra": "douala"
         }
       },
       {
-        '@id': 'gon',
-        'skos:prefLabel': {
-          'eng': 'Gondi',
-          'deu': 'Gondi-Sprache',
-          'fra': 'gond'
+        "@id": "gon",
+        "skos:prefLabel": {
+          "eng": "Gondi",
+          "deu": "Gondi-Sprache",
+          "fra": "gond"
         }
       },
       {
-        '@id': 'glg',
-        'skos:prefLabel': {
-          'fra': 'galicien',
-          'deu': 'Galicisch',
-          'eng': 'Galician'
+        "@id": "glg",
+        "skos:prefLabel": {
+          "eng": "Galician",
+          "deu": "Galicisch",
+          "fra": "galicien"
         }
       },
       {
-        '@id': 'jpr',
-        'skos:prefLabel': {
-          'deu': 'Jüdisch-Persisch',
-          'fra': 'judéo-persan',
-          'eng': 'Judeo-Persian'
+        "@id": "jpr",
+        "skos:prefLabel": {
+          "eng": "Judeo-Persian",
+          "deu": "Jüdisch-Persisch",
+          "fra": "judéo-persan"
         }
       },
       {
-        '@id': 'ceb',
-        'skos:prefLabel': {
-          'fra': 'cebuano',
-          'deu': 'Cebuano'
+        "@id": "ceb",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Cebuano",
+          "fra": "cebuano"
         }
       },
       {
-        '@id': 'ind',
-        'skos:prefLabel': {
-          'deu': 'Bahasa Indonesia',
-          'fra': 'indonésien',
-          'eng': 'Indonesian'
+        "@id": "ind",
+        "skos:prefLabel": {
+          "eng": "Indonesian",
+          "deu": "Bahasa Indonesia",
+          "fra": "indonésien"
         }
       },
       {
-        '@id': 'nde',
-        'skos:prefLabel': {
-          'deu': 'Ndebele-Sprache (Simbabwe)',
-          'eng': 'Ndebele, North | North Ndebele',
-          'fra': 'ndébélé du Nord'
+        "@id": "nde",
+        "skos:prefLabel": {
+          "eng": "Ndebele, North | North Ndebele",
+          "deu": "Ndebele-Sprache (Simbabwe)",
+          "fra": "ndébélé du Nord"
         }
       },
       {
-        '@id': 'bat',
-        'skos:prefLabel': {
-          'deu': 'Baltische Sprachen (Andere)',
-          'fra': 'baltes, langues',
-          'eng': 'Baltic languages'
+        "@id": "bat",
+        "skos:prefLabel": {
+          "eng": "Baltic languages",
+          "deu": "Baltische Sprachen (Andere)",
+          "fra": "baltes, langues"
         }
       },
       {
-        '@id': 'lah',
-        'skos:prefLabel': {
-          'fra': 'lahnda',
-          'deu': 'Lahnda'
+        "@id": "lah",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Lahnda",
+          "fra": "lahnda"
         }
       },
       {
-        '@id': 'gla',
-        'skos:prefLabel': {
-          'eng': 'Gaelic | Scottish Gaelic',
-          'fra': 'gaélique | gaélique écossais',
-          'deu': 'Gälisch-Schottisch'
+        "@id": "gla",
+        "skos:prefLabel": {
+          "eng": "Gaelic | Scottish Gaelic",
+          "deu": "Gälisch-Schottisch",
+          "fra": "gaélique | gaélique écossais"
         }
       },
       {
-        '@id': 'dar',
-        'skos:prefLabel': {
-          'deu': 'Darginisch',
-          'fra': 'dargwa',
-          'eng': 'Dargwa'
+        "@id": "dar",
+        "skos:prefLabel": {
+          "eng": "Dargwa",
+          "deu": "Darginisch",
+          "fra": "dargwa"
         }
       },
       {
-        '@id': 'cpp',
-        'skos:prefLabel': {
-          'deu': 'Kreolisch-Portugiesisch (Andere)',
-          'fra': 'créoles et pidgins basés sur le portugais',
-          'eng': 'Creoles and pidgins, Portuguese-based'
+        "@id": "cpp",
+        "skos:prefLabel": {
+          "eng": "Creoles and pidgins, Portuguese-based",
+          "deu": "Kreolisch-Portugiesisch (Andere)",
+          "fra": "créoles et pidgins basés sur le portugais"
         }
       },
       {
-        '@id': 'kho',
-        'skos:prefLabel': {
-          'eng': 'Khotanese | Sakan',
-          'deu': 'Sakisch',
-          'fra': 'khotanais | sakan'
+        "@id": "kho",
+        "skos:prefLabel": {
+          "eng": "Khotanese | Sakan",
+          "deu": "Sakisch",
+          "fra": "khotanais | sakan"
         }
       },
       {
-        '@id': 'art',
-        'skos:prefLabel': {
-          'eng': 'Artificial languages',
-          'deu': 'Kunstsprachen (Andere)',
-          'fra': 'artificielles, langues'
+        "@id": "art",
+        "skos:prefLabel": {
+          "eng": "Artificial languages",
+          "deu": "Kunstsprachen (Andere)",
+          "fra": "artificielles, langues"
         }
       },
       {
-        '@id': 'akk',
-        'skos:prefLabel': {
-          'fra': 'akkadien',
-          'eng': 'Akkadian',
-          'deu': 'Akkadisch'
+        "@id": "akk",
+        "skos:prefLabel": {
+          "eng": "Akkadian",
+          "deu": "Akkadisch",
+          "fra": "akkadien"
         }
       },
       {
-        '@id': 'oci',
-        'skos:prefLabel': {
-          'eng': 'Occitan (post 1500)',
-          'fra': 'occitan (après 1500)',
-          'deu': 'Okzitanisch'
+        "@id": "oci",
+        "skos:prefLabel": {
+          "eng": "Occitan (post 1500)",
+          "deu": "Okzitanisch",
+          "fra": "occitan (après 1500)"
         }
       },
       {
-        '@id': 'suk',
-        'skos:prefLabel': {
-          'fra': 'sukuma',
-          'deu': 'Sukuma-Sprache',
-          'eng': 'Sukuma'
+        "@id": "suk",
+        "skos:prefLabel": {
+          "eng": "Sukuma",
+          "deu": "Sukuma-Sprache",
+          "fra": "sukuma"
         }
       },
       {
-        '@id': 'sit',
-        'skos:prefLabel': {
-          'fra': 'sino-tibétaines, langues',
-          'deu': 'Sinotibetische Sprachen (Andere)',
-          'eng': 'Sino-Tibetan languages'
+        "@id": "sit",
+        "skos:prefLabel": {
+          "eng": "Sino-Tibetan languages",
+          "deu": "Sinotibetische Sprachen (Andere)",
+          "fra": "sino-tibétaines, langues"
         }
       },
       {
-        '@id': 'bel',
-        'skos:prefLabel': {
-          'eng': 'Belarusian',
-          'deu': 'Weißrussisch',
-          'fra': 'biélorusse'
+        "@id": "bel",
+        "skos:prefLabel": {
+          "eng": "Belarusian",
+          "deu": "Weißrussisch",
+          "fra": "biélorusse"
         }
       },
       {
-        '@id': 'vol',
-        'skos:prefLabel': {
-          'deu': 'Volapük',
-          'fra': 'volapük'
+        "@id": "vol",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Volapük",
+          "fra": "volapük"
         }
       },
       {
-        '@id': 'nor',
-        'skos:prefLabel': {
-          'eng': 'Norwegian',
-          'fra': 'norvégien',
-          'deu': 'Norwegisch'
+        "@id": "nor",
+        "skos:prefLabel": {
+          "eng": "Norwegian",
+          "deu": "Norwegisch",
+          "fra": "norvégien"
         }
       },
       {
-        '@id': 'alg',
-        'skos:prefLabel': {
-          'eng': 'Algonquian languages',
-          'deu': 'Algonkin-Sprachen (Andere)',
-          'fra': 'algonquines, langues'
+        "@id": "alg",
+        "skos:prefLabel": {
+          "eng": "Algonquian languages",
+          "deu": "Algonkin-Sprachen (Andere)",
+          "fra": "algonquines, langues"
         }
       },
       {
-        '@id': 'aar',
-        'skos:prefLabel': {
-          'fra': 'afar',
-          'deu': 'Danakil-Sprache',
-          'eng': 'Afar'
+        "@id": "aar",
+        "skos:prefLabel": {
+          "eng": "Afar",
+          "deu": "Danakil-Sprache",
+          "fra": "afar"
         }
       },
       {
-        '@id': 'ful',
-        'skos:prefLabel': {
-          'eng': 'Fulah',
-          'fra': 'peul',
-          'deu': 'Ful'
+        "@id": "ful",
+        "skos:prefLabel": {
+          "eng": "Fulah",
+          "deu": "Ful",
+          "fra": "peul"
         }
       },
       {
-        '@id': 'chk',
-        'skos:prefLabel': {
-          'eng': 'Chuukese',
-          'deu': 'Trukesisch',
-          'fra': 'chuuk'
+        "@id": "chk",
+        "skos:prefLabel": {
+          "eng": "Chuukese",
+          "deu": "Trukesisch",
+          "fra": "chuuk"
         }
       },
       {
-        '@id': 'zbl',
-        'skos:prefLabel': {
-          'fra': 'symboles Bliss | Bliss',
-          'eng': 'Blissymbols | Blissymbolics | Bliss',
-          'deu': 'Bliss-Symbol'
+        "@id": "zbl",
+        "skos:prefLabel": {
+          "eng": "Blissymbols | Blissymbolics | Bliss",
+          "deu": "Bliss-Symbol",
+          "fra": "symboles Bliss | Bliss"
         }
       },
       {
-        '@id': 'por',
-        'skos:prefLabel': {
-          'fra': 'portugais',
-          'eng': 'Portuguese',
-          'deu': 'Portugiesisch'
+        "@id": "por",
+        "skos:prefLabel": {
+          "eng": "Portuguese",
+          "deu": "Portugiesisch",
+          "fra": "portugais"
         }
       },
       {
-        '@id': 'frr',
-        'skos:prefLabel': {
-          'deu': 'Nordfriesisch',
-          'fra': 'frison septentrional',
-          'eng': 'Northern Frisian'
+        "@id": "frr",
+        "skos:prefLabel": {
+          "eng": "Northern Frisian",
+          "deu": "Nordfriesisch",
+          "fra": "frison septentrional"
         }
       },
       {
-        '@id': 'osa',
-        'skos:prefLabel': {
-          'fra': 'osage',
-          'deu': 'Osage-Sprache',
-          'eng': 'Osage'
+        "@id": "osa",
+        "skos:prefLabel": {
+          "eng": "Osage",
+          "deu": "Osage-Sprache",
+          "fra": "osage"
         }
       },
       {
-        '@id': 'bod',
-        'skos:prefLabel': {
-          'deu': 'Tibetisch',
-          'eng': 'Tibetan',
-          'fra': 'tibétain'
+        "@id": "bod",
+        "skos:prefLabel": {
+          "eng": "Tibetan",
+          "deu": "Tibetisch",
+          "fra": "tibétain"
         }
       },
       {
-        '@id': 'afh',
-        'skos:prefLabel': {
-          'fra': 'afrihili',
-          'deu': 'Afrihili'
+        "@id": "afh",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Afrihili",
+          "fra": "afrihili"
         }
       },
       {
-        '@id': 'mos',
-        'skos:prefLabel': {
-          'deu': 'Mossi-Sprache',
-          'fra': 'moré',
-          'eng': 'Mossi'
+        "@id": "mos",
+        "skos:prefLabel": {
+          "eng": "Mossi",
+          "deu": "Mossi-Sprache",
+          "fra": "moré"
         }
       },
       {
-        '@id': 'hup',
-        'skos:prefLabel': {
-          'deu': 'Hupa-Sprache',
-          'fra': 'hupa',
-          'eng': 'Hupa'
+        "@id": "hup",
+        "skos:prefLabel": {
+          "eng": "Hupa",
+          "deu": "Hupa-Sprache",
+          "fra": "hupa"
         }
       },
       {
-        '@id': 'moh',
-        'skos:prefLabel': {
-          'deu': 'Mohawk-Sprache',
-          'eng': 'Mohawk',
-          'fra': 'mohawk'
+        "@id": "moh",
+        "skos:prefLabel": {
+          "eng": "Mohawk",
+          "deu": "Mohawk-Sprache",
+          "fra": "mohawk"
         }
       },
       {
-        '@id': 'gay',
-        'skos:prefLabel': {
-          'eng': 'Gayo',
-          'fra': 'gayo',
-          'deu': 'Gayo-Sprache'
+        "@id": "gay",
+        "skos:prefLabel": {
+          "eng": "Gayo",
+          "deu": "Gayo-Sprache",
+          "fra": "gayo"
         }
       },
       {
-        '@id': 'bis',
-        'skos:prefLabel': {
-          'fra': 'bichlamar',
-          'eng': 'Bislama',
-          'deu': 'Beach-la-mar'
+        "@id": "bis",
+        "skos:prefLabel": {
+          "eng": "Bislama",
+          "deu": "Beach-la-mar",
+          "fra": "bichlamar"
         }
       },
       {
-        '@id': 'smj',
-        'skos:prefLabel': {
-          'fra': 'sami de Lule',
-          'deu': 'Lulesaamisch',
-          'eng': 'Lule Sami'
+        "@id": "smj",
+        "skos:prefLabel": {
+          "eng": "Lule Sami",
+          "deu": "Lulesaamisch",
+          "fra": "sami de Lule"
         }
       },
       {
-        '@id': 'dut',
-        'skos:prefLabel': {
-          'eng': 'Dutch | Flemish',
-          'fra': 'néerlandais | flamand',
-          'deu': 'Niederländisch'
+        "@id": "dut",
+        "skos:prefLabel": {
+          "eng": "Dutch | Flemish",
+          "deu": "Niederländisch",
+          "fra": "néerlandais | flamand"
         }
       },
       {
-        '@id': 'syr',
-        'skos:prefLabel': {
-          'eng': 'Syriac',
-          'fra': 'syriaque',
-          'deu': 'Neuostaramäisch'
+        "@id": "syr",
+        "skos:prefLabel": {
+          "eng": "Syriac",
+          "deu": "Neuostaramäisch",
+          "fra": "syriaque"
         }
       },
       {
-        '@id': 'was',
-        'skos:prefLabel': {
-          'eng': 'Washo',
-          'deu': 'Washo-Sprache',
-          'fra': 'washo'
+        "@id": "was",
+        "skos:prefLabel": {
+          "eng": "Washo",
+          "deu": "Washo-Sprache",
+          "fra": "washo"
         }
       },
       {
-        '@id': 'tuk',
-        'skos:prefLabel': {
-          'deu': 'Turkmenisch',
-          'fra': 'turkmène',
-          'eng': 'Turkmen'
+        "@id": "tuk",
+        "skos:prefLabel": {
+          "eng": "Turkmen",
+          "deu": "Turkmenisch",
+          "fra": "turkmène"
         }
       },
       {
-        '@id': 'bai',
-        'skos:prefLabel': {
-          'fra': 'bamiléké, langues',
-          'eng': 'Bamileke languages',
-          'deu': 'Bamileke-Sprachen'
+        "@id": "bai",
+        "skos:prefLabel": {
+          "eng": "Bamileke languages",
+          "deu": "Bamileke-Sprachen",
+          "fra": "bamiléké, langues"
         }
       },
       {
-        '@id': 'lit',
-        'skos:prefLabel': {
-          'deu': 'Litauisch',
-          'fra': 'lituanien',
-          'eng': 'Lithuanian'
+        "@id": "lit",
+        "skos:prefLabel": {
+          "eng": "Lithuanian",
+          "deu": "Litauisch",
+          "fra": "lituanien"
         }
       },
       {
-        '@id': 'mwl',
-        'skos:prefLabel': {
-          'eng': 'Mirandese',
-          'fra': 'mirandais',
-          'deu': 'Mirandesisch'
+        "@id": "mwl",
+        "skos:prefLabel": {
+          "eng": "Mirandese",
+          "deu": "Mirandesisch",
+          "fra": "mirandais"
         }
       },
       {
-        '@id': 'eng',
-        'skos:prefLabel': {
-          'eng': 'English',
-          'deu': 'Englisch',
-          'fra': 'anglais'
+        "@id": "eng",
+        "skos:prefLabel": {
+          "eng": "English",
+          "deu": "Englisch",
+          "fra": "anglais"
         }
       },
       {
-        '@id': 'inc',
-        'skos:prefLabel': {
-          'deu': 'Indoarische Sprachen (Andere)',
-          'fra': 'indo-aryennes, langues',
-          'eng': 'Indic languages'
+        "@id": "inc",
+        "skos:prefLabel": {
+          "eng": "Indic languages",
+          "deu": "Indoarische Sprachen (Andere)",
+          "fra": "indo-aryennes, langues"
         }
       },
       {
-        '@id': 'hin',
-        'skos:prefLabel': {
-          'deu': 'Hindi',
-          'fra': 'hindi'
+        "@id": "hin",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Hindi",
+          "fra": "hindi"
         }
       },
       {
-        '@id': 'egy',
-        'skos:prefLabel': {
-          'fra': 'égyptien',
-          'eng': 'Egyptian (Ancient)',
-          'deu': 'Ägyptisch'
+        "@id": "egy",
+        "skos:prefLabel": {
+          "eng": "Egyptian (Ancient)",
+          "deu": "Ägyptisch",
+          "fra": "égyptien"
         }
       },
       {
-        '@id': 'ava',
-        'skos:prefLabel': {
-          'eng': 'Avaric',
-          'fra': 'avar',
-          'deu': 'Awarisch'
+        "@id": "cnr",
+        "skos:prefLabel": {
+          "eng": "Montenegrin",
+          "deu": "Montenegrinisch",
+          "fra": "monténégrin"
         }
       },
       {
-        '@id': 'gaa',
-        'skos:prefLabel': {
-          'deu': 'Ga-Sprache',
-          'fra': 'ga',
-          'eng': 'Ga'
+        "@id": "ava",
+        "skos:prefLabel": {
+          "eng": "Avaric",
+          "deu": "Awarisch",
+          "fra": "avar"
         }
       },
       {
-        '@id': 'tam',
-        'skos:prefLabel': {
-          'fra': 'tamoul',
-          'deu': 'Tamil'
+        "@id": "gaa",
+        "skos:prefLabel": {
+          "eng": "Ga",
+          "deu": "Ga-Sprache",
+          "fra": "ga"
         }
       },
       {
-        '@id': 'frs',
-        'skos:prefLabel': {
-          'deu': 'Ostfriesisch',
-          'eng': 'Eastern Frisian',
-          'fra': 'frison oriental'
+        "@id": "tam",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Tamil",
+          "fra": "tamoul"
         }
       },
       {
-        '@id': 'cel',
-        'skos:prefLabel': {
-          'deu': 'Keltische Sprachen (Andere)',
-          'eng': 'Celtic languages',
-          'fra': 'celtiques, langues | celtes, langues'
+        "@id": "frs",
+        "skos:prefLabel": {
+          "eng": "Eastern Frisian",
+          "deu": "Ostfriesisch",
+          "fra": "frison oriental"
         }
       },
       {
-        '@id': 'pap',
-        'skos:prefLabel': {
-          'deu': 'Papiamento',
-          'fra': 'papiamento'
+        "@id": "cel",
+        "skos:prefLabel": {
+          "eng": "Celtic languages",
+          "deu": "Keltische Sprachen (Andere)",
+          "fra": "celtiques, langues | celtes, langues"
         }
       },
       {
-        '@id': 'kpe',
-        'skos:prefLabel': {
-          'fra': 'kpellé',
-          'eng': 'Kpelle',
-          'deu': 'Kpelle-Sprache'
+        "@id": "pap",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Papiamento",
+          "fra": "papiamento"
         }
       },
       {
-        '@id': 'bem',
-        'skos:prefLabel': {
-          'fra': 'bemba',
-          'deu': 'Bemba-Sprache',
-          'eng': 'Bemba'
+        "@id": "kpe",
+        "skos:prefLabel": {
+          "eng": "Kpelle",
+          "deu": "Kpelle-Sprache",
+          "fra": "kpellé"
         }
       },
       {
-        '@id': 'mal',
-        'skos:prefLabel': {
-          'deu': 'Malayalam',
-          'fra': 'malayalam'
+        "@id": "bem",
+        "skos:prefLabel": {
+          "eng": "Bemba",
+          "deu": "Bemba-Sprache",
+          "fra": "bemba"
         }
       },
       {
-        '@id': 'sat',
-        'skos:prefLabel': {
-          'deu': 'Santali',
-          'fra': 'santal'
+        "@id": "mal",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Malayalam",
+          "fra": "malayalam"
         }
       },
       {
-        '@id': 'bih',
-        'skos:prefLabel': {
-          'eng': 'Bihari languages',
-          'fra': 'langues biharis',
-          'deu': 'Bihari (Andere)'
+        "@id": "sat",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Santali",
+          "fra": "santal"
         }
       },
       {
-        '@id': 'chv',
-        'skos:prefLabel': {
-          'fra': 'tchouvache',
-          'eng': 'Chuvash',
-          'deu': 'Tschuwaschisch'
+        "@id": "bih",
+        "skos:prefLabel": {
+          "eng": "Bihari languages",
+          "deu": "Bihari (Andere)",
+          "fra": "langues biharis"
         }
       },
       {
-        '@id': 'nog',
-        'skos:prefLabel': {
-          'deu': 'Nogaisch',
-          'fra': 'nogaï | nogay',
-          'eng': 'Nogai'
+        "@id": "chv",
+        "skos:prefLabel": {
+          "eng": "Chuvash",
+          "deu": "Tschuwaschisch",
+          "fra": "tchouvache"
         }
       },
       {
-        '@id': 'sux',
-        'skos:prefLabel': {
-          'eng': 'Sumerian',
-          'deu': 'Sumerisch',
-          'fra': 'sumérien'
+        "@id": "nog",
+        "skos:prefLabel": {
+          "eng": "Nogai",
+          "deu": "Nogaisch",
+          "fra": "nogaï | nogay"
         }
       },
       {
-        '@id': 'gmh',
-        'skos:prefLabel': {
-          'eng': 'German, Middle High (ca.1050-1500)',
-          'fra': 'allemand, moyen haut (ca. 1050-1500)',
-          'deu': 'Mittelhochdeutsch'
+        "@id": "sux",
+        "skos:prefLabel": {
+          "eng": "Sumerian",
+          "deu": "Sumerisch",
+          "fra": "sumérien"
         }
       },
       {
-        '@id': 'ast',
-        'skos:prefLabel': {
-          'deu': 'Asturisch',
-          'eng': 'Asturian | Bable | Leonese | Asturleonese',
-          'fra': 'asturien | bable | léonais | asturoléonais'
+        "@id": "gmh",
+        "skos:prefLabel": {
+          "eng": "German, Middle High (ca.1050-1500)",
+          "deu": "Mittelhochdeutsch",
+          "fra": "allemand, moyen haut (ca. 1050-1500)"
         }
       },
       {
-        '@id': 'arg',
-        'skos:prefLabel': {
-          'deu': 'Aragonesisch',
-          'eng': 'Aragonese',
-          'fra': 'aragonais'
+        "@id": "ast",
+        "skos:prefLabel": {
+          "eng": "Asturian | Bable | Leonese | Asturleonese",
+          "deu": "Asturisch",
+          "fra": "asturien | bable | léonais | asturoléonais"
         }
       },
       {
-        '@id': 'sga',
-        'skos:prefLabel': {
-          'deu': 'Altirisch',
-          'fra': 'irlandais ancien (jusqu\'à 900)',
-          'eng': 'Irish, Old (to 900)'
+        "@id": "arg",
+        "skos:prefLabel": {
+          "eng": "Aragonese",
+          "deu": "Aragonesisch",
+          "fra": "aragonais"
         }
       },
       {
-        '@id': 'alt',
-        'skos:prefLabel': {
-          'eng': 'Southern Altai',
-          'deu': 'Altaisch',
-          'fra': 'altai du Sud'
+        "@id": "sga",
+        "skos:prefLabel": {
+          "eng": "Irish, Old (to 900)",
+          "deu": "Altirisch",
+          "fra": "irlandais ancien (jusqu'à 900)"
         }
       },
       {
-        '@id': 'zha',
-        'skos:prefLabel': {
-          'eng': 'Zhuang | Chuang',
-          'fra': 'zhuang | chuang',
-          'deu': 'Zhuang'
+        "@id": "alt",
+        "skos:prefLabel": {
+          "eng": "Southern Altai",
+          "deu": "Altaisch",
+          "fra": "altai du Sud"
         }
       },
       {
-        '@id': 'aka',
-        'skos:prefLabel': {
-          'eng': 'Akan',
-          'deu': 'Akan-Sprache',
-          'fra': 'akan'
+        "@id": "zha",
+        "skos:prefLabel": {
+          "eng": "Zhuang | Chuang",
+          "deu": "Zhuang",
+          "fra": "zhuang | chuang"
         }
       },
       {
-        '@id': 'fin',
-        'skos:prefLabel': {
-          'deu': 'Finnisch',
-          'eng': 'Finnish',
-          'fra': 'finnois'
+        "@id": "aka",
+        "skos:prefLabel": {
+          "eng": "Akan",
+          "deu": "Akan-Sprache",
+          "fra": "akan"
         }
       },
       {
-        '@id': 'uzb',
-        'skos:prefLabel': {
-          'eng': 'Uzbek',
-          'fra': 'ouszbek',
-          'deu': 'Usbekisch'
+        "@id": "fin",
+        "skos:prefLabel": {
+          "eng": "Finnish",
+          "deu": "Finnisch",
+          "fra": "finnois"
         }
       },
       {
-        '@id': 'fon',
-        'skos:prefLabel': {
-          'eng': 'Fon',
-          'deu': 'Fon-Sprache',
-          'fra': 'fon'
+        "@id": "uzb",
+        "skos:prefLabel": {
+          "eng": "Uzbek",
+          "deu": "Usbekisch",
+          "fra": "ouszbek"
         }
       },
       {
-        '@id': 'kos',
-        'skos:prefLabel': {
-          'deu': 'Kosraeanisch',
-          'fra': 'kosrae',
-          'eng': 'Kosraean'
+        "@id": "fon",
+        "skos:prefLabel": {
+          "eng": "Fon",
+          "deu": "Fon-Sprache",
+          "fra": "fon"
         }
       },
       {
-        '@id': 'ewe',
-        'skos:prefLabel': {
-          'deu': 'Ewe-Sprache',
-          'eng': 'Ewe',
-          'fra': 'éwé'
+        "@id": "kos",
+        "skos:prefLabel": {
+          "eng": "Kosraean",
+          "deu": "Kosraeanisch",
+          "fra": "kosrae"
         }
       },
       {
-        '@id': 'nzi',
-        'skos:prefLabel': {
-          'fra': 'nzema',
-          'eng': 'Nzima',
-          'deu': 'Nzima-Sprache'
+        "@id": "ewe",
+        "skos:prefLabel": {
+          "eng": "Ewe",
+          "deu": "Ewe-Sprache",
+          "fra": "éwé"
         }
       },
       {
-        '@id': 'nbl',
-        'skos:prefLabel': {
-          'fra': 'ndébélé du Sud',
-          'eng': 'Ndebele, South | South Ndebele',
-          'deu': 'Ndebele-Sprache (Transvaal)'
+        "@id": "nzi",
+        "skos:prefLabel": {
+          "eng": "Nzima",
+          "deu": "Nzima-Sprache",
+          "fra": "nzema"
         }
       },
       {
-        '@id': 'del',
-        'skos:prefLabel': {
-          'deu': 'Delaware-Sprache',
-          'eng': 'Delaware',
-          'fra': 'delaware'
+        "@id": "nbl",
+        "skos:prefLabel": {
+          "eng": "Ndebele, South | South Ndebele",
+          "deu": "Ndebele-Sprache (Transvaal)",
+          "fra": "ndébélé du Sud"
         }
       },
       {
-        '@id': 'nep',
-        'skos:prefLabel': {
-          'fra': 'népalais',
-          'deu': 'Nepali'
+        "@id": "del",
+        "skos:prefLabel": {
+          "eng": "Delaware",
+          "deu": "Delaware-Sprache",
+          "fra": "delaware"
         }
       },
       {
-        '@id': 'hil',
-        'skos:prefLabel': {
-          'deu': 'Hiligaynon-Sprache',
-          'eng': 'Hiligaynon',
-          'fra': 'hiligaynon'
+        "@id": "nep",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Nepali",
+          "fra": "népalais"
         }
       },
       {
-        '@id': 'kas',
-        'skos:prefLabel': {
-          'deu': 'Kaschmiri',
-          'fra': 'kashmiri',
-          'eng': 'Kashmiri'
+        "@id": "hil",
+        "skos:prefLabel": {
+          "eng": "Hiligaynon",
+          "deu": "Hiligaynon-Sprache",
+          "fra": "hiligaynon"
         }
       },
       {
-        '@id': 'cos',
-        'skos:prefLabel': {
-          'fra': 'corse',
-          'eng': 'Corsican',
-          'deu': 'Korsisch'
+        "@id": "kas",
+        "skos:prefLabel": {
+          "eng": "Kashmiri",
+          "deu": "Kaschmiri",
+          "fra": "kashmiri"
         }
       },
       {
-        '@id': 'ter',
-        'skos:prefLabel': {
-          'fra': 'tereno',
-          'deu': 'Tereno-Sprache',
-          'eng': 'Tereno'
+        "@id": "cos",
+        "skos:prefLabel": {
+          "eng": "Corsican",
+          "deu": "Korsisch",
+          "fra": "corse"
         }
       },
       {
-        '@id': 'kar',
-        'skos:prefLabel': {
-          'deu': 'Karenisch',
-          'fra': 'karen, langues',
-          'eng': 'Karen languages'
+        "@id": "ter",
+        "skos:prefLabel": {
+          "eng": "Tereno",
+          "deu": "Tereno-Sprache",
+          "fra": "tereno"
         }
       },
       {
-        '@id': 'aze',
-        'skos:prefLabel': {
-          'fra': 'azéri',
-          'deu': 'Aserbeidschanisch',
-          'eng': 'Azerbaijani'
+        "@id": "kar",
+        "skos:prefLabel": {
+          "eng": "Karen languages",
+          "deu": "Karenisch",
+          "fra": "karen, langues"
         }
       },
       {
-        '@id': 'car',
-        'skos:prefLabel': {
-          'fra': 'karib | galibi | carib',
-          'deu': 'Karibische Sprachen',
-          'eng': 'Galibi Carib'
+        "@id": "aze",
+        "skos:prefLabel": {
+          "eng": "Azerbaijani",
+          "deu": "Aserbeidschanisch",
+          "fra": "azéri"
         }
       },
       {
-        '@id': 'srn',
-        'skos:prefLabel': {
-          'fra': 'sranan tongo',
-          'deu': 'Sranantongo',
-          'eng': 'Sranan Tongo'
+        "@id": "car",
+        "skos:prefLabel": {
+          "eng": "Galibi Carib",
+          "deu": "Karibische Sprachen",
+          "fra": "karib | galibi | carib"
         }
       },
       {
-        '@id': 'wol',
-        'skos:prefLabel': {
-          'deu': 'Wolof-Sprache',
-          'fra': 'wolof',
-          'eng': 'Wolof'
+        "@id": "srn",
+        "skos:prefLabel": {
+          "eng": "Sranan Tongo",
+          "deu": "Sranantongo",
+          "fra": "sranan tongo"
         }
       },
       {
-        '@id': 'war',
-        'skos:prefLabel': {
-          'fra': 'waray',
-          'deu': 'Waray'
+        "@id": "wol",
+        "skos:prefLabel": {
+          "eng": "Wolof",
+          "deu": "Wolof-Sprache",
+          "fra": "wolof"
         }
       },
       {
-        '@id': 'mak',
-        'skos:prefLabel': {
-          'deu': 'Makassarisch',
-          'eng': 'Makasar',
-          'fra': 'makassar'
+        "@id": "war",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Waray",
+          "fra": "waray"
         }
       },
       {
-        '@id': 'tiv',
-        'skos:prefLabel': {
-          'deu': 'Tiv-Sprache',
-          'eng': 'Tiv',
-          'fra': 'tiv'
+        "@id": "mak",
+        "skos:prefLabel": {
+          "eng": "Makasar",
+          "deu": "Makassarisch",
+          "fra": "makassar"
         }
       },
       {
-        '@id': 'ton',
-        'skos:prefLabel': {
-          'eng': 'Tonga (Tonga Islands)',
-          'deu': 'Tongaisch',
-          'fra': 'tongan (Îles Tonga)'
+        "@id": "tiv",
+        "skos:prefLabel": {
+          "eng": "Tiv",
+          "deu": "Tiv-Sprache",
+          "fra": "tiv"
         }
       },
       {
-        '@id': 'ine',
-        'skos:prefLabel': {
-          'deu': 'Indogermanische Sprachen (Andere)',
-          'fra': 'indo-européennes, langues',
-          'eng': 'Indo-European languages'
+        "@id": "ton",
+        "skos:prefLabel": {
+          "eng": "Tonga (Tonga Islands)",
+          "deu": "Tongaisch",
+          "fra": "tongan (Îles Tonga)"
         }
       },
       {
-        '@id': 'cor',
-        'skos:prefLabel': {
-          'eng': 'Cornish',
-          'deu': 'Kornisch',
-          'fra': 'cornique'
+        "@id": "ine",
+        "skos:prefLabel": {
+          "eng": "Indo-European languages",
+          "deu": "Indogermanische Sprachen (Andere)",
+          "fra": "indo-européennes, langues"
         }
       },
       {
-        '@id': 'chu',
-        'skos:prefLabel': {
-          'deu': 'Kirchenslawisch',
-          'eng': 'Church Slavic | Old Slavonic | Church Slavonic | Old Bulgarian | Old Church Slavonic',
-          'fra': 'slavon d\'église | vieux slave | slavon liturgique | vieux bulgare'
+        "@id": "cor",
+        "skos:prefLabel": {
+          "eng": "Cornish",
+          "deu": "Kornisch",
+          "fra": "cornique"
         }
       },
       {
-        '@id': 'niu',
-        'skos:prefLabel': {
-          'deu': 'Niue-Sprache',
-          'eng': 'Niuean',
-          'fra': 'niué'
+        "@id": "chu",
+        "skos:prefLabel": {
+          "eng": "Church Slavic | Old Slavonic | Church Slavonic | Old Bulgarian | Old Church Slavonic",
+          "deu": "Kirchenslawisch",
+          "fra": "slavon d'église | vieux slave | slavon liturgique | vieux bulgare"
         }
       },
       {
-        '@id': 'nds',
-        'skos:prefLabel': {
-          'eng': 'Low German | Low Saxon | German, Low | Saxon, Low',
-          'deu': 'Niederdeutsch',
-          'fra': 'bas allemand | bas saxon | allemand, bas | saxon, bas'
+        "@id": "niu",
+        "skos:prefLabel": {
+          "eng": "Niuean",
+          "deu": "Niue-Sprache",
+          "fra": "niué"
         }
       },
       {
-        '@id': 'raj',
-        'skos:prefLabel': {
-          'deu': 'Rajasthani',
-          'fra': 'rajasthani'
+        "@id": "nds",
+        "skos:prefLabel": {
+          "eng": "Low German | Low Saxon | German, Low | Saxon, Low",
+          "deu": "Niederdeutsch",
+          "fra": "bas allemand | bas saxon | allemand, bas | saxon, bas"
         }
       },
       {
-        '@id': 'ben',
-        'skos:prefLabel': {
-          'fra': 'bengali',
-          'deu': 'Bengali'
+        "@id": "raj",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Rajasthani",
+          "fra": "rajasthani"
         }
       },
       {
-        '@id': 'kik',
-        'skos:prefLabel': {
-          'eng': 'Kikuyu | Gikuyu',
-          'fra': 'kikuyu',
-          'deu': 'Kikuyu-Sprache'
+        "@id": "ben",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Bengali",
+          "fra": "bengali"
         }
       },
       {
-        '@id': 'him',
-        'skos:prefLabel': {
-          'deu': 'Himachali',
-          'eng': 'Himachali languages | Western Pahari languages',
-          'fra': 'langues himachalis | langues paharis occidentales'
+        "@id": "kik",
+        "skos:prefLabel": {
+          "eng": "Kikuyu | Gikuyu",
+          "deu": "Kikuyu-Sprache",
+          "fra": "kikuyu"
         }
       },
       {
-        '@id': 'bas',
-        'skos:prefLabel': {
-          'deu': 'Basaa-Sprache',
-          'eng': 'Basa',
-          'fra': 'basa'
+        "@id": "him",
+        "skos:prefLabel": {
+          "eng": "Himachali languages | Western Pahari languages",
+          "deu": "Himachali",
+          "fra": "langues himachalis | langues paharis occidentales"
         }
       },
       {
-        '@id': 'nub',
-        'skos:prefLabel': {
-          'fra': 'nubiennes, langues',
-          'deu': 'Nubische Sprachen',
-          'eng': 'Nubian languages'
+        "@id": "bas",
+        "skos:prefLabel": {
+          "eng": "Basa",
+          "deu": "Basaa-Sprache",
+          "fra": "basa"
         }
       },
       {
-        '@id': 'fao',
-        'skos:prefLabel': {
-          'fra': 'féroïen',
-          'eng': 'Faroese',
-          'deu': 'Färöisch'
+        "@id": "nub",
+        "skos:prefLabel": {
+          "eng": "Nubian languages",
+          "deu": "Nubische Sprachen",
+          "fra": "nubiennes, langues"
         }
       },
       {
-        '@id': 'lat',
-        'skos:prefLabel': {
-          'fra': 'latin',
-          'eng': 'Latin',
-          'deu': 'Latein'
+        "@id": "fao",
+        "skos:prefLabel": {
+          "eng": "Faroese",
+          "deu": "Färöisch",
+          "fra": "féroïen"
         }
       },
       {
-        '@id': 'gwi',
-        'skos:prefLabel': {
-          'deu': 'Kutchin-Sprache',
-          'fra': 'gwich\'in',
-          'eng': 'Gwich\'in'
+        "@id": "lat",
+        "skos:prefLabel": {
+          "eng": "Latin",
+          "deu": "Latein",
+          "fra": "latin"
         }
       },
       {
-        '@id': 'chi',
-        'skos:prefLabel': {
-          'eng': 'Chinese',
-          'deu': 'Chinesisch',
-          'fra': 'chinois'
+        "@id": "gwi",
+        "skos:prefLabel": {
+          "eng": "Gwich'in",
+          "deu": "Kutchin-Sprache",
+          "fra": "gwich'in"
         }
       },
       {
-        '@id': 'tha',
-        'skos:prefLabel': {
-          'eng': 'Thai',
-          'fra': 'thaï',
-          'deu': 'Thailändisch'
+        "@id": "chi",
+        "skos:prefLabel": {
+          "eng": "Chinese",
+          "deu": "Chinesisch",
+          "fra": "chinois"
         }
       },
       {
-        '@id': 'snk',
-        'skos:prefLabel': {
-          'eng': 'Soninke',
-          'fra': 'soninké',
-          'deu': 'Soninke-Sprache'
+        "@id": "tha",
+        "skos:prefLabel": {
+          "eng": "Thai",
+          "deu": "Thailändisch",
+          "fra": "thaï"
         }
       },
       {
-        '@id': 'xal',
-        'skos:prefLabel': {
-          'fra': 'kalmouk | oïrat',
-          'eng': 'Kalmyk | Oirat',
-          'deu': 'Kalmückisch'
+        "@id": "snk",
+        "skos:prefLabel": {
+          "eng": "Soninke",
+          "deu": "Soninke-Sprache",
+          "fra": "soninké"
         }
       },
       {
-        '@id': 'sel',
-        'skos:prefLabel': {
-          'deu': 'Selkupisch',
-          'eng': 'Selkup',
-          'fra': 'selkoupe'
+        "@id": "xal",
+        "skos:prefLabel": {
+          "eng": "Kalmyk | Oirat",
+          "deu": "Kalmückisch",
+          "fra": "kalmouk | oïrat"
         }
       },
       {
-        '@id': 'ssw',
-        'skos:prefLabel': {
-          'eng': 'Swati',
-          'deu': 'Swasi-Sprache',
-          'fra': 'swati'
+        "@id": "sel",
+        "skos:prefLabel": {
+          "eng": "Selkup",
+          "deu": "Selkupisch",
+          "fra": "selkoupe"
         }
       },
       {
-        '@id': 'pag',
-        'skos:prefLabel': {
-          'deu': 'Pangasinan-Sprache',
-          'fra': 'pangasinan',
-          'eng': 'Pangasinan'
+        "@id": "ssw",
+        "skos:prefLabel": {
+          "eng": "Swati",
+          "deu": "Swasi-Sprache",
+          "fra": "swati"
         }
       },
       {
-        '@id': 'iba',
-        'skos:prefLabel': {
-          'eng': 'Iban',
-          'deu': 'Iban-Sprache',
-          'fra': 'iban'
+        "@id": "pag",
+        "skos:prefLabel": {
+          "eng": "Pangasinan",
+          "deu": "Pangasinan-Sprache",
+          "fra": "pangasinan"
         }
       },
       {
-        '@id': 'arw',
-        'skos:prefLabel': {
-          'deu': 'Arawak-Sprachen',
-          'eng': 'Arawak',
-          'fra': 'arawak'
+        "@id": "iba",
+        "skos:prefLabel": {
+          "eng": "Iban",
+          "deu": "Iban-Sprache",
+          "fra": "iban"
         }
       },
       {
-        '@id': 'ave',
-        'skos:prefLabel': {
-          'deu': 'Avestisch',
-          'eng': 'Avestan',
-          'fra': 'avestique'
+        "@id": "arw",
+        "skos:prefLabel": {
+          "eng": "Arawak",
+          "deu": "Arawak-Sprachen",
+          "fra": "arawak"
         }
       },
       {
-        '@id': 'csb',
-        'skos:prefLabel': {
-          'deu': 'Kaschubisch',
-          'eng': 'Kashubian',
-          'fra': 'kachoube'
+        "@id": "ave",
+        "skos:prefLabel": {
+          "eng": "Avestan",
+          "deu": "Avestisch",
+          "fra": "avestique"
         }
       },
       {
-        '@id': 'ach',
-        'skos:prefLabel': {
-          'eng': 'Acoli',
-          'fra': 'acoli',
-          'deu': 'Acholi-Sprache'
+        "@id": "csb",
+        "skos:prefLabel": {
+          "eng": "Kashubian",
+          "deu": "Kaschubisch",
+          "fra": "kachoube"
         }
       },
       {
-        '@id': 'syc',
-        'skos:prefLabel': {
-          'fra': 'syriaque classique',
-          'deu': 'Syrisch',
-          'eng': 'Classical Syriac'
+        "@id": "ach",
+        "skos:prefLabel": {
+          "eng": "Acoli",
+          "deu": "Acholi-Sprache",
+          "fra": "acoli"
         }
       },
       {
-        '@id': 'bak',
-        'skos:prefLabel': {
-          'fra': 'bachkir',
-          'eng': 'Bashkir',
-          'deu': 'Baschkirisch'
+        "@id": "syc",
+        "skos:prefLabel": {
+          "eng": "Classical Syriac",
+          "deu": "Syrisch",
+          "fra": "syriaque classique"
         }
       },
       {
-        '@id': 'jpn',
-        'skos:prefLabel': {
-          'fra': 'japonais',
-          'deu': 'Japanisch',
-          'eng': 'Japanese'
+        "@id": "bak",
+        "skos:prefLabel": {
+          "eng": "Bashkir",
+          "deu": "Baschkirisch",
+          "fra": "bachkir"
         }
       },
       {
-        '@id': 'dgr',
-        'skos:prefLabel': {
-          'deu': 'Dogrib-Sprache',
-          'eng': 'Dogrib',
-          'fra': 'dogrib'
+        "@id": "jpn",
+        "skos:prefLabel": {
+          "eng": "Japanese",
+          "deu": "Japanisch",
+          "fra": "japonais"
         }
       },
       {
-        '@id': 'tum',
-        'skos:prefLabel': {
-          'deu': 'Tumbuka-Sprache',
-          'fra': 'tumbuka',
-          'eng': 'Tumbuka'
+        "@id": "dgr",
+        "skos:prefLabel": {
+          "eng": "Dogrib",
+          "deu": "Dogrib-Sprache",
+          "fra": "dogrib"
         }
       },
       {
-        '@id': 'hun',
-        'skos:prefLabel': {
-          'deu': 'Ungarisch',
-          'fra': 'hongrois',
-          'eng': 'Hungarian'
+        "@id": "tum",
+        "skos:prefLabel": {
+          "eng": "Tumbuka",
+          "deu": "Tumbuka-Sprache",
+          "fra": "tumbuka"
         }
       },
       {
-        '@id': 'uga',
-        'skos:prefLabel': {
-          'eng': 'Ugaritic',
-          'fra': 'ougaritique',
-          'deu': 'Ugaritisch'
+        "@id": "hun",
+        "skos:prefLabel": {
+          "eng": "Hungarian",
+          "deu": "Ungarisch",
+          "fra": "hongrois"
         }
       },
       {
-        '@id': 'nai',
-        'skos:prefLabel': {
-          'eng': 'North American Indian languages',
-          'fra': 'nord-amérindiennes, langues',
-          'deu': 'Indianersprachen, Nordamerika (Andere)'
+        "@id": "uga",
+        "skos:prefLabel": {
+          "eng": "Ugaritic",
+          "deu": "Ugaritisch",
+          "fra": "ougaritique"
         }
       },
       {
-        '@id': 'fro',
-        'skos:prefLabel': {
-          'eng': 'French, Old (842-ca.1400)',
-          'fra': 'français ancien (842-ca.1400)',
-          'deu': 'Altfranzösisch'
+        "@id": "nai",
+        "skos:prefLabel": {
+          "eng": "North American Indian languages",
+          "deu": "Indianersprachen, Nordamerika (Andere)",
+          "fra": "nord-amérindiennes, langues"
         }
       },
       {
-        '@id': 'kaw',
-        'skos:prefLabel': {
-          'deu': 'Kawi',
-          'fra': 'kawi'
+        "@id": "fro",
+        "skos:prefLabel": {
+          "eng": "French, Old (842-ca.1400)",
+          "deu": "Altfranzösisch",
+          "fra": "français ancien (842-ca.1400)"
         }
       },
       {
-        '@id': 'sgn',
-        'skos:prefLabel': {
-          'deu': 'Zeichensprachen',
-          'eng': 'Sign Languages',
-          'fra': 'langues des signes'
+        "@id": "kaw",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Kawi",
+          "fra": "kawi"
         }
       },
       {
-        '@id': 'sma',
-        'skos:prefLabel': {
-          'eng': 'Southern Sami',
-          'fra': 'sami du Sud',
-          'deu': 'Südsaamisch'
+        "@id": "sgn",
+        "skos:prefLabel": {
+          "eng": "Sign Languages",
+          "deu": "Zeichensprachen",
+          "fra": "langues des signes"
         }
       },
       {
-        '@id': 'kal',
-        'skos:prefLabel': {
-          'eng': 'Kalaallisut | Greenlandic',
-          'fra': 'groenlandais',
-          'deu': 'Grönländisch'
+        "@id": "sma",
+        "skos:prefLabel": {
+          "eng": "Southern Sami",
+          "deu": "Südsaamisch",
+          "fra": "sami du Sud"
         }
       },
       {
-        '@id': 'fat',
-        'skos:prefLabel': {
-          'fra': 'fanti',
-          'deu': 'Fante-Sprache',
-          'eng': 'Fanti'
+        "@id": "kal",
+        "skos:prefLabel": {
+          "eng": "Kalaallisut | Greenlandic",
+          "deu": "Grönländisch",
+          "fra": "groenlandais"
         }
       },
       {
-        '@id': 'nau',
-        'skos:prefLabel': {
-          'eng': 'Nauru',
-          'fra': 'nauruan',
-          'deu': 'Nauruanisch'
+        "@id": "fat",
+        "skos:prefLabel": {
+          "eng": "Fanti",
+          "deu": "Fante-Sprache",
+          "fra": "fanti"
         }
       },
       {
-        '@id': 'chn',
-        'skos:prefLabel': {
-          'eng': 'Chinook jargon',
-          'fra': 'chinook, jargon',
-          'deu': 'Chinook-Jargon'
+        "@id": "nau",
+        "skos:prefLabel": {
+          "eng": "Nauru",
+          "deu": "Nauruanisch",
+          "fra": "nauruan"
         }
       },
       {
-        '@id': 'lui',
-        'skos:prefLabel': {
-          'eng': 'Luiseno',
-          'fra': 'luiseno',
-          'deu': 'Luiseño-Sprache'
+        "@id": "chn",
+        "skos:prefLabel": {
+          "eng": "Chinook jargon",
+          "deu": "Chinook-Jargon",
+          "fra": "chinook, jargon"
         }
       },
       {
-        '@id': 'cmc',
-        'skos:prefLabel': {
-          'fra': 'chames, langues',
-          'deu': 'Cham-Sprachen',
-          'eng': 'Chamic languages'
+        "@id": "lui",
+        "skos:prefLabel": {
+          "eng": "Luiseno",
+          "deu": "Luiseño-Sprache",
+          "fra": "luiseno"
         }
       },
       {
-        '@id': 'ina',
-        'skos:prefLabel': {
-          'fra': 'interlingua (langue auxiliaire internationale)',
-          'eng': 'Interlingua (International Auxiliary Language Association)',
-          'deu': 'Interlingua'
+        "@id": "cmc",
+        "skos:prefLabel": {
+          "eng": "Chamic languages",
+          "deu": "Cham-Sprachen",
+          "fra": "chames, langues"
         }
       },
       {
-        '@id': 'bur',
-        'skos:prefLabel': {
-          'fra': 'birman',
-          'eng': 'Burmese',
-          'deu': 'Birmanisch'
+        "@id": "ina",
+        "skos:prefLabel": {
+          "eng": "Interlingua (International Auxiliary Language Association)",
+          "deu": "Interlingua",
+          "fra": "interlingua (langue auxiliaire internationale)"
         }
       },
       {
-        '@id': 'roh',
-        'skos:prefLabel': {
-          'fra': 'romanche',
-          'eng': 'Romansh',
-          'deu': 'Rätoromanisch'
+        "@id": "bur",
+        "skos:prefLabel": {
+          "eng": "Burmese",
+          "deu": "Birmanisch",
+          "fra": "birman"
         }
       },
       {
-        '@id': 'ell',
-        'skos:prefLabel': {
-          'deu': 'Neugriechisch',
-          'fra': 'grec moderne (après 1453)',
-          'eng': 'Greek, Modern (1453-)'
+        "@id": "roh",
+        "skos:prefLabel": {
+          "eng": "Romansh",
+          "deu": "Rätoromanisch",
+          "fra": "romanche"
         }
       },
       {
-        '@id': 'gez',
-        'skos:prefLabel': {
-          'fra': 'guèze',
-          'deu': 'Altäthiopisch',
-          'eng': 'Geez'
+        "@id": "ell",
+        "skos:prefLabel": {
+          "eng": "Greek, Modern (1453-)",
+          "deu": "Neugriechisch",
+          "fra": "grec moderne (après 1453)"
         }
       },
       {
-        '@id': 'tpi',
-        'skos:prefLabel': {
-          'fra': 'tok pisin',
-          'eng': 'Tok Pisin',
-          'deu': 'Neumelanesisch'
+        "@id": "gez",
+        "skos:prefLabel": {
+          "eng": "Geez",
+          "deu": "Altäthiopisch",
+          "fra": "guèze"
         }
       },
       {
-        '@id': 'ssa',
-        'skos:prefLabel': {
-          'fra': 'nilo-sahariennes, langues',
-          'eng': 'Nilo-Saharan languages',
-          'deu': 'Nilosaharanische Sprachen (Andere)'
+        "@id": "tpi",
+        "skos:prefLabel": {
+          "eng": "Tok Pisin",
+          "deu": "Neumelanesisch",
+          "fra": "tok pisin"
         }
       },
       {
-        '@id': 'srd',
-        'skos:prefLabel': {
-          'eng': 'Sardinian',
-          'fra': 'sarde',
-          'deu': 'Sardisch'
+        "@id": "ssa",
+        "skos:prefLabel": {
+          "eng": "Nilo-Saharan languages",
+          "deu": "Nilosaharanische Sprachen (Andere)",
+          "fra": "nilo-sahariennes, langues"
         }
       },
       {
-        '@id': 'lav',
-        'skos:prefLabel': {
-          'eng': 'Latvian',
-          'deu': 'Lettisch',
-          'fra': 'letton'
+        "@id": "srd",
+        "skos:prefLabel": {
+          "eng": "Sardinian",
+          "deu": "Sardisch",
+          "fra": "sarde"
         }
       },
       {
-        '@id': 'zul',
-        'skos:prefLabel': {
-          'fra': 'zoulou',
-          'eng': 'Zulu',
-          'deu': 'Zulu-Sprache'
+        "@id": "lav",
+        "skos:prefLabel": {
+          "eng": "Latvian",
+          "deu": "Lettisch",
+          "fra": "letton"
         }
       },
       {
-        '@id': 'ukr',
-        'skos:prefLabel': {
-          'fra': 'ukrainien',
-          'eng': 'Ukrainian',
-          'deu': 'Ukrainisch'
+        "@id": "zul",
+        "skos:prefLabel": {
+          "eng": "Zulu",
+          "deu": "Zulu-Sprache",
+          "fra": "zoulou"
         }
       },
       {
-        '@id': 'oji',
-        'skos:prefLabel': {
-          'deu': 'Ojibwa-Sprache',
-          'fra': 'ojibwa',
-          'eng': 'Ojibwa'
+        "@id": "ukr",
+        "skos:prefLabel": {
+          "eng": "Ukrainian",
+          "deu": "Ukrainisch",
+          "fra": "ukrainien"
         }
       },
       {
-        '@id': 'krl',
-        'skos:prefLabel': {
-          'eng': 'Karelian',
-          'deu': 'Karelisch',
-          'fra': 'carélien'
+        "@id": "oji",
+        "skos:prefLabel": {
+          "eng": "Ojibwa",
+          "deu": "Ojibwa-Sprache",
+          "fra": "ojibwa"
         }
       },
       {
-        '@id': 'chy',
-        'skos:prefLabel': {
-          'eng': 'Cheyenne',
-          'fra': 'cheyenne',
-          'deu': 'Cheyenne-Sprache'
+        "@id": "krl",
+        "skos:prefLabel": {
+          "eng": "Karelian",
+          "deu": "Karelisch",
+          "fra": "carélien"
         }
       },
       {
-        '@id': 'ilo',
-        'skos:prefLabel': {
-          'eng': 'Iloko',
-          'deu': 'Ilokano-Sprache',
-          'fra': 'ilocano'
+        "@id": "chy",
+        "skos:prefLabel": {
+          "eng": "Cheyenne",
+          "deu": "Cheyenne-Sprache",
+          "fra": "cheyenne"
         }
       },
       {
-        '@id': 'bug',
-        'skos:prefLabel': {
-          'eng': 'Buginese',
-          'deu': 'Bugi-Sprache',
-          'fra': 'bugi'
+        "@id": "ilo",
+        "skos:prefLabel": {
+          "eng": "Iloko",
+          "deu": "Ilokano-Sprache",
+          "fra": "ilocano"
         }
       },
       {
-        '@id': 'jbo',
-        'skos:prefLabel': {
-          'deu': 'Lojban',
-          'fra': 'lojban'
+        "@id": "bug",
+        "skos:prefLabel": {
+          "eng": "Buginese",
+          "deu": "Bugi-Sprache",
+          "fra": "bugi"
         }
       },
       {
-        '@id': 'din',
-        'skos:prefLabel': {
-          'fra': 'dinka',
-          'eng': 'Dinka',
-          'deu': 'Dinka-Sprache'
+        "@id": "jbo",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Lojban",
+          "fra": "lojban"
         }
       },
       {
-        '@id': 'und',
-        'skos:prefLabel': {
-          'deu': 'Nicht zu entscheiden',
-          'eng': 'Undetermined',
-          'fra': 'indéterminée'
+        "@id": "din",
+        "skos:prefLabel": {
+          "eng": "Dinka",
+          "deu": "Dinka-Sprache",
+          "fra": "dinka"
         }
       },
       {
-        '@id': 'sot',
-        'skos:prefLabel': {
-          'deu': 'Süd-Sotho-Sprache',
-          'eng': 'Sotho, Southern',
-          'fra': 'sotho du Sud'
+        "@id": "und",
+        "skos:prefLabel": {
+          "eng": "Undetermined",
+          "deu": "Nicht zu entscheiden",
+          "fra": "indéterminée"
         }
       },
       {
-        '@id': 'mus',
-        'skos:prefLabel': {
-          'deu': 'Muskogisch',
-          'fra': 'muskogee',
-          'eng': 'Creek'
+        "@id": "sot",
+        "skos:prefLabel": {
+          "eng": "Sotho, Southern",
+          "deu": "Süd-Sotho-Sprache",
+          "fra": "sotho du Sud"
         }
       },
       {
-        '@id': 'rar',
-        'skos:prefLabel': {
-          'deu': 'Rarotonganisch',
-          'fra': 'rarotonga | maori des îles Cook',
-          'eng': 'Rarotongan | Cook Islands Maori'
+        "@id": "mus",
+        "skos:prefLabel": {
+          "eng": "Creek",
+          "deu": "Muskogisch",
+          "fra": "muskogee"
         }
       },
       {
-        '@id': 'bal',
-        'skos:prefLabel': {
-          'fra': 'baloutchi',
-          'deu': 'Belutschisch',
-          'eng': 'Baluchi'
+        "@id": "rar",
+        "skos:prefLabel": {
+          "eng": "Rarotongan | Cook Islands Maori",
+          "deu": "Rarotonganisch",
+          "fra": "rarotonga | maori des îles Cook"
         }
       },
       {
-        '@id': 'kor',
-        'skos:prefLabel': {
-          'eng': 'Korean',
-          'fra': 'coréen',
-          'deu': 'Koreanisch'
+        "@id": "bal",
+        "skos:prefLabel": {
+          "eng": "Baluchi",
+          "deu": "Belutschisch",
+          "fra": "baloutchi"
         }
       },
       {
-        '@id': 'cym',
-        'skos:prefLabel': {
-          'eng': 'Welsh',
-          'deu': 'Kymrisch',
-          'fra': 'gallois'
+        "@id": "kor",
+        "skos:prefLabel": {
+          "eng": "Korean",
+          "deu": "Koreanisch",
+          "fra": "coréen"
         }
       },
       {
-        '@id': 'mni',
-        'skos:prefLabel': {
-          'deu': 'Meithei-Sprache',
-          'fra': 'manipuri',
-          'eng': 'Manipuri'
+        "@id": "cym",
+        "skos:prefLabel": {
+          "eng": "Welsh",
+          "deu": "Kymrisch",
+          "fra": "gallois"
         }
       },
       {
-        '@id': 'que',
-        'skos:prefLabel': {
-          'deu': 'Quechua-Sprache',
-          'fra': 'quechua',
-          'eng': 'Quechua'
+        "@id": "mni",
+        "skos:prefLabel": {
+          "eng": "Manipuri",
+          "deu": "Meithei-Sprache",
+          "fra": "manipuri"
         }
       },
       {
-        '@id': 'efi',
-        'skos:prefLabel': {
-          'fra': 'efik',
-          'deu': 'Efik'
+        "@id": "que",
+        "skos:prefLabel": {
+          "eng": "Quechua",
+          "deu": "Quechua-Sprache",
+          "fra": "quechua"
         }
       },
       {
-        '@id': 'mai',
-        'skos:prefLabel': {
-          'fra': 'maithili',
-          'deu': 'Maithili'
+        "@id": "efi",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Efik",
+          "fra": "efik"
         }
       },
       {
-        '@id': 'chb',
-        'skos:prefLabel': {
-          'deu': 'Chibcha-Sprachen',
-          'fra': 'chibcha',
-          'eng': 'Chibcha'
+        "@id": "mai",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Maithili",
+          "fra": "maithili"
         }
       },
       {
-        '@id': 'tso',
-        'skos:prefLabel': {
-          'deu': 'Tsonga-Sprache',
-          'fra': 'tsonga',
-          'eng': 'Tsonga'
+        "@id": "chb",
+        "skos:prefLabel": {
+          "eng": "Chibcha",
+          "deu": "Chibcha-Sprachen",
+          "fra": "chibcha"
         }
       },
       {
-        '@id': 'pli',
-        'skos:prefLabel': {
-          'fra': 'pali',
-          'deu': 'Pali'
+        "@id": "tso",
+        "skos:prefLabel": {
+          "eng": "Tsonga",
+          "deu": "Tsonga-Sprache",
+          "fra": "tsonga"
         }
       },
       {
-        '@id': 'day',
-        'skos:prefLabel': {
-          'eng': 'Land Dayak languages',
-          'fra': 'dayak, langues',
-          'deu': 'Dajakisch'
+        "@id": "pli",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Pali",
+          "fra": "pali"
         }
       },
       {
-        '@id': 'dyu',
-        'skos:prefLabel': {
-          'eng': 'Dyula',
-          'deu': 'Dyula-Sprache',
-          'fra': 'dioula'
+        "@id": "day",
+        "skos:prefLabel": {
+          "eng": "Land Dayak languages",
+          "deu": "Dajakisch",
+          "fra": "dayak, langues"
         }
       },
       {
-        '@id': 'epo',
-        'skos:prefLabel': {
-          'fra': 'espéranto',
-          'deu': 'Esperanto'
+        "@id": "dyu",
+        "skos:prefLabel": {
+          "eng": "Dyula",
+          "deu": "Dyula-Sprache",
+          "fra": "dioula"
         }
       },
       {
-        '@id': 'sla',
-        'skos:prefLabel': {
-          'eng': 'Slavic languages',
-          'fra': 'slaves, langues',
-          'deu': 'Slawische Sprachen (Andere)'
+        "@id": "epo",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Esperanto",
+          "fra": "espéranto"
         }
       },
       {
-        '@id': 'fas',
-        'skos:prefLabel': {
-          'eng': 'Persian',
-          'deu': 'Persisch',
-          'fra': 'persan'
+        "@id": "sla",
+        "skos:prefLabel": {
+          "eng": "Slavic languages",
+          "deu": "Slawische Sprachen (Andere)",
+          "fra": "slaves, langues"
         }
       },
       {
-        '@id': 'ipk',
-        'skos:prefLabel': {
-          'deu': 'Inupik',
-          'fra': 'inupiaq',
-          'eng': 'Inupiaq'
+        "@id": "fas",
+        "skos:prefLabel": {
+          "eng": "Persian",
+          "deu": "Persisch",
+          "fra": "persan"
         }
       },
       {
-        '@id': 'doi',
-        'skos:prefLabel': {
-          'deu': 'Dogri',
-          'fra': 'dogri'
+        "@id": "ipk",
+        "skos:prefLabel": {
+          "eng": "Inupiaq",
+          "deu": "Inupik",
+          "fra": "inupiaq"
         }
       },
       {
-        '@id': 'lez',
-        'skos:prefLabel': {
-          'fra': 'lezghien',
-          'eng': 'Lezghian',
-          'deu': 'Lesgisch'
+        "@id": "doi",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Dogri",
+          "fra": "dogri"
         }
       },
       {
-        '@id': 'nav',
-        'skos:prefLabel': {
-          'fra': 'navaho',
-          'deu': 'Navajo-Sprache',
-          'eng': 'Navajo | Navaho'
+        "@id": "lez",
+        "skos:prefLabel": {
+          "eng": "Lezghian",
+          "deu": "Lesgisch",
+          "fra": "lezghien"
         }
       },
       {
-        '@id': 'vie',
-        'skos:prefLabel': {
-          'deu': 'Vietnamesisch',
-          'eng': 'Vietnamese',
-          'fra': 'vietnamien'
+        "@id": "nav",
+        "skos:prefLabel": {
+          "eng": "Navajo | Navaho",
+          "deu": "Navajo-Sprache",
+          "fra": "navaho"
         }
       },
       {
-        '@id': 'cpf',
-        'skos:prefLabel': {
-          'eng': 'Creoles and pidgins, French-based',
-          'deu': 'Kreolisch-Französisch (Andere)',
-          'fra': 'créoles et pidgins basés sur le français'
+        "@id": "vie",
+        "skos:prefLabel": {
+          "eng": "Vietnamese",
+          "deu": "Vietnamesisch",
+          "fra": "vietnamien"
         }
       },
       {
-        '@id': 'anp',
-        'skos:prefLabel': {
-          'deu': 'Anga-Sprache',
-          'fra': 'angika',
-          'eng': 'Angika'
+        "@id": "cpf",
+        "skos:prefLabel": {
+          "eng": "Creoles and pidgins, French-based",
+          "deu": "Kreolisch-Französisch (Andere)",
+          "fra": "créoles et pidgins basés sur le français"
         }
       },
       {
-        '@id': 'pon',
-        'skos:prefLabel': {
-          'deu': 'Ponapeanisch',
-          'fra': 'pohnpei',
-          'eng': 'Pohnpeian'
+        "@id": "anp",
+        "skos:prefLabel": {
+          "eng": "Angika",
+          "deu": "Anga-Sprache",
+          "fra": "angika"
         }
       },
       {
-        '@id': 'cha',
-        'skos:prefLabel': {
-          'fra': 'chamorro',
-          'eng': 'Chamorro',
-          'deu': 'Chamorro-Sprache'
+        "@id": "pon",
+        "skos:prefLabel": {
+          "eng": "Pohnpeian",
+          "deu": "Ponapeanisch",
+          "fra": "pohnpei"
         }
       },
       {
-        '@id': 'kua',
-        'skos:prefLabel': {
-          'deu': 'Kwanyama-Sprache',
-          'eng': 'Kuanyama | Kwanyama',
-          'fra': 'kuanyama | kwanyama'
+        "@id": "cha",
+        "skos:prefLabel": {
+          "eng": "Chamorro",
+          "deu": "Chamorro-Sprache",
+          "fra": "chamorro"
         }
       },
       {
-        '@id': 'lus',
-        'skos:prefLabel': {
-          'eng': 'Lushai',
-          'deu': 'Lushai-Sprache',
-          'fra': 'lushai'
+        "@id": "kua",
+        "skos:prefLabel": {
+          "eng": "Kuanyama | Kwanyama",
+          "deu": "Kwanyama-Sprache",
+          "fra": "kuanyama | kwanyama"
         }
       },
       {
-        '@id': 'srp',
-        'skos:prefLabel': {
-          'eng': 'Serbian',
-          'fra': 'serbe',
-          'deu': 'Serbisch'
+        "@id": "lus",
+        "skos:prefLabel": {
+          "eng": "Lushai",
+          "deu": "Lushai-Sprache",
+          "fra": "lushai"
         }
       },
       {
-        '@id': 'chm',
-        'skos:prefLabel': {
-          'deu': 'Tscheremissisch',
-          'eng': 'Mari',
-          'fra': 'mari'
+        "@id": "srp",
+        "skos:prefLabel": {
+          "eng": "Serbian",
+          "deu": "Serbisch",
+          "fra": "serbe"
         }
       },
       {
-        '@id': 'tet',
-        'skos:prefLabel': {
-          'fra': 'tetum',
-          'deu': 'Tetum-Sprache',
-          'eng': 'Tetum'
+        "@id": "chm",
+        "skos:prefLabel": {
+          "eng": "Mari",
+          "deu": "Tscheremissisch",
+          "fra": "mari"
         }
       },
       {
-        '@id': 'phn',
-        'skos:prefLabel': {
-          'eng': 'Phoenician',
-          'fra': 'phénicien',
-          'deu': 'Phönikisch'
+        "@id": "tet",
+        "skos:prefLabel": {
+          "eng": "Tetum",
+          "deu": "Tetum-Sprache",
+          "fra": "tetum"
         }
       },
       {
-        '@id': 'tir',
-        'skos:prefLabel': {
-          'deu': 'Tigrinja-Sprache',
-          'fra': 'tigrigna',
-          'eng': 'Tigrinya'
+        "@id": "phn",
+        "skos:prefLabel": {
+          "eng": "Phoenician",
+          "deu": "Phönikisch",
+          "fra": "phénicien"
         }
       },
       {
-        '@id': 'men',
-        'skos:prefLabel': {
-          'deu': 'Mende-Sprache',
-          'eng': 'Mende',
-          'fra': 'mendé'
+        "@id": "tir",
+        "skos:prefLabel": {
+          "eng": "Tigrinya",
+          "deu": "Tigrinja-Sprache",
+          "fra": "tigrigna"
         }
       },
       {
-        '@id': 'crh',
-        'skos:prefLabel': {
-          'eng': 'Crimean Tatar | Crimean Turkish',
-          'deu': 'Krimtatarisch',
-          'fra': 'tatar de Crimé'
+        "@id": "men",
+        "skos:prefLabel": {
+          "eng": "Mende",
+          "deu": "Mende-Sprache",
+          "fra": "mendé"
         }
       },
       {
-        '@id': 'sem',
-        'skos:prefLabel': {
-          'eng': 'Semitic languages',
-          'fra': 'sémitiques, langues',
-          'deu': 'Semitische Sprachen (Andere)'
+        "@id": "crh",
+        "skos:prefLabel": {
+          "eng": "Crimean Tatar | Crimean Turkish",
+          "deu": "Krimtatarisch",
+          "fra": "tatar de Crimé"
         }
       },
       {
-        '@id': 'smn',
-        'skos:prefLabel': {
-          'fra': 'sami d\'Inari',
-          'eng': 'Inari Sami',
-          'deu': 'Inarisaamisch'
+        "@id": "sem",
+        "skos:prefLabel": {
+          "eng": "Semitic languages",
+          "deu": "Semitische Sprachen (Andere)",
+          "fra": "sémitiques, langues"
         }
       },
       {
-        '@id': 'got',
-        'skos:prefLabel': {
-          'eng': 'Gothic',
-          'fra': 'gothique',
-          'deu': 'Gotisch'
+        "@id": "smn",
+        "skos:prefLabel": {
+          "eng": "Inari Sami",
+          "deu": "Inarisaamisch",
+          "fra": "sami d'Inari"
         }
       },
       {
-        '@id': 'mdr',
-        'skos:prefLabel': {
-          'deu': 'Mandaresisch',
-          'eng': 'Mandar',
-          'fra': 'mandar'
+        "@id": "got",
+        "skos:prefLabel": {
+          "eng": "Gothic",
+          "deu": "Gotisch",
+          "fra": "gothique"
         }
       },
       {
-        '@id': 'kru',
-        'skos:prefLabel': {
-          'fra': 'kurukh',
-          'deu': 'Oraon-Sprache',
-          'eng': 'Kurukh'
+        "@id": "mdr",
+        "skos:prefLabel": {
+          "eng": "Mandar",
+          "deu": "Mandaresisch",
+          "fra": "mandar"
         }
       },
       {
-        '@id': 'znd',
-        'skos:prefLabel': {
-          'eng': 'Zande languages',
-          'deu': 'Zande-Sprachen',
-          'fra': 'zandé, langues'
+        "@id": "kru",
+        "skos:prefLabel": {
+          "eng": "Kurukh",
+          "deu": "Oraon-Sprache",
+          "fra": "kurukh"
         }
       },
       {
-        '@id': 'dan',
-        'skos:prefLabel': {
-          'fra': 'danois',
-          'deu': 'Dänisch',
-          'eng': 'Danish'
+        "@id": "znd",
+        "skos:prefLabel": {
+          "eng": "Zande languages",
+          "deu": "Zande-Sprachen",
+          "fra": "zandé, langues"
         }
       },
       {
-        '@id': 'oto',
-        'skos:prefLabel': {
-          'fra': 'otomi, langues',
-          'eng': 'Otomian languages',
-          'deu': 'Otomangue-Sprachen'
+        "@id": "dan",
+        "skos:prefLabel": {
+          "eng": "Danish",
+          "deu": "Dänisch",
+          "fra": "danois"
         }
       },
       {
-        '@id': 'rus',
-        'skos:prefLabel': {
-          'eng': 'Russian',
-          'deu': 'Russisch',
-          'fra': 'russe'
+        "@id": "oto",
+        "skos:prefLabel": {
+          "eng": "Otomian languages",
+          "deu": "Otomangue-Sprachen",
+          "fra": "otomi, langues"
         }
       },
       {
-        '@id': 'afa',
-        'skos:prefLabel': {
-          'fra': 'afro-asiatiques, langues',
-          'eng': 'Afro-Asiatic languages',
-          'deu': 'Hamitosemitische Sprachen (Andere)'
+        "@id": "rus",
+        "skos:prefLabel": {
+          "eng": "Russian",
+          "deu": "Russisch",
+          "fra": "russe"
         }
       },
       {
-        '@id': 'mis',
-        'skos:prefLabel': {
-          'deu': 'Einzelne andere Sprachen',
-          'eng': 'Uncoded languages',
-          'fra': 'langues non codées'
+        "@id": "afa",
+        "skos:prefLabel": {
+          "eng": "Afro-Asiatic languages",
+          "deu": "Hamitosemitische Sprachen (Andere)",
+          "fra": "afro-asiatiques, langues"
         }
       },
       {
-        '@id': 'tgl',
-        'skos:prefLabel': {
-          'deu': 'Tagalog',
-          'fra': 'tagalog'
+        "@id": "mis",
+        "skos:prefLabel": {
+          "eng": "Uncoded languages",
+          "deu": "Einzelne andere Sprachen",
+          "fra": "langues non codées"
         }
       },
       {
-        '@id': 'cus',
-        'skos:prefLabel': {
-          'deu': 'Kuschitische Sprachen (Andere)',
-          'eng': 'Cushitic languages',
-          'fra': 'couchitiques, langues'
+        "@id": "tgl",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Tagalog",
+          "fra": "tagalog"
         }
       },
       {
-        '@id': 'kum',
-        'skos:prefLabel': {
-          'deu': 'Kumükisch',
-          'fra': 'koumyk',
-          'eng': 'Kumyk'
+        "@id": "cus",
+        "skos:prefLabel": {
+          "eng": "Cushitic languages",
+          "deu": "Kuschitische Sprachen (Andere)",
+          "fra": "couchitiques, langues"
         }
       },
       {
-        '@id': 'btk',
-        'skos:prefLabel': {
-          'eng': 'Batak languages',
-          'deu': 'Batak-Sprache',
-          'fra': 'batak, langues'
+        "@id": "kum",
+        "skos:prefLabel": {
+          "eng": "Kumyk",
+          "deu": "Kumükisch",
+          "fra": "koumyk"
         }
       },
       {
-        '@id': 'ces',
-        'skos:prefLabel': {
-          'deu': 'Tschechisch',
-          'eng': 'Czech',
-          'fra': 'tchèque'
+        "@id": "btk",
+        "skos:prefLabel": {
+          "eng": "Batak languages",
+          "deu": "Batak-Sprache",
+          "fra": "batak, langues"
         }
       },
       {
-        '@id': 'tig',
-        'skos:prefLabel': {
-          'deu': 'Tigre-Sprache',
-          'fra': 'tigré',
-          'eng': 'Tigre'
+        "@id": "ces",
+        "skos:prefLabel": {
+          "eng": "Czech",
+          "deu": "Tschechisch",
+          "fra": "tchèque"
         }
       },
       {
-        '@id': 'wln',
-        'skos:prefLabel': {
-          'fra': 'wallon',
-          'deu': 'Wallonisch',
-          'eng': 'Walloon'
+        "@id": "tig",
+        "skos:prefLabel": {
+          "eng": "Tigre",
+          "deu": "Tigre-Sprache",
+          "fra": "tigré"
         }
       },
       {
-        '@id': 'ile',
-        'skos:prefLabel': {
-          'deu': 'Interlingue',
-          'fra': 'interlingue',
-          'eng': 'Interlingue | Occidental'
+        "@id": "wln",
+        "skos:prefLabel": {
+          "eng": "Walloon",
+          "deu": "Wallonisch",
+          "fra": "wallon"
         }
       },
       {
-        '@id': 'kau',
-        'skos:prefLabel': {
-          'eng': 'Kanuri',
-          'fra': 'kanouri',
-          'deu': 'Kanuri-Sprache'
+        "@id": "ile",
+        "skos:prefLabel": {
+          "eng": "Interlingue | Occidental",
+          "deu": "Interlingue",
+          "fra": "interlingue"
         }
       },
       {
-        '@id': 'gem',
-        'skos:prefLabel': {
-          'fra': 'germaniques, langues',
-          'eng': 'Germanic languages',
-          'deu': 'Germanische Sprachen (Andere)'
+        "@id": "kau",
+        "skos:prefLabel": {
+          "eng": "Kanuri",
+          "deu": "Kanuri-Sprache",
+          "fra": "kanouri"
         }
       },
       {
-        '@id': 'cpe',
-        'skos:prefLabel': {
-          'fra': 'créoles et pidgins basés sur l\'anglais',
-          'deu': 'Kreolisch-Englisch (Andere)',
-          'eng': 'Creoles and pidgins, English based'
+        "@id": "gem",
+        "skos:prefLabel": {
+          "eng": "Germanic languages",
+          "deu": "Germanische Sprachen (Andere)",
+          "fra": "germaniques, langues"
         }
       },
       {
-        '@id': 'nia',
-        'skos:prefLabel': {
-          'eng': 'Nias',
-          'deu': 'Nias-Sprache',
-          'fra': 'nias'
+        "@id": "cpe",
+        "skos:prefLabel": {
+          "eng": "Creoles and pidgins, English based",
+          "deu": "Kreolisch-Englisch (Andere)",
+          "fra": "créoles et pidgins basés sur l'anglais"
         }
       },
       {
-        '@id': 'cad',
-        'skos:prefLabel': {
-          'eng': 'Caddo',
-          'fra': 'caddo',
-          'deu': 'Caddo-Sprachen'
+        "@id": "nia",
+        "skos:prefLabel": {
+          "eng": "Nias",
+          "deu": "Nias-Sprache",
+          "fra": "nias"
         }
       },
       {
-        '@id': 'sas',
-        'skos:prefLabel': {
-          'deu': 'Sasak',
-          'fra': 'sasak'
+        "@id": "cad",
+        "skos:prefLabel": {
+          "eng": "Caddo",
+          "deu": "Caddo-Sprachen",
+          "fra": "caddo"
         }
       },
       {
-        '@id': 'her',
-        'skos:prefLabel': {
-          'fra': 'herero',
-          'eng': 'Herero',
-          'deu': 'Herero-Sprache'
+        "@id": "sas",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Sasak",
+          "fra": "sasak"
         }
       },
       {
-        '@id': 'mdf',
-        'skos:prefLabel': {
-          'fra': 'moksa',
-          'deu': 'Mokscha-Sprache',
-          'eng': 'Moksha'
+        "@id": "her",
+        "skos:prefLabel": {
+          "eng": "Herero",
+          "deu": "Herero-Sprache",
+          "fra": "herero"
         }
       },
       {
-        '@id': 'mah',
-        'skos:prefLabel': {
-          'eng': 'Marshallese',
-          'fra': 'marshall',
-          'deu': 'Marschallesisch'
+        "@id": "mdf",
+        "skos:prefLabel": {
+          "eng": "Moksha",
+          "deu": "Mokscha-Sprache",
+          "fra": "moksa"
         }
       },
       {
-        '@id': 'tgk',
-        'skos:prefLabel': {
-          'deu': 'Tadschikisch',
-          'eng': 'Tajik',
-          'fra': 'tadjik'
+        "@id": "mah",
+        "skos:prefLabel": {
+          "eng": "Marshallese",
+          "deu": "Marschallesisch",
+          "fra": "marshall"
         }
       },
       {
-        '@id': 'dsb',
-        'skos:prefLabel': {
-          'deu': 'Niedersorbisch',
-          'fra': 'bas-sorabe',
-          'eng': 'Lower Sorbian'
+        "@id": "tgk",
+        "skos:prefLabel": {
+          "eng": "Tajik",
+          "deu": "Tadschikisch",
+          "fra": "tadjik"
         }
       },
       {
-        '@id': 'swe',
-        'skos:prefLabel': {
-          'deu': 'Schwedisch',
-          'fra': 'suédois',
-          'eng': 'Swedish'
+        "@id": "dsb",
+        "skos:prefLabel": {
+          "eng": "Lower Sorbian",
+          "deu": "Niedersorbisch",
+          "fra": "bas-sorabe"
         }
       },
       {
-        '@id': 'haw',
-        'skos:prefLabel': {
-          'eng': 'Hawaiian',
-          'fra': 'hawaïen',
-          'deu': 'Hawaiisch'
+        "@id": "swe",
+        "skos:prefLabel": {
+          "eng": "Swedish",
+          "deu": "Schwedisch",
+          "fra": "suédois"
         }
       },
       {
-        '@id': 'awa',
-        'skos:prefLabel': {
-          'fra': 'awadhi',
-          'deu': 'Awadhi'
+        "@id": "haw",
+        "skos:prefLabel": {
+          "eng": "Hawaiian",
+          "deu": "Hawaiisch",
+          "fra": "hawaïen"
         }
       },
       {
-        '@id': 'deu',
-        'skos:prefLabel': {
-          'fra': 'allemand',
-          'eng': 'German',
-          'deu': 'Deutsch'
+        "@id": "awa",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Awadhi",
+          "fra": "awadhi"
         }
       },
       {
-        '@id': 'nso',
-        'skos:prefLabel': {
-          'deu': 'Pedi-Sprache',
-          'fra': 'pedi | sepedi | sotho du Nord',
-          'eng': 'Pedi | Sepedi | Northern Sotho'
+        "@id": "deu",
+        "skos:prefLabel": {
+          "eng": "German",
+          "deu": "Deutsch",
+          "fra": "allemand"
         }
       },
       {
-        '@id': 'kbd',
-        'skos:prefLabel': {
-          'deu': 'Kabardinisch',
-          'eng': 'Kabardian',
-          'fra': 'kabardien'
+        "@id": "nso",
+        "skos:prefLabel": {
+          "eng": "Pedi | Sepedi | Northern Sotho",
+          "deu": "Pedi-Sprache",
+          "fra": "pedi | sepedi | sotho du Nord"
         }
       },
       {
-        '@id': 'kin',
-        'skos:prefLabel': {
-          'deu': 'Rwanda-Sprache',
-          'eng': 'Kinyarwanda',
-          'fra': 'rwanda'
+        "@id": "kbd",
+        "skos:prefLabel": {
+          "eng": "Kabardian",
+          "deu": "Kabardinisch",
+          "fra": "kabardien"
         }
       },
       {
-        '@id': 'goh',
-        'skos:prefLabel': {
-          'deu': 'Althochdeutsch',
-          'fra': 'allemand, vieux haut (ca. 750-1050)',
-          'eng': 'German, Old High (ca.750-1050)'
+        "@id": "kin",
+        "skos:prefLabel": {
+          "eng": "Kinyarwanda",
+          "deu": "Rwanda-Sprache",
+          "fra": "rwanda"
         }
       },
       {
-        '@id': 'amh',
-        'skos:prefLabel': {
-          'fra': 'amharique',
-          'eng': 'Amharic',
-          'deu': 'Amharisch'
+        "@id": "goh",
+        "skos:prefLabel": {
+          "eng": "German, Old High (ca.750-1050)",
+          "deu": "Althochdeutsch",
+          "fra": "allemand, vieux haut (ca. 750-1050)"
+        }
+      },
+      {
+        "@id": "amh",
+        "skos:prefLabel": {
+          "eng": "Amharic",
+          "deu": "Amharisch",
+          "fra": "amharique"
+        }
+      },
+      {
+        "@id": "sad",
+        "skos:prefLabel": {
+          "eng": "Sandawe",
+          "deu": "Sandawe-Sprache",
+          "fra": "sandawe"
+        }
+      },
+      {
+        "@id": "lug",
+        "skos:prefLabel": {
+          "eng": "Ganda",
+          "deu": "Ganda-Sprache",
+          "fra": "ganda"
+        }
+      },
+      {
+        "@id": "udm",
+        "skos:prefLabel": {
+          "eng": "Udmurt",
+          "deu": "Udmurtisch",
+          "fra": "oudmourte"
+        }
+      },
+      {
+        "@id": "grn",
+        "skos:prefLabel": {
+          "eng": "Guarani",
+          "deu": "Guaraní-Sprache",
+          "fra": "guarani"
+        }
+      },
+      {
+        "@id": "hmo",
+        "skos:prefLabel": {
+          "eng": "Hiri Motu",
+          "deu": "Hiri-Motu",
+          "fra": "hiri motu"
+        }
+      },
+      {
+        "@id": "iii",
+        "skos:prefLabel": {
+          "eng": "Sichuan Yi | Nuosu",
+          "deu": "Lalo-Sprache",
+          "fra": "yi de Sichuan"
+        }
+      },
+      {
+        "@id": "bre",
+        "skos:prefLabel": {
+          "eng": "Breton",
+          "deu": "Bretonisch",
+          "fra": "breton"
+        }
+      },
+      {
+        "@id": "twi",
+        "skos:prefLabel": {
+          "eng": "Twi",
+          "deu": "Twi-Sprache",
+          "fra": "twi"
+        }
+      },
+      {
+        "@id": "ace",
+        "skos:prefLabel": {
+          "eng": "Achinese",
+          "deu": "Aceh-Sprache",
+          "fra": "aceh"
+        }
+      },
+      {
+        "@id": "sag",
+        "skos:prefLabel": {
+          "eng": "Sango",
+          "deu": "Sango-Sprache",
+          "fra": "sango"
+        }
+      },
+      {
+        "@id": "urd",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Urdu",
+          "fra": "ourdou"
+        }
+      },
+      {
+        "@id": "tup",
+        "skos:prefLabel": {
+          "eng": "Tupi languages",
+          "deu": "Tupi-Sprache",
+          "fra": "tupi, langues"
+        }
+      },
+      {
+        "@id": "slk",
+        "skos:prefLabel": {
+          "eng": "Slovak",
+          "deu": "Slowakisch",
+          "fra": "slovaque"
+        }
+      },
+      {
+        "@id": "arc",
+        "skos:prefLabel": {
+          "eng": "Official Aramaic (700-300 BCE) | Imperial Aramaic (700-300 BCE)",
+          "deu": "Aramäisch",
+          "fra": "araméen d'empire (700-300 BCE)"
+        }
+      },
+      {
+        "@id": "sog",
+        "skos:prefLabel": {
+          "eng": "Sogdian",
+          "deu": "Sogdisch",
+          "fra": "sogdien"
+        }
+      },
+      {
+        "@id": "kac",
+        "skos:prefLabel": {
+          "eng": "Kachin | Jingpho",
+          "deu": "Kachin-Sprache",
+          "fra": "kachin | jingpho"
+        }
+      },
+      {
+        "@id": "ban",
+        "skos:prefLabel": {
+          "eng": "Balinese",
+          "deu": "Balinesisch",
+          "fra": "balinais"
+        }
+      },
+      {
+        "@id": "arn",
+        "skos:prefLabel": {
+          "eng": "Mapudungun | Mapuche",
+          "deu": "Arauka-Sprachen",
+          "fra": "mapudungun | mapuche | mapuce"
+        }
+      },
+      {
+        "@id": "khi",
+        "skos:prefLabel": {
+          "eng": "Khoisan languages",
+          "deu": "Khoisan-Sprachen (Andere)",
+          "fra": "khoïsan, langues"
+        }
+      },
+      {
+        "@id": "fiu",
+        "skos:prefLabel": {
+          "eng": "Finno-Ugrian languages",
+          "deu": "Finnougrische Sprachen (Andere)",
+          "fra": "finno-ougriennes, langues"
+        }
+      },
+      {
+        "@id": "grc",
+        "skos:prefLabel": {
+          "eng": "Greek, Ancient (to 1453)",
+          "deu": "Griechisch",
+          "fra": "grec ancien (jusqu'à 1453)"
+        }
+      },
+      {
+        "@id": "qaa-qtz",
+        "skos:prefLabel": {
+          "eng": "Reserved for local use",
+          "deu": "Reserviert für lokale Verwendung",
+          "fra": "réservée à l'usage local"
+        }
+      },
+      {
+        "@id": "smo",
+        "skos:prefLabel": {
+          "eng": "Samoan",
+          "deu": "Samoanisch",
+          "fra": "samoan"
+        }
+      },
+      {
+        "@id": "mag",
+        "skos:prefLabel": {
+          "eng": "Magahi",
+          "deu": "Khotta",
+          "fra": "magahi"
+        }
+      },
+      {
+        "@id": "ber",
+        "skos:prefLabel": {
+          "eng": "Berber languages",
+          "deu": "Berbersprachen (Andere)",
+          "fra": "berbères, langues"
+        }
+      },
+      {
+        "@id": "kaz",
+        "skos:prefLabel": {
+          "eng": "Kazakh",
+          "deu": "Kasachisch",
+          "fra": "kazakh"
+        }
+      },
+      {
+        "@id": "uig",
+        "skos:prefLabel": {
+          "eng": "Uighur | Uyghur",
+          "deu": "Uigurisch",
+          "fra": "ouïgour"
+        }
+      },
+      {
+        "@id": "zun",
+        "skos:prefLabel": {
+          "eng": "Zuni",
+          "deu": "Zuñi-Sprache",
+          "fra": "zuni"
+        }
+      },
+      {
+        "@id": "tem",
+        "skos:prefLabel": {
+          "eng": "Timne",
+          "deu": "Temne-Sprache",
+          "fra": "temne"
+        }
+      },
+      {
+        "@id": "nyo",
+        "skos:prefLabel": {
+          "eng": "Nyoro",
+          "deu": "Nyoro-Sprache",
+          "fra": "nyoro"
+        }
+      },
+      {
+        "@id": "umb",
+        "skos:prefLabel": {
+          "eng": "Umbundu",
+          "deu": "Mbundu-Sprache",
+          "fra": "umbundu"
+        }
+      },
+      {
+        "@id": "dum",
+        "skos:prefLabel": {
+          "eng": "Dutch, Middle (ca.1050-1350)",
+          "deu": "Mittelniederländisch",
+          "fra": "néerlandais moyen (ca. 1050-1350)"
+        }
+      },
+      {
+        "@id": "mas",
+        "skos:prefLabel": {
+          "eng": "Masai",
+          "deu": "Massai-Sprache",
+          "fra": "massaï"
+        }
+      },
+      {
+        "@id": "fra",
+        "skos:prefLabel": {
+          "eng": "French",
+          "deu": "Französisch",
+          "fra": "français"
+        }
+      },
+      {
+        "@id": "ibo",
+        "skos:prefLabel": {
+          "eng": "Igbo",
+          "deu": "Ibo-Sprache",
+          "fra": "igbo"
+        }
+      },
+      {
+        "@id": "rap",
+        "skos:prefLabel": {
+          "eng": "Rapanui",
+          "deu": "Osterinsel-Sprache",
+          "fra": "rapanui"
+        }
+      },
+      {
+        "@id": "pau",
+        "skos:prefLabel": {
+          "eng": "Palauan",
+          "deu": "Palau-Sprache",
+          "fra": "palau"
+        }
+      },
+      {
+        "@id": "kir",
+        "skos:prefLabel": {
+          "eng": "Kirghiz | Kyrgyz",
+          "deu": "Kirgisisch",
+          "fra": "kirghiz"
+        }
+      },
+      {
+        "@id": "hsb",
+        "skos:prefLabel": {
+          "eng": "Upper Sorbian",
+          "deu": "Obersorbisch",
+          "fra": "haut-sorabe"
+        }
+      },
+      {
+        "@id": "pol",
+        "skos:prefLabel": {
+          "eng": "Polish",
+          "deu": "Polnisch",
+          "fra": "polonais"
+        }
+      },
+      {
+        "@id": "kab",
+        "skos:prefLabel": {
+          "eng": "Kabyle",
+          "deu": "Kabylisch",
+          "fra": "kabyle"
+        }
+      },
+      {
+        "@id": "fij",
+        "skos:prefLabel": {
+          "eng": "Fijian",
+          "deu": "Fidschi-Sprache",
+          "fra": "fidjien"
+        }
+      },
+      {
+        "@id": "shn",
+        "skos:prefLabel": {
+          "eng": "Shan",
+          "deu": "Schan-Sprache",
+          "fra": "chan"
+        }
+      },
+      {
+        "@id": "yid",
+        "skos:prefLabel": {
+          "eng": "Yiddish",
+          "deu": "Jiddisch",
+          "fra": "yiddish"
+        }
+      },
+      {
+        "@id": "hai",
+        "skos:prefLabel": {
+          "eng": "Haida",
+          "deu": "Haida-Sprache",
+          "fra": "haida"
+        }
+      },
+      {
+        "@id": "loz",
+        "skos:prefLabel": {
+          "eng": "Lozi",
+          "deu": "Rotse-Sprache",
+          "fra": "lozi"
+        }
+      },
+      {
+        "@id": "heb",
+        "skos:prefLabel": {
+          "eng": "Hebrew",
+          "deu": "Hebräisch",
+          "fra": "hébreu"
+        }
+      },
+      {
+        "@id": "xho",
+        "skos:prefLabel": {
+          "eng": "Xhosa",
+          "deu": "Xhosa-Sprache",
+          "fra": "xhosa"
+        }
+      },
+      {
+        "@id": "sah",
+        "skos:prefLabel": {
+          "eng": "Yakut",
+          "deu": "Jakutisch",
+          "fra": "iakoute"
+        }
+      },
+      {
+        "@id": "sio",
+        "skos:prefLabel": {
+          "eng": "Siouan languages",
+          "deu": "Sioux-Sprachen (Andere)",
+          "fra": "sioux, langues"
+        }
+      },
+      {
+        "@id": "jrb",
+        "skos:prefLabel": {
+          "eng": "Judeo-Arabic",
+          "deu": "Jüdisch-Arabisch",
+          "fra": "judéo-arabe"
+        }
+      },
+      {
+        "@id": "hmn",
+        "skos:prefLabel": {
+          "eng": "Hmong | Mong",
+          "deu": "Miao-Sprachen",
+          "fra": "hmong"
+        }
+      },
+      {
+        "@id": "fur",
+        "skos:prefLabel": {
+          "eng": "Friulian",
+          "deu": "Friulisch",
+          "fra": "frioulan"
+        }
+      },
+      {
+        "@id": "pus",
+        "skos:prefLabel": {
+          "eng": "Pushto | Pashto",
+          "deu": "Paschtu",
+          "fra": "pachto"
+        }
+      },
+      {
+        "@id": "ada",
+        "skos:prefLabel": {
+          "eng": "Adangme",
+          "deu": "Adangme-Sprache",
+          "fra": "adangme"
+        }
+      },
+      {
+        "@id": "gsw",
+        "skos:prefLabel": {
+          "eng": "Swiss German | Alemannic | Alsatian",
+          "deu": "Schweizerdeutsch",
+          "fra": "suisse alémanique | alémanique | alsacien"
+        }
+      },
+      {
+        "@id": "lam",
+        "skos:prefLabel": {
+          "eng": "Lamba",
+          "deu": "Lamba-Sprache (Bantusprache)",
+          "fra": "lamba"
+        }
+      },
+      {
+        "@id": "tog",
+        "skos:prefLabel": {
+          "eng": "Tonga (Nyasa)",
+          "deu": "Tonga (Bantusprache, Sambia)",
+          "fra": "tonga (Nyasa)"
+        }
+      },
+      {
+        "@id": "mwr",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Marwari",
+          "fra": "marvari"
+        }
+      },
+      {
+        "@id": "mar",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Marathi",
+          "fra": "marathe"
+        }
+      },
+      {
+        "@id": "gor",
+        "skos:prefLabel": {
+          "eng": "Gorontalo",
+          "deu": "Gorontalesisch",
+          "fra": "gorontalo"
+        }
+      },
+      {
+        "@id": "alb",
+        "skos:prefLabel": {
+          "eng": "Albanian",
+          "deu": "Albanisch",
+          "fra": "albanais"
+        }
+      },
+      {
+        "@id": "srr",
+        "skos:prefLabel": {
+          "eng": "Serer",
+          "deu": "Serer-Sprache",
+          "fra": "sérère"
+        }
+      },
+      {
+        "@id": "tlh",
+        "skos:prefLabel": {
+          "eng": "Klingon | tlhIngan-Hol",
+          "deu": "Klingonisch",
+          "fra": "klingon"
+        }
+      },
+      {
+        "@id": "hau",
+        "skos:prefLabel": {
+          "eng": "Hausa",
+          "deu": "Haussa-Sprache",
+          "fra": "haoussa"
+        }
+      },
+      {
+        "@id": "frm",
+        "skos:prefLabel": {
+          "eng": "French, Middle (ca.1400-1600)",
+          "deu": "Mittelfranzösisch",
+          "fra": "français moyen (1400-1600)"
+        }
+      },
+      {
+        "@id": "ijo",
+        "skos:prefLabel": {
+          "eng": "Ijo languages",
+          "deu": "Ijo-Sprache",
+          "fra": "ijo, langues"
+        }
+      },
+      {
+        "@id": "eka",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Ekajuk",
+          "fra": "ekajuk"
+        }
+      },
+      {
+        "@id": "enm",
+        "skos:prefLabel": {
+          "eng": "English, Middle (1100-1500)",
+          "deu": "Mittelenglisch",
+          "fra": "anglais moyen (1100-1500)"
+        }
+      },
+      {
+        "@id": "nno",
+        "skos:prefLabel": {
+          "eng": "Norwegian Nynorsk | Nynorsk, Norwegian",
+          "deu": "Nynorsk",
+          "fra": "norvégien nynorsk | nynorsk, norvégien"
+        }
+      },
+      {
+        "@id": "kan",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Kannada",
+          "fra": "kannada"
+        }
+      },
+      {
+        "@id": "che",
+        "skos:prefLabel": {
+          "eng": "Chechen",
+          "deu": "Tschetschenisch",
+          "fra": "tchétchène"
+        }
+      },
+      {
+        "@id": "ain",
+        "skos:prefLabel": {
+          "eng": "Ainu",
+          "deu": "Ainu-Sprache",
+          "fra": "aïnou"
+        }
+      },
+      {
+        "@id": "sid",
+        "skos:prefLabel": {
+          "eng": "Sidamo",
+          "deu": "Sidamo-Sprache",
+          "fra": "sidamo"
+        }
+      },
+      {
+        "@id": "krc",
+        "skos:prefLabel": {
+          "eng": "Karachay-Balkar",
+          "deu": "Karatschaiisch-Balkarisch",
+          "fra": "karatchai balkar"
+        }
+      },
+      {
+        "@id": "hit",
+        "skos:prefLabel": {
+          "eng": "Hittite",
+          "deu": "Hethitisch",
+          "fra": "hittite"
+        }
+      },
+      {
+        "@id": "tli",
+        "skos:prefLabel": {
+          "eng": "Tlingit",
+          "deu": "Tlingit-Sprache",
+          "fra": "tlingit"
+        }
+      },
+      {
+        "@id": "sme",
+        "skos:prefLabel": {
+          "eng": "Northern Sami",
+          "deu": "Nordsaamisch",
+          "fra": "sami du Nord"
+        }
+      },
+      {
+        "@id": "nqo",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "N'Ko",
+          "fra": "n'ko"
+        }
+      },
+      {
+        "@id": "nob",
+        "skos:prefLabel": {
+          "eng": "Bokmål, Norwegian | Norwegian Bokmål",
+          "deu": "Bokmål",
+          "fra": "norvégien bokmål"
+        }
+      },
+      {
+        "@id": "nic",
+        "skos:prefLabel": {
+          "eng": "Niger-Kordofanian languages",
+          "deu": "Nigerkordofanische Sprachen (Andere)",
+          "fra": "nigéro-kordofaniennes, langues"
+        }
+      },
+      {
+        "@id": "peo",
+        "skos:prefLabel": {
+          "eng": "Persian, Old (ca.600-400 B.C.)",
+          "deu": "Altpersisch",
+          "fra": "perse, vieux (ca. 600-400 av. J.-C.)"
+        }
+      },
+      {
+        "@id": "abk",
+        "skos:prefLabel": {
+          "eng": "Abkhazian",
+          "deu": "Abchasisch",
+          "fra": "abkhaze"
+        }
+      },
+      {
+        "@id": "byn",
+        "skos:prefLabel": {
+          "eng": "Blin | Bilin",
+          "deu": "Bilin-Sprache",
+          "fra": "blin | bilen"
+        }
+      },
+      {
+        "@id": "lao",
+        "skos:prefLabel": {
+          "eng": "Lao",
+          "deu": "Laotisch",
+          "fra": "lao"
+        }
+      },
+      {
+        "@id": "mga",
+        "skos:prefLabel": {
+          "eng": "Irish, Middle (900-1200)",
+          "deu": "Mittelirisch",
+          "fra": "irlandais moyen (900-1200)"
+        }
+      },
+      {
+        "@id": "kam",
+        "skos:prefLabel": {
+          "eng": "Kamba",
+          "deu": "Kamba-Sprache",
+          "fra": "kamba"
+        }
+      },
+      {
+        "@id": "fry",
+        "skos:prefLabel": {
+          "eng": "Western Frisian",
+          "deu": "Friesisch",
+          "fra": "frison occidental"
+        }
+      },
+      {
+        "@id": "arm",
+        "skos:prefLabel": {
+          "eng": "Armenian",
+          "deu": "Armenisch",
+          "fra": "arménien"
+        }
+      },
+      {
+        "@id": "chp",
+        "skos:prefLabel": {
+          "eng": "Chipewyan | Dene Suline",
+          "deu": "Chipewyan-Sprache",
+          "fra": "chipewyan"
+        }
+      },
+      {
+        "@id": "tsn",
+        "skos:prefLabel": {
+          "eng": "Tswana",
+          "deu": "Tswana-Sprache",
+          "fra": "tswana"
+        }
+      },
+      {
+        "@id": "sna",
+        "skos:prefLabel": {
+          "eng": "Shona",
+          "deu": "Schona-Sprache",
+          "fra": "shona"
+        }
+      },
+      {
+        "@id": "bik",
+        "skos:prefLabel": {
+          "eng": "Bikol",
+          "deu": "Bikol-Sprache",
+          "fra": "bikol"
+        }
+      },
+      {
+        "@id": "nyn",
+        "skos:prefLabel": {
+          "eng": "Nyankole",
+          "deu": "Nkole-Sprache",
+          "fra": "nyankolé"
+        }
+      },
+      {
+        "@id": "tah",
+        "skos:prefLabel": {
+          "eng": "Tahitian",
+          "deu": "Tahitisch",
+          "fra": "tahitien"
+        }
+      },
+      {
+        "@id": "tvl",
+        "skos:prefLabel": {
+          "eng": "Tuvalu",
+          "deu": "Elliceanisch",
+          "fra": "tuvalu"
+        }
+      },
+      {
+        "@id": "nah",
+        "skos:prefLabel": {
+          "eng": "Nahuatl languages",
+          "deu": "Nahuatl",
+          "fra": "nahuatl, langues"
+        }
+      },
+      {
+        "@id": "cre",
+        "skos:prefLabel": {
+          "eng": "Cree",
+          "deu": "Cree-Sprache",
+          "fra": "cree"
+        }
+      },
+      {
+        "@id": "ara",
+        "skos:prefLabel": {
+          "eng": "Arabic",
+          "deu": "Arabisch",
+          "fra": "arabe"
+        }
+      },
+      {
+        "@id": "lad",
+        "skos:prefLabel": {
+          "eng": "Ladino",
+          "deu": "Judenspanisch",
+          "fra": "judéo-espagnol"
+        }
+      },
+      {
+        "@id": "gle",
+        "skos:prefLabel": {
+          "eng": "Irish",
+          "deu": "Irisch",
+          "fra": "irlandais"
+        }
+      },
+      {
+        "@id": "wak",
+        "skos:prefLabel": {
+          "eng": "Wakashan languages",
+          "deu": "Wakash-Sprachen",
+          "fra": "wakashanes, langues"
+        }
+      },
+      {
+        "@id": "rup",
+        "skos:prefLabel": {
+          "eng": "Aromanian | Arumanian | Macedo-Romanian",
+          "deu": "Aromunisch",
+          "fra": "aroumain | macédo-roumain"
+        }
+      },
+      {
+        "@id": "mkh",
+        "skos:prefLabel": {
+          "eng": "Mon-Khmer languages",
+          "deu": "Mon-Khmer-Sprachen (Andere)",
+          "fra": "môn-khmer, langues"
+        }
+      },
+      {
+        "@id": "yap",
+        "skos:prefLabel": {
+          "eng": "Yapese",
+          "deu": "Yapesisch",
+          "fra": "yapois"
+        }
+      },
+      {
+        "@id": "glv",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Manx",
+          "fra": "manx | mannois"
+        }
+      },
+      {
+        "@id": "dak",
+        "skos:prefLabel": {
+          "eng": "Dakota",
+          "deu": "Dakota-Sprache",
+          "fra": "dakota"
+        }
+      },
+      {
+        "@id": "geo",
+        "skos:prefLabel": {
+          "eng": "Georgian",
+          "deu": "Georgisch",
+          "fra": "géorgien"
+        }
+      },
+      {
+        "@id": "kom",
+        "skos:prefLabel": {
+          "eng": "Komi",
+          "deu": "Komi-Sprache",
+          "fra": "kom"
+        }
+      },
+      {
+        "@id": "grb",
+        "skos:prefLabel": {
+          "eng": "Grebo",
+          "deu": "Grebo-Sprache",
+          "fra": "grebo"
+        }
+      },
+      {
+        "@id": "zen",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Zenaga",
+          "fra": "zenaga"
+        }
+      },
+      {
+        "@id": "ypk",
+        "skos:prefLabel": {
+          "eng": "Yupik languages",
+          "deu": "Ypik-Sprachen",
+          "fra": "yupik, langues"
+        }
+      },
+      {
+        "@id": "bam",
+        "skos:prefLabel": {
+          "eng": "Bambara",
+          "deu": "Bambara-Sprache",
+          "fra": "bambara"
+        }
+      },
+      {
+        "@id": "cho",
+        "skos:prefLabel": {
+          "eng": "Choctaw",
+          "deu": "Choctaw-Sprache",
+          "fra": "choctaw"
+        }
+      },
+      {
+        "@id": "hat",
+        "skos:prefLabel": {
+          "eng": "Haitian | Haitian Creole",
+          "deu": "Haïtien (Haiti-Kreolisch)",
+          "fra": "haïtien | créole haïtien"
+        }
+      },
+      {
+        "@id": "non",
+        "skos:prefLabel": {
+          "eng": "Norse, Old",
+          "deu": "Altnorwegisch",
+          "fra": "norrois, vieux"
+        }
+      },
+      {
+        "@id": "sus",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Susu",
+          "fra": "soussou"
+        }
+      },
+      {
+        "@id": "aus",
+        "skos:prefLabel": {
+          "eng": "Australian languages",
+          "deu": "Australische Sprachen",
+          "fra": "australiennes, langues"
+        }
+      },
+      {
+        "@id": "ori",
+        "skos:prefLabel": {
+          "eng": "Oriya",
+          "deu": "Oriya-Sprache",
+          "fra": "oriya"
+        }
+      },
+      {
+        "@id": "bos",
+        "skos:prefLabel": {
+          "eng": "Bosnian",
+          "deu": "Bosnisch",
+          "fra": "bosniaque"
+        }
+      },
+      {
+        "@id": "wal",
+        "skos:prefLabel": {
+          "eng": "Wolaitta | Wolaytta",
+          "deu": "Walamo-Sprache",
+          "fra": "wolaitta | wolaytta"
+        }
+      },
+      {
+        "@id": "pal",
+        "skos:prefLabel": {
+          "eng": "Pahlavi",
+          "deu": "Mittelpersisch",
+          "fra": "pahlavi"
+        }
+      },
+      {
+        "@id": "tel",
+        "skos:prefLabel": {
+          "eng": "Telugu",
+          "deu": "Telugu-Sprache",
+          "fra": "télougou"
+        }
+      },
+      {
+        "@id": "tat",
+        "skos:prefLabel": {
+          "eng": "Tatar",
+          "deu": "Tatarisch",
+          "fra": "tatar"
+        }
+      },
+      {
+        "@id": "zgh",
+        "skos:prefLabel": {
+          "eng": "Standard Moroccan Tamazight",
+          "deu": "",
+          "fra": "amazighe standard marocain"
+        }
+      },
+      {
+        "@id": "mul",
+        "skos:prefLabel": {
+          "eng": "Multiple languages",
+          "deu": "Mehrere Sprachen",
+          "fra": "multilingue"
+        }
+      },
+      {
+        "@id": "kaa",
+        "skos:prefLabel": {
+          "eng": "Kara-Kalpak",
+          "deu": "Karakalpakisch",
+          "fra": "karakalpak"
+        }
+      },
+      {
+        "@id": "bla",
+        "skos:prefLabel": {
+          "eng": "Siksika",
+          "deu": "Blackfoot-Sprache",
+          "fra": "blackfoot"
+        }
+      },
+      {
+        "@id": "kon",
+        "skos:prefLabel": {
+          "eng": "Kongo",
+          "deu": "Kongo-Sprache",
+          "fra": "kongo"
+        }
+      },
+      {
+        "@id": "nym",
+        "skos:prefLabel": {
+          "eng": "Nyamwezi",
+          "deu": "Nyamwezi-Sprache",
+          "fra": "nyamwezi"
+        }
+      },
+      {
+        "@id": "ady",
+        "skos:prefLabel": {
+          "eng": "Adyghe | Adygei",
+          "deu": "Adygisch",
+          "fra": "adyghé"
+        }
+      },
+      {
+        "@id": "yao",
+        "skos:prefLabel": {
+          "eng": "Yao",
+          "deu": "Yao-Sprache (Bantusprache)",
+          "fra": "yao"
+        }
+      },
+      {
+        "@id": "slv",
+        "skos:prefLabel": {
+          "eng": "Slovenian",
+          "deu": "Slowenisch",
+          "fra": "slovène"
+        }
+      },
+      {
+        "@id": "oss",
+        "skos:prefLabel": {
+          "eng": "Ossetian | Ossetic",
+          "deu": "Ossetisch",
+          "fra": "ossète"
+        }
+      },
+      {
+        "@id": "div",
+        "skos:prefLabel": {
+          "eng": "Divehi | Dhivehi | Maldivian",
+          "deu": "Maledivisch",
+          "fra": "maldivien"
+        }
+      },
+      {
+        "@id": "ota",
+        "skos:prefLabel": {
+          "eng": "Turkish, Ottoman (1500-1928)",
+          "deu": "Osmanisch",
+          "fra": "turc ottoman (1500-1928)"
+        }
+      },
+      {
+        "@id": "myn",
+        "skos:prefLabel": {
+          "eng": "Mayan languages",
+          "deu": "Maya-Sprachen",
+          "fra": "maya, langues"
+        }
+      },
+      {
+        "@id": "asm",
+        "skos:prefLabel": {
+          "eng": "Assamese",
+          "deu": "Assamesisch",
+          "fra": "assamais"
+        }
+      },
+      {
+        "@id": "iku",
+        "skos:prefLabel": {
+          "eng": "",
+          "deu": "Inuktitut",
+          "fra": "inuktitut"
+        }
+      },
+      {
+        "@id": "aym",
+        "skos:prefLabel": {
+          "eng": "Aymara",
+          "deu": "Aymará-Sprache",
+          "fra": "aymara"
+        }
+      },
+      {
+        "@id": "zza",
+        "skos:prefLabel": {
+          "eng": "Zaza | Dimili | Dimli | Kirdki | Kirmanjki | Zazaki",
+          "deu": "Zazaki",
+          "fra": "zaza | dimili | dimli | kirdki | kirmanjki | zazaki"
+        }
+      },
+      {
+        "@id": "crp",
+        "skos:prefLabel": {
+          "eng": "Creoles and pidgins",
+          "deu": "Kreolische Sprachen | Pidginsprachen (Andere)",
+          "fra": "créoles et pidgins"
+        }
+      },
+      {
+        "@id": "iro",
+        "skos:prefLabel": {
+          "eng": "Iroquoian languages",
+          "deu": "Irokesische Sprachen",
+          "fra": "iroquoises, langues"
+        }
+      },
+      {
+        "@id": "ang",
+        "skos:prefLabel": {
+          "eng": "English, Old (ca.450-1100)",
+          "deu": "Altenglisch",
+          "fra": "anglo-saxon (ca.450-1100)"
+        }
+      },
+      {
+        "@id": "sin",
+        "skos:prefLabel": {
+          "eng": "Sinhala | Sinhalese",
+          "deu": "Singhalesisch",
+          "fra": "singhalais"
+        }
+      },
+      {
+        "@id": "jav",
+        "skos:prefLabel": {
+          "eng": "Javanese",
+          "deu": "Javanisch",
+          "fra": "javanais"
         }
       }
     ]

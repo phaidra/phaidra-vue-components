@@ -1,21 +1,35 @@
 <template>
   <v-layout row>
-    <v-flex xs2 v-if="type === 'schema:Person'">
-      <v-text-field
-        :value="firstname"
-        :label="$t('Firstname')"
-        v-on:input="$emit('input-firstname', $event)"
-        box
-      ></v-text-field>
-    </v-flex>
-    <v-flex xs2 v-if="type === 'schema:Person'">
-      <v-text-field
-        :value="lastname"
-        :label="$t('Lastname')"
-        v-on:input="$emit('input-lastname', $event)"
-        box
-      ></v-text-field>
-    </v-flex>
+    <template v-if="type === 'schema:Person'">
+      <template v-if="showname">
+        <v-flex xs4 >
+          <v-text-field
+            :value="firstname"
+            :label="$t('Name')"
+            v-on:input="$emit('input-name', $event)"
+            box
+          ></v-text-field>
+        </v-flex>
+      </template>
+      <template v-else>
+        <v-flex xs2>
+          <v-text-field
+            :value="firstname"
+            :label="$t('Firstname')"
+            v-on:input="$emit('input-firstname', $event)"
+            box
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs2>
+          <v-text-field
+            :value="lastname"
+            :label="$t('Lastname')"
+            v-on:input="$emit('input-lastname', $event)"
+            box
+          ></v-text-field>
+        </v-flex>
+      </template>
+    </template>
     <v-flex xs4 v-if="type === 'schema:Organisation'">
       <v-text-field
         :value="institution"
@@ -86,6 +100,9 @@ export default {
     lastname: {
       type: String
     },
+    name: {
+      type: String
+    },
     institution: {
       type: String
     },
@@ -108,6 +125,10 @@ export default {
     showidentifier: {
       type: Boolean,
       default: true
+    },
+    showname: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
