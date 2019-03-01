@@ -94,6 +94,20 @@
                     ></p-i-date-edtf>        
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-series'" :key="f.id">
+                    <p-i-series
+                      v-bind.sync="f"
+                      v-on:input-title="f.title=$event"
+                      v-on:input-title-language="f.titleLanguage=$event"
+                      v-on:input-volume="f.volume=$event"
+                      v-on:input-issue="f.issue=$event"
+                      v-on:input-issn="f.issn=$event"
+                      v-on:input-identifier="f.identifier=$event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-series>
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'p-entity'" :key="f.id">
                     <p-i-entity
                       v-bind.sync="f"
@@ -325,6 +339,7 @@ import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
 import PIProject from './PIProject'
 import PIFunder from './PIFunder'
+import PISeries from './PISeries'
 import PIFilenameReadonly from './PIFilenameReadonly'
 import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
@@ -350,6 +365,7 @@ export default {
     PIStudyPlan,
     PIProject,
     PIFunder,
+    PISeries,
     PILiteral,
     PIKeyword,
     PIFilenameReadonly,

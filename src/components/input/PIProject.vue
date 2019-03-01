@@ -1,8 +1,26 @@
 <template>
 
-    <v-layout row>
+  <v-layout row>
+    <v-flex xs10>
 
-      <v-flex xs10>
+      <v-card >
+        <v-card-title class="headline grey--text">
+            <span>{{ $t('Project') }}</span>
+            <v-spacer></v-spacer>
+            <v-menu open-on-hover bottom offset-y v-if="actions.length">
+              <v-btn slot="activator" icon>
+                <v-icon>more_vert</v-icon>
+              </v-btn>
+              <v-list>
+                <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+                  <v-list-tile-title>{{ action.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text class="mt-4">
+
 
         <v-layout column>
           <v-flex>
@@ -10,7 +28,7 @@
               <v-flex xs8>
                 <v-text-field
                   :value="name"
-                  :label="$t('Project name')"
+                  :label="$t('Name')"
                   v-on:input="$emit('input-name', $event)"
                   box
                 ></v-text-field>
@@ -47,7 +65,7 @@
               <v-flex xs8>
                 <v-text-field
                   :value="description"
-                  :label="'Project description'"
+                  :label="'Description'"
                   v-on:input="$emit('input-description', $event)"
                   box
                 ></v-text-field>
@@ -85,7 +103,7 @@
               <v-flex xs6>
                 <v-text-field
                   :value="identifier"
-                  :label="'Project identifier'"
+                  :label="'Identifier'"
                   v-on:input="$emit('input-identifier', $event)"
                   box
                 ></v-text-field>
@@ -94,7 +112,7 @@
               <v-flex xs6>
                 <v-text-field
                   :value="homepage"
-                  :label="'Project homepage'"
+                  :label="'Homepage'"
                   v-on:input="$emit('input-homepage', $event)"
                   box
                 ></v-text-field>
@@ -102,23 +120,10 @@
             </v-layout>
           </v-flex>  
         </v-layout>
-      </v-flex>
-      
-      <v-flex xs1 v-if="actions.length">
-        <v-menu open-on-hover bottom offset-y>
-          <v-btn slot="activator" icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-          <v-list>
-            <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-              <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-      </v-flex>
-
-    </v-layout>
-
+        </v-card-text>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

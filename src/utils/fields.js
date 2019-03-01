@@ -214,6 +214,21 @@ const fields = [
     definition: 'Study plan.'
   },
   {
+    id: 'is-in-series',
+    fieldname: 'Journal/Series',
+    predicate: 'rdau:P60193',
+    type: 'schema:CreativeWork',
+    component: 'p-series',
+    label: 'Journal/Series',
+    title: '',
+    titleLanguage: '',
+    volume: '',
+    issue: '',
+    issn: '',
+    identifier: '',
+    definition: 'Relates a resource to a resource in which a part has been issued; a title of a larger resource appears on a part.'
+  },
+  {
     id: 'project',
     fieldname: 'Project',
     predicate: 'frapo:isOutputOf',

@@ -786,9 +786,9 @@ export default {
           '@value': name
         }
       ]
-    }
-    if (nameLanguage) {
-      h['skos:prefLabel'][0]['@language'] = nameLanguage
+      if (nameLanguage) {
+        h['skos:prefLabel'][0]['@language'] = nameLanguage
+      }
     }
     if (description) {
       h['rdfs:comment'] = [
@@ -796,9 +796,9 @@ export default {
           '@value': description
         }
       ]
-    }
-    if (descriptionLanguage) {
-      h['rdfs:comment'][0]['@language'] = descriptionLanguage
+      if (descriptionLanguage) {
+        h['rdfs:comment'][0]['@language'] = descriptionLanguage
+      }
     }
     if (identifiers) {
       h['skos:exactMatch'] = identifiers
@@ -820,9 +820,9 @@ export default {
           '@value': name
         }
       ]
-    }
-    if (nameLanguage) {
-      h['skos:prefLabel'][0]['@language'] = nameLanguage
+      if (nameLanguage) {
+        h['skos:prefLabel'][0]['@language'] = nameLanguage
+      }
     }
     if (notations) {
       h['skos:notation'] = notations
@@ -839,9 +839,9 @@ export default {
           '@value': name
         }
       ]
-    }
-    if (nameLanguage) {
-      h['skos:prefLabel'][0]['@language'] = nameLanguage
+      if (nameLanguage) {
+        h['skos:prefLabel'][0]['@language'] = nameLanguage
+      }
     }
     if (identifiers) {
       h['skos:exactMatch'] = identifiers

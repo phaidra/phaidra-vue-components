@@ -327,6 +327,7 @@ export default {
     this.form.sections[0].fields.push(translatedtitle)
     this.form.sections[0].fields.push(fields.getField('language'))
     this.form.sections[0].fields.push(fields.getField('description'))
+    this.form.sections[0].fields.push(fields.getField('is-in-series'))
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
     var gnd = fields.getField('gnd-subject')
@@ -338,7 +339,9 @@ export default {
     subject.vocabulary = 'basisklassifikation'
     this.form.sections[0].fields.push(subject)
     this.form.sections[0].fields.push(fields.getField('study-plan'))
-    this.form.sections[0].fields.push(fields.getField('project'))
+    var proj = fields.getField('project')
+    proj.multiplicable = true
+    this.form.sections[0].fields.push(proj)
     this.form.sections[0].fields.push(fields.getField('funder'))
     var r = fields.getField('role')
     r.role = 'role:coadvisor'
