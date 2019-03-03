@@ -15,6 +15,7 @@ import PDLabeledValue from './display/PDLabeledValue.vue'
 import PDUwmetadata from './display/PDUwmetadata.vue'
 import PDValue from './display/PDValue.vue'
 import PIDimension from './input/PIDimension.vue'
+import PIDuration from './input/PIDuration.vue'
 import PIEntity from './input/PIEntity.vue'
 import PIDateEdtf from './input/PIDateEdtf.vue'
 import PIFilenameReadonly from './input/PIFilenameReadonly.vue'
@@ -70,7 +71,8 @@ const Components = {
   PIVocabExtReadonly,
   PISpatialGettyReadonly,
   PILiteral,
-  PIKeyword
+  PIKeyword,
+  PIDuration
 }
 
 Object.keys(Components).forEach(name => {

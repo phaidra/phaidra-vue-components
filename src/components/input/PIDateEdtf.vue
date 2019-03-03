@@ -30,7 +30,7 @@
         v-on:input="$emit('input-date', $event)"
         :required="required"
         :hint="'Format YYYY-MM-DD'"
-        :rules="[rules.date]"
+        :rules="[validationrules.date]"
         box
       ></v-text-field>
     </v-flex>
@@ -52,10 +52,11 @@
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-i-date-edtf',
-  mixins: [vocabulary, fieldproperties],
+  mixins: [vocabulary, fieldproperties, validationrules],
   props: {
     value: {
       type: String
@@ -72,60 +73,6 @@ export default {
       const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
       const query = queryText.toLowerCase()
       return lab.indexOf(query) > -1
-    },
-    isValidDate: function(dateString) {
-
-      // First check for the pattern
-      var regex_date = /^(\d{4})(-\d{1,2})?(-\d{1,2})?$/
-
-      if(!regex_date.test(dateString))
-      {
-          return false
-      }
-
-      var m = dateString.match(regex_date)
-
-      var year    = parseInt(m[1], 10)
-
-      if (m[2]) {
-        var month   = parseInt(m[2].substring(1), 10)
-        // Check the ranges of month
-        if (month) {
-          if(month == 0 || month > 12)
-          {
-              return false
-          }
-        }
-      }
-
-      if (m[3]) {
-        var day     = parseInt(m[3].substring(1), 10)
-
-        if (day) {
-          var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
-
-          // Adjust for leap years
-          if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-          {
-              monthLength[1] = 29
-          }
-
-          // Check the range of the day
-          return day > 0 && day <= monthLength[month - 1]
-        }
-      }
-
-      return true
-    }
-  },
-  data () {
-    return {
-      rules: {
-        required: value => !!value || 'Required.',
-        date: value => {
-          return typeof value === 'undefined' || value === '' || this.isValidDate(value) || 'Invalid date.'
-        }
-      }
     }
   },
   mounted: function () {

@@ -23,6 +23,7 @@ export default {
   'dce:subject': 'Keywords',
   'dcterms:subject': 'Subject',
   'dcterms:language': 'Language',
+  'schema:subtitleLanguage': 'Subtitle language',
   'dcterms:type': 'Resource type',
   'edm:hasType': 'Type/Genre',
   'bf:physicalLocation': 'Physical location',
@@ -39,6 +40,8 @@ export default {
   'dcterms:dateCopyrighted': 'Date copyrighted',
   'dcterms:dateSubmitted': 'Date submitted',
   'phaidra:dateAccessioned': 'Date accessioned',
+
+  'rdau:P60193': 'Journal/Series',
 
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',
@@ -57,6 +60,7 @@ export default {
   'schema:height': 'Height',
   'schema:depth': 'Depth',
   'schema:weight': 'Weight',
+  'schema:duration': 'Duration',
   'dcterms:temporal': 'Temporal coverage',
   'vra:hasTechnique': 'Technique',
   'vra:material': 'Material',

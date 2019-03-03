@@ -547,6 +547,8 @@ export default {
   'phaidra:dateAccessioned': 'Date accessioned',
   'edm:rights': 'Lizenz',
 
+  'rdau:P60193': 'Journal/Series',
+
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',
   'vra:placeOfRepository': 'Place of repository',
@@ -555,6 +557,7 @@ export default {
   'dce:subject': 'Stichwort',
   'dcterms:subject': 'Subjekt',
   'dcterms:language': 'Sprache',
+  'schema:subtitleLanguage': 'Untertitel-Sprache',
   'dcterms:type': 'Resource Type',
   'edm:hasType': 'Typ/Genre',
   'bf:physicalLocation': 'Standort',
@@ -571,6 +574,7 @@ export default {
   'schema:height': 'Höhe',
   'schema:depth': 'Tiefe',
   'schema:weight': 'Gewicht',
+  'schema:duration': 'Dauer',
   'dcterms:temporal': 'Zeitliche Abdeckung',
   'vra:hasTechnique': 'Technik',
   'vra:material': 'Material',

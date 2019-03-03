@@ -326,8 +326,9 @@ export default {
     translatedtitle.type = 'bf:ParallelTitle'
     this.form.sections[0].fields.push(translatedtitle)
     this.form.sections[0].fields.push(fields.getField('language'))
+    this.form.sections[0].fields.push(fields.getField('subtitle-language'))
     this.form.sections[0].fields.push(fields.getField('description'))
-    this.form.sections[0].fields.push(fields.getField('is-in-series'))
+    this.form.sections[0].fields.push(fields.getField('series'))
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
     var gnd = fields.getField('gnd-subject')
@@ -362,6 +363,7 @@ export default {
     this.form.sections[1].fields.push(fields.getField('material-vocab'))
     this.form.sections[1].fields.push(fields.getField('material-text'))
     this.form.sections[1].fields.push(fields.getField('height'))
+    this.form.sections[1].fields.push(fields.getField('duration'))
     this.form.sections[1].fields.push(fields.getField('shelf-mark'))
     this.form.sections[1].fields.push(fields.getField('digitization-note'))
     this.form.sections[1].fields.push(fields.getField('reproduction-note'))

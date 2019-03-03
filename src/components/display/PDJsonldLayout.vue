@@ -9,6 +9,7 @@
       <slot name="bf:note"></slot>
       
       <slot name="dcterms:language"></slot>
+      <slot name="schema:subtitleLanguage"></slot>
       <slot name="dce:subject"></slot>
 
       <slot name="dcterms:date"></slot>
@@ -22,6 +23,8 @@
       <slot name="dcterms:dateSubmitted"></slot>
       <slot name="phaidra:dateAccessioned"></slot>
       <slot name="dcterms:temporal"></slot>
+
+      <slot name="rdau:P60193"></slot>
 
       <slot name="frapo:hasFundingAgency"></slot>
       <slot name="frapo:isOutputOf"></slot>
@@ -48,6 +51,7 @@
       <slot name="schema:height"></slot>
       <slot name="schema:depth"></slot>
       <slot name="schema:weight"></slot>
+      <slot name="schema:duration"></slot>
 
       <slot name="edm:rights"></slot>
       <slot name="dce:rights"></slot>

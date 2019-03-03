@@ -1,21 +1,9 @@
 <template>
   <v-layout row>
     <v-flex xs10>
-
       <v-card >
         <v-card-title class="headline grey--text">
-            <span>{{ $t(label) }}</span>
-            <v-spacer></v-spacer>
-            <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <v-btn slot="activator" icon>
-                <v-icon>more_vert</v-icon>
-              </v-btn>
-              <v-list>
-                <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-                  <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
+          <span>{{ $t(p) }}</span>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
@@ -25,9 +13,6 @@
                 <v-flex class="primary--text" xs3 :key="'mt'+j+i">{{ $t(title['@type']) }} ({{ mt['@language'] }})</v-flex>
                 <v-layout column :key="'mtv'+i">
                   <v-flex xs9 >{{ mt['@value'] }}</v-flex>
-                  <template v-for="(st, i) in title['bf:subtitle']">
-                    <v-flex xs9 :key="'stv'+i">{{ st['@value'] }} ({{ st['@language'] }})</v-flex>
-                  </template>
                 </v-layout>
               </template>
             </template>
@@ -75,6 +60,9 @@ export default {
     o: {
       type: Object,
       required: true
+    },
+    p: {
+      type: String
     }
   }
 }

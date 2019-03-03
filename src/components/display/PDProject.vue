@@ -34,6 +34,9 @@ export default {
     o: {
       type: Object,
       required: true
+    },
+    p: {
+      type: String
     }
   }
 }

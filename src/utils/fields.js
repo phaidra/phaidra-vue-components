@@ -143,6 +143,17 @@ const fields = [
     definition: 'A language of the resource.'
   },
   {
+    id: 'subtitle-language',
+    fieldname: 'Language of subtitles',
+    predicate: 'schema:subtitleLanguage',
+    component: 'p-select',
+    vocabulary: 'lang',
+    multiplicable: true,
+    label: 'Language of subtitles',
+    value: '',
+    definition: 'Languages in which subtitles/captions are available.'
+  },
+  {
     id: 'role',
     fieldname: 'Contribution',
     predicate: 'role',
@@ -214,16 +225,17 @@ const fields = [
     definition: 'Study plan.'
   },
   {
-    id: 'is-in-series',
+    id: 'series',
     fieldname: 'Journal/Series',
     predicate: 'rdau:P60193',
     type: 'schema:CreativeWork',
     component: 'p-series',
     label: 'Journal/Series',
     title: '',
-    titleLanguage: '',
+    titleLanguage: 'eng',
     volume: '',
     issue: '',
+    issued: '',
     issn: '',
     identifier: '',
     definition: 'Relates a resource to a resource in which a part has been issued; a title of a larger resource appears on a part.'
@@ -406,6 +418,15 @@ const fields = [
     definition: 'The weight of the item.'
   },
   {
+    id: 'duration',
+    fieldname: 'Duration',
+    predicate: 'schema:duration',
+    component: 'p-duration',
+    label: 'Duration',
+    value: '',
+    definition: 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.'
+  },
+  {
     id: 'inscription',
     fieldname: 'Inscription/Stamp',
     predicate: 'vra:hasInscription',
@@ -546,6 +567,7 @@ const predicateOrder = [
   'bf:note',
   
   'dcterms:language',
+  'schema:subtitleLanguage',
   'dce:subject',
   'dcterms:subject',
 
@@ -560,6 +582,8 @@ const predicateOrder = [
   'dcterms:dateSubmitted',
   'phaidra:dateAccessioned',
   'date',
+
+  'rdau:P60193',
 
   'edm:rights',
   'dce:rights',
@@ -588,7 +612,8 @@ const predicateOrder = [
   'schema:width',
   'schema:height',
   'schema:depth',
-  'schema:weight'
+  'schema:weight',
+  'schema:duration'
 ]
 
 export default {

@@ -62,10 +62,10 @@
 
               <v-layout row>
 
-                <v-flex xs4>
+                <v-flex xs2>
                   <v-text-field
                     :value="volume"
-                    :label="'Volume'"
+                    :label="$t('Volume')"
                     v-on:input="$emit('input-volume', $event)"
                     box
                   ></v-text-field>
@@ -74,12 +74,23 @@
                 <v-flex xs4>
                   <v-text-field
                     :value="issue"
-                    :label="'Issue'"
+                    :label="$t('Issue')"
                     v-on:input="$emit('input-issue', $event)"
                     box
                   ></v-text-field>
                 </v-flex>
-                  
+
+                <v-flex xs4>
+                    <v-text-field       
+                    :value="issued" 
+                    :label="$t('Issued')"
+                    v-on:input="$emit('input-issued', $event)"
+                    :hint="'Format YYYY-MM-DD'"
+                    :rules="[validationrules.date]"
+                    box
+                  ></v-text-field>
+                </v-flex>
+
               </v-layout>
 
               <v-layout row>
@@ -87,7 +98,7 @@
                 <v-flex xs4>
                   <v-text-field
                     :value="issn"
-                    :label="'ISSN'"
+                    :label="$t('ISSN')"
                     v-on:input="$emit('input-issn', $event)"
                     box
                   ></v-text-field>
@@ -96,7 +107,7 @@
                 <v-flex xs6>
                   <v-text-field
                     :value="identifier"
-                    :label="'Identifier'"
+                    :label="$t('Identifier')"
                     v-on:input="$emit('input-identifier', $event)"
                     box
                   ></v-text-field>
@@ -115,10 +126,11 @@
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-i-series',
-  mixins: [vocabulary, fieldproperties],
+  mixins: [vocabulary, fieldproperties, validationrules],
   props: {
     type: {
       type: String
@@ -136,6 +148,9 @@ export default {
       type: String
     },
     issue: {
+      type: String
+    },
+    issued: {
       type: String
     },
     issn: {

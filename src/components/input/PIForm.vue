@@ -94,13 +94,23 @@
                     ></p-i-date-edtf>        
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-duration'" :key="f.id">
+                    <p-i-duration
+                      v-bind.sync="f" 
+                      v-on:input-value="f.value=$event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-duration>
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'p-series'" :key="f.id">
                     <p-i-series
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
-                      v-on:input-title-language="f.titleLanguage=$event"
+                      v-on:input-title-language="setSelected(f, 'titleLanguage', $event)"
                       v-on:input-volume="f.volume=$event"
                       v-on:input-issue="f.issue=$event"
+                      v-on:input-issued="f.issued=$event"
                       v-on:input-issn="f.issn=$event"
                       v-on:input-identifier="f.identifier=$event"
                       v-on:add="addField(s.fields, f)"
@@ -337,6 +347,7 @@ import PISubjectGnd from './PISubjectGnd'
 import PISpatialGetty from './PISpatialGetty'
 import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
+import PIDuration from './PIDuration'
 import PIProject from './PIProject'
 import PIFunder from './PIFunder'
 import PISeries from './PISeries'
@@ -362,6 +373,7 @@ export default {
     PISpatialGetty,
     PISpatialText,
     PIDimension,
+    PIDuration,
     PIStudyPlan,
     PIProject,
     PIFunder,

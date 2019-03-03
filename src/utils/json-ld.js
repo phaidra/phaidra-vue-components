@@ -75,6 +75,15 @@ export default {
               components.push(f)
               break
 
+            // schema:subtitleLanguage
+            case 'schema:subtitleLanguage':
+              f = fields.getField('subtitle-language')
+              for (j = 0; j < value[i].length; j++) {              
+                f.value = value[i]
+              }
+              components.push(f)
+              break
+
             // dce:subject
             case 'dce:subject':
               if (value[i]['@type'] === 'skos:Concept') {
@@ -191,6 +200,51 @@ export default {
               f = fields.getField('rights')             
               f.value = value[i]['@value']
               f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'              
+              components.push(f)
+              break
+
+            // rdau:P60193
+            case 'rdau:P60193':
+              f = fields.getField('series')
+              if (value['dce:title']) {
+                for (let t of value['dce:title']){
+                  if (t['bf:mainTitle']) {
+                    for (let mt of t['bf:mainTitle']){
+                      if (mt['@value']) {
+                        f.title = mt['@value']
+                      }
+                      if (mt['@language']) {
+                        f.titleLanguage = mt['@language']
+                      }
+                    }
+                  }
+                }
+              }
+              if (value['bibo:volume']) {
+                for (let volume of value['bibo:volume']){
+                  f.volume = volume
+                }
+              }
+              if (value['bibo:issue']) {
+                for (let issue of value['bibo:issue']){
+                  f.issue = issue
+                }
+              }
+              if (value['identifiers:issn']) {
+                for (let issn of value['identifiers:issn']){
+                  f.issn = issn
+                }
+              }
+              if (value['dcterms:issued']) {
+                for (let issued of value['dcterms:issued']){
+                  f.issued = issued
+                }
+              }
+              if (value['skos:exactMatch']) {
+                for (let identifier of value['skos:exactMatch']){
+                  f.identifier = identifier
+                }
+              }
               components.push(f)
               break
 
@@ -446,6 +500,15 @@ export default {
                 f.value = value[i]
                 components.push(f)
               }
+              break
+
+            // schema:duration
+            case 'schema:duration':
+              f = fields.getField('duration')
+              for (j = 0; j < value[i].length; j++) {              
+                f.value = value[i]
+              }
+              components.push(f)
               break
 
             default:
@@ -772,7 +835,9 @@ export default {
       ]
     }
     if (identifiers) {
-      h['skos:exactMatch'] = identifiers
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
     }
     return h
   },
@@ -801,12 +866,51 @@ export default {
       }
     }
     if (identifiers) {
-      h['skos:exactMatch'] = identifiers
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
     }
     if (homepage) {
       h['foaf:homepage'] = [
         homepage
       ]
+    }
+    return h
+  },
+  get_json_series (type, title, titleLanguage, volume, issue, issued, issn, identifiers) {
+    var h = {
+      '@type': type
+    }
+    if (title) {
+      let tit = {
+        '@type': 'bf:Title',
+        'bf:mainTitle': [
+          {
+            '@value': title
+          }
+        ]
+      }
+      if (titleLanguage) {
+        tit['bf:mainTitle'][0]['@language'] = titleLanguage
+      }
+      h['dce:title'] = [ tit ]
+    }
+    if (volume) {
+      h['bibo:volume'] = [ volume ]
+    }
+    if (issue) {
+      h['bibo:issue'] = [ issue ]
+    }
+    if (issued) {
+      h['dcterms:issued'] = [ issued ]
+    }
+    if (issn) {
+      h['identifiers:issn'] = [ issn ]
+    }
+    if (identifiers) {
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
     }
     return h
   },
@@ -844,7 +948,9 @@ export default {
       }
     }
     if (identifiers) {
-      h['skos:exactMatch'] = identifiers
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
     }
     return h
   },
@@ -971,6 +1077,12 @@ export default {
           }
           break
 
+        case 'schema:subtitleLanguage':
+          if (f.value) {
+            this.push_literal(jsonld, f.predicate, f.value)
+          }
+          break
+
         case 'dcterms:type':
         case 'edm:hasType':
           if (f.value) {
@@ -1009,6 +1121,11 @@ export default {
           }
           break
 
+        case 'rdau:P60193':
+          if (f.title || f.volume || f.issue || f.issued || f.issn || f.identifier ) {
+            this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier ? [f.identifier] : null))
+          }
+
         case 'frapo:isOutputOf':
           if (f.type === 'aaiso:Programme'){
             // study plan
@@ -1019,7 +1136,7 @@ export default {
             // project
             if (f.type === 'foaf:Project') {
               if (f.name || f.identifier || f.description || f.homepage) {
-                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, [f.identifier], f.homepage))
+                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage))
               }
             }
           }
@@ -1027,7 +1144,7 @@ export default {
 
         case 'frapo:hasFundingAgency':
           if (f.name || f.identifier) {
-            this.push_object(jsonld, f.predicate, this.get_json_funder(f.name, f.nameLanguage, [f.identifier]))
+            this.push_object(jsonld, f.predicate, this.get_json_funder(f.name, f.nameLanguage, f.identifier ? [f.identifier] : null))
           }
           break
 
@@ -1087,6 +1204,12 @@ export default {
             this.push_object(jsonld, f.predicate, this.get_json_quantitativevalue(f.value, f.unit))
           }
           break
+
+        case 'schema:duration':
+        if (f.value) {
+          this.push_literal(jsonld, f.predicate, f.value)
+        }
+        break
 
         case 'date':
         case 'dcterms:date':
