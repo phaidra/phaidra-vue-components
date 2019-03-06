@@ -241,6 +241,22 @@ const fields = [
     definition: 'Relates a resource to a resource in which a part has been issued; a title of a larger resource appears on a part.'
   },
   {
+    id: 'adaptation',
+    fieldname: 'Is adaptation of',
+    predicate: 'rdau:P60227',
+    type: 'schema:CreativeWork',
+    component: 'p-adaptation',
+    label: 'Is adaptation of',
+    title: '',
+    subtitle: '',
+    titleLanguage: 'eng',
+    firstname: '',
+    lastname: '',
+    name: '',
+    role: '',
+    definition: 'Relates a work to a work that has been modified for a purpose, use, or medium other than that for which it was originally intended.'
+  },
+  {
     id: 'project',
     fieldname: 'Project',
     predicate: 'frapo:isOutputOf',
@@ -584,6 +600,7 @@ const predicateOrder = [
   'date',
 
   'rdau:P60193',
+  'rdau:P60227',
 
   'edm:rights',
   'dce:rights',

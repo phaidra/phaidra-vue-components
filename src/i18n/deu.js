@@ -548,6 +548,7 @@ export default {
   'edm:rights': 'Lizenz',
 
   'rdau:P60193': 'Journal/Series',
+  'rdau:P60227': 'Adaptation of',
 
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',

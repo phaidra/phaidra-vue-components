@@ -6,13 +6,10 @@
         <v-layout column :key="'mtv'+i">
           <v-flex xs9 >{{ mt['@value'] }}</v-flex>
           <template v-for="(st, i) in o['bf:subtitle']">
-            <v-flex xs9 :key="'stv'+i">{{ st['@value'] }} ({{ st['@language'] }})</v-flex>
+            <v-flex xs9 :key="'stv'+i">{{ st['@value'] }}</v-flex>
           </template>
         </v-layout>
       </template>
-    </v-layout>
-    <v-layout v-if="o['bf:subtitle']" row>
-      
     </v-layout>
   </v-flex>
 </template>

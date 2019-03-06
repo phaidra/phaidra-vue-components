@@ -9,6 +9,8 @@ import PDJsonldLayout from './display/PDJsonldLayout.vue'
 import PDLangValue from './display/PDLangValue.vue'
 import PDLicense from './display/PDLicense.vue'
 import PDProject from './display/PDProject.vue'
+import PDSeries from './display/PDSeries.vue'
+import PDAdaptation from './display/PDAdaptation.vue'
 import PDSkosPreflabel from './display/PDSkosPreflabel.vue'
 import PDTitle from './display/PDTitle.vue'
 import PDLabeledValue from './display/PDLabeledValue.vue'
@@ -22,6 +24,7 @@ import PIFilenameReadonly from './input/PIFilenameReadonly.vue'
 import PIForm from './input/PIForm.vue'
 import PIFunder from './input/PIFunder.vue'
 import PISeries from './input/PISeries.vue'
+import PIAdaptation from './input/PIAdaptation.vue'
 import PISubjectGnd from './input/PISubjectGnd.vue'
 import PISpatialGetty from './input/PISpatialGetty.vue'
 import PISpatialText from './input/PISpatialText.vue'
@@ -46,6 +49,8 @@ const Components = {
   PDJsonldLayout,
   PDLangValue,
   PDLicense,
+  PDSeries,
+  PDAdaptation,
   PDProject,
   PDSkosPreflabel,
   PDTitle,
@@ -59,6 +64,7 @@ const Components = {
   PIForm,
   PIFunder,
   PISeries,
+  PIAdaptation,
   PISubjectGnd,
   PISpatialGetty,
   PISpatialText,

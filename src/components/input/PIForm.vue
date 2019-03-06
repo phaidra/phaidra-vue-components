@@ -118,6 +118,21 @@
                     ></p-i-series>
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-adaptation'" :key="f.id">
+                    <p-i-adaptation
+                      v-bind.sync="f"
+                      v-on:input-title="f.title=$event"
+                      v-on:input-subtitle="f.subtitle=$event"
+                      v-on:input-title-language="setSelected(f, 'titleLanguage', $event)"
+                      v-on:input-firstname="f.firstname=$event"
+                      v-on:input-lastname="f.lastname=$event"
+                      v-on:input-name="f.name=$event"
+                      v-on:input-role="roleInput(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-adaptation>
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'p-entity'" :key="f.id">
                     <p-i-entity
                       v-bind.sync="f"
@@ -127,7 +142,6 @@
                       v-on:input-institution="f.institution=$event"
                       v-on:input-identifier="f.identifier=$event"
                       v-on:input-role="roleInput(f, $event)"
-                      v-on:input-date="f.date=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                       v-on:up="sortFieldUp(s.fields, f)"
@@ -351,6 +365,7 @@ import PIDuration from './PIDuration'
 import PIProject from './PIProject'
 import PIFunder from './PIFunder'
 import PISeries from './PISeries'
+import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
 import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
@@ -378,6 +393,7 @@ export default {
     PIProject,
     PIFunder,
     PISeries,
+    PIAdaptation,
     PILiteral,
     PIKeyword,
     PIFilenameReadonly,

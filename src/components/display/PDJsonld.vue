@@ -83,6 +83,10 @@
           <p-d-series :p="p" :o="item" v-for="(item, j) in o" :key="pid+'series'+j" ></p-d-series>
         </template>
 
+        <template v-else-if="p==='rdau:P60227'" slot="rdau:P60227">
+          <p-d-adaptation :p="p" :o="item" v-for="(item, j) in o" :key="pid+'adaptation'+j" ></p-d-adaptation>
+        </template>
+
         <template v-else-if="p==='frapo:isOutputOf'" slot="frapo:isOutputOf">
           <template v-for="(item, j) in o">
             <template v-if="item['@type']==='aaiso:Programme'">
@@ -226,6 +230,7 @@ import PDFunder from './PDFunder'
 import PDProject from './PDProject'
 import PDStudyPlan from './PDStudyPlan'
 import PDSeries from './PDSeries'
+import PDAdaptation from './PDAdaptation'
 import PDJsonldLayout from './PDJsonldLayout'
 import { vocabulary } from '../../mixins/vocabulary'
 
@@ -255,7 +260,8 @@ export default {
     PDFunder,
     PDProject,
     PDStudyPlan,
-    PDSeries
+    PDSeries,
+    PDAdaptation
   },
   methods: {
     loadMetadata: function (pid) {

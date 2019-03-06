@@ -203,9 +203,9 @@ export default {
               components.push(f)
               break
 
-            // rdau:P60193
-            case 'rdau:P60193':
-              f = fields.getField('series')
+            // rdau:P60227
+            case 'rdau:P60227':
+              f = fields.getField('adaptation')
               if (value['dce:title']) {
                 for (let t of value['dce:title']){
                   if (t['bf:mainTitle']) {
@@ -217,32 +217,38 @@ export default {
                         f.titleLanguage = mt['@language']
                       }
                     }
+                    for (let st of t['bf:subtitle']){
+                      if (st['@value']) {
+                        f.subtitle = st['@value']
+                      }
+                    }
                   }
                 }
               }
-              if (value['bibo:volume']) {
-                for (let volume of value['bibo:volume']){
-                  f.volume = volume
-                }
-              }
-              if (value['bibo:issue']) {
-                for (let issue of value['bibo:issue']){
-                  f.issue = issue
-                }
-              }
-              if (value['identifiers:issn']) {
-                for (let issn of value['identifiers:issn']){
-                  f.issn = issn
-                }
-              }
-              if (value['dcterms:issued']) {
-                for (let issued of value['dcterms:issued']){
-                  f.issued = issued
-                }
-              }
-              if (value['skos:exactMatch']) {
-                for (let identifier of value['skos:exactMatch']){
-                  f.identifier = identifier
+              for (let [pred, obj] of Object.entries(value)) {
+                if (pred.startsWith('role')) {
+                  for (let role of obj) {
+                    if (role['@type'] === 'schema:Person') {
+                      f = fields.getField('role')
+                      f.role = pred
+                      if (role['schema:name']) {
+                        for (let name of role['schema:name']) {
+                          f.name = name['@value']
+                        }
+                      }
+                      if (role['schema:familyName']) {
+                        for (let lastname of role['schema:familyName']) {
+                          f.lastname = lastname['@value']
+                        }
+                      }
+                      if (role['schema:givenName']) {
+                        for (let firstname of role['schema:givenName']) {
+                          f.firstname = firstname['@value']
+                        }
+                      }
+                      components.push(f)
+                    }
+                  }
                 }
               }
               components.push(f)
@@ -518,6 +524,11 @@ export default {
                 if (value[i]['@type'] === 'schema:Person') {
                   f = fields.getField('role')
                   f.role = key
+                  if (value[i]['schema:name']) {
+                    for (j = 0; j < value[i]['schema:name'].length; j++) {
+                      f.name = value[i]['schema:name'][j]['@value']
+                    }
+                  }
                   if (value[i]['schema:familyName']) {
                     for (j = 0; j < value[i]['schema:familyName'].length; j++) {
                       f.lastname = value[i]['schema:familyName'][j]['@value']
@@ -829,11 +840,6 @@ export default {
         }
       ]
     }
-    if (date) {
-      h['dcterms:date'] = [
-        date
-      ]
-    }
     if (identifiers) {
       if (identifiers.length > 0) {
         h['skos:exactMatch'] = identifiers
@@ -911,6 +917,61 @@ export default {
       if (identifiers.length > 0) {
         h['skos:exactMatch'] = identifiers
       }
+    }
+    return h
+  },
+  get_json_adaptation (type, title, subtitle, titleLanguage, role, name, firstname, lastname) {
+    var h = {
+      '@type': type
+    }
+    if (title) {
+      let tit = {
+        '@type': 'bf:Title',
+        'bf:mainTitle': [
+          {
+            '@value': title
+          }
+        ]
+      }
+      if (titleLanguage) {
+        tit['bf:mainTitle'][0]['@language'] = titleLanguage
+      }
+      if (subtitle) {
+        tit['bf:subtitle'] = [
+          {
+            '@value': subtitle
+          }
+        ]
+        if (titleLanguage) {
+          tit['bf:subtitle'][0]['@language'] = titleLanguage
+        }
+      }
+      h['dce:title'] = [ tit ]
+    }
+    if (firstname || lastname || name) {
+      let r = {}
+      if (firstname) {
+        r['schema:givenName'] = [
+          {
+            '@value': firstname
+          }
+        ]
+      }
+      if (lastname) {
+        r['schema:familyName'] = [
+          {
+            '@value': lastname
+          }
+        ]
+      }
+      if (name) {
+        r['schema:name'] = [
+          {
+            '@value': name
+          }
+        ]
+      }
+      h[role] = [r]
     }
     return h
   },
@@ -1124,6 +1185,11 @@ export default {
         case 'rdau:P60193':
           if (f.title || f.volume || f.issue || f.issued || f.issn || f.identifier ) {
             this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier ? [f.identifier] : null))
+          }
+
+        case 'rdau:P60227':
+          if (f.title || f.name || f.firstname || f.lastname ) {
+            this.push_object(jsonld, f.predicate, this.get_json_adaptation(f.type, f.title, f.subtitle, f.titleLanguage, f.role, f.name, f.firstname, f.lastname))
           }
 
         case 'frapo:isOutputOf':
