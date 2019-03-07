@@ -206,8 +206,8 @@ export default {
             // rdau:P60227
             case 'rdau:P60227':
               f = fields.getField('adaptation')
-              if (value['dce:title']) {
-                for (let t of value['dce:title']){
+              if (value[i]['dce:title']) {
+                for (let t of value[i]['dce:title']){
                   if (t['bf:mainTitle']) {
                     for (let mt of t['bf:mainTitle']){
                       if (mt['@value']) {
@@ -225,11 +225,10 @@ export default {
                   }
                 }
               }
-              for (let [pred, obj] of Object.entries(value)) {
+              for (let [pred, obj] of Object.entries(value[i])) {
                 if (pred.startsWith('role')) {
                   for (let role of obj) {
                     if (role['@type'] === 'schema:Person') {
-                      f = fields.getField('role')
                       f.role = pred
                       if (role['schema:name']) {
                         for (let name of role['schema:name']) {
@@ -246,7 +245,6 @@ export default {
                           f.firstname = firstname['@value']
                         }
                       }
-                      components.push(f)
                     }
                   }
                 }
@@ -949,7 +947,9 @@ export default {
       h['dce:title'] = [ tit ]
     }
     if (firstname || lastname || name) {
-      let r = {}
+      let r = {
+        '@type': 'schema:Person'
+      }
       if (firstname) {
         r['schema:givenName'] = [
           {
