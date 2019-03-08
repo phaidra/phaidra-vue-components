@@ -16,6 +16,33 @@ export default {
 
           switch (key) {
 
+            // dcterms:type
+            case 'dcterms:type':
+              f = fields.getField('resource-type')
+              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
+                f.value = value[i]['skos:exactMatch'][j]
+              }
+              components.push(f)
+              break
+
+            // edm:hasType
+            case 'edm:hasType':
+              f = fields.getField('object-type')
+              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
+                f.value = value[i]['skos:exactMatch'][j]
+              }
+              components.push(f)
+              break
+
+            // schema:genre
+            case 'schema:genre':
+              f = fields.getField('genre')
+              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
+                f.value = value[i]['skos:exactMatch'][j]
+              }
+              components.push(f)
+              break
+
             // dce:title
             case 'dce:title':
               if ((value[i]['@type'] === 'bf:Title') || (value[i]['@type'] === 'bf:ParallelTitle')) {
@@ -170,24 +197,6 @@ export default {
               }
               break
 
-            // dcterms:type
-            case 'dcterms:type':
-              f = fields.getField('resource-type')
-              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                f.value = value[i]['skos:exactMatch'][j]
-              }
-              components.push(f)
-              break
-
-            // edm:hasType
-            case 'edm:hasType':
-              f = fields.getField('genre')
-              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                f.value = value[i]['skos:exactMatch'][j]
-              }
-              components.push(f)
-              break
-
             // edm:rights
             case 'edm:rights':
               f = fields.getField('license')             
@@ -338,6 +347,24 @@ export default {
               components.push(f)
               break
 
+            // bf:soundCharacteristic
+            case 'bf:soundCharacteristic':
+              f = fields.getField('sound-characteristic')
+              f.label = key
+              f.value = value[i]
+              components.push(f)
+              break
+
+            // bf:supplementaryContent
+            case 'bf:supplementaryContent':
+              f = fields.getField('supplementary-content')
+              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
+                f.value = value[i]['skos:prefLabel'][j]['@value']
+                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+              }
+              components.push(f)
+              break
+
             // ebucore:filename
             case 'ebucore:filename':
               f = fields.getField('filename-readonly')
@@ -378,7 +405,7 @@ export default {
             case 'bf:physicalLocation':
               f = fields.getField('physical-location')             
               f.value = value[i]['@value']
-              f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'              
+              f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'
               components.push(f)
               break
 
@@ -386,7 +413,7 @@ export default {
             case 'vra:hasInscription':
               if (value[i]['@type'] === 'vra:Inscription') {
                 f = fields.getField('inscription')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
+                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
                   f.value = value[i]['skos:prefLabel'][j]['@value']
                   f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
                 }
@@ -423,7 +450,7 @@ export default {
             case 'vra:hasTechnique':
               if (value[i]['@type'] === 'vra:Technique' && !(value[i]['skos:exactMatch'])) {
                 f = fields.getField('technique-text')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
+                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
                   f.value = value[i]['skos:prefLabel'][j]['@value']
                   f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
                 }
@@ -448,10 +475,10 @@ export default {
             case 'schema:width':
               if (value[i]['@type'] === 'schema:QuantitativeValue') {
                 f = fields.getField('width')
-                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {              
+                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {
                   f.unit = value[i]['schema:unitCode'][j]
                 }
-                for (j = 0; j < value[i]['schema:value'].length; j++) {              
+                for (j = 0; j < value[i]['schema:value'].length; j++) {
                   f.value = value[i]['schema:value'][j]
                 }
                 components.push(f)
@@ -462,10 +489,10 @@ export default {
             case 'schema:height':
               if (value[i]['@type'] === 'schema:QuantitativeValue') {
                 f = fields.getField('height')
-                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {              
+                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {
                   f.unit = value[i]['schema:unitCode'][j]
                 }
-                for (j = 0; j < value[i]['schema:value'].length; j++) {              
+                for (j = 0; j < value[i]['schema:value'].length; j++) {
                   f.value = value[i]['schema:value'][j]
                 }
                 components.push(f)
@@ -509,7 +536,7 @@ export default {
             // schema:duration
             case 'schema:duration':
               f = fields.getField('duration')
-              for (j = 0; j < value[i].length; j++) {              
+              for (j = 0; j < value[i].length; j++) {
                 f.value = value[i]
               }
               components.push(f)
@@ -1146,8 +1173,15 @@ export default {
 
         case 'dcterms:type':
         case 'edm:hasType':
+        case 'schema:genre':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+          }
+          break
+
+        case 'bf:supplementaryContent':
+          if (f.value) {
+            this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
           }
           break
 
@@ -1314,6 +1348,7 @@ export default {
           break
 
         case 'schema:numberOfPages':
+        case 'bf:soundCharacteristic':
           if (f.value) {
             this.push_literal(jsonld, f.predicate, f.value)
           }

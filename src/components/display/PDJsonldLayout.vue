@@ -3,6 +3,7 @@
     <v-layout column>
       <slot name="dcterms:type"></slot>
       <slot name="edm:hasType"></slot>
+      <slot name="schema:genre"></slot>
 
       <slot name="dce:title"></slot>
       <slot name="role"></slot>
@@ -37,6 +38,8 @@
       <slot name="vra:placeOfSite"></slot>
 
       <slot name="schema:numberOfPages"></slot>
+      <slot name="bf:soundCharacteristic"></slot>
+      <slot name="bf:supplementaryContent"></slot>
 
       <slot name="ebucore:filename"></slot>
       <slot name="ebucore:hasMimeType"></slot>

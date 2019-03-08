@@ -13,18 +13,29 @@ const fields = [
     label: 'Resource type',
     value: '',
     'skos:prefLabel': [],
-    definition: 'The nature of the resource.'
+    definition: 'The nature of the resource. Example: Image, Text, Sound'
+  },
+  {
+    id: 'object-type',
+    fieldname: 'Object type',
+    predicate: 'edm:hasType',
+    component: 'p-select',
+    vocabulary: 'objecttype',
+    label: 'Object type',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography, Railway bridge, Tribe'
   },
   {
     id: 'genre',
     fieldname: 'Genre',
-    predicate: 'edm:hasType',
+    predicate: 'schema:genre',
     component: 'p-select',
     vocabulary: 'genre',
     label: 'Genre',
     value: '',
     'skos:prefLabel': [],
-    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Master thesis, Comedy'
+    definition: 'Genre of the creative work, broadcast channel or group. Example: Master thesis, Comedy, Late Renaissance'
   },
   {
     id: 'title',
@@ -343,6 +354,28 @@ const fields = [
     definition: 'The number of pages in the book in the resource.'
   },
   {
+    id: 'sound-characteristic',
+    fieldname: 'Sound characteristic',
+    predicate: 'bf:soundCharacteristic',
+    component: 'p-literal',
+    label: 'Sound characteristic',
+    value: '',
+    definition: 'Technical specification relating to the encoding of sound in a resource.'
+  },
+  {
+    id: 'supplementary-content',
+    fieldname: 'Supplementary content',
+    predicate: 'bf:supplementaryContent',
+    type: 'bf:SupplementaryContent',
+    component: 'p-text-field',
+    multiplicable: true,
+    multilingual: true,
+    label: 'Supplementary content',
+    value: '',
+    language: 'eng',
+    definition: 'Material such as an index, bibliography, appendix intended to supplement the primary content of a resource.'
+  },
+  {
     id: 'technique-vocab',
     fieldname: 'Technique (vocabulary)',
     predicate: 'vra:hasTechnique',
@@ -577,6 +610,7 @@ const predicateOrder = [
 
   'dcterms:type',
   'edm:hasType',
+  'schema:genre',
   
   'dce:title',
   'role',
@@ -615,6 +649,8 @@ const predicateOrder = [
   'spatial',
 
   'schema:numberOfPages',
+  'bf:soundCharacteristic',
+  'bf:supplementaryContent',
 
   'ebucore:filename',
   'ebucore:hasMimeType',

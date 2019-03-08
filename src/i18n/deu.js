@@ -566,6 +566,8 @@ export default {
   'dcterms:provenance': 'Provenienz',
 
   'schema:numberOfPages': 'Seitenanzahl',
+  'bf:soundCharacteristic': 'Sound characteristic',
+  'bf:supplementaryContent': 'Supplementary content',
 
   'ebucore:filename': 'Dateiname',
   'ebucore:hasMimeType': 'MIME Typ',

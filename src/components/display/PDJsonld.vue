@@ -8,6 +8,10 @@
         </template>
 
         <template v-else-if="p==='edm:hasType'" slot="edm:hasType">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'objtyp'+j" ></p-d-skos-preflabel>
+        </template>
+
+        <template v-else-if="p==='schema:genre'" slot="schema:genre">
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'genre'+j" ></p-d-skos-preflabel>
         </template>
 
@@ -176,6 +180,14 @@
 
         <template v-else-if="p==='schema:numberOfPages'" slot="schema:numberOfPages">
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="pid+'numberOfPages'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='bf:soundCharacteristic'" slot="bf:soundCharacteristic">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="pid+'soundCharacteristic'+j" ></p-d-value>
+        </template>
+
+        <template v-else-if="p==='bf:supplementaryContent'" slot="bf:supplementaryContent">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'supplementaryContent'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='edm:rights'" slot="edm:rights">
