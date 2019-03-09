@@ -40,6 +40,8 @@
       <slot name="schema:numberOfPages"></slot>
       <slot name="bf:soundCharacteristic"></slot>
       <slot name="bf:supplementaryContent"></slot>
+      <slot name="bf:awards"></slot>
+      <slot name="dcterms:audience"></slot>
 
       <slot name="ebucore:filename"></slot>
       <slot name="ebucore:hasMimeType"></slot>

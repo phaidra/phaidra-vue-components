@@ -365,6 +365,26 @@ export default {
               components.push(f)
               break
 
+            // bf:awards
+            case 'bf:awards':
+              f = fields.getField('award')
+              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
+                f.value = value[i]['skos:prefLabel'][j]['@value']
+                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+              }
+              components.push(f)
+              break
+
+              // dcterms:audience
+            case 'dcterms:audience':
+              f = fields.getField('audience')
+              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
+                f.value = value[i]['skos:prefLabel'][j]['@value']
+                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+              }
+              components.push(f)
+              break
+
             // ebucore:filename
             case 'ebucore:filename':
               f = fields.getField('filename-readonly')
@@ -1180,6 +1200,8 @@ export default {
           break
 
         case 'bf:supplementaryContent':
+        case 'bf:awards':
+        case 'dcterms:audience':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
           }

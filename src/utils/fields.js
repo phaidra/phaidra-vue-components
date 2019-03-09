@@ -376,6 +376,32 @@ const fields = [
     definition: 'Material such as an index, bibliography, appendix intended to supplement the primary content of a resource.'
   },
   {
+    id: 'award',
+    fieldname: 'Award',
+    predicate: 'bf:awards',
+    type: 'skos:Concept',
+    component: 'p-text-field',
+    multiplicable: true,
+    multilingual: true,
+    label: 'Award',
+    value: '',
+    language: 'eng',
+    definition: 'Information on an award associated with the described resource.'
+  },
+  {
+    id: 'audience',
+    fieldname: 'Audience',
+    predicate: 'dcterms:audience',
+    type: 'skos:Concept',
+    component: 'p-text-field',
+    multiplicable: true,
+    multilingual: true,
+    label: 'Audience',
+    value: '',
+    language: 'eng',
+    definition: 'A class of entity for whom the resource is intended or useful.'
+  },
+  {
     id: 'technique-vocab',
     fieldname: 'Technique (vocabulary)',
     predicate: 'vra:hasTechnique',
@@ -651,6 +677,8 @@ const predicateOrder = [
   'schema:numberOfPages',
   'bf:soundCharacteristic',
   'bf:supplementaryContent',
+  'bf:awards',
+  'dcterms:audience',
 
   'ebucore:filename',
   'ebucore:hasMimeType',

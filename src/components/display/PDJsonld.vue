@@ -190,6 +190,14 @@
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'supplementaryContent'+j" ></p-d-skos-preflabel>
         </template>
 
+        <template v-else-if="p==='dcterms:audience'" slot="dcterms:audience">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'audience'+j" ></p-d-skos-preflabel>
+        </template>
+
+        <template v-else-if="p==='bf:awards'" slot="bf:awards">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'awards'+j" ></p-d-skos-preflabel>
+        </template>
+
         <template v-else-if="p==='edm:rights'" slot="edm:rights">
           <p-d-license :p="p" :o="item" v-for="(item, j) in o" :key="pid+'license'+j"></p-d-license>
         </template>

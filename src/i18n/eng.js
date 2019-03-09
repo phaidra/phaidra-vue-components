@@ -54,6 +54,8 @@ export default {
   'schema:numberOfPages': 'Number of pages',
   'bf:soundCharacteristic': 'Sound characteristic',
   'bf:supplementaryContent': 'Supplementary content',
+  'bf:awards': 'Award',
+  'dcterms:audience': 'Audience',
 
   'ebucore:filename': 'Filename',
   'ebucore:hasMimeType': 'MIME Type',
