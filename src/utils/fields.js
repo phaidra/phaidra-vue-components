@@ -659,13 +659,8 @@ const predicateOrder = [
   'phaidra:dateAccessioned',
   'date',
 
-  'rdau:P60193',
-  'rdau:P60227',
-
   'edm:rights',
   'dce:rights',
-  'frapo:hasFundingAgency',
-  'frapo:isOutputOf',
   'dcterms:provenance',
 
   'dcterms:spatial',
@@ -694,7 +689,12 @@ const predicateOrder = [
   'schema:height',
   'schema:depth',
   'schema:weight',
-  'schema:duration'
+  'schema:duration',
+
+  'rdau:P60193',
+  'rdau:P60227',
+  'frapo:hasFundingAgency',
+  'frapo:isOutputOf'
 ]
 
 export default {

@@ -1242,11 +1242,13 @@ export default {
           if (f.title || f.volume || f.issue || f.issued || f.issn || f.identifier ) {
             this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier ? [f.identifier] : null))
           }
+          break
 
         case 'rdau:P60227':
           if (f.title || f.name || f.firstname || f.lastname ) {
             this.push_object(jsonld, f.predicate, this.get_json_adaptation(f.type, f.title, f.subtitle, f.titleLanguage, f.role, f.name, f.firstname, f.lastname))
           }
+          break
 
         case 'frapo:isOutputOf':
           if (f.type === 'aaiso:Programme'){

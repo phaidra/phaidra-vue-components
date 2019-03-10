@@ -28,6 +28,7 @@ export default {
       switch (p) {
 
         case 'dcterms:language':
+        case 'schema:subtitleLanguage':
           vocabulary = 'lang'
           break
 
@@ -40,7 +41,7 @@ export default {
       }
 
       return this.getLocalizedTermLabel(vocabulary, v)
-    },
+    }
   }
 }
 </script>

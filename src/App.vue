@@ -334,12 +334,7 @@ export default {
     this.form.sections[0].fields.push(fields.getField('subtitle-language'))
     this.form.sections[0].fields.push(fields.getField('description'))
     this.form.sections[0].fields.push(fields.getField('series'))
-    let adp = fields.getField('adaptation')
-    adp.title = 'the third son'
-    adp.titleLanguage = 'deu'
-    adp.role = 'role:aut'
-    adp.showname = true
-    adp.name = 'a. platanov'
+    this.form.sections[0].fields.push(fields.getField('adaptation'))
     this.form.sections[0].fields.push(adp)
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
