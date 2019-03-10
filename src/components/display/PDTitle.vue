@@ -2,7 +2,7 @@
   <v-flex>
     <v-layout row >
       <template v-for="(mt, i) in o['bf:mainTitle']">
-        <v-flex class="primary--text" xs3 :key="'mt'+i">{{ $t(o['@type']) }} ({{ mt['@language'] }})</v-flex>
+        <v-flex class="primary--text" xs3 :key="'mt'+i">{{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
         <v-layout column :key="'mtv'+i">
           <v-flex xs9 >{{ mt['@value'] }}</v-flex>
           <template v-for="(st, i) in o['bf:subtitle']">

@@ -4,7 +4,7 @@
     <v-flex xs10>
 
       <v-card >
-        <v-card-title class="headline grey--text">
+        <v-card-title class="subheading grey white--text">
             <span>{{ $t('Project') }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">

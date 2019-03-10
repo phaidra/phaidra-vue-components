@@ -1,8 +1,8 @@
 <template>
   <v-layout row>
     <v-flex xs10>
-      <v-card >
-        <v-card-title class="headline grey--text">
+      <v-card>
+        <v-card-title class="subheading grey white--text">
           <span>{{ $t(p) }}</span>
         </v-card-title>
         <v-divider></v-divider>

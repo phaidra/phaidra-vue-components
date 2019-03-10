@@ -4,7 +4,7 @@
     <v-flex xs10>
 
       <v-card >
-        <v-card-title class="headline grey--text">
+        <v-card-title class="subheading grey white--text">
             <span>{{ $t(label) }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
@@ -71,7 +71,7 @@
                 <template v-if="showname">
                   <v-flex xs4 >
                     <v-text-field
-                      :value="firstname"
+                      :value="name"
                       :label="$t('Name')"
                       v-on:input="$emit('input-name', $event)"
                       box
