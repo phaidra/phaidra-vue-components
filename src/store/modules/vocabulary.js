@@ -234,6 +234,7 @@ const state = {
         { '@id': 'role:prc', 'skos:prefLabel': { 'eng': 'Process contact' } },
         { '@id': 'role:pro', 'skos:prefLabel': { 'eng': 'Producer' } },
         { '@id': 'role:prn', 'skos:prefLabel': { 'eng': 'Production company' } },
+        { '@id': 'role:prp', 'skos:prefLabel': { 'eng': 'Production country' } },
         { '@id': 'role:prs', 'skos:prefLabel': { 'eng': 'Production designer' } },
         { '@id': 'role:pmn', 'skos:prefLabel': { 'eng': 'Production manager' } },
         { '@id': 'role:prd', 'skos:prefLabel': { 'eng': 'Production personnel' } },
