@@ -333,9 +333,10 @@ export default {
     this.form.sections[0].fields.push(fields.getField('audience'))
     this.form.sections[0].fields.push(fields.getField('subtitle-language'))
     this.form.sections[0].fields.push(fields.getField('description'))
-    this.form.sections[0].fields.push(fields.getField('series'))
+    let series = fields.getField('series')
+    series.title = 'testseriestest'
+    this.form.sections[0].fields.push(series)
     this.form.sections[0].fields.push(fields.getField('adaptation'))
-    this.form.sections[0].fields.push(adp)
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
     var gnd = fields.getField('gnd-subject')
