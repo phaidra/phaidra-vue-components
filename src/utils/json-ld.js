@@ -375,9 +375,19 @@ export default {
               components.push(f)
               break
 
-              // dcterms:audience
+            // dcterms:audience
             case 'dcterms:audience':
               f = fields.getField('audience')
+              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
+                f.value = value[i]['skos:prefLabel'][j]['@value']
+                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+              }
+              components.push(f)
+              break
+
+            // rdau:P60059
+            case 'rdau:P60059':
+              f = fields.getField('regional-encoding')
               for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
                 f.value = value[i]['skos:prefLabel'][j]['@value']
                 f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
@@ -1194,6 +1204,7 @@ export default {
         case 'dcterms:type':
         case 'edm:hasType':
         case 'schema:genre':
+        case 'rdau:P60059':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
           }

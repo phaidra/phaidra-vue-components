@@ -331,6 +331,7 @@ export default {
     this.form.sections[0].fields.push(fields.getField('supplementary-content'))
     this.form.sections[0].fields.push(fields.getField('award'))
     this.form.sections[0].fields.push(fields.getField('audience'))
+    this.form.sections[0].fields.push(fields.getField('regional-encoding'))
     this.form.sections[0].fields.push(fields.getField('subtitle-language'))
     this.form.sections[0].fields.push(fields.getField('description'))
     let series = fields.getField('series')

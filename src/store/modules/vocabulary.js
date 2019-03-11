@@ -445,6 +445,13 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/basisklassifikation/D03J-KDQG', 'skos:notation': '71.02', 'skos:prefLabel': { 'eng': 'Theorie der Soziologie' } }
       ],
       loaded: true
+    },
+    'regionalencoding': {
+      terms: [
+        { '@id': 'https://pid.phaidra.org/vocabulary/regionalencoding/XFMP-GT0M', 'skos:prefLabel': { 'eng': 'region free' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/regionalencoding/W2RX-V175', 'skos:prefLabel': { 'eng': 'region 2' } }
+      ],
+      loaded: true
     }
   }
 }

@@ -15,6 +15,10 @@
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'genre'+j" ></p-d-skos-preflabel>
         </template>
 
+        <template v-else-if="p==='rdau:P60059'" slot="rdau:P60059">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="pid+'P60059'+j" ></p-d-skos-preflabel>
+        </template>
+
         <template v-else-if="p==='dce:title'" slot="dce:title">
           <p-d-title :o="t" v-for="(t, j) in o" :key="pid+'title'+j"></p-d-title>
         </template>

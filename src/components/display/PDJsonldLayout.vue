@@ -42,6 +42,7 @@
       <slot name="bf:supplementaryContent"></slot>
       <slot name="bf:awards"></slot>
       <slot name="dcterms:audience"></slot>
+      <slot name="rdau:P60059"></slot>
 
       <slot name="ebucore:filename"></slot>
       <slot name="ebucore:hasMimeType"></slot>

@@ -402,6 +402,17 @@ const fields = [
     definition: 'A class of entity for whom the resource is intended or useful.'
   },
   {
+    id: 'regional-encoding',
+    fieldname: 'Regional encoding',
+    predicate: 'rdau:P60059',
+    component: 'p-select',
+    vocabulary: 'regionalencoding',
+    label: 'Regional encoding',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'A designation for one or more regions of the world for which a videodisc or video game carrier has been encoded, restricting playback to a device configured to decode it.'
+  },
+  {
     id: 'technique-vocab',
     fieldname: 'Technique (vocabulary)',
     predicate: 'vra:hasTechnique',
@@ -674,6 +685,7 @@ const predicateOrder = [
   'bf:supplementaryContent',
   'bf:awards',
   'dcterms:audience',
+  'rdau:P60059',
 
   'ebucore:filename',
   'ebucore:hasMimeType',
