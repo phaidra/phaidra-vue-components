@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-lg v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
-      <v-tab ripple><template v-if="loadedPid"><span class="text-lowercase">{{ loadedPid }}</span>&nbsp;-&nbsp;<span>{{ $t('edit') }}</span></template><template v-else >{{ $t('Submit') }}</template>&nbsp;{{ $t('metadata') }}</v-tab>
+      <v-tab ripple><template v-if="currentpid"><span class="text-lowercase">{{ currentpid }}</span>&nbsp;-&nbsp;<span>{{ $t('edit') }}</span></template><template v-else >{{ $t('Submit') }}</template>&nbsp;{{ $t('metadata') }}</v-tab>
       <v-tab ripple @click="generateJson()">{{ $t('Metadata preview') }}</v-tab>
       <v-tab v-if="templating" ripple @click="loadTemplates()">{{ $t('Templates') }}</v-tab>
     </v-tabs>
@@ -329,7 +329,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-btn v-if="loadedPid" raised :loading="loading" :disabled="loading" color="primary" @click="save()">{{ $t('Save') }}</v-btn>
+          <v-btn v-if="currentpid" raised :loading="loading" :disabled="loading" color="primary" @click="save()">{{ $t('Save') }}</v-btn>
           <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()">{{ $t('Submit') }}</v-btn>
         </v-layout>
   
@@ -411,11 +411,11 @@ export default {
       loadedMetadata: [],
       editform: {},
       loading: false,
-      loadedPid: '',
       fab: false,
       addfieldselection: [],
       templatedialog: '',
       templatename: '',
+      currentpid: '',
       metadatafields: fields.getEditableFields() 
     }
   },
@@ -429,9 +429,6 @@ export default {
     contentmodel: {
       type: String,
       default: 'unknown'
-    },
-    pid: {
-      type: String
     },
     addbutton: {
       type: Boolean,
@@ -479,7 +476,7 @@ export default {
       return promise
     },
     loadMetadata: function (pid) {
-      this.loadedPid = pid
+      this.currentpid = pid
       this.loadedMetadata = []
       var self = this
       var url = self.$store.state.settings.instance.api + '/object/' + pid + '/metadata?mode=resolved'
@@ -589,7 +586,7 @@ export default {
       this.generateJson()
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.metadata))      
-      fetch(self.$store.state.settings.instance.api + '/object/' + this.loadedPid + '/metadata', {
+      fetch(self.$store.state.settings.instance.api + '/object/' + this.currentpid + '/metadata', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -607,7 +604,7 @@ export default {
         }
         self.loading = false
         if (json.status === 200){
-          self.$emit('object-saved', self.loadedPid)
+          self.$emit('object-saved', self.currentpid)
         }
         self.$vuetify.goTo(0)
       })
@@ -750,9 +747,6 @@ export default {
     }
   },
   mounted: function () {
-    if (this.pid) {
-      this.loadMetadata(this.pid)
-    }
     this.$store.dispatch('loadLanguages')
   }
 }
