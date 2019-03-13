@@ -4,7 +4,7 @@
       <template v-if="showname">
         <v-flex xs4 >
           <v-text-field
-            :value="firstname"
+            :value="name"
             :label="$t('Name')"
             v-on:input="$emit('input-name', $event)"
             box

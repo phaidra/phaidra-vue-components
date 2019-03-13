@@ -3,9 +3,9 @@
     <v-app>
       <v-container justify-center grid-list-lg>
         <v-layout column>  
-          
+
           <h4 class="text-lg-right subheading mb-3">Phaidra Vue Components {{version}}</h4>
-        
+
           <v-flex xs4>
             <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
               <v-layout row><v-flex class="pa-3">{{alert.msg}}</v-flex><v-spacer></v-spacer><v-btn icon @click.native="dismiss(alert)"><v-icon>close</v-icon></v-btn></v-layout>

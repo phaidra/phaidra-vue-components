@@ -242,6 +242,7 @@ export default {
                       if (role['schema:name']) {
                         for (let name of role['schema:name']) {
                           f.name = name['@value']
+                          f.showname = true
                         }
                       }
                       if (role['schema:familyName']) {
@@ -582,6 +583,7 @@ export default {
                   if (value[i]['schema:name']) {
                     for (j = 0; j < value[i]['schema:name'].length; j++) {
                       f.name = value[i]['schema:name'][j]['@value']
+                      f.showname = true
                     }
                   }
                   if (value[i]['schema:familyName']) {
