@@ -218,8 +218,8 @@ export default {
         ]
       },
       pid: '',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
-      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra',
+      apibaseurl: 'https://services.phaidra.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''
@@ -337,7 +337,7 @@ export default {
     let series = fields.getField('series')
     series.title = 'testseriestest'
     this.form.sections[0].fields.push(series)
-    this.form.sections[0].fields.push(fields.getField('adaptation'))
+    this.form.sections[0].fields.push(fields.getField('movieadaptation'))
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
     var gnd = fields.getField('gnd-subject')
@@ -345,9 +345,6 @@ export default {
     gnd.label = 'Ethnografikum (GND)'
     this.form.sections[0].fields.push(gnd)
     this.form.sections[0].fields.push(fields.getField('keyword'))
-    var subject = fields.getField('subject')
-    subject.vocabulary = 'basisklassifikation'
-    this.form.sections[0].fields.push(subject)
     this.form.sections[0].fields.push(fields.getField('study-plan'))
     var proj = fields.getField('project')
     proj.multiplicable = true

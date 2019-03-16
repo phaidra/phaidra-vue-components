@@ -233,6 +233,7 @@
         <template v-else slot="unknown-predicate">
           <v-container :key="p">
             <v-alert :type="'error'" :value="true" transition="fade-transition">Uknown predicate <b>{{p}}</b></v-alert>
+            <p-i-unknown-readonly :jsonld="o" :label="p" ></p-i-unknown-readonly>
           </v-container>
         </template>
       </template>
@@ -256,6 +257,7 @@ import PDStudyPlan from './PDStudyPlan'
 import PDSeries from './PDSeries'
 import PDAdaptation from './PDAdaptation'
 import PDJsonldLayout from './PDJsonldLayout'
+import PIUnknownReadonly from '../input/PIUnknownReadonly'
 import { vocabulary } from '../../mixins/vocabulary'
 
 export default {
@@ -282,7 +284,8 @@ export default {
     PDProject,
     PDStudyPlan,
     PDSeries,
-    PDAdaptation
+    PDAdaptation,
+    PIUnknownReadonly
   }, 
   data () {
     return {

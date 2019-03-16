@@ -428,7 +428,7 @@ const state = {
     'material': {
       terms: [
         { '@id': 'https://pid.phaidra.org/vocabulary/CRGV-097N', 'skos:prefLabel': { 'eng': 'black marble' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EXRJ-GCYG  ', 'skos:prefLabel': { 'eng': 'shampoo' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/EXRJ-GCYG', 'skos:prefLabel': { 'eng': 'shampoo' } }
       ],
       loaded: true
     },

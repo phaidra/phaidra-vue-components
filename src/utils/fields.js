@@ -252,12 +252,12 @@ const fields = [
     definition: 'Relates a resource to a resource in which a part has been issued; a title of a larger resource appears on a part.'
   },
   {
-    id: 'adaptation',
-    fieldname: 'Is adaptation of',
+    id: 'movieadaptation',
+    fieldname: 'Is motion picture adaptation of',
     predicate: 'rdau:P60227',
     type: 'schema:CreativeWork',
     component: 'p-adaptation',
-    label: 'Is adaptation of',
+    label: 'Is motion picture adaptation of',
     title: '',
     subtitle: '',
     titleLanguage: 'eng',
@@ -265,7 +265,7 @@ const fields = [
     lastname: '',
     name: '',
     role: '',
-    definition: 'Relates a work to a work that has been modified for a purpose, use, or medium other than that for which it was originally intended.'
+    definition: 'Relates a resource to a resource that is adapted as a motion picture.'
   },
   {
     id: 'project',
