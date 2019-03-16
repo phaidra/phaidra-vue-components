@@ -1106,7 +1106,7 @@ export default {
     jsonlds['container'] = {}
 
     var rt = fields.getField('resource-type')
-    rt.value = 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9'
+    rt.value = 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ'
     formData.sections[0].fields.push(rt.value)
 
     for (var i = 0; i < formData.sections.length; i++) {

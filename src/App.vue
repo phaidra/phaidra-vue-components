@@ -225,31 +225,31 @@ export default {
         password: ''
       },
       version: version,
-      contentmodel: 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36',
+      contentmodel: 'https://pid.phaidra.org/vocabulary/44TN-P1S0',
       contentmodels: [
         { 
           text: 'Data', 
-          value: 'https://pid.phaidra.org/vocabulary/resourcetype/VR5J-0CBC',
+          value: 'https://pid.phaidra.org/vocabulary/7AVS-Y482',
         }, 
         { 
           text: 'Picture', 
-          value: 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36' 
+          value: 'https://pid.phaidra.org/vocabulary/44TN-P1S0' 
         }, 
         { 
           text: 'Audio', 
-          value: 'https://pid.phaidra.org/vocabulary/resourcetype/MXND-R5ZY' 
+          value: 'https://pid.phaidra.org/vocabulary/8YB5-1M0J' 
         }, 
         { 
           text: 'Video', 
-          value: 'https://pid.phaidra.org/vocabulary/resourcetype/S7JC-WBBH' 
+          value: 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8' 
         }, 
         { 
           text: 'Document',
-           value: 'https://pid.phaidra.org/vocabulary/resourcetype/B4CB-FN5F' 
+           value: 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX' 
         }, 
         { 
           text: 'Container',
-           value: 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9' 
+           value: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ' 
         }
       ],
       psvis: true

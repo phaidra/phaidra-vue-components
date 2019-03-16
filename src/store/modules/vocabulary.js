@@ -359,97 +359,90 @@ const state = {
     },
     'resourcetype': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_ecc8', 'skos:prefLabel': { 'eng': 'image' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/B4CB-FN5F', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_18cf', 'skos:prefLabel': { 'eng': 'text' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/TBSC-977W', 'skos:exactMatch': 'http://purl.org/dc/dcmitype/Collection', 'skos:prefLabel': { 'eng': 'collection' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/S7JC-WBBH', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_12ce', 'skos:prefLabel': { 'eng': 'video' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/VR5J-0CBC', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_1843', 'skos:prefLabel': { 'eng': 'data' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/MXND-R5ZY', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_18cc', 'skos:prefLabel': { 'eng': 'sound' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9', 'skos:prefLabel': { 'eng': 'container' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/resourcetype/Y9P1-7A2H', 'skos:prefLabel': { 'eng': 'resource' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ', 'skos:prefLabel': { 'eng': 'container' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
       ],
       loaded: true
     },
     'genre': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/JNCK-DCHZ', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_6501', 'skos:prefLabel': { 'eng': 'journal article' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/VAY0-9FDP', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_12cd', 'skos:prefLabel': { 'eng': 'map' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/Y4Q9-0FGP', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_2f33', 'skos:prefLabel': { 'eng': 'book' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/FWQN-VTB7', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_0857', 'skos:prefLabel': { 'eng': 'letter' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/Q5AM-N6KX', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_18cd', 'skos:prefLabel': { 'eng': 'musical composition' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/H8FH-S78J', 'skos:exactMatch': 'http://purl.org/coar/resource_type/c_18cw', 'skos:prefLabel': { 'eng': 'musical notation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/E9W3-Y7DM', 'skos:exactMatch': 'http://d-nb.info/gnd/4012400-9', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/X3TK-PTTB', 'skos:exactMatch': 'http://d-nb.info/gnd/1105859770', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/KQ9J-0R46', 'skos:exactMatch': 'http://d-nb.info/gnd/4012494-0', 'skos:prefLabel': { 'eng': 'Dissertation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/K7V0-JT7D', 'skos:exactMatch': 'http://d-nb.info/gnd/4168514-3', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/2W1X-9H3K', 'skos:exactMatch': 'http://d-nb.info/gnd/4158652-9', 'skos:prefLabel': { 'eng': 'Habilitation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/PK03-57AE', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/4SC8-045U', 'skos:prefLabel': { 'eng': 'Action' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/5J9J-YQH2', 'skos:prefLabel': { 'eng': 'Anime' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/DN11-JAH0', 'skos:prefLabel': { 'eng': 'Biopic' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/MWTM-PP5V', 'skos:prefLabel': { 'eng': 'Diskussion' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/500K-7JR9', 'skos:prefLabel': { 'eng': 'Dokumentarfilm' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/74P1-4CZF', 'skos:prefLabel': { 'eng': 'Drama' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/28PK-GK1Q', 'skos:prefLabel': { 'eng': 'Fantasy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/216P-B9Y7', 'skos:prefLabel': { 'eng': 'Fernsehfilm' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/SW9K-YMCB', 'skos:prefLabel': { 'eng': 'Historienfilm' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/55CG-R4N3', 'skos:prefLabel': { 'eng': 'Horror' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/12MR-5G5J', 'skos:prefLabel': { 'eng': 'Komödie' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/2G8D-VDA8', 'skos:prefLabel': { 'eng': 'Krimi' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/DFNA-2RVW', 'skos:prefLabel': { 'eng': 'Kurzfilm' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/G7N9-E9VZ', 'skos:prefLabel': { 'eng': 'Liebesfilm' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/HSZ7-CP4Y', 'skos:prefLabel': { 'eng': 'Musical' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/D83C-PVS8', 'skos:prefLabel': { 'eng': 'Nachrichtensendung' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/96AQ-D4EW', 'skos:prefLabel': { 'eng': 'Romanze' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/WJKC-9561', 'skos:prefLabel': { 'eng': 'Satire' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/W5RX-YZS8', 'skos:prefLabel': { 'eng': 'Science Fiction' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/H2PP-433Y', 'skos:prefLabel': { 'eng': 'Serie' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/E9FX-5EB8', 'skos:prefLabel': { 'eng': 'Thriller' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/PFJR-VYF8', 'skos:prefLabel': { 'eng': 'Tragikkomödie' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/genre/CNVR-XCGC', 'skos:prefLabel': { 'eng': 'Unterhaltung' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/7RZF-5216', 'skos:prefLabel': { 'eng': 'musical' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } }
       ],
       loaded: true
     },
     'objecttype': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/objecttype/H764-GVVN', 'skos:exactMatch': 'http://vocab.getty.edu/aat/300046300', 'skos:prefLabel': { 'eng': 'photographs' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/objecttype/TVCR-CFKM', 'skos:exactMatch': 'http://vocab.getty.edu/aat/300007893', 'skos:prefLabel': { 'eng': 'railroad bridges' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/objecttype/GQGX-25NV', 'skos:exactMatch': 'http://vocab.getty.edu/aat/300049946', 'skos:prefLabel': { 'eng': 'tribes (kinship groups)' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/A52A-CWMM', 'skos:prefLabel': { 'eng': 'map' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/47QB-8QF1', 'skos:prefLabel': { 'eng': 'book' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/GBWA-JJP8', 'skos:prefLabel': { 'eng': 'letter' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/EWZ9-3MPH', 'skos:prefLabel': { 'eng': 'musical composition' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/8A6X-FKB1', 'skos:prefLabel': { 'eng': 'musical notation' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/7CAB-P987', 'skos:prefLabel': { 'eng': 'photograph' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/YBTD-Q94N', 'skos:prefLabel': { 'eng': 'railroad bridge' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/QT7P-HNZB', 'skos:prefLabel': { 'eng': 'tribe (kinship group)' } },
       ],
       loaded: true
     },
     'technique': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/technique/QAFG-DNM2', 'skos:exactMatch': 'http://vocab.getty.edu/aat/300162056', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/technique/B930-7M0Z', 'skos:exactMatch': 'http://vocab.getty.edu/aat/300134530', 'skos:prefLabel': { 'eng': 'color photography' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography' } }
       ],
       loaded: true
     },
     'material': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/material/A5QP-R8CC', 'skos:exactMatch': 'http://vocab.getty.edu/aat/300011484', 'skos:prefLabel': { 'eng': 'black marble' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/material/XN0R-JNFQ', 'skos:exactMatch': 'http://vocab.getty.edu/aat/300265588', 'skos:prefLabel': { 'eng': 'shampoo' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/CRGV-097N', 'skos:prefLabel': { 'eng': 'black marble' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/EXRJ-GCYG  ', 'skos:prefLabel': { 'eng': 'shampoo' } }
       ],
       loaded: true
     },
     'reproduction': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/reproduction/NM27-2EF2', 'skos:prefLabel': { 'eng': 'original' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/reproduction/2RTV-67M7', 'skos:prefLabel': { 'eng': 'copy' } }
-      ],
-      loaded: true
-    },
-    'basisklassifikation': {
-      terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/basisklassifikation/GR90-276C', 'skos:notation': '31.01', 'skos:prefLabel': { 'eng': 'Geschichte der Mathematik' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/basisklassifikation/D03J-KDQG', 'skos:notation': '71.02', 'skos:prefLabel': { 'eng': 'Theorie der Soziologie' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/AYRE-RQAS', 'skos:prefLabel': { 'eng': 'original' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/BD33-7WA2', 'skos:prefLabel': { 'eng': 'copy' } }
       ],
       loaded: true
     },
     'regionalencoding': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/regionalencoding/XFMP-GT0M', 'skos:prefLabel': { 'eng': 'region free' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/regionalencoding/W2RX-V175', 'skos:prefLabel': { 'eng': 'region 2' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/3MQF-RDQQ', 'skos:prefLabel': { 'eng': 'region free' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/6Z5R-XEG2', 'skos:prefLabel': { 'eng': 'region 2' } }
       ],
       loaded: true
     }

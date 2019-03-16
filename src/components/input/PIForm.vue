@@ -507,15 +507,15 @@ export default {
         case 'data':
         case 'container':
           return contentmodel
-        case 'https://pid.phaidra.org/vocabulary/resourcetype/HMJ4-EW36':
+        case 'https://pid.phaidra.org/vocabulary/44TN-P1S0':
           return 'picture'
-        case 'https://pid.phaidra.org/vocabulary/resourcetype/MXND-R5ZY':
+        case 'https://pid.phaidra.org/vocabulary/8YB5-1M0J':
           return 'audio'
-        case 'https://pid.phaidra.org/vocabulary/resourcetype/S7JC-WBBH':
+        case 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8':
           return 'video'
-        case 'https://pid.phaidra.org/vocabulary/resourcetype/B4CB-FN5F':
+        case 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX':
           return 'document'
-        case 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9':
+        case 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ':
           return 'container'
         default:
           return 'data'
@@ -527,7 +527,7 @@ export default {
       this.generateJson()
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.metadata))
-      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9') {
+      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ') {
         for (var i = 0; i < this.form.sections.length; i++) {
           var s = this.form.sections[i]
           if (s.type === 'member') {
@@ -615,7 +615,7 @@ export default {
       })
     },
     generateJson: function () {
-      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/resourcetype/HS9G-WDM9') {
+      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ') {
         this.jsonlds = jsonLd.containerForm2json(this.form)
       } else {
         this.jsonlds = jsonLd.form2json(this.form)

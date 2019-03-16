@@ -11,7 +11,7 @@ export default {
   'PHAIDRA_IS': 'Phaidra is the repository for the permanent secure storage of digital assets at the University of Vienna.',
 
   'bf:Title': 'Title',
-  'bf:ParallelTitle': 'Translated title',
+  'bf:ParallelTitle': 'Parallel title',
 
   'bf:Note': 'Description',
   'bf:Summary': 'Abstract',

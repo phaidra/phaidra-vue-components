@@ -526,7 +526,7 @@ export default {
   'File': 'Datei',
 
   'bf:Title': 'Titel',
-  'bf:ParallelTitle': 'Translated title',
+  'bf:ParallelTitle': 'Parallel titel',
 
   'bf:Note': 'Beschreibung',
   'bf:Summary': 'Abstrakt',
