@@ -32,7 +32,7 @@
         </template>
 
         <template v-else-if="p==='dce:subject'" slot="dce:subject">
-          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'keyword'+j" ></p-d-skos-preflabel>
+          <p-d-keyword :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'keyword'+j" ></p-d-keyword>
         </template>
 
         <template v-else-if="p==='dcterms:language'" slot="dcterms:language">
@@ -245,6 +245,7 @@
 import PDLicense from './PDLicense'
 import PDTitle from './PDTitle'
 import PDSkosPreflabel from './PDSkosPreflabel'
+import PDKeyword from './PDKeyword'
 import PDLangValue from './PDLangValue'
 import PDValue from './PDValue'
 import PDDimension from './PDDimension'
@@ -274,6 +275,7 @@ export default {
     PDEntity,
     PDJsonldLayout,
     PDSkosPreflabel,
+    PDKeyword,
     PDLangValue,
     PDLicense,
     PDValue,

@@ -12,6 +12,7 @@ import PDProject from './display/PDProject.vue'
 import PDSeries from './display/PDSeries.vue'
 import PDAdaptation from './display/PDAdaptation.vue'
 import PDSkosPreflabel from './display/PDSkosPreflabel.vue'
+import PDKeyword from './display/PDKeyword.vue'
 import PDTitle from './display/PDTitle.vue'
 import PDLabeledValue from './display/PDLabeledValue.vue'
 import PDUwmetadata from './display/PDUwmetadata.vue'
@@ -53,6 +54,7 @@ const Components = {
   PDAdaptation,
   PDProject,
   PDSkosPreflabel,
+  PDKeyword,
   PDTitle,
   PDLabeledValue,
   PDUwmetadata,

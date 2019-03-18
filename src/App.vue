@@ -216,8 +216,8 @@ export default {
         ]
       },
       pid: '',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
-      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra',
+      apibaseurl: 'https://services.phaidra.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''
