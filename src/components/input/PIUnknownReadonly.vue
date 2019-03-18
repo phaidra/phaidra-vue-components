@@ -17,7 +17,7 @@ export default {
   },
   props: {
     jsonld: {
-      type: Array
+      type: Object
     },
     label: {
       type: String,

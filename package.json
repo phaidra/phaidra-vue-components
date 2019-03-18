@@ -1,17 +1,20 @@
 {
   "name": "phaidra-vue-components",
-  "version": "0.2.23",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/phaidra/phaidra-vue-components.git"
-  },
-  "license": "Apache-2.0",
+  "version": "0.3.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build-bundle": "vue-cli-service build --target lib --name phaidra-vue-components ./src/components/index.js"
   },
+  "main": "./dist/phaidra-vue-components.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "dependencies": {
     "base-64": "^0.1.0",
     "moment": "^2.24.0",
@@ -22,9 +25,9 @@
     "vuex": "^3.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "^3.5.1",
+    "@vue/cli-plugin-eslint": "^3.5.1",
+    "@vue/cli-service": "^3.5.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.13.0",
     "eslint-plugin-vue": "^5.1.0",
@@ -58,12 +61,9 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "files": [
-    "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
-  ],
-  "main": "./dist/phaidra-vue-components.common.js"
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/phaidra/phaidra-vue-components.git"
+  }
 }

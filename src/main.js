@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import './plugins/vuetify'
+import './plugins/vuetify'
 import store from './store'
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'

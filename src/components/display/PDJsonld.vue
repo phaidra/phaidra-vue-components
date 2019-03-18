@@ -32,7 +32,7 @@
         </template>
 
         <template v-else-if="p==='dce:subject'" slot="dce:subject">
-          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'subject'+j" ></p-d-skos-preflabel>
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'keyword'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='dcterms:language'" slot="dcterms:language">

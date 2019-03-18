@@ -1,8 +1,8 @@
 <template>
   <v-container grid-list-lg v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
-      <v-tab ripple><template v-if="currentpid"><span class="text-lowercase">{{ currentpid }}</span>&nbsp;-&nbsp;<span>{{ $t('edit') }}</span></template><template v-else >{{ $t('Submit') }}</template>&nbsp;{{ $t('metadata') }}</v-tab>
-      <v-tab ripple @click="generateJson()">{{ $t('Metadata preview') }}</v-tab>
+      <v-tab ripple><template v-if="targetpid"><span class="text-lowercase">{{ targetpid }}</span>&nbsp;-&nbsp;<span>{{ $t('edit') }}</span></template><template v-else >{{ $t('Submit') }}</template>&nbsp;{{ $t('metadata') }}</v-tab>
+      <v-tab ripple @click="updatePrettyPrint()">{{ $t('Metadata preview') }}</v-tab>
       <v-tab v-if="templating" ripple @click="loadTemplates()">{{ $t('Templates') }}</v-tab>
     </v-tabs>
   
@@ -329,7 +329,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-btn v-if="currentpid" raised :loading="loading" :disabled="loading" color="primary" @click="save()">{{ $t('Save') }}</v-btn>
+          <v-btn v-if="targetpid" raised :loading="loading" :disabled="loading" color="primary" @click="save()">{{ $t('Save') }}</v-btn>
           <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()">{{ $t('Submit') }}</v-btn>
         </v-layout>
   
@@ -403,22 +403,6 @@ export default {
     VueJsonPretty,
     PTList
   },
-  data () {
-    return {
-      activetab: null,
-      jsonlds: {},
-      metadata: {},
-      loadedMetadata: [],
-      editform: {},
-      loading: false,
-      fab: false,
-      addfieldselection: [],
-      templatedialog: '',
-      templatename: '',
-      currentpid: '',
-      metadatafields: fields.getEditableFields() 
-    }
-  },
   props: {
     form: {
       type: Object,
@@ -426,9 +410,8 @@ export default {
         sections: []
       }
     },
-    contentmodel: {
-      type: String,
-      default: 'unknown'
+    targetpid: {
+      type: String
     },
     addbutton: {
       type: Boolean,
@@ -437,6 +420,38 @@ export default {
     templating: {
       type: Boolean,
       default: true
+    }
+  },
+  computed: {
+    contentmodel: function() {
+      for (let s of this.form.sections) {
+        for (let field of s.fields) {
+          if (field.predicate === 'dcterms:type') {
+            return field.value
+          }
+        }
+      }
+    },
+    metadata: function () {
+      let jsonlds
+      if (!this.targetpid && (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ')) {
+        jsonlds = jsonLd.containerForm2json(this.form)
+      } else {
+        jsonlds = jsonLd.form2json(this.form)
+      }
+      return { metadata: { 'json-ld': jsonlds } }
+    }
+  },
+  data () {
+    return {
+      activetab: null,
+      loadedMetadata: [],
+      loading: false,
+      fab: false,
+      addfieldselection: [],
+      templatedialog: '',
+      templatename: '',
+      metadatafields: fields.getEditableFields() 
     }
   },
   methods: {
@@ -475,29 +490,6 @@ export default {
       })
       return promise
     },
-    loadMetadata: function (pid) {
-      this.currentpid = pid
-      this.loadedMetadata = []
-      var self = this
-      var url = self.$store.state.settings.instance.api + '/object/' + pid + '/metadata?mode=resolved'
-      var promise = fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        if (json.metadata['JSON-LD']) {
-          self.$emit('load-form', self.json2form(json.metadata['JSON-LD']))
-        }
-      })
-      .catch(function (error) {
-        //console.log(error)
-      })
-      return promise
-    },
-    json2form: function (jsonld) {
-      return jsonLd.json2form(jsonld)
-    },
     getObjectType: function(contentmodel) {
       switch (contentmodel) {
         case 'picture':
@@ -524,7 +516,6 @@ export default {
     submit: function () {
       var self = this
       this.loading = true
-      this.generateJson()
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.metadata))
       if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ') {
@@ -552,7 +543,7 @@ export default {
           }
         }
       }
-      fetch(self.$store.state.settings.instance.api + '/' + this.getObjectType(this.contentmodel) + '/create', {
+      fetch(self.$store.state.settings.instance.api + '/' + this.contentmodel + '/create', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -583,14 +574,13 @@ export default {
     save: function () {
       var self = this
       this.loading = true
-      this.generateJson()
       var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify(this.metadata))      
-      fetch(self.$store.state.settings.instance.api + '/object/' + this.currentpid + '/metadata', {
+      httpFormData.append('metadata', JSON.stringify(self.metadata))      
+      fetch(self.$store.state.settings.instance.api + '/object/' + self.targetpid + '/metadata', {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+          'X-XSRF-TOKEN': self.$store.state.user.token
         },
         body: httpFormData
       })
@@ -604,7 +594,7 @@ export default {
         }
         self.loading = false
         if (json.status === 200){
-          self.$emit('object-saved', self.currentpid)
+          self.$emit('object-saved', self.targetpid)
         }
         self.$vuetify.goTo(0)
       })
@@ -614,13 +604,7 @@ export default {
         self.$vuetify.goTo(0)
       })
     },
-    generateJson: function () {
-      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ') {
-        this.jsonlds = jsonLd.containerForm2json(this.form)
-      } else {
-        this.jsonlds = jsonLd.form2json(this.form)
-      }
-      this.metadata = { metadata: { 'json-ld': this.jsonlds } }
+    updatePrettyPrint: function () {
       this.$refs.prettyprint.$forceUpdate()
     },
     addField: function (arr, f) {
