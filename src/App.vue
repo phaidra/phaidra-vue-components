@@ -357,16 +357,11 @@ export default {
     this.form.sections[0].fields.push(fields.getField('regional-encoding'))
     this.form.sections[0].fields.push(fields.getField('subtitle-language'))
     this.form.sections[0].fields.push(fields.getField('description'))
-    let series = fields.getField('series')
-    series.title = 'testseriestest'
-    this.form.sections[0].fields.push(series)
+    this.form.sections[0].fields.push(fields.getField('series'))
     this.form.sections[0].fields.push(fields.getField('movieadaptation'))
     this.form.sections[0].fields.push(fields.getField('date-edtf'))
     this.form.sections[0].fields.push(fields.getField('number-of-pages'))
-    var gnd = fields.getField('gnd-subject')
-    gnd.exactvoc = 'EthnographicName'
-    gnd.label = 'Ethnografikum (GND)'
-    this.form.sections[0].fields.push(gnd)
+    this.form.sections[0].fields.push(fields.getField('gnd-subject'))
     this.form.sections[0].fields.push(fields.getField('keyword'))
     this.form.sections[0].fields.push(fields.getField('study-plan'))
     var proj = fields.getField('project')

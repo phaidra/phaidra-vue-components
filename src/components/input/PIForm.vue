@@ -423,18 +423,18 @@ export default {
     }
   },
   computed: {
-    contentmodel: function() {
+    submittype: function() {
       for (let s of this.form.sections) {
         for (let field of s.fields) {
           if (field.predicate === 'dcterms:type') {
-            return field.value
+            return this.getObjectType(field.value)
           }
         }
       }
     },
     metadata: function () {
       let jsonlds
-      if (!this.targetpid && (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ')) {
+      if (!this.targetpid && (this.submittype === 'container')) {
         jsonlds = jsonLd.containerForm2json(this.form)
       } else {
         jsonlds = jsonLd.form2json(this.form)
@@ -492,13 +492,6 @@ export default {
     },
     getObjectType: function(contentmodel) {
       switch (contentmodel) {
-        case 'picture':
-        case 'audio':
-        case 'video':
-        case 'document':
-        case 'data':
-        case 'container':
-          return contentmodel
         case 'https://pid.phaidra.org/vocabulary/44TN-P1S0':
           return 'picture'
         case 'https://pid.phaidra.org/vocabulary/8YB5-1M0J':
@@ -518,7 +511,7 @@ export default {
       this.loading = true
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.metadata))
-      if (this.contentmodel === 'container' || this.contentmodel === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ') {
+      if (this.submittype === 'container') {
         for (var i = 0; i < this.form.sections.length; i++) {
           var s = this.form.sections[i]
           if (s.type === 'member') {
@@ -543,7 +536,7 @@ export default {
           }
         }
       }
-      fetch(self.$store.state.settings.instance.api + '/' + this.contentmodel + '/create', {
+      fetch(self.$store.state.settings.instance.api + '/' + this.submittype + '/create', {
         method: 'POST',
         mode: 'cors',
         headers: {
