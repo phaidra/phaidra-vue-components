@@ -10,11 +10,11 @@
       <v-tab-item class="pa-3" v-if="form">
 
         <v-layout v-for="(s) in this.form.sections" :key="s.id" column wrap class="ma-3">
-          
-          <v-card >
+          <v-card>
             <v-card-title class="headline grey white--text">
               <span>{{ $t(s.title) }}</span>
               <v-spacer></v-spacer>
+              <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
               <v-menu v-if="s.multiplicable" open-on-hover bottom offset-y>
                 <v-btn slot="activator" icon dark>
                   <v-icon dark>more_vert</v-icon>
@@ -311,7 +311,6 @@
             </v-card-text>
 
           </v-card>
-
         </v-layout>
 
         <v-layout align-center justify-end row class="ma-3">
@@ -439,7 +438,11 @@ export default {
       } else {
         jsonlds = jsonLd.form2json(this.form)
       }
-      return { metadata: { 'json-ld': jsonlds } }
+      let md = { metadata: { 'json-ld': jsonlds } }
+      if (this.previewMember) {
+        md['metadata']['relationships'] = [ { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' } ]
+      }
+      return md
     }
   },
   data () {
@@ -451,7 +454,8 @@ export default {
       addfieldselection: [],
       templatedialog: '',
       templatename: '',
-      metadatafields: fields.getEditableFields() 
+      metadatafields: fields.getEditableFields(),
+      previewMember: ''
     }
   },
   methods: {

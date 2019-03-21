@@ -194,36 +194,17 @@ export default {
       displayjsonld: {},
       editform: {},
       form: {
-        sections: [
-          {
-            title: 'General metadata',
-            id: 1,
-            fields: []
-          },
-          {
-            title: 'Digitized object',
-            type: 'phaidra:Subject',
-            id: 2,
-            fields: []
-          },
-          {
-            title: 'Subject',
-            type: 'phaidra:Subject',
-            id: 3,
-            multiplicable: true,
-            fields: []
-          }
-        ]
+        sections: []
       },
       pid: '',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra',
-      apibaseurl: 'https://services.phaidra.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
+      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''
       },
       version: version,
-      contentmodel: 'https://pid.phaidra.org/vocabulary/44TN-P1S0',
+      contentmodel: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ',
       contentmodels: [
         { 
           text: 'Data', 
@@ -323,6 +304,123 @@ export default {
         var val = parts.pop().split(";").shift()
         return val === ' ' ? null : val
       }
+    },
+    createSimpleForm: function (index) {
+      this.form = {
+        sections: [
+          {
+            title: 'General metadata',
+            id: 1,
+            fields: []
+          },
+          {
+            title: 'Digitized object',
+            type: 'phaidra:Subject',
+            id: 2,
+            fields: []
+          },
+          {
+            title: 'Subject',
+            type: 'phaidra:Subject',
+            id: 3,
+            multiplicable: true,
+            fields: []
+          },
+          {
+            title: 'File',
+            id: 4,
+            type: '',
+            multiplicable: false,
+            fields: []
+          }
+        ]
+      }
+      var rt = fields.getField('resource-type')
+      rt.value = this.contentmodel
+      this.form.sections[0].fields.push(rt)
+      this.form.sections[0].fields.push(fields.getField('title'))
+      this.form.sections[0].fields.push(fields.getField('description'))
+      var gnd = fields.getField('gnd-subject')
+      gnd.exactvoc = 'EthnographicName'
+      gnd.label = 'Soziokulturelle Kategorie (GND)'
+      this.form.sections[0].fields.push(gnd)
+      this.form.sections[0].fields.push(fields.getField('keyword'))
+      var lang = fields.getField('language')
+      lang.value = 'deu'
+      this.form.sections[0].fields.push(lang)
+      this.form.sections[0].fields.push(fields.getField('role'))
+      this.form.sections[0].fields.push(fields.getField('note'))
+      this.form.sections[0].fields.push(fields.getField('project'))
+      this.form.sections[0].fields.push(fields.getField('funder'))
+
+      this.form.sections[1].fields.push(fields.getField('title'))
+      this.form.sections[1].fields.push(fields.getField('role'))
+      this.form.sections[1].fields.push(fields.getField('shelf-mark'))
+      this.form.sections[1].fields.push(fields.getField('temporal-coverage'))
+      this.form.sections[1].fields.push(fields.getField('provenance'))
+      this.form.sections[1].fields.push(fields.getField('physical-location'))
+      // eingangsdatum
+      var accessiondate = fields.getField('date-edtf')
+      accessiondate.type = 'phaidra:dateAccessioned'
+      this.form.sections[1].fields.push(accessiondate)
+      this.form.sections[1].fields.push(fields.getField('accession-number'))
+      this.form.sections[1].fields.push(fields.getField('condition-note'))
+      this.form.sections[1].fields.push(fields.getField('reproduction-note'))
+      this.form.sections[1].fields.push(fields.getField('technique-vocab'))
+      this.form.sections[1].fields.push(fields.getField('technique-text'))
+      this.form.sections[1].fields.push(fields.getField('material-text'))
+      this.form.sections[1].fields.push(fields.getField('height'))
+      this.form.sections[1].fields.push(fields.getField('width'))
+      this.form.sections[1].fields.push(fields.getField('inscription'))
+      this.form.sections[1].fields.push(fields.getField('spatial-getty'))
+      var localname = fields.getField('spatial-text')
+      localname.label = 'Place (native name)'
+      this.form.sections[1].fields.push(localname)
+
+      this.form.sections[2].fields.push(fields.getField('title'))
+      this.form.sections[2].fields.push(fields.getField('description'))
+      this.form.sections[2].fields.push(fields.getField('shelf-mark'))
+      this.form.sections[2].fields.push(fields.getField('temporal-coverage'))
+      this.form.sections[2].fields.push(fields.getField('provenance'))
+      this.form.sections[2].fields.push(fields.getField('physical-location'))
+      this.form.sections[2].fields.push(fields.getField('role'))
+      // eingangsdatum
+      var accessiondate2 = fields.getField('date-edtf')
+      accessiondate2.type = 'phaidra:dateAccessioned'
+      this.form.sections[2].fields.push(accessiondate2)
+      this.form.sections[2].fields.push(fields.getField('accession-number'))
+      this.form.sections[2].fields.push(fields.getField('technique-text'))
+      this.form.sections[2].fields.push(fields.getField('material-text'))
+      this.form.sections[2].fields.push(fields.getField('height'))
+      this.form.sections[2].fields.push(fields.getField('width'))
+      this.form.sections[2].fields.push(fields.getField('depth'))
+
+      this.form.sections[3].fields.push(fields.getField('file'))
+      this.form.sections[3].fields.push(fields.getField('license'))
+      this.form.sections[3].fields.push(fields.getField('rights'))
+    },
+    createContainerForm: function (index) {
+      this.createSimpleForm()
+      this.form.sections[3] = {
+        title: 'File',
+        id: 4,
+        type: 'member',
+        multiplicable: true,
+        fields: []
+      }
+      var rt = fields.getField('resource-type')
+      rt.value = this.contentmodel
+      this.form.sections[3].fields.push(rt)
+      this.form.sections[3].fields.push(fields.getField('file'))
+      this.form.sections[3].fields.push(fields.getField('title'))
+      this.form.sections[3].fields.push(fields.getField('description'))
+      var mt = fields.getField('mime-type')
+      mt.required = true
+      this.form.sections[3].fields.push(mt)
+      this.form.sections[3].fields.push(fields.getField('digitization-note'))
+      this.form.sections[3].fields.push(fields.getField('role'))
+      this.form.sections[3].fields.push(fields.getField('license'))
+      this.form.sections[3].fields.push(fields.getField('rights'))
     }
   },
   mounted: function () {
@@ -337,66 +435,7 @@ export default {
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
 
-    var rt = fields.getField('resource-type')
-    if (this.contentmodel) {
-      rt.value = this.contentmodel
-    }
-    this.form.sections[0].fields.push(rt)
-    this.form.sections[0].fields.push(fields.getField('object-type'))
-    this.form.sections[0].fields.push(fields.getField('genre'))
-    this.form.sections[0].fields.push(fields.getField('file'))
-    this.form.sections[0].fields.push(fields.getField('title'))
-    var translatedtitle = fields.getField('title')
-    translatedtitle.type = 'bf:ParallelTitle'
-    this.form.sections[0].fields.push(translatedtitle)
-    this.form.sections[0].fields.push(fields.getField('language'))
-    this.form.sections[0].fields.push(fields.getField('sound-characteristic'))
-    this.form.sections[0].fields.push(fields.getField('supplementary-content'))
-    this.form.sections[0].fields.push(fields.getField('award'))
-    this.form.sections[0].fields.push(fields.getField('audience'))
-    this.form.sections[0].fields.push(fields.getField('regional-encoding'))
-    this.form.sections[0].fields.push(fields.getField('subtitle-language'))
-    this.form.sections[0].fields.push(fields.getField('description'))
-    this.form.sections[0].fields.push(fields.getField('series'))
-    this.form.sections[0].fields.push(fields.getField('movieadaptation'))
-    this.form.sections[0].fields.push(fields.getField('date-edtf'))
-    this.form.sections[0].fields.push(fields.getField('number-of-pages'))
-    this.form.sections[0].fields.push(fields.getField('gnd-subject'))
-    this.form.sections[0].fields.push(fields.getField('keyword'))
-    this.form.sections[0].fields.push(fields.getField('study-plan'))
-    var proj = fields.getField('project')
-    proj.multiplicable = true
-    this.form.sections[0].fields.push(proj)
-    this.form.sections[0].fields.push(fields.getField('funder'))
-    var r = fields.getField('role')
-    r.role = 'role:coadvisor'
-    this.form.sections[0].fields.push(r)
-    var r2 = fields.getField('role')
-    r2.showname = true
-    this.form.sections[0].fields.push(r2)
-    this.form.sections[0].fields.push(fields.getField('license'))
-
-    this.form.sections[1].fields.push(fields.getField('title'))
-    this.form.sections[1].fields.push(fields.getField('description'))
-    this.form.sections[1].fields.push(fields.getField('inscription'))
-    var accessiondate = fields.getField('date-edtf')
-    accessiondate.type = 'phaidra:dateAccessioned'
-    this.form.sections[1].fields.push(accessiondate)
-    this.form.sections[1].fields.push(fields.getField('technique-vocab'))
-    this.form.sections[1].fields.push(fields.getField('technique-text'))
-    this.form.sections[1].fields.push(fields.getField('material-vocab'))
-    this.form.sections[1].fields.push(fields.getField('material-text'))
-    this.form.sections[1].fields.push(fields.getField('height'))
-    this.form.sections[1].fields.push(fields.getField('duration'))
-    this.form.sections[1].fields.push(fields.getField('shelf-mark'))
-    this.form.sections[1].fields.push(fields.getField('digitization-note'))
-    this.form.sections[1].fields.push(fields.getField('reproduction-note'))
-    
-    this.form.sections[2].fields.push(fields.getField('title'))
-    this.form.sections[2].fields.push(fields.getField('description'))
-    this.form.sections[2].fields.push(fields.getField('temporal-coverage'))
-    this.form.sections[2].fields.push(fields.getField('spatial-getty'))
-    this.form.sections[2].fields.push(fields.getField('spatial-text'))
+    this.createContainerForm()
   }
 }
 </script>
