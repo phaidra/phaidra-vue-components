@@ -22,6 +22,7 @@
       <slot name="dcterms:dateAccepted"></slot>
       <slot name="dcterms:dateCopyrighted"></slot>
       <slot name="dcterms:dateSubmitted"></slot>
+      <slot name="rdau:P60071"></slot>
       <slot name="phaidra:dateAccessioned"></slot>
       <slot name="dcterms:temporal"></slot>
 
@@ -54,6 +55,7 @@
       <slot name="vra:hasInscription"></slot>
       <slot name="vra:material"></slot>
       <slot name="vra:hasTechnique"></slot>
+      <slot name="dce:format"></slot>
       <slot name="schema:width"></slot>
       <slot name="schema:height"></slot>
       <slot name="schema:depth"></slot>

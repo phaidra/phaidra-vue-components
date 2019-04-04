@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex xs4>
+    <v-flex xs4 v-if="!hideType">
       <v-autocomplete
         v-on:input="$emit('input-date-type', $event)" 
         :label="$t('Type of date')" 
@@ -28,6 +28,7 @@
       <v-text-field       
         :value="value" 
         v-on:input="$emit('input-date', $event)"
+        :label="$t(dateLabel ? dateLabel : '')"
         :required="required"
         :hint="'Format YYYY-MM-DD'"
         :rules="[validationrules.date]"
@@ -61,8 +62,14 @@ export default {
     value: {
       type: String
     },
+    dateLabel: {
+      type: String
+    },
     type: {
       type: String
+    },
+    hideType: {
+      type: Boolean
     },
     required: {
       type: Boolean

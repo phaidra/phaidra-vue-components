@@ -1,7 +1,7 @@
 <template>
 
   <v-layout row>
-    <v-flex xs10>
+    <v-flex xs12>
 
       <v-card >
         <v-card-title class="subheading grey white--text">
@@ -40,7 +40,7 @@
                     box
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs2>
+                <v-flex xs4>
                   <v-autocomplete
                     :value="getTerm('lang', titleLanguage)"
                     v-on:input="$emit('input-title-language', $event)"
@@ -79,7 +79,7 @@
                   </v-flex>
                 </template>
                 <template v-else>
-                  <v-flex xs2>
+                  <v-flex xs4>
                     <v-text-field
                       :value="firstname"
                       :label="$t('Firstname')"
@@ -87,7 +87,7 @@
                       box
                     ></v-text-field>
                   </v-flex>
-                  <v-flex xs2>
+                  <v-flex xs4>
                     <v-text-field
                       :value="lastname"
                       :label="$t('Lastname')"
@@ -96,7 +96,7 @@
                     ></v-text-field>
                   </v-flex>
                 </template>
-                <v-flex xs2>
+                <v-flex xs4>
                   <v-autocomplete
                     :disabled="disablerole" 
                     v-on:input="$emit('input-role', $event)" 

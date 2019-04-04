@@ -31,6 +31,7 @@ import PISpatialGetty from './input/PISpatialGetty.vue'
 import PISpatialText from './input/PISpatialText.vue'
 import PIProject from './input/PIProject.vue'
 import PISelect from './input/PISelect.vue'
+import PISelectText from './input/PISelectText.vue'
 import PITextField from './input/PITextField.vue'
 import PITextFieldSuggest from './input/PITextFieldSuggest.vue'
 import PITitle from './input/PITitle.vue'
@@ -72,6 +73,7 @@ const Components = {
   PISpatialText,
   PIProject,
   PISelect,
+  PISelectText,
   PITextField,
   PITextFieldSuggest,
   PITitle,

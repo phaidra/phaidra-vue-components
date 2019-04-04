@@ -39,10 +39,11 @@ export default {
   'dcterms:dateAccepted': 'Date accepted',
   'dcterms:dateCopyrighted': 'Date copyrighted',
   'dcterms:dateSubmitted': 'Date submitted',
+  'rdau:P60071': 'Date of production',
   'phaidra:dateAccessioned': 'Date accessioned',
 
   'rdau:P60193': 'Journal/Series',
-  'rdau:P60227': 'Adaptation of',
+  'rdau:P60227': 'Is motion picture adaptation of',
 
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',
@@ -56,6 +57,7 @@ export default {
   'bf:supplementaryContent': 'Supplementary content',
   'bf:awards': 'Award',
   'dcterms:audience': 'Audience',
+  'rdau:P60059': 'Regional encoding',
 
   'ebucore:filename': 'Filename',
   'ebucore:hasMimeType': 'MIME Type',
@@ -66,8 +68,10 @@ export default {
   'schema:depth': 'Depth',
   'schema:weight': 'Weight',
   'schema:duration': 'Duration',
+  'schema:genre': 'Genre',
   'dcterms:temporal': 'Temporal coverage',
   'vra:hasTechnique': 'Technique',
+  'dce:format': 'Format',
   'vra:material': 'Material',
   'vra:hasInscription': 'Inscription',
 

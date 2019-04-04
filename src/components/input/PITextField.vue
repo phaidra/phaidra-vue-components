@@ -1,7 +1,7 @@
 <template>
   <v-layout row>
     <v-flex xs8>
-      <v-text-field v-if="!multiline"         
+      <v-text-field v-if="!multiline"
         :value="value" 
         v-on:input="$emit('input', $event)" 
         :label="$t(label)" 
@@ -9,7 +9,7 @@
         :rules="required ? [ v => !!v || 'Required'] : []"
         box
       ></v-text-field>
-      <v-textarea v-if="multiline"         
+      <v-textarea v-if="multiline"
         :value="value" 
         v-on:input="$emit('input', $event)" 
         :label="$t(label)" 
@@ -33,7 +33,7 @@
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
             <v-list-tile-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-            <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
+            <v-list-tile-sub-title v-html="`${item['@id']}`"></v-list-tile-sub-title>
           </v-list-tile-content>
         </template>
         <template slot="selection" slot-scope="{ item }">

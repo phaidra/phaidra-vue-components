@@ -3,15 +3,15 @@
     <v-flex xs4>
       <v-text-field
         :value="title"
-        :label="$t(type)"
+        :label="$t( titleLabel ? titleLabel : type )"
         v-on:input="$emit('input-title', $event)"
         box
       ></v-text-field>
     </v-flex>
-    <v-flex xs4>
+    <v-flex xs4 v-if="!hideSubtitle">
       <v-text-field
         :value="subtitle"
-        :label="$t('Subtitle')"
+        :label="$t( subtitleLabel ? subtitleLabel : 'Subtitle' )"
         v-on:input="$emit('input-subtitle', $event)"
         box
       ></v-text-field>
@@ -67,11 +67,20 @@ export default {
     title: {
       type: String
     },
+    titleLabel: {
+      type: String
+    },
     type: {
       type: String
     },
     subtitle: {
       type: String
+    },
+    subtitleLabel: {
+      type: String
+    },
+    hideSubtitle: {
+      type: Boolean
     },
     language: {
       type: String

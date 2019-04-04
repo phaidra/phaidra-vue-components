@@ -10,10 +10,12 @@
           <v-layout row>
             <template v-for="(title, j) in o['dce:title']">
               <template v-for="(mt, i) in title['bf:mainTitle']">
-                <v-flex class="primary--text" xs3 :key="'mt'+j+i">{{ $t(title['@type']) }} ({{ mt['@language'] }})</v-flex>
-                <v-layout column :key="'mtv'+i">
-                  <v-flex xs9 >{{ mt['@value'] }}</v-flex>
-                </v-layout>
+                <v-flex class="primary--text" xs3 :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
+                <v-flex :key="'mtv'+j+i">
+                  <v-layout column>
+                    <v-flex xs9 >{{ mt['@value'] }}</v-flex>
+                  </v-layout>
+                </v-flex>
               </template>
             </template>
           </v-layout>

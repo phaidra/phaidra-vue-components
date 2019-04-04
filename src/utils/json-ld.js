@@ -19,8 +19,8 @@ export default {
             // dcterms:type
             case 'dcterms:type':
               f = fields.getField('resource-type')
-              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                f.value = value[i]['skos:exactMatch'][j]
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
               }
               components.push(f)
               break
@@ -28,8 +28,8 @@ export default {
             // edm:hasType
             case 'edm:hasType':
               f = fields.getField('object-type')
-              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                f.value = value[i]['skos:exactMatch'][j]
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
               }
               components.push(f)
               break
@@ -37,8 +37,8 @@ export default {
             // schema:genre
             case 'schema:genre':
               f = fields.getField('genre')
-              for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                f.value = value[i]['skos:exactMatch'][j]
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
               }
               components.push(f)
               break
@@ -151,6 +151,55 @@ export default {
               }
               break
 
+            case 'rdau:P60193':
+              f = fields.getField('series')             
+              if (value[i]['dce:title']) {
+                for (let t of value[i]['dce:title']){
+                  if (t['bf:mainTitle']) {
+                    for (let mt of t['bf:mainTitle']){
+                      if (mt['@value']) {
+                        f.title = mt['@value']
+                      }
+                      if (mt['@language']) {
+                        f.titleLanguage = mt['@language']
+                      }
+                    }
+                  }
+                }
+              }
+              if (value[i]['bibo:volume']) {
+                for (let v of value[i]['bibo:volume']){
+                  f.volume = v
+                }
+              }
+              if (value[i]['bibo:issue']) {
+                for (let v of value[i]['bibo:issue']){
+                  f.issue = v
+                }
+              }
+              if (value[i]['dcterms:issued']) {
+                for (let v of value[i]['dcterms:issued']){
+                  f.issued = v
+                }
+              }
+              if (value[i]['identifiers:issn']) {
+                for (let v of value[i]['identifiers:issn']){
+                  f.issn = v
+                }
+              }
+              if (value[i]['skos:exactMatch']) {
+                for (let v of value[i]['skos:exactMatch']){
+                  f.identifier = v
+                }
+              }
+              if (value[i]['bibo:volume']) {
+                for (let v of value[i]['bibo:volume']){
+                  f.volume = v
+                }
+              }
+              components.push(f)
+              break
+
             // dcterms:temporal
             case 'dcterms:temporal':
               f = fields.getField('temporal-coverage')             
@@ -197,16 +246,25 @@ export default {
               }
               break
 
+            // dce:format
+            case 'dce:format':
+              f = fields.getField('dce-format-vocab')
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
+              }
+              components.push(f)
+              break
+
             // edm:rights
             case 'edm:rights':
-              f = fields.getField('license')             
+              f = fields.getField('license')
               f.value = value[i]
               components.push(f)
               break
 
             // dce:rights
             case 'dce:rights':
-              f = fields.getField('rights')             
+              f = fields.getField('rights')
               f.value = value[i]['@value']
               f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'              
               components.push(f)
@@ -214,7 +272,7 @@ export default {
 
             // rdau:P60227
             case 'rdau:P60227':
-              f = fields.getField('adaptation')
+              f = fields.getField('movieadaptation')
               if (value[i]['dce:title']) {
                 for (let t of value[i]['dce:title']){
                   if (t['bf:mainTitle']) {
@@ -226,9 +284,11 @@ export default {
                         f.titleLanguage = mt['@language']
                       }
                     }
-                    for (let st of t['bf:subtitle']){
-                      if (st['@value']) {
-                        f.subtitle = st['@value']
+                    if(t['bf:subtitle']){
+                      for (let st of t['bf:subtitle']){
+                        if (st['@value']) {
+                          f.subtitle = st['@value']
+                        }
                       }
                     }
                   }
@@ -273,8 +333,8 @@ export default {
                   }
                 }
                 if (value[i]['skos:exactMatch']) {
-                  for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {              
-                    f.identifier = value[i]['skos:exactMatch'][j]
+                  for (let em of value[i]['skos:exactMatch']) {
+                    f.identifier = em
                   }
                 }              
                 components.push(f)
@@ -376,22 +436,11 @@ export default {
               components.push(f)
               break
 
-            // dcterms:audience
-            case 'dcterms:audience':
-              f = fields.getField('audience')
-              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
-                f.value = value[i]['skos:prefLabel'][j]['@value']
-                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
-              }
-              components.push(f)
-              break
-
             // rdau:P60059
             case 'rdau:P60059':
               f = fields.getField('regional-encoding')
-              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
-                f.value = value[i]['skos:prefLabel'][j]['@value']
-                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
               }
               components.push(f)
               break
@@ -464,14 +513,10 @@ export default {
               } else {
                 // vra:material - vocab
                 if (value[i]['@type'] === 'vra:material' && (value[i]['skos:exactMatch'])) {
-                  f = fields.getField('vocab-ext-readonly')
-                  f['skos:exactMatch'] = value[i]['skos:exactMatch']
-                  f['skos:prefLabel'] = value[i]['skos:prefLabel']
-                  f['rdfs:label'] = value[i]['rdfs:label']
-                  f.predicate = key
-                  f.label = 'Material'
-                  components.push(f)
                   f = fields.getField('material-vocab')
+                  for (let em of value[i]['skos:exactMatch']) {
+                    f.value = em
+                  }
                   components.push(f)
                 }
               }
@@ -489,14 +534,31 @@ export default {
               } else {
                 // vra:hasTechnique - vocab
                 if (value[i]['@type'] === 'vra:Technique' && (value[i]['skos:exactMatch'])) {
-                  f = fields.getField('vocab-ext-readonly')
-                  f['skos:exactMatch'] = value[i]['skos:exactMatch']
-                  f['skos:prefLabel'] = value[i]['skos:prefLabel']
-                  f['rdfs:label'] = value[i]['rdfs:label']
-                  f.predicate = key
-                  f.label = 'Technique'
-                  components.push(f)
                   f = fields.getField('technique-vocab')
+                  for (let em of value[i]['skos:exactMatch']) {
+                    f.value = em
+                  }
+                  components.push(f)
+                }
+              }
+              break
+
+            // dcterms:audience
+            case 'dcterms:audience':
+              if (value[i]['@type'] === 'dcterms:audience' && !(value[i]['skos:exactMatch'])) {
+                f = fields.getField('audience')
+                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
+                  f.value = value[i]['skos:prefLabel'][j]['@value']
+                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+                }
+                components.push(f)
+              } else {
+                // dcterms:audience - select
+                if (value[i]['@type'] === 'dcterms:audience' && (value[i]['skos:exactMatch'])) {
+                  f = fields.getField('audience-vocab')
+                  for (let em of value[i]['skos:exactMatch']) {
+                    f.value = em
+                  }
                   components.push(f)
                 }
               }
@@ -554,6 +616,7 @@ export default {
             case 'dcterms:dateAccepted':
             case 'dcterms:dateCopyrighted':
             case 'dcterms:dateSubmitted':
+            case 'rdau:P60071':
             case 'phaidra:dateAccessioned':
               // only edtf now (later time can be edm:TimeSpan)
               if (typeof value[i] === 'string') {
@@ -1216,7 +1279,11 @@ export default {
         case 'bf:awards':
         case 'dcterms:audience':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
+            if (f.component === 'p-select' && f.value) {
+              this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [ f.value ]))
+            } else {
+              this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
+            }
           }
           break
 
@@ -1316,6 +1383,16 @@ export default {
         case 'vra:material':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'vra:Material'))
+          }
+          break
+
+        case 'dce:format':
+          if (f.component === 'p-select' && f.value) {
+            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'dce:format', [ f.value ]))
+          } else {
+            if (f.value) {
+              this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'dce:format'))
+            }
           }
           break
 

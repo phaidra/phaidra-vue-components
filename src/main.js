@@ -22,7 +22,7 @@ Vue.filter('unixtime', function (value) {
 
 const messages = { eng, deu, ita }
 const i18n = new VueI18n({
-  locale: 'eng',
+  locale: 'deu',
   messages: messages
 })
 

@@ -79,6 +79,10 @@
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'dateSubmitted'+j" ></p-d-value>
         </template>
 
+        <template v-else-if="p==='rdau:P60071'" slot="rdau:P60071">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'dateOfProduction'+j" ></p-d-value>
+        </template>
+
         <template v-else-if="p==='phaidra:dateAccessioned'" slot="phaidra:dateAccessioned">
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'phaidra:dateAccessioned'+j" ></p-d-value>
         </template>
@@ -162,6 +166,14 @@
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'techn'+j" ></p-d-skos-preflabel>
         </template>
 
+        <template v-else-if="p==='dce:format'" slot="dce:format">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'format'+j" ></p-d-skos-preflabel>
+        </template>
+
+        <template v-else-if="p==='rdau:P60059'" slot="rdau:P60059">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'regenc'+j" ></p-d-skos-preflabel>
+        </template>
+
         <template v-else-if="p==='schema:width'" slot="schema:width">
           <p-d-dimension :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'width'+j" ></p-d-dimension>
         </template>
@@ -232,7 +244,7 @@
 
         <template v-else slot="unknown-predicate">
           <v-container :key="p">
-            <v-alert :type="'error'" :value="true" transition="fade-transition">Uknown predicate <b>{{p}}</b></v-alert>
+            <v-alert :type="'error'" :value="true" transition="fade-transition">Unknown predicate <b>{{p}}</b></v-alert>
             <p-i-unknown-readonly :jsonld="o" :label="p" ></p-i-unknown-readonly>
           </v-container>
         </template>

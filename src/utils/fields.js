@@ -47,10 +47,12 @@ const fields = [
     multiplicable: true,
     multilingual: true,
     ordergroup: 'title',
-    label: 'Title',
+    titleLabel: '',
     title: '',
     subtitle: '',
-    language: 'eng',
+    subtitleLabel: '',
+    hideSubtitle: false,
+    language: '',
     definition: 'A name given to the resource. Typically, a Title will be a name by which the resource is formally known.'
   },
   {
@@ -64,7 +66,7 @@ const fields = [
     multiline: true,
     label: 'Description',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
@@ -78,7 +80,7 @@ const fields = [
     multiline: true,
     label: 'Abstract',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Summary or abstract of the resource described.'
   },
   {
@@ -89,7 +91,9 @@ const fields = [
     multiplicable: true,
     label: 'Date',
     value: '',
+    dateLabel: '',
     type: 'created',
+    hideType: false,
     definition: 'A point or period of time associated with an event in the lifecycle of the resource.'
   },
   {
@@ -102,7 +106,7 @@ const fields = [
     multiline: true,
     label: 'Note',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
@@ -115,7 +119,7 @@ const fields = [
     multiline: true,
     label: 'Digitization note',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
@@ -128,7 +132,7 @@ const fields = [
     multiline: true,
     label: 'Condition',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
@@ -150,7 +154,7 @@ const fields = [
     required: true,
     multiplicable: true,
     label: 'Language',
-    value: 'eng',
+    value: '',
     definition: 'A language of the resource.'
   },
   {
@@ -173,11 +177,12 @@ const fields = [
     multiplicable: true,
     showidentifier: false,
     ordered: true,
-    label: 'Contributions',
+    institutionLabel: '',
     firstname: '',
     lastname: '',
     name: '',
     role: '',
+    hideRole: false,
     definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
   },
   {
@@ -190,7 +195,7 @@ const fields = [
     multilingual: true,
     label: 'Keywords',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'The topic of the resource, represented using keywords.'
   },
   {
@@ -232,7 +237,7 @@ const fields = [
     multilingual: true,
     notation: '',
     name: '',
-    nameLanguage: 'eng',
+    namelanguage: '',
     definition: 'Study plan.'
   },
   {
@@ -243,7 +248,7 @@ const fields = [
     component: 'p-series',
     label: 'Journal/Series',
     title: '',
-    titleLanguage: 'eng',
+    titlelanguage: '',
     volume: '',
     issue: '',
     issued: '',
@@ -260,7 +265,7 @@ const fields = [
     label: 'Is motion picture adaptation of',
     title: '',
     subtitle: '',
-    titleLanguage: 'eng',
+    titlelanguage: '',
     firstname: '',
     lastname: '',
     name: '',
@@ -274,9 +279,9 @@ const fields = [
     type: 'foaf:Project',
     component: 'p-project',
     name: '',
-    nameLanguage: 'eng',
+    namelanguage: '',
     description: '',
-    descriptionLanguage: 'eng',
+    descriptionlanguage: '',
     identifier: '',
     homepage: '',
     definition: 'An administrative entity that enabled an endeavour such as a research investigation.'
@@ -287,7 +292,7 @@ const fields = [
     predicate: 'frapo:hasFundingAgency',
     component: 'p-funder',
     name: '',
-    nameLanguage: 'eng',
+    namelanguage: '',
     identifier: '',
     definition: 'A funding agency that provided funding for the resource.'
   },
@@ -309,7 +314,7 @@ const fields = [
     label: 'Temporal coverage',
     multilingual: true,
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Temporal characteristics of the resource. Indicates the period that the content applies to, i.e. that it describes.'
   },
   {
@@ -321,8 +326,24 @@ const fields = [
     multilingual: true,
     label: 'Provenance',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'A statement of any changes in ownership and custody of a resource since its creation that are significant for its authenticity, integrity, and interpretation.'
+  },
+  {
+    id: 'physical-location-select-text',
+    fieldname: 'Physical location (select)',
+    predicate: 'bf:physicalLocation',
+    component: 'p-select-text',
+    label: 'Physical location',
+    selectlabel: 'Physical location',
+    multilingual: true,
+    selectdisabled: false,
+    selectvalue: '',
+    textvalue: '',
+    value: '',
+    vocabulary: '',
+    language: '',
+    definition: 'Location in the holding agency where the item is shelved or stored. Select box value will be combined with text field.'
   },
   {
     id: 'physical-location',
@@ -332,7 +353,7 @@ const fields = [
     label: 'Physical location',
     multilingual: true,
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Location in the holding agency where the item is shelved or stored.'
   },
   {
@@ -363,6 +384,18 @@ const fields = [
     definition: 'Technical specification relating to the encoding of sound in a resource.'
   },
   {
+    id: 'dce-format-vocab',
+    fieldname: 'DC Format',
+    predicate: 'dce:format',
+    component: 'p-select',
+    vocabulary: 'dceformat',
+    multiplicable: true,
+    label: 'Format',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'The file format, physical medium, or dimensions of the resource.'
+  },
+  {
     id: 'supplementary-content',
     fieldname: 'Supplementary content',
     predicate: 'bf:supplementaryContent',
@@ -372,7 +405,7 @@ const fields = [
     multilingual: true,
     label: 'Supplementary content',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Material such as an index, bibliography, appendix intended to supplement the primary content of a resource.'
   },
   {
@@ -385,7 +418,7 @@ const fields = [
     multilingual: true,
     label: 'Award',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Information on an award associated with the described resource.'
   },
   {
@@ -398,7 +431,19 @@ const fields = [
     multilingual: true,
     label: 'Audience',
     value: '',
-    language: 'eng',
+    language: '',
+    definition: 'A class of entity for whom the resource is intended or useful.'
+  },
+  {
+    id: 'audience-vocab',
+    fieldname: 'Audience',
+    predicate: 'dcterms:audience',
+    type: 'skos:Concept',
+    component: 'p-select',
+    vocabulary: 'audience',
+    label: 'Audience',
+    value: '',
+    'skos:prefLabel': [],
     definition: 'A class of entity for whom the resource is intended or useful.'
   },
   {
@@ -434,7 +479,7 @@ const fields = [
     multiplicable: true,
     label: 'Technique',
     value: '',
-    language: 'eng',
+    language: '',
     'skos:prefLabel': [],
     definition: 'The production or manufacturing processes, techniques, and methods incorporated in the fabrication or alteration of the work or image.'
   },
@@ -460,7 +505,7 @@ const fields = [
     multiplicable: true,
     label: 'Material',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'The substance of which a work or an image is composed.'
   },
   {
@@ -510,6 +555,9 @@ const fields = [
     component: 'p-duration',
     label: 'Duration',
     value: '',
+    hideHours: false,
+    hideMinutes: false,
+    hideSeconds: false,
     definition: 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.'
   },
   {
@@ -522,7 +570,7 @@ const fields = [
     multilingual: true,
     label: 'Inscription/Stamp',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'All marks or written words added to the object at the time of production or in its subsequent history, including signatures, dates, dedications, texts, and colophons, as well as marks, such as the stamps of silversmiths, publishers, or printers.'
   },
   {
@@ -549,7 +597,7 @@ const fields = [
     label: 'Place',
     value: '',
     type: '',
-    language: 'eng',
+    language: '',
     definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
   },    
   {
@@ -583,7 +631,7 @@ const fields = [
     multilingual: true,
     label: 'Rights statement',
     value: '',
-    language: 'eng',
+    language: '',
     definition: 'Information about rights held in and over the resource. Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.'
   },
   {
@@ -667,6 +715,7 @@ const predicateOrder = [
   'dcterms:dateAccepted',
   'dcterms:dateCopyrighted',
   'dcterms:dateSubmitted',
+  'rdau:P60071',
   'phaidra:dateAccessioned',
   'date',
 
@@ -697,6 +746,7 @@ const predicateOrder = [
   'vra:hasInscription',
   'vra:material',
   'vra:hasTechnique',
+  'dce:format',
   'schema:width',
   'schema:height',
   'schema:depth',

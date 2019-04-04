@@ -1,7 +1,7 @@
 <template>
 
   <v-layout row>
-    <v-flex xs10>
+    <v-flex xs12>
 
       <v-card >
         <v-card-title class="subheading grey white--text">
@@ -32,7 +32,7 @@
                     box
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs3>
+                <v-flex xs4>
                   <v-autocomplete
                     :value="getTerm('lang', titleLanguage)"
                     v-on:input="$emit('input-title-language', $event )"
@@ -62,7 +62,7 @@
 
               <v-layout row>
 
-                <v-flex xs2>
+                <v-flex xs4 v-if="!hideVolume">
                   <v-text-field
                     :value="volume"
                     :label="$t('Volume')"
@@ -71,7 +71,7 @@
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex xs4>
+                <v-flex xs4 v-if="!hideIssue">
                   <v-text-field
                     :value="issue"
                     :label="$t('Issue')"
@@ -80,7 +80,7 @@
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex xs4>
+                <v-flex xs4 v-if="!hideIssued">
                     <v-text-field       
                     :value="issued" 
                     :label="$t('Issued')"
@@ -95,7 +95,7 @@
 
               <v-layout row>
 
-                <v-flex xs4>
+                <v-flex xs6 v-if="!hideIssn">
                   <v-text-field
                     :value="issn"
                     :label="$t('ISSN')"
@@ -104,7 +104,7 @@
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex xs6>
+                <v-flex xs6 v-if="!hideIdentifier">
                   <v-text-field
                     :value="identifier"
                     :label="$t('Identifier')"
@@ -144,17 +144,32 @@ export default {
     titleLanguage: {
       type: String
     },
+    hideVolume: {
+      type: Boolean
+    },
     volume: {
       type: String
+    },
+    hideIssue: {
+      type: Boolean
     },
     issue: {
       type: String
     },
+    hideIssued: {
+      type: Boolean
+    },
     issued: {
       type: String
     },
+    hideIssn: {
+      type: Boolean
+    },
     issn: {
       type: String
+    },
+    hideIdentifier: {
+      type: Boolean
     },
     identifier: {
       type: String

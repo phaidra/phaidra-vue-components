@@ -33,7 +33,7 @@
     <v-flex xs4 v-if="type === 'schema:Organisation'">
       <v-text-field
         :value="institution"
-        :label="'Institution'"
+        :label="$t( institutionLabel ? institutionLabel : 'Institution' )"
         v-on:input="$emit('input-institution', $event)"
         box
       ></v-text-field>
@@ -44,9 +44,9 @@
         :label="$t('Identifier')"
         v-on:input="$emit('input-identifier', $event)"
         box
-      ></v-text-field>                    
+      ></v-text-field>
     </v-flex>
-    <v-flex xs2>
+    <v-flex xs4 v-if="!hideRole">
       <v-autocomplete
         :disabled="disablerole" 
         v-on:input="$emit('input-role', $event)" 
@@ -69,7 +69,7 @@
             <v-list-tile-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
           </v-list-tile-content>
         </template>
-      </v-autocomplete>                      
+      </v-autocomplete>
     </v-flex>
     <v-flex xs1 v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
@@ -106,11 +106,17 @@ export default {
     institution: {
       type: String
     },
+    institutionLabel: {
+      type: String
+    },
     identifier: {
       type: String
     },
     role: {
       type: String
+    },
+    hideRole: {
+      type: Boolean
     },
     type: {
       type: String

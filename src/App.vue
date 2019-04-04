@@ -309,99 +309,140 @@ export default {
       this.form = {
         sections: [
           {
-            title: 'General metadata',
+            title: 'Movie metadata',
             id: 1,
-            fields: []
-          },
-          {
-            title: 'Digitized object',
-            type: 'phaidra:Subject',
-            id: 2,
-            fields: []
-          },
-          {
-            title: 'Subject',
-            type: 'phaidra:Subject',
-            id: 3,
-            multiplicable: true,
-            fields: []
-          },
-          {
-            title: 'File',
-            id: 4,
-            type: '',
-            multiplicable: false,
             fields: []
           }
         ]
       }
-      var rt = fields.getField('resource-type')
-      rt.value = this.contentmodel
+      let rt = fields.getField('resource-type')
+      rt.value = 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ'
       this.form.sections[0].fields.push(rt)
-      this.form.sections[0].fields.push(fields.getField('title'))
-      this.form.sections[0].fields.push(fields.getField('description'))
-      var gnd = fields.getField('gnd-subject')
-      gnd.exactvoc = 'EthnographicName'
-      gnd.label = 'Soziokulturelle Kategorie (GND)'
-      this.form.sections[0].fields.push(gnd)
+
+      let tit = fields.getField('title')
+      tit.titleLabel = 'Original title'
+      this.form.sections[0].fields.push(tit)
+
+      let paralelltitle = fields.getField('title')
+      paralelltitle.type = 'bf:ParallelTitle'
+      this.form.sections[0].fields.push(paralelltitle)
+
+      let ser = fields.getField('series')
+      ser.label = 'Series title'
+      ser.hideVolume = true
+      ser.hideIssue = true
+      ser.hideIssued = true
+      ser.hideIssn = true
+      ser.hideIdentifier = true
+      this.form.sections[0].fields.push(ser)
+
+      let actor = fields.getField('role')
+      actor.role = 'role:act'
+      this.form.sections[0].fields.push(actor)
+
+      let director = fields.getField('role')
+      director.role = 'role:drt'
+      this.form.sections[0].fields.push(director)
+
+      let screenplay = fields.getField('role')
+      screenplay.role = 'role:aus'
+      this.form.sections[0].fields.push(screenplay)
+
+      let camera = fields.getField('role')
+      camera.role = 'role:cng'
+      this.form.sections[0].fields.push(camera)
+
+      let music = fields.getField('role')
+      music.role = 'role:msd'
+      this.form.sections[0].fields.push(music)
+
+      let production = fields.getField('role')
+      production.role = 'role:pro'
+      this.form.sections[0].fields.push(production)
+
+      let productioncomp = fields.getField('role')
+      productioncomp.type = 'schema:Organisation'
+      productioncomp.role = 'role:prn'
+      productioncomp.showname = true
+      productioncomp.hideRole = true
+      productioncomp.institutionLabel = 'Production company'
+      this.form.sections[0].fields.push(productioncomp)
+
+      let prodplace = fields.getField('role')
+      prodplace.type = 'schema:Organisation'
+      prodplace.role = 'role:prp'
+      prodplace.institutionLabel = 'Production country'
+      prodplace.showname = true
+      prodplace.hideRole = true
+      this.form.sections[0].fields.push(prodplace)
+
+      let prodyear = fields.getField('date-edtf')
+      prodyear.type = 'rdau:P60071'
+      prodyear.hideType = true
+      prodyear.dateLabel = 'Production year'
+      this.form.sections[0].fields.push(prodyear)
+
+      let dur = fields.getField('duration')
+      dur.hideHours = true,
+      dur.hideSeconds = true,
+      this.form.sections[0].fields.push(dur)
+
+      this.form.sections[0].fields.push(fields.getField('language'))
+
+      this.form.sections[0].fields.push(fields.getField('subtitle-language'))
+
+      let desc = fields.getField('description')
+      desc.label = 'Content description'
+      this.form.sections[0].fields.push(desc)
+
+      let adp = fields.getField('movieadaptation') 
+      adp.role = 'role:aut'
+      this.form.sections[0].fields.push(adp)
+
+      let genre = fields.getField('genre')
+      genre.vocabulary = 'moviegenre'
+      this.form.sections[0].fields.push(genre)
+
       this.form.sections[0].fields.push(fields.getField('keyword'))
-      var lang = fields.getField('language')
-      lang.value = 'deu'
-      this.form.sections[0].fields.push(lang)
-      this.form.sections[0].fields.push(fields.getField('role'))
+
+     let dceformat = fields.getField('dce-format-vocab')
+      dceformat.vocabulary = 'dceformat'
+      this.form.sections[0].fields.push(dceformat)
+
+      let tech = fields.getField('technique-vocab')
+      tech.vocabulary = 'technique'
+      tech.value = 'https://pid.phaidra.org/vocabulary/K818-FSM5'
+      this.form.sections[0].fields.push(tech)
+
+      let tech2 = fields.getField('technique-vocab')
+      tech2.vocabulary = 'technique'
+      tech2.value = 'https://pid.phaidra.org/vocabulary/1K09-VXQ4'
+      this.form.sections[0].fields.push(tech2)
+
+      this.form.sections[0].fields.push(fields.getField('supplementary-content'))
+
+      this.form.sections[0].fields.push(fields.getField('award'))
+
+      let aud = fields.getField('audience-vocab')
+      aud.vocabulary = 'audience'
+      this.form.sections[0].fields.push(aud)
+
+      let regcode = fields.getField('regional-encoding')
+      regcode.vocabulary = 'regionalencoding'
+      this.form.sections[0].fields.push(regcode)
+
       this.form.sections[0].fields.push(fields.getField('note'))
-      this.form.sections[0].fields.push(fields.getField('project'))
-      this.form.sections[0].fields.push(fields.getField('funder'))
 
-      this.form.sections[1].fields.push(fields.getField('title'))
-      this.form.sections[1].fields.push(fields.getField('role'))
-      this.form.sections[1].fields.push(fields.getField('shelf-mark'))
-      this.form.sections[1].fields.push(fields.getField('temporal-coverage'))
-      this.form.sections[1].fields.push(fields.getField('provenance'))
-      this.form.sections[1].fields.push(fields.getField('physical-location'))
-      // eingangsdatum
-      var accessiondate = fields.getField('date-edtf')
-      accessiondate.type = 'phaidra:dateAccessioned'
-      this.form.sections[1].fields.push(accessiondate)
-      this.form.sections[1].fields.push(fields.getField('accession-number'))
-      this.form.sections[1].fields.push(fields.getField('condition-note'))
-      this.form.sections[1].fields.push(fields.getField('reproduction-note'))
-      this.form.sections[1].fields.push(fields.getField('technique-vocab'))
-      this.form.sections[1].fields.push(fields.getField('technique-text'))
-      this.form.sections[1].fields.push(fields.getField('material-text'))
-      this.form.sections[1].fields.push(fields.getField('height'))
-      this.form.sections[1].fields.push(fields.getField('width'))
-      this.form.sections[1].fields.push(fields.getField('inscription'))
-      this.form.sections[1].fields.push(fields.getField('spatial-getty'))
-      var localname = fields.getField('spatial-text')
-      localname.label = 'Place (native name)'
-      this.form.sections[1].fields.push(localname)
+      let physloc = fields.getField('physical-location-select-text')
+      physloc.vocabulary = 'pool'
+      this.form.sections[0].fields.push(physloc)
 
-      this.form.sections[2].fields.push(fields.getField('title'))
-      this.form.sections[2].fields.push(fields.getField('description'))
-      this.form.sections[2].fields.push(fields.getField('shelf-mark'))
-      this.form.sections[2].fields.push(fields.getField('temporal-coverage'))
-      this.form.sections[2].fields.push(fields.getField('provenance'))
-      this.form.sections[2].fields.push(fields.getField('physical-location'))
-      this.form.sections[2].fields.push(fields.getField('role'))
-      // eingangsdatum
-      var accessiondate2 = fields.getField('date-edtf')
-      accessiondate2.type = 'phaidra:dateAccessioned'
-      this.form.sections[2].fields.push(accessiondate2)
-      this.form.sections[2].fields.push(fields.getField('accession-number'))
-      this.form.sections[2].fields.push(fields.getField('technique-text'))
-      this.form.sections[2].fields.push(fields.getField('material-text'))
-      this.form.sections[2].fields.push(fields.getField('height'))
-      this.form.sections[2].fields.push(fields.getField('width'))
-      this.form.sections[2].fields.push(fields.getField('depth'))
-
-      this.form.sections[3].fields.push(fields.getField('file'))
-      this.form.sections[3].fields.push(fields.getField('license'))
-      this.form.sections[3].fields.push(fields.getField('rights'))
+      this.form.sections[0].fields.push(fields.getField('shelf-mark'))
     },
     createContainerForm: function (index) {
       this.createSimpleForm()
-      this.form.sections[3] = {
+
+      let section = {
         title: 'File',
         id: 4,
         type: 'member',
@@ -410,18 +451,22 @@ export default {
       }
       var rt = fields.getField('resource-type')
       rt.value = this.contentmodel
-      this.form.sections[3].fields.push(rt)
-      this.form.sections[3].fields.push(fields.getField('file'))
-      this.form.sections[3].fields.push(fields.getField('title'))
-      this.form.sections[3].fields.push(fields.getField('description'))
+      section.fields.push(rt)
+      section.fields.push(fields.getField('file'))
+      section.fields.push(fields.getField('title'))
+      section.fields.push(fields.getField('description'))
       var mt = fields.getField('mime-type')
+      mt.value = 'image/jpeg'
       mt.required = true
-      this.form.sections[3].fields.push(mt)
-      this.form.sections[3].fields.push(fields.getField('digitization-note'))
-      this.form.sections[3].fields.push(fields.getField('role'))
-      this.form.sections[3].fields.push(fields.getField('license'))
-      this.form.sections[3].fields.push(fields.getField('rights'))
+      section.fields.push(mt)
+      section.fields.push(fields.getField('digitization-note'))
+      section.fields.push(fields.getField('role'))
+      section.fields.push(fields.getField('license'))
+      section.fields.push(fields.getField('rights'))
+
+      this.form.sections.push(section)
     }
+
   },
   mounted: function () {
     var token = this.getCookie('X-XSRF-TOKEN')
@@ -435,7 +480,7 @@ export default {
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
 
-    this.createContainerForm()
+    this.createSimpleForm()
   }
 }
 </script>

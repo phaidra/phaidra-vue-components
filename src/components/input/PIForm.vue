@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-lg v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
-      <v-tab ripple><template v-if="targetpid"><span class="text-lowercase">{{ targetpid }}</span>&nbsp;-&nbsp;<span>{{ $t('edit') }}</span></template><template v-else >{{ $t('Submit') }}</template>&nbsp;{{ $t('metadata') }}</v-tab>
+      <v-tab ripple>{{ $t('Metadata editor') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
       <v-tab ripple @click="updatePrettyPrint()">{{ $t('Metadata preview') }}</v-tab>
       <v-tab v-if="templating" ripple @click="loadTemplates()">{{ $t('Templates') }}</v-tab>
     </v-tabs>
@@ -63,7 +63,7 @@
                   </v-flex>
 
                   <v-flex offset-xs1 v-if="f.component === 'p-title'" :key="f.id">
-                    <p-i-title            
+                    <p-i-title
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
                       v-on:input-subtitle="f.subtitle=$event"
@@ -76,12 +76,24 @@
                   </v-flex>
 
                   <v-flex offset-xs1 xs4 v-else-if="f.component === 'p-select'" :key="f.id">
-                    <p-i-select 
-                      v-bind.sync="f" 
+                    <p-i-select
+                      v-bind.sync="f"
                       v-on:input="selectInput(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-select>        
+                    ></p-i-select>
+                  </v-flex>
+
+                  <v-flex offset-xs1 xs4 v-else-if="f.component === 'p-select-text'" :key="f.id">
+                    <p-i-select-text
+                      v-bind.sync="f" 
+                      v-on:input="f.value=$event"
+                      v-on:input-select="f.selectvalue=$event"
+                      v-on:input-text="f.textvalue=$event"
+                      v-on:input-language="setSelected(f, 'language', $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-select-text>
                   </v-flex>
 
                   <v-flex offset-xs1 v-else-if="f.component === 'p-date-edtf'" :key="f.id">
@@ -97,7 +109,7 @@
                   <v-flex offset-xs1 v-else-if="f.component === 'p-duration'" :key="f.id">
                     <p-i-duration
                       v-bind.sync="f" 
-                      v-on:input-value="f.value=$event"
+                      v-on:input="f.value=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-duration>
@@ -356,6 +368,7 @@ import PITitle from './PITitle'
 import PIEntity from './PIEntity'
 import PIDateEdtf from './PIDateEdtf'
 import PISelect from './PISelect'
+import PISelectText from './PISelectText'
 import PISubjectGnd from './PISubjectGnd'
 import PISpatialGetty from './PISpatialGetty'
 import PISpatialText from './PISpatialText'
@@ -383,6 +396,7 @@ export default {
     PIEntity,
     PIDateEdtf,
     PISelect,
+    PISelectText,
     PISubjectGnd,
     PISpatialGetty,
     PISpatialText,
