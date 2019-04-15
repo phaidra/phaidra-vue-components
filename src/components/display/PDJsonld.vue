@@ -191,7 +191,7 @@
         </template>
 
         <template v-else-if="p==='schema:duration'" slot="schema:duration">
-          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'duration'+j" ></p-d-value>
+          <p-d-duration :p="p" :o="item" v-for="(item, j) in o" :key="currentpid+'duration'+j" ></p-d-duration>
         </template>
 
         <template v-else-if="p==='schema:numberOfPages'" slot="schema:numberOfPages">
@@ -261,6 +261,7 @@ import PDKeyword from './PDKeyword'
 import PDLangValue from './PDLangValue'
 import PDValue from './PDValue'
 import PDDimension from './PDDimension'
+import PDDuration from './PDDuration'
 import PDGeoreference from './PDGeoreference'
 import PDEntity from './PDEntity'
 import PDLabeledValue from './PDLabeledValue'
@@ -292,6 +293,7 @@ export default {
     PDLicense,
     PDValue,
     PDDimension,
+    PDDuration,
     PDGeoreference,
     PDLabeledValue,
     PDFunder,
@@ -325,6 +327,9 @@ export default {
 
       return promise
     }
+  },
+  mounted: function () {
+    this.$store.dispatch('loadLanguages')
   }
 }
 </script>

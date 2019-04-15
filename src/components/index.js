@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import PDDimension from './display/PDDimension.vue'
+import PDDuration from './display/PDDuration.vue'
 import PDEntity from './display/PDEntity.vue'
 import PDExactMatch from './display/PDExactMatch.vue'
 import PDFunder from './display/PDFunder.vue'
@@ -42,6 +43,7 @@ import PILiteral from './input/PILiteral'
 import PIKeyword from './input/PIKeyword'
 
 const Components = {
+  PDDuration,
   PDDimension,
   PDEntity,
   PDExactMatch,

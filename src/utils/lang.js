@@ -1189,7 +1189,7 @@ export default {
         "@id": "dut",
         "skos:prefLabel": {
           "eng": "Dutch | Flemish",
-          "deu": "Niederländisch",
+          "deu": "Niederländisch | Flämisch",
           "fra": "néerlandais | flamand"
         }
       },

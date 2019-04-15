@@ -521,7 +521,7 @@ export default {
         case 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ':
           return 'container'
         default:
-          return 'data'
+          return 'unknown'
       }
     },
     submit: function () {

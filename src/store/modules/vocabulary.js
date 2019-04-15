@@ -601,8 +601,10 @@ const state = {
 
 const mutations = {
   setLangTerms (state, data) {
-    state.vocabularies['lang']['terms'] = data
-    state.vocabularies['lang']['loaded'] = true
+    if (state.vocabularies['lang']['loaded'] === false) {
+      state.vocabularies['lang']['terms'] = data
+      state.vocabularies['lang']['loaded'] = true
+    }
   }
 }
 
