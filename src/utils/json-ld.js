@@ -1175,6 +1175,10 @@ export default {
     for (var i = 0; i < formData.sections.length; i++) {
       var s = formData.sections[i]
       var jsonldid = 'container'
+      if (s.type === 'accessrights') {
+        // handled in PIForm
+        continue
+      }
       if (s.type === 'member') {
         jsonldid = 'member_' + s.id
         jsonlds[jsonldid] = {}
@@ -1211,6 +1215,10 @@ export default {
     for (i = 0; i < formData.sections.length; i++) {
       var s = formData.sections[i]
       var jsonldid
+      if (s.type === 'accessrights') {
+        // handled in PIForm
+        continue
+      }
       if (s.type === 'phaidra:Subject') {
         jsonldid = 'subject-' + i
         jsonlds[jsonldid] = {

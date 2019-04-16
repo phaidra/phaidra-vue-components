@@ -3896,6 +3896,22 @@ export default {
           "deu": "Javanisch",
           "fra": "javanais"
         }
+      },
+      {
+        "@id": "lld",
+        "skos:prefLabel": {
+          "eng": "Ladin",
+          "deu": "Ladinisch",
+          "fra": "ladin"
+        }
+      },
+      {
+        "@id": "xve",
+        "skos:prefLabel": {
+          "eng": "Venetic",
+          "deu": "Venetisch",
+          "fra": "vénète"
+        }
       }
     ]
   }

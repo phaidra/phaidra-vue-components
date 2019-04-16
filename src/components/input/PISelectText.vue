@@ -9,7 +9,7 @@
         :items="vocabularies[vocabulary].terms"
         :filter="autocompleteFilter"
         hide-no-data
-        :label="$t(label)"
+        :label="$t(selectlabel)"
         box
         return-object
         clearable

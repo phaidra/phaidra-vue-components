@@ -10,7 +10,7 @@
       <v-tab-item class="pa-3" v-if="form">
 
         <v-layout v-for="(s) in this.form.sections" :key="s.id" column wrap class="ma-3">
-          <v-card>
+          <v-card v-if="s.type !== 'accessrights'">
             <v-card-title class="headline grey white--text">
               <span>{{ $t(s.title) }}</span>
               <v-spacer></v-spacer>
@@ -438,9 +438,11 @@ export default {
   computed: {
     submittype: function() {
       for (let s of this.form.sections) {
-        for (let field of s.fields) {
-          if (field.predicate === 'dcterms:type') {
-            return this.getObjectType(field.value)
+        if (s.fields) {
+          for (let field of s.fields) {
+            if (field.predicate === 'dcterms:type') {
+              return this.getObjectType(field.value)
+            }
           }
         }
       }
@@ -453,6 +455,11 @@ export default {
         jsonlds = jsonLd.form2json(this.form)
       }
       let md = { metadata: { 'json-ld': jsonlds } }
+      for (let s of this.form.sections) {
+        if (s.type === 'accessrights') {
+          md['metadata']['rights'] = s.rights
+        }
+      }
       if (this.previewMember) {
         md['metadata']['relationships'] = [ { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' } ]
       }
@@ -545,10 +552,12 @@ export default {
       } else {
          for (i = 0; i < this.form.sections.length; i++) {
           s = this.form.sections[i]
-          for (j = 0; j < s.fields.length; j++) {
-            if (s.fields[j].component === 'input-file') {
-              if (s.fields[j].file !== '') {
-                httpFormData.append('file', s.fields[j].file)
+          if (s.fields) {
+            for (j = 0; j < s.fields.length; j++) {
+              if (s.fields[j].component === 'input-file') {
+                if (s.fields[j].file !== '') {
+                  httpFormData.append('file', s.fields[j].file)
+                }
               }
             }
           }

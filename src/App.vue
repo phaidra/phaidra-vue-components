@@ -152,6 +152,7 @@
                           :form="form"
                           v-on:object-created="objectCreated($event)"
                           v-on:load-form="form = $event"
+                          v-on:form-input-p-select="handleSelect($event)"
                         ></p-i-form>
                       </v-card-text>
                     </v-card>
@@ -234,18 +235,75 @@ export default {
       psvis: true
     }
   },
-  watch: {
-    contentmodel: function (val) {
-      for (var i = 0; i < this.form.sections.length; i++) {
-        for (var j = 0; j < this.form.sections[i].fields.length; j++) {
-          if (this.form.sections[i].fields[j].predicate === 'dcterms:type') {
-            this.form.sections[i].fields[j].value = this.contentmodel
+  methods: {
+    getResourceTypeFromMimeType: function (mime) {
+      switch (mime) {
+        case 'image/jpeg':
+        case 'image/tiff':
+        case 'image/gif':
+        case 'image/png':
+        case 'image/x-ms-bmp':
+          // picture
+          return 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
+
+        case 'audio/wav':
+        case 'audio/mpeg':
+        case 'audio/flac':
+        case 'audio/ogg':
+          // audio
+          return 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
+
+        case 'application/pdf':
+          // document
+          return 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
+
+        case 'video/mpeg':
+        case 'video/avi':
+        case 'video/mp4':
+        case 'video/quicktime':
+        case 'video/x-matroska':
+          // video
+          return 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
+
+        // eg application/x-iso9660-image
+        default:
+          // data
+          return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
+      }
+    },
+    handleSelect: function (val) {
+      var i
+      var j
+      var k
+      if (val.predicate === 'ebucore:hasMimeType') {
+        for (i = 0; i < this.form.sections.length; i++) {
+          var mime
+          for (j = 0; j < this.form.sections[i].fields.length; j++) {
+            if (this.form.sections[i].fields[j].predicate === 'ebucore:hasMimeType') {
+              mime = this.form.sections[i].fields[j].value
+            }
           }
+          var resourcetype = this.getResourceTypeFromMimeType(mime)
+          for (j = 0; j < this.form.sections[i].fields.length; j++) {
+            if (this.form.sections[i].fields[j].predicate === 'dcterms:type') {
+              var rt = this.form.sections[i].fields[j]
+              rt.value = resourcetype
+              var preflabels
+              for (k = 0; k < this.vocabularies['resourcetype'].terms.length; k++) {
+                if (this.vocabularies['resourcetype'].terms[k]['@id'] === rt.value) {
+                  preflabels = this.vocabularies['resourcetype'].terms[k]['skos:prefLabel']
+                }
+              }
+              rt['skos:prefLabel'] = []
+              Object.entries(preflabels).forEach(([key, value]) => {
+                rt['skos:prefLabel'].push({ '@value': value, '@language': key })
+              })
+            }
+          }
+          this.form.sections.splice(i, 1, this.form.sections[i])
         }
       }
-    }
-  },
-  methods: {
+    },
     loadMetadata: function (pid) {
       this.loadedMetadata = []
       var self = this
@@ -309,164 +367,43 @@ export default {
       this.form = {
         sections: [
           {
-            title: 'Movie metadata',
+            title: 'General',
             id: 1,
             fields: []
+          },
+          {
+            title: 'Access rights',
+            type: 'accessrights',
+            rights: {
+              username: [
+                {
+                  value: 'hudakr4',
+                  expires: '2019-08-25T14:31:34Z'
+                }
+              ]
+            }
           }
         ]
       }
       let rt = fields.getField('resource-type')
-      rt.value = 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ'
+      rt.value = 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
       this.form.sections[0].fields.push(rt)
 
       let tit = fields.getField('title')
-      tit.titleLabel = 'Original title'
+      tit.title = 'test'
       this.form.sections[0].fields.push(tit)
 
-      let paralelltitle = fields.getField('title')
-      paralelltitle.type = 'bf:ParallelTitle'
-      this.form.sections[0].fields.push(paralelltitle)
-
-      let ser = fields.getField('series')
-      ser.label = 'Series title'
-      ser.hideVolume = true
-      ser.hideIssue = true
-      ser.hideIssued = true
-      ser.hideIssn = true
-      ser.hideIdentifier = true
-      this.form.sections[0].fields.push(ser)
-
-      let actor = fields.getField('role')
-      actor.role = 'role:act'
-      this.form.sections[0].fields.push(actor)
-
-      let director = fields.getField('role')
-      director.role = 'role:drt'
-      this.form.sections[0].fields.push(director)
-
-      let screenplay = fields.getField('role')
-      screenplay.role = 'role:aus'
-      this.form.sections[0].fields.push(screenplay)
-
-      let camera = fields.getField('role')
-      camera.role = 'role:cng'
-      this.form.sections[0].fields.push(camera)
-
-      let music = fields.getField('role')
-      music.role = 'role:msd'
-      this.form.sections[0].fields.push(music)
-
-      let production = fields.getField('role')
-      production.role = 'role:pro'
-      this.form.sections[0].fields.push(production)
-
-      let productioncomp = fields.getField('role')
-      productioncomp.type = 'schema:Organisation'
-      productioncomp.role = 'role:prn'
-      productioncomp.showname = true
-      productioncomp.hideRole = true
-      productioncomp.institutionLabel = 'Production company'
-      this.form.sections[0].fields.push(productioncomp)
-
-      let prodplace = fields.getField('role')
-      prodplace.type = 'schema:Organisation'
-      prodplace.role = 'role:prp'
-      prodplace.institutionLabel = 'Production country'
-      prodplace.showname = true
-      prodplace.hideRole = true
-      this.form.sections[0].fields.push(prodplace)
-
-      let prodyear = fields.getField('date-edtf')
-      prodyear.type = 'rdau:P60071'
-      prodyear.hideType = true
-      prodyear.dateLabel = 'Production year'
-      this.form.sections[0].fields.push(prodyear)
-
-      let dur = fields.getField('duration')
-      dur.hideHours = true,
-      dur.hideSeconds = true,
-      this.form.sections[0].fields.push(dur)
-
-      this.form.sections[0].fields.push(fields.getField('language'))
-
-      this.form.sections[0].fields.push(fields.getField('subtitle-language'))
-
-      let desc = fields.getField('description')
-      desc.label = 'Content description'
-      this.form.sections[0].fields.push(desc)
-
-      let adp = fields.getField('movieadaptation') 
-      adp.role = 'role:aut'
-      this.form.sections[0].fields.push(adp)
-
-      let genre = fields.getField('genre')
-      genre.vocabulary = 'moviegenre'
-      this.form.sections[0].fields.push(genre)
-
-      this.form.sections[0].fields.push(fields.getField('keyword'))
-
-     let dceformat = fields.getField('dce-format-vocab')
-      dceformat.vocabulary = 'dceformat'
-      this.form.sections[0].fields.push(dceformat)
-
-      let tech = fields.getField('technique-vocab')
-      tech.vocabulary = 'technique'
-      tech.value = 'https://pid.phaidra.org/vocabulary/K818-FSM5'
-      this.form.sections[0].fields.push(tech)
-
-      let tech2 = fields.getField('technique-vocab')
-      tech2.vocabulary = 'technique'
-      tech2.value = 'https://pid.phaidra.org/vocabulary/1K09-VXQ4'
-      this.form.sections[0].fields.push(tech2)
-
-      this.form.sections[0].fields.push(fields.getField('supplementary-content'))
-
-      this.form.sections[0].fields.push(fields.getField('award'))
-
-      let aud = fields.getField('audience-vocab')
-      aud.vocabulary = 'audience'
-      this.form.sections[0].fields.push(aud)
-
-      let regcode = fields.getField('regional-encoding')
-      regcode.vocabulary = 'regionalencoding'
-      this.form.sections[0].fields.push(regcode)
-
-      this.form.sections[0].fields.push(fields.getField('note'))
-
-      let physloc = fields.getField('physical-location-select-text')
-      physloc.vocabulary = 'pool'
-      this.form.sections[0].fields.push(physloc)
-
-      this.form.sections[0].fields.push(fields.getField('shelf-mark'))
-    },
-    createContainerForm: function (index) {
-      this.createSimpleForm()
-
-      let section = {
-        title: 'File',
-        id: 4,
-        type: 'member',
-        multiplicable: true,
-        fields: []
-      }
-      var rt = fields.getField('resource-type')
-      rt.value = this.contentmodel
-      section.fields.push(rt)
-      section.fields.push(fields.getField('file'))
-      section.fields.push(fields.getField('title'))
-      section.fields.push(fields.getField('description'))
-      var mt = fields.getField('mime-type')
-      mt.value = 'image/jpeg'
-      mt.required = true
-      section.fields.push(mt)
-      section.fields.push(fields.getField('digitization-note'))
-      section.fields.push(fields.getField('role'))
-      section.fields.push(fields.getField('license'))
-      section.fields.push(fields.getField('rights'))
-
-      this.form.sections.push(section)
+      let lic = fields.getField('license')
+      lic.value = 'http://rightsstatements.org/vocab/InC/1.0/'
+      this.form.sections[0].fields.push(lic)
+      
+      let mime = fields.getField('mime-type')
+      mime.value = 'image/jpeg'
+      this.form.sections[0].fields.push(mime)
+      
+      this.form.sections[0].fields.push(fields.getField('file'))
+    
     }
-
   },
   mounted: function () {
     var token = this.getCookie('X-XSRF-TOKEN')
