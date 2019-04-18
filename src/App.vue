@@ -89,6 +89,15 @@
                         </v-list-tile>
                       </div>
                     </v-item>
+                    <v-item>
+                      <div slot-scope="{ active, toggle }">
+                        <v-list-tile @click="toggle">
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ $t('Search') }}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile>
+                      </div>
+                    </v-item>
                   </v-item-group>
                 </v-list>
               </v-navigation-drawer>
@@ -161,6 +170,22 @@
                     </v-card>
                   </v-flex>
                 </v-window-item>
+                <v-window-item>
+                  <v-flex>
+                    <v-card>
+                      <v-toolbar flat>
+                        <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
+                        <v-divider class="mx-3" inset vertical></v-divider>
+                        <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                        <v-spacer></v-spacer>
+                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load</v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <p-search></p-search>
+                      </v-card-text>
+                    </v-card>
+                  </v-flex>
+                </v-window-item>
               </v-window>
             </v-flex>
 
@@ -174,6 +199,7 @@
 <script>
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
+import PSearch from '@/components/search/PSearch'
 import {version} from '../package.json'
 import fields from '@/utils/fields'
 import jsonLd from '@/utils/json-ld'
@@ -182,7 +208,8 @@ export default {
   name: 'app',
   components: {
     PIForm,
-    PDJsonld
+    PDJsonld,
+    PSearch
   },
   computed: {
     token: function() {
