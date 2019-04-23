@@ -5,7 +5,7 @@ const state = {
     'pool': {
       terms: [
         { '@id': 'Bibliothek', 'skos:prefLabel': { 'eng': 'Bibliothek' } },
-        { '@id': 'Institut', 'skos:prefLabel': { 'eng': 'Institut' } },
+        { '@id': 'Institut für Romanistik', 'skos:prefLabel': { 'eng': 'Institut für Romanistik' } },
         { '@id': 'privat', 'skos:prefLabel': { 'eng': 'privat' } }
       ],
       loaded: true
