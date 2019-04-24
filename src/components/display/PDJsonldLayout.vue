@@ -1,14 +1,13 @@
 <template>
   <v-container>
     <v-layout column>
-      <slot name="dcterms:type"></slot>
-      <slot name="edm:hasType"></slot>
-      <slot name="schema:genre"></slot>
-
       <slot name="dce:title"></slot>
       <slot name="role"></slot>
       <slot name="bf:note"></slot>
       
+      <slot name="edm:hasType"></slot>
+      <slot name="schema:genre"></slot>
+
       <slot name="dcterms:language"></slot>
       <slot name="schema:subtitleLanguage"></slot>
       <slot name="dce:subject"></slot>
@@ -61,6 +60,9 @@
       <slot name="schema:depth"></slot>
       <slot name="schema:weight"></slot>
       <slot name="schema:duration"></slot>
+
+      <slot name="dcterms:type"></slot>
+      <slot name="pid"></slot>
 
       <slot name="edm:rights"></slot>
       <slot name="dce:rights"></slot>

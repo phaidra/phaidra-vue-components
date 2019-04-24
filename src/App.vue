@@ -13,10 +13,13 @@
           </v-flex>
 
           <v-layout row>  
-            <v-flex xs3>
+            <v-flex xs2>
               <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
+              <v-text-field v-model="phaidrabaseurl" :label="'phaidra'"></v-text-field>
+            </v-flex>
+            <v-flex xs2>
               <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
             </v-flex>
             <template v-if="token">
@@ -106,7 +109,7 @@
                       <v-card-text>
                         <p-d-jsonld 
                           :jsonld="displayjsonld"
-                          v-on:load-jsonld="displayjsonld = $event"
+                          :pid="pid"
                         ></p-d-jsonld>
                       </v-card-text>
                     </v-card>
@@ -187,6 +190,9 @@ export default {
     },
     alerts: function () {
       return this.$store.state.alerts.alerts
+    },
+    vocabularies: function () {
+      return this.$store.state.vocabulary.vocabularies
     }
   },
   data () {
@@ -199,6 +205,7 @@ export default {
       },
       pid: '',
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
+      phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
         username: '',
@@ -277,30 +284,32 @@ export default {
       var k
       if (val.predicate === 'ebucore:hasMimeType') {
         for (i = 0; i < this.form.sections.length; i++) {
-          var mime
-          for (j = 0; j < this.form.sections[i].fields.length; j++) {
-            if (this.form.sections[i].fields[j].predicate === 'ebucore:hasMimeType') {
-              mime = this.form.sections[i].fields[j].value
-            }
-          }
-          var resourcetype = this.getResourceTypeFromMimeType(mime)
-          for (j = 0; j < this.form.sections[i].fields.length; j++) {
-            if (this.form.sections[i].fields[j].predicate === 'dcterms:type') {
-              var rt = this.form.sections[i].fields[j]
-              rt.value = resourcetype
-              var preflabels
-              for (k = 0; k < this.vocabularies['resourcetype'].terms.length; k++) {
-                if (this.vocabularies['resourcetype'].terms[k]['@id'] === rt.value) {
-                  preflabels = this.vocabularies['resourcetype'].terms[k]['skos:prefLabel']
-                }
+          if(this.form.sections[i].fields){
+            var mime
+            for (j = 0; j < this.form.sections[i].fields.length; j++) {
+              if (this.form.sections[i].fields[j].predicate === 'ebucore:hasMimeType') {
+                mime = this.form.sections[i].fields[j].value
               }
-              rt['skos:prefLabel'] = []
-              Object.entries(preflabels).forEach(([key, value]) => {
-                rt['skos:prefLabel'].push({ '@value': value, '@language': key })
-              })
             }
+            var resourcetype = this.getResourceTypeFromMimeType(mime)
+            for (j = 0; j < this.form.sections[i].fields.length; j++) {
+              if (this.form.sections[i].fields[j].predicate === 'dcterms:type') {
+                var rt = this.form.sections[i].fields[j]
+                rt.value = resourcetype
+                var preflabels
+                for (k = 0; k < this.vocabularies['resourcetype'].terms.length; k++) {
+                  if (this.vocabularies['resourcetype'].terms[k]['@id'] === rt.value) {
+                    preflabels = this.vocabularies['resourcetype'].terms[k]['skos:prefLabel']
+                  }
+                }
+                rt['skos:prefLabel'] = []
+                Object.entries(preflabels).forEach(([key, value]) => {
+                  rt['skos:prefLabel'].push({ '@value': value, '@language': key })
+                })
+              }
+            }
+            this.form.sections.splice(i, 1, this.form.sections[i])
           }
-          this.form.sections.splice(i, 1, this.form.sections[i])
         }
       }
     },
@@ -414,6 +423,7 @@ export default {
 
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
+    this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
 

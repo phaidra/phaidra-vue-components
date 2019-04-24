@@ -57,6 +57,9 @@ export default new Vuex.Store({
     setInstanceSolr (state, solr) {
       state.settings.instance.solr = solr
     },
+    setInstancePhaidra (state, baseurl) {
+      state.settings.instance.baseurl = baseurl
+    },
     setSuggester (state, data) {
       Vue.set(state.settings.global.suggesters, data.suggester, data.url)
     }

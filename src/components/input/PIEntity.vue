@@ -1,5 +1,30 @@
 <template>
   <v-layout row>
+    <v-flex xs4 v-if="!hideRole">
+      <v-autocomplete
+        :disabled="disablerole" 
+        v-on:input="$emit('input-role', $event)" 
+        :label="$t('Role')" 
+        :items="vocabularies['rolepredicate'].terms" 
+        :value="getTerm('rolepredicate', role)"
+        :filter="autocompleteFilter"
+        box
+        return-object
+        clearable
+      >
+        <template slot="item" slot-scope="{ item }">
+          <v-list-tile-content two-line>
+            <v-list-tile-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
+            <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
+          </v-list-tile-content>
+        </template>
+        <template slot="selection" slot-scope="{ item }">
+          <v-list-tile-content>
+            <v-list-tile-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
+          </v-list-tile-content>
+        </template>
+      </v-autocomplete>
+    </v-flex>
     <template v-if="type === 'schema:Person'">
       <template v-if="showname">
         <v-flex xs4 >
@@ -45,31 +70,6 @@
         v-on:input="$emit('input-identifier', $event)"
         box
       ></v-text-field>
-    </v-flex>
-    <v-flex xs4 v-if="!hideRole">
-      <v-autocomplete
-        :disabled="disablerole" 
-        v-on:input="$emit('input-role', $event)" 
-        :label="$t('Role')" 
-        :items="vocabularies['rolepredicate'].terms" 
-        :value="getTerm('rolepredicate', role)"
-        :filter="autocompleteFilter"
-        box
-        return-object
-        clearable
-      >
-        <template slot="item" slot-scope="{ item }">
-          <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
-            <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
-          </v-list-tile-content>
-        </template>
-        <template slot="selection" slot-scope="{ item }">
-          <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
-          </v-list-tile-content>
-        </template>
-      </v-autocomplete>
     </v-flex>
     <v-flex xs1 v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
