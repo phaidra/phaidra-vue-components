@@ -282,7 +282,109 @@ export default {
 
 <style lang="stylus" scoped>
 
-// TODO @require '../stylus/main'
+// --- BEGIN stylus/main.sty
+
+@require '../../../node_modules/vuetify/src/stylus/settings/_colors'
+
+$phaidrablue = {
+  "base":       #1A74B0, // univie
+  "lighten-5":  #E3F2FD,
+  "lighten-4":  #BBDEFB,
+  "lighten-3":  #90CAF9,
+  "lighten-2":  #64B5F6,
+  "lighten-1":  #42A5F5,
+  "darken-1":   #1E88E5,
+  "darken-2":   #1976D2,
+  "darken-3":   #1565C0,
+  "darken-4":   #0D47A1,
+  "accent-1":   #82B1FF,
+  "accent-2":   #448AFF,
+  "accent-3":   #2979FF,
+  "accent-4":   #2962FF
+}
+
+$phaidragrey = {
+  "base":       #777777, // univie
+  "lighten-5":  #F9F9F9, // univie
+  "lighten-4":  #F2F2F2, // univie
+  "lighten-3":  #EEEEEE,
+  "lighten-2":  #A4A4A4, // univie
+  "lighten-1":  #7B7B7B, // univie
+  "darken-1":   #757575,
+  "darken-2":   #616161,
+  "darken-3":   #424242,
+  "darken-4":   #333333 // univie
+}
+
+$colors.blue = $phaidrablue
+$colors.grey = $phaidragrey
+
+$theme = {
+  primary: $phaidrablue.base
+  accent: $red.accent-2
+  secondary: $grey.lighten-1
+  info: $blue.lighten-1
+  warning: $amber.darken-2
+  error: $red.accent-4
+  success: $green.lighten-2
+}
+
+@require '../../../node_modules/vuetify/src/stylus/settings/_theme'
+
+$material-light.text.disabled = rgba(#000, .87)
+
+$headings = {
+  h1: { size: 26pt, weight: 300, line-height: 1.1, letter-spacing: normal }, // univie
+  h2: { size: 22pt, weight: 300, line-height: 1.1, letter-spacing: normal, padding: 8px }, // univie
+  h3: { size: 20px, weight: 300, line-height: 1.1, letter-spacing: normal }, // univie
+  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal }
+  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal },
+  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em },
+  subheading: { size: 16px, weight: 400 },
+  body-2: { size: 14px, weight: 500 },
+  body-1: { size: 14px, weight: 400 },
+  caption: { size: 12px, weight: 400 },
+  button: { size: 14px, weight: 500 }
+}
+
+@import '../../../node_modules/vuetify/src/stylus/main'
+
+.pagination
+
+  &__item
+    elevation(0)
+    border-radius: 0px
+
+    &--active
+      elevation(0)
+
+   &__navigation
+    elevation(0)
+
+.pagination a
+  transition: none
+
+.pagination a:hover
+  box-shadow: none
+
+.application--light .pagination__item
+  color: $phaidragrey.base
+
+.application--light .pagination__item--active
+  color: #fff;
+
+.application--light .pagination__navigation .icon
+  color: $phaidragrey.base
+
+
+// phaidra-api returns 'danger', vuetify uses 'error'
+// .danger
+//  @extends .error
+
+.alert
+  font-weight: 400
+
+// --- END OF stylus/main.sty
 
 ul
   list-style: none
@@ -297,10 +399,5 @@ ul
 svg
   margin-bottom: 3px
   cursor: pointer
-
-</style>
-
-<style scoped>
-
 
 </style>
