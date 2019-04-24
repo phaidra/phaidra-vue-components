@@ -48,10 +48,6 @@ export default new Vuex.Store({
       state.user.token = '',
       state.alerts.alerts = []
     },
-    clearUser (state) {
-      state.settings.username = '',
-      state.settings.token = ''
-    },
     setInstanceApi (state, api) {
       state.settings.instance.api = api
     },
@@ -67,7 +63,7 @@ export default new Vuex.Store({
   },
   actions: {
 
-    login ({ commit, dispatch, state, rootState }, credentials) {
+    login ({ commit, rootState }, credentials) {
       return new Promise((resolve, reject) => {
         commit('initStore')
   
@@ -91,13 +87,13 @@ export default new Vuex.Store({
           }
         })
         .catch(function (error) {
-          console.log(error)
+          console.log(error) // eslint-disable-line no-console
           reject()
         })
       })
     },
-    logout ({ commit, dispatch, state, rootState }) {
-      return new Promise((resolve, reject) => {
+    logout ({ commit, state, rootState }) {
+      return new Promise((resolve) => {
         fetch(rootState.settings.instance.api + '/signout', {
           method: 'GET',
           mode: 'cors',
@@ -114,7 +110,7 @@ export default new Vuex.Store({
           resolve()
         })
         .catch(function (error) {
-          console.log(error)
+          console.log(error) // eslint-disable-line no-console
           commit('initStore')
           resolve()
         })
