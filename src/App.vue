@@ -457,6 +457,7 @@ export default {
     this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
+    this.$store.commit('initStore') // this commits initStore in every store module which has it
 
     this.createSimpleForm()
   }
