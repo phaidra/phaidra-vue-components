@@ -132,7 +132,7 @@ export default {
       return this.$store.state.search.collection
     }
   },
-    methods: {
+  methods: {
     handleSelect: function (query) {
       this.$store.commit('setQuery', query.term)
       this.$store.dispatch('search').then(() => {
@@ -154,7 +154,7 @@ export default {
     }
   },
   beforeCreate: function () {
-    this.$store.commit('setSearchParams', this.$route.query)
+    // this.$store.commit('setSearchParams', this.$route.query) FIXME this.$route is not defined
     this.$store.dispatch('search')
   },
   props: {
@@ -165,7 +165,7 @@ export default {
   },
   data () {
     return {
-      loading: false
+      linkdialog: false
     }
   },
   mounted: function () {
