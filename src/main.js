@@ -3,6 +3,7 @@ import './plugins/vuetify'
 import store from './store'
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
+import * as svgicon from 'vue-svgicon'
 import eng from './i18n/eng'
 import deu from './i18n/deu'
 import ita from './i18n/ita'
@@ -13,6 +14,11 @@ Vue.config.productionTip = false
 
 Vue.use(Vuetify)
 Vue.use(VueI18n)
+Vue.use(svgicon, {
+  tagName: 'icon',
+  defaultWidth: '1em',
+  defaultHeight: '1em'
+})
 
 Vue.filter('unixtime', function (value) {
   if (value) {
