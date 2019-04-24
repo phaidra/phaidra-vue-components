@@ -29,7 +29,11 @@
                             <v-container fluid>
                               <v-layout row>
                                 <v-flex xs10>
-                                  <h3 class="display-2" @click.stop v-if="doc.dc_title"><router-link :to="{ name: 'detail', params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</router-link></h3>
+                                  <h3 class="display-2" @click.stop v-if="doc.dc_title">
+                                    <!-- FIXME temporary remove router-link (we don't have $router) -->
+                                    <!-- <router-link :to="{ name: 'detail', params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</router-link> -->
+                                    {{ doc.dc_title[0] }}
+                                  </h3>
                                   <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex xs2 class="text-xs-right"><span v-if="doc.created" class="grey--text">{{ doc.created | date }}</span></v-flex>
