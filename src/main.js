@@ -26,6 +26,12 @@ Vue.filter('unixtime', function (value) {
   }
 })
 
+Vue.filter('date', function (value) {
+  if (value) {
+    return moment(String(value)).format('DD.MM.YYYY')
+  }
+})
+
 const messages = { eng, deu, ita }
 const i18n = new VueI18n({
   locale: 'deu',
