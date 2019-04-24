@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import vocabulary from './modules/vocabulary'
+import search from './modules/search'
 
 Vue.use(Vuex)
 
@@ -121,7 +122,8 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    vocabulary
+    vocabulary,
+    search
   },
   strict: debug
 })
