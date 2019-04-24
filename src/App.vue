@@ -22,6 +22,9 @@
             <v-flex xs2>
               <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
             </v-flex>
+            <v-flex xs3>
+              <v-text-field v-model="baseurl" :label="'base-url'"></v-text-field>
+            </v-flex>
             <template v-if="token">
               <v-flex xs6>
                 <h3 class="font-weight-light pt-4">Logged in [{{ token }}]</h3>
@@ -234,6 +237,7 @@ export default {
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
       phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
+      baseurl: 'phaidra.univie.ac.at',
       credentials: {
         username: '',
         password: ''
