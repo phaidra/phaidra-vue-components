@@ -467,8 +467,12 @@ export default {
 <style>
 #app {
   font-family: "Roboto", sans-serif, Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: 11.5pt;
+  line-height: 1.42857143;
+  color: black;
+  background-color: white;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
 .right {
