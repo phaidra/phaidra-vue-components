@@ -475,3 +475,8 @@ export default {
   float: right;
 }
 </style>
+
+<style lang="stylus">
+  @require './stylus/main'
+</style>
+
