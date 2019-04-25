@@ -1,0 +1,11 @@
+/* eslint-disable */
+require('./fontello-sort-name-down')
+require('./fontello-sort-name-up')
+require('./fontello-sort-number-down')
+require('./fontello-sort-number-up')
+require('./material-action-account-balance')
+require('./material-action-bookmark')
+require('./material-content-link')
+require('./material-navigation-close')
+require('./univie-checkbox-unchecked')
+require('./univie-stop2')

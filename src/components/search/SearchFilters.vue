@@ -168,10 +168,10 @@
 
 <script>
 import Autocomplete from './Autocomplete'
-// import '@/compiled-icons/univie-stop2'
-// import '@/compiled-icons/univie-checkbox-unchecked'
-// import '@/compiled-icons/material-action-account-balance'
-// import '@/compiled-icons/material-navigation-close'
+import '@/compiled-icons/univie-stop2'
+import '@/compiled-icons/univie-checkbox-unchecked'
+import '@/compiled-icons/material-action-account-balance'
+import '@/compiled-icons/material-navigation-close'
 
 export default {
   name: 'search-filters',

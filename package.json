@@ -5,7 +5,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-bundle": "vue-cli-service build --target lib --name phaidra-vue-components ./src/components/index.js"
+    "build-bundle": "vue-cli-service build --target lib --name phaidra-vue-components ./src/components/index.js",
+    "svg": "vsvg -s ./src/svg-icons -t ./src/compiled-icons"
   },
   "main": "./dist/phaidra-vue-components.common.js",
   "files": [
@@ -21,7 +22,6 @@
     "vue": "^2.6.5",
     "vue-i18n": "^8.8.1",
     "vue-json-pretty": "^1.4.1",
-    "vue-svgicon": "^3.2.6",
     "vuetify": "^1.5.0",
     "vuex": "^3.1.0"
   },
@@ -36,6 +36,7 @@
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
     "vue-template-compiler": "^2.6.5",
+    "vue-svgicon": "^3.2.6",
     "vuetify-loader": "^1.2.1"
   },
   "eslintConfig": {

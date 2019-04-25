@@ -90,12 +90,12 @@
 import Autocomplete from './Autocomplete'
 import SearchResults from './SearchResults'
 import SearchFilters from './SearchFilters'
-// import '@/compiled-icons/fontello-sort-name-up'
-// import '@/compiled-icons/fontello-sort-name-down'
-// import '@/compiled-icons/fontello-sort-number-up'
-// import '@/compiled-icons/fontello-sort-number-down'
-// import '@/compiled-icons/material-content-link'
-// import '@/compiled-icons/material-action-bookmark'
+import '@/compiled-icons/fontello-sort-name-up'
+import '@/compiled-icons/fontello-sort-name-down'
+import '@/compiled-icons/fontello-sort-number-up'
+import '@/compiled-icons/fontello-sort-number-down'
+import '@/compiled-icons/material-content-link'
+import '@/compiled-icons/material-action-bookmark'
 
 export default {
   name: 'p-search',
