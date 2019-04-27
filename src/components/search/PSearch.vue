@@ -153,23 +153,15 @@ export default {
       this.$store.dispatch('setCollection', '')
     }
   },
-  beforeCreate: function () {
-    // this.$store.commit('setSearchParams', this.$route.query) FIXME this.$route is not defined
-    this.$store.dispatch('search')
-  },
-  props: {
-    label: {
-      type: String,
-      required: false
-    },
+  mounted: function () {
+    // this call is delayed because at this point
+    // setInstanceSolr has not yet been executed and the solr url is missing
+    setTimeout(() => this.$store.dispatch('search'), 100)
   },
   data () {
     return {
       linkdialog: false
     }
-  },
-  mounted: function () {
-    console.log('mounted')
   }
 }
 </script>
