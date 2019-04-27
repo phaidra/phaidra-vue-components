@@ -181,7 +181,7 @@
                         <v-divider class="mx-3" inset vertical></v-divider>
                         <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load</v-btn>
+                        <v-btn raised single-line class="right" color="primary lighten-2">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
                         <p-search></p-search>

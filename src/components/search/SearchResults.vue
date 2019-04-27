@@ -92,8 +92,13 @@
 </template>
 
 <script>
+import PDLicense from '../display/PDLicense'
+
 export default {
   name: 'search-results',
+  components: {
+    PDLicense
+  },
   data () {
     return {
       docstoggle: {}
