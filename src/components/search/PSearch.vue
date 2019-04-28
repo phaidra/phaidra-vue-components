@@ -132,6 +132,12 @@ export default {
       return this.$store.state.search.collection
     }
   },
+  props: {
+    collection: {
+      type: String,
+      required: false
+    }
+  },
   methods: {
     handleSelect: function (query) {
       this.$store.commit('setQuery', query.term)
@@ -155,8 +161,14 @@ export default {
   },
   mounted: function () {
     // this call is delayed because at this point
-    // setInstanceSolr has not yet been executed and the solr url is missing
-    setTimeout(() => this.$store.dispatch('search'), 100)
+    // `setInstanceSolr` has not yet been executed and the solr url is missing
+    setTimeout(() => {
+      if (this.collection) {
+        this.$store.dispatch('setCollection', this.collection)
+      }
+
+      this.$store.dispatch('search')
+    }, 100)
   },
   data () {
     return {
