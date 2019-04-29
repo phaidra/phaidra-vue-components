@@ -1,8 +1,8 @@
 <template>
   <v-flex>
-    <v-layout>
-      <v-flex class="primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex xs9>
+    <v-layout row wrap>
+      <v-flex md3 xs12 class="primary--text">{{ $t(p) }}</v-flex>
+      <v-flex md9 xs12>
         <a :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
         <!--
         <v-flex>

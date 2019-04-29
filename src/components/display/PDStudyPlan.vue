@@ -1,9 +1,9 @@
 <template>
   <v-flex>
-    <v-layout row>
+    <v-layout row wrap>
       <template v-for="(l, i) in o['skos:prefLabel']">
-        <v-flex class="primary--text" xs3 :key="'pl'+i">{{ $t('Study plan') }}</v-flex>
-        <v-flex :key="'spl'+i">
+        <v-flex md3 xs12 class="primary--text" :key="'pl'+i">{{ $t('Study plan') }}</v-flex>
+        <v-flex md9 xs12 :key="'spl'+i">
           <v-layout column>
             <v-flex >{{ l['@value'] }}</v-flex>
             <template v-for="(id, i) in o['skos:notation']">

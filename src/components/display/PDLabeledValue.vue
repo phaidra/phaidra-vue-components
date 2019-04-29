@@ -1,8 +1,8 @@
 <template>
   <v-flex>
-    <v-layout>
-      <v-flex class="primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex xs9>{{ resolve(p, o) }} <span class="grey--text">[{{o}}]</span></v-flex>
+    <v-layout row wrap>
+      <v-flex md3 xs12 class="primary--text">{{ $t(p) }}</v-flex>
+      <v-flex md9 xs12>{{ resolve(p, o) }} <span class="grey--text">[{{o}}]</span></v-flex>
     </v-layout>
   </v-flex>
 </template>

@@ -3,9 +3,9 @@
     <v-layout column >
       <v-flex>
         <template v-for="(l, i) in o['skos:prefLabel']">
-          <v-layout row :key="'row'+i">
-            <v-flex class="primary--text" xs3 :key="'l'+i">{{ $t(p) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-flex>
-            <v-flex xs9 :key="'t'+i">
+          <v-layout row wrap :key="'row'+i">
+            <v-flex class="primary--text" md3 xs12 :key="'l'+i">{{ $t(p) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-flex>
+            <v-flex md9 xs12 :key="'t'+i">
               <v-chip v-for="(keyword, j) in getKeywords(l)" :key="'kw'+j">{{keyword}}</v-chip>
             </v-flex>
           </v-layout>

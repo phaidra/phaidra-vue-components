@@ -3,13 +3,13 @@
     <v-layout column >
       <v-flex>
         <template v-for="(mt, i) in o['bf:mainTitle']">
-          <v-layout row :key="'row'+i">
-            <v-flex class="primary--text" xs3 :key="'mt'+i">{{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
-            <v-flex>
+          <v-layout :key="'row'+i" row wrap>
+            <v-flex md3 xs12 class="primary--text" :key="'mt'+i">{{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
+            <v-flex md9 xs12>
               <v-layout column :key="'mtv'+i">
-                <v-flex xs9 >{{ mt['@value'] }}</v-flex>
+                <v-flex>{{ mt['@value'] }}</v-flex>
                 <template v-for="(st, i) in o['bf:subtitle']">
-                  <v-flex xs9 :key="'stv'+i">{{ st['@value'] }}</v-flex>
+                  <v-flex :key="'stv'+i">{{ st['@value'] }}</v-flex>
                 </template>
               </v-layout>
             </v-flex>
