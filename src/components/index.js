@@ -41,6 +41,7 @@ import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
 import PISpatialGettyReadonly from './input/PISpatialGettyReadonly'
 import PILiteral from './input/PILiteral'
 import PIKeyword from './input/PIKeyword'
+import PSearch from './search/PSearch'
 
 const Components = {
   PDDuration,
@@ -84,7 +85,8 @@ const Components = {
   PISpatialGettyReadonly,
   PILiteral,
   PIKeyword,
-  PIDuration
+  PIDuration,
+  PSearch
 }
 
 Object.keys(Components).forEach(name => {

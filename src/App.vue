@@ -89,6 +89,15 @@
                         </v-list-tile>
                       </div>
                     </v-item>
+                    <v-item>
+                      <div slot-scope="{ active, toggle }">
+                        <v-list-tile @click="toggle">
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ $t('Search') }}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile>
+                      </div>
+                    </v-item>
                   </v-item-group>
                 </v-list>
               </v-navigation-drawer>
@@ -161,6 +170,22 @@
                     </v-card>
                   </v-flex>
                 </v-window-item>
+                <v-window-item>
+                  <v-flex>
+                    <v-card>
+                      <v-toolbar flat>
+                        <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
+                        <v-divider class="mx-3" inset vertical></v-divider>
+                        <v-text-field v-model="collection"></v-text-field>
+                        <v-spacer></v-spacer>
+                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load</v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <p-search :collection="collection"></p-search>
+                      </v-card-text>
+                    </v-card>
+                  </v-flex>
+                </v-window-item>
               </v-window>
             </v-flex>
 
@@ -174,6 +199,7 @@
 <script>
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
+import PSearch from '@/components/search/PSearch'
 import {version} from '../package.json'
 import fields from '@/utils/fields'
 import jsonLd from '@/utils/json-ld'
@@ -182,7 +208,8 @@ export default {
   name: 'app',
   components: {
     PIForm,
-    PDJsonld
+    PDJsonld,
+    PSearch
   },
   computed: {
     token: function() {
@@ -204,6 +231,7 @@ export default {
         sections: []
       },
       pid: '',
+      collection: 'o:541829',
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
       phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
@@ -345,6 +373,9 @@ export default {
         self.editform = jsonLd.json2form(jsonld)
       })
     },
+    loadSearch: function() {
+      this.$store.dispatch('setCollection', this.collection)
+    },
     login: function () {
       this.$store.dispatch('login', this.credentials)
     },
@@ -426,6 +457,7 @@ export default {
     this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
+    this.$store.commit('initStore') // this commits initStore in every store module which has it
 
     this.createSimpleForm()
   }
@@ -435,11 +467,20 @@ export default {
 <style>
 #app {
   font-family: "Roboto", sans-serif, Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: 11.5pt;
+  line-height: 1.42857143;
+  color: black;
+  background-color: white;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
 .right {
   float: right;
 }
 </style>
+
+<style lang="stylus">
+  @require './stylus/main'
+</style>
+
