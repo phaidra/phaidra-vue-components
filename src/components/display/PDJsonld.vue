@@ -5,7 +5,7 @@
       <template v-if="pid" slot="pid">
         <v-flex>
           <v-layout row wrap>
-            <v-flex md3 xs12 class="primary--text">{{ $t('Persistent identifier') }}</v-flex>
+            <v-flex md3 xs12 class="pdlabel primary--text">{{ $t('Persistent identifier') }}</v-flex>
             <v-flex md9 xs12>https://{{ instance.baseurl }}/{{ pid }}</v-flex>
           </v-layout>
         </v-flex>

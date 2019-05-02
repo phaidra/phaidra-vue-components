@@ -1,7 +1,7 @@
 <template>
   <v-flex>
     <v-layout v-if="entity" row wrap>
-      <v-flex md3 xs12 class="primary--text" xs3>{{ getLocalizedTermLabel(this.role) }}</v-flex>
+      <v-flex md3 xs12 class="pdlabel primary--text">{{ getLocalizedTermLabel(this.role) }}</v-flex>
       <v-flex md9 xs12>
         <v-layout column>
           <v-flex>

@@ -116,10 +116,16 @@
                         <v-btn raised single-line class="right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <p-d-jsonld 
-                          :jsonld="displayjsonld"
-                          :pid="pid"
-                        ></p-d-jsonld>
+                        <v-layout row>
+                          <p-d-jsonld 
+                            :jsonld="displayjsonld"
+                            :pid="pid"
+                          ></p-d-jsonld>
+                          <p-d-jsonld 
+                            :jsonld="displayjsonld"
+                            :pid="pid"
+                          ></p-d-jsonld>
+                        </v-layout>
                       </v-card-text>
                     </v-card>
                   </v-flex>
@@ -477,6 +483,10 @@ export default {
 
 .right {
   float: right;
+}
+
+.pdlabel {
+  max-width: 100%;
 }
 </style>
 

@@ -35,6 +35,7 @@ Vue.filter('date', function (value) {
 const messages = { eng, deu, ita }
 const i18n = new VueI18n({
   locale: 'deu',
+  fallbackLocale: 'eng',
   messages: messages
 })
 
