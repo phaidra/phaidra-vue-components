@@ -4,8 +4,8 @@
       <v-flex>
         <template v-for="(mt, i) in o['bf:mainTitle']">
           <v-layout :key="'row'+i" row wrap>
-            <v-flex md3 xs12 class="pdlabel primary--text" :key="'mt'+i">{{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
-            <v-flex md9 xs12>
+            <v-flex md4 xs12 class="pdlabel primary--text" :key="'mt'+i">{{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
+            <v-flex md8 xs12>
               <v-layout column :key="'mtv'+i">
                 <v-flex>{{ mt['@value'] }}</v-flex>
                 <template v-for="(st, i) in o['bf:subtitle']">

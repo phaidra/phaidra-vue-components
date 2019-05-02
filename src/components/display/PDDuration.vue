@@ -1,8 +1,8 @@
 <template>
   <v-flex>
     <v-layout row wrap>
-      <v-flex md3 xs12 class="pdlabel primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex md9 xs12><template v-if="duration.hours > 0">{{ duration.hours }} {{$t('hours') + ' '}}</template> <template v-if="duration.minutes > 0">{{ duration.minutes }} {{$t('minutes') + ' '}}</template> <template v-if="duration.seconds > 0">{{ duration.seconds }} {{$t('seconds')}}</template></v-flex>
+      <v-flex md4 xs12 class="pdlabel primary--text" xs3>{{ $t(p) }}</v-flex>
+      <v-flex md8 xs12><template v-if="duration.hours > 0">{{ duration.hours }} {{$t('hours') + ' '}}</template> <template v-if="duration.minutes > 0">{{ duration.minutes }} {{$t('minutes') + ' '}}</template> <template v-if="duration.seconds > 0">{{ duration.seconds }} {{$t('seconds')}}</template></v-flex>
     </v-layout>
   </v-flex>
 </template>
