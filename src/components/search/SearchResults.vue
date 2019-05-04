@@ -66,7 +66,7 @@
               <v-layout column>
                 <v-flex v-if="doc.dc_description" class="search-description pb-3">{{ doc.dc_description[0] }}</v-flex>
                 <v-flex class="text-xs-right">
-                  <v-btn :to="{ name: 'detail', params: { pid: doc.pid } }" raised>{{ $t('Details') }}</v-btn>
+                  <!--<v-btn :to="{ name: 'detail', params: { pid: doc.pid } }" raised>{{ $t('Details') }}</v-btn>-->
                   <v-btn :href="instance.api + '/object/' + doc.pid + '/diss/Content/get'" primary>{{ $t('View') }}</v-btn>
                   <v-btn :href="instance.api + '/object/' + doc.pid + '/diss/Content/download'" primary>{{ $t('Download') }}</v-btn>
                 </v-flex>

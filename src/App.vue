@@ -98,6 +98,15 @@
                         </v-list-tile>
                       </div>
                     </v-item>
+                    <v-item>
+                      <div slot-scope="{ active, toggle }">
+                        <v-list-tile @click="toggle">
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{ $t('Manage') }}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile>
+                      </div>
+                    </v-item>
                   </v-item-group>
                 </v-list>
               </v-navigation-drawer>
@@ -117,10 +126,6 @@
                       </v-toolbar>
                       <v-card-text>
                         <v-layout row>
-                          <p-d-jsonld 
-                            :jsonld="displayjsonld"
-                            :pid="pid"
-                          ></p-d-jsonld>
                           <p-d-jsonld 
                             :jsonld="displayjsonld"
                             :pid="pid"
@@ -192,6 +197,24 @@
                     </v-card>
                   </v-flex>
                 </v-window-item>
+                <v-window-item>
+                  <v-flex>
+                    <v-card>
+                      <v-toolbar flat>
+                        <v-toolbar-title>{{ $t('Manage') }}</v-toolbar-title>
+                        <v-divider class="mx-3" inset vertical></v-divider>
+                        <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                      </v-toolbar>
+                      <v-card-text>
+                        <p-m-sort :pid="pid"></p-m-sort>
+                        <p-m-rights :pid="pid"></p-m-rights>
+                        <p-m-relationships :pid="pid"></p-m-relationships>
+                        <p-m-files :pid="pid"></p-m-files>
+                        <p-m-delete :pid="pid"></p-m-delete>
+                      </v-card-text>
+                    </v-card>
+                  </v-flex>
+                </v-window-item>
               </v-window>
             </v-flex>
 
@@ -205,6 +228,11 @@
 <script>
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
+import PMDelete from '@/components/management/PMDelete'
+import PMSort from '@/components/management/PMSort'
+import PMRights from '@/components/management/PMRights'
+import PMRelationships from '@/components/management/PMRelationships'
+import PMFiles from '@/components/management/PMFiles'
 import PSearch from '@/components/search/PSearch'
 import {version} from '../package.json'
 import fields from '@/utils/fields'
@@ -215,7 +243,12 @@ export default {
   components: {
     PIForm,
     PDJsonld,
-    PSearch
+    PSearch,
+    PMDelete,
+    PMSort,
+    PMRights,
+    PMRelationships,
+    PMFiles
   },
   computed: {
     token: function() {
@@ -230,7 +263,7 @@ export default {
   },
   data () {
     return {
-      window: 2,
+      window: 4,
       displayjsonld: {},
       editform: {},
       form: {

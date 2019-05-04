@@ -42,6 +42,11 @@ import PISpatialGettyReadonly from './input/PISpatialGettyReadonly'
 import PILiteral from './input/PILiteral'
 import PIKeyword from './input/PIKeyword'
 import PSearch from './search/PSearch'
+import PMDelete from './management/PMDelete'
+import PMSort from './management/PMSort'
+import PMRights from './management/PMRights'
+import PMRelationships from './management/PMRelationships'
+import PMFiles from './management/PMFiles'
 
 const Components = {
   PDDuration,
@@ -86,7 +91,12 @@ const Components = {
   PILiteral,
   PIKeyword,
   PIDuration,
-  PSearch
+  PSearch,
+  PMDelete,
+  PMSort,
+  PMRights,
+  PMRelationships,
+  PMFiles
 }
 
 Object.keys(Components).forEach(name => {
