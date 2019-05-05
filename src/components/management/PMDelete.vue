@@ -4,6 +4,9 @@
     <v-divider></v-divider>
     <v-card-text class="mt-4">
       <v-flex>{{ $t('Here you can delete this object. Any other objects, like members (if this is a container or a collection), pages (if this is a book) different versions or related objects will not be affected.') }}</v-flex>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
       <v-flex>
         <v-dialog v-model="dialog" width="500" >
           <template v-slot:activator="{ on }">
@@ -21,7 +24,7 @@
           </v-card>
         </v-dialog>
       </v-flex>
-    </v-card-text>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -69,12 +72,14 @@ export default {
         }
         self.loading = false
         self.dialog = false
+        self.$vuetify.goTo(0)
       })
       .catch(function (error) {
         self.$store.commit('setAlerts', [{ type: 'danger', msg: 'Error deleting object: ' + error}])
         console.log(error)
         self.loading = false
         self.dialog = false
+        self.$vuetify.goTo(0)
       })
       return promise
     }

@@ -4,96 +4,97 @@
     <v-divider></v-divider>
     <v-card-text class="mt-4">
       <v-flex>{{ $t('Here you can sort members of this object.') }}</v-flex>
-      <v-data-table
-        :headers="headers"
-        :items="members"
-        :loading="loading"
-        class="elevation-1"
-      >
-        <template slot="items" slot-scope="props">
-          <td>{{ props.item.dc_title[0] }}</td>
-          <td class="text-xs-right">{{ props.item.created | unixtime }}</td>
-          <td class="text-xs-right">{{ props.item.pid }}</td>
-          <td class="text-xs-right" ><v-btn :to="{ name: router-link-manage, params: { pid: props.item.pid }}" color="primary" raised>{{ $t('manage') }}</v-btn><v-btn flat color="red" @click="deleteObject(props.item.pid)">{{ $t('delete') }}</v-btn></td>
-        </template>
-      </v-data-table>
+      <SortableList lockAxis="y" v-model="memberscomputed">
+        <SortableSolrDoc v-for="(item, index) in memberscomputed" :index="index" :key="index" :item="item"/>
+      </SortableList>
     </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="primary" :disabled="loading" :loading="loading" @click="save()">{{ $t('Save') }}</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import SortableList from '../utils/SortableList'
+import SortableSolrDoc from '../utils/SortableSolrDoc'
 
 export default {
   name: 'p-m-sort',
+  components: {
+    SortableSolrDoc,
+    SortableList
+  },
   props: {
     pid: {
       type: String,
+      required: true
+    },
+    members: {
+      type: Array,
       required: true
     }
   },
   computed: {
     instance: function() {
       return this.$store.state.settings.instance
+    },
+    memberscomputed: {
+      get: function () {
+        if (this.membersdata.length === 0) {
+          this.membersdata = this.members
+        }
+        return this.membersdata
+      },
+      set: function (newValue) {
+        this.membersdata = newValue
+      }
     }
   },
   data () {
     return {
-      headers: [
-        { text: 'Title', align: 'left', value: 'name' },
-        { text: 'Created', align: 'right', value: 'created' },
-        { text: 'PID', align: 'rght', value: 'pid' },
-        { text: 'Actions', align: 'right', value: 'load', sortable: false }
-      ],
-      members: [],
-      loading: false
+      loading: false,
+      membersdata: []
     }
   },
   methods: {
-    sort: function (tid) {
+    save: function () {
       var self = this
-      
-    },
-    loadMembers: function (pid) {
-      var self = this
-      this.loading = true
-      for (let member of self.members) {
-        member['jsonld'] = {}
+      let colorder = []
+      let i = 0
+      for (let m of this.membersdata) {
+        i++
+        colorder.push({pid: m.pid, pos: i})
       }
-
-      var params = {
-        q: 'ismemberof:"' + pid + '"',
-        defType: 'edismax',
-        wt: 'json',
-        qf: 'ismemberof^5',
-        fl: 'pid,cmodel'
-      }
-
-      var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
-      var url = self.instance.solr + '/select?' + query
-      var promise = fetch(url, {
-        method: 'GET',
-        mode: 'cors'
+      var httpFormData = new FormData()
+      httpFormData.append('metadata', JSON.stringify({metadata: {members: colorder}}))      
+      fetch(self.instance.api + '/object/' + self.pid + '/members/order', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'X-XSRF-TOKEN': self.$store.state.user.token
+        },
+        body: httpFormData
       })
-      .then(function (response) { return response.json() })
+      .then(response => response.json())
       .then(function (json) {
-        if (json.response.numFound > 0) {
-          self.members = json.response.docs
-        } else {
-          self.members = []
+        if (json.alerts && json.alerts.length > 0) {
+          if (json.status === 401) {
+            json.alerts.push({ type: 'danger', msg: 'Please log in' })
+          }
+          self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
+        if (json.status === 200){
+          self.$emit('object-saved', self.targetpid)
+        }
+        self.$vuetify.goTo(0)
       })
       .catch(function (error) {
+        self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
         self.loading = false
-        console.log(error)
+        self.$vuetify.goTo(0)
       })
-
-      return promise
-    }
-  },
-  mounted: function () {
-    if (this.$store.state.user.token) {
-      this.loadMembers(pid)
     }
   }
 }

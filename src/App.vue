@@ -204,9 +204,11 @@
                         <v-toolbar-title>{{ $t('Manage') }}</v-toolbar-title>
                         <v-divider class="mx-3" inset vertical></v-divider>
                         <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                        <v-spacer></v-spacer>
+                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadManagement(pid)">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <p-m-sort :pid="pid"></p-m-sort>
+                        <p-m-sort :pid="pid" :members="members" @input="members=$event"></p-m-sort>
                         <p-m-rights :pid="pid"></p-m-rights>
                         <p-m-relationships :pid="pid"></p-m-relationships>
                         <p-m-files :pid="pid"></p-m-files>
@@ -226,6 +228,7 @@
 </template>
 
 <script>
+import qs from 'qs'
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
 import PMDelete from '@/components/management/PMDelete'
@@ -259,6 +262,9 @@ export default {
     },
     vocabularies: function () {
       return this.$store.state.vocabulary.vocabularies
+    },
+    instance: function() {
+      return this.$store.state.settings.instance
     }
   },
   data () {
@@ -269,6 +275,7 @@ export default {
       form: {
         sections: []
       },
+      members: [],
       pid: '',
       collection: 'o:541829',
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
@@ -379,6 +386,42 @@ export default {
           }
         }
       }
+    },
+    loadManagement: function (pid) {
+      this.loadMembers(pid)
+    },
+    loadMembers: function (pid) {
+      var self = this
+      
+      this.members = []
+
+      var params = {
+        q: 'ismemberof:"' + pid + '"',
+        defType: 'edismax',
+        wt: 'json',
+        qf: 'ismemberof^5',
+        fl: 'pid,cmodel,dc_title,created'
+      }
+
+      var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
+      var url = self.instance.solr + '/select?' + query
+      var promise = fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+      })
+      .then(function (response) { return response.json() })
+      .then(function (json) {
+        if (json.response.numFound > 0) {
+          self.members = json.response.docs
+        } else {
+          self.members = []
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+
+      return promise
     },
     loadMetadata: function (pid) {
       this.loadedMetadata = []
