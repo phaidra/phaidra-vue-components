@@ -208,7 +208,8 @@
                         <v-btn raised single-line class="right" color="primary lighten-2" @click="loadManagement(pid)">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <p-m-sort :pid="pid" :members="members" @input="members=$event"></p-m-sort>
+                        <v-flex>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-flex>
+                        <p-m-sort :pid="pid" :cmodel="piddoc.cmodel" :members="members" @input="members=$event"></p-m-sort>
                         <p-m-rights :pid="pid"></p-m-rights>
                         <p-m-relationships :pid="pid"></p-m-relationships>
                         <p-m-files :pid="pid"></p-m-files>
@@ -277,6 +278,7 @@ export default {
       },
       members: [],
       pid: '',
+      piddoc: {},
       collection: 'o:541829',
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
       phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
@@ -389,6 +391,39 @@ export default {
     },
     loadManagement: function (pid) {
       this.loadMembers(pid)
+      this.loadDoc(pid)
+    },
+    loadDoc: function (pid) {
+      var self = this
+      
+      this.members = []
+
+      var params = {
+        q: 'pid:"' + pid + '"',
+        defType: 'edismax',
+        wt: 'json',
+        qf: 'pid^5'
+      }
+
+      var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
+      var url = self.instance.solr + '/select?' + query
+      var promise = fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+      })
+      .then(function (response) { return response.json() })
+      .then(function (json) {
+        if (json.response.numFound > 0) {
+          self.piddoc = json.response.docs[0]
+        } else {
+          self.piddoc = {}
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+
+      return promise
     },
     loadMembers: function (pid) {
       var self = this
@@ -400,7 +435,8 @@ export default {
         defType: 'edismax',
         wt: 'json',
         qf: 'ismemberof^5',
-        fl: 'pid,cmodel,dc_title,created'
+        fl: 'pid,cmodel,dc_title,created',
+        sort: 'pos_in_' + pid.replace(':','_') + ' asc'
       }
 
       var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })

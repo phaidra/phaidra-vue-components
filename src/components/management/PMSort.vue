@@ -27,12 +27,13 @@ export default {
   },
   props: {
     pid: {
-      type: String,
-      required: true
+      type: String
+    },
+    cmodel: {
+      type: String
     },
     members: {
-      type: Array,
-      required: true
+      type: Array
     }
   },
   computed: {
@@ -68,7 +69,7 @@ export default {
       }
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify({metadata: {members: colorder}}))      
-      fetch(self.instance.api + '/object/' + self.pid + '/members/order', {
+      fetch(self.instance.api + '/' + this.cmodel.toLowerCase() + '/' + self.pid + '/members/order', {
         method: 'POST',
         mode: 'cors',
         headers: {
