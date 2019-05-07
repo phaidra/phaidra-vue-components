@@ -2,13 +2,13 @@
   <v-card >
     <v-card-title class="subheading grey white--text">{{ $t('Sort') }}</v-card-title>
     <v-divider></v-divider>
-    <v-card-text class="mt-4">
+    <v-card-text class="mt-4" v-if="members.length > 0">
       <v-flex>{{ $t('Here you can sort members of this object.') }}</v-flex>
       <SortableList lockAxis="y" v-model="memberscomputed">
         <SortableSolrDoc v-for="(item, index) in memberscomputed" :index="index" :key="index" :item="item"/>
       </SortableList>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions v-if="members.length > 0">
       <v-spacer></v-spacer>
       <v-btn color="primary" :disabled="loading" :loading="loading" @click="save()">{{ $t('Save') }}</v-btn>
     </v-card-actions>
@@ -27,13 +27,16 @@ export default {
   },
   props: {
     pid: {
-      type: String
+      type: String,
+      required: true
     },
     cmodel: {
-      type: String
+      type: String,
+      required: true
     },
     members: {
-      type: Array
+      type: Array,
+      required: true
     }
   },
   computed: {

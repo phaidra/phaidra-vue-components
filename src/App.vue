@@ -209,11 +209,11 @@
                       </v-toolbar>
                       <v-card-text>
                         <v-flex>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-flex>
-                        <p-m-sort :pid="pid" :cmodel="piddoc.cmodel" :members="members" @input="members=$event"></p-m-sort>
+                        <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event"></p-m-sort>
                         <p-m-rights :pid="pid"></p-m-rights>
                         <p-m-relationships :pid="pid"></p-m-relationships>
                         <p-m-files :pid="pid"></p-m-files>
-                        <p-m-delete :pid="pid"></p-m-delete>
+                        <p-m-delete :pid="pid" :cmodel="loadedcmodel" :members="members"></p-m-delete>
                       </v-card-text>
                     </v-card>
                   </v-flex>
@@ -255,6 +255,9 @@ export default {
     PMFiles
   },
   computed: {
+    loadedcmodel: function() {
+      return 'cmodel' in this.piddoc ? this.piddoc.cmodel : 'unknown'
+    },
     token: function() {
       return this.$store.state.user.token
     },

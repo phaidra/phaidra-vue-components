@@ -3,14 +3,15 @@
     <v-card-title class="subheading grey white--text">{{ $t('Delete') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4">
-      <v-flex>{{ $t('Here you can delete this object. Any other objects, like members (if this is a container or a collection), pages (if this is a book) different versions or related objects will not be affected.') }}</v-flex>
+      <v-alert :type="'info'" :value="true" transition="slide-y-transition" v-if="(cmodel === 'Container') || (cmodel === 'Collection') && (members.length > 0)">{{ $t('MEMBERS_DELETE_ALERT', { cmodel: cmodel, nrmembers: members.length }) }}</v-alert>
+      <v-flex v-else>{{ $t('Here you can delete this object.') }}</v-flex>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-flex>
         <v-dialog v-model="dialog" width="500" >
           <template v-slot:activator="{ on }">
-            <v-btn color="red" class="white--text" v-on="on" >{{ $t('Delete') }}</v-btn>
+            <v-btn color="red" class="white--text" v-on="on" :disabled="(members.length > 0) || !pid || !cmodel">{{ $t('Delete') }}</v-btn>
           </template>
           <v-card>
             <v-card-title class="headline grey lighten-2" primary-title >{{ $t('Delete') }}</v-card-title>
@@ -36,6 +37,14 @@ export default {
     pid: {
       type: String,
       required: true
+    },
+    cmodel: {
+      type: String,
+      required: true
+    },
+    members: {
+      type: Array,
+      default: []
     }
   },
   computed: {
