@@ -1,7 +1,7 @@
 <template>
   <li class="list-item">
     <img :src="'https://' + instance.baseurl + '/preview/' + item.pid + '///120'"  class="elevation-1"></img>
-    <div class="list-item-title">{{item.pid}} - {{item.dc_title[0]}}</div>
+    <div class="list-item-title">{{item.pid}} - {{item.cmodel}}<template v-if="'dc_title' in item"> - {{item.dc_title[0]}}</template></div>
   </li>
 </template>
 
