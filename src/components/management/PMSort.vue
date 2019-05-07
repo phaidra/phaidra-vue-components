@@ -64,6 +64,7 @@ export default {
   methods: {
     save: function () {
       var self = this
+      self.loading = true
       let colorder = []
       let i = 0
       for (let m of this.membersdata) {
