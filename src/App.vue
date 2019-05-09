@@ -209,7 +209,7 @@
                       </v-toolbar>
                       <v-card-text>
                         <v-flex>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-flex>
-                        <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event"></p-m-sort>
+                        <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event" @order-saved="orderSaved($event)"></p-m-sort>
                         <p-m-rights :pid="pid"></p-m-rights>
                         <p-m-relationships :pid="pid"></p-m-relationships>
                         <p-m-files :pid="pid"></p-m-files>
@@ -510,6 +510,12 @@ export default {
     objectSaved: function (event) {
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Metadata for object ' + event + ' saved' }])
     },
+    orderSaved: function (event) {
+      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Order for object ' + event + ' saved' }])
+    },
+    objectDeleted: function (event) {
+      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object was successfully deleted.' }])
+    },
     toggleVisibility: function () {
       this.psvis = !this.psvis
     },    
@@ -602,6 +608,10 @@ export default {
 
 .pdlabel {
   max-width: 100%;
+}
+
+#app .v-btn {
+  text-transform: none;
 }
 </style>
 

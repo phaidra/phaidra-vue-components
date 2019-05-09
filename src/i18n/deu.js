@@ -602,4 +602,12 @@ export default {
   'Save as template': 'Als Vorlage speichern',
 
   'MEMBERS_DELETE_ALERT': 'This object is a {cmodel} with {nrmembers} members. Only an empty {cmodel} can be deleted. If you want to delete this object, you need to remove all members from this {cmodel} or delete them first.',
+  'Edit': 'Bearbeiten',
+  'Manage object': 'Objekt verwalten',
+  'Delete': 'Löschen',
+  'Here you can delete this object.': 'Hier können Sie das Objekt löschen.',
+  'Manage': 'Verwalten',
+  'Save': 'Speichern',
+  'Sort': 'Sortieren',
+  'Here you can sort members of this object (drag & drop).': 'Hier können Sie Mitglieder dieses Objekts sortieren (drag & drop)'
 }

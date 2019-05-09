@@ -35,12 +35,10 @@ export default {
   name: 'p-m-delete',
   props: {
     pid: {
-      type: String,
-      required: true
+      type: String
     },
     cmodel: {
-      type: String,
-      required: true
+      type: String
     },
     members: {
       type: Array,
@@ -73,7 +71,7 @@ export default {
       .then(function (response) { return response.json() })
       .then(function (json) {
         if (json.status === 200) {
-          self.$store.commit('setAlerts', [{ type: 'danger', msg: 'Object was successfully deleted.'}])  
+          self.$emit('object-deleted', self.pid)
         } else {
           if (json.alerts && json.alerts.length > 0) {
             self.$store.commit('setAlerts', json.alerts)

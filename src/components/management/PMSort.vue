@@ -3,7 +3,7 @@
     <v-card-title class="subheading grey white--text">{{ $t('Sort') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4" v-if="members.length > 0">
-      <v-flex>{{ $t('Here you can sort members of this object.') }}</v-flex>
+      <v-flex>{{ $t('Here you can sort members of this object (drag & drop).') }}</v-flex>
       <SortableList lockAxis="y" v-model="memberscomputed">
         <SortableSolrDoc v-for="(item, index) in memberscomputed" :index="index" :key="index" :item="item"/>
       </SortableList>
@@ -27,16 +27,14 @@ export default {
   },
   props: {
     pid: {
-      type: String,
-      required: true
+      type: String
     },
     cmodel: {
-      type: String,
-      required: true
+      type: String
     },
     members: {
       type: Array,
-      required: true
+      default: []
     }
   },
   computed: {
@@ -91,7 +89,7 @@ export default {
         }
         self.loading = false
         if (json.status === 200){
-          self.$emit('object-saved', self.targetpid)
+          self.$emit('order-saved', self.pid)
         }
         self.$vuetify.goTo(0)
       })
