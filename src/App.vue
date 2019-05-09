@@ -283,9 +283,9 @@ export default {
       pid: '',
       piddoc: {},
       collection: 'o:541829',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_temp',
-      phaidrabaseurl: 'phaidra-temp.univie.ac.at',
-      apibaseurl: 'https://services.phaidra-temp.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
+      phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
+      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''

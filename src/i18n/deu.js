@@ -601,7 +601,8 @@ export default {
   'Duplicate': 'Duplizieren',
   'Save as template': 'Als Vorlage speichern',
 
-  'MEMBERS_DELETE_ALERT': 'This object is a {cmodel} with {nrmembers} members. Only an empty {cmodel} can be deleted. If you want to delete this object, you need to remove all members from this {cmodel} or delete them first.',
+  'DELETE_OBJECT': 'Sind Sie sicher, dass Sie das Objekt {pid} unwiderruflich löschen wollen?',
+  'MEMBERS_DELETE_ALERT_CONTAINER': 'Bei diesem Objekt handelt es sich um einen Container, der {nrmembers} Objekte beinhaltet. Es kann jedoch nur ein leerer Container gelöscht werden. Wenn Sie diesen Container löschen möchten, müssen Sie zuvor alle Objekte, die sich darin befinden, löschen, oder aus dem Container entfernen.',
   'Edit': 'Bearbeiten',
   'Manage object': 'Objekt verwalten',
   'Delete': 'Löschen',
@@ -609,5 +610,5 @@ export default {
   'Manage': 'Verwalten',
   'Save': 'Speichern',
   'Sort': 'Sortieren',
-  'Here you can sort members of this object (drag & drop).': 'Hier können Sie Mitglieder dieses Objekts sortieren (drag & drop)'
+  'Here you can sort members of this object (drag & drop).': 'Hier können Sie die Objekte innerhalb des Containers sortieren (drag & drop).'
 }

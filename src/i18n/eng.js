@@ -75,7 +75,7 @@ export default {
   'vra:material': 'Material',
   'vra:hasInscription': 'Inscription',
 
-  'MEMBERS_DELETE_ALERT': 'This object is a {cmodel} with {nrmembers} members. Only an empty {cmodel} can be deleted. If you want to delete this object, you need to remove all members from this {cmodel} or delete them first.',
+  'MEMBERS_DELETE_ALERT_CONTAINER': 'This object is a Container with {nrmembers} members. Only an empty Container can be deleted. If you want to delete this object, you need to remove all members from this Container or delete them first.',
 
   uwm_etheses: 'E-Theses',
   uwm_etheses_note_2: 'Note 2',
