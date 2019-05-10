@@ -4,7 +4,7 @@
     <v-divider></v-divider>
     <v-card-text class="mt-4">
       <v-alert :type="'info'" :value="true" transition="slide-y-transition" v-if="(cmodel === 'Container') && (members.length > 0)">{{ $t('MEMBERS_DELETE_ALERT_CONTAINER', { nrmembers: members.length }) }}</v-alert>
-      <v-flex v-else>{{ $t('Here you can delete this object.') }}</v-flex>
+      <v-flex v-else>{{ $t('DELETE_OBJECT', { pid: 'https://' + instance.baseurl + '/' + pid }) }}</v-flex>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -15,7 +15,7 @@
           </template>
           <v-card>
             <v-card-title class="headline grey lighten-2" primary-title >{{ $t('Delete') }}</v-card-title>
-            <v-card-text>{{ $t('Are you sure you want to permanently delete object ') + 'https://' + instance.baseurl + '/' + pid + '?'}}</v-card-text>
+            <v-card-text>{{ $t('DELETE_OBJECT_CONFIRM', { pid: 'https://' + instance.baseurl + '/' +  pid })}}</v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
