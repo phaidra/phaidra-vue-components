@@ -29,6 +29,7 @@ export default {
   'bf:physicalLocation': 'Physical location',
   'bf:shelfMark': 'Call number',
   'edm:rights': 'License',
+  'dce:rights': 'Rights statement',
 
   'dcterms:date': 'Date',
   'dcterms:created': 'Date created',

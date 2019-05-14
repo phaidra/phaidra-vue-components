@@ -2,9 +2,7 @@
   <div id="app">
     <v-app>
       <v-container justify-center grid-list-lg>
-        <v-layout column>  
-
-          <h4 class="text-lg-right subheading mb-3">Phaidra Vue Components {{version}}</h4>
+        <v-layout column>
 
           <v-flex xs4>
             <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
@@ -222,6 +220,22 @@
             </v-flex>
 
           </v-layout>
+          <v-footer color="white">
+            <v-layout row>
+              <v-spacer></v-spacer>
+              <v-flex offset-xs9 xs2>
+                <v-select
+                  v-model="lang"
+                  :items="languages"
+                  :label="$t('Language')"
+                  @change="$i18n.locale=$event"
+                  prepend-icon="language"
+                  single-line
+                ></v-select>
+              </v-flex>
+              <v-flex xs1 class="mt-4">v {{version}}</v-flex>
+            </v-layout>
+          </v-footer>
         </v-layout>
       </v-container>
     </v-app>
@@ -274,6 +288,11 @@ export default {
   data () {
     return {
       window: 4,
+      lang: 'deu',
+      languages: [
+        { text: 'English', value: 'eng' },
+        { text: 'Deutsch', value: 'deu' }
+      ],
       displayjsonld: {},
       editform: {},
       form: {
@@ -612,6 +631,10 @@ export default {
 
 #app .v-btn {
   text-transform: none;
+}
+#app .v-tabs__div {
+  text-transform: none;
+  font-weight: 300;
 }
 </style>
 

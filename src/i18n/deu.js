@@ -603,7 +603,7 @@ export default {
 
   'DELETE_OBJECT': 'Hier können Sie das Objekt {pid} löschen.',
   'DELETE_OBJECT_CONFIRM': 'Sind Sie sicher, dass Sie das Objekt {pid} unwiderruflich löschen wollen?',
-  'MEMBERS_DELETE_ALERT_CONTAINER': 'Bei diesem Objekt handelt es sich um einen Container, der {nrmembers} Objekte beinhaltet. Es kann jedoch nur ein leerer Container gelöscht werden. Wenn Sie diesen Container löschen möchten, müssen Sie zuvor alle Objekte, die sich darin befinden, löschen, oder aus dem Container entfernen.',
+  'MEMBERS_DELETE_ALERT_CONTAINER': 'Bei diesem Objekt handelt es sich um einen Container, der {nrmembers} Objekt(e) beinhaltet. Es kann jedoch nur ein leerer Container gelöscht werden. Wenn Sie diesen Container löschen möchten, müssen Sie zuvor alle Objekte, die sich darin befinden, löschen, oder aus dem Container entfernen.',
   'Edit': 'Bearbeiten',
   'Manage object': 'Objekt verwalten',
   'Delete': 'Löschen',

@@ -276,47 +276,45 @@
                 </template>
 
                 <v-flex v-if="addbutton" offset-xs1 class="pb-4">
-                  <v-dialog v-model="s['adddialogue']" fullscreen>
+                  <v-dialog v-model="s['adddialogue']" scrollable width="50%">
+
                     <v-btn slot="activator" fab depressed small color="grey lighten-3">
                       <v-icon color="grey darken-1">add</v-icon>
                     </v-btn>
+
                     <v-card>
-                      <v-card-title class="headline grey lighten-2" primary-title>{{ $t('Add metadata fields to ') + $t(s.title) }}</v-card-title>
+                      <v-card-title class="grey white--text">{{ $t('Add metadata fields') }}</v-card-title>
                       <v-card-text>
-                        <v-autocomplete
-                          v-model="addfieldselection"
-                          :items="metadatafields"
-                          :filter="addFieldAutocompleteFilter"
-                          :label="$t('Select metadata fields')"
-                          chips
-                          multiple
-                          small-chips
-                          return-object
-                        >
-                          <template slot="selection" slot-scope="data">
-                            <v-chip :selected="data.selected" close class="chip--select-multi" @input="removeFieldChip(data.item)">
-                              {{ data.item.fieldname }}
-                            </v-chip>
-                          </template>
-                          <template slot="item" slot-scope="data">
-                            <template v-if="typeof data.item !== 'object'">
-                              <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                            </template>
-                            <template v-else>
+                        <v-list three-line >
+                          <template v-for="field in metadatafields">
+                            <v-list-tile :key="field.id" @click="addfieldselection.push(field)">
                               <v-list-tile-content>
-                                <v-list-tile-title v-html="data.item.fieldname"></v-list-tile-title>
-                                <v-list-tile-sub-title v-html="data.item.definition"></v-list-tile-sub-title>
+                                <v-list-tile-title>{{field.fieldname}}</v-list-tile-title>
+                                <v-list-tile-sub-title>{{field.definition}}</v-list-tile-sub-title>
                               </v-list-tile-content>
-                            </template>
+                            </v-list-tile>
+                            <v-divider></v-divider>
                           </template>
-                        </v-autocomplete>
+                        </v-list>
                       </v-card-text>
+                      <v-divider></v-divider>
                       <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="grey" dark @click="s['adddialogue'] = false">{{ $t('Cancel') }}</v-btn>
-                        <v-btn color="primary" @click="addFields(s)">{{ $t('Add') }}</v-btn>
+                        <v-layout row>
+                          <v-flex>
+                            <v-layout column>
+                              <v-flex v-if="addfieldselection.length > 0">
+                                {{ $t('Selected fields:') }} <v-chip v-for="ch in addfieldselection" close @input="removeFieldChip(data.item)">{{ ch.fieldname }}</v-chip>
+                              </v-flex>
+                              <v-flex v-else>{{ $t('Please select metadata fields from the list') }}                              </v-flex>
+                            </v-layout>
+                          </v-flex>
+                          <v-spacer></v-spacer>
+                          <v-btn color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false">{{ $t('Cancel') }}</v-btn>
+                          <v-btn color="primary" @click="addFields(s)">{{ $t('Add') }}</v-btn>
+                        </v-layout>
                       </v-card-actions>
                     </v-card>
+
                   </v-dialog>
                 </v-flex>
               </v-layout>
@@ -744,7 +742,9 @@ export default {
     },
     addFields (section) {
       for (var i = 0; i < this.addfieldselection.length; i++) {
-        section.fields.push(fields.getField(this.addfieldselection[i].id))
+        let f = fields.getField(this.addfieldselection[i].id)
+        f.removable = true
+        section.fields.push(f)
       }
       this.addfieldselection = []
       section['adddialogue'] = false

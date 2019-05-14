@@ -7,10 +7,36 @@
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
-      <td>{{ props.item.name }}</td>
+      <td>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">{{ props.item.name }}</span>
+          </template>
+          <span>{{ props.item.tid }}</span>
+        </v-tooltip>
+      </td>
       <td class="text-xs-right">{{ props.item.created | unixtime }}</td>
-      <td class="text-xs-right">{{ props.item.tid }}</td>
-      <td class="text-xs-right" ><v-btn flat color="primary" @click="loadTemplate(props.item.tid)">{{ $t('load') }}</v-btn><v-btn flat color="grey" @click="deleteTemplate(props.item.tid)">{{ $t('delete') }}</v-btn></td>
+      <td class="text-xs-right" >
+        <v-btn flat color="primary" @click="loadTemplate(props.item.tid)">{{ $t('Load') }}</v-btn>
+        <v-btn flat color="grey" @click="deleteTemplate(props.item.tid)">{{ $t('Delete') }}</v-btn>
+        <!-- for some reason opening the dialog from here causes infinite cycle.. looks like vuetify bug..
+        <v-dialog v-model="deletetempconfirm" width="300" >
+          <template v-slot:activator="{ on }">
+            <v-btn flat color="grey" v-on="on">{{ $t('Delete') }}</v-btn>
+          </template>
+          <v-card>
+            <v-card-title class="headline grey lighten-2" primary-title >{{ $t('Delete') }}</v-card-title>
+            <v-card-text>{{ $t('Are you sure you want to delete template') }} "{{props.item.name}}" ?</v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red" class="white--text" :loading="loading" :disabled="loading" @click="deleteTemplate(props.item.tid)">{{ $t('Delete') }}</v-btn>
+              <v-btn :disabled="loading" @click="deletetempconfirm = false">{{ $t('Cancel') }}</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        -->
+      </td>
     </template>
   </v-data-table>
 
@@ -25,10 +51,10 @@ export default {
       headers: [
         { text: 'Name', align: 'left', value: 'name' },
         { text: 'Created', align: 'right', value: 'created' },
-        { text: 'Template ID', align: 'right', value: 'tid' },
         { text: 'Actions', align: 'right', value: 'load', sortable: false }
       ],
       templates: [],
+      deletetempconfirm: false,
       loading: false
     }
   },
@@ -75,6 +101,7 @@ export default {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.loading = false
+        self.deletetempconfirm = false
         self.loadTemplates()
       })
       .catch(function (error) {
