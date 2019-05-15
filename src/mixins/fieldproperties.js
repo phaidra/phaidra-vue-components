@@ -5,12 +5,15 @@ export const fieldproperties = {
     },
     ordered: {
       type: Boolean
+    },
+    removable: {
+      type: Boolean
     }
   },
   computed: {
     actions: function () {
       var arr = []
-      if (this.multiplicable || this.removable) {
+      if (this.removable) {
         arr.push( { title: this.$t('Remove'), event: 'remove' } )
       }
       if (this.multiplicable) {

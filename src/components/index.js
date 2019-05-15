@@ -36,6 +36,7 @@ import PISelectText from './input/PISelectText.vue'
 import PITextField from './input/PITextField.vue'
 import PITextFieldSuggest from './input/PITextFieldSuggest.vue'
 import PITitle from './input/PITitle.vue'
+import PIFile from './input/PIFile'
 import PIUnknownReadonly from './input/PIUnknownReadonly.vue'
 import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
 import PISpatialGettyReadonly from './input/PISpatialGettyReadonly'
@@ -72,6 +73,7 @@ const Components = {
   PIEntity,
   PIDateEdtf,
   PIFilenameReadonly,
+  PIFile,
   PIForm,
   PIFunder,
   PISeries,

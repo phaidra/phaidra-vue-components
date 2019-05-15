@@ -636,12 +636,12 @@ const fields = [
   },
   {
     id: 'file',
-    fieldname: 'Filename',
+    fieldname: 'File',
     predicate: 'ebucore:filename',
     component: 'input-file',
-    label: 'Filename',
+    label: 'File to upload',
     value: '',
-    definition: 'The name of the file containing the Resource.'
+    definition: 'File input, combined with a metadata field for the filename.'
   },
   {
     id: 'filename-readonly',

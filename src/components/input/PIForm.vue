@@ -26,6 +26,12 @@
                   <v-list-tile @click="removeSection(s)">
                     <v-list-tile-title>{{ $t('Remove') }}</v-list-tile-title>
                   </v-list-tile>
+                  <v-list-tile v-if="s.type === 'member'" @click="sortMemberUp(s)">
+                    <v-list-tile-title>{{ $t('Move up') }}</v-list-tile-title>
+                  </v-list-tile>
+                  <v-list-tile v-if="s.type === 'member'" @click="sortMemberDown(s)">
+                    <v-list-tile-title>{{ $t('Move down') }}</v-list-tile-title>
+                  </v-list-tile>
                 </v-list>
               </v-menu>
             </v-card-title>
@@ -270,7 +276,12 @@
                   </v-flex>
 
                   <v-flex offset-xs1 v-else-if="f.component === 'input-file'" :key="f.id">
-                    <input type="file" @input="setFilename(f, $event)">
+                    <p-i-file
+                      v-bind.sync="f"
+                      v-on:input-file="setFilename(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-file>
                   </v-flex>
 
                 </template>
@@ -377,6 +388,7 @@ import PIFunder from './PIFunder'
 import PISeries from './PISeries'
 import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
+import PIFile from './PIFile'
 import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
 import PIUnknownReadonly from './PIUnknownReadonly'
@@ -408,6 +420,7 @@ export default {
     PILiteral,
     PIKeyword,
     PIFilenameReadonly,
+    PIFile,
     PIVocabExtReadonly,
     PISpatialGettyReadonly,
     PIUnknownReadonly,
@@ -436,7 +449,7 @@ export default {
   computed: {
     submittype: function() {
       for (let s of this.form.sections) {
-        if (s.fields) {
+        if (s.fields && (s.type !== 'member')) {
           for (let field of s.fields) {
             if (field.predicate === 'dcterms:type') {
               return this.getObjectType(field.value)
@@ -457,6 +470,17 @@ export default {
         if (s.type === 'accessrights') {
           md['metadata']['rights'] = s.rights
         }
+      }
+      let colorder = []
+      let i = 0
+      for (let s of this.form.sections) {
+        if (s.type === 'member') {
+          i++
+          colorder.push( { member: 'member_' + s.id, pos: i } )
+        }
+      }
+      if (colorder.length > 0) {
+        md['metadata']['membersorder'] = colorder
       }
       if (this.previewMember) {
         md['metadata']['relationships'] = [ { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' } ]
@@ -649,6 +673,22 @@ export default {
       if (arr[i + 1]) {
         if (arr[i + 1].ordergroup === f.ordergroup) {
           arrays.moveDown(arr, f)
+        }
+      }
+    },
+    sortMemberUp: function (s) {
+      var i = this.form.sections.indexOf(s)
+      if (this.form.sections[i - 1]) {
+        if (this.form.sections[i - 1].type === 'member') {
+          arrays.moveUp(this.form.sections, s)
+        }
+      }
+    },
+    sortMemberDown: function (s) {
+      var i = this.form.sections.indexOf(s)
+      if (this.form.sections[i + 1]) {
+        if (this.form.sections[i + 1].type === 'member') {
+          arrays.moveDown(this.form.sections, s)
         }
       }
     },
