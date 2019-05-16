@@ -287,7 +287,7 @@
                 </template>
 
                 <v-flex v-if="addbutton" offset-xs1 class="pb-4">
-                  <v-dialog v-model="s['adddialogue']" scrollable width="50%">
+                  <v-dialog v-model="s['adddialogue']" scrollable width="700px">
 
                     <v-btn slot="activator" fab depressed small color="grey lighten-3">
                       <v-icon color="grey darken-1">add</v-icon>
