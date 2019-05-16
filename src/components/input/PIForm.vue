@@ -297,7 +297,8 @@
                       <v-card-title class="grey white--text">{{ $t('Add metadata fields') }}</v-card-title>
                       <v-card-text>
                         <v-list three-line >
-                          <template v-for="field in metadatafields">
+                          <v-text-field clearable label="Search..." append-icon="search" v-model="searchfieldsinput"></v-text-field>
+                          <template v-for="field in filteredMetadatafields">
                             <v-list-tile :key="field.id" @click="addfieldselection.push(field)">
                               <v-list-tile-content>
                                 <v-list-tile-title>{{field.fieldname}}</v-list-tile-title>
@@ -314,7 +315,7 @@
                           <v-flex>
                             <v-layout column>
                               <v-flex v-if="addfieldselection.length > 0">
-                                {{ $t('Selected fields:') }} <v-chip v-for="ch in addfieldselection" close @input="removeFieldChip(data.item)">{{ ch.fieldname }}</v-chip>
+                                {{ $t('Selected fields:') }} <v-chip v-for="ch in addfieldselection" close @input="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
                               </v-flex>
                               <v-flex v-else>{{ $t('Please select metadata fields from the list') }}                              </v-flex>
                             </v-layout>
@@ -486,6 +487,14 @@ export default {
         md['metadata']['relationships'] = [ { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' } ]
       }
       return md
+    },
+    filteredMetadatafields() {
+      let list = fields.getEditableFields()
+      if (this.searchfieldsinput) {
+        return list.filter(f => (f.fieldname.toLowerCase().includes(this.searchfieldsinput.toLowerCase()) ||  (f.definition.toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
+      } else {
+        return list
+      }
     }
   },
   data () {
@@ -497,8 +506,8 @@ export default {
       addfieldselection: [],
       templatedialog: '',
       templatename: '',
-      metadatafields: fields.getEditableFields(),
-      previewMember: ''
+      previewMember: '',
+      searchfieldsinput: ''
     }
   },
   methods: {

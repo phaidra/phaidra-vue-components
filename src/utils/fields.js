@@ -641,7 +641,7 @@ const fields = [
     component: 'input-file',
     label: 'File to upload',
     value: '',
-    definition: 'File input, combined with a metadata field for the filename.'
+    definition: 'File input.'
   },
   {
     id: 'filename-readonly',
