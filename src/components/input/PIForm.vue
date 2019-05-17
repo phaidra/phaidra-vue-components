@@ -20,10 +20,10 @@
                   <v-icon dark>more_vert</v-icon>
                 </v-btn>
                 <v-list>
-                  <v-list-tile @click="addSection(s)">
+                  <v-list-tile v-if="(s.type === 'member') || (s.type === 'subjectmetadata')" @click="addSection(s)">
                     <v-list-tile-title>{{ $t('Duplicate') }}</v-list-tile-title>
                   </v-list-tile>
-                  <v-list-tile @click="removeSection(s)">
+                  <v-list-tile v-if="s.type != 'digitalobject'" @click="removeSection(s)">
                     <v-list-tile-title>{{ $t('Remove') }}</v-list-tile-title>
                   </v-list-tile>
                   <v-list-tile v-if="s.type === 'member'" @click="sortMemberUp(s)">
@@ -31,6 +31,9 @@
                   </v-list-tile>
                   <v-list-tile v-if="s.type === 'member'" @click="sortMemberDown(s)">
                     <v-list-tile-title>{{ $t('Move down') }}</v-list-tile-title>
+                  </v-list-tile>
+                  <v-list-tile v-if="s.type === 'digitalobject'" @click="$emit('add-subject-section', after)">
+                    <v-list-tile-title>{{ $t('Add subject metadata section') }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
               </v-menu>
