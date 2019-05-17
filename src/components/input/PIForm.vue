@@ -15,15 +15,15 @@
               <span>{{ $t(s.title) }}</span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
-              <v-menu v-if="s.multiplicable" open-on-hover bottom offset-y>
+              <v-menu open-on-hover bottom offset-y>
                 <v-btn slot="activator" icon dark>
                   <v-icon dark>more_vert</v-icon>
                 </v-btn>
                 <v-list>
-                  <v-list-tile v-if="(s.type === 'member') || (s.type === 'subjectmetadata')" @click="addSection(s)">
+                  <v-list-tile v-if="s.multiplicable && (s.type === 'member') || (s.type === 'phaidra:Subject')" @click="addSection(s)">
                     <v-list-tile-title>{{ $t('Duplicate') }}</v-list-tile-title>
                   </v-list-tile>
-                  <v-list-tile v-if="s.type != 'digitalobject'" @click="removeSection(s)">
+                  <v-list-tile v-if="s.removable && (s.type != 'digitalobject')" @click="removeSection(s)">
                     <v-list-tile-title>{{ $t('Remove') }}</v-list-tile-title>
                   </v-list-tile>
                   <v-list-tile v-if="s.type === 'member'" @click="sortMemberUp(s)">
@@ -32,7 +32,7 @@
                   <v-list-tile v-if="s.type === 'member'" @click="sortMemberDown(s)">
                     <v-list-tile-title>{{ $t('Move down') }}</v-list-tile-title>
                   </v-list-tile>
-                  <v-list-tile v-if="s.type === 'digitalobject'" @click="$emit('add-subject-section', after)">
+                  <v-list-tile v-if="s.type === 'digitalobject'" @click="$emit('add-phaidrasubject-section', s)">
                     <v-list-tile-title>{{ $t('Add subject metadata section') }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
@@ -707,6 +707,7 @@ export default {
     addSection: function (s) {
       var ns = arrays.duplicate(this.form.sections, s)
       ns.id = (new Date()).getTime()
+      ns.removable = true
       for (var i = 0; i < ns.fields.length; i++) {
         var id = (new Date()).getTime()
         if (i > 0) {
