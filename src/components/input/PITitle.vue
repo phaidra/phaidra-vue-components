@@ -4,7 +4,7 @@
       <v-text-field
         :value="title"
         :label="$t( titleLabel ? titleLabel : type )"
-        v-on:input="$emit('input-title', $event)"
+        v-on:blur="$emit('input-title',$event.target.value)"
         box
       ></v-text-field>
     </v-flex>
@@ -12,7 +12,7 @@
       <v-text-field
         :value="subtitle"
         :label="$t( subtitleLabel ? subtitleLabel : 'Subtitle' )"
-        v-on:input="$emit('input-subtitle', $event)"
+        v-on:blur="$emit('input-subtitle',$event.target.value)"
         box
       ></v-text-field>
     </v-flex>

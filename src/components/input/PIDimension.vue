@@ -3,14 +3,14 @@
     <v-flex xs2>
       <v-text-field
         :value="value" 
-        v-on:input="$emit('input-value', $event)" 
+        v-on:blur="$emit('input-value',$event.target.value)"
         :label="$t(label)"
         box
       ></v-text-field>
     </v-flex>
     <v-flex xs2>
       <v-select 
-        v-on:input="$emit('input-unit', $event)" 
+        v-on:blur="$emit('input-unit',$event.target.value)"
         :label="$t('Unit')"
         :items="vocabularies['uncefact'].terms" 
         :value="getTerm('uncefact', unit)"

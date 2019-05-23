@@ -2,16 +2,16 @@
   <v-layout row>
     <v-flex xs8>
       <v-text-field v-if="!multiline"
-        :value="value" 
-        v-on:input="$emit('input', $event)" 
+        :value="value"
+        v-on:blur="$emit('input',$event.target.value)"
         :label="$t(label)" 
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
         box
       ></v-text-field>
       <v-textarea v-if="multiline"
-        :value="value" 
-        v-on:input="$emit('input', $event)" 
+        :value="value"
+        v-on:blur="$emit('input',$event.target.value)" 
         :label="$t(label)" 
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"

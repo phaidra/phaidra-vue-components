@@ -3,7 +3,7 @@
     <v-flex xs4>
       <v-text-field
         :value="value" 
-        v-on:input="$emit('input-value', $event)" 
+        v-on:blur="$emit('input-value',$event.target.value)"
         :label="$t(label)"
         box
       ></v-text-field>

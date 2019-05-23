@@ -28,7 +28,7 @@
                   <v-text-field
                     :value="title"
                     :label="$t('Title')"
-                    v-on:input="$emit('input-title', $event)"
+                    v-on:blur="$emit('input-title',$event.target.value)"
                     box
                   ></v-text-field>
                 </v-flex>
@@ -36,7 +36,7 @@
                   <v-text-field
                     :value="subtitle"
                     :label="$t('Subtitle')"
-                    v-on:input="$emit('input-subtitle', $event)"
+                    v-on:blur="$emit('input-subtitle',$event.target.value)"
                     box
                   ></v-text-field>
                 </v-flex>
@@ -73,7 +73,7 @@
                     <v-text-field
                       :value="name"
                       :label="$t('Name')"
-                      v-on:input="$emit('input-name', $event)"
+                      v-on:blur="$emit('input-name',$event.target.value)"
                       box
                     ></v-text-field>
                   </v-flex>
@@ -83,7 +83,7 @@
                     <v-text-field
                       :value="firstname"
                       :label="$t('Firstname')"
-                      v-on:input="$emit('input-firstname', $event)"
+                      v-on:blur="$emit('input-firstname',$event.target.value)"
                       box
                     ></v-text-field>
                   </v-flex>
@@ -91,7 +91,7 @@
                     <v-text-field
                       :value="lastname"
                       :label="$t('Lastname')"
-                      v-on:input="$emit('input-lastname', $event)"
+                      v-on:blur="$emit('input-lastname',$event.target.value)"
                       box
                     ></v-text-field>
                   </v-flex>

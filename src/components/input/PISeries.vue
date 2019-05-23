@@ -28,7 +28,7 @@
                   <v-text-field
                     :value="title"
                     :label="$t('Title')"
-                    v-on:input="$emit('input-title', $event)"
+                    v-on:blur="$emit('input-title',$event.target.value)"
                     box
                   ></v-text-field>
                 </v-flex>
@@ -66,7 +66,7 @@
                   <v-text-field
                     :value="volume"
                     :label="$t('Volume')"
-                    v-on:input="$emit('input-volume', $event)"
+                    v-on:blur="$emit('input-volume',$event.target.value)"
                     box
                   ></v-text-field>
                 </v-flex>
@@ -75,7 +75,7 @@
                   <v-text-field
                     :value="issue"
                     :label="$t('Issue')"
-                    v-on:input="$emit('input-issue', $event)"
+                    v-on:blur="$emit('input-issue',$event.target.value)"
                     box
                   ></v-text-field>
                 </v-flex>
@@ -84,7 +84,7 @@
                     <v-text-field       
                     :value="issued" 
                     :label="$t('Issued')"
-                    v-on:input="$emit('input-issued', $event)"
+                    v-on:blur="$emit('input-issued',$event.target.value)"
                     :hint="'Format YYYY-MM-DD'"
                     :rules="[validationrules.date]"
                     box
@@ -99,7 +99,7 @@
                   <v-text-field
                     :value="issn"
                     :label="$t('ISSN')"
-                    v-on:input="$emit('input-issn', $event)"
+                    v-on:blur="$emit('input-issn',$event.target.value)"
                     box
                   ></v-text-field>
                 </v-flex>
@@ -108,7 +108,7 @@
                   <v-text-field
                     :value="identifier"
                     :label="$t('Identifier')"
-                    v-on:input="$emit('input-identifier', $event)"
+                    v-on:blur="$emit('input-identifier',$event.target.value)"
                     box
                   ></v-text-field>
                 </v-flex>

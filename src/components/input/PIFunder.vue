@@ -5,7 +5,7 @@
       <v-text-field
         :value="name"
         :label="$t('Funder name')"
-        v-on:input="$emit('input-name', $event)"
+        v-on:blur="$emit('input-name',$event.target.value)"
         box
       ></v-text-field>
     </v-flex>
@@ -38,7 +38,7 @@
       <v-text-field
         :value="identifier"
         :label="'Funder identifier'"
-        v-on:input="$emit('input-identifier', $event)"
+        v-on:blur="$emit('input-identifier',$event.target.value)"
         box
       ></v-text-field>
     </v-flex>  

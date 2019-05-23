@@ -1,9 +1,9 @@
 <template>
   <v-container grid-list-lg v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
-      <v-tab ripple>{{ $t('Metadata editor') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
-      <v-tab ripple @click="updatePrettyPrint()">{{ $t('Metadata preview') }}</v-tab>
-      <v-tab v-if="templating" ripple @click="loadTemplates()">{{ $t('Templates') }}</v-tab>
+      <v-tab ripple><span v-t="'Metadata editor'"></span><template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
+      <v-tab ripple @click="updatePrettyPrint()"><span v-t="'Metadata preview'"></span></v-tab>
+      <v-tab v-if="templating" ripple @click="loadTemplates()"><span v-t="'Templates'"></span></v-tab>
     </v-tabs>
   
     <v-tabs-items v-model="activetab">
@@ -12,7 +12,7 @@
         <v-layout v-for="(s) in this.form.sections" :key="s.id" column wrap class="ma-3">
           <v-card v-if="s.type !== 'accessrights'">
             <v-card-title class="headline grey white--text">
-              <span>{{ $t(s.title) }}</span>
+              <span><span v-t="s.title"></span></span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
               <v-menu open-on-hover bottom offset-y>
@@ -21,24 +21,25 @@
                 </v-btn>
                 <v-list>
                   <v-list-tile v-if="s.multiplicable && (s.type === 'member') || (s.type === 'phaidra:Subject')" @click="addSection(s)">
-                    <v-list-tile-title>{{ $t('Duplicate') }}</v-list-tile-title>
+                    <v-list-tile-title><span v-t="'Duplicate'"></span></v-list-tile-title>
                   </v-list-tile>
                   <v-list-tile v-if="s.removable && (s.type != 'digitalobject')" @click="removeSection(s)">
-                    <v-list-tile-title>{{ $t('Remove') }}</v-list-tile-title>
+                    <v-list-tile-title><span v-t="'Remove'"></span></v-list-tile-title>
                   </v-list-tile>
                   <v-list-tile v-if="s.type === 'member'" @click="sortMemberUp(s)">
-                    <v-list-tile-title>{{ $t('Move up') }}</v-list-tile-title>
+                    <v-list-tile-title><span v-t="'Move up'"></span></v-list-tile-title>
                   </v-list-tile>
                   <v-list-tile v-if="s.type === 'member'" @click="sortMemberDown(s)">
-                    <v-list-tile-title>{{ $t('Move down') }}</v-list-tile-title>
+                    <v-list-tile-title><span v-t="'Move down'"></span></v-list-tile-title>
                   </v-list-tile>
                   <v-list-tile v-if="s.type === 'digitalobject'" @click="$emit('add-phaidrasubject-section', s)">
-                    <v-list-tile-title>{{ $t('Add subject metadata section') }}</v-list-tile-title>
+                    <v-list-tile-title><span v-t="'Add subject metadata section'"></span></v-list-tile-title>
                   </v-list-tile>
                 </v-list>
               </v-menu>
             </v-card-title>
             <v-card-text class="mt-4">
+
               <v-layout column wrap>
                 <template v-for="(f) in s.fields">
                   <v-flex offset-xs1 v-if="f.component === 'p-text-field'" :key="f.id">
@@ -297,7 +298,7 @@
                     </v-btn>
 
                     <v-card>
-                      <v-card-title class="grey white--text">{{ $t('Add metadata fields') }}</v-card-title>
+                      <v-card-title class="grey white--text"><span v-t="'Add metadata fields'"></span></v-card-title>
                       <v-card-text>
                         <v-list three-line >
                           <v-text-field clearable label="Search..." append-icon="search" v-model="searchfieldsinput"></v-text-field>
@@ -318,14 +319,14 @@
                           <v-flex>
                             <v-layout column>
                               <v-flex v-if="addfieldselection.length > 0">
-                                {{ $t('Selected fields:') }} <v-chip v-for="ch in addfieldselection" close @input="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
+                                <span v-t="'Selected fields:'"></span> <v-chip v-for="ch in addfieldselection" close @input="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
                               </v-flex>
-                              <v-flex v-else>{{ $t('Please select metadata fields from the list') }}                              </v-flex>
+                              <v-flex v-else><span v-t="'Please select metadata fields from the list'"></span></v-flex>
                             </v-layout>
                           </v-flex>
                           <v-spacer></v-spacer>
-                          <v-btn color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false">{{ $t('Cancel') }}</v-btn>
-                          <v-btn color="primary" @click="addFields(s)">{{ $t('Add') }}</v-btn>
+                          <v-btn color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
+                          <v-btn color="primary" @click="addFields(s)"><span v-t="'Add'"></span></v-btn>
                         </v-layout>
                       </v-card-actions>
                     </v-card>
@@ -340,26 +341,26 @@
 
         <v-layout align-center justify-end row class="ma-3">
           <v-dialog v-if="templating" v-model="templatedialog" width="500">
-            <v-btn class="mr-3" slot="activator" dark raised :loading="loading" :disabled="loading" color="grey">{{ $t('Save as template') }}</v-btn>
+            <v-btn class="mr-3" slot="activator" dark raised :loading="loading" :disabled="loading" color="grey"><span v-t="'Save as template'"></span></v-btn>
             <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>{{ $t('Save as template') }}</v-card-title>
+              <v-card-title class="headline grey lighten-2" primary-title><span v-t="'Save as template'"></span></v-card-title>
               <v-card-text>
                 <v-text-field v-model="templatename" :label="$t('Template name')" ></v-text-field>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn :loading="loading" :disabled="loading" color="grey" dark @click="templatedialog= false">{{ $t('Cancel') }}</v-btn>
-                <v-btn :loading="loading" :disabled="loading" color="primary" @click="saveAsTemplate()">{{ $t('Save') }}</v-btn>
+                <v-btn :loading="loading" :disabled="loading" color="grey" dark @click="templatedialog= false"><span v-t="'Cancel'"></span></v-btn>
+                <v-btn :loading="loading" :disabled="loading" color="primary" @click="saveAsTemplate()"><span v-t="'Save'"></span></v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-btn v-if="targetpid" raised :loading="loading" :disabled="loading" color="primary" @click="save()">{{ $t('Save') }}</v-btn>
-          <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()">{{ $t('Submit') }}</v-btn>
+          <v-btn v-if="targetpid" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
+          <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()"><span v-t="'Submit'"></span></v-btn>
         </v-layout>
   
       </v-tab-item>
       <v-tab-item class="ma-4">
-        <vue-json-pretty :data="metadata" ref="prettyprint"></vue-json-pretty>
+        <vue-json-pretty :data="metadatapreview" ref="prettyprint"></vue-json-pretty>
       </v-tab-item>
       <v-tab-item class="ma-4">
         <p-t-list ref="templates" v-on:load-template="loadTemplate($event)"></p-t-list>
@@ -462,7 +463,31 @@ export default {
         }
       }
     },
-    metadata: function () {
+    filteredMetadatafields() {
+      let list = fields.getEditableFields()
+      if (this.searchfieldsinput) {
+        return list.filter(f => (f.fieldname.toLowerCase().includes(this.searchfieldsinput.toLowerCase()) ||  (f.definition.toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
+      } else {
+        return list
+      }
+    }
+  },
+  data () {
+    return {
+      activetab: null,
+      loadedMetadata: [],
+      loading: false,
+      fab: false,
+      addfieldselection: [],
+      templatedialog: '',
+      templatename: '',
+      previewMember: '',
+      searchfieldsinput: '',
+      metadatapreview: {}
+    }
+  },
+  methods: {
+    getMetadata: function () {
       let jsonlds
       if (!this.targetpid && (this.submittype === 'container')) {
         jsonlds = jsonLd.containerForm2json(this.form)
@@ -491,29 +516,6 @@ export default {
       }
       return md
     },
-    filteredMetadatafields() {
-      let list = fields.getEditableFields()
-      if (this.searchfieldsinput) {
-        return list.filter(f => (f.fieldname.toLowerCase().includes(this.searchfieldsinput.toLowerCase()) ||  (f.definition.toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
-      } else {
-        return list
-      }
-    }
-  },
-  data () {
-    return {
-      activetab: null,
-      loadedMetadata: [],
-      loading: false,
-      fab: false,
-      addfieldselection: [],
-      templatedialog: '',
-      templatename: '',
-      previewMember: '',
-      searchfieldsinput: ''
-    }
-  },
-  methods: {
     loadTemplates: function () {
       this.$refs.templates.loadTemplates()
     },
@@ -569,7 +571,7 @@ export default {
       var self = this
       this.loading = true
       var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify(this.metadata))
+      httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
       if (this.submittype === 'container') {
         for (var i = 0; i < this.form.sections.length; i++) {
           var s = this.form.sections[i]
@@ -629,7 +631,7 @@ export default {
       var self = this
       this.loading = true
       var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify(self.metadata))      
+      httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
       fetch(self.$store.state.settings.instance.api + '/object/' + self.targetpid + '/metadata', {
         method: 'POST',
         mode: 'cors',
@@ -659,6 +661,7 @@ export default {
       })
     },
     updatePrettyPrint: function () {
+      this.metadatapreview = this.getMetadata()
       this.$refs.prettyprint.$forceUpdate()
     },
     addField: function (arr, f) {

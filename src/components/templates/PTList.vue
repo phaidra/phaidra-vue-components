@@ -72,7 +72,7 @@ export default {
       })
       .then(function (response) { return response.json() })
       .then(function (json) {
-         if (json.alerts && json.alerts.length > 0) {
+        if (json.alerts && json.alerts.length > 0) {
           self.$store.commit('setAlerts', json.alerts)
         }
         self.$emit('load-template', json.template.form)

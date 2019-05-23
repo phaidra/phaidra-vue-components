@@ -3,7 +3,7 @@
     <v-flex xs4>
       <v-text-field      
         :value="notation" 
-        v-on:input="$emit('input-notation', $event)" 
+        v-on:blur="$emit('input-notation',$event.target.value)"
         :label="$t('Study plan notation')" 
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
@@ -13,7 +13,7 @@
     <v-flex xs4>
       <v-text-field      
         :value="name" 
-        v-on:input="$emit('input-name', $event)" 
+        v-on:blur="$emit('input-name',$event.target.value)"
         :label="$t('Study plan name')" 
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
