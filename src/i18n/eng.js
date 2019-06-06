@@ -19,6 +19,7 @@ export default {
   'phaidra:ConditionNote': 'Condition',
   'phaidra:ReproductionNote': 'Reproduction note',
   'phaidra:DigitizationNote': 'Digitization note',
+  'bf:tableOfContents': 'Table of contents',
 
   'dce:subject': 'Keywords',
   'dcterms:subject': 'Subject',

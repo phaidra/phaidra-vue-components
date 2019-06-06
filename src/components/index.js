@@ -25,6 +25,7 @@ import PIDateEdtf from './input/PIDateEdtf.vue'
 import PIFilenameReadonly from './input/PIFilenameReadonly.vue'
 import PIForm from './input/PIForm.vue'
 import PIFunder from './input/PIFunder.vue'
+import PIAssociation from './input/PIAssociation.vue'
 import PISeries from './input/PISeries.vue'
 import PIAdaptation from './input/PIAdaptation.vue'
 import PISubjectGnd from './input/PISubjectGnd.vue'
@@ -76,6 +77,7 @@ const Components = {
   PIFile,
   PIForm,
   PIFunder,
+  PIAssociation,
   PISeries,
   PIAdaptation,
   PISubjectGnd,

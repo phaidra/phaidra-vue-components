@@ -229,7 +229,7 @@
                       v-on:input-notation="f.notation=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-study-plan>        
+                    ></p-i-study-plan>
                   </v-flex>
 
                   <v-flex offset-xs1 v-else-if="f.component === 'p-project'" :key="f.id">
@@ -243,7 +243,7 @@
                       v-on:input-homepage="f.homepage=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-project>        
+                    ></p-i-project>
                   </v-flex>
 
                   <v-flex offset-xs1 v-else-if="f.component === 'p-funder'" :key="f.id">
@@ -254,7 +254,16 @@
                       v-on:input-identifier="f.identifier=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-funder>        
+                    ></p-i-funder>
+                  </v-flex>
+
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-association'" :key="f.id">
+                    <p-i-association
+                      v-bind.sync="f" 
+                      v-on:input="selectInput(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-association>
                   </v-flex>
 
                   <v-flex offset-xs1 v-else-if="f.component === 'p-filename-readonly'" :key="f.id">
@@ -390,6 +399,7 @@ import PIDimension from './PIDimension'
 import PIDuration from './PIDuration'
 import PIProject from './PIProject'
 import PIFunder from './PIFunder'
+import PIAssociation from './PIAssociation'
 import PISeries from './PISeries'
 import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
@@ -420,6 +430,7 @@ export default {
     PIStudyPlan,
     PIProject,
     PIFunder,
+    PIAssociation,
     PISeries,
     PIAdaptation,
     PILiteral,
@@ -758,6 +769,9 @@ export default {
     selectInput: function (f, event) {
       if (event) {
         f.value = event['@id']
+        if (event['@type']){
+          f.type = event['@type']
+        }
         var preflabels = event['skos:prefLabel']
         f['skos:prefLabel'] = []
         Object.entries(preflabels).forEach(([key, value]) => {

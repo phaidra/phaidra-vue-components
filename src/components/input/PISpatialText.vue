@@ -1,12 +1,13 @@
 <template>
   <v-layout row>
-    <v-flex xs3>
+    <v-flex xs5>
       <v-autocomplete
         v-on:input="$emit('input-place-type', $event)" 
         :label="$t('Type of place')" 
         :items="vocabularies['placepredicate'].terms" 
         :value="getTerm('placepredicate', type)"
         :filter="autocompleteFilter"
+        :disabled="disabletype"
         box
         return-object
         clearable
@@ -24,7 +25,7 @@
         </template>
       </v-autocomplete>
     </v-flex>
-    <v-flex xs6>
+    <v-flex xs4>
       <v-text-field v-if="!multiline"         
         :value="value" 
         v-on:input="$emit('input', $event)" 
@@ -111,6 +112,9 @@ export default {
       type: Boolean
     },
     multilingual: {
+      type: Boolean
+    },
+    disabletype: {
       type: Boolean
     }
   },

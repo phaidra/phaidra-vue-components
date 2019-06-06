@@ -292,8 +292,8 @@ export default {
       window: 2,
       lang: 'deu',
       languages: [
-        { text: 'English', value: 'eng' },
-        { text: 'Deutsch', value: 'deu' }
+        { text: 'english', value: 'eng' },
+        { text: 'deutsch', value: 'deu' }
       ],
       displayjsonld: {},
       editform: {},
@@ -607,6 +607,7 @@ export default {
       this.form.sections[0].fields.push(rt)
       this.form.sections[0].fields.push(fields.getField('title'))
       this.form.sections[0].fields.push(fields.getField('description'))
+      this.form.sections[0].fields.push(fields.getField('table-of-contents'))
       var gnd = fields.getField('gnd-subject')
       gnd.exactvoc = 'EthnographicName'
       gnd.label = 'Soziokulturelle Kategorie (GND)'
@@ -619,7 +620,7 @@ export default {
       this.form.sections[0].fields.push(fields.getField('note'))
       this.form.sections[0].fields.push(fields.getField('project'))
       this.form.sections[0].fields.push(fields.getField('funder'))
-
+      this.form.sections[0].fields.push(fields.getField('association'))
       this.form.sections[1].fields.push(fields.getField('title'))
       this.form.sections[1].fields.push(fields.getField('role'))
       this.form.sections[1].fields.push(fields.getField('shelf-mark'))
@@ -636,11 +637,14 @@ export default {
       this.form.sections[1].fields.push(fields.getField('technique-vocab'))
       this.form.sections[1].fields.push(fields.getField('technique-text'))
       this.form.sections[1].fields.push(fields.getField('material-text'))
+      this.form.sections[1].fields.push(fields.getField('carrier-type'))
       this.form.sections[1].fields.push(fields.getField('height'))
       this.form.sections[1].fields.push(fields.getField('width'))
       this.form.sections[1].fields.push(fields.getField('inscription'))
       this.form.sections[1].fields.push(fields.getField('spatial-getty'))
       var localname = fields.getField('spatial-text')
+      localname.type = 'dcterms:spatial'
+      localname.disabletype = true
       localname.label = 'Place (native name)'
       this.form.sections[1].fields.push(localname)
 

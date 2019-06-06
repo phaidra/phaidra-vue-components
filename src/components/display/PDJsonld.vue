@@ -41,6 +41,10 @@
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'text'+j" ></p-d-skos-preflabel>
         </template>
 
+        <template v-else-if="p==='bf:tableOfContents'" slot="bf:tableOfContents">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'toc'+j" ></p-d-skos-preflabel>
+        </template>
+
         <template v-else-if="p==='dce:subject'" slot="dce:subject">
           <p-d-keyword :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'keyword'+j" ></p-d-keyword>
         </template>
@@ -124,6 +128,10 @@
           <p-d-funder :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'funder'+j" ></p-d-funder>
         </template>
 
+        <template v-else-if="p==='rdax:P00009'" slot="rdax:P00009">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'association'+j" ></p-d-skos-preflabel>
+        </template>
+
         <template v-else-if="p==='bf:physicalLocation'" slot="bf:physicalLocation">
           <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'physloc'+j" ></p-d-lang-value>
         </template>
@@ -178,6 +186,10 @@
 
         <template v-else-if="p==='dce:format'" slot="dce:format">
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'format'+j" ></p-d-skos-preflabel>
+        </template>
+
+        <template v-else-if="p==='rdau:P60048'" slot="rdau:P60048">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'carriertype'+j" ></p-d-skos-preflabel>
         </template>
 
         <template v-else-if="p==='rdau:P60059'" slot="rdau:P60059">

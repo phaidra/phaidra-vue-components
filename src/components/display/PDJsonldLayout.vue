@@ -4,6 +4,7 @@
       <slot name="dce:title"></slot>
       <slot name="role"></slot>
       <slot name="bf:note"></slot>
+      <slot name="bf:tableOfContents"></slot>
       
       <slot name="edm:hasType"></slot>
       <slot name="schema:genre"></slot>
@@ -30,6 +31,7 @@
 
       <slot name="frapo:hasFundingAgency"></slot>
       <slot name="frapo:isOutputOf"></slot>
+      <slot name="rdax:P00009"></slot>
       <slot name="dcterms:provenance"></slot>
 
       <slot name="dcterms:spatial"></slot>
@@ -55,6 +57,7 @@
       <slot name="vra:material"></slot>
       <slot name="vra:hasTechnique"></slot>
       <slot name="dce:format"></slot>
+      <slot name="rdau:P60048"></slot>
       <slot name="schema:width"></slot>
       <slot name="schema:height"></slot>
       <slot name="schema:depth"></slot>

@@ -7,6 +7,7 @@
         :items="vocabularies['placepredicate'].terms" 
         :value="getTerm('placepredicate', type)"
         :filter="autocompleteFilter"
+        :disabled="disabletype"
         box
         return-object
         clearable
@@ -86,6 +87,9 @@ export default {
     debounce: {
       type: Number,
       default: 500
+    },
+    disabletype: {
+      type: Boolean
     }
   },
   watch: {

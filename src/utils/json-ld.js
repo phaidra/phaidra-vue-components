@@ -86,9 +86,19 @@ export default {
                   break;
               }
 
-              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {              
-                f.value = value[i]['skos:prefLabel'][j]['@value']
-                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'              
+              for (let prefLabel of value[i]['skos:prefLabel']) {
+                f.value = prefLabel['@value']
+                f.language = prefLabel['@language'] ? prefLabel['@language'] : ''
+              }
+              components.push(f)
+              break
+
+            // bf:tableOfContents
+            case 'bf:tableOfContents':
+              f = fields.getField('table-of-contents')
+              for (let prefLabel of value[i]['skos:prefLabel']) {
+                f.value = prefLabel['@value']
+                f.language = prefLabel['@language'] ? prefLabel['@language'] : ''
               }
               components.push(f)
               break
@@ -255,6 +265,15 @@ export default {
               components.push(f)
               break
 
+            // rdau:P60048
+            case 'rdau:P60048':
+              f = fields.getField('carrier-type')
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
+              }
+              components.push(f)
+              break
+
             // edm:rights
             case 'edm:rights':
               f = fields.getField('license')
@@ -385,6 +404,15 @@ export default {
                   components.push(f)
                 }
               }
+              break
+
+            // rdax:P00009
+            case 'rdax:P00009':
+              f = fields.getField('association')
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
+              }
+              components.push(f)
               break
 
             // dcterms:provenance
@@ -774,25 +802,6 @@ export default {
         h['bf:subtitle'][0]['@language'] = language
       }
     }
-    return h
-  },
-  get_json_bf_note (value, language, type) {
-    var h = {}
-
-    if (type) {
-      h['@type'] = type
-    }
-
-    h['skos:prefLabel'] = [
-      {
-        '@value': value
-      }
-    ]
-
-    if (language) {
-      h['skos:prefLabel'][0]['@language'] = language
-    }
-
     return h
   },
   get_json_object (preflabels, rdfslabels, type, identifiers) {
@@ -1253,8 +1262,9 @@ export default {
           break
 
         case 'bf:note':
+        case 'bf:tableOfContents':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_bf_note(f.value, f.language, f.type))
+            this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
           }
           break
 
@@ -1276,6 +1286,12 @@ export default {
         case 'rdau:P60059':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+          }
+          break
+
+        case 'rdax:P00009':
+          if (f.value) {
+            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, f.type, [f.value]))
           }
           break
 

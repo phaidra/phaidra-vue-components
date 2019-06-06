@@ -30,7 +30,6 @@ const state = {
       terms: [
         { '@id': 'dcterms:spatial', 'skos:prefLabel': { 'eng': 'Depicted/Represented place' } },
         { '@id': 'vra:placeOfCreation', 'skos:prefLabel': { 'eng': 'Place of creation' } },
-        { '@id': 'vra:placeOfRepository', 'skos:prefLabel': { 'eng': 'Place of repository' } },
         { '@id': 'vra:placeOfSite', 'skos:prefLabel': { 'eng': 'Place of site' } }
       ],
       loaded: true
@@ -364,6 +363,16 @@ const state = {
         { '@id': 'MTR', 'skos:prefLabel': {'eng': 'm'} },
         { '@id': 'CMT', 'skos:prefLabel': {'eng': 'cm'} },
         { '@id': 'MMT', 'skos:prefLabel': {'eng': 'mm'} }
+      ],
+      loaded: true
+    },
+    'carriertype': {
+      terms: [
+        { '@id': 'https://pid.phaidra.org/vocabulary/2FTX-ZPZV', 'skos:prefLabel': { 'eng': 'ADAT' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/A3BG-65F5', 'skos:prefLabel': { 'eng': 'CD' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/4CQF-7HHF', 'skos:prefLabel': { 'eng': 'DAT' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/HXSS-NBZ4', 'skos:prefLabel': { 'eng': 'audiocassette' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/X627-FCV9', 'skos:prefLabel': { 'eng': 'tape' } }
       ],
       loaded: true
     },

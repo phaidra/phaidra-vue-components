@@ -84,6 +84,20 @@ const fields = [
     definition: 'Summary or abstract of the resource described.'
   },
   {
+    id: 'table-of-contents',
+    fieldname: 'Table of contents',
+    predicate: 'bf:tableOfContents',
+    type: 'bf:TableOfContents',
+    component: 'p-text-field',
+    multiplicable: true,
+    multilingual: true,
+    multiline: true,
+    label: 'Table of contents',
+    value: '',
+    language: '',
+    definition: 'Table of contents of the described resource.'
+  },
+  {
     id: 'date-edtf',
     fieldname: 'Date',
     predicate: 'date',
@@ -295,6 +309,29 @@ const fields = [
     namelanguage: '',
     identifier: '',
     definition: 'A funding agency that provided funding for the resource.'
+  },
+  {
+    id: 'association',
+    fieldname: 'Association',
+    predicate: 'rdax:P00009',
+    component: 'p-association',
+    multiplicable: true,
+    label: 'Association',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'Relates an object to a corporate body who is associated with an object.'
+  },
+  {
+    id: 'carrier-type',
+    fieldname: 'Carrier type',
+    predicate: 'rdau:P60048',
+    component: 'p-select',
+    vocabulary: 'carriertype',
+    multiplicable: true,
+    label: 'Carrier type',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'Relates a resource to a categorization reflecting a format of a storage medium and housing of a carrier in combination with a type of intermediation device required to view, play, run, etc., the content of a resource.'
   },
   {
     id: 'shelf-mark',
@@ -583,6 +620,7 @@ const fields = [
     label: 'Place',
     value: '',
     type: '',
+    disabletype: false,
     'rdfs:label': [],
     'skos:prefLabel': [],
     definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
@@ -597,6 +635,7 @@ const fields = [
     label: 'Place',
     value: '',
     type: '',
+    disabletype: false,
     language: '',
     definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
   },    
@@ -700,6 +739,7 @@ const predicateOrder = [
   'dce:title',
   'role',
   'bf:note',
+  'bf:tableOfContents',
   
   'dcterms:language',
   'schema:subtitleLanguage',
@@ -747,6 +787,7 @@ const predicateOrder = [
   'vra:material',
   'vra:hasTechnique',
   'dce:format',
+  'rdau:P60048',
   'schema:width',
   'schema:height',
   'schema:depth',
@@ -756,7 +797,8 @@ const predicateOrder = [
   'rdau:P60193',
   'rdau:P60227',
   'frapo:hasFundingAgency',
-  'frapo:isOutputOf'
+  'frapo:isOutputOf',
+  'rdax:P00009'
 ]
 
 export default {
