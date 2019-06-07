@@ -560,8 +560,11 @@ export default {
 
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',
-  'vra:placeOfRepository': 'Place of repository',
   'vra:placeOfSite': 'Place of site',
+
+  'frapo:isOutputOf': 'Projekt',
+  'frapo:hasFundingAgency': 'Funding',
+  'rdax:P00009': 'Zuordnung',
 
   'dce:subject': 'Stichwort',
   'dcterms:subject': 'Subjekt',
@@ -593,6 +596,7 @@ export default {
   'dcterms:temporal': 'Zeitliche Abdeckung',
   'vra:hasTechnique': 'Technik',
   'dce:format': 'Format',
+  'rdau:P60048': 'Carrier type',
   'vra:material': 'Material',
   'vra:hasInscription': 'Inschrift',
 

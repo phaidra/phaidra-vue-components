@@ -2,9 +2,9 @@
   <v-layout row>
     <v-flex xs8>
       <v-autocomplete
-        :value="getTerm(orgunits, value)"
+        :value="getTerm(value)"
         :required="required"
-        v-on:input="$emit('input', $event )"
+        v-on:input="handleInput($event)"
         :rules="required ? [ v => !!v || 'Required'] : []"
         :items="orgunits"
         :loading="loading"
@@ -15,6 +15,7 @@
         return-object
         clearable
         :disabled="disabled"
+        :messages="path"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-tile-content two-line>
@@ -56,23 +57,42 @@ export default {
       const query = queryText.toLowerCase()
       return lab.indexOf(query) > -1
     },
-    getTerm: function (units, v) {
-      let ret = null
-      for (let u of units) {
+    getTerm: function (v) {
+      for (let u of this.orgunits) {
         if (u['@id'] === v){
-          ret = u
-        } else {
-          if (u['subunits']) {
-            if (u.subunits.length > 0) {
-              ret = this.getTerm(u.subunits, v)
-            }
-          }
+          return u
         }
       }
-      return ret
     },
     getLocalizedTermLabel: function (item) {
       return item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale] : item['skos:prefLabel']['eng']
+    },
+    addToOrgunits: function (units, parent) {
+      for (let u of units) {
+        this.orgunits.push(u)
+        u.parent = parent
+        if (u['subunits']) {
+          if (u.subunits.length > 0) {
+            this.addToOrgunits(u.subunits, u)
+          }
+        }
+      }
+    },
+    handleInput: function (unit) {
+      this.path = ''
+      let parentpath = []
+      this.getParentPath(unit, parentpath)
+      for (let u of parentpath.reverse()) {
+        this.path = this.path + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+      }
+      this.path = this.path + unit['skos:prefLabel'][this.$i18n.locale]
+      this.$emit('input', unit)
+    },
+    getParentPath: function (unit, parentpath) {
+      if (unit['parent']) {
+        parentpath.push(unit.parent)
+        this.getParentPath(unit.parent, parentpath)
+      }
     },
     loadOrgUnits: function () {
       var self = this
@@ -92,8 +112,7 @@ export default {
         }
         self.loading = false
         self.templatedialog = false
-        // TODO: make flat!
-        self.orgunits = json.units
+        self.addToOrgunits(json.units, null)
       })
       .catch(function (error) {
         console.log(error)
@@ -120,12 +139,20 @@ export default {
   data () {
     return {
       loading: false,
-      orgunits: []
+      orgunits: [],
+      path: ''
     }
   },
   mounted: function () {
     this.$nextTick(function () {
-      this.loadOrgUnits()
+      let self = this
+      this.loadOrgUnits().then(function () { 
+        if (self.value) {
+          let term = self.getTerm(self.value)
+          // emit input to set skos:prefLabel in parent
+          self.handleInput(term)
+        }
+      })
     })
   }
 }

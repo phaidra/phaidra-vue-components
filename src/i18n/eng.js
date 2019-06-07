@@ -49,9 +49,12 @@ export default {
 
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',
-  'vra:placeOfRepository': 'Place of repository',
   'vra:placeOfSite': 'Place of site',
 
+  'frapo:isOutputOf': 'Project',
+  'frapo:hasFundingAgency': 'Funder',
+  'rdax:P00009': 'Association',
+  
   'dcterms:provenance': 'Provenance',
 
   'schema:numberOfPages': 'Number of pages',
@@ -74,6 +77,7 @@ export default {
   'dcterms:temporal': 'Temporal coverage',
   'vra:hasTechnique': 'Technique',
   'dce:format': 'Format',
+  'rdau:P60048': 'Carrier type',
   'vra:material': 'Material',
   'vra:hasInscription': 'Inscription',
 
