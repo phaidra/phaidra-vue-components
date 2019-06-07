@@ -28,7 +28,6 @@
       <v-text-field       
         :value="value" 
         v-on:blur="$emit('input-date',$event.target.value)"
-        identifier
         :label="$t(dateLabel ? dateLabel : '')"
         :required="required"
         :hint="'Format YYYY-MM-DD'"

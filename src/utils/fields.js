@@ -322,6 +322,21 @@ const fields = [
     definition: 'Relates an object to a corporate body who is associated with an object.'
   },
   {
+    id: 'bf-publication',
+    fieldname: 'Provision activity: Publication',
+    predicate: 'bf:provisionActivity',
+    component: 'p-bf-publication',
+    multiplicable: true,
+    label: 'Provision activity: Publication',
+    publisherNameLabel: 'ORG_PUBLISHER',
+    publishingPlaceLabel: 'Place',
+    publishingDateLabel: 'Date',
+    publisherName: '',
+    publishingPlace: '',
+    publishingDate: '',
+    definition: 'Information relating to publication of a resource.'
+  },
+  {
     id: 'carrier-type',
     fieldname: 'Carrier type',
     predicate: 'rdau:P60048',
@@ -795,6 +810,7 @@ const predicateOrder = [
   'schema:duration',
 
   'rdau:P60193',
+  'bf:provisionActivity',
   'rdau:P60227',
   'frapo:hasFundingAgency',
   'frapo:isOutputOf',

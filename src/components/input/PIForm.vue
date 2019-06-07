@@ -140,6 +140,17 @@
                     ></p-i-series>
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-bf-publication'" :key="f.id">
+                    <p-i-bf-publication
+                      v-bind.sync="f"
+                      v-on:input-publisher-name="f.publisherName=$event"
+                      v-on:input-publishing-place="f.publisherName=$event"
+                      v-on:input-publishing-date="f.publisherName=$event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-bf-publication>
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'p-adaptation'" :key="f.id">
                     <p-i-adaptation
                       v-bind.sync="f"
@@ -401,6 +412,7 @@ import PIProject from './PIProject'
 import PIFunder from './PIFunder'
 import PIAssociation from './PIAssociation'
 import PISeries from './PISeries'
+import PIBfPublication from './PIBfPublication'
 import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
 import PIFile from './PIFile'
@@ -432,6 +444,7 @@ export default {
     PIFunder,
     PIAssociation,
     PISeries,
+    PIBfPublication,
     PIAdaptation,
     PILiteral,
     PIKeyword,

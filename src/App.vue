@@ -621,6 +621,7 @@ export default {
       this.form.sections[0].fields.push(fields.getField('project'))
       this.form.sections[0].fields.push(fields.getField('funder'))
       this.form.sections[0].fields.push(fields.getField('association'))
+      this.form.sections[0].fields.push(fields.getField('bf-publication'))
       this.form.sections[1].fields.push(fields.getField('title'))
       this.form.sections[1].fields.push(fields.getField('role'))
       this.form.sections[1].fields.push(fields.getField('shelf-mark'))

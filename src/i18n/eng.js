@@ -85,6 +85,8 @@ export default {
   'DELETE_OBJECT': 'Here you can delete object {pid}.',
   'DELETE_OBJECT_CONFIRM': 'Are you sure you want to permanently delete object {pid}?',
 
+  'ORG_PUBLISHER': 'Publisher',
+
   uwm_etheses: 'E-Theses',
   uwm_etheses_note_2: 'Note 2',
   uwm_etheses_note_1: 'Note 1',

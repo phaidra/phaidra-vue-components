@@ -27,6 +27,7 @@
       <slot name="dcterms:temporal"></slot>
 
       <slot name="rdau:P60193"></slot>
+      <slot name="bf:provisionActivity"></slot>
       <slot name="rdau:P60227"></slot>
 
       <slot name="frapo:hasFundingAgency"></slot>

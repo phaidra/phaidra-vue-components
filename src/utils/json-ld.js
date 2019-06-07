@@ -289,6 +289,33 @@ export default {
               components.push(f)
               break
 
+            // bf:provisionActivity
+            case 'bf:provisionActivity':
+              f = fields.getField('bf-publication')
+              if (value[i]['bf:agent']) {
+                for (let pub of value[i]['bf:agent']){
+                  if (pub['schema:name']) {
+                    for (let name of pub['schema:name']){
+                      f.publisherName = name['@value']
+                    }
+                  }
+                }
+              }
+              if (value[i]['bf:place']) {
+                for (let pl of value[i]['bf:place']){
+                  if (pl['skos:prefLabel']) {
+                    for (let pllab of pl['skos:prefLabel']){
+                      f.publishingPlace = pllab['@value']
+                    }
+                  }
+                }
+              }
+              if (value[i]['bf:date']) {
+                for (let pdate of value[i]['bf:date']){
+                  f.publishingDate = pdate
+                }
+              }
+
             // rdau:P60227
             case 'rdau:P60227':
               f = fields.getField('movieadaptation')
@@ -1106,6 +1133,38 @@ export default {
     }
     return h
   },
+  get_json_bf_publication (publisherName, publishingPlace, publishingDate) {
+    var h = {
+      '@type': 'bf:Publication'
+    }
+    if (publisherName) {
+      let pn = {
+        '@type': 'schema:Organization',
+        'schema:name': [
+          {
+            '@value': publisherName
+          }
+        ]
+      }
+      h['bf:agent'] = [ pn ]
+    }
+    if (publishingPlace) {
+      let pp = {
+        '@type': 'schema:Place',
+        'skos:prefLabel': [
+          {
+            '@value': publishingPlace
+          }
+        ]
+      }
+      h['bf:place'] = [ pp ]
+    }
+    if (publishingDate) {
+      h['bf:date'] = [ publishingDate ]
+    }
+    
+    return h
+  },
   get_json_study_plan (name, nameLanguage, notations) {
     var h = {
       '@type': 'aaiso:Programme'
@@ -1349,6 +1408,12 @@ export default {
             this.push_object(jsonld, f.predicate, this.get_json_adaptation(f.type, f.title, f.subtitle, f.titleLanguage, f.role, f.name, f.firstname, f.lastname))
           }
           break
+
+        case 'bf:provisionActivity':
+            if (f.publisherName || f.publishingPlace || f.publishingDate ) {
+              this.push_object(jsonld, f.predicate, this.get_json_bf_publication(f.publisherName, f.publishingPlace, f.publishingDate))
+            }
+            break
 
         case 'frapo:isOutputOf':
           if (f.type === 'aaiso:Programme'){
