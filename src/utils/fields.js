@@ -349,6 +349,21 @@ const fields = [
     definition: 'Relates a resource to a categorization reflecting a format of a storage medium and housing of a carrier in combination with a type of intermediation device required to view, play, run, etc., the content of a resource.'
   },
   {
+    id: 'citation',
+    fieldname: 'Citation',
+    predicate: 'citation',
+    component: 'p-citation',
+    multiplicable: true,
+    citationLabel: 'Citation',
+    identifierLabel: 'Identifier',
+    identifier: '',
+    type: '',
+    citation: '',
+    citationLanguage: '',
+    disabletype: false,
+    definition: 'The citations characterized may be either direct and explicit (as in the reference list of a journal article), indirect (e.g. a citation to a more recent paper by the same research group on the same topic), or implicit (e.g. as in artistic quotations or parodies, or in cases of plagiarism).'
+  },
+  {
     id: 'shelf-mark',
     fieldname: 'Shelf mark',
     predicate: 'bf:shelfMark',
@@ -814,7 +829,8 @@ const predicateOrder = [
   'rdau:P60227',
   'frapo:hasFundingAgency',
   'frapo:isOutputOf',
-  'rdax:P00009'
+  'rdax:P00009',
+  'citation'
 ]
 
 export default {

@@ -34,6 +34,13 @@ const state = {
       ],
       loaded: true
     },
+    'citationpredicate': {
+      terms: [
+        { '@id': 'cito:cites', 'skos:prefLabel': { 'eng': 'Cites' } },
+        { '@id': 'cito:isCitedBy', 'skos:prefLabel': { 'eng': 'Is cited by' } }
+      ],
+      loaded: true
+    },
     'rolepredicate': {
       terms: [
         { '@id': 'role:abr', 'skos:prefLabel': { 'eng': 'Abridger', 'deu': 'Abridger', 'ita': 'Abridger' } },

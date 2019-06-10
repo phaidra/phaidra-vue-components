@@ -8,8 +8,8 @@
             <span>{{ $t('Project') }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <v-btn slot="activator" icon>
-                <v-icon>more_vert</v-icon>
+              <v-btn slot="activator" icon dark>
+                <v-icon dark>more_vert</v-icon>
               </v-btn>
               <v-list>
                 <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">

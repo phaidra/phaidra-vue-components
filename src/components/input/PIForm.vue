@@ -140,12 +140,24 @@
                     ></p-i-series>
                   </v-flex>
 
+                  <v-flex offset-xs1 v-else-if="f.component === 'p-citation'" :key="f.id">
+                    <p-i-citation
+                      v-bind.sync="f"
+                      v-on:input-citation-type="setSelected(f, 'type', $event)"
+                      v-on:input-citation="f.citation=$event"
+                      v-on:input-citation-language="setSelected(f, 'citationLanguage', $event)"
+                      v-on:input-identifier="f.identifier=$event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-citation>
+                  </v-flex>
+
                   <v-flex offset-xs1 v-else-if="f.component === 'p-bf-publication'" :key="f.id">
                     <p-i-bf-publication
                       v-bind.sync="f"
                       v-on:input-publisher-name="f.publisherName=$event"
-                      v-on:input-publishing-place="f.publisherName=$event"
-                      v-on:input-publishing-date="f.publisherName=$event"
+                      v-on:input-publishing-place="f.publishingPlace=$event"
+                      v-on:input-publishing-date="f.publishingDate=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-bf-publication>
@@ -412,6 +424,7 @@ import PIProject from './PIProject'
 import PIFunder from './PIFunder'
 import PIAssociation from './PIAssociation'
 import PISeries from './PISeries'
+import PICitation from './PICitation'
 import PIBfPublication from './PIBfPublication'
 import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
@@ -444,6 +457,7 @@ export default {
     PIFunder,
     PIAssociation,
     PISeries,
+    PICitation,
     PIBfPublication,
     PIAdaptation,
     PILiteral,
@@ -692,8 +706,7 @@ export default {
       var newField = arrays.duplicate(arr, f)
       if (newField) {
         newField.id = (new Date()).getTime()
-        newField.value = ''
-        newField.language = ''
+        newField.removable = true
       }
     },
     removeField: function (arr, f) {

@@ -51,13 +51,6 @@ import { fieldproperties } from '../../mixins/fieldproperties'
 export default {
   name: 'p-i-select',
   mixins: [vocabulary, fieldproperties],
-  methods: {
-    autocompleteFilter: function (item, queryText) {
-      const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
-      const query = queryText.toLowerCase()
-      return lab.indexOf(query) > -1
-    }
-  },
   props: {
     value: {
       type: String

@@ -113,6 +113,14 @@
           <p-d-bf-publication :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'bfpubl'+j" ></p-d-bf-publication>
         </template>
 
+        <template v-else-if="p==='cito:cites'" slot="cito:cites">
+          <p-d-citation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'cites'+j" ></p-d-citation>
+        </template>
+
+        <template v-else-if="p==='cito:isCitedBy'" slot="cito:isCitedBy">
+          <p-d-citation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'citedby'+j" ></p-d-citation>
+        </template>
+
         <template v-else-if="p==='rdau:P60227'" slot="rdau:P60227">
           <p-d-adaptation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'adaptation'+j" ></p-d-adaptation>
         </template>
@@ -293,9 +301,11 @@ import PDEntity from './PDEntity'
 import PDLabeledValue from './PDLabeledValue'
 import PDFunder from './PDFunder'
 import PDProject from './PDProject'
+import PDBfPublication from './PDBfPublication'
 import PDStudyPlan from './PDStudyPlan'
 import PDSeries from './PDSeries'
 import PDAdaptation from './PDAdaptation'
+import PDCitation from './PDCitation'
 import PDJsonldLayout from './PDJsonldLayout'
 import PIUnknownReadonly from '../input/PIUnknownReadonly'
 import { vocabulary } from '../../mixins/vocabulary'
@@ -325,9 +335,11 @@ export default {
     PDLabeledValue,
     PDFunder,
     PDProject,
+    PDBfPublication,
     PDStudyPlan,
     PDSeries,
     PDAdaptation,
+    PDCitation,
     PIUnknownReadonly
   },
   computed: {

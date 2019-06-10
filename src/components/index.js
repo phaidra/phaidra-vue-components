@@ -12,6 +12,7 @@ import PDLicense from './display/PDLicense.vue'
 import PDProject from './display/PDProject.vue'
 import PDSeries from './display/PDSeries.vue'
 import PDBfPublication from './display/PDBfPublication.vue'
+import PDCitation from './display/PDCitation.vue'
 import PDAdaptation from './display/PDAdaptation.vue'
 import PDSkosPreflabel from './display/PDSkosPreflabel.vue'
 import PDKeyword from './display/PDKeyword.vue'
@@ -29,6 +30,7 @@ import PIFunder from './input/PIFunder.vue'
 import PIAssociation from './input/PIAssociation.vue'
 import PISeries from './input/PISeries.vue'
 import PIBfPublication from './input/PIBfPublication.vue'
+import PICitation from './input/PICitation.vue'
 import PIAdaptation from './input/PIAdaptation.vue'
 import PISubjectGnd from './input/PISubjectGnd.vue'
 import PISpatialGetty from './input/PISpatialGetty.vue'
@@ -65,6 +67,7 @@ const Components = {
   PDLicense,
   PDSeries,
   PDBfPublication,
+  PDCitation,
   PDAdaptation,
   PDProject,
   PDSkosPreflabel,
@@ -83,6 +86,7 @@ const Components = {
   PIAssociation,
   PISeries,
   PIBfPublication,
+  PICitation,
   PIAdaptation,
   PISubjectGnd,
   PISpatialGetty,

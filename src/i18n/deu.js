@@ -565,6 +565,9 @@ export default {
   'frapo:isOutputOf': 'Projekt',
   'frapo:hasFundingAgency': 'Funding',
   'rdax:P00009': 'Zuordnung',
+  'bf:provisionActivity': 'Provision activity: Publication',
+  'cito:cites': 'Cites',
+  'cito:isCitedBy': 'Is cited by',
 
   'dce:subject': 'Stichwort',
   'dcterms:subject': 'Subjekt',

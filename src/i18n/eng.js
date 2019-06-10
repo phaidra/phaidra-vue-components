@@ -46,6 +46,9 @@ export default {
 
   'rdau:P60193': 'Journal/Series',
   'rdau:P60227': 'Is motion picture adaptation of',
+  'bf:provisionActivity': 'Provision activity: Publication',
+  'cito:cites': 'Cites',
+  'cito:isCitedBy': 'Is cited by',
 
   'dcterms:spatial': 'Depicted/Represented place',
   'vra:placeOfCreation': 'Place of creation',

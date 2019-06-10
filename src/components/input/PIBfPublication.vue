@@ -7,8 +7,8 @@
             <span>{{ $t(label) }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <v-btn slot="activator" icon>
-                <v-icon>more_vert</v-icon>
+              <v-btn slot="activator" icon dark>
+                <v-icon dark>more_vert</v-icon>
               </v-btn>
               <v-list>
                 <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
@@ -23,7 +23,7 @@
           <v-layout row>
             <v-flex xs4>
               <v-text-field
-                :value="value"
+                :value="publisherName"
                 v-on:blur="$emit('input-publisher-name',$event.target.value)"
                 :label="$t(publisherNameLabel ? publisherNameLabel : '')"
                 :required="required"
@@ -33,7 +33,7 @@
             </v-flex>
             <v-flex xs4>
               <v-text-field
-                :value="value"
+                :value="publishingPlace"
                 v-on:blur="$emit('input-publishing-place',$event.target.value)"
                 :label="$t(publishingPlaceLabel ? publishingPlaceLabel : '')"
                 :required="required"
@@ -43,7 +43,7 @@
             </v-flex>
             <v-flex xs4>
               <v-text-field       
-                :value="value" 
+                :value="publishingDate" 
                 v-on:blur="$emit('input-publishing-date',$event.target.value)"
                 :label="$t(publishingDateLabel ? publishingDateLabel : '')"
                 :required="required"

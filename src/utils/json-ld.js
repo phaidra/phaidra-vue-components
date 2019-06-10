@@ -315,6 +315,23 @@ export default {
                   f.publishingDate = pdate
                 }
               }
+              components.push(f)
+              break
+
+            // citation
+            case 'cito:cites':
+            case 'cito:isCitedBy':
+              f = fields.getField('citation')
+              f.type = key
+              for (let prefLabel of value[i]['skos:prefLabel']) {
+                f.citation = prefLabel['@value']
+                f.citationLanguage = prefLabel['@language'] ? prefLabel['@language'] : ''
+              }
+              for (let em of value[i]['skos:exactMatch']) {
+                f.identifier = em
+              }
+              components.push(f)
+              break
 
             // rdau:P60227
             case 'rdau:P60227':
@@ -1410,10 +1427,15 @@ export default {
           break
 
         case 'bf:provisionActivity':
-            if (f.publisherName || f.publishingPlace || f.publishingDate ) {
-              this.push_object(jsonld, f.predicate, this.get_json_bf_publication(f.publisherName, f.publishingPlace, f.publishingDate))
-            }
-            break
+          if (f.publisherName || f.publishingPlace || f.publishingDate ) {
+            this.push_object(jsonld, f.predicate, this.get_json_bf_publication(f.publisherName, f.publishingPlace, f.publishingDate))
+          }
+          break
+
+        case 'citation':
+          if (f.citation || f.identifier) {
+            this.push_object(jsonld, f.type, this.get_json_object([{ '@value': f.citation, '@language': f.citationLanguage }], null, 'rdfs:Resource', [ f.identifier ]))
+          }
 
         case 'frapo:isOutputOf':
           if (f.type === 'aaiso:Programme'){
