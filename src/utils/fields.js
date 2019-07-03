@@ -251,7 +251,7 @@ const fields = [
     multilingual: true,
     notation: '',
     name: '',
-    namelanguage: '',
+    nameLanguage: '',
     definition: 'Study plan.'
   },
   {
@@ -293,9 +293,9 @@ const fields = [
     type: 'foaf:Project',
     component: 'p-project',
     name: '',
-    namelanguage: '',
+    nameLanguage: '',
     description: '',
-    descriptionlanguage: '',
+    descriptionLanguage: '',
     identifier: '',
     homepage: '',
     definition: 'An administrative entity that enabled an endeavour such as a research investigation.'
@@ -306,7 +306,7 @@ const fields = [
     predicate: 'frapo:hasFundingAgency',
     component: 'p-funder',
     name: '',
-    namelanguage: '',
+    nameLanguage: '',
     identifier: '',
     definition: 'A funding agency that provided funding for the resource.'
   },
