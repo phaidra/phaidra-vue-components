@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <template v-for="(l, i) in o['skos:prefLabel']">
         <v-flex md4 xs12 class="pdlabel primary--text" :key="'pl'+i">{{ $t('Project') }} ({{ l['@language'] }})</v-flex>
-        <v-flex md8 xs12 :key="'pv'+i">{{ l['@value'] }}</v-flex>
+        <v-flex class="valuefield" md8 xs12 :key="'pv'+i" >{{ l['@value'] }}</v-flex>
       </template>
     </v-layout>
     <v-layout row wrap>
@@ -15,7 +15,7 @@
     <v-layout row wrap>
       <template v-for="(d, i) in o['rdfs:comment']">
         <v-flex md4 xs12 class="pdlabel primary--text" :key="'dl'+i">{{ $t('Project Description') }} ({{ d['@language'] }})</v-flex>
-        <v-flex md8 xs12 :key="'dv'+i">{{ d['@value'] }}</v-flex>
+        <v-flex class="valuefield" md8 xs12 :key="'dv'+i">{{ d['@value'] }}</v-flex>
       </template>
     </v-layout>
     <v-layout row wrap>

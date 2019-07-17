@@ -13,7 +13,7 @@
                 <v-flex md4 xs12 class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
                 <v-flex md8 xs12 :key="'mtv'+j+i">
                   <v-layout column>
-                    <v-flex>{{ mt['@value'] }}</v-flex>
+                    <v-flex class="valuefield">{{ mt['@value'] }}</v-flex>
                   </v-layout>
                 </v-flex>
               </template>

@@ -13,7 +13,7 @@
                 <v-flex md4 xs12 class="pdlabel primary--text" :key="'publnamel'+j+i">{{ $t('ORG_PUBLISHER') }}</v-flex>
                 <v-flex md8 xs12 :key="'publname'+j+i">
                   <v-layout column>
-                    <v-flex>{{ publishername['@value'] }}</v-flex>
+                    <v-flex class="valuefield">{{ publishername['@value'] }}</v-flex>
                   </v-layout>
                 </v-flex>
               </template>
@@ -25,7 +25,7 @@
                 <v-flex md4 xs12 class="pdlabel primary--text" :key="'publplacel'+j+i">{{ $t('Place') }}</v-flex>
                 <v-flex md8 xs12 :key="'publplace'+j+i">
                   <v-layout column>
-                    <v-flex>{{ place['@value'] }}</v-flex>
+                    <v-flex class="valuefield">{{ place['@value'] }}</v-flex>
                   </v-layout>
                 </v-flex>
               </template>

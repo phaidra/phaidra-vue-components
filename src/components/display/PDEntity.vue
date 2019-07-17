@@ -5,7 +5,7 @@
       <v-flex md8 xs12>
         <v-layout column>
           <v-flex>
-            <template v-for="(gn) in entity['schema:givenName']">{{ gn['@value'] }}</template><template v-for="(fn) in entity['schema:familyName']"> {{ fn['@value'] }}</template><template v-for="(fn) in entity['schema:name']"> {{ fn['@value'] }}</template> <template v-if="entity['schema:affiliation']" class="grey--text"><template v-for="(af) in entity['schema:affiliation']"><template v-for="(afn) in af"> {{ afn['@value'] }}</template></template></template>
+            <template class="valuefield" v-for="(gn) in entity['schema:givenName']">{{ gn['@value'] }}</template><template class="valuefield" v-for="(fn) in entity['schema:familyName']"> {{ fn['@value'] }}</template><template class="valuefield" v-for="(fn) in entity['schema:name']"> {{ fn['@value'] }}</template> <template v-if="entity['schema:affiliation']" class="grey--text"><template v-for="(af) in entity['schema:affiliation']"><template class="valuefield" v-for="(afn) in af"> {{ afn['@value'] }}</template></template></template>
           </v-flex>
         </v-layout>
       </v-flex>

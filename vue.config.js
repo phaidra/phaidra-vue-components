@@ -2,9 +2,10 @@ module.exports = {
   // css: {
   //   extract: false
   // },
-  // configureWebpack: {
-  //   output: {
-  //     libraryExport: 'default'
-  //   }
-  // }
+  configureWebpack: {
+    output: {
+      library: 'PhaidraVueComponents',
+      libraryExport: 'default'
+    }
+  }
 };

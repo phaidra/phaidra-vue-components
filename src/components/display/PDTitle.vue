@@ -7,9 +7,9 @@
             <v-flex md4 xs12 class="pdlabel primary--text" :key="'mt'+i">{{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
             <v-flex md8 xs12>
               <v-layout column :key="'mtv'+i">
-                <v-flex>{{ mt['@value'] }}</v-flex>
+                <v-flex class="valuefield">{{ mt['@value'] }}</v-flex>
                 <template v-for="(st, i) in o['bf:subtitle']">
-                  <v-flex :key="'stv'+i">{{ st['@value'] }}</v-flex>
+                  <v-flex class="valuefield" :key="'stv'+i">{{ st['@value'] }}</v-flex>
                 </template>
               </v-layout>
             </v-flex>

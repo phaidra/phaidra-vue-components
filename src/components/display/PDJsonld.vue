@@ -355,3 +355,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.valuefield {
+  white-space: pre-wrap;
+}
+</style>

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import PDDimension from './display/PDDimension.vue'
 import PDDuration from './display/PDDuration.vue'
 import PDEntity from './display/PDEntity.vue'
@@ -110,11 +111,8 @@ const Components = {
   PMFiles
 }
 
-export default {
-  install(Vue) {
-    Object.keys(Components).forEach(name => {
-      Vue.component(name, Components[name])
-    })
-  },
-  ...Components
-}
+Object.keys(Components).forEach(name => {
+  Vue.component(name, Components[name])
+})
+
+export default Components

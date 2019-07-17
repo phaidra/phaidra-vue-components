@@ -13,9 +13,9 @@
                 <v-flex md4 xs12 class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
                 <v-flex md8 xs12 :key="'mtv'+i">
                   <v-layout column>
-                    <v-flex>{{ mt['@value'] }}</v-flex>
+                    <v-flex class="valuefield">{{ mt['@value'] }}</v-flex>
                     <template v-for="(st, i) in title['bf:subtitle']">
-                      <v-flex :key="'stv'+i">{{ st['@value'] }}</v-flex>
+                      <v-flex class="valuefield" :key="'stv'+i">{{ st['@value'] }}</v-flex>
                     </template>
                   </v-layout>
                 </v-flex>
@@ -28,7 +28,7 @@
               <v-flex md8 xs12 v-for="(n, i) in obj" :key="'adpname' + i">
                 <v-layout column>
                   <v-flex>
-                    <template v-for="(gn) in n['schema:givenName']">{{ gn['@value'] }}</template><template v-for="(fn) in n['schema:familyName']"> {{ fn['@value'] }}</template><template v-for="(fn) in n['schema:name']"> {{ fn['@value'] }}</template> <template v-if="n['schema:affiliation']" class="grey--text"><template v-for="(af) in n['schema:affiliation']"><template v-for="(afn) in af"> {{ afn['@value'] }}</template></template></template>
+                    <template class="valuefield" v-for="(gn) in n['schema:givenName']">{{ gn['@value'] }}</template><template class="valuefield" v-for="(fn) in n['schema:familyName']"> {{ fn['@value'] }}</template><template class="valuefield" v-for="(fn) in n['schema:name']"> {{ fn['@value'] }}</template> <template v-if="n['schema:affiliation']" class="grey--text"><template v-for="(af) in n['schema:affiliation']"><template class="valuefield" v-for="(afn) in af"> {{ afn['@value'] }}</template></template></template>
                   </v-flex>
                 </v-layout>
               </v-flex>

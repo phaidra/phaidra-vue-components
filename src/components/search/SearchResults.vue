@@ -30,9 +30,7 @@
                               <v-layout row>
                                 <v-flex xs10>
                                   <h3 class="display-2" @click.stop v-if="doc.dc_title">
-                                    <!-- FIXME temporary remove router-link (we don't have $router) -->
-                                    <!-- <router-link :to="{ name: 'detail', params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</router-link> -->
-                                    {{ doc.dc_title[0] }}
+                                    <router-link :to="{ name: 'detail', params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</router-link>
                                   </h3>
                                   <v-spacer></v-spacer>
                                 </v-flex>

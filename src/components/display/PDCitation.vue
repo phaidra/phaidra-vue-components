@@ -7,7 +7,7 @@
             <v-flex md4 xs12 class="pdlabel primary--text" :key="'mt'+i">{{ $t(p) }}<template v-if="pl['@language']"> ({{ pl['@language'] }})</template></v-flex>
             <v-flex md8 xs12>
               <v-layout row :key="'mtv'+i">
-                <v-flex>{{ pl['@value'] }}<template v-for="(identifier, i) in o['skos:exactMatch']"> ({{ identifier }})</template></v-flex>
+                <v-flex class="valuefield">{{ pl['@value'] }}<template v-for="(identifier) in o['skos:exactMatch']"> ({{ identifier }})</template></v-flex>
               </v-layout>
             </v-flex>
           </v-layout>
