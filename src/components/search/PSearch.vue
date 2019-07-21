@@ -6,7 +6,7 @@
             <autocomplete
               placeholder="Search..."
               name="autocomplete"
-              :initValue="query"
+              :initValue="q"
               :suggester="'titlesuggester'"
               :customParams="{ token: 'dev' }"
               :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
@@ -18,7 +18,7 @@
             <v-layout row>
               <v-flex xs2><span>{{ total }} {{ $t('objects') }}</span></v-flex>
               <v-flex xs6>
-                <v-pagination v-if="total>pagesize" v-bind:length.number="totalPages" total-visible="9" v-model="page" class="mb-3" flat></v-pagination>
+                <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="9" v-model="page" class="mb-3" flat></v-pagination>
               </v-flex>
               <v-flex xs4>
                 <v-container grid-list-md>
@@ -70,9 +70,9 @@
               </v-flex>
             </v-layout>
             <v-flex v-if="inCollection" class="display-2 primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-flex>
-            <search-results></search-results>
+            <search-results :docs="docs"></search-results>
             <v-flex class="text-xs-center">
-              <v-pagination v-if="total>pagesize" v-bind:length.number="totalPages" total-visible="13" v-model="page" class="mb-3"></v-pagination>
+              <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="13" v-model="page" class="mb-3"></v-pagination>
             </v-flex>
           </v-flex>
 
@@ -81,12 +81,18 @@
       </v-flex>
       <v-flex xs3 class="pa-2">
         <h3 class="border-bottom display-2 pa-2 primary--text">Filters</h3>
-        <search-filters></search-filters>
+        <search-filters
+          :search="search"
+          :facetQueries="facetQueries"
+          :pers_authors="pers_authors"
+          :corp_authors="corp_authors"
+          ></search-filters>
       </v-flex>
     </v-layout>
 </template>
 
 <script>
+import qs from 'qs'
 import Autocomplete from './Autocomplete'
 import SearchResults from './SearchResults'
 import SearchFilters from './SearchFilters'
@@ -96,6 +102,8 @@ import '@/compiled-icons/fontello-sort-number-up'
 import '@/compiled-icons/fontello-sort-number-down'
 import '@/compiled-icons/material-content-link'
 import '@/compiled-icons/material-action-bookmark'
+import { facetQueries, updateFacetQueries, pers_authors, corp_authors } from './facets'
+import { buildParams, buildSearchDef, sortdef } from './utils'
 
 export default {
   name: 'p-search',
@@ -105,74 +113,114 @@ export default {
     SearchFilters
   },
   computed: {
-    query: function () {
-      return this.$store.state.search.q
-    },
     page: {
       get () {
-        return this.$store.state.search.page
+        return this.currentPage
       },
       set (value) {
-        this.$store.dispatch('setPage', value)
+        this.currentPage = value
+        this.search()
       }
     },
     totalPages: function () {
-      return Math.ceil(this.$store.state.search.total / this.$store.state.search.pagesize)
+      return Math.ceil(this.total / this.pagesize)
     },
-    total: function () {
-      return this.$store.state.search.total
+    solr: function () { // TODO: pass in app settings
+      return this.$root.$store.state.settings.instance.solr
     },
-    pagesize: function () {
-      return this.$store.state.search.pagesize
-    },
-    searchDef: function () {
-      return this.$store.state.search.searchDef
-    },
-    inCollection: function () {
-      return this.$store.state.search.collection
-    }
   },
   props: {
     collection: {
       type: String,
-      required: false
+      default: ''
     }
   },
   methods: {
+    search: async function (options) {
+      // `options` are combined into the PSearch component. The later are sent
+      // over from child components: e.g. SearchFilters.
+      // This allows us the buildSearchDef/buildParams functions to pick out
+      // whatever properties they might need.
+      Object.assign(this, options)
+
+      let { searchdefarr, ands } = buildSearchDef(this)
+      let params = buildParams(this, ands)
+      
+      this.searchDef.query = searchdefarr.join('&')
+      this.searchDef.link =
+        location.protocol + '//' + location.host +
+        '/#/search?' + this.searchDef.query
+      
+      let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
+      let url = this.solr + '/select?' + query
+      let response = await fetch(url, { method: 'GET', mode: 'cors' })
+      let json = await response.json()
+      this.docs = json.response.docs
+      this.total = json.response.numFound
+      this.facet_counts = json.facet_counts
+      updateFacetQueries(json.facet_counts.facet_queries, facetQueries)
+    },
     handleSelect: function (query) {
-      this.$store.commit('setQuery', query.term)
-      this.$store.dispatch('search').then(() => {
-        window.history.replaceState('Search', 'Search results', this.searchDef.link)
-      })
+      // passed to Autocomplete
+      // this.$store.commit('setQuery', query.term)
+      // this.$store.dispatch('search').then(() => {
+      //   window.history.replaceState('Search', 'Search results', this.searchDef.link)
+      // })
+      this.q = query.term
+      this.search()
+      window.history.replaceState('Search', 'Search results', this.searchDef.link)
     },
     setSort: function (sort) {
-      this.$store.dispatch('setSort', sort)
+      for (let i = 0; i < this.sortdef.length; i++) {
+        if (this.sortdef[i].id === sort) {
+          this.sortdef[i].active = !this.sortdef[i].active
+        } else {
+          this.sortdef[i].active = false
+        }
+      }
+      this.search()
     },
     sortIsActive: function (sort) {
-      for (var i = 0; i < this.$store.state.search.sortdef.length; i++) {
-        if (this.$store.state.search.sortdef[i].id === sort) {
-          return this.$store.state.search.sortdef[i].active
+      for (let i = 0; i < this.sortdef.length; i++) {
+        if (this.sortdef[i].id === sort) {
+          return this.sortdef[i].active
         }
       }
     },
     removeCollectionFilter: function () {
-      this.$store.dispatch('setCollection', '')
+      this.inCollection = ''
+      this.search()
     }
   },
   mounted: function () {
     // this call is delayed because at this point
-    // `setInstanceSolr` has not yet been executed and the solr url is missing
-    setTimeout(() => {
-      if (this.collection) {
-        this.$store.dispatch('setCollection', this.collection)
-      }
-
-      this.$store.dispatch('search')
-    }, 100)
+    // `setInstanceSolr` has not yet been executed and
+    // the solr url is missing.
+    setTimeout(() => { this.search() }, 100)
   },
   data () {
     return {
-      linkdialog: false
+      linkdialog: false,
+      searchDef: {
+        query: '',
+        link: ''
+      },
+      q: '',
+      inCollection: this.collection,
+      currentPage: 1,
+      pagesize: 10,
+      sortdef,
+      lang: 'en',
+      facetQueries,
+      
+      corp_authors,
+      pers_authors,
+      roles: [],
+      owner: '',
+      
+      docs: [],
+      total: 0,
+      facet_counts: null,
     }
   }
 }

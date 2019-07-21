@@ -1,5 +1,4 @@
 <template>
-
   <v-container fluid grid-list-md>
     <ul class="main-ul">
       <li v-for="(f, i) in facetQueries" :key="i">
@@ -44,7 +43,7 @@
               <v-flex>
                 <icon @click.native="toggleOwnerFilter()" v-if="showOwnerFilter" name="univie-stop2" class="primary--text"></icon>
                 <icon @click.native="toggleOwnerFilter()" v-if="!showOwnerFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
-                <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">Owner</span>
+                <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">{{ $t('Owner') }}</span>
               </v-flex>
             </v-layout>
             <autocomplete
@@ -76,14 +75,12 @@
                 <icon name="material-social-person" class="primary--text" height="100%"></icon>
               </v-flex>
               <v-flex xs10>
-                <v-select
-                  :placeholder="$t('ADD_PREFIX') + ' '  + $t(persAuthors[0].label) + ' ' + $t('ADD_SUFFIX') + '...'"
+                <v-combobox
+                  :placeholder="selectPlaceholder('pers_authors')"
                   chips
-                  tags
                   clearable
-                  v-model="persAuthorsValues"
-                >
-                </v-select>
+                  multiple
+                  v-model="persAuthorsValues" />
               </v-flex>
             </v-layout>
             <v-layout row v-if="showAuthorFilter">
@@ -91,14 +88,12 @@
                 <icon name="material-action-account-balance" class="primary--text" height="100%"></icon>
               </v-flex>
               <v-flex xs10>
-                <v-select
-                  :placeholder="$t('ADD_PREFIX') + ' '  + $t(corpAuthors[0].label) + ' ' + $t('ADD_SUFFIX') + '...'"
+                <v-combobox
+                  :placeholder="selectPlaceholder('corp_authors')"
                   chips
-                  tags
                   clearable
-                  v-model="corpAuthorsValues"
-                >
-                </v-select>
+                  multiple
+                  v-model="corpAuthorsValues" />
               </v-flex>
             </v-layout>
           </v-flex>
@@ -121,7 +116,7 @@
                 :items="marcRolesArray"
                 v-model="selectedRole.pers"
                 @input="addRoleFilter('pers')"
-                max-height="400"
+                :menu-props="{maxHeight:'400'}"
                 persistent-hint
               ></v-select>
               <v-select
@@ -130,7 +125,7 @@
                 :items="marcRolesArray"
                 v-model="selectedRole.corp"
                 @input="addRoleFilter('corp')"
-                max-height="400"
+                :menu-props="{maxHeight:'400'}"
                 persistent-hint
               ></v-select>
               <div v-for="(role, i) in roles" :key="i" v-if="roles.length > 0" >
@@ -140,16 +135,14 @@
                     <icon v-if="role.type==='corp'" name="material-action-account-balance" class="primary--text" height="100%"></icon>
                   </v-flex>
                   <v-flex xs8>
-                    <v-select
+                    <v-combobox
                       :placeholder="$t('ADD_PREFIX') + ' '  + $t(role.label) + ' ' + $t('ADD_SUFFIX') + '...'"
                       chips
-                      tags
                       clearable
+                      multiple
                       :items="role.values"
                       v-model="role.values"
-                      @input="setRoleFilterValues(role)"
-                    >
-                    </v-select>
+                      @input="setRoleFilterValues(role)" />
                   </v-flex>
                   <v-flex xs2>
                     <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeRoleFilter(role)"></icon>
@@ -163,7 +156,6 @@
       </li>
     </ul>
   </v-container>
-
 </template>
 
 <script>
@@ -171,7 +163,10 @@ import Autocomplete from './Autocomplete'
 import '@/compiled-icons/univie-stop2'
 import '@/compiled-icons/univie-checkbox-unchecked'
 import '@/compiled-icons/material-action-account-balance'
+import '@/compiled-icons/material-social-person'
 import '@/compiled-icons/material-navigation-close'
+import { marcRoles } from './filters'
+import { toggleFacet, showFacet } from './facets'
 
 export default {
   name: 'search-filters',
@@ -179,82 +174,94 @@ export default {
     Autocomplete
   },
   computed: {
-    owner () {
-      return this.$store.state.search.owner
-    },
-    showRoleFilter () {
-      return this.$store.state.search.showRoleFilter
-    },
-    showAuthorFilter () {
-      return this.$store.state.search.showAuthorFilter
-    },
-    showOwnerFilter () {
-      return this.$store.state.search.showOwnerFilter
-    },
-    facetQueries () {
-      return this.$store.state.search.facetQueries
-    },
-    persAuthors () {
-      return this.$store.state.search.pers_authors
-    },
     persAuthorsValues: {
       get () {
-        return this.$store.state.search.pers_authors.values
+        return this.pers_authors.values()
       },
-      set (value) {
-        // it seems chips are manipulating the array directly anyways
-        // maybe should provide own filtering function
-        this.$store.dispatch('setPersAuthors', value)
+      set (values) {
+        this.pers_authors[0].values = values
       }
-    },
-    corpAuthors () {
-      return this.$store.state.search.corp_authors
     },
     corpAuthorsValues: {
       get () {
-        return this.$store.state.search.corp_authors.values
+        return this.corp_authors.values()
       },
-      set (value) {
+      set (values) {
         // it seems chips are manipulating the array directly anyways
         // maybe should provide own filtering function
-        this.$store.dispatch('setCorpAuthors', value)
+        this.corp_authors[0].values = values
       }
+    }
+  },
+  props: {
+    search: {
+      type: Function,
+      required: true
     },
-    marcRoles () {
-      return this.$store.state.search.marcRoles
+    facetQueries: {
+      type: Array,
+      required: true
     },
-    roles () {
-      return this.$store.state.search.roles
+    pers_authors: {
+      type: Array,
+      required: true
+    },
+    corp_authors: {
+      type: Array,
+      required: true
     }
   },
   data () {
     return {
+      showOwnerFilter: false,
+      showAuthorFilter: false,
+      showRoleFilter: false,
       selectedRole: { pers: '', corp: '' },
-      marcRolesArray: []
+      
+      marcRoles,
+      marcRolesArray: [],
+      
+      roles: [],
+      owner: ''
     }
   },
   methods: {
     showFacet: function (f) {
-      this.$store.dispatch('showFacet', f)
+      showFacet(f)
+      this.search({ facetQueries: this.facetQueries })
     },
     toggleFacet: function (q, f) {
-      this.$store.dispatch('toggleFacet', { q: q, f: f })
+      toggleFacet(q, f)
+      this.search({ page: 1, facetQueries: this.facetQueries })
     },
     handleOwnerSelect: function (query) {
-      this.$store.dispatch('setOwnerFilter', query.term)
+      this.owner = query.term
+      this.search({ owner: this.owner })
     },
     toggleOwnerFilter: function () {
-      this.$store.dispatch('toggleOwnerFilter')
+      this.showOwnerFilter = !this.showOwnerFilter
+      if (!this.showOwnerFilter) {
+        this.owner = '' // TODO change '' to null whereever it's used
+        this.search({ owner: this.owner }) // TODO: should this be in if clause?
+      }
     },
     toggleAuthorFilter: function () {
-      this.$store.dispatch('toggleAuthorFilter')
+      this.showAuthorFilter = !this.showAuthorFilter
+      if (!this.showAuthorFilter) {
+        this.pers_authors[0].values = []
+        this.corp_authors[0].values = []
+        this.search({ pers_authors: this.pers_authors, corp_authors: this.corp_authors }) // TODO: should this be in if clause?
+      }
     },
     toggleRoleFilter: function () {
-      this.$store.dispatch('toggleRoleFilter')
+      this.showRoleFilter = !this.showRoleFilter
+      if (!this.showRoleFilter) {
+        this.roles = []
+      }
     },
     addRoleFilter: function (type) {
       if (this.selectedRole[type]) {
-        this.$store.dispatch('addRoleFilter', {
+        this.roles.push({
           field: 'bib_roles_' + type + '_' + this.selectedRole[type],
           label: this.$t(this.marcRoles[this.selectedRole[type]]),
           values: [],
@@ -263,17 +270,31 @@ export default {
       }
     },
     removeRoleFilter: function (role) {
-      this.$store.dispatch('removeRoleFilter', role)
+      this.roles.splice(this.roles.indexOf(role), 1)
+      this.search({ roles: this.roles })
     },
     setRoleFilterValues: function (role) {
-      this.$store.dispatch('setRoleFilterValues', role)
+      this.roles[this.roles.indexOf(role)].values = role.values
+      this.search({ roles: this.roles })
     },
     removeRoleFilterValue: function (role, value) {
-      this.$store.dispatch('removeRoleFilterValue', {role: role, value: value})
+      this.roles[this.roles.indexOf(role)].values.splice(this.roles[this.roles.indexOf(role)].values.indexOf(value), 1)
+      this.search({ roles: this.roles })
+    },
+    selectPlaceholder: function (source) {
+      let label = ''
+      if (this[source].length) {
+        label = this[source][0].label
+      } else {
+        console.warn(`Label for ${source} not found`, this[source])
+      }
+      return this.$t('ADD_PREFIX') + ' ' +
+        this.$t(label) + ' ' +
+        this.$t('ADD_SUFFIX') + '...'
     }
   },
   mounted () {
-    for (var role in this.marcRoles) {
+    for (let role in this.marcRoles) {
       this.marcRolesArray.push({ value: role, text: this.$t(this.marcRoles[role]) })
     }
   }
@@ -296,5 +317,4 @@ ul
 svg
   margin-bottom: 3px
   cursor: pointer
-
 </style>
