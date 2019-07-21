@@ -15,7 +15,7 @@
       @focus="handleFocus"
       autocomplete="off"
     />
-    <div :class="`${getClassName('list')} autocomplete autocomplete-list elevation-2`" v-show="showList && suggestions.length">
+    <div :class="`${getClassName('list')} autocomplete autocomplete-list elevation-2`" v-show="showList && suggestions && suggestions.length">
       <v-list>
         <v-list-tile v-for="(data, i) in suggestions" :class="activeClass(i)" :key="i" @click.prevent="selectList(data)">
           <v-list-tile-content>
