@@ -6,7 +6,7 @@
             <autocomplete
               placeholder="Search..."
               name="autocomplete"
-              :initValue="query"
+              :initValue="q"
               :suggester="'titlesuggester'"
               :customParams="{ token: 'dev' }"
               :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import qs from 'qs'
 import Autocomplete from './Autocomplete'
 import SearchResults from './SearchResults'
 import SearchFilters from './SearchFilters'
@@ -96,8 +97,9 @@ import '@/compiled-icons/fontello-sort-number-up'
 import '@/compiled-icons/fontello-sort-number-down'
 import '@/compiled-icons/material-content-link'
 import '@/compiled-icons/material-action-bookmark'
-import facets from './facets'
+import { facetQueries, updateFacetQueries } from './facets'
 import constants from './constants'
+import { buildParams, buildSearchDef } from './utils'
 
 export default {
   name: 'p-search',
@@ -107,74 +109,113 @@ export default {
     SearchFilters
   },
   computed: {
-    query: function () {
-      return this.$store.state.search.q
-    },
-    page: {
-      get () {
-        return this.$store.state.search.page
-      },
-      set (value) {
-        this.$store.dispatch('setPage', value)
-      }
-    },
+    // page: {
+    //   get () {
+    //     return this.data.page
+    //   },
+    //   set (value) {
+    //     // TODO: test me
+    //     this.data.page = value
+    //     this.search()
+    //   }
+    // },
+    // TODO: test changing pages / pagination
+    
     totalPages: function () {
-      return Math.ceil(this.$store.state.search.total / this.$store.state.search.pagesize)
+      return Math.ceil(this.total / this.pagesize)
     },
-    total: function () {
-      return this.$store.state.search.total
+    solr: function () { // TODO: pass in app settings
+      return this.$root.$store.state.settings.instance.solr
     },
-    pagesize: function () {
-      return this.$store.state.search.pagesize
-    },
-    searchDef: function () {
-      return this.$store.state.search.searchDef
-    },
-    inCollection: function () {
-      return this.$store.state.search.collection
-    }
   },
   props: {
     collection: {
       type: String,
-      required: false
+      default: ''
     }
   },
   methods: {
+    search: async function () {
+      let { searchdefarr, ands } = buildSearchDef(this)
+      let params = buildParams(this)
+      
+      if (ands.length > 0) {
+        params['fq'] = ands.join(' AND ')
+      }
+      
+      this.searchDef.query = searchdefarr.join('&')
+      this.searchDef.link = location.protocol + '//' + location.host + '/#/search?' + this.searchDef.query
+      
+      let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
+      let url = this.solr + '/select?' + query
+      let response = await fetch(url, { method: 'GET', mode: 'cors' })
+      let json = await response.json()
+      this.docs = json.response.docs
+      this.total = json.response.numFound
+      this.facet_counts = json.facet_counts
+      updateFacetQueries(json.facet_counts.facet_queries, facetQueries)
+    },
     handleSelect: function (query) {
-      this.$store.commit('setQuery', query.term)
-      this.$store.dispatch('search').then(() => {
-        window.history.replaceState('Search', 'Search results', this.searchDef.link)
-      })
+      // passed to Autocomplete
+      // this.$store.commit('setQuery', query.term)
+      // this.$store.dispatch('search').then(() => {
+      //   window.history.replaceState('Search', 'Search results', this.searchDef.link)
+      // })
+      this.q = query.term
+      this.search()
+      window.history.replaceState('Search', 'Search results', this.searchDef.link)
     },
     setSort: function (sort) {
-      this.$store.dispatch('setSort', sort)
+      for (let i = 0; i < this.sortdef.length; i++) {
+        if (this.sortdef[i].id === sort) {
+          this.sortdef[i].active = !state.sortdef[i].active
+        } else {
+          this.sortdef[i].active = false
+        }
+      }
     },
     sortIsActive: function (sort) {
-      for (var i = 0; i < this.$store.state.search.sortdef.length; i++) {
-        if (this.$store.state.search.sortdef[i].id === sort) {
-          return this.$store.state.search.sortdef[i].active
+      for (let i = 0; i < this.sortdef.length; i++) {
+        if (this.sortdef[i].id === sort) {
+          return this.sortdef[i].active
         }
       }
     },
     removeCollectionFilter: function () {
-      this.$store.dispatch('setCollection', '')
+      this.inCollection = ''
+      this.search()
     }
   },
   mounted: function () {
     // this call is delayed because at this point
     // `setInstanceSolr` has not yet been executed and the solr url is missing
     setTimeout(() => {
-      if (this.collection) {
-        this.$store.dispatch('setCollection', this.collection)
-      }
-
-      this.$store.dispatch('search')
+      this.search()
     }, 100)
   },
   data () {
     return {
-      linkdialog: false
+      linkdialog: false,
+      searchDef: {
+        query: '',
+        link: ''
+      },
+      q: '',
+      inCollection: this.collection,
+      page: 1,
+      pagesize: 10,
+      sortdef: [],
+      lang: 'en',
+      facetQueries,
+      
+      corp_authors: [],
+      pers_authors: [],
+      roles: [],
+      owner: '',
+      
+      docs: [],
+      total: 0,
+      facet_counts: null,
     }
   }
 }

@@ -1,4 +1,6 @@
-const facetQueries = [
+import Vue from 'vue'
+
+export const facetQueries = [
   {
     label: 'Access',
     field: 'datastreams',
@@ -255,26 +257,25 @@ function buildDateFacet() {
 }
 
 // TODO: FIXME
-let Vue = {}
-function updateFacetQueries (state, facetCounts) {
+export function updateFacetQueries (facet_queries, facetQueries) {
   // called by the `search` function
-  Object.keys(facetCounts.facet_queries).forEach(function (key) {
-    for (var i = 0; i < state.facetQueries.length; i++) {
-      for (var j = 0; j < state.facetQueries[i].queries.length; j++) {
-        if (state.facetQueries[i].queries[j].query === key) {
-          Vue.set(state.facetQueries[i].queries[j], 'count', facetCounts.facet_queries[key])
+  Object.keys(facet_queries).forEach(function (key) {
+    for (let i = 0; i < facetQueries.length; i++) {
+      for (let j = 0; j < facetQueries[i].queries.length; j++) {
+        if (facetQueries[i].queries[j].query === key) {
+          Vue.set(facetQueries[i].queries[j], 'count', facet_queries[key])
         }
-        if (state.facetQueries[i].queries[j].childFacet) {
-          var lvl1 = state.facetQueries[i].queries[j].childFacet
-          for (var k = 0; k < lvl1.queries.length; k++) {
+        if (facetQueries[i].queries[j].childFacet) {
+          let lvl1 = facetQueries[i].queries[j].childFacet
+          for (let k = 0; k < lvl1.queries.length; k++) {
             if (lvl1.queries[k].query === key) {
-              Vue.set(lvl1.queries[k], 'count', facetCounts.facet_queries[key])
+              Vue.set(lvl1.queries[k], 'count', facet_queries[key])
             }
             if (lvl1.queries[k].childFacet) {
-              var lvl2 = lvl1.queries[k].childFacet
-              for (var l = 0; l < lvl2.queries.length; l++) {
+              let lvl2 = lvl1.queries[k].childFacet
+              for (let l = 0; l < lvl2.queries.length; l++) {
                 if (lvl2.queries[l].query === key) {
-                  Vue.set(lvl2.queries[l], 'count', facetCounts.facet_queries[key])
+                  Vue.set(lvl2.queries[l], 'count', facet_queries[key])
                 }
               }
             }
@@ -291,7 +292,7 @@ function toggleFacet (state, params) {
   state.page = 1
 
   if (params.f.exclusive) {
-    for (var i = 0; i < params.f.queries.length; i++) {
+    for (let i = 0; i < params.f.queries.length; i++) {
       if (params.f.queries[i] !== params.q) {
         // Vue.set(params.f.queries[i], 'active', 0)
       }
@@ -304,15 +305,15 @@ function showFacet (state, f) {
 
   if (!f.show) {
     // when hiding facet, remove it's filters
-    for (var i = 0; i < f.queries.length; i++) {
+    for (let i = 0; i < f.queries.length; i++) {
       f.queries[i].active = false
       if (f.childFacet) {
-        var lvl1 = f.childFacet
-        for (var j = 0; j < lvl1.queries.length; j++) {
+        let lvl1 = f.childFacet
+        for (let j = 0; j < lvl1.queries.length; j++) {
           lvl1.queries[j].active = false
           if (lvl1.childFacet) {
-            var lvl2 = f.childFacet
-            for (var k = 0; k < lvl2.queries.length; k++) {
+            let lvl2 = f.childFacet
+            for (let k = 0; k < lvl2.queries.length; k++) {
               lvl2.queries[k].active = false
             }
           }
@@ -323,7 +324,3 @@ function showFacet (state, f) {
 }
 
 facetQueries.push(buildDateFacet())
-
-export default {
-  facetQueries
-}
