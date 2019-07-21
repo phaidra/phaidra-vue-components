@@ -81,7 +81,12 @@
       </v-flex>
       <v-flex xs3 class="pa-2">
         <h3 class="border-bottom display-2 pa-2 primary--text">Filters</h3>
-        <search-filters></search-filters>
+        <search-filters
+          :search="search"
+          :facetQueries="facetQueries"
+          :pers_authors="pers_authors"
+          :corp_authors="corp_authors"
+          ></search-filters>
       </v-flex>
     </v-layout>
 </template>
@@ -97,7 +102,7 @@ import '@/compiled-icons/fontello-sort-number-up'
 import '@/compiled-icons/fontello-sort-number-down'
 import '@/compiled-icons/material-content-link'
 import '@/compiled-icons/material-action-bookmark'
-import { facetQueries, updateFacetQueries } from './facets'
+import { facetQueries, updateFacetQueries, pers_authors, corp_authors } from './facets'
 import { buildParams, buildSearchDef, sortdef } from './utils'
 
 export default {
@@ -131,16 +136,20 @@ export default {
     }
   },
   methods: {
-    search: async function () {
+    search: async function (options) {
+      // `options` are combined into the PSearch component. The later are sent
+      // over from child components: e.g. SearchFilters.
+      // This allows us the buildSearchDef/buildParams functions to pick out
+      // whatever properties they might need.
+      Object.assign(this, options)
+
       let { searchdefarr, ands } = buildSearchDef(this)
-      let params = buildParams(this)
-      
-      if (ands.length > 0) {
-        params['fq'] = ands.join(' AND ')
-      }
+      let params = buildParams(this, ands)
       
       this.searchDef.query = searchdefarr.join('&')
-      this.searchDef.link = location.protocol + '//' + location.host + '/#/search?' + this.searchDef.query
+      this.searchDef.link =
+        location.protocol + '//' + location.host +
+        '/#/search?' + this.searchDef.query
       
       let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
       let url = this.solr + '/select?' + query
@@ -185,10 +194,9 @@ export default {
   },
   mounted: function () {
     // this call is delayed because at this point
-    // `setInstanceSolr` has not yet been executed and the solr url is missing
-    setTimeout(() => {
-      this.search()
-    }, 100)
+    // `setInstanceSolr` has not yet been executed and
+    // the solr url is missing.
+    setTimeout(() => { this.search() }, 100)
   },
   data () {
     return {
@@ -205,8 +213,8 @@ export default {
       lang: 'en',
       facetQueries,
       
-      corp_authors: [],
-      pers_authors: [],
+      corp_authors,
+      pers_authors,
       roles: [],
       owner: '',
       

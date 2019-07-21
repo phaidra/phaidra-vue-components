@@ -286,22 +286,20 @@ export function updateFacetQueries (facet_queries, facetQueries) {
   })
 }
 
-function toggleFacet (state, params) {
-  // Vue.set(params.q, 'active', !params.q.active)
+export function toggleFacet (q, f) {
+  q.active = !q.active
 
-  state.page = 1
-
-  if (params.f.exclusive) {
-    for (let i = 0; i < params.f.queries.length; i++) {
-      if (params.f.queries[i] !== params.q) {
-        // Vue.set(params.f.queries[i], 'active', 0)
+  if (f.exclusive) {
+    for (let i = 0; i < f.queries.length; i++) {
+      if (f.queries[i] !== q) {
+        f.queries[i].active = 0
       }
     }
   }
 }
 
-function showFacet (state, f) {
-  // Vue.set(f, 'show', !f.show)
+export function showFacet (f) {
+  f.show = !f.show
 
   if (!f.show) {
     // when hiding facet, remove it's filters
@@ -322,5 +320,21 @@ function showFacet (state, f) {
     }
   }
 }
+
+export const pers_authors = [
+  {
+    field: 'bib_roles_pers_aut',
+    label: 'Author',
+    values: []
+  }
+]
+
+export const corp_authors = [
+  {
+    field: 'bib_roles_corp_aut',
+    label: 'Author',
+    values: []
+  }
+]
 
 facetQueries.push(buildDateFacet())

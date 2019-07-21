@@ -114,15 +114,13 @@ export function buildSearchDef({ sortdef, q, page, pagesize, facetQueries, corp_
   return { searchdefarr, ands }
 }
 
-export function buildParams({ q, page, pagesize, sortdef, lang, facetQueries }) {
-  // let i, j, k, l, field, v
-  let start = (page - 1) * pagesize
+export function buildParams({ q, page, pagesize, sortdef, lang, facetQueries }, ands) {
   let params = {
     q,
     defType: 'edismax',
     wt: 'json',
     qf: 'pid^5 dc_title^4 dc_creator^3 dc_subject^2 _text_',
-    start,
+    start: (page - 1) * pagesize,
     rows: pagesize,
     sort: '',
     facet: true,
@@ -144,7 +142,7 @@ export function buildParams({ q, page, pagesize, sortdef, lang, facetQueries }) 
     }
   }
 
-  // TODO: new fn: serialize facetQueries (careful, it's mutated)
+  // TODO: new fn: serializefacetQueries (careful, current implementation might be using mutation)
   for (let i = 0; i < facetQueries.length; i++) {
     if (facetQueries[i].show) {
       for (let j = 0; j < facetQueries[i].queries.length; j++) {
@@ -166,6 +164,10 @@ export function buildParams({ q, page, pagesize, sortdef, lang, facetQueries }) 
         params['facet.query'].push(facetQueries[i].queries[j].query)
       }
     }
+  }
+
+  if (ands.length > 0) {
+    params['fq'] = ands.join(' AND ')
   }
 
   return params

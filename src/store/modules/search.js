@@ -766,11 +766,11 @@ const actions = {
     commit('clearOwnerFilter')
     dispatch('search')
   },
-  showFacet ({ dispatch, commit, state }, f) {
+  showFacet ({ dispatch, commit }, f) {
     commit('showFacet', f)
     dispatch('search')
   },
-  toggleFacet ({ dispatch, commit, state }, params) {
+  toggleFacet ({ dispatch, commit }, params) {
     commit('toggleFacet', params)
     dispatch('search')
   },
