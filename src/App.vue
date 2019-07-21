@@ -289,7 +289,7 @@ export default {
   },
   data () {
     return {
-      window: 2,
+      window: 3,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
