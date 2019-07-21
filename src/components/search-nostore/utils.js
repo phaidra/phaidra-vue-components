@@ -170,3 +170,34 @@ export function buildParams({ q, page, pagesize, sortdef, lang, facetQueries }) 
 
   return params
 }
+
+export const sortdef = [
+  {
+    id: 'title asc',
+    active: false,
+    def: {
+      'en': 'sort_eng_dc_title asc,sort_dc_title asc',
+      'de': 'sort_deu_dc_title asc,sort_dc_title asc',
+      'it': 'sort_ita_dc_title asc,sort_dc_title asc'
+    }
+  },
+  {
+    id: 'title desc',
+    active: false,
+    def: {
+      'en': 'sort_eng_dc_title desc,sort_dc_title desc',
+      'de': 'sort_deu_dc_title desc,sort_dc_title desc',
+      'it': 'sort_ita_dc_title desc,sort_dc_title desc'
+    }
+  },
+  {
+    id: 'created asc',
+    active: false,
+    def: 'created asc'
+  },
+  {
+    id: 'created desc',
+    active: false,
+    def: 'created desc'
+  }
+]

@@ -98,8 +98,7 @@ import '@/compiled-icons/fontello-sort-number-down'
 import '@/compiled-icons/material-content-link'
 import '@/compiled-icons/material-action-bookmark'
 import { facetQueries, updateFacetQueries } from './facets'
-import constants from './constants'
-import { buildParams, buildSearchDef } from './utils'
+import { buildParams, buildSearchDef, sortdef } from './utils'
 
 export default {
   name: 'p-search',
@@ -109,18 +108,15 @@ export default {
     SearchFilters
   },
   computed: {
-    // page: {
-    //   get () {
-    //     return this.data.page
-    //   },
-    //   set (value) {
-    //     // TODO: test me
-    //     this.data.page = value
-    //     this.search()
-    //   }
-    // },
-    // TODO: test changing pages / pagination
-    
+    page: {
+      get () {
+        return this.currentPage
+      },
+      set (value) {
+        this.currentPage = value
+        this.search()
+      }
+    },
     totalPages: function () {
       return Math.ceil(this.total / this.pagesize)
     },
@@ -173,6 +169,7 @@ export default {
           this.sortdef[i].active = false
         }
       }
+      this.search()
     },
     sortIsActive: function (sort) {
       for (let i = 0; i < this.sortdef.length; i++) {
@@ -202,9 +199,9 @@ export default {
       },
       q: '',
       inCollection: this.collection,
-      page: 1,
+      currentPage: 1,
       pagesize: 10,
-      sortdef: [],
+      sortdef,
       lang: 'en',
       facetQueries,
       

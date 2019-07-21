@@ -99,11 +99,6 @@ export default {
     PDLicense,
     PImg
   },
-  // data () {
-  //   return {
-  //     docstoggle: {}
-  //   }
-  // },
   props: {
     docs: {
       type: Array
