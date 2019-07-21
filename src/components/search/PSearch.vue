@@ -193,10 +193,18 @@ export default {
     }
   },
   mounted: function () {
-    // this call is delayed because at this point
+    setSearchParams(this, this.$route.query)
+    
+    // This call is delayed because at this point
     // `setInstanceSolr` has not yet been executed and
     // the solr url is missing.
-    setTimeout(() => { this.search() }, 100)
+    setTimeout(() => { this.search()} , 100)
+  },
+  watch: {
+    collection: function (newVal, oldVal) {
+      this.inCollection = newVal
+      this.search()
+    }
   },
   data () {
     return {

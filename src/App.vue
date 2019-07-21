@@ -187,9 +187,9 @@
                       <v-toolbar flat>
                         <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
                         <v-divider class="mx-3" inset vertical></v-divider>
-                        <v-text-field v-model="collection"></v-text-field>
+                        <v-text-field :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load</v-btn>
+                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load Collection</v-btn>
                       </v-toolbar>
                       <v-card-text>
                         <p-search :collection="collection"></p-search>
@@ -303,7 +303,8 @@ export default {
       members: [],
       pid: '',
       piddoc: {},
-      collection: 'o:541829',
+      collection: '',
+      sampleCollection: 'o:541829',
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
       phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
@@ -529,7 +530,8 @@ export default {
       })
     },
     loadSearch: function() {
-      this.$store.dispatch('setCollection', this.collection)
+      this.collection = ''
+      this.collection = this.sampleCollection
     },
     login: function () {
       this.$store.dispatch('login', this.credentials)
