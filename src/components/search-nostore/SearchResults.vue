@@ -97,15 +97,17 @@ export default {
   components: {
     PDLicense
   },
-  data () {
-    return {
-      docstoggle: {}
+  // data () {
+  //   return {
+  //     docstoggle: {}
+  //   }
+  // },
+  props: {
+    docs: {
+      type: Array
     }
   },
   computed: {
-    docs () {
-      return this.$store.state.search.docs
-    },
     instance () {
       return this.$store.state.settings.instance
     }

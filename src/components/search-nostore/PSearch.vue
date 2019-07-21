@@ -70,7 +70,7 @@
               </v-flex>
             </v-layout>
             <v-flex v-if="inCollection" class="display-2 primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-flex>
-            <search-results></search-results>
+            <search-results :docs="docs"></search-results>
             <v-flex class="text-xs-center">
               <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="13" v-model="page" class="mb-3"></v-pagination>
             </v-flex>
