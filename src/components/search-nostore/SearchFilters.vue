@@ -75,14 +75,12 @@
                 <icon name="material-social-person" class="primary--text" height="100%"></icon>
               </v-flex>
               <v-flex xs10>
-                <v-select
+                <v-combobox
                   :placeholder="selectPlaceholder('pers_authors')"
                   chips
-                  tags
                   clearable
-                  v-model="persAuthorsValues"
-                >
-                </v-select>
+                  multiple
+                  v-model="persAuthorsValues" />
               </v-flex>
             </v-layout>
             <v-layout row v-if="showAuthorFilter">
@@ -90,14 +88,12 @@
                 <icon name="material-action-account-balance" class="primary--text" height="100%"></icon>
               </v-flex>
               <v-flex xs10>
-                <v-select
+                <v-combobox
                   :placeholder="selectPlaceholder('corp_authors')"
                   chips
-                  tags
                   clearable
-                  v-model="corpAuthorsValues"
-                >
-                </v-select>
+                  multiple
+                  v-model="corpAuthorsValues" />
               </v-flex>
             </v-layout>
           </v-flex>
@@ -120,7 +116,7 @@
                 :items="marcRolesArray"
                 v-model="selectedRole.pers"
                 @input="addRoleFilter('pers')"
-                max-height="400"
+                :menu-props="{maxHeight:'400'}"
                 persistent-hint
               ></v-select>
               <v-select
@@ -129,7 +125,7 @@
                 :items="marcRolesArray"
                 v-model="selectedRole.corp"
                 @input="addRoleFilter('corp')"
-                max-height="400"
+                :menu-props="{maxHeight:'400'}"
                 persistent-hint
               ></v-select>
               <div v-for="(role, i) in roles" :key="i" v-if="roles.length > 0" >
@@ -139,16 +135,14 @@
                     <icon v-if="role.type==='corp'" name="material-action-account-balance" class="primary--text" height="100%"></icon>
                   </v-flex>
                   <v-flex xs8>
-                    <v-select
+                    <v-combobox
                       :placeholder="$t('ADD_PREFIX') + ' '  + $t(role.label) + ' ' + $t('ADD_SUFFIX') + '...'"
                       chips
-                      tags
                       clearable
+                      multiple
                       :items="role.values"
                       v-model="role.values"
-                      @input="setRoleFilterValues(role)"
-                    >
-                    </v-select>
+                      @input="setRoleFilterValues(role)" />
                   </v-flex>
                   <v-flex xs2>
                     <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeRoleFilter(role)"></icon>
@@ -182,19 +176,17 @@ export default {
   computed: {
     persAuthorsValues: {
       get () {
-        return this.pers_authors.values
+        return this.pers_authors.values()
       },
-      set (value) {
-        // it seems chips are manipulating the array directly anyways
-        // maybe should provide own filtering function
+      set (values) {
         this.pers_authors[0].values = values
       }
     },
     corpAuthorsValues: {
       get () {
-        return this.corp_authors.values
+        return this.corp_authors.values()
       },
-      set (value) {
+      set (values) {
         // it seems chips are manipulating the array directly anyways
         // maybe should provide own filtering function
         this.corp_authors[0].values = values
