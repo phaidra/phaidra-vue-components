@@ -11,7 +11,7 @@
                   <v-layout column>
                     <v-layout row>
                       <v-flex xs2>
-                        <v-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'"  class="elevation-1">
+                        <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'"  class="elevation-1">
                           <v-layout
                             slot="placeholder"
                             fill-height
@@ -21,7 +21,7 @@
                           >
                             <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
                           </v-layout>
-                        </v-img>
+                        </p-img>
                       </v-flex>
                       <v-flex xs10>
                         <v-layout column>
@@ -91,11 +91,13 @@
 
 <script>
 import PDLicense from '../display/PDLicense'
+import PImg from '../utils/PImg'
 
 export default {
   name: 'search-results',
   components: {
-    PDLicense
+    PDLicense,
+    PImg
   },
   // data () {
   //   return {
