@@ -18,7 +18,7 @@
             <v-layout row>
               <v-flex xs2><span>{{ total }} {{ $t('objects') }}</span></v-flex>
               <v-flex xs6>
-                <v-pagination v-if="total>pagesize" v-bind:length.number="totalPages" total-visible="9" v-model="page" class="mb-3" flat></v-pagination>
+                <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="9" v-model="page" class="mb-3" flat></v-pagination>
               </v-flex>
               <v-flex xs4>
                 <v-container grid-list-md>
@@ -72,7 +72,7 @@
             <v-flex v-if="inCollection" class="display-2 primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-flex>
             <search-results></search-results>
             <v-flex class="text-xs-center">
-              <v-pagination v-if="total>pagesize" v-bind:length.number="totalPages" total-visible="13" v-model="page" class="mb-3"></v-pagination>
+              <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="13" v-model="page" class="mb-3"></v-pagination>
             </v-flex>
           </v-flex>
 
@@ -168,7 +168,7 @@ export default {
     setSort: function (sort) {
       for (let i = 0; i < this.sortdef.length; i++) {
         if (this.sortdef[i].id === sort) {
-          this.sortdef[i].active = !state.sortdef[i].active
+          this.sortdef[i].active = !this.sortdef[i].active
         } else {
           this.sortdef[i].active = false
         }
