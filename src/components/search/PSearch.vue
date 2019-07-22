@@ -144,6 +144,14 @@ export default {
       // over from child components: e.g. SearchFilters.
       // This allows us the buildSearchDef/buildParams functions to pick out
       // whatever properties they might need.
+
+      // exclude 'collection' from above manipulation, since it's passed a prop
+      let { collection } = options || {}
+      if (collection) {
+        this.inCollection = collection
+        delete options.collection
+      }
+
       Object.assign(this, options)
 
       let { searchdefarr, ands } = buildSearchDef(this)

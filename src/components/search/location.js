@@ -27,7 +27,7 @@ export function setSearchParams (self, { q, page, pagesize, sortdef, owner, coll
   }
 
   if (collection) {
-    self.collection = collection
+    self.inCollection = collection
   }
 
   if (fq) {
