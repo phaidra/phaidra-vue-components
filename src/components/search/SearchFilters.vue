@@ -334,8 +334,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@require '../../stylus/main'
-
 ul
   list-style: none
   padding-left: 1em
