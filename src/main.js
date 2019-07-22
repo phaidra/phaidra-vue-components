@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import './plugins/vuetify'
 import store from './store'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
@@ -14,7 +13,9 @@ import moment from 'moment'
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  iconfont: 'md'
+})
 Vue.use(VueI18n)
 Vue.use(SvgIcon, {
   tagName: 'icon',
