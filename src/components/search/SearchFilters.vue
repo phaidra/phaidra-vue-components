@@ -209,6 +209,14 @@ export default {
     corp_authors: {
       type: Array,
       required: true
+    },
+    rolesProp: {
+      type: Array,
+      required: true
+    },
+    ownerProp: {
+      type: String,
+      required: true
     }
   },
   data () {
@@ -217,12 +225,10 @@ export default {
       showAuthorFilter: false,
       showRoleFilter: false,
       selectedRole: { pers: '', corp: '' },
-      
       marcRoles,
       marcRolesArray: [],
-      
       roles: [],
-      owner: ''
+      owner: '',
     }
   },
   methods: {
@@ -235,7 +241,7 @@ export default {
       this.search({ page: 1, facetQueries: this.facetQueries })
     },
     handleOwnerSelect: function (query) {
-      this.owner = query.term
+      this.owner = query.payload
       this.search({ owner: this.owner })
     },
     toggleOwnerFilter: function () {
@@ -258,6 +264,7 @@ export default {
       if (!this.showRoleFilter) {
         this.roles = []
       }
+      this.search({ roles: this.roles })
     },
     addRoleFilter: function (type) {
       if (this.selectedRole[type]) {
@@ -297,6 +304,31 @@ export default {
     for (let role in this.marcRoles) {
       this.marcRolesArray.push({ value: role, text: this.$t(this.marcRoles[role]) })
     }
+  },
+  watch: {
+    rolesProp: function (v) {
+      this.roles = v
+      if (v.length) {
+        this.showRoleFilter = true
+      }
+    },
+    ownerProp: function (v) {
+      this.owner = v
+      if (v.length) {
+        this.showOwnerFilter = true
+      }
+    },
+    pers_authors: function (v) {
+      if (v[0].values.length) {
+        this.showAuthorFilter = true
+        // this.selectedRole.pers // TODO might need something like this
+      }
+    },
+    corp_authors: function (v) {
+      if (v[0].values.length) {
+        this.showAuthorFilter = true
+      }
+    },
   }
 }
 </script>

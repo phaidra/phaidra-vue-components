@@ -90,3 +90,17 @@ export const marcRoles = {
   'act': 'Actor',
   'adp': 'Adapter'
 }
+
+export function getMarcRoleLabel (r) {
+  // if possible, return label directly
+  if (marcRoles[r]) return marcRoles[r]
+
+  // try to use the last element for lookup, e.g. from 'bib_roles_pers_uploader'
+  // extracts 'Uploader'
+  let splitted = r.split('_')
+  if (splitted.length) {
+    let last = splitted[splitted.length - 1]
+    return marcRoles[last] || r
+  }
+}
+

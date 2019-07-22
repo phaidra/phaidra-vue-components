@@ -86,6 +86,8 @@
           :facetQueries="facetQueries"
           :pers_authors="pers_authors"
           :corp_authors="corp_authors"
+          :rolesProp="roles"
+          :ownerProp="owner"
           ></search-filters>
       </v-flex>
     </v-layout>
@@ -104,6 +106,7 @@ import '@/compiled-icons/material-content-link'
 import '@/compiled-icons/material-action-bookmark'
 import { facetQueries, updateFacetQueries, pers_authors, corp_authors } from './facets'
 import { buildParams, buildSearchDef, sortdef } from './utils'
+import { setSearchParams } from './location'
 
 export default {
   name: 'p-search',
@@ -147,9 +150,9 @@ export default {
       let params = buildParams(this, ands)
       
       this.searchDef.query = searchdefarr.join('&')
-      this.searchDef.link =
-        location.protocol + '//' + location.host +
+      this.searchDef.link = location.protocol + '//' + location.host +
         '/#/search?' + this.searchDef.query
+      window.history.replaceState(null, this.$t('Search results'), this.searchDef.link)
       
       let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
       let url = this.solr + '/select?' + query
@@ -161,14 +164,9 @@ export default {
       updateFacetQueries(json.facet_counts.facet_queries, facetQueries)
     },
     handleSelect: function (query) {
-      // passed to Autocomplete
-      // this.$store.commit('setQuery', query.term)
-      // this.$store.dispatch('search').then(() => {
-      //   window.history.replaceState('Search', 'Search results', this.searchDef.link)
-      // })
+      // called from Autocomplete
       this.q = query.term
       this.search()
-      window.history.replaceState('Search', 'Search results', this.searchDef.link)
     },
     setSort: function (sort) {
       for (let i = 0; i < this.sortdef.length; i++) {
@@ -201,8 +199,8 @@ export default {
     setTimeout(() => { this.search()} , 100)
   },
   watch: {
-    collection: function (newVal, oldVal) {
-      this.inCollection = newVal
+    collection: function (col) { // used by demo app
+      this.inCollection = col
       this.search()
     }
   },
