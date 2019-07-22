@@ -1,5 +1,4 @@
 <template>
-
   <v-container fluid grid-list-lg>
     <v-layout column>
       <v-flex xs12>
@@ -86,7 +85,6 @@
       </v-flex>
     </v-layout>
   </v-container>
-
 </template>
 
 <script>
@@ -113,7 +111,6 @@ export default {
 </script>
 
 <style scoped>
-
 .card__title--primary {
   padding-top: 10px;
 }
@@ -126,4 +123,7 @@ export default {
   padding-top: 0px;
 }
 
+.container {
+  padding: 0;
+}
 </style>

@@ -13,15 +13,12 @@
               :onSelect="handleSelect"
             ></autocomplete>
           </v-flex>
-
-          <v-flex xs12 class="pt-5">
-            <v-layout row>
+          <v-flex xs12>
+            <v-layout row class="pt-3 pb-2">
               <v-flex xs2><span>{{ total }} {{ $t('objects') }}</span></v-flex>
-              <v-flex xs6>
-                <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="9" v-model="page" class="mb-3" flat></v-pagination>
-              </v-flex>
+              <v-spacer />
               <v-flex xs4>
-                <v-container grid-list-md>
+                <v-container class="toolbar" grid-list-md>
                   <v-layout row wrap>
                     <v-flex>
                       <v-tooltip bottom>
@@ -56,7 +53,7 @@
                           <v-card-text>{{ searchDef.link }}</v-card-text>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" flat @click.stop="linkdialog=false">Close</v-btn>
+                            <v-btn color="primary" flat @click.stp="linkdialog=false">Close</v-btn>
                           </v-card-actions>
                         </v-card>
                       </v-dialog>
@@ -69,15 +66,27 @@
                 </v-container>
               </v-flex>
             </v-layout>
+            <v-layout row>
+              <v-pagination
+                v-if="total>pagesize"
+                v-bind:length="totalPages"
+                total-visible="10"
+                v-model="page"
+                class="mb-3"
+                flat />
+            </v-layout>
             <v-flex v-if="inCollection" class="display-2 primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-flex>
             <search-results :docs="docs"></search-results>
             <v-flex class="text-xs-center">
-              <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="13" v-model="page" class="mb-3"></v-pagination>
+              <v-pagination
+                v-if="total>pagesize"
+                v-bind:length="totalPages"
+                total-visible="10"
+                v-model="page"
+                class="mb-3" />
             </v-flex>
           </v-flex>
-
         </v-layout>
-
       </v-flex>
       <v-flex xs3 class="pa-2">
         <h3 class="border-bottom display-2 pa-2 primary--text">Filters</h3>
@@ -251,5 +260,9 @@ export default {
 
 svg {
   cursor: pointer
+}
+
+.container .toolbar {
+  padding: 0px;
 }
 </style>
