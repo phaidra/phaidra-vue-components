@@ -293,7 +293,7 @@ export default {
       if (this[source].length) {
         label = this[source][0].label
       } else {
-        console.warn(`Label for ${source} not found`, this[source])
+        console.warn(`Label for ${source} not found`, this[source]) // eslint-disable-line no-console
       }
       return this.$t('ADD_PREFIX') + ' ' +
         this.$t(label) + ' ' +

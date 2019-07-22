@@ -50,7 +50,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "vue/no-use-v-if-with-v-for": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

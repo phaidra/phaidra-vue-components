@@ -93,13 +93,13 @@ export default {
     },
     
     // Netralize Autocomplete (XXX not used anywhere)
-    clearInput () {
-      debugger
-      this.showList = false
-      this.type = ''
-      this.suggestions = []
-      this.focusList = ''
-    },
+    // clearInput () {
+    //   debugger
+    //   this.showList = false
+    //   this.type = ''
+    //   this.suggestions = []
+    //   this.focusList = ''
+    // },
     
     // Get the original data (TODO move to single used place)
     cleanUp (data) {
@@ -169,25 +169,27 @@ export default {
       this.focusList = nextFocusList
     },
     
-    setValue (val) { // TODO used anywhere?
-      debugger
-      this.type = val
-    },
+    // unused?
+    // setValue (val) { // TODO used anywhere?
+    //   debugger
+    //   this.type = val
+    // },
     
-    handleBlur (e) {
+    handleBlur () {
       setTimeout(() => {
         this.showList = false
       }, 250)
     },
     
-    handleFocus (e) {
+    handleFocus () {
       this.focusList = 0
     },
     
-    mousemove (i) {
-      debugger
-      this.focusList = i
-    },
+    // unused?
+    // mousemove (i) {
+    //   debugger
+    //   this.focusList = i
+    // },
     
     activeClass (i) {
       const focusClass = i === this.focusList ? 'grey lighten-4' : ''
