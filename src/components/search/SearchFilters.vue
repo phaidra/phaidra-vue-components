@@ -334,6 +334,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.container
+  padding-top: 1em
+  padding-left: 0
+
 ul
   list-style: none
   padding-left: 1em
@@ -347,4 +351,7 @@ ul
 svg
   margin-bottom: 3px
   cursor: pointer
+
+svg.primary--text
+  margin-right: 4px
 </style>

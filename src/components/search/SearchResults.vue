@@ -10,7 +10,7 @@
                 <v-container fluid grid-list-lg pa-3>
                   <v-layout column>
                     <v-layout row>
-                      <v-flex xs2>
+                      <v-flex xs3>
                         <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'"  class="elevation-1">
                           <v-layout
                             slot="placeholder"
@@ -23,7 +23,7 @@
                           </v-layout>
                         </p-img>
                       </v-flex>
-                      <v-flex xs10>
+                      <v-flex xs9>
                         <v-layout column>
                           <v-card-title primary-title>
                             <v-container fluid>
