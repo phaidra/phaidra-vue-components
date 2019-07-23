@@ -221,9 +221,13 @@ export default {
       }
       let query = qs.stringify(params)
       
-      let response = await fetch(this.solr + '/suggest?' + query, {
-        method: 'GET',
-        mode: 'cors'
+      let response = await fetch(this.solr + '/suggest', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: query
       })
       let json = await response.json()
       this.suggestions = json.suggest[this.suggester][value].suggestions

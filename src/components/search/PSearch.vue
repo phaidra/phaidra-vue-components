@@ -113,16 +113,16 @@ export default {
       // over from child components: e.g. SearchFilters.
       // This allows us the buildSearchDef/buildParams functions to pick out
       // whatever properties they might need.
-
+      
       // exclude 'collection' from above manipulation, since it's passed a prop
       let { collection } = options || {}
       if (collection) {
         this.inCollection = collection
         delete options.collection
       }
-
+      
       Object.assign(this, options)
-
+      
       let { searchdefarr, ands } = buildSearchDef(this)
       let params = buildParams(this, ands)
       
@@ -130,8 +130,15 @@ export default {
       window.history.replaceState(null, this.$t('Search results'), this.link)
       
       let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
-      let url = this.solr + '/select?' + query
-      let response = await fetch(url, { method: 'GET', mode: 'cors' })
+      let url = this.solr + '/select'
+      let response = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: query
+      })
       let json = await response.json()
       this.docs = json.response.docs
       this.total = json.response.numFound
