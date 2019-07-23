@@ -558,7 +558,7 @@ export default {
         md['metadata']['relationships'] = [ { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' } ]
       }
       if (this.owner) {
-        md['metadata']['owner'] = this.owner
+        md['metadata']['ownerid'] = this.owner
       }
       return md
     },
