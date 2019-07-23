@@ -18,52 +18,10 @@
               <v-flex xs2><span>{{ total }} {{ $t('objects') }}</span></v-flex>
               <v-spacer />
               <v-flex xs4>
-                <v-container class="toolbar" grid-list-md>
-                  <v-layout row wrap>
-                    <v-flex>
-                      <v-tooltip bottom>
-                        <icon @click.native="setSort('title asc')" name="fontello-sort-name-up" :color="sortIsActive('title asc') ? '#1A74B0' : '#777777'" slot="activator"></icon>
-                        <span>{{ $t('Title ascending')}}</span>
-                      </v-tooltip>
-                    </v-flex>
-                    <v-flex>
-                      <v-tooltip bottom>
-                        <icon @click.native="setSort('title desc')" name="fontello-sort-name-down" :color="sortIsActive('title desc') ? '#1A74B0' : '#777777'" slot="activator"></icon>
-                        <span>{{ $t('Title descending')}}</span>
-                      </v-tooltip>
-                    </v-flex>
-                    <v-flex>
-                      <v-tooltip bottom>
-                        <icon @click.native="setSort('created asc')" name="fontello-sort-number-up" :color="sortIsActive('created asc') ? '#1A74B0' : '#777777'" slot="activator"></icon>
-                        <span>{{ $t('Upload date ascending')}}</span>
-                      </v-tooltip>
-                    </v-flex>
-                    <v-flex>
-                      <v-tooltip bottom>
-                        <icon @click.native="setSort('created desc')" name="fontello-sort-number-down" :color="sortIsActive('created desc') ? '#1A74B0' : '#777777'" slot="activator"></icon>
-                        <span>{{ $t('Upload date descending')}}</span>
-                      </v-tooltip>
-                    </v-flex>
-                    <v-flex>
-                      <v-dialog v-model="linkdialog" max-width="800px">
-                        <v-card>
-                          <v-card-title>
-                            <h3 class="display-2">{{ $t('Link to search results') }}</h3>
-                          </v-card-title>
-                          <v-card-text>{{ searchDef.link }}</v-card-text>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="primary" flat @click.stp="linkdialog=false">Close</v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-                      <v-tooltip bottom>
-                        <icon @click.native="linkdialog=true" name="material-content-link" slot="activator"></icon>
-                        <span>{{ $t('Link to search results')}}</span>
-                      </v-tooltip>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
+                <search-toolbar
+                  :setSort="setSort"
+                  :sortIsActive="sortIsActive"
+                  :link="searchDef.link" />
               </v-flex>
             </v-layout>
             <v-layout row>
@@ -107,6 +65,7 @@ import qs from 'qs'
 import Autocomplete from './Autocomplete'
 import SearchResults from './SearchResults'
 import SearchFilters from './SearchFilters'
+import SearchToolbar from './SearchToolbar'
 import '@/compiled-icons/fontello-sort-name-up'
 import '@/compiled-icons/fontello-sort-name-down'
 import '@/compiled-icons/fontello-sort-number-up'
@@ -122,7 +81,8 @@ export default {
   components: {
     Autocomplete,
     SearchResults,
-    SearchFilters
+    SearchFilters,
+    SearchToolbar
   },
   computed: {
     page: {
@@ -260,9 +220,5 @@ export default {
 
 svg {
   cursor: pointer
-}
-
-.container .toolbar {
-  padding: 0px;
 }
 </style>
