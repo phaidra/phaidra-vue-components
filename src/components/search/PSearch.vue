@@ -138,9 +138,11 @@ export default {
       this.facet_counts = json.facet_counts
       updateFacetQueries(json.facet_counts.facet_queries, facetQueries)
     },
-    handleSelect: function (query) {
+    handleSelect: function ({ term, payload }) {
       // called from Autocomplete
-      this.q = query.term
+      // When an item has been clicked on explicitly - issue a quoted search on it's title,
+      // otherwise too many unrealted results are returned
+      this.q = payload ? `"${payload}"` : term
       this.search()
     },
     setSort: function (sort) {
@@ -181,6 +183,7 @@ export default {
   },
   data () {
     return {
+      link: '',
       linkdialog: false,
       q: '',
       inCollection: this.collection,
