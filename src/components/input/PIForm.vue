@@ -480,6 +480,11 @@ export default {
     targetpid: {
       type: String
     },
+    owner: {
+      // if defined, phaidra will transfer ownership to this user
+      // IIF the current user is authorized to do so in phaidra-api
+      type: String
+    },
     addbutton: {
       type: Boolean,
       default: true
@@ -551,6 +556,9 @@ export default {
       }
       if (this.previewMember) {
         md['metadata']['relationships'] = [ { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' } ]
+      }
+      if (this.owner) {
+        md['metadata']['owner'] = this.owner
       }
       return md
     },
