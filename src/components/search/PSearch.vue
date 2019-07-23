@@ -21,7 +21,7 @@
                 <search-toolbar
                   :setSort="setSort"
                   :sortIsActive="sortIsActive"
-                  :link="searchDef.link" />
+                  :link="link" />
               </v-flex>
             </v-layout>
             <v-layout row>
@@ -126,10 +126,8 @@ export default {
       let { searchdefarr, ands } = buildSearchDef(this)
       let params = buildParams(this, ands)
       
-      this.searchDef.query = searchdefarr.join('&')
-      this.searchDef.link = location.protocol + '//' + location.host +
-        '/#/search?' + this.searchDef.query
-      window.history.replaceState(null, this.$t('Search results'), this.searchDef.link)
+      this.link = location.protocol + '//' + location.host + '/#/search?' + searchdefarr.join('&')
+      window.history.replaceState(null, this.$t('Search results'), this.link)
       
       let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
       let url = this.solr + '/select?' + query
@@ -184,10 +182,6 @@ export default {
   data () {
     return {
       linkdialog: false,
-      searchDef: {
-        query: '',
-        link: ''
-      },
       q: '',
       inCollection: this.collection,
       currentPage: 1,
