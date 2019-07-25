@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import './plugins/vuetify'
 import store from './store'
+import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
 import SvgIcon from 'vue-svgicon'
@@ -12,7 +12,10 @@ import moment from 'moment'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuetify)
+Vue.use(VueRouter)
+Vue.use(Vuetify, {
+  iconfont: 'md'
+})
 Vue.use(VueI18n)
 Vue.use(SvgIcon, {
   tagName: 'icon',
@@ -41,8 +44,21 @@ const i18n = new VueI18n({
   messages: messages
 })
 
+const router = new VueRouter({
+  routes: [
+    {
+      name: 'detail',
+      path: '/details',
+      component: {
+        template: '<div><b>Details</b> not implemented in PVC demo app</div>'
+      }
+    },
+  ]
+})
+
 new Vue({
   store,
   i18n,
+  router,
   render: h => h(App),
 }).$mount('#app')

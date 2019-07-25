@@ -113,9 +113,11 @@
 
 <script>
 import PDLicense from './PDLicense'
+import { vocabulary } from '../../mixins/vocabulary'
 
 export default {
   name: 'p-d-uwmetadata',
+  mixins: [vocabulary],
   props: {
     pid: {
       type: String
@@ -176,7 +178,7 @@ export default {
           if (!rolesHash[sortedContr[i].role]) {
             rolesHash[sortedContr[i].role] = {
               role: sortedContr[i].role,
-              label: getRoleLabel(sortedContr[i].role),
+              label: this.getRoleLabel(sortedContr[i].role),
               entities: []
             }
           }

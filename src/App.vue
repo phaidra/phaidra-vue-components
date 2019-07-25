@@ -187,9 +187,9 @@
                       <v-toolbar flat>
                         <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
                         <v-divider class="mx-3" inset vertical></v-divider>
-                        <v-text-field v-model="collection"></v-text-field>
+                        <v-text-field :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load</v-btn>
+                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load Collection</v-btn>
                       </v-toolbar>
                       <v-card-text>
                         <p-search :collection="collection"></p-search>
@@ -289,7 +289,7 @@ export default {
   },
   data () {
     return {
-      window: 2,
+      window: 3,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -303,7 +303,8 @@ export default {
       members: [],
       pid: '',
       piddoc: {},
-      collection: 'o:541829',
+      collection: '',
+      sampleCollection: 'o:541829',
       solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
       phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
       apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
@@ -332,11 +333,11 @@ export default {
         }, 
         { 
           text: 'Document',
-           value: 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX' 
+          value: 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX' 
         }, 
         { 
           text: 'Container',
-           value: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ' 
+          value: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ' 
         }
       ],
       psvis: true
@@ -345,37 +346,37 @@ export default {
   methods: {
     getResourceTypeFromMimeType: function (mime) {
       switch (mime) {
-        case 'image/jpeg':
-        case 'image/tiff':
-        case 'image/gif':
-        case 'image/png':
-        case 'image/x-ms-bmp':
-          // picture
-          return 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
-
-        case 'audio/wav':
-        case 'audio/mpeg':
-        case 'audio/flac':
-        case 'audio/ogg':
-          // audio
-          return 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
-
-        case 'application/pdf':
-          // document
-          return 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
-
-        case 'video/mpeg':
-        case 'video/avi':
-        case 'video/mp4':
-        case 'video/quicktime':
-        case 'video/x-matroska':
-          // video
-          return 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
-
+      case 'image/jpeg':
+      case 'image/tiff':
+      case 'image/gif':
+      case 'image/png':
+      case 'image/x-ms-bmp':
+        // picture
+        return 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
+        
+      case 'audio/wav':
+      case 'audio/mpeg':
+      case 'audio/flac':
+      case 'audio/ogg':
+        // audio
+        return 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
+        
+      case 'application/pdf':
+        // document
+        return 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
+        
+      case 'video/mpeg':
+      case 'video/avi':
+      case 'video/mp4':
+      case 'video/quicktime':
+      case 'video/x-matroska':
+        // video
+        return 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
+        
         // eg application/x-iso9660-image
-        default:
-          // data
-          return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
+      default:
+        // data
+        return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
       }
     },
     handleSelect: function (val) {
@@ -434,39 +435,39 @@ export default {
       var self = this
       
       this.members = []
-
+      
       var params = {
         q: 'pid:"' + pid + '"',
         defType: 'edismax',
         wt: 'json',
         qf: 'pid^5'
       }
-
+      
       var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
       var url = self.instance.solr + '/select?' + query
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors'
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        if (json.response.numFound > 0) {
-          self.piddoc = json.response.docs[0]
-        } else {
-          self.piddoc = {}
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-
+          .then(function (response) { return response.json() })
+          .then(function (json) {
+            if (json.response.numFound > 0) {
+              self.piddoc = json.response.docs[0]
+            } else {
+              self.piddoc = {}
+            }
+          })
+          .catch(function (error) {
+            console.log(error) // eslint-disable-line no-console
+          })
+      
       return promise
     },
     loadMembers: function (pid) {
       var self = this
       
       this.members = []
-
+      
       var params = {
         q: 'ismemberof:"' + pid + '"',
         defType: 'edismax',
@@ -475,25 +476,25 @@ export default {
         fl: 'pid,cmodel,dc_title,created',
         sort: 'pos_in_' + pid.replace(':','_') + ' asc'
       }
-
+      
       var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
       var url = self.instance.solr + '/select?' + query
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors'
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        if (json.response.numFound > 0) {
-          self.members = json.response.docs
-        } else {
-          self.members = []
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-
+          .then(function (response) { return response.json() })
+          .then(function (json) {
+            if (json.response.numFound > 0) {
+              self.members = json.response.docs
+            } else {
+              self.members = []
+            }
+          })
+          .catch(function (error) {
+            console.log(error) // eslint-disable-line no-console
+          })
+      
       return promise
     },
     loadMetadata: function (pid) {
@@ -504,14 +505,14 @@ export default {
         method: 'GET',
         mode: 'cors'
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        if (json.metadata['JSON-LD']) {
-          return json.metadata['JSON-LD']
+          .then(function (response) { return response.json() })
+          .then(function (json) {
+            if (json.metadata['JSON-LD']) {
+              return json.metadata['JSON-LD']
         }
       })
       .catch(function (error) {
-        console.log(error)
+        console.log(error) // eslint-disable-line no-console
       })
       return promise
     },
@@ -529,7 +530,8 @@ export default {
       })
     },
     loadSearch: function() {
-      this.$store.dispatch('setCollection', this.collection)
+      this.collection = ''
+      this.collection = this.sampleCollection
     },
     login: function () {
       this.$store.dispatch('login', this.credentials)
@@ -547,7 +549,7 @@ export default {
     orderSaved: function (event) {
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Order for object ' + event + ' saved' }])
     },
-    objectDeleted: function (event) {
+    objectDeleted: function () {
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object was successfully deleted.' }])
     },
     toggleVisibility: function () {
@@ -571,7 +573,7 @@ export default {
         this.createSimpleForm()
       }
     },
-    createSimpleForm: function (index) {
+    createSimpleForm: function () {
       this.form = {
         sections: [
           {
@@ -674,7 +676,7 @@ export default {
       this.form.sections[3].fields.push(fields.getField('license'))
       this.form.sections[3].fields.push(fields.getField('rights'))
     },
-    createContainerForm: function (index) {
+    createContainerForm: function () {
       this.createSimpleForm()
       this.form.sections[3] = {
         title: 'File',

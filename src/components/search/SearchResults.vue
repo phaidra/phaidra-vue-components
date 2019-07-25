@@ -1,5 +1,4 @@
 <template>
-
   <v-container fluid grid-list-lg>
     <v-layout column>
       <v-flex xs12>
@@ -10,8 +9,8 @@
                 <v-container fluid grid-list-lg pa-3>
                   <v-layout column>
                     <v-layout row>
-                      <v-flex xs2>
-                        <v-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'"  class="elevation-1">
+                      <v-flex xs3>
+                        <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'"  class="elevation-1">
                           <v-layout
                             slot="placeholder"
                             fill-height
@@ -21,9 +20,9 @@
                           >
                             <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
                           </v-layout>
-                        </v-img>
+                        </p-img>
                       </v-flex>
-                      <v-flex xs10>
+                      <v-flex xs9>
                         <v-layout column>
                           <v-card-title primary-title>
                             <v-container fluid>
@@ -86,26 +85,24 @@
       </v-flex>
     </v-layout>
   </v-container>
-
 </template>
 
 <script>
 import PDLicense from '../display/PDLicense'
+import PImg from '../utils/PImg'
 
 export default {
   name: 'search-results',
   components: {
-    PDLicense
+    PDLicense,
+    PImg
   },
-  data () {
-    return {
-      docstoggle: {}
+  props: {
+    docs: {
+      type: Array
     }
   },
   computed: {
-    docs () {
-      return this.$store.state.search.docs
-    },
     instance () {
       return this.$store.state.settings.instance
     }
@@ -114,7 +111,6 @@ export default {
 </script>
 
 <style scoped>
-
 .card__title--primary {
   padding-top: 10px;
 }
@@ -127,4 +123,7 @@ export default {
   padding-top: 0px;
 }
 
+.container {
+  padding: 0;
+}
 </style>
