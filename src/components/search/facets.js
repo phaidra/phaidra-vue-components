@@ -303,16 +303,16 @@ export function showFacet (f) {
 
   if (!f.show) {
     // when hiding facet, remove it's filters
-    for (let i = 0; i < f.queries.length; i++) {
-      f.queries[i].active = false
-      if (f.childFacet) {
-        let lvl1 = f.childFacet
-        for (let j = 0; j < lvl1.queries.length; j++) {
-          lvl1.queries[j].active = false
-          if (lvl1.childFacet) {
-            let lvl2 = f.childFacet
-            for (let k = 0; k < lvl2.queries.length; k++) {
-              lvl2.queries[k].active = false
+    for (var i = 0; i < f.queries.length; i++) {
+      f.queries[i].active = false;
+      if(f.queries[i].childFacet){
+        var lvl1 = f.queries[i].childFacet;
+        for (var j = 0; j < lvl1.queries.length; j++) {
+          lvl1.queries[j].active = false;
+          if(lvl1.queries[j].childFacet){
+            var lvl2 = lvl1.queries[j].childFacet;
+            for (var k = 0; k < lvl2.queries.length; k++) {
+              lvl2.queries[k].active = false;
             }
           }
         }
