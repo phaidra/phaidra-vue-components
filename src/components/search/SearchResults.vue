@@ -9,8 +9,8 @@
                 <v-container fluid grid-list-lg pa-3>
                   <v-layout column>
                     <v-layout row>
-                      <v-flex xs3>
-                        <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'"  class="elevation-1">
+                      <v-flex xs2>
+                        <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'" class="elevation-1">
                           <v-layout
                             slot="placeholder"
                             fill-height

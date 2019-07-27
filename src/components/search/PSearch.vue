@@ -2,7 +2,7 @@
     <v-layout row >
       <v-flex xs9 class="border-right" pr-2>
         <v-layout column>
-          <v-flex xs9 offset-xs2>
+          <v-flex>
             <autocomplete
               placeholder="Search..."
               name="autocomplete"
@@ -23,15 +23,6 @@
                   :sortIsActive="sortIsActive"
                   :link="link" />
               </v-flex>
-            </v-layout>
-            <v-layout row>
-              <v-pagination
-                v-if="total>pagesize"
-                v-bind:length="totalPages"
-                total-visible="10"
-                v-model="page"
-                class="mb-3"
-                flat />
             </v-layout>
             <v-flex v-if="inCollection" class="display-2 primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-flex>
             <search-results :docs="docs"></search-results>
@@ -143,6 +134,11 @@ export default {
       this.docs = json.response.docs
       this.total = json.response.numFound
       this.facet_counts = json.facet_counts
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
       updateFacetQueries(json.facet_counts.facet_queries, facetQueries)
     },
     handleSelect: function ({ term, payload }) {
