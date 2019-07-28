@@ -1,3 +1,4 @@
+import PImg from './utils/PImg'
 import PDDimension from './display/PDDimension.vue'
 import PDDuration from './display/PDDuration.vue'
 import PDEntity from './display/PDEntity.vue'
@@ -52,9 +53,9 @@ import PMSort from './management/PMSort'
 import PMRights from './management/PMRights'
 import PMRelationships from './management/PMRelationships'
 import PMFiles from './management/PMFiles'
-import PImg from './utils/PImg'
 
 const Components = {
+  PImg,
   PDDuration,
   PDDimension,
   PDEntity,
@@ -108,8 +109,7 @@ const Components = {
   PMSort,
   PMRights,
   PMRelationships,
-  PMFiles,
-  PImg
+  PMFiles
 }
 
 export default {
