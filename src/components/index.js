@@ -52,6 +52,7 @@ import PMSort from './management/PMSort'
 import PMRights from './management/PMRights'
 import PMRelationships from './management/PMRelationships'
 import PMFiles from './management/PMFiles'
+import PImg from './utils/PImg'
 
 const Components = {
   PDDuration,
@@ -107,7 +108,8 @@ const Components = {
   PMSort,
   PMRights,
   PMRelationships,
-  PMFiles
+  PMFiles,
+  PImg
 }
 
 export default {
