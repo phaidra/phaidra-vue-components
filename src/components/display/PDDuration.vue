@@ -32,6 +32,7 @@ export default {
           seconds: m[3]
         }
       }
+      return null
     }
   }
 }

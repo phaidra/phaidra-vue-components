@@ -67,7 +67,7 @@ export default {
         ret = '<a href="' + this['skos:exactMatch'][0] + '" target="_blank">' + this['skos:exactMatch'][0] + '</a>'
       }
       if (this['skos:notation']) {
-        ret = ret + (ret ? ret + ' ' : '') + 'Notation: ' + notation  
+        ret = ret + (ret ? ret + ' ' : '') + 'Notation: ' + this['skos:notation']
       }
       return ret
     }

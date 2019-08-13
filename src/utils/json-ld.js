@@ -1436,6 +1436,7 @@ export default {
           if (f.citation || f.identifier) {
             this.push_object(jsonld, f.type, this.get_json_object([{ '@value': f.citation, '@language': f.citationLanguage }], null, 'rdfs:Resource', [ f.identifier ]))
           }
+          break
 
         case 'frapo:isOutputOf':
           if (f.type === 'aaiso:Programme'){

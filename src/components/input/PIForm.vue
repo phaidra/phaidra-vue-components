@@ -341,11 +341,11 @@
                                 <v-list-tile-sub-title>{{field.definition}}</v-list-tile-sub-title>
                               </v-list-tile-content>
                             </v-list-tile>
-                            <v-divider></v-divider>
+                            <v-divider :key="'divi'+field.id"></v-divider>
                           </template>
                         </v-list>
                       </v-card-text>
-                      <v-divider></v-divider>
+                      <v-divider :key="'divi'+f.id"></v-divider>
                       <v-card-actions>
                         <v-layout row>
                           <v-flex>
@@ -468,10 +468,7 @@ export default {
   },
   props: {
     form: {
-      type: Object,
-      default: {
-        sections: []
-      }
+      type: Object
     },
     targetpid: {
       type: String
@@ -501,6 +498,7 @@ export default {
           }
         }
       }
+      return null
     },
     filteredMetadatafields() {
       let list = fields.getEditableFields()
@@ -589,7 +587,7 @@ export default {
         self.templatedialog = false
       })
       .catch(function (error) {
-        //console.log(error)
+        console.log(error)
       })
       return promise
     },

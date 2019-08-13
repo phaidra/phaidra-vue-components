@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import qs from 'qs'
 import { fieldproperties } from '../../mixins/fieldproperties'
 import { validationrules } from '../../mixins/validationrules'
 

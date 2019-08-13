@@ -52,17 +52,6 @@ export default {
   name: 'p-i-duration',
   mixins: [fieldproperties],
   props: {
-    /*
-    hoursValue: {
-      type: Number
-    },
-    minutesValue: {
-      type: Number
-    },
-    secondsValue: {
-      type: Number
-    },
-    */
     value: {
       type: String
     },
@@ -81,13 +70,13 @@ export default {
     }
   },
   watch: {
-    hours: function (val) {
+    hours: function () {
       this.$emit('input', this.duration)
     },
-    minutes: function (val) {
+    minutes: function () {
       this.$emit('input', this.duration)
     },
-    seconds: function (val) {
+    seconds: function () {
       this.$emit('input', this.duration)
     }
   },
@@ -96,7 +85,7 @@ export default {
       get: function () {
         return 'PT' + this.hours + 'H' + this.minutes + 'M' + this.seconds + 'S'
       },
-      set: function (v) {
+      set: function () {
         let m = this.value.match(/PT(\d+)H(\d+)M(\d+)S/)
         if (m){
           this.hours = m[1]

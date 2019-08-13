@@ -41,8 +41,7 @@ export default {
       type: String
     },
     members: {
-      type: Array,
-      default: []
+      type: Array
     }
   },
   computed: {

@@ -79,7 +79,7 @@ export default {
         self.loading = false
       })
       .catch(function (error) {
-        //console.log(error)
+        console.log(error)
         self.loading = false
       })
       return promise
@@ -105,12 +105,12 @@ export default {
         self.loadTemplates()
       })
       .catch(function (error) {
-        //console.log(error)
+        console.log(error)
         self.loading = false
       })
       return promise
     },
-    loadTemplates: function (pid) {
+    loadTemplates: function () {
       var self = this
       this.loading = true
       var url = self.$store.state.instanceconfig.api + '/jsonld/templates'
@@ -127,7 +127,7 @@ export default {
         self.loading = false
       })
       .catch(function (error) {
-        //console.log(error)
+        console.log(error)
         self.loading = false
       })
       return promise

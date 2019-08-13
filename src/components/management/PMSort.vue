@@ -33,8 +33,7 @@ export default {
       type: String
     },
     members: {
-      type: Array,
-      default: []
+      type: Array
     }
   },
   computed: {
@@ -43,9 +42,6 @@ export default {
     },
     memberscomputed: {
       get: function () {
-        if (this.membersdata.length === 0) {
-          this.membersdata = this.members
-        }
         return this.membersdata
       },
       set: function (newValue) {
@@ -56,7 +52,7 @@ export default {
   data () {
     return {
       loading: false,
-      membersdata: []
+      membersdata: this.members
     }
   },
   methods: {
