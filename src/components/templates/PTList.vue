@@ -62,7 +62,7 @@ export default {
     loadTemplate: function (tid) {
       var self = this
       this.loading = true
-      var url = self.$store.state.settings.instance.api + '/jsonld/template/' + tid
+      var url = self.$store.state.instanceconfig.api + '/jsonld/template/' + tid
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors',
@@ -87,7 +87,7 @@ export default {
     deleteTemplate: function (tid) {
       var self = this
       this.loading = true
-      var url = self.$store.state.settings.instance.api + '/jsonld/template/' + tid + '/remove'
+      var url = self.$store.state.instanceconfig.api + '/jsonld/template/' + tid + '/remove'
       var promise = fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -113,7 +113,7 @@ export default {
     loadTemplates: function (pid) {
       var self = this
       this.loading = true
-      var url = self.$store.state.settings.instance.api + '/jsonld/templates'
+      var url = self.$store.state.instanceconfig.api + '/jsonld/templates'
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors',

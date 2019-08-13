@@ -82,7 +82,7 @@ export default {
   
   computed: {
     solr: function () { // TODO: pass in app settings
-      return this.$root.$store.state.settings.instance.solr
+      return this.$root.$store.state.instanceconfig.solr
     },
   },
   methods: {

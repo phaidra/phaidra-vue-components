@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     instance: function() {
-      return this.$store.state.settings.instance
+      return this.$store.state.instanceconfig
     }
   },
   data () {
@@ -60,7 +60,7 @@ export default {
     deleteObject: function (pid) {
       var self = this
       self.loading = true
-      var url = self.$store.state.settings.instance.api + '/object/' + pid + '/delete'
+      var url = self.$store.state.instanceconfig.api + '/object/' + pid + '/delete'
       var promise = fetch(url, {
         method: 'POST',
         mode: 'cors',

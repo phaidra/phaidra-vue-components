@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     instance: function() {
-      return this.$store.state.settings.instance
+      return this.$store.state.instanceconfig
     }
   }
 }

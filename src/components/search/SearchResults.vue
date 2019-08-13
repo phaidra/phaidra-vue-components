@@ -9,7 +9,7 @@
                 <v-container fluid grid-list-lg pa-3>
                   <v-layout column>
                     <v-layout row>
-                      <v-flex xs2>
+                      <v-flex xs2 class="preview-maxwidth">
                         <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'" class="elevation-1">
                           <v-layout
                             slot="placeholder"
@@ -104,13 +104,17 @@ export default {
   },
   computed: {
     instance () {
-      return this.$store.state.settings.instance
+      return this.$store.state.instanceconfig
     }
   }
 }
 </script>
 
 <style scoped>
+.preview-maxwidth {
+  max-width: 130px;
+}
+
 .card__title--primary {
   padding-top: 10px;
 }

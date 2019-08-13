@@ -151,7 +151,7 @@
 
         var query = qs.stringify(params)
 
-        fetch(self.$store.state.settings.instance.solr + '/suggest?' + query, {
+        fetch(self.$store.state.instanceconfig.solr + '/suggest?' + query, {
           method: 'GET',
           mode: 'cors'
         })

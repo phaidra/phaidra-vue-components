@@ -97,7 +97,7 @@ export default {
     loadOrgUnits: function () {
       var self = this
       this.loading = true
-      var url = self.$store.state.settings.instance.api + '/directory/org_get_units'
+      var url = self.$store.state.instanceconfig.api + '/directory/org_get_units'
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors',

@@ -15,7 +15,7 @@
               <span><span v-t="s.title"></span></span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
-              <v-menu open-on-hover bottom offset-y>
+              <v-menu open-on-hover bottom offset-y v-if="!s.disablemenu">
                 <v-btn slot="activator" icon dark>
                   <v-icon dark>more_vert</v-icon>
                 </v-btn>
@@ -351,7 +351,7 @@
                           <v-flex>
                             <v-layout column>
                               <v-flex v-if="addfieldselection.length > 0">
-                                <span v-t="'Selected fields:'"></span> <v-chip v-for="ch in addfieldselection" close @input="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
+                                <span v-t="'Selected fields:'"></span> <v-chip :key="index" v-for="(ch, index) in addfieldselection" close @input="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
                               </v-flex>
                               <v-flex v-else><span v-t="'Please select metadata fields from the list'"></span></v-flex>
                             </v-layout>
@@ -391,9 +391,7 @@
         </v-layout>
   
       </v-tab-item>
-      <v-tab-item class="ma-4">
-        <vue-json-pretty :data="metadatapreview" ref="prettyprint"></vue-json-pretty>
-      </v-tab-item>
+      <v-tab-item class="ma-4 prewrap">{{JSON.stringify(metadatapreview, null, 2)}}</v-tab-item>
       <v-tab-item class="ma-4">
         <p-t-list ref="templates" v-on:load-template="loadTemplate($event)"></p-t-list>
       </v-tab-item>
@@ -404,7 +402,6 @@
 </template>
 
 <script>
-import VueJsonPretty from 'vue-json-pretty'
 import arrays from '../../utils/arrays'
 import jsonLd from '../../utils/json-ld'
 import fields from '../../utils/fields'
@@ -467,7 +464,6 @@ export default {
     PIVocabExtReadonly,
     PISpatialGettyReadonly,
     PIUnknownReadonly,
-    VueJsonPretty,
     PTList
   },
   props: {
@@ -575,7 +571,7 @@ export default {
       this.loading = true
       httpFormData.append('name', this.templatename)
       httpFormData.append('form', JSON.stringify(this.form))
-      var url = self.$store.state.settings.instance.api + '/jsonld/template/add'
+      var url = self.$store.state.instanceconfig.api + '/jsonld/template/add'
       var promise = fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -645,11 +641,11 @@ export default {
           }
         }
       }
-      fetch(self.$store.state.settings.instance.api + '/' + this.submittype + '/create', {
+      fetch(self.$store.state.instanceconfig.api + '/' + this.submittype + '/create', {
         method: 'POST',
         mode: 'cors',
         headers: {
-          //'Authorization': 'Basic ' + base64.encode(self.$store.state.settings.instance.adminuser + ':' + self.$store.state.settings.instance.adminpass),
+          //'Authorization': 'Basic ' + base64.encode(self.$store.state.instanceconfig.adminuser + ':' + self.$store.state.instanceconfig.adminpass),
           'X-XSRF-TOKEN': this.$store.state.user.token
         },
         body: httpFormData
@@ -678,7 +674,7 @@ export default {
       this.loading = true
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
-      fetch(self.$store.state.settings.instance.api + '/object/' + self.targetpid + '/metadata', {
+      fetch(self.$store.state.instanceconfig.api + '/object/' + self.targetpid + '/metadata', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -708,7 +704,6 @@ export default {
     },
     updatePrettyPrint: function () {
       this.metadatapreview = this.getMetadata()
-      this.$refs.prettyprint.$forceUpdate()
     },
     addField: function (arr, f) {
       var newField = arrays.duplicate(arr, f)
@@ -863,5 +858,9 @@ export default {
 <style scoped>
 .v-btn {
   margin: 0;
+}
+
+.prewrap {
+  white-space: pre-wrap;
 }
 </style>

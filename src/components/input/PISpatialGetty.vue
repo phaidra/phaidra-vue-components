@@ -41,6 +41,7 @@
         box
         clearable
         :messages="resolved"
+        browser-autocomplete="off"
       ></v-autocomplete>
     </v-flex>
     <v-flex xs1 v-if="actions.length">
@@ -126,7 +127,7 @@ export default {
 
         var query = qs.stringify(params)
 
-        fetch(self.$store.state.settings.instance.api + '/resolve/?' + query, {
+        fetch(self.$store.state.instanceconfig.api + '/resolve/?' + query, {
           method: 'GET',
           mode: 'cors'
         })
@@ -184,7 +185,7 @@ export default {
 
       var query = qs.stringify(params)
 
-      fetch(self.$store.state.settings.global.suggesters.getty + '?' + query, {
+      fetch(self.$store.state.appconfig.suggesters.getty + '?' + query, {
         method: 'GET',
         mode: 'cors'
       })

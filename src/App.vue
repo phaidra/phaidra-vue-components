@@ -278,13 +278,13 @@ export default {
       return this.$store.state.user.token
     },
     alerts: function () {
-      return this.$store.state.alerts.alerts
+      return this.$store.state.alerts
     },
     vocabularies: function () {
       return this.$store.state.vocabulary.vocabularies
     },
     instance: function() {
-      return this.$store.state.settings.instance
+      return this.$store.state.instanceconfig
     }
   },
   data () {
@@ -500,7 +500,7 @@ export default {
     loadMetadata: function (pid) {
       this.loadedMetadata = []
       var self = this
-      var url = self.$store.state.settings.instance.api + '/object/' + pid + '/metadata?mode=resolved'
+      var url = self.$store.state.instanceconfig.api + '/object/' + pid + '/metadata?mode=resolved'
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors'
@@ -538,7 +538,6 @@ export default {
     },
     logout: function () {
       this.$store.dispatch('logout')
-      document.cookie = 'X-XSRF-TOKEN='
     },
     objectCreated: function (event) {
       this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + event + ' created' }])
@@ -557,14 +556,6 @@ export default {
     },    
     dismiss: function (alert) {
       this.$store.commit('clearAlert', alert)
-    },
-    getCookie: function (name) {
-      var value = "; " + document.cookie
-      var parts = value.split("; " + name + "=")
-      if (parts.length == 2) {
-        var val = parts.pop().split(";").shift()
-        return val === ' ' ? null : val
-      }
     },
     resetForm: function (cm) {
       if (cm === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ') {
@@ -701,18 +692,12 @@ export default {
     }
   },
   mounted: function () {
-    var token = this.getCookie('X-XSRF-TOKEN')
-    if (token) {
-      // TODO init userdata if setting token from cookie
-      this.$store.commit('setToken', token)
-    }
-
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
     this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
-    this.$store.commit('initStore') // this commits initStore in every store module which has it
+    this.$store.commit('initStore')
 
     this.createContainerForm()
   }

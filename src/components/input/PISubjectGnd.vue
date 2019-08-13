@@ -104,7 +104,7 @@ export default {
 
         var query = qs.stringify(params)
 
-        fetch(self.$store.state.settings.instance.api + '/resolve/?' + query, {
+        fetch(self.$store.state.instanceconfig.api + '/resolve/?' + query, {
           method: 'GET',
           mode: 'cors'
         })
@@ -162,7 +162,7 @@ export default {
 
       var query = qs.stringify(params)
 
-      fetch(self.$store.state.settings.global.suggesters.gnd + '?' + query, {
+      fetch(self.$store.state.appconfig.suggesters.gnd + '?' + query, {
         method: 'GET',
         mode: 'cors'
       })
