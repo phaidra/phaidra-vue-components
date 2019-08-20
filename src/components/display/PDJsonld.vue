@@ -109,6 +109,10 @@
           <p-d-series :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'series'+j" ></p-d-series>
         </template>
 
+        <template v-else-if="p==='rdau:P60101'" slot="rdau:P60101">
+          <p-d-series :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'seriesbook'+j" ></p-d-series>
+        </template>
+
         <template v-else-if="p==='bf:provisionActivity'" slot="bf:provisionActivity">
           <p-d-bf-publication :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'bfpubl'+j" ></p-d-bf-publication>
         </template>

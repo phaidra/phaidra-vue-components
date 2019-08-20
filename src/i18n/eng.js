@@ -45,6 +45,7 @@ export default {
   'phaidra:dateAccessioned': 'Date accessioned',
 
   'rdau:P60193': 'Journal/Series',
+  'rdau:P60101': 'Series/Part of',
   'rdau:P60227': 'Is motion picture adaptation of',
   'bf:provisionActivity': 'Provision activity: Publication',
   'cito:cites': 'Cites',

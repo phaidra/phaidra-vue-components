@@ -66,7 +66,7 @@ export default {
         colorder.push({pid: m.pid, pos: i})
       }
       var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify({metadata: {members: colorder}}))      
+      httpFormData.append('metadata', JSON.stringify({metadata: {members: colorder}}))
       fetch(self.instance.api + '/' + this.cmodel.toLowerCase() + '/' + self.pid + '/members/order', {
         method: 'POST',
         mode: 'cors',

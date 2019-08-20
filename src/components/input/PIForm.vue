@@ -345,7 +345,7 @@
                           </template>
                         </v-list>
                       </v-card-text>
-                      <v-divider :key="'divi'+f.id"></v-divider>
+                      <v-divider :key="'divi'+s.id"></v-divider>
                       <v-card-actions>
                         <v-layout row>
                           <v-flex>

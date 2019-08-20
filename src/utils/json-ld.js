@@ -162,6 +162,7 @@ export default {
               break
 
             case 'rdau:P60193':
+            case 'rdau:P60101':
               f = fields.getField('series')             
               if (value[i]['dce:title']) {
                 for (let t of value[i]['dce:title']){
@@ -1415,6 +1416,7 @@ export default {
           break
 
         case 'rdau:P60193':
+        case 'rdau:P60101':
           if (f.title || f.volume || f.issue || f.issued || f.issn || f.identifier ) {
             this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier ? [f.identifier] : null))
           }

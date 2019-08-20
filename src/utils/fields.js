@@ -825,6 +825,7 @@ const predicateOrder = [
   'schema:duration',
 
   'rdau:P60193',
+  'rdau:P60101',
   'bf:provisionActivity',
   'rdau:P60227',
   'frapo:hasFundingAgency',
