@@ -1,6 +1,6 @@
 <template>
-  <v-layout row>
-    <v-flex xs8>
+  <v-row >
+    <v-col cols="8">
       <v-autocomplete
         v-model="model"
         v-on:input="$emit('input', $event)"
@@ -17,20 +17,22 @@
         clearable
         :messages="resolved"
       ></v-autocomplete>
-    </v-flex>
-    <v-flex xs1 v-if="actions.length">
+    </v-col>
+    <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
-        <v-btn slot="activator" icon>
-          <v-icon>more_vert</v-icon>
-        </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" icon>
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+        </template>
         <v-list>
-          <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-            <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-          </v-list-tile>
+          <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+            <v-list-item-title>{{ action.title }}</v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -108,28 +110,28 @@ export default {
           method: 'GET',
           mode: 'cors'
         })
-        .then(function (response) {
-          return response.json()
-        })
-        .then(function (json) {
-          self.loading = false
-          self.preflabel = json[uri]['skos:prefLabel']
-          self.rdfslabel = json[uri]['rdfs:label']
-          if (self.rdfslabel) {
-            var rdfslabelarr = []
-            for (var i = 0; i < self.rdfslabel.length; i++) {
-              rdfslabelarr.push(self.rdfslabel[i]['@value'])
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (json) {
+            self.loading = false
+            self.preflabel = json[uri]['skos:prefLabel']
+            self.rdfslabel = json[uri]['rdfs:label']
+            if (self.rdfslabel) {
+              var rdfslabelarr = []
+              for (var i = 0; i < self.rdfslabel.length; i++) {
+                rdfslabelarr.push(self.rdfslabel[i]['@value'])
+              }
+              self.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'
+            } else {
+              self.resolved = ''
             }
-            self.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'
-          } else {
-            self.resolved = ''
-          }
-          self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel })
-        })
-        .catch(function (error) {
-          console.log(error)
-          self.loading = false
-        })
+            self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel })
+          })
+          .catch(function (error) {
+            console.log(error)
+            self.loading = false
+          })
       }
     },
     querySuggestionsDebounce (q) {
@@ -166,17 +168,17 @@ export default {
         method: 'GET',
         mode: 'cors'
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        for (var i = 0; i < json[1].length; i++) {
-          self.items.push({ text: json[1][i], value: json[3][i] })
-        }
-        self.loading = false
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-      .finally(() => (self.loading = false))
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          for (var i = 0; i < json[1].length; i++) {
+            self.items.push({ text: json[1][i], value: json[3][i] })
+          }
+          self.loading = false
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+        .finally(() => (self.loading = false))
     }
   },
   mounted: function () {

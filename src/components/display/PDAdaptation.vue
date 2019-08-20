@@ -1,43 +1,43 @@
 <template>
-  <v-layout row>
-    <v-flex xs10>
+  <v-row >
+    <v-col cols="10">
       <v-card>
         <v-card-title class="subheading grey white--text">
           <span>{{ $t(p) }}</span>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
-          <v-layout row wrap>
+          <v-row  >
             <template v-for="(title, j) in o['dce:title']">
               <template v-for="(mt, i) in title['bf:mainTitle']">
-                <v-flex md4 xs12 class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-flex>
-                <v-flex md8 xs12 :key="'mtv'+i">
-                  <v-layout column>
-                    <v-flex class="valuefield">{{ mt['@value'] }}</v-flex>
+                <v-col md="4" cols="12" class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-col>
+                <v-col md="8" cols="12" :key="'mtv'+i">
+                  <v-row>
+                    <v-col class="valuefield">{{ mt['@value'] }}</v-col>
                     <template v-for="(st, i) in title['bf:subtitle']">
-                      <v-flex class="valuefield" :key="'stv'+i">{{ st['@value'] }}</v-flex>
+                      <v-col class="valuefield" :key="'stv'+i">{{ st['@value'] }}</v-col>
                     </template>
-                  </v-layout>
-                </v-flex>
+                  </v-row>
+                </v-col>
               </template>
             </template>
-          </v-layout>
-          <v-layout v-for="(obj, pred, i) in o" :key="'role' + i" row wrap>
+          </v-row>
+          <v-row v-for="(obj, pred, i) in o" :key="'role' + i"  >
             <template v-if="pred.startsWith('role')">
-              <v-flex md4 xs12 class="pdlabel primary--text">{{ getLocalizedTermLabel('rolepredicate', pred) }}</v-flex>
-              <v-flex md8 xs12 v-for="(n, i) in obj" :key="'adpname' + i">
-                <v-layout column>
-                  <v-flex>
+              <v-col md="4" cols="12" class="pdlabel primary--text">{{ getLocalizedTermLabel('rolepredicate', pred) }}</v-col>
+              <v-col md="8" cols="12" v-for="(n, i) in obj" :key="'adpname' + i">
+                <v-row>
+                  <v-col>
                     <template class="valuefield" v-for="(gn) in n['schema:givenName']">{{ gn['@value'] }}</template><template class="valuefield" v-for="(fn) in n['schema:familyName']"> {{ fn['@value'] }}</template><template class="valuefield" v-for="(fn) in n['schema:name']"> {{ fn['@value'] }}</template> <template v-if="n['schema:affiliation']" class="grey--text"><template v-for="(af) in n['schema:affiliation']"><template class="valuefield" v-for="(afn) in af"> {{ afn['@value'] }}</template></template></template>
-                  </v-flex>
-                </v-layout>
-              </v-flex>
+                  </v-col>
+                </v-row>
+              </v-col>
             </template>
-          </v-layout>
+          </v-row>
         </v-card-text>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -57,4 +57,3 @@ export default {
   }
 }
 </script>
-

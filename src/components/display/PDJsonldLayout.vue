@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <v-layout column>
+    <v-row>
       <slot name="dce:title"></slot>
       <slot name="role"></slot>
       <slot name="bf:note"></slot>
       <slot name="bf:tableOfContents"></slot>
-      
+
       <slot name="edm:hasType"></slot>
       <slot name="schema:genre"></slot>
 
@@ -77,7 +77,7 @@
       <slot name="dcterms:subject"></slot>
 
       <slot name="unknown-predicate"></slot>
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 <script>

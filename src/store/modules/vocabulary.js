@@ -325,7 +325,7 @@ const state = {
         { '@id': 'role:wat', 'skos:prefLabel': { 'eng': 'Writer of added text', 'deu': 'Writer of added text', 'ita': 'Writer of added text' } },
         { '@id': 'role:win', 'skos:prefLabel': { 'eng': 'Writer of introduction', 'deu': 'Writer of introduction', 'ita': 'Writer of introduction' } },
         { '@id': 'role:wpr', 'skos:prefLabel': { 'eng': 'Writer of preface', 'deu': 'Writer of preface', 'ita': 'Writer of preface' } },
-        { '@id': 'role:wst', 'skos:prefLabel': { 'eng': 'Writer of supplementary textual content', 'deu': 'Writer of supplementary textual content', 'ita': 'Writer of supplementary textual content' } },
+        { '@id': 'role:wst', 'skos:prefLabel': { 'eng': 'Writer of supplementary textual content', 'deu': 'Writer of supplementary textual content', 'ita': 'Writer of supplementary textual content' } }
       ],
       loaded: true
     },
@@ -335,42 +335,42 @@ const state = {
     },
     'mimetypes': {
       terms: [
-        { '@id': 'image/jpeg', 'skos:prefLabel': {'eng': 'JPG/JPEG'} },
-        { '@id': 'image/tiff', 'skos:prefLabel': {'eng': 'TIFF'} },
-        { '@id': 'image/gif', 'skos:prefLabel': {'eng': 'GIF'} },
-        { '@id': 'image/png', 'skos:prefLabel': {'eng': 'PNG'} },
-        { '@id': 'image/x-ms-bmp', 'skos:prefLabel': {'eng': 'BMP'} },
-        { '@id': 'audio/wav', 'skos:prefLabel': {'eng': 'WAVE'} },
-        { '@id': 'audio/mpeg', 'skos:prefLabel': {'eng': 'MP3'} },
-        { '@id': 'audio/flac', 'skos:prefLabel': {'eng': 'FLAC'} },
-        { '@id': 'audio/ogg', 'skos:prefLabel': {'eng': 'Ogg'} },
-        { '@id': 'application/pdf', 'skos:prefLabel': {'eng': 'PDF'} },
-        { '@id': 'video/mpeg', 'skos:prefLabel': {'eng': 'MPEG'} },
-        { '@id': 'video/avi', 'skos:prefLabel': {'eng': 'AVI'} },
-        { '@id': 'video/mp4', 'skos:prefLabel': {'eng': 'MPEG-4'} },
-        { '@id': 'video/quicktime', 'skos:prefLabel': {'eng': 'Quicktime'} },
-        { '@id': 'video/x-matroska', 'skos:prefLabel': {'eng': 'MKV'} },
-        { '@id': 'application/x-iso9660-image', 'skos:prefLabel': {'eng': 'ISO'} },
+        { '@id': 'image/jpeg', 'skos:prefLabel': { 'eng': 'JPG/JPEG' } },
+        { '@id': 'image/tiff', 'skos:prefLabel': { 'eng': 'TIFF' } },
+        { '@id': 'image/gif', 'skos:prefLabel': { 'eng': 'GIF' } },
+        { '@id': 'image/png', 'skos:prefLabel': { 'eng': 'PNG' } },
+        { '@id': 'image/x-ms-bmp', 'skos:prefLabel': { 'eng': 'BMP' } },
+        { '@id': 'audio/wav', 'skos:prefLabel': { 'eng': 'WAVE' } },
+        { '@id': 'audio/mpeg', 'skos:prefLabel': { 'eng': 'MP3' } },
+        { '@id': 'audio/flac', 'skos:prefLabel': { 'eng': 'FLAC' } },
+        { '@id': 'audio/ogg', 'skos:prefLabel': { 'eng': 'Ogg' } },
+        { '@id': 'application/pdf', 'skos:prefLabel': { 'eng': 'PDF' } },
+        { '@id': 'video/mpeg', 'skos:prefLabel': { 'eng': 'MPEG' } },
+        { '@id': 'video/avi', 'skos:prefLabel': { 'eng': 'AVI' } },
+        { '@id': 'video/mp4', 'skos:prefLabel': { 'eng': 'MPEG-4' } },
+        { '@id': 'video/quicktime', 'skos:prefLabel': { 'eng': 'Quicktime' } },
+        { '@id': 'video/x-matroska', 'skos:prefLabel': { 'eng': 'MKV' } },
+        { '@id': 'application/x-iso9660-image', 'skos:prefLabel': { 'eng': 'ISO' } }
       ],
       loaded: true
     },
     'licenses': {
       terms: [
-        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': {'eng': '© All rights reserved'}, 'img': 'cc-by.png' },
-        { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': {'eng': 'CC BY 4.0 International'}, 'img': 'cc-by.png' },
-        { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC 4.0 International'}, 'img': 'cc-by-nc.png' },
-        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-ND 4.0 International'}, 'img': 'cc-by-nc-nd.png' },
-        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-NC-SA 4.0 International'}, 'img': 'cc-by-nc-sa.png' },
-        { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:prefLabel': {'eng': 'CC BY-ND 4.0 International'}, 'img': 'cc-by-nd.png' },
-        { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:prefLabel': {'eng': 'CC BY-SA 4.0 International'}, 'img': 'cc-by-sa.png' }
+        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': { 'eng': '© All rights reserved' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': { 'eng': 'CC BY 4.0 International' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC 4.0 International' }, 'img': 'cc-by-nc.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 4.0 International' }, 'img': 'cc-by-nc-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 4.0 International' }, 'img': 'cc-by-nc-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-ND 4.0 International' }, 'img': 'cc-by-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-SA 4.0 International' }, 'img': 'cc-by-sa.png' }
       ],
       loaded: true
     },
     'uncefact': {
       terms: [
-        { '@id': 'MTR', 'skos:prefLabel': {'eng': 'm'} },
-        { '@id': 'CMT', 'skos:prefLabel': {'eng': 'cm'} },
-        { '@id': 'MMT', 'skos:prefLabel': {'eng': 'mm'} }
+        { '@id': 'MTR', 'skos:prefLabel': { 'eng': 'm' } },
+        { '@id': 'CMT', 'skos:prefLabel': { 'eng': 'cm' } },
+        { '@id': 'MMT', 'skos:prefLabel': { 'eng': 'mm' } }
       ],
       loaded: true
     },
@@ -480,7 +480,7 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/8A6X-FKB1', 'skos:prefLabel': { 'eng': 'musical notation' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/7CAB-P987', 'skos:prefLabel': { 'eng': 'photograph' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/YBTD-Q94N', 'skos:prefLabel': { 'eng': 'railroad bridge' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QT7P-HNZB', 'skos:prefLabel': { 'eng': 'tribe (kinship group)' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/QT7P-HNZB', 'skos:prefLabel': { 'eng': 'tribe (kinship group)' } }
       ],
       loaded: true
     },
@@ -516,7 +516,7 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/4DQY-TNPT', 'skos:prefLabel': { 'eng': 'FSK ab 12 freigegeben' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/HSDH-MD0J', 'skos:prefLabel': { 'eng': 'FSK ab 16 freigegeben' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/F2VP-9Z07', 'skos:prefLabel': { 'eng': 'FSK ab 18 freigegeben' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/C2TK-3DTQ', 'skos:prefLabel': { 'eng': 'Freigegeben gemäß §14 JuSchG FSK' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/C2TK-3DTQ', 'skos:prefLabel': { 'eng': 'Freigegeben gemäß §14 JuSchG FSK' } }
       ],
       loaded: true
     },

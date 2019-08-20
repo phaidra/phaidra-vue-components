@@ -1,46 +1,48 @@
 <template>
 
-  <v-layout row>
-    <v-flex xs12>
+  <v-row >
+    <v-col cols="12">
 
       <v-card >
         <v-card-title class="subheading grey white--text">
             <span>{{ $t(label) }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <v-btn slot="activator" icon dark>
-                <v-icon dark>more_vert</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" icon dark>
+                  <v-icon dark>more_vert</v-icon>
+                </v-btn>
+              </template>
               <v-list>
-                <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-                  <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-                </v-list-tile>
+                <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+                  <v-list-item-title>{{ action.title }}</v-list-item-title>
+                </v-list-item>
               </v-list>
             </v-menu>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
 
-          <v-layout column>
-            <v-flex>
-              <v-layout row>
-                <v-flex xs4>
+          <v-row>
+            <v-col>
+              <v-row >
+                <v-col cols="4">
                   <v-text-field
                     :value="title"
                     :label="$t('Title')"
                     v-on:blur="$emit('input-title',$event.target.value)"
                     box
                   ></v-text-field>
-                </v-flex>
-                <v-flex xs4>
+                </v-col>
+                <v-col cols="4">
                   <v-text-field
                     :value="subtitle"
                     :label="$t('Subtitle')"
                     v-on:blur="$emit('input-subtitle',$event.target.value)"
                     box
                   ></v-text-field>
-                </v-flex>
-                <v-flex xs4>
+                </v-col>
+                <v-col cols="4">
                   <v-autocomplete
                     :value="getTerm('lang', titleLanguage)"
                     v-on:input="$emit('input-title-language', $event)"
@@ -53,55 +55,55 @@
                     clearable
                   >
                     <template slot="item" slot-scope="{ item }">
-                      <v-list-tile-content two-line>
-                        <v-list-tile-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-                        <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
-                      </v-list-tile-content>
+                      <v-list-item-content two-line>
+                        <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+                        <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                      </v-list-item-content>
                     </template>
                     <template slot="selection" slot-scope="{ item }">
-                      <v-list-tile-content>
-                        <v-list-tile-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-                      </v-list-tile-content>
+                      <v-list-item-content>
+                        <v-list-item-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+                      </v-list-item-content>
                     </template>
                   </v-autocomplete>
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
 
-              <v-layout row>
+              <v-row >
                 <template v-if="showname">
-                  <v-flex xs4 >
+                  <v-col cols="4" >
                     <v-text-field
                       :value="name"
                       :label="$t('Name')"
                       v-on:blur="$emit('input-name',$event.target.value)"
                       box
                     ></v-text-field>
-                  </v-flex>
+                  </v-col>
                 </template>
                 <template v-else>
-                  <v-flex xs4>
+                  <v-col cols="4">
                     <v-text-field
                       :value="firstname"
                       :label="$t('Firstname')"
                       v-on:blur="$emit('input-firstname',$event.target.value)"
                       box
                     ></v-text-field>
-                  </v-flex>
-                  <v-flex xs4>
+                  </v-col>
+                  <v-col cols="4">
                     <v-text-field
                       :value="lastname"
                       :label="$t('Lastname')"
                       v-on:blur="$emit('input-lastname',$event.target.value)"
                       box
                     ></v-text-field>
-                  </v-flex>
+                  </v-col>
                 </template>
-                <v-flex xs4>
+                <v-col cols="4">
                   <v-autocomplete
-                    :disabled="disablerole" 
-                    v-on:input="$emit('input-role', $event)" 
-                    :label="$t('Role')" 
-                    :items="vocabularies['rolepredicate'].terms" 
+                    :disabled="disablerole"
+                    v-on:input="$emit('input-role', $event)"
+                    :label="$t('Role')"
+                    :items="vocabularies['rolepredicate'].terms"
                     :value="getTerm('rolepredicate', role)"
                     :filter="autocompleteFilter"
                     box
@@ -109,27 +111,27 @@
                     clearable
                   >
                     <template slot="item" slot-scope="{ item }">
-                      <v-list-tile-content two-line>
-                        <v-list-tile-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
-                        <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
-                      </v-list-tile-content>
+                      <v-list-item-content two-line>
+                        <v-list-item-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                        <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                      </v-list-item-content>
                     </template>
                     <template slot="selection" slot-scope="{ item }">
-                      <v-list-tile-content>
-                        <v-list-tile-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-tile-title>
-                      </v-list-tile-content>
+                      <v-list-item-content>
+                        <v-list-item-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                      </v-list-item-content>
                     </template>
                   </v-autocomplete>
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
 
-            </v-flex>  
-          </v-layout>
+            </v-col>
+          </v-row>
 
         </v-card-text>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

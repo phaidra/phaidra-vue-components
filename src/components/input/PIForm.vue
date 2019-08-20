@@ -1,58 +1,60 @@
 <template>
-  <v-container grid-list-lg v-if="form && form.sections">
+  <v-container  v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
       <v-tab ripple><span v-t="'Metadata editor'"></span><template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
       <v-tab ripple @click="updatePrettyPrint()"><span v-t="'Metadata preview'"></span></v-tab>
       <v-tab v-if="templating" ripple @click="loadTemplates()"><span v-t="'Templates'"></span></v-tab>
     </v-tabs>
-  
+
     <v-tabs-items v-model="activetab">
       <v-tab-item class="pa-3" v-if="form">
 
-        <v-layout v-for="(s) in this.form.sections" :key="s.id" column wrap class="ma-3">
+        <v-row v-for="(s) in this.form.sections" :key="s.id" class="ma-3">
           <v-card v-if="s.type !== 'accessrights'">
             <v-card-title class="headline grey white--text">
               <span><span v-t="s.title"></span></span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
               <v-menu open-on-hover bottom offset-y v-if="!s.disablemenu">
-                <v-btn slot="activator" icon dark>
-                  <v-icon dark>more_vert</v-icon>
-                </v-btn>
+                <template v-slot:activator="{ on }">
+                  <v-btn v-on="on" icon dark>
+                    <v-icon dark>more_vert</v-icon>
+                  </v-btn>
+                </template>
                 <v-list>
-                  <v-list-tile v-if="s.multiplicable && (s.type === 'member') || (s.type === 'phaidra:Subject')" @click="addSection(s)">
-                    <v-list-tile-title><span v-t="'Duplicate'"></span></v-list-tile-title>
-                  </v-list-tile>
-                  <v-list-tile v-if="s.removable && (s.type != 'digitalobject')" @click="removeSection(s)">
-                    <v-list-tile-title><span v-t="'Remove'"></span></v-list-tile-title>
-                  </v-list-tile>
-                  <v-list-tile v-if="s.type === 'member'" @click="sortMemberUp(s)">
-                    <v-list-tile-title><span v-t="'Move up'"></span></v-list-tile-title>
-                  </v-list-tile>
-                  <v-list-tile v-if="s.type === 'member'" @click="sortMemberDown(s)">
-                    <v-list-tile-title><span v-t="'Move down'"></span></v-list-tile-title>
-                  </v-list-tile>
-                  <v-list-tile v-if="s.type === 'digitalobject'" @click="$emit('add-phaidrasubject-section', s)">
-                    <v-list-tile-title><span v-t="'Add subject metadata section'"></span></v-list-tile-title>
-                  </v-list-tile>
+                  <v-list-item v-if="s.multiplicable && (s.type === 'member') || (s.type === 'phaidra:Subject')" @click="addSection(s)">
+                    <v-list-item-title><span v-t="'Duplicate'"></span></v-list-item-title>
+                  </v-list-item>
+                  <v-list-item v-if="s.removable && (s.type != 'digitalobject')" @click="removeSection(s)">
+                    <v-list-item-title><span v-t="'Remove'"></span></v-list-item-title>
+                  </v-list-item>
+                  <v-list-item v-if="s.type === 'member'" @click="sortMemberUp(s)">
+                    <v-list-item-title><span v-t="'Move up'"></span></v-list-item-title>
+                  </v-list-item>
+                  <v-list-item v-if="s.type === 'member'" @click="sortMemberDown(s)">
+                    <v-list-item-title><span v-t="'Move down'"></span></v-list-item-title>
+                  </v-list-item>
+                  <v-list-item v-if="s.type === 'digitalobject'" @click="$emit('add-phaidrasubject-section', s)">
+                    <v-list-item-title><span v-t="'Add subject metadata section'"></span></v-list-item-title>
+                  </v-list-item>
                 </v-list>
               </v-menu>
             </v-card-title>
             <v-card-text class="mt-4">
 
-              <v-layout column wrap>
+              <v-row >
                 <template v-for="(f) in s.fields">
-                  <v-flex offset-xs1 v-if="f.component === 'p-text-field'" :key="f.id">
-                    <p-i-text-field             
+                  <v-col offset="1" v-if="f.component === 'p-text-field'" :key="f.id">
+                    <p-i-text-field
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
                       v-on:input-language="setSelected(f, 'language', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-text-field>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-text-field-suggest'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-text-field-suggest'" :key="f.id">
                     <p-i-text-field-suggest
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -60,9 +62,9 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-text-field-suggest>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-keyword'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-keyword'" :key="f.id">
                     <p-i-keyword
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -70,9 +72,9 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-keyword>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-if="f.component === 'p-title'" :key="f.id">
+                  <v-col offset="1" v-if="f.component === 'p-title'" :key="f.id">
                     <p-i-title
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
@@ -83,20 +85,20 @@
                       v-on:up="sortFieldUp(s.fields, f)"
                       v-on:down="sortFieldDown(s.fields, f)"
                     ></p-i-title>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 xs4 v-else-if="f.component === 'p-select'" :key="f.id">
+                  <v-col offset="1" cols="4" v-else-if="f.component === 'p-select'" :key="f.id">
                     <p-i-select
                       v-bind.sync="f"
                       v-on:input="selectInput(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-select>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 xs4 v-else-if="f.component === 'p-select-text'" :key="f.id">
+                  <v-col offset="1" cols="4" v-else-if="f.component === 'p-select-text'" :key="f.id">
                     <p-i-select-text
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input="f.value=$event"
                       v-on:input-select="f.selectvalue=$event"
                       v-on:input-text="f.textvalue=$event"
@@ -104,28 +106,28 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-select-text>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-date-edtf'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-date-edtf'" :key="f.id">
                     <p-i-date-edtf
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input-date="f.value=$event"
                       v-on:input-date-type="setSelected(f, 'type', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-date-edtf>        
-                  </v-flex>
+                    ></p-i-date-edtf>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-duration'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-duration'" :key="f.id">
                     <p-i-duration
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input="f.value=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-duration>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-series'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-series'" :key="f.id">
                     <p-i-series
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
@@ -138,9 +140,9 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-series>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-citation'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-citation'" :key="f.id">
                     <p-i-citation
                       v-bind.sync="f"
                       v-on:input-citation-type="setSelected(f, 'type', $event)"
@@ -150,9 +152,9 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-citation>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-bf-publication'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-bf-publication'" :key="f.id">
                     <p-i-bf-publication
                       v-bind.sync="f"
                       v-on:input-publisher-name="f.publisherName=$event"
@@ -161,9 +163,9 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-bf-publication>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-adaptation'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-adaptation'" :key="f.id">
                     <p-i-adaptation
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
@@ -176,9 +178,9 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-adaptation>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-entity'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-entity'" :key="f.id">
                     <p-i-entity
                       v-bind.sync="f"
                       v-on:input-firstname="f.firstname=$event"
@@ -192,72 +194,72 @@
                       v-on:up="sortFieldUp(s.fields, f)"
                       v-on:down="sortFieldDown(s.fields, f)"
                     ></p-i-entity>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-subject-gnd'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-subject-gnd'" :key="f.id">
                     <p-i-subject-gnd
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input="f.value=$event"
                       v-on:resolve="updateSubject(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-subject-gnd>        
-                  </v-flex>
+                    ></p-i-subject-gnd>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-spatial-getty'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-spatial-getty'" :key="f.id">
                     <p-i-spatial-getty
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input="f.value=$event"
                       v-on:input-place-type="setSelected(f, 'type', $event)"
                       v-on:resolve="updatePlace(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-spatial-getty>        
-                  </v-flex>
+                    ></p-i-spatial-getty>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-spatial-text'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-spatial-text'" :key="f.id">
                     <p-i-spatial-text
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input="f.value=$event"
                       v-on:input-place-type="setSelected(f, 'type', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-spatial-text>        
-                  </v-flex>
+                    ></p-i-spatial-text>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-dimension'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-dimension'" :key="f.id">
                     <p-i-dimension
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input-value="f.value=$event"
                       v-on:input-unit="setSelected(f, 'unitCode', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-dimension>        
-                  </v-flex>
+                    ></p-i-dimension>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-literal'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-literal'" :key="f.id">
                     <p-i-literal
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input-value="f.value=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-literal>        
-                  </v-flex>
+                    ></p-i-literal>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-study-plan'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-study-plan'" :key="f.id">
                     <p-i-study-plan
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input-name="f.name=$event"
                       v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                       v-on:input-notation="f.notation=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-study-plan>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-project'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-project'" :key="f.id">
                     <p-i-project
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input-name="f.name=$event"
                       v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                       v-on:input-description="f.description=$event"
@@ -267,113 +269,115 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-project>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-funder'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-funder'" :key="f.id">
                     <p-i-funder
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input-name="f.name=$event"
                       v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                       v-on:input-identifier="f.identifier=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-funder>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-association'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-association'" :key="f.id">
                     <p-i-association
-                      v-bind.sync="f" 
+                      v-bind.sync="f"
                       v-on:input="selectInput(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-association>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-filename-readonly'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-filename-readonly'" :key="f.id">
                     <p-i-filename-readonly v-bind.sync="f"></p-i-filename-readonly>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-unknown-readonly'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'p-unknown-readonly'" :key="f.id">
                     <p-i-unknown-readonly v-bind.sync="f"></p-i-unknown-readonly>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-vocab-ext-readonly'" :key="f.id">
-                    <p-i-vocab-ext-readonly 
+                  <v-col offset="1" v-else-if="f.component === 'p-vocab-ext-readonly'" :key="f.id">
+                    <p-i-vocab-ext-readonly
                       v-bind.sync="f"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-vocab-ext-readonly>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'p-spatial-getty-readonly'" :key="f.id">
-                    <p-i-spatial-getty-readonly 
+                  <v-col offset="1" v-else-if="f.component === 'p-spatial-getty-readonly'" :key="f.id">
+                    <p-i-spatial-getty-readonly
                       v-bind.sync="f"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-spatial-getty-readonly>
-                  </v-flex>
+                  </v-col>
 
-                  <v-flex offset-xs1 v-else-if="f.component === 'input-file'" :key="f.id">
+                  <v-col offset="1" v-else-if="f.component === 'input-file'" :key="f.id">
                     <p-i-file
                       v-bind.sync="f"
                       v-on:input-file="setFilename(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-file>
-                  </v-flex>
+                  </v-col>
 
                 </template>
 
-                <v-flex v-if="addbutton" offset-xs1 class="pb-4">
+                <v-col v-if="addbutton" offset="1" class="pb-4">
                   <v-dialog v-model="s['adddialogue']" scrollable width="700px">
-
-                    <v-btn slot="activator" fab depressed small color="grey lighten-3">
-                      <v-icon color="grey darken-1">add</v-icon>
-                    </v-btn>
-
+                    <template v-slot:activator="{ on }">
+                      <v-btn v-on="on" fab depressed small color="grey lighten-3">
+                        <v-icon color="grey darken-1">add</v-icon>
+                      </v-btn>
+                    </template>
                     <v-card>
                       <v-card-title class="grey white--text"><span v-t="'Add metadata fields'"></span></v-card-title>
                       <v-card-text>
                         <v-list three-line >
                           <v-text-field clearable label="Search..." append-icon="search" v-model="searchfieldsinput"></v-text-field>
                           <template v-for="field in filteredMetadatafields">
-                            <v-list-tile :key="field.id" @click="addfieldselection.push(field)">
-                              <v-list-tile-content>
-                                <v-list-tile-title>{{field.fieldname}}</v-list-tile-title>
-                                <v-list-tile-sub-title>{{field.definition}}</v-list-tile-sub-title>
-                              </v-list-tile-content>
-                            </v-list-tile>
+                            <v-list-item :key="field.id" @click="addfieldselection.push(field)">
+                              <v-list-item-content>
+                                <v-list-item-title>{{field.fieldname}}</v-list-item-title>
+                                <v-list-item-subtitle>{{field.definition}}</v-list-item-subtitle>
+                              </v-list-item-content>
+                            </v-list-item>
                             <v-divider :key="'divi'+field.id"></v-divider>
                           </template>
                         </v-list>
                       </v-card-text>
                       <v-divider :key="'divi'+s.id"></v-divider>
                       <v-card-actions>
-                        <v-layout row>
-                          <v-flex>
-                            <v-layout column>
-                              <v-flex v-if="addfieldselection.length > 0">
+                        <v-row >
+                          <v-col>
+                            <v-row>
+                              <v-col v-if="addfieldselection.length > 0">
                                 <span v-t="'Selected fields:'"></span> <v-chip :key="index" v-for="(ch, index) in addfieldselection" close @input="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
-                              </v-flex>
-                              <v-flex v-else><span v-t="'Please select metadata fields from the list'"></span></v-flex>
-                            </v-layout>
-                          </v-flex>
+                              </v-col>
+                              <v-col v-else><span v-t="'Please select metadata fields from the list'"></span></v-col>
+                            </v-row>
+                          </v-col>
                           <v-spacer></v-spacer>
                           <v-btn color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
                           <v-btn color="primary" @click="addFields(s)"><span v-t="'Add'"></span></v-btn>
-                        </v-layout>
+                        </v-row>
                       </v-card-actions>
                     </v-card>
 
                   </v-dialog>
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
             </v-card-text>
 
           </v-card>
-        </v-layout>
+        </v-row>
 
-        <v-layout align-center justify-end row class="ma-3">
+        <v-row align="center" justify="end"  class="ma-3">
           <v-dialog v-if="templating" v-model="templatedialog" width="500">
-            <v-btn class="mr-3" slot="activator" dark raised :loading="loading" :disabled="loading" color="grey"><span v-t="'Save as template'"></span></v-btn>
+            <template v-slot:activator="{ on }">
+              <v-btn class="mr-3" v-on="on" dark raised :loading="loading" :disabled="loading" color="grey"><span v-t="'Save as template'"></span></v-btn>
+            </template>
             <v-card>
               <v-card-title class="headline grey lighten-2" primary-title><span v-t="'Save as template'"></span></v-card-title>
               <v-card-text>
@@ -388,8 +392,8 @@
           </v-dialog>
           <v-btn v-if="targetpid" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
           <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()"><span v-t="'Submit'"></span></v-btn>
-        </v-layout>
-  
+        </v-row>
+
       </v-tab-item>
       <v-tab-item class="ma-4 prewrap">{{JSON.stringify(metadatapreview, null, 2)}}</v-tab-item>
       <v-tab-item class="ma-4">
@@ -398,7 +402,7 @@
     </v-tabs-items>
 
   </v-container>
- 
+
 </template>
 
 <script>
@@ -488,7 +492,7 @@ export default {
     }
   },
   computed: {
-    submittype: function() {
+    submittype: function () {
       for (let s of this.form.sections) {
         if (s.fields && (s.type !== 'member')) {
           for (let field of s.fields) {
@@ -500,10 +504,10 @@ export default {
       }
       return null
     },
-    filteredMetadatafields() {
+    filteredMetadatafields () {
       let list = fields.getEditableFields()
       if (this.searchfieldsinput) {
-        return list.filter(f => (f.fieldname.toLowerCase().includes(this.searchfieldsinput.toLowerCase()) ||  (f.definition.toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
+        return list.filter(f => (f.fieldname.toLowerCase().includes(this.searchfieldsinput.toLowerCase()) || (f.definition.toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
       } else {
         return list
       }
@@ -542,7 +546,7 @@ export default {
       for (let s of this.form.sections) {
         if (s.type === 'member') {
           i++
-          colorder.push( { member: 'member_' + s.id, pos: i } )
+          colorder.push({ member: 'member_' + s.id, pos: i })
         }
       }
       if (colorder.length > 0) {
@@ -578,20 +582,20 @@ export default {
         },
         body: httpFormData
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        if (json.alerts && json.alerts.length > 0) {
-          self.$store.commit('setAlerts', json.alerts)
-        }
-        self.loading = false
-        self.templatedialog = false
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          if (json.alerts && json.alerts.length > 0) {
+            self.$store.commit('setAlerts', json.alerts)
+          }
+          self.loading = false
+          self.templatedialog = false
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
       return promise
     },
-    getObjectType: function(contentmodel) {
+    getObjectType: function (contentmodel) {
       switch (contentmodel) {
         case 'https://pid.phaidra.org/vocabulary/44TN-P1S0':
           return 'picture'
@@ -626,7 +630,7 @@ export default {
           }
         }
       } else {
-         for (i = 0; i < this.form.sections.length; i++) {
+        for (i = 0; i < this.form.sections.length; i++) {
           s = this.form.sections[i]
           if (s.fields) {
             for (j = 0; j < s.fields.length; j++) {
@@ -643,29 +647,29 @@ export default {
         method: 'POST',
         mode: 'cors',
         headers: {
-          //'Authorization': 'Basic ' + base64.encode(self.$store.state.instanceconfig.adminuser + ':' + self.$store.state.instanceconfig.adminpass),
+          // 'Authorization': 'Basic ' + base64.encode(self.$store.state.instanceconfig.adminuser + ':' + self.$store.state.instanceconfig.adminpass),
           'X-XSRF-TOKEN': this.$store.state.user.token
         },
         body: httpFormData
       })
-      .then(response => response.json())
-      .then(function (json) {
-        if (json.alerts && json.alerts.length > 0) {
-          self.$store.commit('setAlerts', json.alerts)
-        }
-        self.loading = false
-        if (json.status === 200){
-          if (json.pid) {
-            self.$emit('object-created', json.pid)
+        .then(response => response.json())
+        .then(function (json) {
+          if (json.alerts && json.alerts.length > 0) {
+            self.$store.commit('setAlerts', json.alerts)
           }
-        }
-        self.$vuetify.goTo(0)
-      })
-      .catch(function (error) {
-        self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-        self.loading = false
-        self.$vuetify.goTo(0)
-      })
+          self.loading = false
+          if (json.status === 200) {
+            if (json.pid) {
+              self.$emit('object-created', json.pid)
+            }
+          }
+          self.$vuetify.goTo(0)
+        })
+        .catch(function (error) {
+          self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+          self.loading = false
+          self.$vuetify.goTo(0)
+        })
     },
     save: function () {
       var self = this
@@ -680,25 +684,25 @@ export default {
         },
         body: httpFormData
       })
-      .then(response => response.json())
-      .then(function (json) {
-        if (json.alerts && json.alerts.length > 0) {
-          if (json.status === 401) {
-            json.alerts.push({ type: 'danger', msg: 'Please log in' })
+        .then(response => response.json())
+        .then(function (json) {
+          if (json.alerts && json.alerts.length > 0) {
+            if (json.status === 401) {
+              json.alerts.push({ type: 'danger', msg: 'Please log in' })
+            }
+            self.$store.commit('setAlerts', json.alerts)
           }
-          self.$store.commit('setAlerts', json.alerts)
-        }
-        self.loading = false
-        if (json.status === 200){
-          self.$emit('object-saved', self.targetpid)
-        }
-        self.$vuetify.goTo(0)
-      })
-      .catch(function (error) {
-        self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-        self.loading = false
-        self.$vuetify.goTo(0)
-      })
+          self.loading = false
+          if (json.status === 200) {
+            self.$emit('object-saved', self.targetpid)
+          }
+          self.$vuetify.goTo(0)
+        })
+        .catch(function (error) {
+          self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+          self.loading = false
+          self.$vuetify.goTo(0)
+        })
     },
     updatePrettyPrint: function () {
       this.metadatapreview = this.getMetadata()
@@ -796,7 +800,7 @@ export default {
     selectInput: function (f, event) {
       if (event) {
         f.value = event['@id']
-        if (event['@type']){
+        if (event['@type']) {
           f.type = event['@type']
         }
         var preflabels = event['skos:prefLabel']

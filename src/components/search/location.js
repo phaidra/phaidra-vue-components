@@ -89,11 +89,11 @@ export function setSearchParams (self, { q, page, pagesize, sortdef, owner, coll
 
     Object.keys(roles).forEach(function (role) {
       if (role === 'bib_roles_pers_aut') {
-        self.pers_authors[0].values = roles[role].values
+        self.persAuthors[0].values = roles[role].values
         // SearchFilters.watch will set "showAuthorFilter = true"
       } else {
         if (role === 'bib_roles_corp_aut') {
-          self.corp_authors[0].values = roles[role].values
+          self.corpAuthors[0].values = roles[role].values
           // SearchFilters.watch will set "showAuthorFilter = true"
         } else {
           self.roles.push({

@@ -1,18 +1,20 @@
 <template>
-  <v-layout row>
-    <v-flex xs10>
+  <v-row >
+    <v-col cols="10">
       <v-card class="mb-4">
         <v-card-title class="headline grey white--text">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
           <v-menu v-if="actions.length" open-on-hover bottom offset-y>
-            <v-btn slot="activator" icon dark>
-              <v-icon dark>more_vert</v-icon>
-            </v-btn>
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on" icon dark>
+                <v-icon dark>more_vert</v-icon>
+              </v-btn>
+            </template>
             <v-list>
-              <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-                <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-              </v-list-tile>
+              <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+                <v-list-item-title>{{ action.title }}</v-list-item-title>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-card-title>
@@ -20,8 +22,8 @@
           <input type="file" v-on:input="$emit('input-file', $event)">
         </v-card-text>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

@@ -3,7 +3,7 @@
     <v-card-title class="subheading grey white--text">{{ $t('Relationships') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4">
-      <v-flex>{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</v-flex>
+      <v-col>{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</v-col>
     </v-card-text>
   </v-card>
 </template>
@@ -19,7 +19,7 @@ export default {
     }
   },
   computed: {
-    instance: function() {
+    instance: function () {
       return this.$store.state.instanceconfig
     }
   },

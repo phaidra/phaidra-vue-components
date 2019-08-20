@@ -1,17 +1,14 @@
 <template>
-  <v-flex>
-    <v-layout row wrap>
-      <v-flex md4 xs12 class="pdlabel primary--text">{{ $t(p) }}</v-flex>
-      <v-flex md8 xs12>
-        <a :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
-        <!--
-        <v-flex>
-          <v-img :src="'../../assets/' + getTermProperty('licenses', o, 'img')" :alt="o" class="license-icon"/>
-        </v-flex>
-        -->
-      </v-flex>
-    </v-layout>
-  </v-flex>
+  <a v-if="hideLabel" :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
+  <v-row v-else>
+    <v-col md="4" cols="12" class="pdlabel primary--text">{{ $t(p) }}</v-col>
+    <v-col md="8" cols="12">
+      <a :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
+      <!--
+        <v-img :src="'../../assets/' + getTermProperty('licenses', o, 'img')" :alt="o" class="license-icon"/>
+      -->
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -27,7 +24,8 @@ export default {
     },
     p: {
       type: String
-    }
+    },
+    hideLabel: Boolean
   }
 }
 </script>

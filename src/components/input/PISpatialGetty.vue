@@ -1,10 +1,10 @@
 <template>
-  <v-layout row>
-    <v-flex xs3>
+  <v-row >
+    <v-col cols="3">
       <v-autocomplete
-        v-on:input="$emit('input-place-type', $event)" 
-        :label="$t('Type of place')" 
-        :items="vocabularies['placepredicate'].terms" 
+        v-on:input="$emit('input-place-type', $event)"
+        :label="$t('Type of place')"
+        :items="vocabularies['placepredicate'].terms"
         :value="getTerm('placepredicate', type)"
         :filter="autocompleteFilter"
         :disabled="disabletype"
@@ -13,19 +13,19 @@
         clearable
       >
         <template slot="item" slot-scope="{ item }">
-          <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-tile-title>
-            <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
-          </v-list-tile-content>
+          <v-list-item-content two-line>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-item-title>
+            <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+          </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
-          <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-tile-title>
-          </v-list-tile-content>
+          <v-list-item-content>
+            <v-list-item-title v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-item-title>
+          </v-list-item-content>
         </template>
       </v-autocomplete>
-    </v-flex>
-    <v-flex xs6>
+    </v-col>
+    <v-col cols="6">
       <v-autocomplete
         v-model="model"
         v-on:input="$emit('input', $event)"
@@ -43,20 +43,22 @@
         :messages="resolved"
         browser-autocomplete="off"
       ></v-autocomplete>
-    </v-flex>
-    <v-flex xs1 v-if="actions.length">
+    </v-col>
+    <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
-        <v-btn slot="activator" icon>
-          <v-icon>more_vert</v-icon>
-        </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" icon>
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+        </template>
         <v-list>
-          <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-            <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-          </v-list-tile>
+          <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+            <v-list-item-title>{{ action.title }}</v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -131,35 +133,35 @@ export default {
           method: 'GET',
           mode: 'cors'
         })
-        .then(function (response) {
-          return response.json()
-        })
-        .then(function (json) {
-          self.loading = false
-          self.preflabel = json[uri]['skos:prefLabel']
-          self.rdfslabel = json[uri]['rdfs:label']
-          for (var i = 0; i < self.rdfslabel.length; i++) {
-            self.resolved = '<a href="' + uri + '" target="_blank">' + self.rdfslabel[i]['@value'] + '</a>'
-          }
-          if(json[uri]['schema:GeoCoordinates']){
-            self.coordinates = [
-              {
-                '@type': 'schema:GeoCoordinates',
-                'schema:latitude': [
-                  json[uri]['schema:GeoCoordinates']['schema:latitude']
-                ],
-                'schema:longitude': [
-                  json[uri]['schema:GeoCoordinates']['schema:longitude']
-                ]
-              }
-            ]
-          }
-          self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel, coordinates: self.coordinates })
-        })
-        .catch(function (error) {
-          console.log(error)
-          self.loading = false
-        })
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (json) {
+            self.loading = false
+            self.preflabel = json[uri]['skos:prefLabel']
+            self.rdfslabel = json[uri]['rdfs:label']
+            for (var i = 0; i < self.rdfslabel.length; i++) {
+              self.resolved = '<a href="' + uri + '" target="_blank">' + self.rdfslabel[i]['@value'] + '</a>'
+            }
+            if (json[uri]['schema:GeoCoordinates']) {
+              self.coordinates = [
+                {
+                  '@type': 'schema:GeoCoordinates',
+                  'schema:latitude': [
+                    json[uri]['schema:GeoCoordinates']['schema:latitude']
+                  ],
+                  'schema:longitude': [
+                    json[uri]['schema:GeoCoordinates']['schema:longitude']
+                  ]
+                }
+              ]
+            }
+            self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel, coordinates: self.coordinates })
+          })
+          .catch(function (error) {
+            console.log(error)
+            self.loading = false
+          })
       }
     },
     querySuggestionsDebounce (q) {
@@ -189,17 +191,17 @@ export default {
         method: 'GET',
         mode: 'cors'
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        for (var i = 0; i < json[1].length; i++) {
-          self.items.push({ text: json[1][i], value: json[3][i] })
-        }
-        self.loading = false
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-      .finally(() => (self.loading = false))
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          for (var i = 0; i < json[1].length; i++) {
+            self.items.push({ text: json[1][i], value: json[3][i] })
+          }
+          self.loading = false
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+        .finally(() => (self.loading = false))
     }
   },
   mounted: function () {

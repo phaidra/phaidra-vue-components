@@ -6,15 +6,15 @@
 </template>
 
 <script>
-import { ElementMixin } from 'vue-slicksort';
+import { ElementMixin } from 'vue-slicksort'
 export default {
-  name: 'sortable-solr-doc',
+  name: 'p-sortable-solr-doc',
   mixins: [ElementMixin],
   props: {
     item: Object
   },
   computed: {
-    instance: function() {
+    instance: function () {
       return this.$store.state.instanceconfig
     }
   }

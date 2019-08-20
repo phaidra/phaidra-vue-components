@@ -1,16 +1,16 @@
 <template>
-  <v-flex>
-    <v-layout v-if="entity" row wrap>
-      <v-flex md4 xs12 class="pdlabel primary--text">{{ getLocalizedTermLabel(this.role) }}</v-flex>
-      <v-flex md8 xs12>
-        <v-layout column>
-          <v-flex>
+  <v-col>
+    <v-row v-if="entity"  >
+      <v-col md="4" cols="12" class="pdlabel primary--text">{{ getLocalizedTermLabel(this.role) }}</v-col>
+      <v-col md="8" cols="12">
+        <v-row>
+          <v-col>
             <template class="valuefield" v-for="(gn) in entity['schema:givenName']">{{ gn['@value'] }}</template><template class="valuefield" v-for="(fn) in entity['schema:familyName']"> {{ fn['@value'] }}</template><template class="valuefield" v-for="(fn) in entity['schema:name']"> {{ fn['@value'] }}</template> <template v-if="entity['schema:affiliation']" class="grey--text"><template v-for="(af) in entity['schema:affiliation']"><template class="valuefield" v-for="(afn) in af"> {{ afn['@value'] }}</template></template></template>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-  </v-flex>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-col>
 </template>
 
 <script>
@@ -36,4 +36,3 @@ export default {
   }
 }
 </script>
-

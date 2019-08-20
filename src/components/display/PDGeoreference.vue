@@ -1,19 +1,19 @@
 <template>
-  <v-flex>
+  <v-col>
     <template v-if="o['skos:prefLabel']">
-      <v-layout row wrap>
-        <v-flex class="pdlabel primary--text" md4 xs12>{{ $t(p) }}<template v-for="(l) in o['skos:prefLabel']"><template v-if="l['@language']"> ({{ l['@language'] }})</template></template></v-flex>
-        <v-flex md8 xs12>
-          <v-layout column>
-            <v-flex class="valuefield" v-for="(l, i) in o['skos:prefLabel']" :key="'gplv'+i">{{ l['@value'] }}</v-flex>
+      <v-row  >
+        <v-col class="pdlabel primary--text" md="4" cols="12">{{ $t(p) }}<template v-for="(l) in o['skos:prefLabel']"><template v-if="l['@language']"> ({{ l['@language'] }})</template></template></v-col>
+        <v-col md="8" cols="12">
+          <v-row>
+            <v-col class="valuefield" v-for="(l, i) in o['skos:prefLabel']" :key="'gplv'+i">{{ l['@value'] }}</v-col>
             <template v-if="o['rdfs:label']">
-              <v-flex class="grey--text valuefield" v-for="(l, i) in o['rdfs:label']" :key="'gl'+i">[{{ l['@value'] }}]</v-flex>
+              <v-col class="grey--text valuefield" v-for="(l, i) in o['rdfs:label']" :key="'gl'+i">[{{ l['@value'] }}]</v-col>
             </template>
-          </v-layout>
-        </v-flex>
-      </v-layout>
+          </v-row>
+        </v-col>
+      </v-row>
     </template>
-  </v-flex>
+  </v-col>
 </template>
 
 <script>
@@ -30,4 +30,3 @@ export default {
   }
 }
 </script>
-

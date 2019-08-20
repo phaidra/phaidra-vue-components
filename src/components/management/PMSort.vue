@@ -3,10 +3,10 @@
     <v-card-title class="subheading grey white--text">{{ $t('Sort') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4" v-if="members.length > 0">
-      <v-flex>{{ $t('Here you can sort members of this object (drag & drop).') }}</v-flex>
-      <SortableList lockAxis="y" v-model="memberscomputed">
-        <SortableSolrDoc v-for="(item, index) in memberscomputed" :index="index" :key="index" :item="item"/>
-      </SortableList>
+      <v-col>{{ $t('Here you can sort members of this object (drag & drop).') }}</v-col>
+      <PSortableList lockAxis="y" v-model="memberscomputed">
+        <PSortableSolrDoc v-for="(item, index) in memberscomputed" :index="index" :key="index" :item="item"/>
+      </PSortableList>
     </v-card-text>
     <v-card-actions v-if="members.length > 0">
       <v-spacer></v-spacer>
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import SortableList from '../utils/SortableList'
-import SortableSolrDoc from '../utils/SortableSolrDoc'
+import PSortableList from '../utils/PSortableList'
+import PSortableSolrDoc from '../utils/PSortableSolrDoc'
 
 export default {
   name: 'p-m-sort',
   components: {
-    SortableSolrDoc,
-    SortableList
+    PSortableSolrDoc,
+    PSortableList
   },
   props: {
     pid: {
@@ -37,7 +37,7 @@ export default {
     }
   },
   computed: {
-    instance: function() {
+    instance: function () {
       return this.$store.state.instanceconfig
     },
     memberscomputed: {
@@ -63,10 +63,10 @@ export default {
       let i = 0
       for (let m of this.membersdata) {
         i++
-        colorder.push({pid: m.pid, pos: i})
+        colorder.push({ pid: m.pid, pos: i })
       }
       var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify({metadata: {members: colorder}}))
+      httpFormData.append('metadata', JSON.stringify({ metadata: { members: colorder } }))
       fetch(self.instance.api + '/' + this.cmodel.toLowerCase() + '/' + self.pid + '/members/order', {
         method: 'POST',
         mode: 'cors',
@@ -75,25 +75,25 @@ export default {
         },
         body: httpFormData
       })
-      .then(response => response.json())
-      .then(function (json) {
-        if (json.alerts && json.alerts.length > 0) {
-          if (json.status === 401) {
-            json.alerts.push({ type: 'danger', msg: 'Please log in' })
+        .then(response => response.json())
+        .then(function (json) {
+          if (json.alerts && json.alerts.length > 0) {
+            if (json.status === 401) {
+              json.alerts.push({ type: 'danger', msg: 'Please log in' })
+            }
+            self.$store.commit('setAlerts', json.alerts)
           }
-          self.$store.commit('setAlerts', json.alerts)
-        }
-        self.loading = false
-        if (json.status === 200){
-          self.$emit('order-saved', self.pid)
-        }
-        self.$vuetify.goTo(0)
-      })
-      .catch(function (error) {
-        self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-        self.loading = false
-        self.$vuetify.goTo(0)
-      })
+          self.loading = false
+          if (json.status === 200) {
+            self.$emit('order-saved', self.pid)
+          }
+          self.$vuetify.goTo(0)
+        })
+        .catch(function (error) {
+          self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+          self.loading = false
+          self.$vuetify.goTo(0)
+        })
     }
   }
 }

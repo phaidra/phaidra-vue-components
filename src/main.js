@@ -9,13 +9,12 @@ import deu from './i18n/deu'
 import ita from './i18n/ita'
 import App from './App.vue'
 import moment from 'moment'
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-Vue.use(Vuetify, {
-  iconfont: 'md'
-})
+Vue.use(Vuetify)
 Vue.use(VueI18n)
 Vue.use(SvgIcon, {
   tagName: 'icon',
@@ -35,6 +34,25 @@ Vue.filter('date', function (value) {
   }
 })
 
+Vue.filter('truncate', function (text, length, clamp) {
+  clamp = clamp || '...'
+  length = length || 500
+
+  if (text.length <= length) return text
+
+  var tcText = text.slice(0, length - clamp.length)
+  var last = tcText.length - 1
+
+  while (last > 0 && tcText[last] !== ' ' && tcText[last] !== clamp[0]) last -= 1
+
+  // Fix for case when text does not have any space
+  last = last || length - clamp.length
+
+  tcText = tcText.slice(0, last)
+
+  return tcText + clamp
+})
+
 const messages = { eng, deu, ita }
 const i18n = new VueI18n({
   locale: 'deu',
@@ -52,7 +70,7 @@ const router = new VueRouter({
       component: {
         template: '<div><b>Details</b> not implemented in PVC demo app</div>'
       }
-    },
+    }
   ]
 })
 
@@ -60,5 +78,6 @@ new Vue({
   store,
   i18n,
   router,
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')

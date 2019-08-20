@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-md>
+  <v-container fluid >
     <ul class="main-ul">
       <li v-for="(f, i) in facetQueries" :key="i">
         <icon @click.native="showFacet(f)" v-if="f.show" name="univie-stop2" class="primary--text"></icon>
@@ -37,15 +37,15 @@
         </ul>
       </li>
       <li>
-        <v-layout column>
-          <v-flex>
-            <v-layout row>
-              <v-flex>
+        <v-row>
+          <v-col>
+            <v-row >
+              <v-col>
                 <icon @click.native="toggleOwnerFilter()" v-if="showOwnerFilter" name="univie-stop2" class="primary--text"></icon>
                 <icon @click.native="toggleOwnerFilter()" v-if="!showOwnerFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
                 <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">{{ $t('Owner') }}</span>
-              </v-flex>
-            </v-layout>
+              </v-col>
+            </v-row>
             <autocomplete
               v-if="showOwnerFilter"
               searchaction="search"
@@ -57,59 +57,59 @@
               :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
               :onSelect="handleOwnerSelect"
             ></autocomplete>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </li>
       <li>
-        <v-layout column>
-          <v-flex>
-            <v-layout row>
-              <v-flex>
+        <v-row>
+          <v-col>
+            <v-row >
+              <v-col>
                 <icon @click.native="toggleAuthorFilter()" v-if="showAuthorFilter" name="univie-stop2" class="primary--text"></icon>
                 <icon @click.native="toggleAuthorFilter()" v-if="!showAuthorFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
                 <span @click="toggleAuthorFilter()" class="facet-label primary--text" :class="{ active: showAuthorFilter }">{{ $t('Authors') }}</span>
-              </v-flex>
-            </v-layout>
-            <v-layout row v-if="showAuthorFilter">
-              <v-flex xs2>
+              </v-col>
+            </v-row>
+            <v-row  v-if="showAuthorFilter">
+              <v-col cols="2">
                 <icon name="material-social-person" class="primary--text" height="100%"></icon>
-              </v-flex>
-              <v-flex xs10>
+              </v-col>
+              <v-col cols="10">
                 <v-combobox
-                  :placeholder="selectPlaceholder('pers_authors')"
+                  :placeholder="selectPlaceholder('persAuthors')"
                   chips
                   clearable
                   multiple
                   v-model="persAuthorsValues" />
-              </v-flex>
-            </v-layout>
-            <v-layout row v-if="showAuthorFilter">
-              <v-flex xs2>
+              </v-col>
+            </v-row>
+            <v-row  v-if="showAuthorFilter">
+              <v-col cols="2">
                 <icon name="material-action-account-balance" class="primary--text" height="100%"></icon>
-              </v-flex>
-              <v-flex xs10>
+              </v-col>
+              <v-col cols="10">
                 <v-combobox
-                  :placeholder="selectPlaceholder('corp_authors')"
+                  :placeholder="selectPlaceholder('corpAuthors')"
                   chips
                   clearable
                   multiple
                   v-model="corpAuthorsValues" />
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </li>
       <li>
-        <v-layout column>
-          <v-flex>
-            <v-layout row>
-              <v-flex>
+        <v-row>
+          <v-col>
+            <v-row >
+              <v-col>
                 <icon @click.native="toggleRoleFilter()" v-if="showRoleFilter" name="univie-stop2" class="primary--text"></icon>
                 <icon @click.native="toggleRoleFilter()" v-if="!showRoleFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
                 <span @click="toggleRoleFilter()" class="facet-label primary--text" :class="{ active: showRoleFilter }">{{ $t('Roles') }}</span>
-              </v-flex>
-            </v-layout>
-            <v-layout column v-if="showRoleFilter">
+              </v-col>
+            </v-row>
+            <v-row v-if="showRoleFilter">
               <v-select
                 :placeholder="$t('Add role') + '...'"
                 :hint="$t('Personal')"
@@ -129,12 +129,12 @@
                 persistent-hint
               ></v-select>
               <div v-for="(role, i) in roles" :key="i" v-if="roles.length > 0" >
-                <v-layout row>
-                  <v-flex xs2>
+                <v-row >
+                  <v-col cols="2">
                     <icon v-if="role.type==='pers'" name="material-social-person" class="primary--text" height="100%"></icon>
                     <icon v-if="role.type==='corp'" name="material-action-account-balance" class="primary--text" height="100%"></icon>
-                  </v-flex>
-                  <v-flex xs8>
+                  </v-col>
+                  <v-col cols="8">
                     <v-combobox
                       :placeholder="$t('ADD_PREFIX') + ' '  + $t(role.label) + ' ' + $t('ADD_SUFFIX') + '...'"
                       chips
@@ -143,16 +143,16 @@
                       :items="role.values"
                       v-model="role.values"
                       @input="setRoleFilterValues(role)" />
-                  </v-flex>
-                  <v-flex xs2>
+                  </v-col>
+                  <v-col cols="2">
                     <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeRoleFilter(role)"></icon>
-                  </v-flex>
-                </v-layout>
+                  </v-col>
+                </v-row>
               </div>
-            </v-layout>
+            </v-row>
 
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </li>
     </ul>
   </v-container>
@@ -176,20 +176,20 @@ export default {
   computed: {
     persAuthorsValues: {
       get () {
-        return this.pers_authors.values()
+        return this.persAuthors.values()
       },
       set (values) {
-        this.pers_authors[0].values = values
+        this.persAuthors[0].values = values
       }
     },
     corpAuthorsValues: {
       get () {
-        return this.corp_authors.values()
+        return this.corpAuthors.values()
       },
       set (values) {
         // it seems chips are manipulating the array directly anyways
         // maybe should provide own filtering function
-        this.corp_authors[0].values = values
+        this.corpAuthors[0].values = values
       }
     }
   },
@@ -202,11 +202,11 @@ export default {
       type: Array,
       required: true
     },
-    pers_authors: {
+    persAuthors: {
       type: Array,
       required: true
     },
-    corp_authors: {
+    corpAuthors: {
       type: Array,
       required: true
     },
@@ -228,7 +228,7 @@ export default {
       marcRoles,
       marcRolesArray: [],
       roles: [],
-      owner: '',
+      owner: ''
     }
   },
   methods: {
@@ -254,9 +254,9 @@ export default {
     toggleAuthorFilter: function () {
       this.showAuthorFilter = !this.showAuthorFilter
       if (!this.showAuthorFilter) {
-        this.pers_authors[0].values = []
-        this.corp_authors[0].values = []
-        this.search({ pers_authors: this.pers_authors, corp_authors: this.corp_authors }) // TODO: should this be in if clause?
+        this.persAuthors[0].values = []
+        this.corpAuthors[0].values = []
+        this.search({ persAuthors: this.persAuthors, corpAuthors: this.corpAuthors }) // TODO: should this be in if clause?
       }
     },
     toggleRoleFilter: function () {
@@ -318,17 +318,17 @@ export default {
         this.showOwnerFilter = true
       }
     },
-    pers_authors: function (v) {
+    persAuthors: function (v) {
       if (v[0].values.length) {
         this.showAuthorFilter = true
         // this.selectedRole.pers // TODO might need something like this
       }
     },
-    corp_authors: function (v) {
+    corpAuthors: function (v) {
       if (v[0].values.length) {
         this.showAuthorFilter = true
       }
-    },
+    }
   }
 }
 </script>

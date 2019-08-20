@@ -668,7 +668,7 @@ const fields = [
     disabletype: false,
     language: '',
     definition: 'Spatial characteristics of the resource. May be a named place or a location specified by its geographic coordinates.'
-  },    
+  },
   {
     id: 'mime-type',
     fieldname: 'MIME type',
@@ -765,12 +765,12 @@ const predicateOrder = [
   'dcterms:type',
   'edm:hasType',
   'schema:genre',
-  
+
   'dce:title',
   'role',
   'bf:note',
   'bf:tableOfContents',
-  
+
   'dcterms:language',
   'schema:subtitleLanguage',
   'dce:subject',
@@ -847,13 +847,13 @@ export default {
       delete field['value']
       newarr.push(field)
     }
-    return newarr;
+    return newarr
   },
   getField: function (id, ordergroup) {
     for (var i = 0; i < fields.length; i++) {
       if (fields[i]['id'] === id) {
         var field = JSON.parse(JSON.stringify(fields[i]))
-        field.id = field.id + '_' + uuid.generate();
+        field.id = field.id + '_' + uuid.generate()
         field.ordergroup = ordergroup
         return field
       }

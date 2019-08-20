@@ -1,20 +1,20 @@
 <template>
-  <v-flex>
-    <v-layout column >
-      <v-flex>
+  <v-col>
+    <v-row >
+      <v-col>
         <template v-for="(pl, i) in o['skos:prefLabel']">
-          <v-layout :key="'row'+i" row wrap>
-            <v-flex md4 xs12 class="pdlabel primary--text" :key="'mt'+i">{{ $t(p) }}<template v-if="pl['@language']"> ({{ pl['@language'] }})</template></v-flex>
-            <v-flex md8 xs12>
-              <v-layout row :key="'mtv'+i">
-                <v-flex class="valuefield">{{ pl['@value'] }}<template v-for="(identifier) in o['skos:exactMatch']"> ({{ identifier }})</template></v-flex>
-              </v-layout>
-            </v-flex>
-          </v-layout>
+          <v-row :key="'row'+i"  >
+            <v-col md="4" cols="12" class="pdlabel primary--text" :key="'mt'+i">{{ $t(p) }}<template v-if="pl['@language']"> ({{ pl['@language'] }})</template></v-col>
+            <v-col md="8" cols="12">
+              <v-row  :key="'mtv'+i">
+                <v-col class="valuefield">{{ pl['@value'] }}<template v-for="(identifier) in o['skos:exactMatch']"> ({{ identifier }})</template></v-col>
+              </v-row>
+            </v-col>
+          </v-row>
         </template>
-      </v-flex>
-    </v-layout>
-  </v-flex>
+      </v-col>
+    </v-row>
+  </v-col>
 </template>
 
 <script>
@@ -31,4 +31,3 @@ export default {
   }
 }
 </script>
-

@@ -7,7 +7,7 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
-  state: { 
+  state: {
     instanceconfig: {
       api: '',
       solr: ''
@@ -55,7 +55,7 @@ export default new Vuex.Store({
     login ({ commit, state }, credentials) {
       return new Promise((resolve, reject) => {
         commit('initStore')
-  
+
         fetch(state.instanceconfig.api + '/signin', {
           method: 'GET',
           mode: 'cors',
@@ -63,20 +63,20 @@ export default new Vuex.Store({
             'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password)
           }
         })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.alerts && json.alerts.length > 0) {
-            commit('setAlerts', json.alerts)
-          }
-          if (json.status === 200) {
-            commit('setToken', json['XSRF-TOKEN'])
-            //document.cookie = 'X-XSRF-TOKEN=' + json['XSRF-TOKEN']
-          }
-        })
-        .catch(function (error) {
-          console.log(error) // eslint-disable-line no-console
-          reject()
-        })
+          .then(function (response) { return response.json() })
+          .then(function (json) {
+            if (json.alerts && json.alerts.length > 0) {
+              commit('setAlerts', json.alerts)
+            }
+            if (json.status === 200) {
+              commit('setToken', json['XSRF-TOKEN'])
+            // document.cookie = 'X-XSRF-TOKEN=' + json['XSRF-TOKEN']
+            }
+          })
+          .catch(function (error) {
+            console.log(error) // eslint-disable-line no-console
+            reject(error)
+          })
       })
     },
     logout ({ commit, state }) {
@@ -88,19 +88,19 @@ export default new Vuex.Store({
             'X-XSRF-TOKEN': state.token
           }
         })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          commit('initStore')
-          if (json.alerts && json.alerts.length > 0) {
-            commit('setAlerts', json.alerts)
-          }
-          resolve()
-        })
-        .catch(function (error) {
-          console.log(error) // eslint-disable-line no-console
-          commit('initStore')
-          resolve()
-        })
+          .then(function (response) { return response.json() })
+          .then(function (json) {
+            commit('initStore')
+            if (json.alerts && json.alerts.length > 0) {
+              commit('setAlerts', json.alerts)
+            }
+            resolve()
+          })
+          .catch(function (error) {
+            console.log(error) // eslint-disable-line no-console
+            commit('initStore')
+            resolve()
+          })
       })
     }
   },

@@ -15,8 +15,8 @@
           <span>{{ props.item.tid }}</span>
         </v-tooltip>
       </td>
-      <td class="text-xs-right">{{ props.item.created | unixtime }}</td>
-      <td class="text-xs-right" >
+      <td class="text-right">{{ props.item.created | unixtime }}</td>
+      <td class="text-right" >
         <v-btn flat color="primary" @click="loadTemplate(props.item.tid)">{{ $t('Load') }}</v-btn>
         <v-btn flat color="grey" @click="deleteTemplate(props.item.tid)">{{ $t('Delete') }}</v-btn>
         <!-- for some reason opening the dialog from here causes infinite cycle.. looks like vuetify bug..
@@ -70,18 +70,18 @@ export default {
           'X-XSRF-TOKEN': this.$store.state.user.token
         }
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        if (json.alerts && json.alerts.length > 0) {
-          self.$store.commit('setAlerts', json.alerts)
-        }
-        self.$emit('load-template', json.template.form)
-        self.loading = false
-      })
-      .catch(function (error) {
-        console.log(error)
-        self.loading = false
-      })
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          if (json.alerts && json.alerts.length > 0) {
+            self.$store.commit('setAlerts', json.alerts)
+          }
+          self.$emit('load-template', json.template.form)
+          self.loading = false
+        })
+        .catch(function (error) {
+          console.log(error)
+          self.loading = false
+        })
       return promise
     },
     deleteTemplate: function (tid) {
@@ -95,19 +95,19 @@ export default {
           'X-XSRF-TOKEN': this.$store.state.user.token
         }
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-         if (json.alerts && json.alerts.length > 0) {
-          self.$store.commit('setAlerts', json.alerts)
-        }
-        self.loading = false
-        self.deletetempconfirm = false
-        self.loadTemplates()
-      })
-      .catch(function (error) {
-        console.log(error)
-        self.loading = false
-      })
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          if (json.alerts && json.alerts.length > 0) {
+            self.$store.commit('setAlerts', json.alerts)
+          }
+          self.loading = false
+          self.deletetempconfirm = false
+          self.loadTemplates()
+        })
+        .catch(function (error) {
+          console.log(error)
+          self.loading = false
+        })
       return promise
     },
     loadTemplates: function () {
@@ -121,15 +121,15 @@ export default {
           'X-XSRF-TOKEN': this.$store.state.user.token
         }
       })
-      .then(function (response) { return response.json() })
-      .then(function (json) {
-        self.templates = json.templates
-        self.loading = false
-      })
-      .catch(function (error) {
-        console.log(error)
-        self.loading = false
-      })
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          self.templates = json.templates
+          self.loading = false
+        })
+        .catch(function (error) {
+          console.log(error)
+          self.loading = false
+        })
       return promise
     }
   },

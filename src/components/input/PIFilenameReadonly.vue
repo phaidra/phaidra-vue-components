@@ -1,14 +1,14 @@
 <template>
-  <v-layout row>
-    <v-flex xs8>
+  <v-row >
+    <v-col cols="8">
       <v-text-field
         :value="value"
         :label="$t('Filename')"
         readonly
         box
       ></v-text-field>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 <script>
 

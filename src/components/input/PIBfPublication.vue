@@ -1,27 +1,29 @@
 <template>
-<v-layout row>
-    <v-flex xs12>
+<v-row >
+    <v-col cols="12">
 
       <v-card >
         <v-card-title class="subheading grey white--text">
             <span>{{ $t(label) }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <v-btn slot="activator" icon dark>
-                <v-icon dark>more_vert</v-icon>
-              </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" icon dark>
+                  <v-icon dark>more_vert</v-icon>
+                </v-btn>
+              </template>
               <v-list>
-                <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-                  <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-                </v-list-tile>
+                <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+                  <v-list-item-title>{{ action.title }}</v-list-item-title>
+                </v-list-item>
               </v-list>
             </v-menu>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
 
-          <v-layout row>
-            <v-flex xs4>
+          <v-row >
+            <v-col cols="4">
               <v-text-field
                 :value="publisherName"
                 v-on:blur="$emit('input-publisher-name',$event.target.value)"
@@ -30,8 +32,8 @@
                 :rules="required ? [ v => !!v || 'Required'] : []"
                 box
               ></v-text-field>
-            </v-flex>
-            <v-flex xs4>
+            </v-col>
+            <v-col cols="4">
               <v-text-field
                 :value="publishingPlace"
                 v-on:blur="$emit('input-publishing-place',$event.target.value)"
@@ -40,10 +42,10 @@
                 :rules="required ? [ v => !!v || 'Required'] : []"
                 box
               ></v-text-field>
-            </v-flex>
-            <v-flex xs4>
-              <v-text-field       
-                :value="publishingDate" 
+            </v-col>
+            <v-col cols="4">
+              <v-text-field
+                :value="publishingDate"
                 v-on:blur="$emit('input-publishing-date',$event.target.value)"
                 :label="$t(publishingDateLabel ? publishingDateLabel : '')"
                 :required="required"
@@ -51,13 +53,13 @@
                 :rules="[validationrules.date]"
                 box
               ></v-text-field>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
 
         </v-card-text>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

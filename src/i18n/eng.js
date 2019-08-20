@@ -58,7 +58,7 @@ export default {
   'frapo:isOutputOf': 'Project',
   'frapo:hasFundingAgency': 'Funder',
   'rdax:P00009': 'Association',
-  
+
   'dcterms:provenance': 'Provenance',
 
   'schema:numberOfPages': 'Number of pages',

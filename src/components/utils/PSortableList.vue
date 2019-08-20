@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import { ContainerMixin } from 'vue-slicksort';
+import { ContainerMixin } from 'vue-slicksort'
 export default {
-  name: 'sortable-list',
+  name: 'p-sortable-list',
   mixins: [ContainerMixin]
 }
 </script>
@@ -23,4 +23,3 @@ export default {
   border-radius: 3;
 }
 </style>
-

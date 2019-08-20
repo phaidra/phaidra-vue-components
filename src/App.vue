@@ -1,60 +1,60 @@
 <template>
   <div id="app">
     <v-app>
-      <v-container justify-center grid-list-lg>
-        <v-layout column>
+      <v-container class="justify" >
+        <v-row>
 
-          <v-flex xs4>
+          <v-col cols="4">
             <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
-              <v-layout row><v-flex class="pa-3">{{alert.msg}}</v-flex><v-spacer></v-spacer><v-btn icon @click.native="dismiss(alert)"><v-icon>close</v-icon></v-btn></v-layout>
+              <v-row ><v-col class="pa-3">{{alert.msg}}</v-col><v-spacer></v-spacer><v-btn icon @click.native="dismiss(alert)"><v-icon>close</v-icon></v-btn></v-row>
             </v-alert>
-          </v-flex>
+          </v-col>
 
-          <v-layout row>  
-            <v-flex xs2>
+          <v-row >
+            <v-col cols="2">
               <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
-            </v-flex>
-            <v-flex xs2>
+            </v-col>
+            <v-col cols="2">
               <v-text-field v-model="phaidrabaseurl" :label="'phaidra'"></v-text-field>
-            </v-flex>
-            <v-flex xs2>
+            </v-col>
+            <v-col cols="2">
               <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
-            </v-flex>
+            </v-col>
             <template v-if="token">
-              <v-flex xs6>
+              <v-col cols="6">
                 <h3 class="font-weight-light pt-4">Logged in [{{ token }}]</h3>
-              </v-flex>
-              <v-flex xs1>
-                <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="logout()">Logout</v-btn>
-              </v-flex>
+              </v-col>
+              <v-col cols="1">
+                <v-btn text single-line color="primary lighten-2" class="mt-3" @click="logout()">Logout</v-btn>
+              </v-col>
             </template>
             <template v-else>
-              <v-flex xs2> 
+              <v-col cols="2">
                 <v-text-field v-model="credentials.username" :label="'username'" ></v-text-field>
-              </v-flex>
-              <v-flex xs2>
-                <v-text-field 
-                  v-model="credentials.password" 
-                  :label="'password'" 
+              </v-col>
+              <v-col cols="2">
+                <v-text-field
+                  v-model="credentials.password"
+                  :label="'password'"
                   :append-icon="psvis ? 'visibility' : 'visibility_off'"
                   @click:append="toggleVisibility"
                   :type="psvis ? 'password' : 'text'"
                 ></v-text-field>
-              </v-flex>
-              <v-flex xs1>
+              </v-col>
+              <v-col cols="1">
                 <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
-              </v-flex>
+              </v-col>
             </template>
-          </v-layout> 
+          </v-row>
 
-          <v-layout row> 
-            <v-flex xs2>
+          <v-row >
+            <v-col cols="2">
               <v-navigation-drawer permanent>
                 <v-toolbar flat>
                   <v-list>
-                    <v-list-tile>
-                      <v-list-tile-title class="title">{{ $t('Examples') }}</v-list-tile-title>
-                    </v-list-tile>
+                    <v-list-item>
+                      <v-list-item-title class="title">{{ $t('Examples') }}</v-list-item-title>
+                    </v-list-item>
                   </v-list>
                 </v-toolbar>
                 <v-divider></v-divider>
@@ -62,89 +62,89 @@
                   <v-item-group v-model="window" class="shrink mr-4" mandatory tag="v-flex">
                     <v-item>
                       <div slot-scope="{ active, toggle }">
-                        <v-list-tile @click="toggle">
-                          <v-list-tile-content>
-                            <v-list-tile-title>{{ $t('Display') }}</v-list-tile-title>
-                          </v-list-tile-content>
-                        </v-list-tile>
+                        <v-list-item @click="toggle">
+                          <v-list-item-content>
+                            <v-list-item-title>{{ $t('Display') }}</v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
                       </div>
                     </v-item>
                     <v-item>
                       <div slot-scope="{ active, toggle }">
-                        <v-list-tile @click="toggle">
-                          <v-list-tile-content>
-                            <v-list-tile-title>{{ $t('Edit') }}</v-list-tile-title>
-                          </v-list-tile-content>
-                        </v-list-tile>
+                        <v-list-item @click="toggle">
+                          <v-list-item-content>
+                            <v-list-item-title>{{ $t('Edit') }}</v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
                       </div>
                     </v-item>
                     <v-item>
                       <div slot-scope="{ active, toggle }">
-                        <v-list-tile @click="toggle">
-                          <v-list-tile-content>
-                            <v-list-tile-title>{{ $t('Submit') }}</v-list-tile-title>
-                          </v-list-tile-content>
-                        </v-list-tile>
+                        <v-list-item @click="toggle">
+                          <v-list-item-content>
+                            <v-list-item-title>{{ $t('Submit') }}</v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
                       </div>
                     </v-item>
                     <v-item>
                       <div slot-scope="{ active, toggle }">
-                        <v-list-tile @click="toggle">
-                          <v-list-tile-content>
-                            <v-list-tile-title>{{ $t('Search') }}</v-list-tile-title>
-                          </v-list-tile-content>
-                        </v-list-tile>
+                        <v-list-item @click="toggle">
+                          <v-list-item-content>
+                            <v-list-item-title>{{ $t('Search') }}</v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
                       </div>
                     </v-item>
                     <v-item>
                       <div slot-scope="{ active, toggle }">
-                        <v-list-tile @click="toggle">
-                          <v-list-tile-content>
-                            <v-list-tile-title>{{ $t('Manage') }}</v-list-tile-title>
-                          </v-list-tile-content>
-                        </v-list-tile>
+                        <v-list-item @click="toggle">
+                          <v-list-item-content>
+                            <v-list-item-title>{{ $t('Manage') }}</v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
                       </div>
                     </v-item>
                   </v-item-group>
                 </v-list>
               </v-navigation-drawer>
-            </v-flex>
+            </v-col>
 
-            <v-flex>
+            <v-col>
               <v-window v-model="window">
                 <v-window-item>
-                  <v-flex>
+                  <v-col>
                     <v-card>
                       <v-toolbar flat>
                         <v-toolbar-title>Display</v-toolbar-title>
                         <v-divider class="mx-3" inset vertical></v-divider>
                         <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
+                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <v-layout row>
-                          <p-d-jsonld 
+                        <v-row >
+                          <p-d-jsonld
                             :jsonld="displayjsonld"
                             :pid="pid"
                           ></p-d-jsonld>
-                        </v-layout>
+                        </v-row>
                       </v-card-text>
                     </v-card>
-                  </v-flex>
+                  </v-col>
                 </v-window-item>
                 <v-window-item>
-                  <v-flex>
+                  <v-col>
                     <v-card>
                       <v-toolbar flat>
                         <v-toolbar-title>Edit</v-toolbar-title>
                         <v-divider class="mx-3" inset vertical></v-divider>
                         <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
+                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <p-i-form 
+                        <p-i-form
                           :form="editform"
                           :targetpid="this.pid"
                           v-on:object-saved="objectSaved($event)"
@@ -152,10 +152,10 @@
                         ></p-i-form>
                       </v-card-text>
                     </v-card>
-                  </v-flex>
+                  </v-col>
                 </v-window-item>
                 <v-window-item>
-                  <v-flex>
+                  <v-col>
                     <v-card>
                       <v-toolbar flat>
                         <v-toolbar-title>Submit</v-toolbar-title>
@@ -179,36 +179,36 @@
                         ></p-i-form>
                       </v-card-text>
                     </v-card>
-                  </v-flex>
+                  </v-col>
                 </v-window-item>
                 <v-window-item>
-                  <v-flex>
+                  <v-col>
                     <v-card>
                       <v-toolbar flat>
                         <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
                         <v-divider class="mx-3" inset vertical></v-divider>
                         <v-text-field :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadSearch()">Load Collection</v-btn>
+                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadSearch()">Load Collection</v-btn>
                       </v-toolbar>
                       <v-card-text>
                         <p-search :collection="collection"></p-search>
                       </v-card-text>
                     </v-card>
-                  </v-flex>
+                  </v-col>
                 </v-window-item>
                 <v-window-item>
-                  <v-flex>
+                  <v-col>
                     <v-card>
                       <v-toolbar flat>
                         <v-toolbar-title>{{ $t('Manage') }}</v-toolbar-title>
                         <v-divider class="mx-3" inset vertical></v-divider>
                         <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn raised single-line class="right" color="primary lighten-2" @click="loadManagement(pid)">Load</v-btn>
+                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadManagement(pid)">Load</v-btn>
                       </v-toolbar>
                       <v-card-text>
-                        <v-flex>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-flex>
+                        <v-col>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-col>
                         <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event" @order-saved="orderSaved($event)"></p-m-sort>
                         <p-m-rights :pid="pid"></p-m-rights>
                         <p-m-relationships :pid="pid"></p-m-relationships>
@@ -216,16 +216,16 @@
                         <p-m-delete :pid="pid" :cmodel="loadedcmodel" :members="members"></p-m-delete>
                       </v-card-text>
                     </v-card>
-                  </v-flex>
+                  </v-col>
                 </v-window-item>
               </v-window>
-            </v-flex>
+            </v-col>
 
-          </v-layout>
+          </v-row>
           <v-footer color="white">
-            <v-layout row>
+            <v-row >
               <v-spacer></v-spacer>
-              <v-flex offset-xs9 xs2>
+              <v-col offset="9" cols="2">
                 <v-select
                   v-model="lang"
                   :items="languages"
@@ -234,11 +234,11 @@
                   prepend-icon="language"
                   single-line
                 ></v-select>
-              </v-flex>
-              <v-flex xs1 class="mt-4">v {{version}}</v-flex>
-            </v-layout>
+              </v-col>
+              <v-col cols="1" class="mt-4">v {{version}}</v-col>
+            </v-row>
           </v-footer>
-        </v-layout>
+        </v-row>
       </v-container>
     </v-app>
   </div>
@@ -254,7 +254,7 @@ import PMRights from '@/components/management/PMRights'
 import PMRelationships from '@/components/management/PMRelationships'
 import PMFiles from '@/components/management/PMFiles'
 import PSearch from '@/components/search/PSearch'
-import {version} from '../package.json'
+import { version } from '../package.json'
 import fields from '@/utils/fields'
 import jsonLd from '@/utils/json-ld'
 
@@ -271,10 +271,10 @@ export default {
     PMFiles
   },
   computed: {
-    loadedcmodel: function() {
+    loadedcmodel: function () {
       return 'cmodel' in this.piddoc ? this.piddoc.cmodel : 'unknown'
     },
-    token: function() {
+    token: function () {
       return this.$store.state.user.token
     },
     alerts: function () {
@@ -283,7 +283,7 @@ export default {
     vocabularies: function () {
       return this.$store.state.vocabulary.vocabularies
     },
-    instance: function() {
+    instance: function () {
       return this.$store.state.instanceconfig
     }
   },
@@ -315,29 +315,29 @@ export default {
       version: version,
       contentmodel: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ',
       contentmodels: [
-        { 
-          text: 'Data', 
-          value: 'https://pid.phaidra.org/vocabulary/7AVS-Y482',
-        }, 
-        { 
-          text: 'Picture', 
-          value: 'https://pid.phaidra.org/vocabulary/44TN-P1S0' 
-        }, 
-        { 
-          text: 'Audio', 
-          value: 'https://pid.phaidra.org/vocabulary/8YB5-1M0J' 
-        }, 
-        { 
-          text: 'Video', 
-          value: 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8' 
-        }, 
-        { 
+        {
+          text: 'Data',
+          value: 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
+        },
+        {
+          text: 'Picture',
+          value: 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
+        },
+        {
+          text: 'Audio',
+          value: 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
+        },
+        {
+          text: 'Video',
+          value: 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
+        },
+        {
           text: 'Document',
-          value: 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX' 
-        }, 
-        { 
+          value: 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
+        },
+        {
           text: 'Container',
-          value: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ' 
+          value: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ'
         }
       ],
       psvis: true
@@ -346,37 +346,37 @@ export default {
   methods: {
     getResourceTypeFromMimeType: function (mime) {
       switch (mime) {
-      case 'image/jpeg':
-      case 'image/tiff':
-      case 'image/gif':
-      case 'image/png':
-      case 'image/x-ms-bmp':
+        case 'image/jpeg':
+        case 'image/tiff':
+        case 'image/gif':
+        case 'image/png':
+        case 'image/x-ms-bmp':
         // picture
-        return 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
-        
-      case 'audio/wav':
-      case 'audio/mpeg':
-      case 'audio/flac':
-      case 'audio/ogg':
+          return 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
+
+        case 'audio/wav':
+        case 'audio/mpeg':
+        case 'audio/flac':
+        case 'audio/ogg':
         // audio
-        return 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
-        
-      case 'application/pdf':
+          return 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
+
+        case 'application/pdf':
         // document
-        return 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
-        
-      case 'video/mpeg':
-      case 'video/avi':
-      case 'video/mp4':
-      case 'video/quicktime':
-      case 'video/x-matroska':
+          return 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
+
+        case 'video/mpeg':
+        case 'video/avi':
+        case 'video/mp4':
+        case 'video/quicktime':
+        case 'video/x-matroska':
         // video
-        return 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
-        
+          return 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
+
         // eg application/x-iso9660-image
-      default:
+        default:
         // data
-        return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
+          return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
       }
     },
     handleSelect: function (val) {
@@ -385,7 +385,7 @@ export default {
       var k
       if (val.predicate === 'ebucore:hasMimeType') {
         for (i = 0; i < this.form.sections.length; i++) {
-          if(this.form.sections[i].fields){
+          if (this.form.sections[i].fields) {
             var mime
             for (j = 0; j < this.form.sections[i].fields.length; j++) {
               if (this.form.sections[i].fields[j].predicate === 'ebucore:hasMimeType') {
@@ -425,7 +425,7 @@ export default {
         multiplicable: true,
         fields: []
       }
-      this.form.sections.splice(this.form.sections.indexOf(afterSection)+1, 0, s)
+      this.form.sections.splice(this.form.sections.indexOf(afterSection) + 1, 0, s)
     },
     loadManagement: function (pid) {
       this.loadMembers(pid)
@@ -433,68 +433,68 @@ export default {
     },
     loadDoc: function (pid) {
       var self = this
-      
+
       this.members = []
-      
+
       var params = {
         q: 'pid:"' + pid + '"',
         defType: 'edismax',
         wt: 'json',
         qf: 'pid^5'
       }
-      
+
       var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
       var url = self.instance.solr + '/select?' + query
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors'
       })
-          .then(function (response) { return response.json() })
-          .then(function (json) {
-            if (json.response.numFound > 0) {
-              self.piddoc = json.response.docs[0]
-            } else {
-              self.piddoc = {}
-            }
-          })
-          .catch(function (error) {
-            console.log(error) // eslint-disable-line no-console
-          })
-      
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          if (json.response.numFound > 0) {
+            self.piddoc = json.response.docs[0]
+          } else {
+            self.piddoc = {}
+          }
+        })
+        .catch(function (error) {
+          console.log(error) // eslint-disable-line no-console
+        })
+
       return promise
     },
     loadMembers: function (pid) {
       var self = this
-      
+
       this.members = []
-      
+
       var params = {
         q: 'ismemberof:"' + pid + '"',
         defType: 'edismax',
         wt: 'json',
         qf: 'ismemberof^5',
         fl: 'pid,cmodel,dc_title,created',
-        sort: 'pos_in_' + pid.replace(':','_') + ' asc'
+        sort: 'pos_in_' + pid.replace(':', '_') + ' asc'
       }
-      
+
       var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
       var url = self.instance.solr + '/select?' + query
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors'
       })
-          .then(function (response) { return response.json() })
-          .then(function (json) {
-            if (json.response.numFound > 0) {
-              self.members = json.response.docs
-            } else {
-              self.members = []
-            }
-          })
-          .catch(function (error) {
-            console.log(error) // eslint-disable-line no-console
-          })
-      
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          if (json.response.numFound > 0) {
+            self.members = json.response.docs
+          } else {
+            self.members = []
+          }
+        })
+        .catch(function (error) {
+          console.log(error) // eslint-disable-line no-console
+        })
+
       return promise
     },
     loadMetadata: function (pid) {
@@ -505,31 +505,31 @@ export default {
         method: 'GET',
         mode: 'cors'
       })
-          .then(function (response) { return response.json() })
-          .then(function (json) {
-            if (json.metadata['JSON-LD']) {
-              return json.metadata['JSON-LD']
-        }
-      })
-      .catch(function (error) {
-        console.log(error) // eslint-disable-line no-console
-      })
+        .then(function (response) { return response.json() })
+        .then(function (json) {
+          if (json.metadata['JSON-LD']) {
+            return json.metadata['JSON-LD']
+          }
+        })
+        .catch(function (error) {
+          console.log(error) // eslint-disable-line no-console
+        })
       return promise
     },
-    loadDisplay: function() {
+    loadDisplay: function () {
       this.displayjsonld = {}
       let self = this
-      this.loadMetadata(self.pid).then(function (jsonld) { 
-        self.displayjsonld = jsonld 
+      this.loadMetadata(self.pid).then(function (jsonld) {
+        self.displayjsonld = jsonld
       })
     },
-    loadEdit: function() {
+    loadEdit: function () {
       let self = this
-      this.loadMetadata(self.pid).then(function (jsonld) { 
+      this.loadMetadata(self.pid).then(function (jsonld) {
         self.editform = jsonLd.json2form(jsonld)
       })
     },
-    loadSearch: function() {
+    loadSearch: function () {
       this.collection = ''
       this.collection = this.sampleCollection
     },
@@ -553,7 +553,7 @@ export default {
     },
     toggleVisibility: function () {
       this.psvis = !this.psvis
-    },    
+    },
     dismiss: function (alert) {
       this.$store.commit('clearAlert', alert)
     },
@@ -732,7 +732,6 @@ export default {
 }
 </style>
 
-<style lang="stylus">
+<style lang="sass">
   @require './stylus/main'
 </style>
-

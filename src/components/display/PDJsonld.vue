@@ -1,14 +1,14 @@
 <template>
- 
+
     <p-d-jsonld-layout v-if="jsonld">
 
       <template v-if="pid" slot="pid">
-        <v-flex>
-          <v-layout row wrap>
-            <v-flex md4 xs12 class="pdlabel primary--text">{{ $t('Persistent identifier') }}</v-flex>
-            <v-flex md8 xs12>https://{{ instance.baseurl }}/{{ pid }}</v-flex>
-          </v-layout>
-        </v-flex>
+        <v-col>
+          <v-row  >
+            <v-col md="4" cols="12" class="pdlabel primary--text">{{ $t('Persistent identifier') }}</v-col>
+            <v-col md="8" cols="12">https://{{ instance.baseurl }}/{{ pid }}</v-col>
+          </v-row>
+        </v-col>
       </template>
 
       <template v-for="(o, p) in jsonld" >
@@ -261,13 +261,13 @@
         </template>
 
         <template v-else-if="p==='dcterms:subject'" slot="dcterms:subject">
-          
+
           <template v-for="(subject, j) in o">
             <v-card class="mt-3" v-if="subject['@type']==='phaidra:Subject'" :key="componentid+'psubject'+j">
               <v-toolbar dense flat>
-                <v-layout>
+                <v-row>
                   <v-toolbar-title class="font-weight-light">Subject</v-toolbar-title>
-                </v-layout>
+                </v-row>
               </v-toolbar>
               <v-card-text class="ma-2">
                 <p-d-jsonld :jsonld="subject" ></p-d-jsonld>
@@ -275,7 +275,7 @@
             </v-card>
             <p-d-skos-preflabel v-else :p="p" :o="subject" :key="componentid+'subject'+j" ></p-d-skos-preflabel>
           </template>
-            
+
         </template>
 
         <template v-else-if="p==='@type'"></template>
@@ -347,11 +347,11 @@ export default {
     PIUnknownReadonly
   },
   computed: {
-    instance: function() {
+    instance: function () {
       return this.$store.state.instanceconfig
     },
-    componentid: function() {
-      return Math.floor(Math.random()*10000000)
+    componentid: function () {
+      return Math.floor(Math.random() * 10000000)
     }
   },
   mounted: function () {

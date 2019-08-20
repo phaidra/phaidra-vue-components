@@ -5,4 +5,4 @@ module.exports = {
       libraryExport: 'default'
     }
   }
-};
+}

@@ -103,4 +103,3 @@ export function getMarcRoleLabel (r) {
     return marcRoles[last] || r
   }
 }
-

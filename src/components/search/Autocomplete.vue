@@ -17,11 +17,9 @@
     />
     <div :class="`${getClassName('list')} autocomplete autocomplete-list elevation-2`" v-show="showList && suggestions && suggestions.length">
       <v-list>
-        <v-list-tile v-for="(data, i) in suggestions" :class="activeClass(i)" :key="i" @click.prevent="selectList(data)">
-          <v-list-tile-content>
-            <v-list-tile-title v-html="data.term"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+        <v-list-item v-for="(data, i) in suggestions" :class="activeClass(i)" :key="i" @click.prevent="selectList(data)">
+          <v-list-item-title v-html="data.term"></v-list-item-title>
+        </v-list-item>
       </v-list>
     </div>
   </div>
@@ -46,30 +44,30 @@ export default {
     },
     placeholder: String,
     required: Boolean,
-    
+
     // Intial Value
     initValue: {
       type: String,
       default: ''
     },
-    
+
     // Debounce time
     debounce: Number,
-    
+
     suggester: {
       type: String,
       required: true
     },
-    
+
     // minimum length
     min: {
       type: Number,
       default: 0
     },
-    
+
     onSelect: Function
   },
-  
+
   data () {
     return {
       showList: false,
@@ -79,11 +77,11 @@ export default {
       suggestions: []
     }
   },
-  
+
   computed: {
     solr: function () { // TODO: pass in app settings
       return this.$root.$store.state.instanceconfig.solr
-    },
+    }
   },
   methods: {
     getClassName (part) {
@@ -91,7 +89,7 @@ export default {
       if (classes[part]) return `${classes[part]}`
       return className ? `${className}-${part}` : ''
     },
-    
+
     // Netralize Autocomplete (XXX not used anywhere)
     // clearInput () {
     //   debugger
@@ -100,16 +98,16 @@ export default {
     //   this.suggestions = []
     //   this.focusList = ''
     // },
-    
+
     // Get the original data (TODO move to single used place)
     cleanUp (data) {
       return JSON.parse(JSON.stringify(data))
     },
-    
+
     handleInput (e) {
       const { value } = e.target
       this.showList = true
-      
+
       // If Debounce
       if (this.debounce) {
         if (this.debounceTask !== undefined) clearTimeout(this.debounceTask)
@@ -120,82 +118,84 @@ export default {
         return this.getData(value)
       }
     },
-    
+
     handleKeyDown (e) {
       let key = e.keyCode
-      
+
       // Disable when list isn't showing up
       if (!this.showList) return
-      
+
       // Key List
       const DOWN = 40
       const UP = 38
       const ENTER = 13
       const ESC = 27
-      
+
       // Prevent Default for Prevent Cursor Move & Form Submit
       switch (key) {
-      case DOWN:
-        e.preventDefault()
-        this.focusList++
-        break
-      case UP:
-        e.preventDefault()
-        this.focusList--
-        break
-      case ENTER:
-        e.preventDefault()
-        if (this.focusList === 0) {
-          this.onSelect ? this.onSelect({ term: this.type }) : null
-        } else {
-          this.selectList(this.suggestions[this.focusList])
-        }
-        this.showList = false
-        break
-      case ESC:
-        this.showList = false
-        break
+        case DOWN:
+          e.preventDefault()
+          this.focusList++
+          break
+        case UP:
+          e.preventDefault()
+          this.focusList--
+          break
+        case ENTER:
+          e.preventDefault()
+          if (this.focusList === 0) {
+            if (this.onSelect) {
+              this.onSelect({ term: this.type })
+            }
+          } else {
+            this.selectList(this.suggestions[this.focusList])
+          }
+          this.showList = false
+          break
+        case ESC:
+          this.showList = false
+          break
       }
-      
+
       const listLength = this.suggestions.length - 1
       const outOfRangeBottom = this.focusList > listLength
       const outOfRangeTop = this.focusList < 0
       const topItemIndex = 0
       const bottomItemIndex = listLength
-      
+
       let nextFocusList = this.focusList
       if (outOfRangeBottom) nextFocusList = topItemIndex
       if (outOfRangeTop) nextFocusList = bottomItemIndex
       this.focusList = nextFocusList
     },
-    
+
     // unused?
     // setValue (val) { // TODO used anywhere?
     //   debugger
     //   this.type = val
     // },
-    
+
     handleBlur () {
       setTimeout(() => {
         this.showList = false
       }, 250)
     },
-    
+
     handleFocus () {
       this.focusList = 0
     },
-    
+
     // unused?
     // mousemove (i) {
     //   debugger
     //   this.focusList = i
     // },
-    
+
     activeClass (i) {
       const focusClass = i === this.focusList ? 'grey lighten-4' : ''
       return `${focusClass}`
     },
-    
+
     selectList (data) {
       // Deep clone of the original object
       const clean = this.cleanUp(data)
@@ -203,15 +203,17 @@ export default {
       this.type = clean['payload']
       // Hide List
       this.showList = false
-      
-      this.onSelect ? this.onSelect(clean) : null
+
+      if (this.onSelect) {
+        this.onSelect(clean)
+      }
     },
-    
+
     getData (value) {
       if (value.length < this.min || !this.suggester) return
       this.suggest(value)
     },
-    
+
     async suggest (value) {
       let params = {
         suggest: true,
@@ -220,7 +222,7 @@ export default {
         'suggest.q': value
       }
       let query = qs.stringify(params)
-      
+
       let response = await fetch(this.solr + '/suggest', {
         method: 'POST',
         mode: 'cors',
@@ -233,15 +235,14 @@ export default {
       this.suggestions = json.suggest[this.suggester][value].suggestions
     }
   },
-  
+
   created () {
     // Sync parent model with initValue Props
     this.type = this.initValue ? this.initValue : null
   },
 
   mounted () {
-    if (this.required)
-      this.$refs.input.setAttribute('required', this.required)
+    if (this.required) { this.$refs.input.setAttribute('required', this.required) }
   }
 }
 </script>

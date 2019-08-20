@@ -1,10 +1,10 @@
 <template>
-  <v-layout>
-    <v-flex>
-      <v-flex class="primary--text" xs3>{{ label }}</v-flex>
+  <v-row>
+    <v-col>
+      <v-col class="primary--text" cols="3">{{ label }}</v-col>
       {{jsonld}}
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

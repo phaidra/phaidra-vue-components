@@ -1,10 +1,10 @@
 <template>
-  <v-flex>
-    <v-layout row wrap>
-      <v-flex md4 xs12 class="pdlabel primary--text">{{ $t(p) }}</v-flex>
-      <v-flex md8 xs12>{{ resolve(p, o) }} <span class="grey--text">[{{o}}]</span></v-flex>
-    </v-layout>
-  </v-flex>
+  <v-col>
+    <v-row  >
+      <v-col md="4" cols="12" class="pdlabel primary--text">{{ $t(p) }}</v-col>
+      <v-col md="8" cols="12">{{ resolve(p, o) }} <span class="grey--text">[{{o}}]</span></v-col>
+    </v-row>
+  </v-col>
 </template>
 
 <script>
@@ -26,7 +26,6 @@ export default {
     resolve: function (p, v) {
       var vocabulary = ''
       switch (p) {
-
         case 'dcterms:language':
         case 'schema:subtitleLanguage':
           vocabulary = 'lang'
@@ -37,7 +36,7 @@ export default {
           break
 
         default:
-          //console.error('p-d-uri resolve: unrecognized predicate ', p, v)
+          // console.error('p-d-uri resolve: unrecognized predicate ', p, v)
       }
 
       return this.getLocalizedTermLabel(vocabulary, v)
@@ -45,4 +44,3 @@ export default {
   }
 }
 </script>
-

@@ -181,7 +181,7 @@ export const facetQueries = [
   }
 ]
 
-function buildDateFacet() {
+function buildDateFacet () {
   let months31 = [1, 3, 5, 7, 8, 10, 12]
   let months30 = [4, 6, 9, 11]
   let startYear = 2008
@@ -257,33 +257,35 @@ function buildDateFacet() {
 }
 
 // TODO: FIXME
-export function updateFacetQueries (facet_queries, facetQueries) {
+export function updateFacetQueries (facetQueriesSolr, facetQueries) {
   // called by the `search` function
-  Object.keys(facet_queries).forEach(function (key) {
-    for (let i = 0; i < facetQueries.length; i++) {
-      for (let j = 0; j < facetQueries[i].queries.length; j++) {
-        if (facetQueries[i].queries[j].query === key) {
-          Vue.set(facetQueries[i].queries[j], 'count', facet_queries[key])
-        }
-        if (facetQueries[i].queries[j].childFacet) {
-          let lvl1 = facetQueries[i].queries[j].childFacet
-          for (let k = 0; k < lvl1.queries.length; k++) {
-            if (lvl1.queries[k].query === key) {
-              Vue.set(lvl1.queries[k], 'count', facet_queries[key])
-            }
-            if (lvl1.queries[k].childFacet) {
-              let lvl2 = lvl1.queries[k].childFacet
-              for (let l = 0; l < lvl2.queries.length; l++) {
-                if (lvl2.queries[l].query === key) {
-                  Vue.set(lvl2.queries[l], 'count', facet_queries[key])
+  if (facetQueriesSolr) {
+    Object.keys(facetQueriesSolr).forEach(function (key) {
+      for (let i = 0; i < facetQueries.length; i++) {
+        for (let j = 0; j < facetQueries[i].queries.length; j++) {
+          if (facetQueries[i].queries[j].query === key) {
+            Vue.set(facetQueries[i].queries[j], 'count', facetQueriesSolr[key])
+          }
+          if (facetQueries[i].queries[j].childFacet) {
+            let lvl1 = facetQueries[i].queries[j].childFacet
+            for (let k = 0; k < lvl1.queries.length; k++) {
+              if (lvl1.queries[k].query === key) {
+                Vue.set(lvl1.queries[k], 'count', facetQueriesSolr[key])
+              }
+              if (lvl1.queries[k].childFacet) {
+                let lvl2 = lvl1.queries[k].childFacet
+                for (let l = 0; l < lvl2.queries.length; l++) {
+                  if (lvl2.queries[l].query === key) {
+                    Vue.set(lvl2.queries[l], 'count', facetQueriesSolr[key])
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-  })
+    })
+  }
 }
 
 export function toggleFacet (q, f) {
@@ -304,15 +306,15 @@ export function showFacet (f) {
   if (!f.show) {
     // when hiding facet, remove it's filters
     for (var i = 0; i < f.queries.length; i++) {
-      f.queries[i].active = false;
-      if(f.queries[i].childFacet){
-        var lvl1 = f.queries[i].childFacet;
+      f.queries[i].active = false
+      if (f.queries[i].childFacet) {
+        var lvl1 = f.queries[i].childFacet
         for (var j = 0; j < lvl1.queries.length; j++) {
-          lvl1.queries[j].active = false;
-          if(lvl1.queries[j].childFacet){
-            var lvl2 = lvl1.queries[j].childFacet;
+          lvl1.queries[j].active = false
+          if (lvl1.queries[j].childFacet) {
+            var lvl2 = lvl1.queries[j].childFacet
             for (var k = 0; k < lvl2.queries.length; k++) {
-              lvl2.queries[k].active = false;
+              lvl2.queries[k].active = false
             }
           }
         }
@@ -321,7 +323,7 @@ export function showFacet (f) {
   }
 }
 
-export const pers_authors = [
+export const persAuthors = [
   {
     field: 'bib_roles_pers_aut',
     label: 'Author',
@@ -329,7 +331,7 @@ export const pers_authors = [
   }
 ]
 
-export const corp_authors = [
+export const corpAuthors = [
   {
     field: 'bib_roles_corp_aut',
     label: 'Author',

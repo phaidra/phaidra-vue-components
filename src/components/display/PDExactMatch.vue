@@ -1,10 +1,10 @@
 <template>
-  <v-flex>
-    <v-layout row wrap>
-      <v-flex md4 xs12 class="pdlabel primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex md8 xs12>{{ resolve(p, o['skos:exactMatch']) }}</v-flex>
-    </v-layout>
-  </v-flex>
+  <v-col>
+    <v-row  >
+      <v-col md="4" cols="12" class="pdlabel primary--text">{{ $t(p) }}</v-col>
+      <v-col md="8" cols="12">{{ resolve(p, o['skos:exactMatch']) }}</v-col>
+    </v-row>
+  </v-col>
 </template>
 
 <script>
@@ -35,7 +35,6 @@ export default {
     resolve: function (p, v) {
       var vocabulary = ''
       switch (p) {
-
         case 'vra:hasInscription':
           vocabulary = 'https://phaidra.org/vocabulary/stamp'
           break
@@ -49,4 +48,3 @@ export default {
   }
 }
 </script>
-

@@ -1,10 +1,10 @@
 <template>
-  <v-flex>
-    <v-layout row wrap>
-      <v-flex md4 xs12 class="pdlabel primary--text" xs3>{{ $t(p) }}</v-flex>
-      <v-flex md8 xs12><template v-if="duration.hours > 0">{{ duration.hours }} {{$t('hours') + ' '}}</template> <template v-if="duration.minutes > 0">{{ duration.minutes }} {{$t('minutes') + ' '}}</template> <template v-if="duration.seconds > 0">{{ duration.seconds }} {{$t('seconds')}}</template></v-flex>
-    </v-layout>
-  </v-flex>
+  <v-col>
+    <v-row  >
+      <v-col md="4" cols="12" class="pdlabel primary--text">{{ $t(p) }}</v-col>
+      <v-col md="8" cols="12"><template v-if="duration.hours > 0">{{ duration.hours }} {{$t('hours') + ' '}}</template> <template v-if="duration.minutes > 0">{{ duration.minutes }} {{$t('minutes') + ' '}}</template> <template v-if="duration.seconds > 0">{{ duration.seconds }} {{$t('seconds')}}</template></v-col>
+    </v-row>
+  </v-col>
 </template>
 
 <script>
@@ -23,9 +23,9 @@ export default {
     }
   },
   computed: {
-    duration: function() {
+    duration: function () {
       let m = this.o.match(/PT(\d+)H(\d+)M(\d+)S/)
-      if (m){
+      if (m) {
         return {
           hours: m[1],
           minutes: m[2],
@@ -37,4 +37,3 @@ export default {
   }
 }
 </script>
-

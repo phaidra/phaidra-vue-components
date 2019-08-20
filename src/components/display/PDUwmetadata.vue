@@ -1,114 +1,114 @@
 <template>
-  <v-flex v-if="this.indexdata">
-    <v-flex v-for="(title,i) in getTitles()" :key="'title'+i" class="mt-3">
+  <v-col v-if="this.indexdata">
+    <v-col v-for="(title,i) in getTitles()" :key="'title'+i" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('Title') }} ({{ title.lang }})</v-flex>
-          <v-flex xs9>{{ title.value }}</v-flex>
-        </v-layout>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('Title') }} ({{ title.lang }})</v-col>
+          <v-col cols="9">{{ title.value }}</v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex v-for="(role,i) in parsedRolesUwm()" :key="'role'+i" class="mt-3">
+    <v-col v-for="(role,i) in parsedRolesUwm()" :key="'role'+i" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ role.label }}</v-flex>
-          <v-flex xs9>
-            <v-layout column>
-              <v-flex v-for="(entity,j) in role.entities" :key="j">
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ role.label }}</v-col>
+          <v-col cols="9">
+            <v-row>
+              <v-col v-for="(entity,j) in role.entities" :key="j">
                 {{ entity.firstname }} {{ entity.lastname }} <span class="grey--text">{{ entity.institution }}</span>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex v-if="indexdata.bib_journal" class="mt-3">
+    <v-col v-if="indexdata.bib_journal" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('Journal') }}</v-flex>
-          <v-flex xs9>
-            <v-layout column>
-              <v-flex v-for="(v,i) in indexdata.bib_journal" :key="i">{{v}}</v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('Journal') }}</v-col>
+          <v-col cols="9">
+            <v-row>
+              <v-col v-for="(v,i) in indexdata.bib_journal" :key="i">{{v}}</v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex v-if="indexdata.bib_volume" class="mt-3">
+    <v-col v-if="indexdata.bib_volume" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('Volume') }}</v-flex>
-          <v-flex xs9>
-            <v-layout column>
-              <v-flex v-for="(v,i) in indexdata.bib_volume" :key="i">{{v}}</v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('Volume') }}</v-col>
+          <v-col cols="9">
+            <v-row>
+              <v-col v-for="(v,i) in indexdata.bib_volume" :key="i">{{v}}</v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex v-if="indexdata.bib_publisher" class="mt-3">
+    <v-col v-if="indexdata.bib_publisher" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('Publisher') }}</v-flex>
-          <v-flex xs9>
-            <v-layout column>
-              <v-flex v-for="(v,i) in indexdata.bib_publisher" :key="i">{{v}}</v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('Publisher') }}</v-col>
+          <v-col cols="9">
+            <v-row>
+              <v-col v-for="(v,i) in indexdata.bib_publisher" :key="i">{{v}}</v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex v-if="indexdata.bib_published" class="mt-3">
+    <v-col v-if="indexdata.bib_published" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('Published') }}</v-flex>
-          <v-flex xs9>
-            <v-layout column>
-              <v-flex v-for="(v,i) in indexdata.bib_published" :key="i">{{v}}</v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('Published') }}</v-col>
+          <v-col cols="9">
+            <v-row>
+              <v-col v-for="(v,i) in indexdata.bib_published" :key="i">{{v}}</v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex v-if="indexdata.bib_publisherlocation" class="mt-3">
+    <v-col v-if="indexdata.bib_publisherlocation" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('Publisher location') }}</v-flex>
-          <v-flex xs9>
-            <v-layout column>
-              <v-flex v-for="(v,i) in indexdata.bib_publisherlocation" :key="i">{{v}}</v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('Publisher location') }}</v-col>
+          <v-col cols="9">
+            <v-row>
+              <v-col v-for="(v,i) in indexdata.bib_publisherlocation" :key="i">{{v}}</v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex v-for="(desc,i) in getDescriptions()" :key="'desc'+i" class="mt-3">
+    <v-col v-for="(desc,i) in getDescriptions()" :key="'desc'+i" class="mt-3">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('Description') }} ({{ desc.lang }})</v-flex>
-          <v-flex xs9>{{ desc.value }}</v-flex>
-        </v-layout>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('Description') }} ({{ desc.lang }})</v-col>
+          <v-col cols="9">{{ desc.value }}</v-col>
+        </v-row>
       </v-container>
-    </v-flex>
+    </v-col>
 
-    <v-flex class="mt-3" v-if="indexdata.dc_license">
+    <v-col class="mt-3" v-if="indexdata.dc_license">
       <v-container fluid>
-        <v-layout row>
-          <v-flex class="caption grey--text" xs2>{{ $t('License') }}</v-flex>
-          <v-flex xs9>
+        <v-row >
+          <v-col class="caption grey--text" cols="2">{{ $t('License') }}</v-col>
+          <v-col cols="9">
             <p-d-license v-if="indexdata.dc_license" :dclicense="indexdata.dc_license[0]"></p-d-license>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
-    </v-flex>
-  </v-flex>
+    </v-col>
+  </v-col>
 </template>
 
 <script>

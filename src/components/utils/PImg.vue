@@ -7,7 +7,7 @@ export default {
   methods: {
     onError () {
       // Change the verbose error to a warning.
-      // This is useful to declutter the console when testing 
+      // This is useful to declutter the console when testing
       // with phaidra-sandbox outside the network.
       // As of 2019-07-21 used in SearchResults component only.
 

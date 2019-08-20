@@ -1,6 +1,6 @@
 <template>
-  <v-layout row>
-    <v-flex xs8>
+  <v-row >
+    <v-col cols="8">
       <v-combobox
         v-model="model"
         v-on:input="$emit('input', htmlToPlaintext($event))"
@@ -20,18 +20,18 @@
         clearable
       >
         <template slot="item" slot-scope="{ item }">
-          <v-list-tile-content two-line>
-            <v-list-tile-title inset v-html="item"></v-list-tile-title>
-          </v-list-tile-content>
+          <v-list-item-content two-line>
+            <v-list-item-title inset v-html="item"></v-list-item-title>
+          </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
-          <v-list-tile-content>
-            <v-list-tile-title inset>{{ htmlToPlaintext(item) }}</v-list-tile-title>
-          </v-list-tile-content>
+          <v-list-item-content>
+            <v-list-item-title inset>{{ htmlToPlaintext(item) }}</v-list-item-title>
+          </v-list-item-content>
         </template>
       </v-combobox>
-    </v-flex>
-    <v-flex xs2 v-if="multilingual">
+    </v-col>
+    <v-col cols="2" v-if="multilingual">
       <v-autocomplete
         :value="getTerm('lang', language)"
         v-on:input="$emit('input-language', $event )"
@@ -44,117 +44,119 @@
         clearable
       >
         <template slot="item" slot-scope="{ item }">
-          <v-list-tile-content two-line>
-            <v-list-tile-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-            <v-list-tile-sub-title  v-html="`${item['@id']}`"></v-list-tile-sub-title>
-          </v-list-tile-content>
+          <v-list-item-content two-line>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+            <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+          </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
-          <v-list-tile-content>
-            <v-list-tile-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-tile-title>
-          </v-list-tile-content>
+          <v-list-item-content>
+            <v-list-item-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+          </v-list-item-content>
         </template>
       </v-autocomplete>
-    </v-flex>
-    <v-flex xs1 v-if="actions.length">
+    </v-col>
+    <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
-        <v-btn slot="activator" icon>
-          <v-icon>more_vert</v-icon>
-        </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" icon>
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+        </template>
         <v-list>
-          <v-list-tile v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-            <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-          </v-list-tile>
+          <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+            <v-list-item-title>{{ action.title }}</v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-  import qs from 'qs'
-  import { vocabulary } from '../../mixins/vocabulary'
-  import { fieldproperties } from '../../mixins/fieldproperties'
+import qs from 'qs'
+import { vocabulary } from '../../mixins/vocabulary'
+import { fieldproperties } from '../../mixins/fieldproperties'
 
-  export default {
-    name: 'p-i-text-field-suggest',
-    mixins: [vocabulary, fieldproperties],
-    props: {
-      value: {
-        type: String,
-        required: true
-      },
-      language: {
-        type: String
-      },
-      label: {
-        type: String,
-        required: true
-      },
-      required: {
-        type: Boolean
-      },
-      multilingual: {
-        type: Boolean
-      },
-      suggester: {
-        type: String,
-        required: true
-      },
-      debounce: {
-        type: Number,
-        default: 500
-      }
+export default {
+  name: 'p-i-text-field-suggest',
+  mixins: [vocabulary, fieldproperties],
+  props: {
+    value: {
+      type: String,
+      required: true
     },
-    data () {
-      return {
-        items: [],
-        loading: false,
-        model: this.value,
-        search: null
-      }
+    language: {
+      type: String
     },
-    watch: {
-      search (val) {
-        val && this.querySuggestionsDebounce(val)
-      }
+    label: {
+      type: String,
+      required: true
     },
-    methods: {
-      htmlToPlaintext: function (text) {
-        return text ? String(text).replace(/<[^>]+>/gm, '') : ''
-      },
-      querySuggestionsDebounce (value) {
-        this.showList = true
+    required: {
+      type: Boolean
+    },
+    multilingual: {
+      type: Boolean
+    },
+    suggester: {
+      type: String,
+      required: true
+    },
+    debounce: {
+      type: Number,
+      default: 500
+    }
+  },
+  data () {
+    return {
+      items: [],
+      loading: false,
+      model: this.value,
+      search: null
+    }
+  },
+  watch: {
+    search (val) {
+      val && this.querySuggestionsDebounce(val)
+    }
+  },
+  methods: {
+    htmlToPlaintext: function (text) {
+      return text ? String(text).replace(/<[^>]+>/gm, '') : ''
+    },
+    querySuggestionsDebounce (value) {
+      this.showList = true
 
-        if (this.debounce) {
-          if (this.debounceTask !== undefined) clearTimeout(this.debounceTask)
-          this.debounceTask = setTimeout(() => {
-            return this.querySuggestions(value)
-          }, this.debounce)
-        } else {
+      if (this.debounce) {
+        if (this.debounceTask !== undefined) clearTimeout(this.debounceTask)
+        this.debounceTask = setTimeout(() => {
           return this.querySuggestions(value)
-        }
-      },
-      querySuggestions (q) {
-        var self = this
+        }, this.debounce)
+      } else {
+        return this.querySuggestions(value)
+      }
+    },
+    querySuggestions (q) {
+      var self = this
 
-        if (q.length < this.min || !this.suggester) return
+      if (q.length < this.min || !this.suggester) return
 
-        self.loading = true
+      self.loading = true
 
-        var params = {
-          suggest: true,
-          'suggest.dictionary': self.suggester,
-          wt: 'json',
-          'suggest.q': q
-        }
+      var params = {
+        suggest: true,
+        'suggest.dictionary': self.suggester,
+        wt: 'json',
+        'suggest.q': q
+      }
 
-        var query = qs.stringify(params)
+      var query = qs.stringify(params)
 
-        fetch(self.$store.state.instanceconfig.solr + '/suggest?' + query, {
-          method: 'GET',
-          mode: 'cors'
-        })
+      fetch(self.$store.state.instanceconfig.solr + '/suggest?' + query, {
+        method: 'GET',
+        mode: 'cors'
+      })
         .then(function (response) { return response.json() })
         .then(function (json) {
           self.items = []
@@ -167,10 +169,10 @@
           console.log(error)
           self.loading = false
         })
-      }
     }
-
   }
+
+}
 </script>
 
 <style scoped>
@@ -196,4 +198,3 @@
   margin: 0;
 }
 </style>
-

@@ -1,4 +1,4 @@
-export function buildSearchDef({ sortdef, q, page, pagesize, facetQueries, corp_authors, pers_authors, roles, owner, inCollection: collection }) {
+export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corpAuthors, persAuthors, roles, owner, inCollection: collection }) {
   let searchdefarr = []
 
   for (let i = 0; i < sortdef.length; i++) {
@@ -65,8 +65,8 @@ export function buildSearchDef({ sortdef, q, page, pagesize, facetQueries, corp_
     }
   }
 
-  for (let i = 0; i < corp_authors.length; i++) {
-    let field = corp_authors[i]
+  for (let i = 0; i < corpAuthors.length; i++) {
+    let field = corpAuthors[i]
     for (let j = 0; j < field.values.length; j++) {
       let v = field.values[j]
       if (v !== '') {
@@ -76,8 +76,8 @@ export function buildSearchDef({ sortdef, q, page, pagesize, facetQueries, corp_
     }
   }
 
-  for (let i = 0; i < pers_authors.length; i++) {
-    let field = pers_authors[i]
+  for (let i = 0; i < persAuthors.length; i++) {
+    let field = persAuthors[i]
     for (let j = 0; j < field.values.length; j++) {
       let v = field.values[j]
       if (v !== '') {
@@ -114,7 +114,7 @@ export function buildSearchDef({ sortdef, q, page, pagesize, facetQueries, corp_
   return { searchdefarr, ands }
 }
 
-export function buildParams({ q, page, pagesize, sortdef, lang, facetQueries }, ands) {
+export function buildParams ({ q, page, pagesize, sortdef, lang, facetQueries }, ands) {
   let params = {
     q,
     defType: 'edismax',
