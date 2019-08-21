@@ -7,7 +7,7 @@
         :items="vocabularies['datepredicate'].terms"
         :value="getTerm('datepredicate', type)"
         :filter="autocompleteFilter"
-        box
+       filled
         return-object
         clearable
       >
@@ -32,14 +32,14 @@
         :required="required"
         :hint="'Format YYYY-MM-DD'"
         :rules="[validationrules.date]"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

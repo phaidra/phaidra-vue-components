@@ -5,7 +5,7 @@
         :value="value"
         :label="$t('Filename')"
         readonly
-        box
+       filled
       ></v-text-field>
     </v-col>
   </v-row>

@@ -1,9 +1,7 @@
 <template>
   <div :class="`${getClassName('wrapper')} autocomplete-wrapper`">
-    <input
-      class="searchbox elevation-1"
+    <v-text-field
       ref="input"
-      type="text"
       :id="id"
       :class="`${getClassName('input')} autocomplete-input`"
       :placeholder="placeholder"
@@ -14,6 +12,9 @@
       @keydown="handleKeyDown"
       @focus="handleFocus"
       autocomplete="off"
+      clearable
+      filled
+      single-line
     />
     <div :class="`${getClassName('list')} autocomplete autocomplete-list elevation-2`" v-show="showList && suggestions && suggestions.length">
       <v-list>
@@ -90,40 +91,39 @@ export default {
       return className ? `${className}-${part}` : ''
     },
 
-    // Netralize Autocomplete (XXX not used anywhere)
-    // clearInput () {
-    //   debugger
-    //   this.showList = false
-    //   this.type = ''
-    //   this.suggestions = []
-    //   this.focusList = ''
-    // },
+    clearInput () {
+      this.showList = false
+      this.type = ''
+      this.suggestions = []
+      this.focusList = ''
+    },
 
     // Get the original data (TODO move to single used place)
     cleanUp (data) {
       return JSON.parse(JSON.stringify(data))
     },
 
-    handleInput (e) {
-      const { value } = e.target
-      this.showList = true
+    handleInput (value) {
+      if (value) {
+        this.showList = true
 
-      // If Debounce
-      if (this.debounce) {
-        if (this.debounceTask !== undefined) clearTimeout(this.debounceTask)
-        this.debounceTask = setTimeout(() => {
+        // If Debounce
+        if (this.debounce) {
+          if (this.debounceTask !== undefined) clearTimeout(this.debounceTask)
+          this.debounceTask = setTimeout(() => {
+            return this.getData(value)
+          }, this.debounce)
+        } else {
           return this.getData(value)
-        }, this.debounce)
+        }
       } else {
-        return this.getData(value)
+        this.clearInput()
+        this.onSelect({ term: '' })
       }
     },
 
     handleKeyDown (e) {
       let key = e.keyCode
-
-      // Disable when list isn't showing up
-      if (!this.showList) return
 
       // Key List
       const DOWN = 40

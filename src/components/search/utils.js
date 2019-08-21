@@ -65,25 +65,19 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
     }
   }
 
-  for (let i = 0; i < corpAuthors.length; i++) {
-    let field = corpAuthors[i]
-    for (let j = 0; j < field.values.length; j++) {
-      let v = field.values[j]
-      if (v !== '') {
-        ands.push('(' + field.field + ':"' + v + '")')
-        searchdefarr.push('fr=' + field.field + '_' + window.encodeURIComponent(v))
-      }
+  for (let j = 0; j < corpAuthors.values.length; j++) {
+    let v = corpAuthors.values[j]
+    if (v !== '') {
+      ands.push('(' + corpAuthors.field + ':"' + v + '")')
+      searchdefarr.push('fr=' + corpAuthors.field + '_' + window.encodeURIComponent(v))
     }
   }
 
-  for (let i = 0; i < persAuthors.length; i++) {
-    let field = persAuthors[i]
-    for (let j = 0; j < field.values.length; j++) {
-      let v = field.values[j]
-      if (v !== '') {
-        ands.push('(' + field.field + ':"' + v + '")')
-        searchdefarr.push('fr=' + field.field + '_' + window.encodeURIComponent(v))
-      }
+  for (let j = 0; j < persAuthors.values.length; j++) {
+    let v = persAuthors.values[j]
+    if (v !== '') {
+      ands.push('(' + persAuthors.field + ':"' + v + '")')
+      searchdefarr.push('fr=' + persAuthors.field + '_' + window.encodeURIComponent(v))
     }
   }
 

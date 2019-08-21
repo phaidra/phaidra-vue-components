@@ -13,7 +13,7 @@
         item-text="text"
         item-value="value"
         :label="$t(label)"
-        box
+       filled
         clearable
         :messages="resolved"
       ></v-autocomplete>
@@ -22,7 +22,7 @@
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

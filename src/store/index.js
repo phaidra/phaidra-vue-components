@@ -25,7 +25,7 @@ export default new Vuex.Store({
       state.alerts = alerts
     },
     clearAlert (state, alert) {
-      state.alerts = state.alerts.alerts.filter(e => e !== alert)
+      state.alerts = state.alerts.filter(e => e !== alert)
     },
     clearUser (state) {
       Vue.set(state.user, 'token', '')

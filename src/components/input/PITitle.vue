@@ -5,7 +5,7 @@
         :value="title"
         :label="$t( titleLabel ? titleLabel : type )"
         v-on:blur="$emit('input-title',$event.target.value)"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="4" v-if="!hideSubtitle">
@@ -13,7 +13,7 @@
         :value="subtitle"
         :label="$t( subtitleLabel ? subtitleLabel : 'Subtitle' )"
         v-on:blur="$emit('input-subtitle',$event.target.value)"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="2" v-if="multilingual">
@@ -24,7 +24,7 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-        box
+       filled
         return-object
         clearable
       >
@@ -45,7 +45,7 @@
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

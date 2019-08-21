@@ -7,7 +7,7 @@
         type="number"
         :label="$t('Duration')"
         :suffix="$t('hours')"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="3" v-if="!hideMinutes">
@@ -17,7 +17,7 @@
         type="number"
         :label="$t('Duration')"
         :suffix="$t('minutes')"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="3" v-if="!hideSeconds">
@@ -27,14 +27,14 @@
         type="number"
         :label="$t('Duration')"
         :suffix="$t('seconds')"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

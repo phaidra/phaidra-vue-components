@@ -25,7 +25,7 @@
             <v-btn flat color="grey" v-on="on">{{ $t('Delete') }}</v-btn>
           </template>
           <v-card>
-            <v-card-title class="headline grey lighten-2" primary-title >{{ $t('Delete') }}</v-card-title>
+            <v-card-title class="title font-weight-light grey lighten-2" primary-title >{{ $t('Delete') }}</v-card-title>
             <v-card-text>{{ $t('Are you sure you want to delete template') }} "{{props.item.name}}" ?</v-card-text>
             <v-divider></v-divider>
             <v-card-actions>

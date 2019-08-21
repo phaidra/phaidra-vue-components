@@ -15,7 +15,7 @@
           </v-col>
           <v-col cols="2" align-self="center"><span>{{ total }} {{ $t('objects') }}</span></v-col>
           <v-spacer></v-spacer>
-          <v-col cols="4">
+          <v-col cols="4" align-self="center">
             <search-toolbar
                   :setSort="setSort"
                   :sortIsActive="sortIsActive"
@@ -40,8 +40,8 @@
         <search-filters
           :search="search"
           :facetQueries="facetQueries"
-          :persAuthors="persAuthors"
-          :corpAuthors="corpAuthors"
+          :persAuthorsProp="persAuthors"
+          :corpAuthorsProp="corpAuthors"
           :rolesProp="roles"
           :ownerProp="owner"
           ></search-filters>
@@ -117,7 +117,7 @@ export default {
       let { searchdefarr, ands } = buildSearchDef(this)
       let params = buildParams(this, ands)
 
-      this.link = location.protocol + '//' + location.host + '/#/search?' + searchdefarr.join('&')
+      this.link = location.protocol + '//' + location.host + '/search?' + searchdefarr.join('&')
       window.history.replaceState(null, this.$t('Search results'), this.link)
 
       let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
@@ -134,7 +134,7 @@ export default {
       this.docs = json.response.docs
       this.total = json.response.numFound
       this.facet_counts = json.facet_counts
-      updateFacetQueries(json.facet_counts.facetQueries, facetQueries)
+      updateFacetQueries(json.facet_counts.facet_queries, facetQueries)
     },
     handleSelect: function ({ term, payload }) {
       // called from Autocomplete

@@ -1,19 +1,13 @@
 <template>
-  <v-col>
-    <template v-if="o['skos:prefLabel']">
-      <v-row  >
-        <v-col class="pdlabel primary--text" md="4" cols="12">{{ $t(p) }}<template v-for="(l) in o['skos:prefLabel']"><template v-if="l['@language']"> ({{ l['@language'] }})</template></template></v-col>
-        <v-col md="8" cols="12">
-          <v-row>
-            <v-col class="valuefield" v-for="(l, i) in o['skos:prefLabel']" :key="'gplv'+i">{{ l['@value'] }}</v-col>
-            <template v-if="o['rdfs:label']">
-              <v-col class="grey--text valuefield" v-for="(l, i) in o['rdfs:label']" :key="'gl'+i">[{{ l['@value'] }}]</v-col>
-            </template>
-          </v-row>
-        </v-col>
-      </v-row>
-    </template>
-  </v-col>
+  <v-row v-if="o['skos:prefLabel']">
+    <v-col class="pdlabel primary--text text-right" md="2" cols="12">{{ $t(p) }}<template v-for="(l) in o['skos:prefLabel']"><template v-if="l['@language']"> ({{ l['@language'] }})</template></template></v-col>
+    <v-col md="10" cols="12">
+        <v-row no-gutters class="valuefield" v-for="(l, i) in o['skos:prefLabel']" :key="'gplv'+i">{{ l['@value'] }}</v-row>
+        <template v-if="o['rdfs:label']">
+          <v-row no-gutters class="grey--text valuefield" v-for="(l, i) in o['rdfs:label']" :key="'gl'+i">[{{ l['@value'] }}]</v-row>
+        </template>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

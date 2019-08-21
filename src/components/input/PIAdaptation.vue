@@ -1,16 +1,16 @@
 <template>
 
-  <v-row >
+  <v-row>
     <v-col cols="12">
 
       <v-card >
-        <v-card-title class="subheading grey white--text">
+        <v-card-title class="title font-weight-light grey white--text">
             <span>{{ $t(label) }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" icon dark>
-                  <v-icon dark>more_vert</v-icon>
+                  <v-icon dark>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
@@ -31,7 +31,7 @@
                     :value="title"
                     :label="$t('Title')"
                     v-on:blur="$emit('input-title',$event.target.value)"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4">
@@ -39,7 +39,7 @@
                     :value="subtitle"
                     :label="$t('Subtitle')"
                     v-on:blur="$emit('input-subtitle',$event.target.value)"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4">
@@ -50,7 +50,7 @@
                     :filter="autocompleteFilter"
                     hide-no-data
                     :label="$t('Language')"
-                    box
+                   filled
                     return-object
                     clearable
                   >
@@ -76,7 +76,7 @@
                       :value="name"
                       :label="$t('Name')"
                       v-on:blur="$emit('input-name',$event.target.value)"
-                      box
+                     filled
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -86,7 +86,7 @@
                       :value="firstname"
                       :label="$t('Firstname')"
                       v-on:blur="$emit('input-firstname',$event.target.value)"
-                      box
+                     filled
                     ></v-text-field>
                   </v-col>
                   <v-col cols="4">
@@ -94,7 +94,7 @@
                       :value="lastname"
                       :label="$t('Lastname')"
                       v-on:blur="$emit('input-lastname',$event.target.value)"
-                      box
+                     filled
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -106,7 +106,7 @@
                     :items="vocabularies['rolepredicate'].terms"
                     :value="getTerm('rolepredicate', role)"
                     :filter="autocompleteFilter"
-                    box
+                   filled
                     return-object
                     clearable
                   >

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import store from './store'
 import VueRouter from 'vue-router'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 import VueI18n from 'vue-i18n'
 import SvgIcon from 'vue-svgicon'
 import eng from './i18n/eng'
@@ -32,25 +32,6 @@ Vue.filter('date', function (value) {
   if (value) {
     return moment(String(value)).format('DD.MM.YYYY')
   }
-})
-
-Vue.filter('truncate', function (text, length, clamp) {
-  clamp = clamp || '...'
-  length = length || 500
-
-  if (text.length <= length) return text
-
-  var tcText = text.slice(0, length - clamp.length)
-  var last = tcText.length - 1
-
-  while (last > 0 && tcText[last] !== ' ' && tcText[last] !== clamp[0]) last -= 1
-
-  // Fix for case when text does not have any space
-  last = last || length - clamp.length
-
-  tcText = tcText.slice(0, last)
-
-  return tcText + clamp
 })
 
 const messages = { eng, deu, ita }

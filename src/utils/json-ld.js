@@ -1354,6 +1354,7 @@ export default {
         case 'edm:hasType':
         case 'schema:genre':
         case 'rdau:P60059':
+        case 'rdau:P60048':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
           }

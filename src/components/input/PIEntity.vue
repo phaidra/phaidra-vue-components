@@ -8,7 +8,7 @@
         :items="vocabularies['rolepredicate'].terms"
         :value="getTerm('rolepredicate', role)"
         :filter="autocompleteFilter"
-        box
+       filled
         return-object
         clearable
       >
@@ -32,7 +32,7 @@
             :value="name"
             :label="$t('Name')"
             v-on:blur="$emit('input-name',$event.target.value)"
-            box
+           filled
           ></v-text-field>
         </v-col>
       </template>
@@ -42,7 +42,7 @@
             :value="firstname"
             :label="$t('Firstname')"
             v-on:blur="$emit('input-firstname',$event.target.value)"
-            box
+           filled
           ></v-text-field>
         </v-col>
         <v-col cols="2">
@@ -50,7 +50,7 @@
             :value="lastname"
             :label="$t('Lastname')"
             v-on:blur="$emit('input-lastname',$event.target.value)"
-            box
+           filled
           ></v-text-field>
         </v-col>
       </template>
@@ -60,7 +60,7 @@
         :value="institution"
         :label="$t( institutionLabel ? institutionLabel : 'Institution' )"
         v-on:blur="$emit('input-institution',$event.target.value)"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="2" v-if="showidentifier">
@@ -68,14 +68,14 @@
         :value="identifier"
         :label="$t('Identifier')"
         v-on:blur="$emit('input-identifier',$event.target.value)"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

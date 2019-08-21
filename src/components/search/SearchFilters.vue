@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid >
+  <v-container>
     <ul class="main-ul">
       <li v-for="(f, i) in facetQueries" :key="i">
         <icon @click.native="showFacet(f)" v-if="f.show" name="univie-stop2" class="primary--text"></icon>
@@ -37,121 +37,128 @@
         </ul>
       </li>
       <li>
-        <v-row>
+        <v-row no-gutters>
           <v-col>
-            <v-row >
-              <v-col>
-                <icon @click.native="toggleOwnerFilter()" v-if="showOwnerFilter" name="univie-stop2" class="primary--text"></icon>
-                <icon @click.native="toggleOwnerFilter()" v-if="!showOwnerFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
-                <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">{{ $t('Owner') }}</span>
-              </v-col>
-            </v-row>
-            <autocomplete
-              v-if="showOwnerFilter"
-              searchaction="search"
-              placeholder="Search..."
-              name="autocomplete"
-              :initValue="owner"
-              :suggester="'ownersuggester'"
-              :customParams="{ token: 'dev' }"
-              :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
-              :onSelect="handleOwnerSelect"
-            ></autocomplete>
+            <icon @click.native="toggleOwnerFilter()" v-if="showOwnerFilter" name="univie-stop2" class="primary--text"></icon>
+            <icon @click.native="toggleOwnerFilter()" v-if="!showOwnerFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
+            <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">{{ $t('Owner') }}</span>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <autocomplete
+            class="mt-4"
+            v-if="showOwnerFilter"
+            searchaction="search"
+            placeholder="Search..."
+            name="autocomplete"
+            :initValue="owner"
+            :suggester="'ownersuggester'"
+            :customParams="{ token: 'dev' }"
+            :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
+            :onSelect="handleOwnerSelect"
+          ></autocomplete>
+        </v-row>
+      </li>
+      <li>
+        <v-row no-gutters>
+          <v-col>
+            <icon @click.native="toggleAuthorFilter()" v-if="showAuthorFilter" name="univie-stop2" class="primary--text"></icon>
+            <icon @click.native="toggleAuthorFilter()" v-if="!showAuthorFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
+            <span @click="toggleAuthorFilter()" class="facet-label primary--text" :class="{ active: showAuthorFilter }">{{ $t('Authors') }}</span>
+          </v-col>
+        </v-row>
+        <v-row no-gutters v-if="showAuthorFilter">
+          <v-col cols="12">
+            <v-combobox
+              class="mt-4"
+              :placeholder="$t('ADD_PREFIX') + ' '  + $t('Author') + ' ' + $t('ADD_SUFFIX') + '...'"
+              :hint="$t('Personal')"
+              persistent-hint
+              chips
+              clearable
+              deletable-chips
+              multiple
+              filled
+              single-line
+              v-model="persAuthors.values"
+              @input="setPersAuthors()"/>
+          </v-col>
+        </v-row>
+        <v-row no-gutters v-if="showAuthorFilter">
+          <v-col cols="12">
+            <v-combobox
+              class="mt-4"
+              :placeholder="$t('ADD_PREFIX') + ' '  + $t('Author') + ' ' + $t('ADD_SUFFIX') + '...'"
+              :hint="$t('Corporate')"
+              persistent-hint
+              chips
+              clearable
+              deletable-chips
+              multiple
+              filled
+              single-line
+              v-model="corpAuthors.values"
+              @input="setCorpAuthors()"/>
           </v-col>
         </v-row>
       </li>
       <li>
-        <v-row>
+        <v-row no-gutters>
           <v-col>
-            <v-row >
-              <v-col>
-                <icon @click.native="toggleAuthorFilter()" v-if="showAuthorFilter" name="univie-stop2" class="primary--text"></icon>
-                <icon @click.native="toggleAuthorFilter()" v-if="!showAuthorFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
-                <span @click="toggleAuthorFilter()" class="facet-label primary--text" :class="{ active: showAuthorFilter }">{{ $t('Authors') }}</span>
-              </v-col>
-            </v-row>
-            <v-row  v-if="showAuthorFilter">
-              <v-col cols="2">
-                <icon name="material-social-person" class="primary--text" height="100%"></icon>
-              </v-col>
-              <v-col cols="10">
-                <v-combobox
-                  :placeholder="selectPlaceholder('persAuthors')"
-                  chips
-                  clearable
-                  multiple
-                  v-model="persAuthorsValues" />
-              </v-col>
-            </v-row>
-            <v-row  v-if="showAuthorFilter">
-              <v-col cols="2">
-                <icon name="material-action-account-balance" class="primary--text" height="100%"></icon>
-              </v-col>
-              <v-col cols="10">
-                <v-combobox
-                  :placeholder="selectPlaceholder('corpAuthors')"
-                  chips
-                  clearable
-                  multiple
-                  v-model="corpAuthorsValues" />
-              </v-col>
-            </v-row>
+            <icon @click.native="toggleRoleFilter()" v-if="showRoleFilter" name="univie-stop2" class="primary--text"></icon>
+            <icon @click.native="toggleRoleFilter()" v-if="!showRoleFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
+            <span @click="toggleRoleFilter()" class="facet-label primary--text" :class="{ active: showRoleFilter }">{{ $t('Roles') }}</span>
           </v-col>
         </v-row>
-      </li>
-      <li>
-        <v-row>
-          <v-col>
-            <v-row >
-              <v-col>
-                <icon @click.native="toggleRoleFilter()" v-if="showRoleFilter" name="univie-stop2" class="primary--text"></icon>
-                <icon @click.native="toggleRoleFilter()" v-if="!showRoleFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
-                <span @click="toggleRoleFilter()" class="facet-label primary--text" :class="{ active: showRoleFilter }">{{ $t('Roles') }}</span>
+        <v-row no-gutters v-if="showRoleFilter">
+          <v-select
+            class="mt-4"
+            :placeholder="$t('Add role') + '...'"
+            :hint="$t('Personal')"
+            :items="marcRolesArray"
+            v-model="selectedRole.pers"
+            @input="addRoleFilter('pers')"
+            :menu-props="{maxHeight:'400'}"
+            persistent-hint
+            filled
+            single-line
+          ></v-select>
+          <v-select
+            class="mt-4"
+            :placeholder="$t('Add role') + '...'"
+            :hint="$t('Corporate')"
+            :items="marcRolesArray"
+            v-model="selectedRole.corp"
+            @input="addRoleFilter('corp')"
+            :menu-props="{maxHeight:'400'}"
+            persistent-hint
+            filled
+            single-line
+          ></v-select>
+          <div v-for="(role, i) in roles" :key="i" v-if="roles.length > 0" >
+            <v-row no-gutters>
+              <v-col cols="10">
+                <v-combobox
+                  :hint="role.type === 'pers' ? $t('Personal') : $t('Corporate')"
+                  persistent-hint
+                  class="mt-4"
+                  :placeholder="$t('ADD_PREFIX') + ' '  + $t(role.label) + ' ' + $t('ADD_SUFFIX') + '...'"
+                  chips
+                  clearable
+                  deletable-chips
+                  multiple
+                  filled
+                  single-line
+                  :items="role.values"
+                  v-model="role.values"
+                  @input="setRoleFilterValues(role)"
+                />
+              </v-col>
+              <v-col cols="2">
+                <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeRoleFilter(role)"></icon>
               </v-col>
             </v-row>
-            <v-row v-if="showRoleFilter">
-              <v-select
-                :placeholder="$t('Add role') + '...'"
-                :hint="$t('Personal')"
-                :items="marcRolesArray"
-                v-model="selectedRole.pers"
-                @input="addRoleFilter('pers')"
-                :menu-props="{maxHeight:'400'}"
-                persistent-hint
-              ></v-select>
-              <v-select
-                :placeholder="$t('Add role') + '...'"
-                :hint="$t('Corporate')"
-                :items="marcRolesArray"
-                v-model="selectedRole.corp"
-                @input="addRoleFilter('corp')"
-                :menu-props="{maxHeight:'400'}"
-                persistent-hint
-              ></v-select>
-              <div v-for="(role, i) in roles" :key="i" v-if="roles.length > 0" >
-                <v-row >
-                  <v-col cols="2">
-                    <icon v-if="role.type==='pers'" name="material-social-person" class="primary--text" height="100%"></icon>
-                    <icon v-if="role.type==='corp'" name="material-action-account-balance" class="primary--text" height="100%"></icon>
-                  </v-col>
-                  <v-col cols="8">
-                    <v-combobox
-                      :placeholder="$t('ADD_PREFIX') + ' '  + $t(role.label) + ' ' + $t('ADD_SUFFIX') + '...'"
-                      chips
-                      clearable
-                      multiple
-                      :items="role.values"
-                      v-model="role.values"
-                      @input="setRoleFilterValues(role)" />
-                  </v-col>
-                  <v-col cols="2">
-                    <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeRoleFilter(role)"></icon>
-                  </v-col>
-                </v-row>
-              </div>
-            </v-row>
-
-          </v-col>
+          </div>
         </v-row>
       </li>
     </ul>
@@ -173,26 +180,6 @@ export default {
   components: {
     Autocomplete
   },
-  computed: {
-    persAuthorsValues: {
-      get () {
-        return this.persAuthors.values()
-      },
-      set (values) {
-        this.persAuthors[0].values = values
-      }
-    },
-    corpAuthorsValues: {
-      get () {
-        return this.corpAuthors.values()
-      },
-      set (values) {
-        // it seems chips are manipulating the array directly anyways
-        // maybe should provide own filtering function
-        this.corpAuthors[0].values = values
-      }
-    }
-  },
   props: {
     search: {
       type: Function,
@@ -202,12 +189,12 @@ export default {
       type: Array,
       required: true
     },
-    persAuthors: {
-      type: Array,
+    persAuthorsProp: {
+      type: Object,
       required: true
     },
-    corpAuthors: {
-      type: Array,
+    corpAuthorsProp: {
+      type: Object,
       required: true
     },
     rolesProp: {
@@ -228,6 +215,8 @@ export default {
       marcRoles,
       marcRolesArray: [],
       roles: [],
+      persAuthors: {},
+      corpAuthors: {},
       owner: ''
     }
   },
@@ -241,22 +230,26 @@ export default {
       this.search({ page: 1, facetQueries: this.facetQueries })
     },
     handleOwnerSelect: function (query) {
-      this.owner = query.payload
+      if (query['payload']){
+        this.owner = query.payload
+      } else {
+        this.owner = query.term
+      }
       this.search({ owner: this.owner })
     },
     toggleOwnerFilter: function () {
       this.showOwnerFilter = !this.showOwnerFilter
       if (!this.showOwnerFilter) {
         this.owner = '' // TODO change '' to null whereever it's used
-        this.search({ owner: this.owner }) // TODO: should this be in if clause?
+        this.search({ owner: this.owner })
       }
     },
     toggleAuthorFilter: function () {
       this.showAuthorFilter = !this.showAuthorFilter
       if (!this.showAuthorFilter) {
-        this.persAuthors[0].values = []
-        this.corpAuthors[0].values = []
-        this.search({ persAuthors: this.persAuthors, corpAuthors: this.corpAuthors }) // TODO: should this be in if clause?
+        this.persAuthors.values = []
+        this.corpAuthors.values = []
+        this.search({ persAuthors: this.persAuthors, corpAuthors: this.corpAuthors })
       }
     },
     toggleRoleFilter: function () {
@@ -288,22 +281,19 @@ export default {
       this.roles[this.roles.indexOf(role)].values.splice(this.roles[this.roles.indexOf(role)].values.indexOf(value), 1)
       this.search({ roles: this.roles })
     },
-    selectPlaceholder: function (source) {
-      let label = ''
-      if (this[source].length) {
-        label = this[source][0].label
-      } else {
-        console.warn(`Label for ${source} not found`, this[source]) // eslint-disable-line no-console
-      }
-      return this.$t('ADD_PREFIX') + ' ' +
-        this.$t(label) + ' ' +
-        this.$t('ADD_SUFFIX') + '...'
+    setPersAuthors: function () {
+      this.search({ persAuthors: this.persAuthors })
+    },
+    setCorpAuthors: function () {
+      this.search({ corpAuthors: this.corpAuthors })
     }
   },
   mounted () {
     for (let role in this.marcRoles) {
       this.marcRolesArray.push({ value: role, text: this.$t(this.marcRoles[role]) })
     }
+    this.persAuthors = this.persAuthorsProp
+    this.corpAuthors = this.corpAuthorsProp
   },
   watch: {
     rolesProp: function (v) {
@@ -318,14 +308,15 @@ export default {
         this.showOwnerFilter = true
       }
     },
-    persAuthors: function (v) {
-      if (v[0].values.length) {
+    persAuthorsProp: function (v) {
+      this.persAuthors = v
+      if (v.length) {
         this.showAuthorFilter = true
-        // this.selectedRole.pers // TODO might need something like this
       }
     },
-    corpAuthors: function (v) {
-      if (v[0].values.length) {
+    corpAuthorsProp: function (v) {
+      this.corpAuthors = v
+      if (v.length) {
         this.showAuthorFilter = true
       }
     }

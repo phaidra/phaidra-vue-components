@@ -6,7 +6,7 @@
         :value="name"
         :label="$t('Funder name')"
         v-on:blur="$emit('input-name',$event.target.value)"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="2">
@@ -17,7 +17,7 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-        box
+       filled
         return-object
         clearable
       >
@@ -39,14 +39,14 @@
         :value="identifier"
         :label="'Funder identifier'"
         v-on:blur="$emit('input-identifier',$event.target.value)"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

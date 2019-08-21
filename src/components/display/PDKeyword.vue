@@ -1,18 +1,12 @@
 <template>
-  <v-col>
-    <v-row >
-      <v-col>
-        <template v-for="(l, i) in o['skos:prefLabel']">
-          <v-row   :key="'row'+i">
-            <v-col class="pdlabel primary--text" md="4" cols="12" :key="'l'+i">{{ $t(p) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
-            <v-col md="8" cols="12" :key="'t'+i">
-              <v-chip v-for="(keyword, j) in getKeywords(l)" :key="'kw'+j">{{keyword}}</v-chip>
-            </v-col>
-          </v-row>
-        </template>
+  <span>
+    <v-row v-for="(l, i) in o['skos:prefLabel']">
+      <v-col class="pdlabel primary--text text-right" md="2" cols="12" :key="'l'+i">{{ $t(p) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
+      <v-col md="10" cols="12" :key="'t'+i">
+        <v-chip v-for="(keyword, j) in getKeywords(l)" :key="'kw'+j">{{keyword}}</v-chip>
       </v-col>
     </v-row>
-  </v-col>
+  </span>
 </template>
 
 <script>

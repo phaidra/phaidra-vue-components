@@ -5,7 +5,7 @@
         :value="value"
         v-on:blur="$emit('input-value',$event.target.value)"
         :label="$t(label)"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="2">
@@ -14,7 +14,7 @@
         :label="$t('Unit')"
         :items="vocabularies['uncefact'].terms"
         :value="getTerm('uncefact', unit)"
-        box
+       filled
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
@@ -33,7 +33,7 @@
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

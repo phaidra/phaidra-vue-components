@@ -4,13 +4,13 @@
     <v-col cols="10">
 
       <v-card >
-        <v-card-title class="subheading grey white--text">
+        <v-card-title class="title font-weight-light grey white--text">
             <span>{{ $t('Project') }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" icon dark>
-                  <v-icon dark>more_vert</v-icon>
+                  <v-icon dark>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
@@ -31,7 +31,7 @@
                   :value="name"
                   :label="$t('Name')"
                   v-on:blur="$emit('input-name',$event.target.value)"
-                  box
+                 filled
                 ></v-text-field>
               </v-col>
               <v-col cols="3">
@@ -42,7 +42,7 @@
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t('Language')"
-                  box
+                 filled
                   return-object
                   clearable
                 >
@@ -68,7 +68,7 @@
                   :value="description"
                   :label="'Description'"
                   v-on:input="$emit('input-description', $event)"
-                  box
+                 filled
                 ></v-text-field>
               </v-col>
               <v-col cols="3">
@@ -79,7 +79,7 @@
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t('Language')"
-                  box
+                 filled
                   return-object
                   clearable
                 >
@@ -107,7 +107,7 @@
                   :label="'Identifier'"
                   v-on:blur="$emit('input-identifier',$event.target.value)"
                   homepage
-                  box
+                 filled
                 ></v-text-field>
               </v-col>
 
@@ -116,7 +116,7 @@
                   :value="homepage"
                   :label="'Homepage'"
                   v-on:blur="$emit('input-homepage',$event.target.value)"
-                  box
+                 filled
                 ></v-text-field>
               </v-col>
             </v-row>

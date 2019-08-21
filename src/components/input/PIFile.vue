@@ -2,13 +2,13 @@
   <v-row >
     <v-col cols="10">
       <v-card class="mb-4">
-        <v-card-title class="headline grey white--text">
+        <v-card-title class="title font-weight-light grey white--text">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
           <v-menu v-if="actions.length" open-on-hover bottom offset-y>
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" icon dark>
-                <v-icon dark>more_vert</v-icon>
+                <v-icon dark>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
             <v-list>

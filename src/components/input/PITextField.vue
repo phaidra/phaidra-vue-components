@@ -1,5 +1,5 @@
 <template>
-  <v-row >
+  <v-row>
     <v-col cols="8">
       <v-text-field v-if="!multiline"
         :value="value"
@@ -7,7 +7,7 @@
         :label="$t(label)"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-        box
+       filled
       ></v-text-field>
       <v-textarea v-if="multiline"
         :value="value"
@@ -15,7 +15,7 @@
         :label="$t(label)"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-        box
+       filled
       ></v-textarea>
     </v-col>
     <v-col cols="2" v-if="multilingual">
@@ -26,7 +26,7 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-        box
+       filled
         return-object
         clearable
       >
@@ -47,7 +47,7 @@
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

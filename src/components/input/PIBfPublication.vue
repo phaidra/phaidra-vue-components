@@ -3,13 +3,13 @@
     <v-col cols="12">
 
       <v-card >
-        <v-card-title class="subheading grey white--text">
+        <v-card-title class="title font-weight-light grey white--text">
             <span>{{ $t(label) }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" icon dark>
-                  <v-icon dark>more_vert</v-icon>
+                  <v-icon dark>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
@@ -30,7 +30,7 @@
                 :label="$t(publisherNameLabel ? publisherNameLabel : '')"
                 :required="required"
                 :rules="required ? [ v => !!v || 'Required'] : []"
-                box
+               filled
               ></v-text-field>
             </v-col>
             <v-col cols="4">
@@ -40,7 +40,7 @@
                 :label="$t(publishingPlaceLabel ? publishingPlaceLabel : '')"
                 :required="required"
                 :rules="required ? [ v => !!v || 'Required'] : []"
-                box
+               filled
               ></v-text-field>
             </v-col>
             <v-col cols="4">
@@ -51,7 +51,7 @@
                 :required="required"
                 :hint="'Format YYYY-MM-DD'"
                 :rules="[validationrules.date]"
-                box
+               filled
               ></v-text-field>
             </v-col>
           </v-row>

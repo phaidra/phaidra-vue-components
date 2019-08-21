@@ -7,7 +7,7 @@
         :label="$t('Study plan notation')"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="4">
@@ -17,7 +17,7 @@
         :label="$t('Study plan name')"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-        box
+       filled
       ></v-text-field>
     </v-col>
     <v-col cols="2" v-if="multilingual">
@@ -28,7 +28,7 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Name language')"
-        box
+       filled
         return-object
         clearable
       >
@@ -49,7 +49,7 @@
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
-            <v-icon>more_vert</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>

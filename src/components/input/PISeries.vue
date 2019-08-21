@@ -4,13 +4,13 @@
     <v-col cols="12">
 
       <v-card >
-        <v-card-title class="subheading grey white--text">
+        <v-card-title class="title font-weight-light grey white--text">
             <span>{{ $t(label) }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" icon dark>
-                  <v-icon dark>more_vert</v-icon>
+                  <v-icon dark>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
@@ -31,7 +31,7 @@
                     :value="title"
                     :label="$t('Title')"
                     v-on:blur="$emit('input-title',$event.target.value)"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4">
@@ -42,7 +42,7 @@
                     :filter="autocompleteFilter"
                     hide-no-data
                     :label="$t('Language')"
-                    box
+                   filled
                     return-object
                     clearable
                   >
@@ -69,7 +69,7 @@
                     :value="volume"
                     :label="$t('Volume')"
                     v-on:blur="$emit('input-volume',$event.target.value)"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
 
@@ -78,7 +78,7 @@
                     :value="issue"
                     :label="$t('Issue')"
                     v-on:blur="$emit('input-issue',$event.target.value)"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
 
@@ -89,7 +89,7 @@
                     v-on:blur="$emit('input-issued',$event.target.value)"
                     :hint="'Format YYYY-MM-DD'"
                     :rules="[validationrules.date]"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
 
@@ -102,7 +102,7 @@
                     :value="issn"
                     :label="$t('ISSN')"
                     v-on:blur="$emit('input-issn',$event.target.value)"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
 
@@ -111,7 +111,7 @@
                     :value="identifier"
                     :label="$t('Identifier')"
                     v-on:blur="$emit('input-identifier',$event.target.value)"
-                    box
+                   filled
                   ></v-text-field>
                 </v-col>
 

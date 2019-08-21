@@ -1,243 +1,230 @@
 <template>
   <div id="app">
     <v-app>
-      <v-container class="justify" >
+      <v-container class="justify">
         <v-row>
-
           <v-col cols="4">
             <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
-              <v-row ><v-col class="pa-3">{{alert.msg}}</v-col><v-spacer></v-spacer><v-btn icon @click.native="dismiss(alert)"><v-icon>close</v-icon></v-btn></v-row>
+              <v-row>
+                <span class="pa-3">{{alert.msg}}</span>
+                <v-spacer></v-spacer>
+                <v-btn icon @click.native="dismiss(alert)"><v-icon>mdi-close</v-icon></v-btn>
+              </v-row>
             </v-alert>
           </v-col>
+        </v-row> 
 
-          <v-row >
+        <v-row >
+          <v-col cols="2">
+            <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
+          </v-col>
+          <v-col cols="2">
+            <v-text-field v-model="phaidrabaseurl" :label="'phaidra'"></v-text-field>
+          </v-col>
+          <v-col cols="2">
+            <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
+          </v-col>
+          <template v-if="token">
+            <v-col cols="6">
+              <h3 class="font-weight-light pt-4">Logged in [{{ token }}]</h3>
+            </v-col>
+            <v-col cols="1">
+              <v-btn text single-line color="primary lighten-2" class="mt-3" @click="logout()">Logout</v-btn>
+            </v-col>
+          </template>
+          <template v-else>
             <v-col cols="2">
-              <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
+              <v-text-field v-model="credentials.username" :label="'username'" ></v-text-field>
             </v-col>
             <v-col cols="2">
-              <v-text-field v-model="phaidrabaseurl" :label="'phaidra'"></v-text-field>
+              <v-text-field
+                v-model="credentials.password"
+                :label="'password'"
+                :append-icon="psvis ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="toggleVisibility"
+                :type="psvis ? 'password' : 'text'"
+              ></v-text-field>
             </v-col>
-            <v-col cols="2">
-              <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
+            <v-col cols="1">
+              <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
             </v-col>
-            <template v-if="token">
-              <v-col cols="6">
-                <h3 class="font-weight-light pt-4">Logged in [{{ token }}]</h3>
-              </v-col>
-              <v-col cols="1">
-                <v-btn text single-line color="primary lighten-2" class="mt-3" @click="logout()">Logout</v-btn>
-              </v-col>
-            </template>
-            <template v-else>
-              <v-col cols="2">
-                <v-text-field v-model="credentials.username" :label="'username'" ></v-text-field>
-              </v-col>
-              <v-col cols="2">
-                <v-text-field
-                  v-model="credentials.password"
-                  :label="'password'"
-                  :append-icon="psvis ? 'visibility' : 'visibility_off'"
-                  @click:append="toggleVisibility"
-                  :type="psvis ? 'password' : 'text'"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="1">
-                <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
-              </v-col>
-            </template>
-          </v-row>
+          </template>
+        </v-row>
 
-          <v-row >
-            <v-col cols="2">
-              <v-navigation-drawer permanent>
-                <v-toolbar flat>
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-title class="title">{{ $t('Examples') }}</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-toolbar>
-                <v-divider></v-divider>
+        <v-row>
+          <v-col cols="2">
+            <v-navigation-drawer permanent>
+              <v-toolbar flat>
                 <v-list>
-                  <v-item-group v-model="window" class="shrink mr-4" mandatory tag="v-flex">
-                    <v-item>
-                      <div slot-scope="{ active, toggle }">
-                        <v-list-item @click="toggle">
-                          <v-list-item-content>
-                            <v-list-item-title>{{ $t('Display') }}</v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </div>
-                    </v-item>
-                    <v-item>
-                      <div slot-scope="{ active, toggle }">
-                        <v-list-item @click="toggle">
-                          <v-list-item-content>
-                            <v-list-item-title>{{ $t('Edit') }}</v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </div>
-                    </v-item>
-                    <v-item>
-                      <div slot-scope="{ active, toggle }">
-                        <v-list-item @click="toggle">
-                          <v-list-item-content>
-                            <v-list-item-title>{{ $t('Submit') }}</v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </div>
-                    </v-item>
-                    <v-item>
-                      <div slot-scope="{ active, toggle }">
-                        <v-list-item @click="toggle">
-                          <v-list-item-content>
-                            <v-list-item-title>{{ $t('Search') }}</v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </div>
-                    </v-item>
-                    <v-item>
-                      <div slot-scope="{ active, toggle }">
-                        <v-list-item @click="toggle">
-                          <v-list-item-content>
-                            <v-list-item-title>{{ $t('Manage') }}</v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </div>
-                    </v-item>
-                  </v-item-group>
+                  <v-list-item>
+                    <v-list-item-title class="title">{{ $t('Examples') }}</v-list-item-title>
+                  </v-list-item>
                 </v-list>
-              </v-navigation-drawer>
-            </v-col>
+              </v-toolbar>
+              <v-divider></v-divider>
+              <v-list>
+                <v-item-group v-model="window" class="shrink mr-4" mandatory tag="v-flex">
+                  <v-item>
+                    <div slot-scope="{ active, toggle }">
+                      <v-list-item @click="toggle">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('Display') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </div>
+                  </v-item>
+                  <v-item>
+                    <div slot-scope="{ active, toggle }">
+                      <v-list-item @click="toggle">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('Edit') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </div>
+                  </v-item>
+                  <v-item>
+                    <div slot-scope="{ active, toggle }">
+                      <v-list-item @click="toggle">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('Submit') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </div>
+                  </v-item>
+                  <v-item>
+                    <div slot-scope="{ active, toggle }">
+                      <v-list-item @click="toggle">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('Search') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </div>
+                  </v-item>
+                  <v-item>
+                    <div slot-scope="{ active, toggle }">
+                      <v-list-item @click="toggle">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('Manage') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </div>
+                  </v-item>
+                </v-item-group>
+              </v-list>
+            </v-navigation-drawer>
+          </v-col>
 
-            <v-col>
-              <v-window v-model="window">
-                <v-window-item>
-                  <v-col>
-                    <v-card>
-                      <v-toolbar flat>
-                        <v-toolbar-title>Display</v-toolbar-title>
-                        <v-divider class="mx-3" inset vertical></v-divider>
-                        <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
-                        <v-spacer></v-spacer>
-                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
-                      </v-toolbar>
-                      <v-card-text>
-                        <v-row >
-                          <p-d-jsonld
-                            :jsonld="displayjsonld"
-                            :pid="pid"
-                          ></p-d-jsonld>
-                        </v-row>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                </v-window-item>
-                <v-window-item>
-                  <v-col>
-                    <v-card>
-                      <v-toolbar flat>
-                        <v-toolbar-title>Edit</v-toolbar-title>
-                        <v-divider class="mx-3" inset vertical></v-divider>
-                        <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
-                        <v-spacer></v-spacer>
-                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
-                      </v-toolbar>
-                      <v-card-text>
-                        <p-i-form
-                          :form="editform"
-                          :targetpid="this.pid"
-                          v-on:object-saved="objectSaved($event)"
-                          v-on:load-form="form = $event"
-                        ></p-i-form>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                </v-window-item>
-                <v-window-item>
-                  <v-col>
-                    <v-card>
-                      <v-toolbar flat>
-                        <v-toolbar-title>Submit</v-toolbar-title>
-                        <v-divider class="mx-3" inset vertical></v-divider>
-                        <v-select
-                          :items="contentmodels"
-                          v-model="contentmodel"
-                          label="Object type"
-                          single-line
-                          v-on:change="resetForm($event)"
-                        ></v-select>
-                        <v-spacer></v-spacer>
-                      </v-toolbar>
-                      <v-card-text>
-                        <p-i-form
-                          :form="form"
-                          v-on:object-created="objectCreated($event)"
-                          v-on:load-form="form = $event"
-                          v-on:form-input-p-select="handleSelect($event)"
-                          v-on:add-phaidrasubject-section="addPhaidrasubjectSection($event)"
-                        ></p-i-form>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                </v-window-item>
-                <v-window-item>
-                  <v-col>
-                    <v-card>
-                      <v-toolbar flat>
-                        <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
-                        <v-divider class="mx-3" inset vertical></v-divider>
-                        <v-text-field :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
-                        <v-spacer></v-spacer>
-                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadSearch()">Load Collection</v-btn>
-                      </v-toolbar>
-                      <v-card-text>
-                        <p-search :collection="collection"></p-search>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                </v-window-item>
-                <v-window-item>
-                  <v-col>
-                    <v-card>
-                      <v-toolbar flat>
-                        <v-toolbar-title>{{ $t('Manage') }}</v-toolbar-title>
-                        <v-divider class="mx-3" inset vertical></v-divider>
-                        <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
-                        <v-spacer></v-spacer>
-                        <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadManagement(pid)">Load</v-btn>
-                      </v-toolbar>
-                      <v-card-text>
-                        <v-col>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-col>
-                        <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event" @order-saved="orderSaved($event)"></p-m-sort>
-                        <p-m-rights :pid="pid"></p-m-rights>
-                        <p-m-relationships :pid="pid"></p-m-relationships>
-                        <p-m-files :pid="pid"></p-m-files>
-                        <p-m-delete :pid="pid" :cmodel="loadedcmodel" :members="members"></p-m-delete>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                </v-window-item>
-              </v-window>
-            </v-col>
+          <v-col>
+            <v-window v-model="window">
+              <v-window-item>
+                <v-card>
+                  <v-toolbar flat>
+                    <v-toolbar-title>Display</v-toolbar-title>
+                    <v-divider class="mx-3" inset vertical></v-divider>
+                    <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                    <v-spacer></v-spacer>
+                    <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
+                  </v-toolbar>
+                  <v-card-text>
+                    <p-d-jsonld
+                      :jsonld="displayjsonld"
+                      :pid="pid"
+                    ></p-d-jsonld>
+                  </v-card-text>
+                </v-card>
+              </v-window-item>
+              <v-window-item>
+                <v-card>
+                  <v-toolbar flat>
+                    <v-toolbar-title>Edit</v-toolbar-title>
+                    <v-divider class="mx-3" inset vertical></v-divider>
+                    <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                    <v-spacer></v-spacer>
+                    <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
+                  </v-toolbar>
+                  <v-card-text>
+                    <p-i-form
+                      :form="editform"
+                      :targetpid="this.pid"
+                      v-on:object-saved="objectSaved($event)"
+                      v-on:load-form="form = $event"
+                    ></p-i-form>
+                  </v-card-text>
+                </v-card>
+              </v-window-item>
+              <v-window-item>
+                <v-card>
+                  <v-toolbar flat>
+                    <v-toolbar-title>Submit</v-toolbar-title>
+                    <v-divider class="mx-3" inset vertical></v-divider>
+                    <v-select
+                      :items="contentmodels"
+                      v-model="contentmodel"
+                      label="Object type"
+                      single-line
+                      v-on:change="resetForm($event)"
+                    ></v-select>
+                    <v-spacer></v-spacer>
+                  </v-toolbar>
+                  <v-card-text>
+                    <p-i-form
+                      :form="form"
+                      v-on:object-created="objectCreated($event)"
+                      v-on:load-form="form = $event"
+                      v-on:form-input-p-select="handleSelect($event)"
+                      v-on:add-phaidrasubject-section="addPhaidrasubjectSection($event)"
+                    ></p-i-form>
+                  </v-card-text>
+                </v-card>
+              </v-window-item>
+              <v-window-item>
+                <v-card>
+                  <v-toolbar flat>
+                    <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
+                    <v-divider class="mx-3" inset vertical></v-divider>
+                    <v-text-field :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
+                  </v-toolbar>
+                  <v-card-text>
+                    <p-search :collection="collection"></p-search>
+                  </v-card-text>
+                </v-card>
+              </v-window-item>
+              <v-window-item>
+                <v-card>
+                  <v-toolbar flat>
+                    <v-toolbar-title>{{ $t('Manage') }}</v-toolbar-title>
+                    <v-divider class="mx-3" inset vertical></v-divider>
+                    <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                    <v-spacer></v-spacer>
+                    <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadManagement(pid)">Load</v-btn>
+                  </v-toolbar>
+                  <v-card-text>
+                    <v-col>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-col>
+                    <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event" @order-saved="orderSaved($event)"></p-m-sort>
+                    <p-m-rights :pid="pid"></p-m-rights>
+                    <p-m-relationships :pid="pid"></p-m-relationships>
+                    <p-m-files :pid="pid"></p-m-files>
+                    <p-m-delete :pid="pid" :cmodel="loadedcmodel" :members="members"></p-m-delete>
+                  </v-card-text>
+                </v-card>
+              </v-window-item>
+            </v-window>
+          </v-col>
+        </v-row>
 
-          </v-row>
-          <v-footer color="white">
-            <v-row >
-              <v-spacer></v-spacer>
-              <v-col offset="9" cols="2">
-                <v-select
-                  v-model="lang"
-                  :items="languages"
-                  :label="$t('Language')"
-                  @change="$i18n.locale=$event"
-                  prepend-icon="language"
-                  single-line
-                ></v-select>
-              </v-col>
-              <v-col cols="1" class="mt-4">v {{version}}</v-col>
-            </v-row>
-          </v-footer>
+        <v-row justify="center">
+          <v-spacer></v-spacer>
+          <v-col offset="9" cols="2">
+            <v-select
+              v-model="lang"
+              :items="languages"
+              :label="$t('Language')"
+              @change="$i18n.locale=$event"
+              prepend-icon="mdi-translate"
+              single-line
+            ></v-select>
+          </v-col>
+          <v-col cols="1" class="mt-4">v {{version}}</v-col>
         </v-row>
       </v-container>
     </v-app>
@@ -729,6 +716,37 @@ export default {
 #app .v-tabs__div {
   text-transform: none;
   font-weight: 300;
+}
+
+.svg-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+  vertical-align: middle;
+  fill: none;
+  stroke: currentColor;
+}
+
+.svg-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+.svg-up {
+  transform: rotate(0deg);
+}
+
+.svg-right {
+  transform: rotate(90deg);
+}
+
+.svg-down {
+  transform: rotate(180deg);
+}
+ 
+.svg-left {
+  transform: rotate(-90deg);
 }
 </style>
 

@@ -26,7 +26,7 @@ export default {
   'dcterms:language': 'Language',
   'schema:subtitleLanguage': 'Subtitle language',
   'dcterms:type': 'Resource type',
-  'edm:hasType': 'Type/Genre',
+  'edm:hasType': 'Type / Genre',
   'bf:physicalLocation': 'Physical location',
   'bf:shelfMark': 'Call number',
   'edm:rights': 'License',
@@ -44,14 +44,14 @@ export default {
   'rdau:P60071': 'Date of production',
   'phaidra:dateAccessioned': 'Date accessioned',
 
-  'rdau:P60193': 'Journal/Series',
-  'rdau:P60101': 'Series/Part of',
+  'rdau:P60193': 'Journal / Series',
+  'rdau:P60101': 'Series / Part of',
   'rdau:P60227': 'Is motion picture adaptation of',
   'bf:provisionActivity': 'Provision activity: Publication',
   'cito:cites': 'Cites',
   'cito:isCitedBy': 'Is cited by',
 
-  'dcterms:spatial': 'Depicted/Represented place',
+  'dcterms:spatial': 'Depicted / Represented place',
   'vra:placeOfCreation': 'Place of creation',
   'vra:placeOfSite': 'Place of site',
 

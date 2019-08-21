@@ -256,7 +256,6 @@ function buildDateFacet () {
   return yearsFacet
 }
 
-// TODO: FIXME
 export function updateFacetQueries (facetQueriesSolr, facetQueries) {
   // called by the `search` function
   if (facetQueriesSolr) {
@@ -323,20 +322,16 @@ export function showFacet (f) {
   }
 }
 
-export const persAuthors = [
-  {
-    field: 'bib_roles_pers_aut',
-    label: 'Author',
-    values: []
-  }
-]
+export const persAuthors = {
+  field: 'bib_roles_pers_aut',
+  label: 'Author',
+  values: []
+}
 
-export const corpAuthors = [
-  {
-    field: 'bib_roles_corp_aut',
-    label: 'Author',
-    values: []
-  }
-]
+export const corpAuthors = {
+  field: 'bib_roles_corp_aut',
+  label: 'Author',
+  values: []
+}
 
 facetQueries.push(buildDateFacet())
