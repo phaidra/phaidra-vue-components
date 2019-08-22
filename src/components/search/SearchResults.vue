@@ -39,7 +39,7 @@
         </v-col>
       </v-row>
       <v-row no-gutters class="my-4 mr-2" :key="'lic'+doc.pid">
-        <v-col cols="2"></v-col>
+        <v-col cols="2" class="preview-maxwidth"></v-col>
         <v-col>
           <v-row no-gutters>
             <span>https://{{ instance.baseurl }}/{{ doc.pid }}</span>

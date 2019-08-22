@@ -9,7 +9,7 @@
       <v-tab-item class="pa-3" v-if="form">
 
         <v-row v-for="(s) in this.form.sections" :key="s.id" class="ma-3">
-          <v-card v-if="s.type !== 'accessrights'">
+          <v-card v-if="s.type !== 'accessrights'" width="100%">
             <v-card-title class="title font-weight-light grey white--text">
               <span><span v-t="s.title"></span></span>
               <v-spacer></v-spacer>
@@ -44,7 +44,7 @@
 
               <template v-for="(f) in s.fields">
                 <v-row no-gutters :key="f.id">
-                  <v-col v-if="f.component === 'p-text-field'" >
+                  <v-col v-if="f.component === 'p-text-field'">
                     <p-i-text-field
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -323,12 +323,11 @@
                   </v-col>
 
                 </v-row>
-
               </template>
 
               <v-row>
-                <v-col v-if="addbutton" class="pb-4">
-                  <v-dialog v-model="s['adddialogue']" scrollable width="700px">
+                <v-col >
+                  <v-dialog v-if="addbutton" class="pb-4" v-model="s['adddialogue']" scrollable width="700px">
                     <template v-slot:activator="{ on }">
                       <v-btn v-on="on" fab depressed small color="grey lighten-3">
                         <v-icon color="grey darken-1">mdi-plus</v-icon>
@@ -383,7 +382,7 @@
             <v-card>
               <v-card-title class="title font-weight-light grey lighten-2" primary-title><span v-t="'Save as template'"></span></v-card-title>
               <v-card-text>
-                <v-text-field v-model="templatename" :label="$t('Template name')" ></v-text-field>
+                <v-text-field class="mt-4" hide-details filled single-line v-model="templatename" :label="$t('Template name')" ></v-text-field>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>

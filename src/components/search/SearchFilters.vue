@@ -304,9 +304,7 @@ export default {
     },
     ownerProp: function (v) {
       this.owner = v
-      if (v.length) {
-        this.showOwnerFilter = true
-      }
+      this.showOwnerFilter = v.length
     },
     persAuthorsProp: function (v) {
       this.persAuthors = v

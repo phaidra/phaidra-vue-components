@@ -97,6 +97,10 @@ export default {
     collection: {
       type: String,
       default: ''
+    },
+    ownerProp: {
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -164,6 +168,22 @@ export default {
     removeCollectionFilter: function () {
       this.inCollection = ''
       this.search()
+    },
+    resetSearchParams: function () {
+      this.q = ''
+      this.inCollection = ''
+      this.owner = ''
+      this.currentPage = 1
+      this.pagesize = 10
+      for (let fq of this.facetQueries) {
+        // resetable might be set to false in case this search should
+        // work only in limited scope (eg only in a particular collection)
+        if (fq.resetable) {
+          for (let q of fq.queries) {
+            q.active = false
+          }
+        }
+      }
     }
   },
   mounted: function () {
@@ -175,8 +195,12 @@ export default {
     setTimeout(() => { this.search() }, 100)
   },
   watch: {
-    collection: function (col) { // used by demo app
+    collection: function (col) {
       this.inCollection = col
+      this.search()
+    },
+    ownerProp: function (owner) {
+      this.owner = owner
       this.search()
     }
   },
@@ -195,12 +219,19 @@ export default {
       corpAuthors,
       persAuthors,
       roles: [],
-      owner: '',
+      owner: this.ownerProp,
 
       docs: [],
       total: 0,
       facet_counts: null
     }
+  },
+  beforeRouteUpdate: async function (to, from, next) {
+    this.resetSearchParams()
+    this.owner = to.query.owner
+    this.inCollection = to.query.collection
+    await this.search()
+    next()
   }
 }
 </script>

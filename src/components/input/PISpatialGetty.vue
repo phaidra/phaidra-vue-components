@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col cols="3">
+    <v-col cols="4">
       <v-autocomplete
         v-on:input="$emit('input-place-type', $event)"
         :label="$t('Type of place')"
