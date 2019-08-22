@@ -13,8 +13,9 @@
       @focus="handleFocus"
       autocomplete="off"
       clearable
-      filled
+      :filled="!solo"
       single-line
+      :solo="solo"
     />
     <div :class="`${getClassName('list')} autocomplete autocomplete-list elevation-2`" v-show="showList && suggestions && suggestions.length">
       <v-list>
@@ -33,6 +34,7 @@ export default {
   props: {
     id: String,
     name: String,
+    solo: Boolean,
     className: String,
     classes: {
       type: Object,

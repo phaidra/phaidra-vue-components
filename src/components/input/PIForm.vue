@@ -1,9 +1,8 @@
 <template>
   <v-container  v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
-      <v-tab ripple><span v-t="'Metadata editor'"></span><template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
-      <v-tab ripple @click="updatePrettyPrint()"><span v-t="'Metadata preview'"></span></v-tab>
-      <v-tab v-if="templating" ripple @click="loadTemplates()"><span v-t="'Templates'"></span></v-tab>
+      <v-tab class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
+      <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="activetab">
@@ -398,7 +397,6 @@
         </v-row>
 
       </v-tab-item>
-      <v-tab-item class="ma-4 prewrap">{{JSON.stringify(metadatapreview, null, 2)}}</v-tab-item>
       <v-tab-item class="ma-4">
         <p-t-list ref="templates" v-on:load-template="loadTemplate($event)"></p-t-list>
       </v-tab-item>
@@ -564,7 +562,9 @@ export default {
       return md
     },
     loadTemplates: function () {
-      this.$refs.templates.loadTemplates()
+      if (this.$refs.templates) {
+        this.$refs.templates.loadTemplates()
+      }
     },
     loadTemplate: function (form) {
       this.$emit('load-form', form)
@@ -707,9 +707,6 @@ export default {
           self.$vuetify.goTo(0)
         })
     },
-    updatePrettyPrint: function () {
-      this.metadatapreview = this.getMetadata()
-    },
     addField: function (arr, f) {
       var newField = arrays.duplicate(arr, f)
       if (newField) {
@@ -831,8 +828,8 @@ export default {
       this.$emit('form-input-' + f.component, f)
     },
     setFilename: function (f, event) {
-      f.value = event.target.files[0].name
-      f.file = event.target.files[0]
+      f.value = event.name
+      f.file = event
       this.$emit('form-input-' + f.component, f)
     },
     addFieldAutocompleteFilter: function (item, queryText) {

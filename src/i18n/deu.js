@@ -606,6 +606,7 @@ export default {
 
   'Metadata editor': 'Metadateneditor',
   'Metadata preview': 'Metadatenansicht',
+  'Templates': 'Vorlagen',
   'Remove': 'Löschen',
   'Duplicate': 'Duplizieren',
   'Save as template': 'Als Vorlage speichern',

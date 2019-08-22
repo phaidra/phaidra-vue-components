@@ -1,20 +1,22 @@
 <template>
   <div id="app">
     <v-app>
-      <v-container class="justify">
-        <v-row>
-          <v-col cols="4">
-            <v-alert v-for="(alert, i) in alerts" :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
-              <v-row>
-                <span class="pa-3">{{alert.msg}}</span>
-                <v-spacer></v-spacer>
-                <v-btn icon @click.native="dismiss(alert)"><v-icon>mdi-close</v-icon></v-btn>
+
+      <v-container>
+        <v-row justify="center" v-for="(alert, i) in alerts">
+          <v-col cols="10">
+            <v-alert prominent dense :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
+              <v-row align="center">
+                <v-col class="grow">{{alert.msg}}</v-col>
+                <v-col class="shrink">
+                  <v-btn icon @click.native="dismiss(alert)"><v-icon>mdi-close</v-icon></v-btn>
+                </v-col>
               </v-row>
             </v-alert>
           </v-col>
         </v-row> 
 
-        <v-row >
+        <v-row align="center">
           <v-col cols="2">
             <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
           </v-col>
@@ -25,11 +27,9 @@
             <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
           </v-col>
           <template v-if="token">
-            <v-col cols="6">
-              <h3 class="font-weight-light pt-4">Logged in [{{ token }}]</h3>
-            </v-col>
+            <v-col cols="4" class="body-2">{{ token }}</v-col>
             <v-col cols="1">
-              <v-btn text single-line color="primary lighten-2" class="mt-3" @click="logout()">Logout</v-btn>
+              <v-btn dark raised single-line color="grey darken-3" @click="logout()">Logout</v-btn>
             </v-col>
           </template>
           <template v-else>
@@ -46,7 +46,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="1">
-              <v-btn raised single-line color="primary lighten-2" class="mt-3" @click="login()">Login</v-btn>
+              <v-btn dark raised single-line color="grey darken-3" @click="login()">Login</v-btn>
             </v-col>
           </template>
         </v-row>
@@ -118,12 +118,11 @@
             <v-window v-model="window">
               <v-window-item>
                 <v-card>
-                  <v-toolbar flat>
-                    <v-toolbar-title>Display</v-toolbar-title>
-                    <v-divider class="mx-3" inset vertical></v-divider>
-                    <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                  <v-toolbar dark color="grey">
+                    <v-toolbar-title>{{ $t('Display') }}</v-toolbar-title>
+                    <v-text-field class="mx-4" flat solo hide-details single-line v-model="pid" :placeholder="'o:123456789'"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadDisplay()">Load</v-btn>
+                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadDisplay()">Load</v-btn>
                   </v-toolbar>
                   <v-card-text>
                     <p-d-jsonld
@@ -135,12 +134,11 @@
               </v-window-item>
               <v-window-item>
                 <v-card>
-                  <v-toolbar flat>
-                    <v-toolbar-title>Edit</v-toolbar-title>
-                    <v-divider class="mx-3" inset vertical></v-divider>
-                    <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                  <v-toolbar dark color="grey">
+                    <v-toolbar-title>{{ $t('Edit') }}</v-toolbar-title>
+                    <v-text-field class="mx-4" flat solo hide-details single-line v-model="pid" :placeholder="'o:123456789'"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadEdit()">Load</v-btn>
+                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadEdit()">Load</v-btn>
                   </v-toolbar>
                   <v-card-text>
                     <p-i-form
@@ -154,14 +152,14 @@
               </v-window-item>
               <v-window-item>
                 <v-card>
-                  <v-toolbar flat>
-                    <v-toolbar-title>Submit</v-toolbar-title>
-                    <v-divider class="mx-3" inset vertical></v-divider>
+                  <v-toolbar class="grey" dark>
+                    <v-toolbar-title>{{ $t('Submit') }}</v-toolbar-title>
                     <v-select
+                      class="mx-4"
                       :items="contentmodels"
                       v-model="contentmodel"
                       label="Object type"
-                      single-line
+                      flat solo hide-details single-line
                       v-on:change="resetForm($event)"
                     ></v-select>
                     <v-spacer></v-spacer>
@@ -179,10 +177,10 @@
               </v-window-item>
               <v-window-item>
                 <v-card>
-                  <v-toolbar flat>
+                  <v-toolbar dark color="grey">
                     <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
-                    <v-divider class="mx-3" inset vertical></v-divider>
-                    <v-text-field :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
+                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
+                    <v-spacer></v-spacer>
                   </v-toolbar>
                   <v-card-text>
                     <p-search :collection="collection"></p-search>
@@ -191,12 +189,11 @@
               </v-window-item>
               <v-window-item>
                 <v-card>
-                  <v-toolbar flat>
+                  <v-toolbar class="grey" dark>
                     <v-toolbar-title>{{ $t('Manage') }}</v-toolbar-title>
-                    <v-divider class="mx-3" inset vertical></v-divider>
-                    <v-text-field v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'o:123456789'" v-model="pid"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="primary lighten-2" @click="loadManagement(pid)">Load</v-btn>
+                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadManagement(pid)">Load</v-btn>
                   </v-toolbar>
                   <v-card-text>
                     <v-col>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-col>

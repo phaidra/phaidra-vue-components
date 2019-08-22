@@ -11,15 +11,16 @@
               :customParams="{ token: 'dev' }"
               :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
               :onSelect="handleSelect"
+              solo
             ></autocomplete>
           </v-col>
           <v-col cols="2" align-self="center"><span>{{ total }} {{ $t('objects') }}</span></v-col>
           <v-spacer></v-spacer>
           <v-col cols="4" align-self="center">
             <search-toolbar
-                  :setSort="setSort"
-                  :sortIsActive="sortIsActive"
-                  :link="link" />
+              :setSort="setSort"
+              :sortIsActive="sortIsActive"
+              :link="link" />
           </v-col>
           <v-col cols="12">
             <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>

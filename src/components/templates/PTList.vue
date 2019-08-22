@@ -6,37 +6,20 @@
     :loading="loading"
     class="elevation-1"
   >
-    <template slot="items" slot-scope="props">
-      <td>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <span v-on="on">{{ props.item.name }}</span>
-          </template>
-          <span>{{ props.item.tid }}</span>
-        </v-tooltip>
-      </td>
-      <td class="text-right">{{ props.item.created | unixtime }}</td>
-      <td class="text-right" >
-        <v-btn flat color="primary" @click="loadTemplate(props.item.tid)">{{ $t('Load') }}</v-btn>
-        <v-btn flat color="grey" @click="deleteTemplate(props.item.tid)">{{ $t('Delete') }}</v-btn>
-        <!-- for some reason opening the dialog from here causes infinite cycle.. looks like vuetify bug..
-        <v-dialog v-model="deletetempconfirm" width="300" >
-          <template v-slot:activator="{ on }">
-            <v-btn flat color="grey" v-on="on">{{ $t('Delete') }}</v-btn>
-          </template>
-          <v-card>
-            <v-card-title class="title font-weight-light grey lighten-2" primary-title >{{ $t('Delete') }}</v-card-title>
-            <v-card-text>{{ $t('Are you sure you want to delete template') }} "{{props.item.name}}" ?</v-card-text>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="red" class="white--text" :loading="loading" :disabled="loading" @click="deleteTemplate(props.item.tid)">{{ $t('Delete') }}</v-btn>
-              <v-btn :disabled="loading" @click="deletetempconfirm = false">{{ $t('Cancel') }}</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        -->
-      </td>
+    <template v-slot:item.name="{ item }">
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <span v-on="on">{{ item.name }}</span>
+        </template>
+        <span>{{ item.tid }}</span>
+      </v-tooltip>
+    </template>
+    <template v-slot:item.created="{ item }">
+      {{ item.created | unixtime }}
+    </template>
+    <template v-slot:item.load="{ item }">
+      <v-btn text color="primary" @click="loadTemplate(item.tid)">{{ $t('Load') }}</v-btn>
+      <v-btn text color="grey" @click="deleteTemplate(item.tid)">{{ $t('Delete') }}</v-btn>
     </template>
   </v-data-table>
 
@@ -85,30 +68,32 @@ export default {
       return promise
     },
     deleteTemplate: function (tid) {
-      var self = this
-      this.loading = true
-      var url = self.$store.state.instanceconfig.api + '/jsonld/template/' + tid + '/remove'
-      var promise = fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
-        }
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.alerts && json.alerts.length > 0) {
-            self.$store.commit('setAlerts', json.alerts)
+      if(confirm(this.$t('Are you sure you want to delete this template?'))){
+        var self = this
+        this.loading = true
+        var url = self.$store.state.instanceconfig.api + '/jsonld/template/' + tid + '/remove'
+        var promise = fetch(url, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
-          self.loading = false
-          self.deletetempconfirm = false
-          self.loadTemplates()
         })
-        .catch(function (error) {
-          console.log(error)
-          self.loading = false
-        })
-      return promise
+          .then(function (response) { return response.json() })
+          .then(function (json) {
+            if (json.alerts && json.alerts.length > 0) {
+              self.$store.commit('setAlerts', json.alerts)
+            }
+            self.loading = false
+            self.deletetempconfirm = false
+            self.loadTemplates()
+          })
+          .catch(function (error) {
+            console.log(error)
+            self.loading = false
+          })
+        return promise
+      }
     },
     loadTemplates: function () {
       var self = this
