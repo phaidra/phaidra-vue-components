@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <template v-for="(doc) in this.docs">
-      <v-row :key="'row'+doc.pid">
+      <v-row :key="'prev'+doc.pid">
         <v-col cols="2" class="preview-maxwidth">
           <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'" class="elevation-1 mt-2">
             <div class="fill-height ma-0" slot="placeholder" align="center" justify="center">
@@ -38,7 +38,7 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-row no-gutters class="my-4 mr-2">
+      <v-row no-gutters class="my-4 mr-2" :key="'lic'+doc.pid">
         <v-col cols="2"></v-col>
         <v-col>
           <v-row no-gutters>

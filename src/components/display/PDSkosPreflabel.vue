@@ -1,10 +1,10 @@
 <template>
   <span>
-    <v-row v-for="(l, i) in o['skos:prefLabel']" v-if="l['@language'] === displaylang">
-      <v-col md="2" cols="12" v-if="p==='bf:note'" class="pdlabel primary--text text-right" :key="'l'+i">{{ $t(o['@type']) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
-      <v-col md="2" cols="12" v-else class="pdlabel primary--text text-right" :key="'l'+i">{{ $t(p) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
-      <v-col md="10" cols="12" v-if="o['skos:exactMatch']" :key="'t-id'+i"><a class="valuefield" :href="o['skos:exactMatch'][0]" target="_blank">{{ l['@value'] }}</a></v-col>
-      <v-col class="valuefield" md="10" cols="12" v-else :key="'t'+i">{{ l['@value'] }}</v-col>
+    <v-row v-for="(l, i) in o['skos:prefLabel']" v-if="l['@language'] === displaylang" :key="'prl'+i">
+      <v-col md="2" cols="12" v-if="p==='bf:note'" class="pdlabel primary--text text-right" >{{ $t(o['@type']) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
+      <v-col md="2" cols="12" v-else class="pdlabel primary--text text-right">{{ $t(p) }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
+      <v-col md="10" cols="12" v-if="o['skos:exactMatch']"><a class="valuefield" :href="o['skos:exactMatch'][0]" target="_blank">{{ l['@value'] }}</a></v-col>
+      <v-col class="valuefield" md="10" cols="12" v-else>{{ l['@value'] }}</v-col>
     </v-row>
   </span>
 </template>

@@ -1,11 +1,11 @@
 <template>
   <span>
     <template>
-      <v-row v-for="(mt, i) in o['bf:mainTitle']">
-        <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'mt'+i">
+      <v-row v-for="(mt, i) in o['bf:mainTitle']" :key="'mt'+i">
+        <v-col md="2" cols="12" class="pdlabel primary--text text-right">
           {{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template>
         </v-col>
-        <v-col md="10" cols="12" :key="'mtv'+i">
+        <v-col md="10" cols="12">
             <v-row no-gutters class="valuefield">{{ mt['@value'] }}</v-row>
             <template v-for="(st, i) in o['bf:subtitle']">
               <v-row no-gutters class="valuefield" :key="'stv'+i">{{ st['@value'] }}</v-row>

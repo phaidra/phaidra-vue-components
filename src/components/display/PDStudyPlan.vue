@@ -5,7 +5,7 @@
       <v-col md="10" cols="12" :key="'spl'+i">
         <v-row class="valuefield" >{{ l['@value'] }}</v-row>
         <template v-for="(id, i) in o['skos:notation']">
-          <v-row class="grey--text"  cols="4" :key="'notation'+i">[{{ id }}]</v-row>
+          <v-row class="grey--text cols"  :key="'notation'+i">[{{ id }}]</v-row>
         </template>
       </v-col>
     </template>

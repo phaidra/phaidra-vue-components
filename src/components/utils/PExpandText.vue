@@ -1,11 +1,11 @@
 <template>
-	<div>
-		<span class="prewrap" v-html="formattedString"></span>
-		<span v-show="text.length > maxChars">
-			<a :href="link" id="readmore" v-show="!isReadMore" v-on:click="triggerReadMore($event, true)">{{ moreStr }}</a>
-			<a :href="link" id="readmore" v-show="isReadMore" v-on:click="triggerReadMore($event, false)">{{ lessStr }}</a>
-		</span>
-	</div>
+  <div>
+    <span class="prewrap" v-html="formattedString"></span>
+    <span v-show="text.length > maxChars">
+      <a :href="link" id="readmore" v-show="!isReadMore" v-on:click="triggerReadMore($event, true)">{{ moreStr }}</a>
+      <a :href="link" id="readmore" v-show="isReadMore" v-on:click="triggerReadMore($event, false)">{{ lessStr }}</a>
+    </span>
+  </div>
 </template>
 
 <script>
@@ -33,22 +33,22 @@ export default {
       default: 500
     }
   },
-  data() {
+  data () {
     return {
       isReadMore: false
     }
   },
   computed: {
-    formattedString() {
-      var val_container = this.text;
+    formattedString () {
+      var valContainer = this.text
       if (!this.isReadMore && this.text.length > this.maxChars) {
-        val_container = val_container.substring(0, this.maxChars) + "... "
+        valContainer = valContainer.substring(0, this.maxChars) + '... '
       }
-      return val_container
+      return valContainer
     }
   },
   methods: {
-    triggerReadMore(e, b) {
+    triggerReadMore (e, b) {
       if (this.link === '#') {
         e.preventDefault()
       }

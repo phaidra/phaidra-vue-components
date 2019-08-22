@@ -43,8 +43,8 @@
             <v-card-text class="mt-4">
 
               <template v-for="(f) in s.fields">
-                <v-row no-gutters>
-                  <v-col v-if="f.component === 'p-text-field'" :key="f.id">
+                <v-row no-gutters :key="f.id">
+                  <v-col v-if="f.component === 'p-text-field'" >
                     <p-i-text-field
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -54,7 +54,7 @@
                     ></p-i-text-field>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-text-field-suggest'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-text-field-suggest'">
                     <p-i-text-field-suggest
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -64,7 +64,7 @@
                     ></p-i-text-field-suggest>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-keyword'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-keyword'">
                     <p-i-keyword
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -74,7 +74,7 @@
                     ></p-i-keyword>
                   </v-col>
 
-                  <v-col v-if="f.component === 'p-title'" :key="f.id">
+                  <v-col v-if="f.component === 'p-title'">
                     <p-i-title
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
@@ -87,7 +87,7 @@
                     ></p-i-title>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-select'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-select'">
                     <p-i-select
                       v-bind.sync="f"
                       v-on:input="selectInput(f, $event)"
@@ -96,7 +96,7 @@
                     ></p-i-select>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-select-text'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-select-text'">
                     <p-i-select-text
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -108,7 +108,7 @@
                     ></p-i-select-text>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-date-edtf'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-date-edtf'">
                     <p-i-date-edtf
                       v-bind.sync="f"
                       v-on:input-date="f.value=$event"
@@ -118,7 +118,7 @@
                     ></p-i-date-edtf>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-duration'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-duration'">
                     <p-i-duration
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -127,7 +127,7 @@
                     ></p-i-duration>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-series'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-series'">
                     <p-i-series
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
@@ -142,7 +142,7 @@
                     ></p-i-series>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-citation'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-citation'">
                     <p-i-citation
                       v-bind.sync="f"
                       v-on:input-citation-type="setSelected(f, 'type', $event)"
@@ -154,7 +154,7 @@
                     ></p-i-citation>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-bf-publication'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-bf-publication'">
                     <p-i-bf-publication
                       v-bind.sync="f"
                       v-on:input-publisher-name="f.publisherName=$event"
@@ -165,7 +165,7 @@
                     ></p-i-bf-publication>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-adaptation'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-adaptation'">
                     <p-i-adaptation
                       v-bind.sync="f"
                       v-on:input-title="f.title=$event"
@@ -180,7 +180,7 @@
                     ></p-i-adaptation>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-entity'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-entity'">
                     <p-i-entity
                       v-bind.sync="f"
                       v-on:input-firstname="f.firstname=$event"
@@ -196,7 +196,7 @@
                     ></p-i-entity>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-subject-gnd'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-subject-gnd'">
                     <p-i-subject-gnd
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -206,7 +206,7 @@
                     ></p-i-subject-gnd>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-spatial-getty'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-spatial-getty'">
                     <p-i-spatial-getty
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -217,7 +217,7 @@
                     ></p-i-spatial-getty>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-spatial-text'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-spatial-text'">
                     <p-i-spatial-text
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
@@ -227,7 +227,7 @@
                     ></p-i-spatial-text>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-dimension'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-dimension'">
                     <p-i-dimension
                       v-bind.sync="f"
                       v-on:input-value="f.value=$event"
@@ -237,7 +237,7 @@
                     ></p-i-dimension>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-literal'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-literal'">
                     <p-i-literal
                       v-bind.sync="f"
                       v-on:input-value="f.value=$event"
@@ -246,7 +246,7 @@
                     ></p-i-literal>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-study-plan'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-study-plan'">
                     <p-i-study-plan
                       v-bind.sync="f"
                       v-on:input-name="f.name=$event"
@@ -257,7 +257,7 @@
                     ></p-i-study-plan>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-project'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-project'">
                     <p-i-project
                       v-bind.sync="f"
                       v-on:input-name="f.name=$event"
@@ -271,7 +271,7 @@
                     ></p-i-project>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-funder'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-funder'">
                     <p-i-funder
                       v-bind.sync="f"
                       v-on:input-name="f.name=$event"
@@ -282,7 +282,7 @@
                     ></p-i-funder>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-association'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-association'">
                     <p-i-association
                       v-bind.sync="f"
                       v-on:input="selectInput(f, $event)"
@@ -291,29 +291,29 @@
                     ></p-i-association>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-filename-readonly'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-filename-readonly'">
                     <p-i-filename-readonly v-bind.sync="f"></p-i-filename-readonly>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-unknown-readonly'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-unknown-readonly'">
                     <p-i-unknown-readonly v-bind.sync="f"></p-i-unknown-readonly>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-vocab-ext-readonly'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-vocab-ext-readonly'">
                     <p-i-vocab-ext-readonly
                       v-bind.sync="f"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-vocab-ext-readonly>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'p-spatial-getty-readonly'" :key="f.id">
+                  <v-col v-else-if="f.component === 'p-spatial-getty-readonly'">
                     <p-i-spatial-getty-readonly
                       v-bind.sync="f"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-spatial-getty-readonly>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'input-file'" :key="f.id">
+                  <v-col v-else-if="f.component === 'input-file'">
                     <p-i-file
                       v-bind.sync="f"
                       v-on:input-file="setFilename(f, $event)"

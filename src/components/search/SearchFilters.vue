@@ -230,7 +230,7 @@ export default {
       this.search({ page: 1, facetQueries: this.facetQueries })
     },
     handleOwnerSelect: function (query) {
-      if (query['payload']){
+      if (query['payload']) {
         this.owner = query.payload
       } else {
         this.owner = query.term

@@ -68,7 +68,7 @@ export default {
       return promise
     },
     deleteTemplate: function (tid) {
-      if(confirm(this.$t('Are you sure you want to delete this template?'))){
+      if (confirm(this.$t('Are you sure you want to delete this template?'))) {
         var self = this
         this.loading = true
         var url = self.$store.state.instanceconfig.api + '/jsonld/template/' + tid + '/remove'

@@ -3,9 +3,9 @@
     <v-app>
 
       <v-container>
-        <v-row justify="center" v-for="(alert, i) in alerts">
+        <v-row justify="center" v-for="(alert, i) in alerts" :key="i">
           <v-col cols="10">
-            <v-alert prominent dense :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition" :key="i">
+            <v-alert prominent dense :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition">
               <v-row align="center">
                 <v-col class="grow">{{alert.msg}}</v-col>
                 <v-col class="shrink">
@@ -14,7 +14,7 @@
               </v-row>
             </v-alert>
           </v-col>
-        </v-row> 
+        </v-row>
 
         <v-row align="center">
           <v-col cols="2">
@@ -741,7 +741,7 @@ export default {
 .svg-down {
   transform: rotate(180deg);
 }
- 
+
 .svg-left {
   transform: rotate(-90deg);
 }
