@@ -70,7 +70,7 @@ export default new Vuex.Store({
             }
             if (json.status === 200) {
               commit('setToken', json['XSRF-TOKEN'])
-            // document.cookie = 'X-XSRF-TOKEN=' + json['XSRF-TOKEN']
+              document.cookie = 'X-XSRF-TOKEN=' + json['XSRF-TOKEN']
             }
           })
           .catch(function (error) {

@@ -5,8 +5,9 @@ export const facetQueries = [
     label: 'Access',
     field: 'datastreams',
     id: 'datastreams',
-    exclusive: 1,
-    show: 0,
+    exclusive: true,
+    resetable: true,
+    show: false,
     queries: [
       {
         id: 'restricted',
@@ -24,7 +25,8 @@ export const facetQueries = [
     label: 'Type',
     field: 'resourcetype',
     id: 'resourcetype',
-    show: 1,
+    resetable: true,
+    show: true,
     queries: [
       {
         id: 'image',
@@ -87,7 +89,8 @@ export const facetQueries = [
     label: 'Size',
     field: 'tsize',
     id: 'size',
-    show: 0,
+    show: false,
+    resetable: true,
     queries: [
       {
         id: 'less10',
@@ -130,7 +133,8 @@ export const facetQueries = [
     label: 'License',
     field: 'dc_license',
     id: 'license',
-    show: 0,
+    show: false,
+    resetable: true,
     queries: [
       {
         id: 'all-rights-reserved',
@@ -190,7 +194,8 @@ function buildDateFacet () {
     label: 'Date',
     field: 'tcreated',
     id: 'created',
-    show: 0,
+    show: false,
+    resetable: true,
     queries: []
   }
 
@@ -198,6 +203,7 @@ function buildDateFacet () {
     let monthsFacet = {
       label: 'Months of ' + year,
       field: 'tcreated',
+      resetable: true,
       id: 'months-' + year,
       queries: []
     }
@@ -222,6 +228,7 @@ function buildDateFacet () {
       let daysFacet = {
         label: 'Days of ' + month + '.' + year,
         field: 'tcreated',
+        resetable: true,
         id: 'days-' + year + '-' + month,
         queries: []
       }
@@ -299,26 +306,30 @@ export function toggleFacet (q, f) {
   }
 }
 
+export function deactivateFacetQueries (f) {
+  for (var i = 0; i < f.queries.length; i++) {
+    f.queries[i].active = false
+    if (f.queries[i].childFacet) {
+      var lvl1 = f.queries[i].childFacet
+      for (var j = 0; j < lvl1.queries.length; j++) {
+        lvl1.queries[j].active = false
+        if (lvl1.queries[j].childFacet) {
+          var lvl2 = lvl1.queries[j].childFacet
+          for (var k = 0; k < lvl2.queries.length; k++) {
+            lvl2.queries[k].active = false
+          }
+        }
+      }
+    }
+  }
+}
+
 export function showFacet (f) {
   f.show = !f.show
 
   if (!f.show) {
     // when hiding facet, remove it's filters
-    for (var i = 0; i < f.queries.length; i++) {
-      f.queries[i].active = false
-      if (f.queries[i].childFacet) {
-        var lvl1 = f.queries[i].childFacet
-        for (var j = 0; j < lvl1.queries.length; j++) {
-          lvl1.queries[j].active = false
-          if (lvl1.queries[j].childFacet) {
-            var lvl2 = lvl1.queries[j].childFacet
-            for (var k = 0; k < lvl2.queries.length; k++) {
-              lvl2.queries[k].active = false
-            }
-          }
-        }
-      }
-    }
+    deactivateFacetQueries(f)
   }
 }
 

@@ -63,7 +63,7 @@ import '@/compiled-icons/fontello-sort-number-up'
 import '@/compiled-icons/fontello-sort-number-down'
 import '@/compiled-icons/material-content-link'
 import '@/compiled-icons/material-action-bookmark'
-import { facetQueries, updateFacetQueries, persAuthors, corpAuthors } from './facets'
+import { facetQueries, updateFacetQueries, persAuthors, corpAuthors, deactivateFacetQueries } from './facets'
 import { buildParams, buildSearchDef, sortdef } from './utils'
 import { setSearchParams } from './location'
 
@@ -173,6 +173,13 @@ export default {
       this.q = ''
       this.inCollection = ''
       this.owner = ''
+      // TODO pass showAuthorFiler 
+      // and showRoleFilter to searchFilters
+      // as props so that we can hide toggle them off here
+      // the same for roles
+      this.corpAuthors.values = []
+      this.persAuthors.values = []
+      this.roles = []
       this.currentPage = 1
       this.pagesize = 10
       for (let fq of this.facetQueries) {
@@ -182,6 +189,7 @@ export default {
           for (let q of fq.queries) {
             q.active = false
           }
+          deactivateFacetQueries(fq)
         }
       }
     }
@@ -228,7 +236,11 @@ export default {
   },
   beforeRouteUpdate: async function (to, from, next) {
     this.resetSearchParams()
-    this.owner = to.query.owner
+    if (to.query.owner) {
+      this.owner = to.query.owner
+    } else {
+      this.owner = ''
+    }
     this.inCollection = to.query.collection
     await this.search()
     next()
