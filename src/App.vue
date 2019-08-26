@@ -608,6 +608,9 @@ export default {
       this.form.sections[1].fields.push(fields.getField('temporal-coverage'))
       this.form.sections[1].fields.push(fields.getField('provenance'))
       this.form.sections[1].fields.push(fields.getField('physical-location'))
+      this.form.sections[1].fields.push(fields.getField('page-start'))
+      this.form.sections[1].fields.push(fields.getField('page-end'))
+      this.form.sections[1].fields.push(fields.getField('scale'))
       // eingangsdatum
       var accessiondate = fields.getField('date-edtf')
       accessiondate.type = 'phaidra:dateAccessioned'

@@ -25,6 +25,8 @@
     <slot name="phaidra:dateAccessioned"></slot>
     <slot name="dcterms:temporal"></slot>
 
+    <slot name="schema:pageStart"></slot>
+    <slot name="schema:pageEnd"></slot>
     <slot name="rdau:P60193"></slot>
     <slot name="rdau:P60101"></slot>
     <slot name="cito:cites"></slot>
@@ -66,6 +68,7 @@
     <slot name="schema:depth"></slot>
     <slot name="schema:weight"></slot>
     <slot name="schema:duration"></slot>
+    <slot name="bf:scale"></slot>
 
     <slot name="dcterms:type"></slot>
     <slot name="pid"></slot>

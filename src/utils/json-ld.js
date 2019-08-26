@@ -570,6 +570,17 @@ export default {
               }
               break
 
+            // bf:scale
+            case 'bf:scale':
+              if (value[i]['@type'] === 'bf:Scale') {
+                f = fields.getField('scale')
+                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
+                  f.value = value[i]['skos:prefLabel'][j]['@value']
+                }
+                components.push(f)
+              }
+              break
+
             // vra:material
             case 'vra:material':
               if (value[i]['@type'] === 'vra:Material') {
@@ -694,6 +705,24 @@ export default {
                 f.value = value[i]
                 components.push(f)
               }
+              break
+
+            // schema:pageStart
+            case 'schema:pageStart':
+              f = fields.getField('page-start')
+              for (j = 0; j < value[i].length; j++) {
+                f.value = value[i]
+              }
+              components.push(f)
+              break
+
+            // schema:pageEnd
+            case 'schema:pageEnd':
+              f = fields.getField('page-end')
+              for (j = 0; j < value[i].length; j++) {
+                f.value = value[i]
+              }
+              components.push(f)
               break
 
             // schema:duration
@@ -1333,6 +1362,7 @@ export default {
 
         case 'bf:note':
         case 'bf:tableOfContents':
+        case 'bf:scale':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
           }
@@ -1524,6 +1554,8 @@ export default {
           break
 
         case 'schema:duration':
+        case 'schema:pageStart':
+        case 'schema:pageEnd':
           if (f.value) {
             this.push_literal(jsonld, f.predicate, f.value)
           }

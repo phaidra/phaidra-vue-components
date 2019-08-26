@@ -439,7 +439,25 @@ const fields = [
     component: 'p-literal',
     label: 'Number of pages',
     value: '',
-    definition: 'The number of pages in the book in the resource.'
+    definition: 'The number of pages in the resource.'
+  },
+  {
+    id: 'page-start',
+    fieldname: 'Page start',
+    predicate: 'schema:pageStart',
+    component: 'p-literal',
+    label: 'Page start',
+    value: '',
+    definition: 'The page on which the work starts; for example "135".'
+  },
+  {
+    id: 'page-end',
+    fieldname: 'Page end',
+    predicate: 'schema:pageEnd',
+    component: 'p-literal',
+    label: 'Page end',
+    value: '',
+    definition: 'The page on which the work ends; for example "138".'
   },
   {
     id: 'sound-characteristic',
@@ -614,6 +632,18 @@ const fields = [
     unit: 'KGM',
     value: '',
     definition: 'The weight of the item.'
+  },
+  {
+    id: 'scale',
+    fieldname: 'Scale',
+    predicate: 'bf:scale',
+    type: 'bf:Scale',
+    component: 'p-text-field',
+    multilingual: false,
+    multiplicable: false,
+    label: 'Scale',
+    value: '',
+    definition: 'Ratio of the dimensions of a form contained or embodied in a resource to the dimensions of the entity it represents, e.g., for images or cartographic resources.'
   },
   {
     id: 'duration',
@@ -823,7 +853,10 @@ const predicateOrder = [
   'schema:depth',
   'schema:weight',
   'schema:duration',
+  'bf:scale',
 
+  'schema:pageStart',
+  'schema:pageEnd',
   'rdau:P60193',
   'rdau:P60101',
   'bf:provisionActivity',

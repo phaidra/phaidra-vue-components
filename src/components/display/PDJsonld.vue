@@ -238,6 +238,14 @@
         <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'soundCharacteristic'+j" ></p-d-value>
       </template>
 
+      <template v-else-if="p==='schema:pageStart'" slot="schema:pageStart">
+        <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'pageStart'+j" ></p-d-value>
+      </template>
+
+      <template v-else-if="p==='schema:pageEnd'" slot="schema:pageEnd">
+        <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'pageEnd'+j" ></p-d-value>
+      </template>
+
       <template v-else-if="p==='bf:supplementaryContent'" slot="bf:supplementaryContent">
         <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'supplementaryContent'+j" ></p-d-skos-preflabel>
       </template>
@@ -248,6 +256,10 @@
 
       <template v-else-if="p==='bf:awards'" slot="bf:awards">
         <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'awards'+j" ></p-d-skos-preflabel>
+      </template>
+
+      <template v-else-if="p==='bf:scale'" slot="bf:scale">
+        <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'scale'+j" ></p-d-skos-preflabel>
       </template>
 
       <template v-else-if="p==='edm:rights'" slot="edm:rights">
