@@ -140,7 +140,7 @@ const fields = [
     id: 'condition-note',
     fieldname: 'Condition',
     predicate: 'bf:note',
-    type: 'phaidra:ConditionNote',
+    type: 'arm:ConditionAssessment',
     component: 'p-text-field',
     multilingual: true,
     multiline: true,

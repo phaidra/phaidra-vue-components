@@ -322,6 +322,10 @@ export default {
         {
           text: 'Container',
           value: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ'
+        },
+        {
+          text: 'Resource',
+          value: 'https://pid.phaidra.org/vocabulary/T8GH-F4V8'
         }
       ],
       psvis: true
@@ -545,8 +549,35 @@ export default {
       if (cm === 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ') {
         this.createContainerForm()
       } else {
-        this.createSimpleForm()
+        if (cm === 'https://pid.phaidra.org/vocabulary/T8GH-F4V8') {
+          this.createResourceForm()
+        } else {
+          this.createSimpleForm()
+        }
       }
+    },
+    createResourceForm: function () {
+      this.form = {
+        sections: [
+          {
+            title: 'Resource link',
+            type: 'resourcelink',
+            id: 1,
+            fields: []
+          },
+          {
+            title: 'General metadata',
+            type: 'digitalobject',
+            id: 2,
+            fields: []
+          }
+        ]
+      }
+      var rt = fields.getField('resource-type')
+      rt.value = this.contentmodel
+      this.form.sections[1].fields.push(rt)
+      this.form.sections[1].fields.push(fields.getField('title'))
+      this.form.sections[1].fields.push(fields.getField('description'))
     },
     createSimpleForm: function () {
       this.form = {

@@ -9,9 +9,26 @@
       <v-tab-item class="pa-3" v-if="form">
 
         <v-row v-for="(s) in this.form.sections" :key="s.id" class="ma-3">
-          <v-card v-if="s.type !== 'accessrights'" width="100%">
+
+          <v-card v-if="s.type === 'resourcelink'" width="100%">
             <v-card-title class="title font-weight-light grey white--text">
-              <span><span v-t="s.title"></span></span>
+              <span>{{s.title}}</span>
+              <v-spacer></v-spacer>
+            </v-card-title>
+            <v-card-text class="mt-4">
+              <v-text-field v-model="s.resourcelink"
+                :label="$t('Resource link')"
+                :required="required"
+                :placeholder="$t('e.g.: https://phaidra.org')"
+                :rules="required ? [ v => !!v || 'Required'] : []"
+                filled
+              ></v-text-field>
+            </v-card-text>
+          </v-card>
+
+          <v-card v-else-if="(s.type !== 'accessrights')" width="100%">
+            <v-card-title class="title font-weight-light grey white--text">
+              <span v-t="s.title"></span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
               <v-spacer></v-spacer>
@@ -326,7 +343,7 @@
               </template>
 
               <v-row>
-                <v-col >
+                <v-col>
                   <v-dialog v-if="addbutton" class="pb-4" v-model="s['adddialogue']" scrollable width="700px">
                     <template v-slot:activator="{ on }">
                       <v-btn v-on="on" fab depressed small color="grey lighten-3">
@@ -359,8 +376,8 @@
                             <v-col v-else><span v-t="'Please select metadata fields from the list'"></span></v-col>
                           </v-row>
                           <v-row justify="end">
-                              <v-btn color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
-                              <v-btn color="primary" @click="addFields(s)"><span v-t="'Add'"></span></v-btn>
+                            <v-btn color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
+                            <v-btn color="primary" @click="addFields(s)"><span v-t="'Add'"></span></v-btn>
                           </v-row>
                         </v-container>
                       </v-card-actions>
@@ -536,17 +553,18 @@ export default {
         jsonlds = jsonLd.form2json(this.form)
       }
       let md = { metadata: { 'json-ld': jsonlds } }
-      for (let s of this.form.sections) {
-        if (s.type === 'accessrights') {
-          md['metadata']['rights'] = s.rights
-        }
-      }
       let colorder = []
       let i = 0
       for (let s of this.form.sections) {
         if (s.type === 'member') {
           i++
           colorder.push({ member: 'member_' + s.id, pos: i })
+        }
+        if (s.type === 'accessrights') {
+          md['metadata']['rights'] = s.rights
+        }
+        if (s.type === 'resourcelink') {
+          md['metadata']['resourcelink'] = s.resourcelink
         }
       }
       if (colorder.length > 0) {
@@ -609,6 +627,10 @@ export default {
           return 'document'
         case 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ':
           return 'container'
+        case 'https://pid.phaidra.org/vocabulary/T8GH-F4V8':
+          return 'resource'
+        case 'https://pid.phaidra.org/vocabulary/GXS7-ENXJ':
+          return 'collection'
         default:
           return 'unknown'
       }
@@ -617,34 +639,49 @@ export default {
       var self = this
       this.loading = true
       var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
-      if (this.submittype === 'container') {
-        for (var i = 0; i < this.form.sections.length; i++) {
-          var s = this.form.sections[i]
-          if (s.type === 'member') {
-            for (var j = 0; j < s.fields.length; j++) {
-              if (s.fields[j].component === 'input-file') {
-                if (s.fields[j].file !== '') {
-                  httpFormData.append('member_' + s.id, s.fields[j].file)
+      
+      switch (this.submittype) {
+        case 'container':
+            for (var i = 0; i < this.form.sections.length; i++) {
+            var s = this.form.sections[i]
+            if (s.type === 'member') {
+              for (var j = 0; j < s.fields.length; j++) {
+                if (s.fields[j].component === 'input-file') {
+                  if (s.fields[j].file !== '') {
+                    httpFormData.append('member_' + s.id, s.fields[j].file)
+                  }
                 }
               }
             }
           }
-        }
-      } else {
-        for (i = 0; i < this.form.sections.length; i++) {
-          s = this.form.sections[i]
-          if (s.fields) {
-            for (j = 0; j < s.fields.length; j++) {
-              if (s.fields[j].component === 'input-file') {
-                if (s.fields[j].file !== '') {
-                  httpFormData.append('file', s.fields[j].file)
+          break
+        case 'resource':
+            for (var i = 0; i < this.form.sections.length; i++) {
+            var s = this.form.sections[i]
+            if (s.type === 'resourcelink') {
+
+            }
+          }
+          break
+      
+        default:
+          for (i = 0; i < this.form.sections.length; i++) {
+            s = this.form.sections[i]
+            if (s.fields) {
+              for (j = 0; j < s.fields.length; j++) {
+                if (s.fields[j].component === 'input-file') {
+                  if (s.fields[j].file !== '') {
+                    httpFormData.append('file', s.fields[j].file)
+                  }
                 }
               }
             }
           }
-        }
+          break;
       }
+
+      httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
+
       fetch(self.$store.state.instanceconfig.api + '/' + this.submittype + '/create', {
         method: 'POST',
         mode: 'cors',

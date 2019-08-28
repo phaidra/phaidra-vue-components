@@ -537,7 +537,7 @@ export default {
   'bf:Note': 'Beschreibung',
   'bf:Summary': 'Abstrakt',
   'phaidra:Remark': 'Anmerkung',
-  'phaidra:ConditionNote': 'Zustand',
+  'arm:ConditionAssessment': 'Zustand',
   'phaidra:ReproductionNote': 'Reproduction note',
   'phaidra:DigitizationNote': 'Digitization note',
   'bf:tableOfContents': 'Inhaltsverzeichnis',
@@ -624,5 +624,6 @@ export default {
   'Save': 'Speichern',
   'Sort': 'Sortieren',
   'Here you can sort members of this object (drag & drop).': 'Hier können Sie die Objekte innerhalb des Containers sortieren (drag & drop).',
-  'ORG_PUBLISHER': 'Verlag'
+  'ORG_PUBLISHER': 'Verlag',
+  'e.g.: https://phaidra.org': 'z.B.: https://phaidra.org'
 }

@@ -16,7 +16,7 @@ export default {
   'bf:Note': 'Description',
   'bf:Summary': 'Abstract',
   'phaidra:Remark': 'Remark',
-  'phaidra:ConditionNote': 'Condition',
+  'arm:ConditionAssessment': 'Condition',
   'phaidra:ReproductionNote': 'Reproduction note',
   'phaidra:DigitizationNote': 'Digitization note',
   'bf:tableOfContents': 'Table of contents',
