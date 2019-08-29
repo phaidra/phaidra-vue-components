@@ -18,9 +18,9 @@
             <v-card-text class="mt-4">
               <v-text-field v-model="s.resourcelink"
                 :label="$t('Resource link')"
-                :required="required"
+                :required="true"
                 :placeholder="$t('e.g.: https://phaidra.org')"
-                :rules="required ? [ v => !!v || 'Required'] : []"
+                :rules="[ v => !!v || 'Required']"
                 filled
               ></v-text-field>
             </v-card-text>
