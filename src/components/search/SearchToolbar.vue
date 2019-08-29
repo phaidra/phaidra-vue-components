@@ -1,10 +1,12 @@
 <template lang="html">
   <v-container class="toolbar">
-    <v-row  >
+    <v-row>
       <v-col>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <icon @click.native="setSort('title asc')" name="fontello-sort-name-up" :color="sortIsActive('title asc') ? '#1A74B0' : '#777777'" v-on="on"></icon>
+            <v-btn icon @click="setSort('title asc')" :color="sortIsActive('title asc') ? 'primary' : 'grey darken-1'" v-on="on">
+              <icon width="16px" height="16px" name="fontello-sort-name-up"></icon>
+            </v-btn>
           </template>
           <span>{{ $t('Title ascending')}}</span>
         </v-tooltip>
@@ -12,7 +14,9 @@
       <v-col>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <icon @click.native="setSort('title desc')" name="fontello-sort-name-down" :color="sortIsActive('title desc') ? '#1A74B0' : '#777777'" v-on="on"></icon>
+            <v-btn icon @click="setSort('title desc')" :color="sortIsActive('title desc') ? 'primary' : 'grey darken-1'" v-on="on">
+              <icon width="16px" height="16px" name="fontello-sort-name-down"></icon>
+            </v-btn>
           </template>
           <span>{{ $t('Title descending')}}</span>
         </v-tooltip>
@@ -20,7 +24,9 @@
       <v-col>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <icon @click.native="setSort('created asc')" name="fontello-sort-number-up" :color="sortIsActive('created asc') ? '#1A74B0' : '#777777'" v-on="on"></icon>
+            <v-btn icon @click="setSort('created asc')" :color="sortIsActive('created asc') ? 'primary' : 'grey darken-1'" v-on="on">
+              <icon width="16px" height="16px" name="fontello-sort-number-up"></icon>
+            </v-btn>
           </template>
           <span>{{ $t('Upload date ascending')}}</span>
         </v-tooltip>
@@ -28,7 +34,9 @@
       <v-col>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <icon @click.native="setSort('created desc')" name="fontello-sort-number-down" :color="sortIsActive('created desc') ? '#1A74B0' : '#777777'" v-on="on"></icon>
+            <v-btn icon @click="setSort('created desc')" :color="sortIsActive('created desc') ? 'primary' : 'grey darken-1'" v-on="on">
+              <icon width="16px" height="16px" name="fontello-sort-number-down"></icon>
+            </v-btn>
           </template>
           <span>{{ $t('Upload date descending')}}</span>
         </v-tooltip>
@@ -48,11 +56,22 @@
         </v-dialog>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <icon @click.native="linkdialog=true" name="material-content-link" v-on="on"></icon>
+            <v-btn icon @click="linkdialog=true" :color="'grey darken-1'" v-on="on">
+              <icon width="18px" height="18px" name="material-content-link"></icon>
+            </v-btn>
           </template>
           <span>{{ $t('Link to search results')}}</span>
         </v-tooltip>
       </v-col>
+      <v-col>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-checkbox hide-details class="shrink mr-2 mt-1" color="primary" @click.stop="toggleSelection()" v-model="selectioncheck" v-on="on"></v-checkbox>
+          </template>
+          <span>{{ $t('Select results')}}</span>
+        </v-tooltip>
+      </v-col>
+      
     </v-row>
   </v-container>
 </template>
@@ -71,7 +90,12 @@ export default {
     },
     link: {
       type: String
-    }
+    },
+    toggleSelection: {
+      type: Function,
+      required: true
+    },
+    selectioncheck: Boolean
   },
   data () {
     return {

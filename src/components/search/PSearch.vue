@@ -20,20 +20,15 @@
             <search-toolbar
               :setSort="setSort"
               :sortIsActive="sortIsActive"
-              :link="link" />
+              :link="link"
+              :toggleSelection="toggleSelection"
+              :selectioncheck="selectioncheck" />
           </v-col>
-          <v-col cols="12">
-            <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
-            <search-results :docs="docs"></search-results>
-            <v-col class="text-center">
-              <p-pagination
-                v-if="total>pagesize"
-                v-bind:length="totalPages"
-                total-visible="10"
-                v-model="page"
-                class="mb-3" />
-            </v-col>
-          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
+          <search-results :docs="docs" :total="total" :selectioncheck="selectioncheck"></search-results>
+          <p-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
         </v-row>
       </v-col>
       <v-col cols="3" class="pa-2">
@@ -63,6 +58,7 @@ import '@/compiled-icons/fontello-sort-number-up'
 import '@/compiled-icons/fontello-sort-number-down'
 import '@/compiled-icons/material-content-link'
 import '@/compiled-icons/material-action-bookmark'
+import '@/compiled-icons/material-toggle-check-box-outline-blank'
 import { facetQueries, updateFacetQueries, persAuthors, corpAuthors, deactivateFacetQueries } from './facets'
 import { buildParams, buildSearchDef, sortdef } from './utils'
 import { setSearchParams } from './location'
@@ -192,7 +188,10 @@ export default {
           deactivateFacetQueries(fq)
         }
       }
-    }
+    },
+    toggleSelection: function () {
+      this.selectioncheck = !this.selectioncheck
+    },
   },
   mounted: function () {
     setSearchParams(this, this.$route.query)
@@ -216,6 +215,7 @@ export default {
     return {
       link: '',
       linkdialog: false,
+      selectioncheck: false,
       q: '',
       inCollection: this.collection,
       currentPage: 1,

@@ -16,6 +16,7 @@
       :filled="!solo"
       single-line
       :solo="solo"
+      hide-details
     />
     <div :class="`${getClassName('list')} autocomplete autocomplete-list elevation-2`" v-show="showList && suggestions && suggestions.length">
       <v-list>

@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <v-app>
-
       <v-container>
         <v-row justify="center" v-for="(alert, i) in alerts" :key="i">
           <v-col cols="10">
