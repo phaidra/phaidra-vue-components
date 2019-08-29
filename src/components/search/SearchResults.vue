@@ -3,7 +3,7 @@
     <v-divider v-if="selectioncheck"></v-divider>
     <v-slide-y-transition hide-on-leave>
       <v-row v-if="selectioncheck" no-gutters class="my-4">
-        <span class="mt-2"><a @click="selectPage()">{{ $t('Select this page') }}</a><span class="mx-2">/</span><a @click="selection = []">{{ $t('Clear selection') }}</a></span>
+        <span class="mt-2"><a @click="selectPage()">{{ $t('Select this page') }}</a><span class="mx-2">/</span><a @click="unselectPage()">{{ $t('Unselect this page') }}</a><span class="mx-2">/</span><a @click="selection = []">{{ $t('Clear selection') }}</a></span>
         <v-spacer></v-spacer>
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
@@ -140,6 +140,13 @@ export default {
       for (let d of this.docs) {
         if (!this.selection.includes(d.pid)) {
           this.selection.push(d.pid)
+        }
+      }
+    },
+    unselectPage: function () {
+      for (let d of this.docs) {
+        if (this.selection.includes(d.pid)) {
+          this.selection.splice(this.selection.indexOf(d.pid), 1)
         }
       }
     }
