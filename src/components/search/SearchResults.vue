@@ -1,42 +1,46 @@
 <template>
   <v-container>
     <v-divider v-if="selectioncheck"></v-divider>
-    <v-row v-if="selectioncheck" no-gutters class="my-4">
-      <span class="mt-2"><a @click="selectPage()">{{ $t('Select this page') }}</a><span class="mx-2">/</span><a @click="selection = []">{{ $t('Clear selection') }}</a></span>
-      <v-spacer></v-spacer>
-      <v-menu offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on" text outlined color="primary" class="mx-4" :disabled="!total">{{ $t('All results') }} ({{ total }})</v-btn>
-        </template>
-        <v-list>
-          <v-list-item @click="">
-            <v-list-item-title>{{ $t('Add to bookmark list') }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="">
-            <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <v-menu offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
-        </template>
-        <v-list>
-          <v-list-item @click="">
-            <v-list-item-title>{{ $t('Add to bookmark list') }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="">
-            <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-row>
+    <v-slide-y-transition hide-on-leave>
+      <v-row v-if="selectioncheck" no-gutters class="my-4">
+        <span class="mt-2"><a @click="selectPage()">{{ $t('Select this page') }}</a><span class="mx-2">/</span><a @click="selection = []">{{ $t('Clear selection') }}</a></span>
+        <v-spacer></v-spacer>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" text outlined color="primary" class="mx-4" :disabled="!total">{{ $t('All results') }} ({{ total }})</v-btn>
+          </template>
+          <v-list>
+            <v-list-item @click="">
+              <v-list-item-title>{{ $t('Add to bookmark list') }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="">
+              <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
+          </template>
+          <v-list>
+            <v-list-item @click="">
+              <v-list-item-title>{{ $t('Add to bookmark list') }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="">
+              <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-row>
+    </v-slide-y-transition>
     <v-divider v-if="selectioncheck"></v-divider>
     <template v-for="(doc) in this.docs">
       <v-row>
-        <v-col cols="1" v-if="selectioncheck" align-self="center">
-          <v-checkbox color="primary" @change="selectDoc($event, doc.pid)" :value="selection.includes(doc.pid)"></v-checkbox>
-        </v-col>
+        <v-slide-x-transition hide-on-leave>
+          <v-col cols="1" v-if="selectioncheck" align-self="center">
+            <v-checkbox color="primary" @change="selectDoc($event, doc.pid)" :value="selection.includes(doc.pid)"></v-checkbox>
+          </v-col>
+        </v-slide-x-transition>
         <v-divider inset vertical v-if="selectioncheck"></v-divider>
         <v-col :cols="selectioncheck ? 10 : 12">
           <v-row :key="'prev'+doc.pid">
