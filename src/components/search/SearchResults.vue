@@ -3,27 +3,14 @@
     <v-divider v-if="selectioncheck"></v-divider>
     <v-slide-y-transition hide-on-leave>
       <v-row v-if="selectioncheck" no-gutters class="my-4">
-        <span class="mt-2"><a @click="selectPage()">{{ $t('Select this page') }}</a><span class="mx-2">/</span><a @click="unselectPage()">{{ $t('Unselect this page') }}</a><span class="mx-2">/</span><a @click="selection = []">{{ $t('Clear selection') }}</a></span>
+        <span class="mt-2"><a @click="selectPage()">{{ $t('Select this page') }}</a><span class="mx-2">/</span><a @click="unselectPage()">{{ $t('Unselect this page') }}</a><span class="mx-2">/</span><a @click="selectAllResults()">{{ $t('Select all results') }}</a><span class="mx-2">/</span><a @click="selection = []">{{ $t('Clear selection') }}</a></span>
         <v-spacer></v-spacer>
         <v-menu offset-y>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on" text outlined color="primary" class="mx-4" :disabled="!total">{{ $t('All results') }} ({{ total }})</v-btn>
+          <template v-slot:activator="{ on: menu }">
+            <v-btn v-on="{ ...menu }" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
           </template>
           <v-list>
-            <v-list-item @click="">
-              <v-list-item-title>{{ $t('Add to bookmark list') }}</v-list-item-title>
-            </v-list-item>
-            <v-list-item @click="">
-              <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-        <v-menu offset-y>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
-          </template>
-          <v-list>
-            <v-list-item @click="">
+            <v-list-item @click="$refs.bookmarkdialog.open()">
               <v-list-item-title>{{ $t('Add to bookmark list') }}</v-list-item-title>
             </v-list-item>
             <v-list-item @click="">
@@ -94,6 +81,9 @@
       </v-row>
       <v-divider :key="'div'+doc.pid" class="my-4 mr-2"></v-divider>
     </template>
+
+    <bookmark-dialog ref="bookmarkdialog" @bookmarklist-selected="addToBookmarklist($event)"></bookmark-dialog>
+
   </v-container>
 </template>
 
@@ -101,13 +91,15 @@
 import PDLicense from '../display/PDLicense'
 import PImg from '../utils/PImg'
 import PExpandText from '../utils/PExpandText'
+import BookmarkDialog from './BookmarkDialog'
 
 export default {
   name: 'search-results',
   components: {
     PDLicense,
     PImg,
-    PExpandText
+    PExpandText,
+    BookmarkDialog
   },
   props: {
     docs: {
@@ -117,7 +109,7 @@ export default {
     total: Number
   },
   computed: {
-    instance () {
+    instance: function () {
       return this.$store.state.instanceconfig
     }
   },
@@ -127,6 +119,9 @@ export default {
     }
   },
   methods: {
+    addToBookmarklist: function (blist) {
+      console.log('Adding selection to bookmarklist: ' + blist.name)
+    },
     selectDoc: function (value, pid) {
       if (value) {
         if (!this.selection.includes(pid)) {
@@ -147,6 +142,16 @@ export default {
       for (let d of this.docs) {
         if (this.selection.includes(d.pid)) {
           this.selection.splice(this.selection.indexOf(d.pid), 1)
+        }
+      }
+    },
+    selectAllResults: function () {
+      // todo: get all pid+title from current search
+      // check for max selection size
+      let docs = []
+      for (let d of docs) {
+        if (!this.selection.includes(d.pid)) {
+          this.selection.push(d.pid)
         }
       }
     }

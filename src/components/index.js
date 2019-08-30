@@ -52,7 +52,8 @@ import PMDelete from './management/PMDelete'
 import PMSort from './management/PMSort'
 import PMRights from './management/PMRights'
 import PMRelationships from './management/PMRelationships'
-import PMFiles from './management/PMFiles'
+import PMObjectMembers from './management/PMObjectMembers'
+import PMCollectionMembers from './management/PMCollectionMembers'
 
 const Components = {
   PImg,
@@ -109,7 +110,8 @@ const Components = {
   PMSort,
   PMRights,
   PMRelationships,
-  PMFiles
+  PMObjectMembers,
+  PMCollectionMembers
 }
 
 export default {
