@@ -10,8 +10,8 @@
             <v-btn v-on="{ ...menu }" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
           </template>
           <v-list>
-            <v-list-item @click="$refs.bookmarkdialog.open()">
-              <v-list-item-title>{{ $t('Add to bookmark list') }}</v-list-item-title>
+            <v-list-item @click="$refs.listdialog.open()">
+              <v-list-item-title>{{ $t('Add to list') }}</v-list-item-title>
             </v-list-item>
             <v-list-item @click="">
               <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
@@ -25,7 +25,7 @@
       <v-row>
         <v-slide-x-transition hide-on-leave>
           <v-col cols="1" v-if="selectioncheck" align-self="center">
-            <v-checkbox color="primary" @change="selectDoc($event, doc.pid)" :value="selection.includes(doc.pid)"></v-checkbox>
+            <v-checkbox color="primary" @change="selectDoc($event, doc)" :value="selection.includes(doc.pid)"></v-checkbox>
           </v-col>
         </v-slide-x-transition>
         <v-divider inset vertical v-if="selectioncheck"></v-divider>
@@ -82,7 +82,7 @@
       <v-divider :key="'div'+doc.pid" class="my-4 mr-2"></v-divider>
     </template>
 
-    <bookmark-dialog ref="bookmarkdialog" @bookmarklist-selected="addToBookmarklist($event)"></bookmark-dialog>
+    <list-dialog ref="listdialog" @list-selected="addToList($event)"></list-dialog>
 
   </v-container>
 </template>
@@ -91,7 +91,7 @@
 import PDLicense from '../display/PDLicense'
 import PImg from '../utils/PImg'
 import PExpandText from '../utils/PExpandText'
-import BookmarkDialog from './BookmarkDialog'
+import ListDialog from './ListDialog'
 
 export default {
   name: 'search-results',
@@ -99,7 +99,7 @@ export default {
     PDLicense,
     PImg,
     PExpandText,
-    BookmarkDialog
+    ListDialog
   },
   props: {
     docs: {
@@ -119,29 +119,90 @@ export default {
     }
   },
   methods: {
-    addToBookmarklist: function (blist) {
-      console.log('Adding selection to bookmarklist: ' + blist.name)
+    addToList: async function (list) {
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('members', JSON.stringify({ members: this.selection }))
+        let response = await fetch(this.instance.api + '/list/' + list.listid + '/members/add', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          body: httpFormData
+        })
+        if ( response.status === 200 ) {
+          this.$store.commit('setAlerts', [ { msg: this.$t('Bookmarklist successfuly updated'), type: 'success' } ])
+        } else {
+          let json = await response.json()
+          if (json.alerts && json.alerts.length > 0) {
+            this.$store.commit('setAlerts', json.alerts)
+          }
+        }
+        this.loading = false  
+      } catch (error) {
+        console.log(error)
+        this.loading = false
+      }
     },
-    selectDoc: function (value, pid) {
+    selectDoc: function (value, doc) {
       if (value) {
-        if (!this.selection.includes(pid)) {
-          this.selection.push(pid)
+        let found = false
+        for (let s of this.selection) {
+          if(s.pid === doc.pid) {
+            found = true
+          }
+        }
+        if (!found){
+          let t = ''
+          if (doc.dc_title) {
+            t = doc.dc_title[0]
+          }
+          this.selection.push({
+            pid: doc.pid,
+            title: t
+          })
         }
       } else {
-        this.selection.splice(this.selection.indexOf(pid), 1)
+        let i = 0
+        for (let s of this.selection) {
+          if(s.pid === doc.pid) {
+            this.selection.splice(i, 1)
+            break
+          }
+          i++
+        }
       }
     },
     selectPage: function () {
       for (let d of this.docs) {
-        if (!this.selection.includes(d.pid)) {
-          this.selection.push(d.pid)
+        let found = false
+        for (let s of this.selection) {
+          if(s.pid === d.pid) {
+            found = true
+          }
+        }
+        if (!found){
+          let t = ''
+          if (d.dc_title) {
+            t = d.dc_title[0]
+          }
+          this.selection.push({
+            pid: d.pid,
+            title: t
+          })
         }
       }
     },
     unselectPage: function () {
       for (let d of this.docs) {
-        if (this.selection.includes(d.pid)) {
-          this.selection.splice(this.selection.indexOf(d.pid), 1)
+        let i = 0
+        for (let s of this.selection) {
+          if(s.pid === d.pid) {
+            this.selection.splice(i, 1)
+            break
+          }
+          i++
         }
       }
     },
