@@ -11,7 +11,7 @@
           </template>
           <v-list>
             <v-list-item @click="$refs.listdialog.open()">
-              <v-list-item-title>{{ $t('Add to list') }}</v-list-item-title>
+              <v-list-item-title>{{ $t('Add to object list') }}</v-list-item-title>
             </v-list-item>
             <v-list-item @click="">
               <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
@@ -132,7 +132,7 @@ export default {
           body: httpFormData
         })
         if ( response.status === 200 ) {
-          this.$store.commit('setAlerts', [ { msg: this.$t('Bookmarklist successfuly updated'), type: 'success' } ])
+          this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
         } else {
           let json = await response.json()
           if (json.alerts && json.alerts.length > 0) {
