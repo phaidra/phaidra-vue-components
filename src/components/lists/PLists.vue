@@ -5,7 +5,6 @@
         <v-card>
           <v-card-title class="title font-weight-light grey white--text">
             {{ $t('Manage object lists') }}
-            <div class="flex-grow-1"></div>
           </v-card-title>
           <v-card-text>
             <v-data-table
@@ -16,41 +15,41 @@
               :loading="listsLoading"
               :loading-text="$t('Loading object lists...')"
             >
-            <template v-slot:top>
-              <v-toolbar flat>
-                <v-text-field
-                  v-model="listsSearch"
-                  append-icon="search"
-                  :label="$t('Search...')"
-                  single-line
-                  hide-details
-                ></v-text-field>
-                <v-spacer></v-spacer>
-                <v-dialog v-model="createDialog" max-width="500px">
-                  <template v-slot:activator="{ on }">
-                    <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('New list') }}</v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-title class="title font-weight-light grey white--text">
-                      {{ $t('Create new object list') }}
-                    </v-card-title>
-                    <v-card-text>
-                      <v-text-field
-                        v-model="newListName"
-                        :label="$t('Enter object list name...')"
-                        single-line
-                        hide-details
-                      ></v-text-field>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn dark @click="createDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
-                      <v-btn @click="createList()" color="primary">{{ $t('Create') }}</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-toolbar>
-            </template>
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-text-field
+                    v-model="listsSearch"
+                    append-icon="search"
+                    :label="$t('Search...')"
+                    single-line
+                    hide-details
+                  ></v-text-field>
+                  <v-spacer></v-spacer>
+                  <v-dialog v-model="createDialog" max-width="500px">
+                    <template v-slot:activator="{ on }">
+                      <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('New list') }}</v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title class="title font-weight-light grey white--text">
+                        {{ $t('Create new object list') }}
+                      </v-card-title>
+                      <v-card-text>
+                        <v-text-field
+                          v-model="newListName"
+                          :label="$t('Enter object list name...')"
+                          single-line
+                          hide-details
+                        ></v-text-field>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn dark @click="createDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
+                        <v-btn @click="createList()" color="primary">{{ $t('Create') }}</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-toolbar>
+              </template>
               <template v-slot:item.name="{ item }">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
@@ -66,57 +65,91 @@
                 {{ item.updated | unixtime }}
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-btn text color="primary" @click="loadedList = item">{{ $t('Select') }}</v-btn>
+                <v-icon color="primary" class="mx-3" @click="loadedList = item">edit</v-icon>
+                <v-icon color="grey" class="mx-3" @click="deleteListDialog(item)">delete</v-icon>
               </template>
             </v-data-table>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <v-row v-if="loadedList">
-      <v-card>
-        <v-card-title>
-          {{ loadedList.name }}
-          <div class="flex-grow-1"></div>
-          <v-text-field
-            v-model="membersSearch"
-            append-icon="search"
-            :label="$t('Search...')"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-card-title>
-        <v-data-table
-          hide-default-header
-          :headers="membersHeaders"
-          :items="members"
-          :search="membersSearch"
-          :loading="membersLoading"
-          :loading-text="$t('Loading object list members...')"
-        >
-          <template v-slot:item.actions="{ item }">
-            <v-btn text color="primary" @click="removeMember(item)">{{ $t('Remove') }}</v-btn>
-          </template>
-        </v-data-table>
-      </v-card>
+    <v-row no-gutters v-if="loadedList">
+      <v-col cols="12">
+        <v-card>
+          <v-card-title class="title font-weight-light grey white--text">
+            {{ loadedList.name }}
+          </v-card-title>
+          <v-card-text>
+            <v-data-table
+              hide-default-header
+              :headers="membersHeaders"
+              :items="members"
+              :search="membersSearch"
+              :loading="membersLoading"
+              :loading-text="$t('Loading object list members...')"
+            >
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-text-field
+                    v-model="membersSearch"
+                    append-icon="search"
+                    :label="$t('Search...')"
+                    single-line
+                    hide-details
+                  ></v-text-field>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" dark class="mb-2"  @click="$refs.collectiondialog.open()">{{ $t('Add to collection') }}</v-btn>
+                </v-toolbar>
+              </template>
+              <template v-slot:item.pid="{ item }">
+                <router-link :to="{ name: 'detail', params: { pid: item.pid } }">{{ item.pid }}</router-link>
+              </template>
+              <template v-slot:item.actions="{ item }">
+                <v-icon color="grey" class="mx-3" @click="removeMember(item)">delete</v-icon>
+              </template>
+            </v-data-table>
+          </v-card-text>
+        </v-card>
+      </v-col>
     </v-row>
+    <v-dialog v-model="deleteDialog" max-width="500px" v-if="listToDelete">
+      <v-card>
+        <v-card-title class="title font-weight-light grey white--text">
+          {{ $t('Delete object list') }}
+        </v-card-title>
+        <v-card-text>
+          <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('Delete object list') + listToDelete.name + '?' }}</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn dark @click="createDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
+          <v-btn @click="deleteList()" color="primary">{{ $t('Delete') }}</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <collection-dialog ref="collectiondialog" @collection-selected="addToCollection($event)"></collection-dialog>
   </v-container>
 </template>
 
 <script>
+import CollectionDialog from '../select/CollectionDialog'
+
 export default {
   name: 'p-lists',
+  components: {
+    CollectionDialog
+  },
   computed: {
     instance: function () {
       return this.$store.state.instanceconfig
     }
   },
   watch: {
-    selectedList: async function () {
+    loadedList: async function () {
       if (this.loadedList) {
         this.membersLoading = true
         try {
-          let response = await fetch(this.instance.api + '/list/' + loadedList.listid, {
+          let response = await fetch(this.instance.api + '/list/' + this.loadedList.listid, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -125,15 +158,15 @@ export default {
           })
           let json = await response.json()
           if ( response.status === 200 ) {
-            this.members = json.members
+            this.members = json.list.members
           } else {
             if (json.alerts && json.alerts.length > 0) {
               this.$store.commit('setAlerts', json.alerts)
             }
           }
-          this.membersLoading = false  
         } catch (error) {
           console.log(error)
+        } finally {
           this.membersLoading = false
         }
       }
@@ -142,6 +175,10 @@ export default {
   data () {
     return {
       createDialog: false,
+      deleteDialog: false,
+      addToDialog: false,
+      listToDelete: null,
+      listToAddToCollection: null,
       newListName: '',
       listsLoading: false,
       listsSearch: '',
@@ -159,13 +196,48 @@ export default {
       deleteMembersConfirm: false,
       membersHeaders: [
         { text: 'PID', align: 'left', value: 'pid' },
-        { text: 'Title', align: 'right', value: 'title' },
+        { text: 'Title', align: 'left', value: 'title' },
         { text: 'Actions', align: 'right', value: 'actions', sortable: false }
       ],
       members: []
     }
   },
   methods: {
+    addToCollection: async function (collection) {
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.members } }))
+        let response = await fetch(this.instance.api + '/collection/' + collection.pid + '/members/add', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          body: httpFormData
+        })
+        if ( response.status === 200 ) {
+          this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
+          this.$router.push({ name: 'detail', params: { pid: collection.pid } })
+        } else {
+          let json = await response.json()
+          if (json.alerts && json.alerts.length > 0) {
+            this.$store.commit('setAlerts', json.alerts)
+          }
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+    },
+    deleteListDialog: function (list) {
+      this.listToDelete = list
+      this.deleteDialog = true
+    },
+    addToCollectionDialog: function (list) {
+      this.listToAddToCollection = list
+      this.addToDialog = true
+    },
     createList: async function () {
       try {
         this.createDialog = false
@@ -199,52 +271,53 @@ export default {
         if ( response.status === 200 ) {
           this.lists = json.lists
         }
-        this.listsLoading = false  
       } catch (error) {
         console.log(error)
+      } finally {
         this.listsLoading = false
       }
     },
-    deleteList: async function (listid) {
-      if (confirm(this.$t('Are you sure you want to delete this object list?'))) {
-        try {
-          let response = await fetch(this.instance.api + '/list/' + listid + '/remove', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'X-XSRF-TOKEN': this.$store.state.user.token
-            }
-          })
-          let json = await response.json()
-          if ( response.status !== 200 ) {
-            if (json.alerts && json.alerts.length > 0) {
-              this.$store.commit('setAlerts', json.alerts)
-            }
+    deleteList: async function () {
+      this.deleteDialog = false
+      this.listsLoading = true
+      try {
+        let response = await fetch(this.instance.api + '/list/' + this.listToDelete.listid + '/remove', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
-          response = await fetch(this.instance.api + '/lists', {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-              'X-XSRF-TOKEN': this.$store.state.user.token
-            }
-          })
-          json = await response.json()
-          if ( response.status === 200 ) {
-            this.lists = json.lists
+        })
+        let json = await response.json()
+        if ( response.status !== 200 ) {
+          if (json.alerts && json.alerts.length > 0) {
+            this.$store.commit('setAlerts', json.alerts)
           }
-          this.listsLoading = false  
-        } catch (error) {
-          console.log(error)
-          this.listsLoading = false
         }
+        response = await fetch(this.instance.api + '/lists', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
+        })
+        json = await response.json()
+        if ( response.status === 200 ) {
+          this.lists = json.lists
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.listsLoading = false
+        this.listToDelete = null
       }
     },
     removeMember: async function (member) {
       try {
         this.membersLoading = true
         var httpFormData = new FormData()
-        httpFormData.append('members', JSON.stringify([{ pid: member.pid}]))
-        let response = await fetch(this.instance.api + '/list/' + loadedList.listid + '/members/remove', {
+        httpFormData.append('members', JSON.stringify({ members: [ member ]}))
+        let response = await fetch(this.instance.api + '/list/' + this.loadedList.listid + '/members/remove', {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -258,7 +331,7 @@ export default {
             this.$store.commit('setAlerts', json.alerts)
           }
         }
-        response = await fetch(this.instance.api + '/list/' + loadedList.listid, {
+        response = await fetch(this.instance.api + '/list/' + this.loadedList.listid, {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -267,11 +340,11 @@ export default {
         })
         json = await response.json()
         if ( response.status === 200 ) {
-          this.members = json.members
+          this.members = json.list.members
         }
-        this.membersLoading = false  
       } catch (error) {
         console.log(error)
+      } finally {
         this.membersLoading = false
       }
     }

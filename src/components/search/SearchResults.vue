@@ -25,7 +25,7 @@
       <v-row>
         <v-slide-x-transition hide-on-leave>
           <v-col cols="1" v-if="selectioncheck" align-self="center">
-            <v-checkbox color="primary" @change="selectDoc($event, doc)" :value="selection.includes(doc.pid)"></v-checkbox>
+            <v-checkbox color="primary" @change="selectDoc($event, doc)" :value="selectionIncludes(doc)"></v-checkbox>
           </v-col>
         </v-slide-x-transition>
         <v-divider inset vertical v-if="selectioncheck"></v-divider>
@@ -91,7 +91,7 @@
 import PDLicense from '../display/PDLicense'
 import PImg from '../utils/PImg'
 import PExpandText from '../utils/PExpandText'
-import ListDialog from './ListDialog'
+import ListDialog from '../select/ListDialog'
 
 export default {
   name: 'search-results',
@@ -119,6 +119,14 @@ export default {
     }
   },
   methods: {
+    selectionIncludes: function (doc) {
+      for (let s of this.selection) {
+        if(s.pid === doc.pid) {
+          return true
+        }
+      }
+      return false
+    },
     addToList: async function (list) {
       try {
         var httpFormData = new FormData()

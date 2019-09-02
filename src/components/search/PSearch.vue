@@ -241,9 +241,29 @@ export default {
     } else {
       this.owner = ''
     }
-    this.inCollection = to.query.collection
+    if (to.query.collection) {
+      this.inCollection = to.query.collection
+    } else {
+      this.inCollection = ''
+    }
     await this.search()
     next()
+  },
+  beforeRouteEnter: async function (to, from, next) {
+    next(async vm => {
+      vm.resetSearchParams()
+      if (to.query.owner) {
+        vm.owner = to.query.owner
+      } else {
+        vm.owner = ''
+      }
+      if (to.query.collection) {
+        vm.inCollection = to.query.collection
+      } else {
+        vm.inCollection = ''
+      }
+      await vm.search()
+    })
   }
 }
 </script>

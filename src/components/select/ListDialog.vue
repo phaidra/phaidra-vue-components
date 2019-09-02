@@ -18,6 +18,7 @@
           :search="listsSearch"
           :loading="loading"
           :loading-text="$t('Loading...')"
+          :items-per-page="5"
         >
           <template v-slot:item.name="{ item }">
             <v-tooltip bottom>
