@@ -22,7 +22,7 @@
           :items-per-page="5"
         >
           <template v-slot:item.title="{ item }">
-            <span v-if="item.dc_title">{{ item.dc_title[0] }}</span>
+            <span v-if="item.dc_title">{{ item.dc_title[0] | truncate(50) }}</span>
           </template>
           <template v-slot:item.created="{ item }">
             {{ item.created | date }}

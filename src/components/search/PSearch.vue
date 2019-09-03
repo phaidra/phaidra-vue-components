@@ -27,7 +27,12 @@
         </v-row>
         <v-row no-gutters>
           <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
-          <search-results :docs="docs" :total="total" :selectioncheck="selectioncheck"></search-results>
+          <search-results 
+            :docs="docs" 
+            :total="total" 
+            :selectioncheck="selectioncheck" 
+            :getallresults="getAllResults">
+          </search-results>
           <p-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
         </v-row>
       </v-col>
@@ -42,6 +47,21 @@
           :ownerProp="owner"
           ></search-filters>
       </v-col>
+      <v-dialog v-model="limitdialog" width="500">
+        <v-card>
+          <v-card-title class="grey white--text">{{ $t('Selection limit' ) }}</v-card-title>
+          <v-card-text>
+            <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('SELECTION_LIMIT', { limit: appconfig.search.selectionlimit }) }}</p>
+          </v-card-text>
+          <v-card-actions>
+            <v-container>
+              <v-row justify="end" class="px-4">
+                <v-btn color="grey" dark @click="limitdialog = false">{{ $t('Ok') }}</v-btn>
+              </v-row>
+            </v-container>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-row>
 </template>
 
@@ -85,8 +105,11 @@ export default {
     totalPages: function () {
       return Math.ceil(this.total / this.pagesize)
     },
-    solr: function () { // TODO: pass in app settings
-      return this.$root.$store.state.instanceconfig.solr
+    instance: function () {
+      return this.$root.$store.state.instanceconfig
+    },
+    appconfig: function () {
+      return this.$root.$store.state.appconfig
     }
   },
   props: {
@@ -106,7 +129,7 @@ export default {
       // This allows us the buildSearchDef/buildParams functions to pick out
       // whatever properties they might need.
 
-      // exclude 'collection' from above manipulation, since it's passed a prop
+      // exclude 'collection' from above manipulation, since it's only passed as a prop
       let { collection } = options || {}
       if (collection) {
         this.inCollection = collection
@@ -118,11 +141,13 @@ export default {
       let { searchdefarr, ands } = buildSearchDef(this)
       let params = buildParams(this, ands)
 
-      this.link = location.protocol + '//' + location.host + '/search?' + searchdefarr.join('&')
-      window.history.replaceState(null, this.$t('Search results'), this.link)
+      if (process.browser) {
+        this.link = location.protocol + '//' + location.host + '/search?' + searchdefarr.join('&')
+        window.history.replaceState(null, this.$t('Search results'), this.link)
+      }
 
       let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
-      let url = this.solr + '/select'
+      let url = this.instance.solr + '/select'
       let response = await fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -143,6 +168,29 @@ export default {
       // otherwise too many unrealted results are returned
       this.q = payload ? `"${payload}"` : term
       this.search()
+    },
+    getAllResults: async function () {
+      if (this.total > this.appconfig.search.selectionlimit) {
+        this.limitdialog = true
+      } else {
+        let { searchdefarr, ands } = buildSearchDef(this)
+        let params = buildParams(this, ands)
+        params.page = 0
+        params.rows = this.total
+        params.fl = [ 'pid', 'dc_title' ]
+        let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
+        let url = this.instance.solr + '/select'
+        let response = await fetch(url, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: query
+        })
+        let json = await response.json()
+        return json.response.docs
+      }
     },
     setSort: function (sort) {
       for (let i = 0; i < this.sortdef.length; i++) {
@@ -214,6 +262,7 @@ export default {
   data () {
     return {
       link: '',
+      limitdialog: false,
       linkdialog: false,
       selectioncheck: false,
       q: '',

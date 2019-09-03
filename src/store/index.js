@@ -13,6 +13,9 @@ export default new Vuex.Store({
       solr: ''
     },
     appconfig: {
+      search: {
+        selectionlimit: 5000
+      },
       suggesters: {}
     },
     user: {

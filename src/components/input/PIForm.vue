@@ -453,7 +453,7 @@ import PIUnknownReadonly from './PIUnknownReadonly'
 import PILiteral from './PILiteral'
 import PIStudyPlan from './PIStudyPlan'
 import PIKeyword from './PIKeyword'
-import PTList from '../templates/PTList'
+import PTemplates from '../templates/PTemplates'
 
 export default {
   name: 'p-i-form',
@@ -485,7 +485,7 @@ export default {
     PIVocabExtReadonly,
     PISpatialGettyReadonly,
     PIUnknownReadonly,
-    PTList
+    PTemplates
   },
   props: {
     form: {

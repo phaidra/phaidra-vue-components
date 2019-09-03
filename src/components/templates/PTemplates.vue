@@ -28,7 +28,7 @@
 <script>
 
 export default {
-  name: 'p-t-list',
+  name: 'p-templates',
   data () {
     return {
       headers: [

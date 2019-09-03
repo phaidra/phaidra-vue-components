@@ -235,7 +235,7 @@ import PMDelete from '@/components/management/PMDelete'
 import PMSort from '@/components/management/PMSort'
 import PMRights from '@/components/management/PMRights'
 import PMRelationships from '@/components/management/PMRelationships'
-import PMFiles from '@/components/management/PMFiles'
+import PMObjectMembers from '@/components/management/PMObjectMembers'
 import PSearch from '@/components/search/PSearch'
 import { version } from '../package.json'
 import fields from '@/utils/fields'
@@ -251,7 +251,7 @@ export default {
     PMSort,
     PMRights,
     PMRelationships,
-    PMFiles
+    PMObjectMembers
   },
   computed: {
     loadedcmodel: function () {

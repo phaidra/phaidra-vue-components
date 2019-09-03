@@ -10,11 +10,17 @@
             <v-btn v-on="{ ...menu }" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
           </template>
           <v-list>
-            <v-list-item @click="$refs.listdialog.open()">
-              <v-list-item-title>{{ $t('Add to object list') }}</v-list-item-title>
+            <v-list-item @click="$refs.addlistdialog.open()">
+              <v-list-item-title>{{ $t('Add to object list') }} ...</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="">
-              <v-list-item-title>{{ $t('Add to collection') }}</v-list-item-title>
+            <v-list-item @click="$refs.removelistdialog.open()">
+              <v-list-item-title>{{ $t('Remove from object list') }} ...</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="$refs.addcollectiondialog.open()">
+              <v-list-item-title>{{ $t('Add to collection') }} ...</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="$refs.removecollectiondialog.open()">
+              <v-list-item-title>{{ $t('Remove from collection') }} ...</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -82,7 +88,10 @@
       <v-divider :key="'div'+doc.pid" class="my-4 mr-2"></v-divider>
     </template>
 
-    <list-dialog ref="listdialog" @list-selected="addToList($event)"></list-dialog>
+    <list-dialog ref="addlistdialog" @list-selected="addToList($event)"></list-dialog>
+    <list-dialog ref="removelistdialog" @list-selected="removeFromList($event)"></list-dialog>
+    <collection-dialog ref="addcollectiondialog" @collection-selected="addToCollection($event)"></collection-dialog>
+    <collection-dialog ref="removecollectiondialog" @collection-selected="removeFromCollection($event)"></collection-dialog>
 
   </v-container>
 </template>
@@ -92,6 +101,7 @@ import PDLicense from '../display/PDLicense'
 import PImg from '../utils/PImg'
 import PExpandText from '../utils/PExpandText'
 import ListDialog from '../select/ListDialog'
+import CollectionDialog from '../select/CollectionDialog'
 
 export default {
   name: 'search-results',
@@ -99,9 +109,14 @@ export default {
     PDLicense,
     PImg,
     PExpandText,
+    CollectionDialog,
     ListDialog
   },
   props: {
+    getallresults: {
+      type: Function,
+      required: true
+    },
     docs: {
       type: Array
     },
@@ -127,11 +142,91 @@ export default {
       }
       return false
     },
+    addToCollection: async function (collection) {
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.selection } }))
+        let response = await fetch(this.instance.api + '/collection/' + collection.pid + '/members/add', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          body: httpFormData
+        })
+        if ( response.status === 200 ) {
+          this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
+          this.$router.push({ name: 'detail', params: { pid: collection.pid } })
+        } else {
+          let json = await response.json()
+          if (json.alerts && json.alerts.length > 0) {
+            this.$store.commit('setAlerts', json.alerts)
+          }
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+    },
+    removeFromCollection: async function (collection) {
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.selection } }))
+        let response = await fetch(this.instance.api + '/collection/' + collection.pid + '/members/remove', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          body: httpFormData
+        })
+        if ( response.status === 200 ) {
+          this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
+          this.$router.push({ name: 'detail', params: { pid: collection.pid } })
+        } else {
+          let json = await response.json()
+          if (json.alerts && json.alerts.length > 0) {
+            this.$store.commit('setAlerts', json.alerts)
+          }
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+    },
     addToList: async function (list) {
       try {
         var httpFormData = new FormData()
         httpFormData.append('members', JSON.stringify({ members: this.selection }))
         let response = await fetch(this.instance.api + '/list/' + list.listid + '/members/add', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          body: httpFormData
+        })
+        if ( response.status === 200 ) {
+          this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
+        } else {
+          let json = await response.json()
+          if (json.alerts && json.alerts.length > 0) {
+            this.$store.commit('setAlerts', json.alerts)
+          }
+        }
+        this.loading = false  
+      } catch (error) {
+        console.log(error)
+        this.loading = false
+      }
+    },
+    removeFromList: async function (list) {
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('members', JSON.stringify({ members: this.selection }))
+        let response = await fetch(this.instance.api + '/list/' + list.listid + '/members/remove', {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -214,13 +309,26 @@ export default {
         }
       }
     },
-    selectAllResults: function () {
-      // todo: get all pid+title from current search
-      // check for max selection size
-      let docs = []
-      for (let d of docs) {
-        if (!this.selection.includes(d.pid)) {
-          this.selection.push(d.pid)
+    selectAllResults: async function () {
+      let docs = await this.getallresults()
+      if (docs) {
+        if (docs.length > 0) {
+          for (let d of docs) {
+            let add = true
+            for (let ind of this.selection) {
+              if (d.pid === ind.pid) {
+                add = false
+                break
+              }
+            }
+            if (add) {
+              let nd = { pid: d.pid, title: '' }
+              if (d.dc_title) {
+                nd.title = d.dc_title[0]
+              }
+              this.selection.push(nd)
+            }
+          }
         }
       }
     }

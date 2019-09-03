@@ -104,6 +104,9 @@
               <template v-slot:item.pid="{ item }">
                 <router-link :to="{ name: 'detail', params: { pid: item.pid } }">{{ item.pid }}</router-link>
               </template>
+              <template v-slot:item.title="{ item }">
+                {{ item.title | truncate(100) }}
+              </template>
               <template v-slot:item.actions="{ item }">
                 <v-icon color="grey" class="mx-3" @click="removeMember(item)">delete</v-icon>
               </template>
