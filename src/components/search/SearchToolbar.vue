@@ -50,7 +50,7 @@
             <v-card-text>{{ link }}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" flat @click.stop="linkdialog=false">Close</v-btn>
+              <v-btn color="primary" text @click.stop="linkdialog=false">Close</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
