@@ -54,6 +54,8 @@ import PMRights from './management/PMRights'
 import PMRelationships from './management/PMRelationships'
 import PMObjectMembers from './management/PMObjectMembers'
 import PMCollectionMembers from './management/PMCollectionMembers'
+import PTemplates from './templates/PTemplates'
+import PLists from './lists/PLists'
 
 const Components = {
   PImg,
@@ -111,7 +113,9 @@ const Components = {
   PMRights,
   PMRelationships,
   PMObjectMembers,
-  PMCollectionMembers
+  PMCollectionMembers,
+  PTemplates,
+  PLists
 }
 
 export default {

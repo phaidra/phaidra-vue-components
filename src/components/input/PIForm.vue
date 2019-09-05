@@ -414,7 +414,7 @@
 
       </v-tab-item>
       <v-tab-item class="ma-4">
-        <p-t-list ref="templates" v-on:load-template="loadTemplate($event)"></p-t-list>
+        <p-templates ref="templates" v-on:load-template="loadTemplate($event)"></p-templates>
       </v-tab-item>
     </v-tabs-items>
 
