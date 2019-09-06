@@ -27,7 +27,7 @@
     </v-col>
     <template v-if="type === 'schema:Person'">
       <template v-if="showname">
-        <v-col cols="4" >
+        <v-col cols="6" >
           <v-text-field
             :value="name"
             :label="$t('Name')"
@@ -37,7 +37,7 @@
         </v-col>
       </template>
       <template v-else>
-        <v-col cols="2">
+        <v-col cols="3">
           <v-text-field
             :value="firstname"
             :label="$t('Firstname')"
@@ -45,7 +45,7 @@
            filled
           ></v-text-field>
         </v-col>
-        <v-col cols="2">
+        <v-col cols="3">
           <v-text-field
             :value="lastname"
             :label="$t('Lastname')"
@@ -55,19 +55,11 @@
         </v-col>
       </template>
     </template>
-    <v-col cols="4" v-if="type === 'schema:Organisation'">
+    <v-col cols="6" v-if="type === 'schema:Organisation'">
       <v-text-field
-        :value="institution"
-        :label="$t( institutionLabel ? institutionLabel : 'Institution' )"
-        v-on:blur="$emit('input-institution',$event.target.value)"
-       filled
-      ></v-text-field>
-    </v-col>
-    <v-col cols="2" v-if="showidentifier">
-      <v-text-field
-        :value="identifier"
-        :label="$t('Identifier')"
-        v-on:blur="$emit('input-identifier',$event.target.value)"
+        :value="organisation"
+        :label="$t( organisationLabel ? organisationLabel : 'Organisation' )"
+        v-on:blur="$emit('input-organisation',$event.target.value)"
        filled
       ></v-text-field>
     </v-col>
@@ -105,10 +97,10 @@ export default {
     name: {
       type: String
     },
-    institution: {
+    organisation: {
       type: String
     },
-    institutionLabel: {
+    organisationLabel: {
       type: String
     },
     identifier: {

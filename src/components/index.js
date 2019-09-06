@@ -23,6 +23,7 @@ import PDValue from './display/PDValue.vue'
 import PIDimension from './input/PIDimension.vue'
 import PIDuration from './input/PIDuration.vue'
 import PIEntity from './input/PIEntity.vue'
+import PIEntityExtended from './input/PIEntityExtended'
 import PIDateEdtf from './input/PIDateEdtf.vue'
 import PIFilenameReadonly from './input/PIFilenameReadonly.vue'
 import PIForm from './input/PIForm.vue'
@@ -82,6 +83,7 @@ const Components = {
   PDValue,
   PIDimension,
   PIEntity,
+  PIEntityExtended,
   PIDateEdtf,
   PIFilenameReadonly,
   PIFile,

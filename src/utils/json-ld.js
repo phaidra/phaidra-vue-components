@@ -1005,7 +1005,7 @@ export default {
 
     return h
   },
-  get_json_role (type, firstname, lastname, name, institution, date, identifiers) {
+  get_json_role (type, firstname, lastname, name, organisation, date, identifiers) {
     var h = {
       '@type': type
     }
@@ -1030,10 +1030,10 @@ export default {
         }
       ]
     }
-    if (institution) {
+    if (organisation) {
       h['schema:name'] = [
         {
-          '@value': institution
+          '@value': organisation
         }
       ]
     }
@@ -1409,8 +1409,8 @@ export default {
           break
 
         case 'role':
-          if (f.role && (f.firstname || f.lastname || f.name || f.institution || f.identifier)) {
-            this.push_object(jsonld, f.role, this.get_json_role(f.type, f.firstname, f.lastname, f.name, f.institution, f.date, f.identifier ? [f.identifier] : null))
+          if (f.role && (f.firstname || f.lastname || f.name || f.organisation || f.identifier)) {
+            this.push_object(jsonld, f.role, this.get_json_role(f.type, f.firstname, f.lastname, f.name, f.organisation, f.date, f.identifier ? [f.identifier] : null))
           }
           break
 

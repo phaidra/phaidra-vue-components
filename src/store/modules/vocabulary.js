@@ -329,10 +329,6 @@ const state = {
       ],
       loaded: true
     },
-    'lang': {
-      terms: [],
-      loaded: false
-    },
     'mimetypes': {
       terms: [
         { '@id': 'image/jpeg', 'skos:prefLabel': { 'eng': 'JPG/JPEG' } },
@@ -612,6 +608,14 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/VTY6-58WQ', 'skos:prefLabel': { 'eng': 'xvid' } }
       ],
       loaded: true
+    },
+    'lang': {
+      terms: [],
+      loaded: false
+    },
+    'orgunits': {
+      terms: [],
+      loaded: false
     }
   }
 }
@@ -622,12 +626,33 @@ const mutations = {
       state.vocabularies['lang']['terms'] = data
       state.vocabularies['lang']['loaded'] = true
     }
+  },
+  setOrgUnitsTerms (state, data) {
+    if (state.vocabularies['orgunits']['loaded'] === false) {
+      state.vocabularies['orgunits']['terms'] = data
+      state.vocabularies['orgunits']['loaded'] = true
+    }
   }
 }
 
 const actions = {
   loadLanguages ({ commit }) {
     commit('setLangTerms', languages.get_lang())
+  },
+  async loadOrgUnits ({ commit, rootState }) {
+    try {
+      let response = await fetch(rootState.instanceconfig.api + '/directory/org_get_units?flat=1', {
+        method: 'GET',
+        mode: 'cors'
+      })
+      let json = await response.json()
+      if (json.alerts && json.alerts.length > 0) {
+        commit('setAlerts', json.alerts)
+      }
+      commit('setOrgUnitsTerms', json.units)
+    } catch (error) {
+      commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch org units: ' + error } ])
+    }
   }
 }
 
