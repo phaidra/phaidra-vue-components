@@ -25,15 +25,49 @@
       </v-autocomplete>
     </v-col>
     <v-col cols="4">
-      <v-text-field
-        :value="value"
-        v-on:blur="$emit('input-date',$event.target.value)"
-        :label="$t(dateLabel ? dateLabel : '')"
-        :required="required"
-        :hint="'Format YYYY-MM-DD'"
-        :rules="[validationrules.date]"
-       filled
-      ></v-text-field>
+      <template v-if="picker">
+        <v-menu
+          ref="menu1"
+          v-model="dateMenu"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          full-width
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              :value="value"
+              :label="$t(dateLabel ? dateLabel : 'Date')"
+              :required="required"
+              :rules="[validationrules.date]"
+              filled
+              append-icon="event"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            color="primary"
+            :value="value"
+            :show-current="false"
+            v-model="pickerModel"
+            :locale="this.$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+            v-on:input="dateMenu = false; $emit('input-date', $event)"
+          ></v-date-picker>
+        </v-menu>
+      </template>
+      <template v-else>
+        <v-text-field
+          :value="value"
+          v-on:blur="$emit('input-date',$event.target.value)"
+          :label="$t(dateLabel ? dateLabel : 'Date')"
+          :required="required"
+          :hint="'Format YYYY-MM-DD'"
+          :rules="[validationrules.date]"
+        filled
+        ></v-text-field>
+      </template>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
@@ -78,6 +112,12 @@ export default {
     },
     picker: {
       type: Boolean
+    }
+  },
+  data () {
+    return {
+      picker: new Date().toISOString().substr(0, 10),
+      dateMenu: false
     }
   },
   mounted: function () {

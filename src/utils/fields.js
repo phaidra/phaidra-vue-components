@@ -107,7 +107,7 @@ const fields = [
     label: 'Date',
     value: '',
     dateLabel: '',
-    type: 'created',
+    type: 'dcterms:created',
     hideType: false,
     definition: 'A point or period of time associated with an event in the lifecycle of the resource.'
   },

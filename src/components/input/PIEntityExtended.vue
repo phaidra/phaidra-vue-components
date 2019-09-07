@@ -49,8 +49,8 @@
               </v-col>
               <v-col cols="2">
                 <v-radio-group v-model="typeModel" class="mt-0" @change="$emit('change-type', $event)">
-                  <v-radio :label="$t('Personal')" :value="'schema:Person'"></v-radio>
-                  <v-radio :label="$t('Corporate')" :value="'schema:Organization'"></v-radio>
+                  <v-radio color="primary" :label="$t('Personal')" :value="'schema:Person'"></v-radio>
+                  <v-radio color="primary" :label="$t('Corporate')" :value="'schema:Organization'"></v-radio>
                 </v-radio-group>
               </v-col>
             </v-row>
@@ -88,8 +88,8 @@
               <template v-if="typeModel === 'schema:Organization'">
                 <v-col cols="2">
                   <v-radio-group v-model="organizationRadio" class="mt-0" @change="$emit('change-organization-type', $event)">
-                    <v-radio :label="$t('Select organization')" :value="'select'"></v-radio>
-                    <v-radio :label="$t('Other')" :value="'other'"></v-radio>
+                    <v-radio color="primary" :label="$t('Select organization')" :value="'select'"></v-radio>
+                    <v-radio color="primary" :label="$t('Other')" :value="'other'"></v-radio>
                   </v-radio-group>
                 </v-col>
                 <v-col cols="6" v-if="organizationRadio === 'select'">
@@ -142,8 +142,8 @@
             <v-row v-if="typeModel === 'schema:Person'">
               <v-col cols="2">
                 <v-radio-group v-model="affiliationRadio" class="mt-0" @change="$emit('change-affiliation-type', $event)">
-                  <v-radio :label="$t('Select affiliation')" :value="'select'"></v-radio>
-                  <v-radio :label="$t('Other')" :value="'other'"></v-radio>
+                  <v-radio color="primary" :label="$t('Select affiliation')" :value="'select'"></v-radio>
+                  <v-radio color="primary" :label="$t('Other')" :value="'other'"></v-radio>
                 </v-radio-group>
               </v-col>
               <v-col cols="8" v-if="affiliationRadio === 'select'">
