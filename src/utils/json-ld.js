@@ -457,7 +457,6 @@ export default {
               break
 
             // dcterms:provenance
-            // TODO fix skos:prefLabel?
             case 'dcterms:provenance':
               if (value[i]['@type'] === 'dcterms:ProvenanceStatement') {
                 f = fields.getField('provenance')
@@ -738,27 +737,84 @@ export default {
 
               // role
               if (key.startsWith('role')) {
-                if (value[i]['@type'] === 'schema:Person') {
-                  f = fields.getField('role')
-                  f.role = key
-                  if (value[i]['schema:name']) {
-                    for (j = 0; j < value[i]['schema:name'].length; j++) {
-                      f.name = value[i]['schema:name'][j]['@value']
+                let role = value[i]
+                f = fields.getField('role-extended')
+                f.role = key
+                f.type = role['@type']
+                if (role['@type'] === 'schema:Person') {
+                  if (role['schema:name']) {
+                    for (let name of role['schema:name']) {
+                      f.name = name['@value']
                       f.showname = true
                     }
                   }
-                  if (value[i]['schema:familyName']) {
-                    for (j = 0; j < value[i]['schema:familyName'].length; j++) {
-                      f.lastname = value[i]['schema:familyName'][j]['@value']
+                  if (role['schema:familyName']) {
+                    for (let lastname of role['schema:familyName']) {
+                      f.lastname = lastname['@value']
                     }
                   }
-                  if (value[i]['schema:givenName']) {
-                    for (j = 0; j < value[i]['schema:givenName'].length; j++) {
-                      f.firstname = value[i]['schema:givenName'][j]['@value']
+                  if (role['schema:givenName']) {
+                    for (let firstname of role['schema:givenName']) {
+                      f.firstname = firstname['@value']
                     }
                   }
-                  components.push(f)
+                  if (role['skos:exactMatch']) {
+                    for (let id of role['skos:exactMatch']) {
+                      f.identifierText = id
+                    }
+                  }
+                  if (role['schema:affiliation']) {
+                    for (let af of role['schema:affiliation']) {
+                      if (af['skos:exactMatch']) {
+                        for (let id of af['skos:exactMatch']) {
+                          if (id.startsWith('https://pid.phaidra.org/')) {
+                            f.affiliationType = 'select'
+                            f.affiliation = id
+                          } else {
+                            f.affiliationType = 'other'
+                            if (af['schema:name']) {
+                              for (let name of af['schema:name']) {
+                                f.affiliationText = name['@value']
+                              }
+                            }
+                          }
+                        }
+                      } else {
+                        if (af['schema:name']) {
+                          f.affiliationType = 'other'
+                          for (let name of af['schema:name']) {
+                            f.affiliationText = name['@value']
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
+                if (role['@type'] === 'schema:Organization') {
+                  if (role['skos:exactMatch']) {
+                    for (let id of role['skos:exactMatch']) {
+                      if (id.startsWith('https://pid.phaidra.org/')) {
+                        f.organizationType = 'select'
+                        f.organization = id
+                      } else {
+                        f.organizationType = 'other'
+                        f.identifierText = id
+                        if (role['schema:name']) {
+                          for (let name of role['schema:name']) {
+                            f.organizationText = name['@value']
+                          }
+                        }
+                      }
+                    }
+                  } else {
+                    if (role['schema:name']) {
+                      for (let name of role['schema:name']) {
+                        f.organizationText = name['@value']
+                      }
+                    }
+                  }
+                }
+                components.push(f)
               } else {
                 // unknown predicate
                 f = fields.getField('readonly')
@@ -1005,41 +1061,74 @@ export default {
 
     return h
   },
-  get_json_role (type, firstname, lastname, name, organisation, date, identifiers) {
+  get_json_role (f) {
     var h = {
-      '@type': type
+      '@type': f.type
     }
-    if (firstname) {
-      h['schema:givenName'] = [
-        {
-          '@value': firstname
+    if (f.type === 'schema:Person'){
+      if (f.firstname) {
+        h['schema:givenName'] = [
+          {
+            '@value': f.firstname
+          }
+        ]
+      }
+      if (f.lastname) {
+        h['schema:familyName'] = [
+          {
+            '@value': f.lastname
+          }
+        ]
+      }
+      if (f.name) {
+        h['schema:name'] = [
+          {
+            '@value': f.name
+          }
+        ]
+      }
+      if (f.identifierText) {
+        h['skos:exactMatch'] = [ f.identifierText ]
+      }
+      if (f.affiliation || f.affiliationText) {
+        let a = {
+          '@type': 'schema:Organization'
         }
-      ]
-    }
-    if (lastname) {
-      h['schema:familyName'] = [
-        {
-          '@value': lastname
+        if (f.affiliationType === 'select') {
+          a['schema:name'] = f.affiliationSelectedName
+          a['skos:exactMatch'] = [ f.affiliation ]
         }
-      ]
-    }
-    if (name) {
-      h['schema:name'] = [
-        {
-          '@value': name
+        if (f.affiliationType === 'other') {
+          a['schema:name'] = [ 
+            {
+              '@value': f.affiliationText 
+            }
+          ]
         }
-      ]
+        if (
+          (f.affiliationType === 'select' && f.affiliationSelectedName) ||
+          (f.affiliationType === 'other' && f.affiliationText)
+          ) {
+            h['schema:affiliation'] = [ a ]
+          }
+      }
     }
-    if (organisation) {
-      h['schema:name'] = [
-        {
-          '@value': organisation
+    if (f.type === 'schema:Organization') {
+      if (f.organizationType === 'select') {
+        h['schema:name'] = f.organizationSelectedName
+        h['skos:exactMatch'] = [ f.organization ]
+      }
+      if (f.organizationType == 'other') {
+        if (f.organizationText) {
+          h['schema:name'] = [ 
+            {
+              '@value': f.organizationText 
+            }
+          ]
         }
-      ]
-    }
-    if (identifiers) {
-      if (identifiers.length > 0) {
-        h['skos:exactMatch'] = identifiers
+        if (f.identifierText) {
+          h['skos:exactMatch'] = [ f.identifierText ]
+        }
       }
     }
     return h
@@ -1409,8 +1498,8 @@ export default {
           break
 
         case 'role':
-          if (f.role && (f.firstname || f.lastname || f.name || f.organisation || f.identifier)) {
-            this.push_object(jsonld, f.role, this.get_json_role(f.type, f.firstname, f.lastname, f.name, f.organisation, f.date, f.identifier ? [f.identifier] : null))
+          if (f.role && (f.firstname || f.lastname || f.name  || f.organizationSelectedName || f.identifierText)) {
+            this.push_object(jsonld, f.role, this.get_json_role(f))
           }
           break
 
@@ -1607,6 +1696,9 @@ export default {
         case 'ebucore:filename':
           if (f.value) {
             this.push_literal(jsonld, f.predicate, f.value)
+          }
+          if (f.mimetype) {
+            this.push_literal(jsonld, 'ebucore:hasMimeType', f.mimetype)
           }
           break
 

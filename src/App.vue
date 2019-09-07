@@ -623,7 +623,7 @@ export default {
       var lang = fields.getField('language')
       lang.value = 'deu'
       this.form.sections[0].fields.push(lang)
-      this.form.sections[0].fields.push(fields.getField('role'))
+      this.form.sections[0].fields.push(fields.getField('role-extended'))
       this.form.sections[0].fields.push(fields.getField('note'))
       let pf = fields.getField('project')
       pf.multiplicable = true

@@ -205,7 +205,7 @@
                       v-on:input-name="f.name=$event"
                       v-on:input-affiliation-select="setSelected(f, 'affiliation', $event)"
                       v-on:input-affiliation-text="f.affiliation=$event"
-                      v-on:input-organisation="f.organisation=$event"
+                      v-on:input-organization="f.organization=$event"
                       v-on:input-identifier="f.identifier=$event"
                       v-on:input-role="roleInput(f, $event)"
                       v-on:add="addField(s.fields, f)"
@@ -214,6 +214,28 @@
                       v-on:down="sortFieldDown(s.fields, f)"
                     ></p-i-entity>
                   </v-col>
+
+                  <template v-else-if="f.component === 'p-entity-extended'">
+                    <p-i-entity-extended
+                      v-bind.sync="f"
+                      v-on:change-type="changeEntityType(f, $event)"
+                      v-on:input-firstname="f.firstname = $event"
+                      v-on:input-lastname="f.lastname = $event"
+                      v-on:input-name="f.name = $event"
+                      v-on:input-identifier="f.identifierText = $event"
+                      v-on:change-affiliation-type="changeEntityAffiliationType(f, $event)"
+                      v-on:input-affiliation-select="affiliationSelectInput(f, $event)"
+                      v-on:input-affiliation-other="f.affiliationText = $event"
+                      v-on:change-organization-type="changeEntityOrganizationType(f, $event)"
+                      v-on:input-organization-select="organizationSelectInput(f, $event)"
+                      v-on:input-organization-other="f.organizationText = $event"
+                      v-on:input-role="roleInput(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                      v-on:up="sortFieldUp(s.fields, f)"
+                      v-on:down="sortFieldDown(s.fields, f)"
+                    ></p-i-entity-extended>
+                  </template>
 
                   <v-col v-else-if="f.component === 'p-subject-gnd'">
                     <p-i-subject-gnd
@@ -332,10 +354,11 @@
                     ></p-i-spatial-getty-readonly>
                   </v-col>
 
-                  <v-col v-else-if="f.component === 'input-file'">
+                  <v-col v-else-if="f.component === 'p-file'">
                     <p-i-file
                       v-bind.sync="f"
                       v-on:input-file="setFilename(f, $event)"
+                      v-on:input-mimetype="setSelected(f, 'mimetype', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-file>
@@ -432,6 +455,7 @@ import PITextField from './PITextField'
 import PITextFieldSuggest from './PITextFieldSuggest'
 import PITitle from './PITitle'
 import PIEntity from './PIEntity'
+import PIEntityExtended from './PIEntityExtended'
 import PIDateEdtf from './PIDateEdtf'
 import PISelect from './PISelect'
 import PISelectText from './PISelectText'
@@ -464,6 +488,7 @@ export default {
     PITextFieldSuggest,
     PITitle,
     PIEntity,
+    PIEntityExtended,
     PIDateEdtf,
     PISelect,
     PISelectText,
@@ -804,6 +829,35 @@ export default {
     removeSection: function (s) {
       arrays.remove(this.form.sections, s)
     },
+    changeEntityType: function (f, event) {
+      f.type = event
+    },
+    changeEntityAffiliationType: function (f, event) {
+      f.affiliationType = event
+    },
+    changeEntityOrganizationType: function (f, event) {
+      f.organizationType = event
+    },
+    affiliationSelectInput: function (f, event) {
+      if (event) {
+        f.affiliation = event['@id']
+        f.affiliationSelectedName = []
+        var preflabels = event['skos:prefLabel']
+        Object.entries(preflabels).forEach(([key, value]) => {
+          f.affiliationSelectedName.push({ '@value': value, '@language': key })
+        })
+      }
+    },
+    organizationSelectInput: function (f, event) {
+      if (event) {
+        f.organization = event['@id']
+        f.organizationSelectedName = []
+        var preflabels = event['skos:prefLabel']
+        Object.entries(preflabels).forEach(([key, value]) => {
+          f.organizationSelectedName.push({ '@value': value, '@language': key })
+        })
+      }
+    },
     setSelected: function (f, property, event) {
       if (event) {
         f[property] = event['@id']
@@ -862,7 +916,6 @@ export default {
     },
     roleInput: function (f, event) {
       f.role = event['@id']
-      f['skos:prefLabel'] = event['skos:prefLabel']
       this.$emit('form-input-' + f.component, f)
     },
     setFilename: function (f, event) {

@@ -24,6 +24,21 @@ export const vocabulary = {
       const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
       const query = queryText.toLowerCase()
       return lab.indexOf(query) > -1
+    },
+    getLocalizedValue: function (values) {
+      for (let v of values) {
+        if (v['@language'] === this.$i18n.locale) {
+          return v['@value']
+        }
+      }
+      for (let v of values) {
+        if (v['@language'] === 'eng') {
+          return v['@value']
+        }
+      }
+      for (let v of values) {
+        return v['@value']
+      }
     }
   }
 }

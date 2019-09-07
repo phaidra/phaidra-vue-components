@@ -75,6 +75,9 @@ export default {
     },
     required: {
       type: Boolean
+    },
+    picker: {
+      type: Boolean
     }
   },
   mounted: function () {

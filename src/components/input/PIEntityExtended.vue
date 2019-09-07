@@ -48,9 +48,9 @@
                 </v-autocomplete>
               </v-col>
               <v-col cols="2">
-                <v-radio-group v-model="typeModel" class="mt-0">
+                <v-radio-group v-model="typeModel" class="mt-0" @change="$emit('change-type', $event)">
                   <v-radio :label="$t('Personal')" :value="'schema:Person'"></v-radio>
-                  <v-radio :label="$t('Corporate')" :value="'schema:Organisation'"></v-radio>
+                  <v-radio :label="$t('Corporate')" :value="'schema:Organization'"></v-radio>
                 </v-radio-group>
               </v-col>
             </v-row>
@@ -85,18 +85,18 @@
                   </v-col>
                 </template>
               </template>
-              <template v-if="typeModel === 'schema:Organisation'">
+              <template v-if="typeModel === 'schema:Organization'">
                 <v-col cols="2">
-                  <v-radio-group v-model="organisationRadio" class="mt-0">
-                    <v-radio :label="$t('Select organisation')" :value="'select'"></v-radio>
+                  <v-radio-group v-model="organizationRadio" class="mt-0" @change="$emit('change-organization-type', $event)">
+                    <v-radio :label="$t('Select organization')" :value="'select'"></v-radio>
                     <v-radio :label="$t('Other')" :value="'other'"></v-radio>
                   </v-radio-group>
                 </v-col>
-                <v-col cols="6" v-if="organisationRadio === 'select'">
+                <v-col cols="6" v-if="organizationRadio === 'select'">
                   <v-autocomplete
-                    :value="getTerm('orgunits', value)"
+                    :value="getTerm('orgunits', organization)"
                     :required="required"
-                    v-on:input="$emit('input-organisation-select', $event )"
+                    v-on:input="$emit('input-organization-select', $event )"
                     :rules="required ? [ v => !!v || 'Required'] : []"
                     :items="vocabularies['orgunits'].terms"
                     :loading="loading"
@@ -123,34 +123,34 @@
                 </v-col>
                 <v-col cols="6" v-else>
                   <v-text-field
-                    :value="organisation"
-                    :label="$t('Organisation')"
-                    v-on:blur="$emit('input-organisation',$event.target.value)"
+                    :value="organizationText"
+                    :label="$t('Organization')"
+                    v-on:blur="$emit('input-organization-other', $event.target.value)"
                     filled
                   ></v-text-field>
                 </v-col>
               </template>
-              <v-col cols="4">
+              <v-col cols="4" v-if="(typeModel === 'schema:Person') || (organizationRadio !== 'select')">
                 <v-text-field
-                  :value="identifier"
+                  :value="identifierText"
                   :label="$t('Identifier')"
-                  v-on:blur="$emit('input-identifier',$event.target.value)"
-                filled
+                  v-on:blur="$emit('input-identifier', $event.target.value)"
+                  filled
                 ></v-text-field>
               </v-col>
             </v-row>
             <v-row v-if="typeModel === 'schema:Person'">
               <v-col cols="2">
-                <v-radio-group v-model="affiliationRadio" class="mt-0">
+                <v-radio-group v-model="affiliationRadio" class="mt-0" @change="$emit('change-affiliation-type', $event)">
                   <v-radio :label="$t('Select affiliation')" :value="'select'"></v-radio>
                   <v-radio :label="$t('Other')" :value="'other'"></v-radio>
                 </v-radio-group>
               </v-col>
               <v-col cols="8" v-if="affiliationRadio === 'select'">
                 <v-autocomplete
-                  :value="getTerm('orgunits', value)"
+                  :value="getTerm('orgunits', affiliation)"
                   :required="required"
-                  v-on:input="$emit('input-affiliation-select', $event )"
+                  v-on:input="$emit('input-affiliation-select', $event)"
                   :rules="required ? [ v => !!v || 'Required'] : []"
                   :items="vocabularies['orgunits'].terms"
                   :loading="loading"
@@ -177,7 +177,7 @@
               </v-col>
               <v-col cols="6" v-else>
                 <v-text-field
-                  :value="affiliation"
+                  :value="affiliationText"
                   :label="$t('Affiliation')"
                   v-on:blur="$emit('input-affiliation-other',$event.target.value)"
                   filled
@@ -214,13 +214,22 @@ export default {
     affiliation: {
       type: String
     },
-    organisation: {
+    affiliationText: {
       type: String
     },
-    organisationLabel: {
+    affiliationType: {
       type: String
     },
-    identifier: {
+    organization: {
+      type: String
+    },
+    organizationText: {
+      type: String
+    },
+    organizationType: {
+      type: String
+    },
+    identifierText: {
       type: String
     },
     role: {
@@ -250,10 +259,12 @@ export default {
   },
   data () {
     return {
+      loading: false,
+      disabled: false,
       vocabulary: 'rolepredicate',
       typeModel: this.type,
-      affiliationRadio: 'select',
-      organisationRadio: 'select'
+      affiliationRadio: this.affiliationType,
+      organizationRadio: this.organizationType
     }
   },
   mounted: function () {
@@ -265,6 +276,12 @@ export default {
       // emit input to set skos:prefLabel in parent
       if (this.role) {
         this.$emit('input', this.getTerm('rolepredicate', this.role))
+      }
+      if (this.organization) {
+        this.$emit('input-organization-select', this.getTerm('orgunits', this.organization))
+      }
+      if (this.affiliation) {
+        this.$emit('input-affiliation-select', this.getTerm('orgunits', this.affiliation))
       }
     })
   }

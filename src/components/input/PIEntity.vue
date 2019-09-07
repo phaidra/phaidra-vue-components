@@ -55,11 +55,11 @@
         </v-col>
       </template>
     </template>
-    <v-col cols="6" v-if="type === 'schema:Organisation'">
+    <v-col cols="6" v-if="type === 'schema:Organization'">
       <v-text-field
-        :value="organisation"
-        :label="$t( organisationLabel ? organisationLabel : 'Organisation' )"
-        v-on:blur="$emit('input-organisation',$event.target.value)"
+        :value="organization"
+        :label="$t( organizationLabel ? organizationLabel : 'Organization' )"
+        v-on:blur="$emit('input-organization',$event.target.value)"
        filled
       ></v-text-field>
     </v-col>
@@ -97,10 +97,10 @@ export default {
     name: {
       type: String
     },
-    organisation: {
+    organization: {
       type: String
     },
-    organisationLabel: {
+    organizationLabel: {
       type: String
     },
     identifier: {

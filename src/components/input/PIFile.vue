@@ -1,7 +1,33 @@
 <template>
   <v-row >
-    <v-col cols="8">
-      <v-file-input filled show-size @change="$emit('input-file', $event)" :label="label"></v-file-input>
+    <v-col cols="4">
+      <v-file-input filled show-size @change="$emit('input-file', $event)" :label="$t(label)"></v-file-input>
+    </v-col>
+    <v-col cols="6">
+      <v-autocomplete
+        :value="getTerm('mimetypes', mimetype)"
+        v-on:input="$emit('input-mimetype', $event )"
+        :items="vocabularies['mimetypes'].terms"
+        :loading="loading"
+        :filter="autocompleteFilter"
+        hide-no-data
+        :label="$t(mimeLabel)"
+        filled
+        return-object
+        clearable
+      >
+        <template slot="item" slot-scope="{ item }">
+          <v-list-item-content two-line>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel('mimetypes', item['@id'])}`"></v-list-item-title>
+            <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+          </v-list-item-content>
+        </template>
+        <template slot="selection" slot-scope="{ item }">
+          <v-list-item-content>
+            <v-list-item-title v-html="`${getLocalizedTermLabel('mimetypes', item['@id'])}`"></v-list-item-title>
+          </v-list-item-content>
+        </template>
+      </v-autocomplete>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
@@ -21,15 +47,29 @@
 </template>
 
 <script>
+import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-file',
-  mixins: [fieldproperties],
+  mixins: [vocabulary, fieldproperties],
   props: {
     label: {
       type: String,
       required: true
+    },
+    mimeLabel: {
+      type: String,
+      required: true
+    },
+    mimetype: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      loading: false
     }
   }
 }
