@@ -38,6 +38,28 @@ const fields = [
     definition: 'Genre of the creative work, broadcast channel or group. Example: Master thesis, Comedy, Late Renaissance'
   },
   {
+    id: 'version-type',
+    fieldname: 'Version type',
+    predicate: 'oaire:version',
+    component: 'p-select',
+    vocabulary: 'versiontypes',
+    label: 'Version type',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'The status in the publication process of journal articles.'
+  },
+  {
+    id: 'access-right',
+    fieldname: 'Access right',
+    predicate: 'dcterms:accessRights',
+    component: 'p-select',
+    vocabulary: 'accessright',
+    label: 'Access right',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'Information about who can access the resource or an indication of its security status.'
+  },
+  {
     id: 'title',
     fieldname: 'Title',
     predicate: 'dce:title',
@@ -824,6 +846,7 @@ const predicateOrder = [
 
   'dce:title',
   'role',
+  'role-extended',
   'bf:note',
   'bf:tableOfContents',
 
@@ -845,6 +868,8 @@ const predicateOrder = [
   'phaidra:dateAccessioned',
   'date',
 
+  'oaire:version',
+  'dcterms:accessRights',
   'edm:rights',
   'dce:rights',
   'dcterms:provenance',

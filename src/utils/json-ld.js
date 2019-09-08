@@ -39,6 +39,24 @@ export default {
               components.push(f)
               break
 
+            // oaire:version
+            case 'oaire:version':
+              f = fields.getField('version-type')
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
+              }
+              components.push(f)
+              break
+
+            // dcterms:accessRights
+            case 'dcterms:accessRights':
+              f = fields.getField('access-right')
+              for (let em of value[i]['skos:exactMatch']) {
+                f.value = em
+              }
+              components.push(f)
+              break
+
             // dce:title
             case 'dce:title':
               if ((value[i]['@type'] === 'bf:Title') || (value[i]['@type'] === 'bf:ParallelTitle')) {
@@ -1472,6 +1490,8 @@ export default {
         case 'dcterms:type':
         case 'edm:hasType':
         case 'schema:genre':
+        case 'oaire:version':
+        case 'dcterms:accessRights':
         case 'rdau:P60059':
         case 'rdau:P60048':
           if (f.value) {

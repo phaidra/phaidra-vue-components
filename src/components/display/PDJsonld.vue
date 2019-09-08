@@ -23,6 +23,14 @@
         <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'genre'+j" ></p-d-skos-preflabel>
       </template>
 
+      <template v-else-if="p==='oaire:version'" slot="oaire:version">
+        <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'oairev'+j" ></p-d-skos-preflabel>
+      </template>
+
+      <template v-else-if="p==='dcterms:accessRights'" slot="dcterms:accessRights">
+        <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'dtar'+j" ></p-d-skos-preflabel>
+      </template>
+
       <template v-else-if="p==='rdau:P60059'" slot="rdau:P60059">
         <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'P60059'+j" ></p-d-skos-preflabel>
       </template>

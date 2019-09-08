@@ -73,6 +73,8 @@
     <slot name="dcterms:type"></slot>
     <slot name="pid"></slot>
 
+    <slot name="oaire:version"></slot>
+    <slot name="dcterms:accessRights"></slot>
     <slot name="edm:rights"></slot>
     <slot name="dce:rights"></slot>
 

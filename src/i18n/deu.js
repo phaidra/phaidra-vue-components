@@ -554,6 +554,9 @@ export default {
   'rdau:P60071': 'Produktionsdatum',
   'phaidra:dateAccessioned': 'Date accessioned',
   'edm:rights': 'Lizenz',
+  'dce:rights': 'Rights statement',
+  'oaire:version': 'Version type',
+  'dcterms:accessRights': 'Access right',
 
   'schema:pageStart': 'von Seite',
   'schema:pageEnd': 'bis Seite',

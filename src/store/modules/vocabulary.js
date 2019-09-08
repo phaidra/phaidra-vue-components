@@ -504,6 +504,47 @@ const state = {
       ],
       loaded: true
     },
+    'irobjecttype': {
+      terms: [
+        { '@id': 'https://vocab.phaidra.org/vocabulary/VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/T023-BGTD', 'skos:prefLabel': { 'eng': 'preprint' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KGNB-AJ5C', 'skos:prefLabel': { 'eng': 'review' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/MF25-FDGW', 'skos:prefLabel': { 'eng': 'contribution to journal' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/47QB-8QF1', 'skos:prefLabel': { 'eng': 'book' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/XA52-09WA', 'skos:prefLabel': { 'eng': 'book part' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/1PHE-7VMS', 'skos:prefLabel': { 'eng': 'dissertation' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QKDF-E5HA', 'skos:prefLabel': { 'eng': 'conference object' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' } }
+      ],
+      loaded: true
+    },
+    'accessright': {
+      terms: [
+        { '@id': 'https://vocab.phaidra.org/vocabulary/AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' } }
+      ],
+      loaded: true
+    },
+    'versiontypes': {
+      terms: [
+        { '@id': 'https://vocab.phaidra.org/vocabulary/PHXV-R6B3', 'skos:prefLabel': { 'eng': 'accepted manuscript' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/TV31-080M', 'skos:prefLabel': { 'eng': 'author\'s original' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/MT1G-APSB', 'skos:prefLabel': { 'eng': 'corrected version of record' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/SSQW-AP1S', 'skos:prefLabel': { 'eng': 'enhanced version of record' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KZB5-0F5G', 'skos:prefLabel': { 'eng': 'not applicable (or unknown)' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/83ZP-CPP2', 'skos:prefLabel': { 'eng': 'proof' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/JTD4-R26P', 'skos:prefLabel': { 'eng': 'submitted manuscript under review' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/PMR8-3C8D', 'skos:prefLabel': { 'eng': 'version of record' } }
+      ],
+      loaded: true
+    },
     'technique': {
       terms: [
         { '@id': 'https://pid.phaidra.org/vocabulary/NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
