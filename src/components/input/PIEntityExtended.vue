@@ -5,24 +5,24 @@
         <v-card-title class="title font-weight-light">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
-          <v-menu open-on-hover bottom offset-y v-if="actions.length">
-            <template v-slot:activator="{ on }">
-              <v-btn v-on="on" icon>
-                <v-icon dark>mdi-dots-vertical</v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-                <v-list-item-title>{{ action.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+          <v-btn icon @click="$emit('add', $event)">
+            <v-icon dark>mdi-plus</v-icon>
+          </v-btn>
+          <v-btn icon @click="$emit('remove', $event)">
+            <v-icon dark>mdi-minus</v-icon>
+          </v-btn>
+          <v-btn icon @click="$emit('up', $event)">
+            <v-icon dark>mdi-chevron-up</v-icon>
+          </v-btn>
+          <v-btn icon @click="$emit('down', $event)">
+            <v-icon dark>mdi-chevron-down</v-icon>
+          </v-btn>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
           <v-container>
             <v-row>
-              <v-col cols="4" v-if="!hideRole">
+              <v-col cols="8" v-if="!hideRole">
                 <v-autocomplete
                   :disabled="disablerole"
                   v-on:input="$emit('input-role', $event)"
@@ -57,7 +57,7 @@
             <v-row>
               <template v-if="typeModel === 'schema:Person'">
                 <template v-if="showname">
-                  <v-col cols="6" >
+                  <v-col cols="8" >
                     <v-text-field
                       :value="name"
                       :label="$t('Name')"
@@ -67,7 +67,7 @@
                   </v-col>
                 </template>
                 <template v-else>
-                  <v-col cols="3">
+                  <v-col cols="4">
                     <v-text-field
                       :value="firstname"
                       :label="$t('Firstname')"
@@ -75,7 +75,7 @@
                     filled
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="3">
+                  <v-col cols="4">
                     <v-text-field
                       :value="lastname"
                       :label="$t('Lastname')"
@@ -92,7 +92,7 @@
                     <v-radio color="primary" :label="$t('Other')" :value="'other'"></v-radio>
                   </v-radio-group>
                 </v-col>
-                <v-col cols="6" v-if="organizationRadio === 'select'">
+                <v-col cols="10" v-if="organizationRadio === 'select'">
                   <v-autocomplete
                     :value="getTerm('orgunits', organization)"
                     :required="required"
@@ -146,7 +146,7 @@
                   <v-radio color="primary" :label="$t('Other')" :value="'other'"></v-radio>
                 </v-radio-group>
               </v-col>
-              <v-col cols="8" v-if="affiliationRadio === 'select'">
+              <v-col cols="10" v-if="affiliationRadio === 'select'">
                 <v-autocomplete
                   :value="getTerm('orgunits', affiliation)"
                   :required="required"

@@ -39,6 +39,12 @@ export const vocabulary = {
       for (let v of values) {
         return v['@value']
       }
+    },
+    getLocalizedDefinition: function (vocabulary, value) {
+      if (vocabulary && value) {
+        let item = this.$store.getters.getTerm(vocabulary, value)
+        return item['skos:definition'][this.$i18n.locale] ? item['skos:definition'][this.$i18n.locale] : item['skos:definition']['eng']
+      }
     }
   }
 }

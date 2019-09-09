@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col cols="4" v-if="!hideType">
+    <v-col cols="5" v-if="!hideType">
       <v-autocomplete
         v-on:input="$emit('input-date-type', $event)"
         :label="$t('Type of date')"
@@ -24,7 +24,7 @@
         </template>
       </v-autocomplete>
     </v-col>
-    <v-col cols="4">
+    <v-col cols="5">
       <template v-if="picker">
         <v-menu
           ref="menu1"
@@ -69,7 +69,7 @@
         ></v-text-field>
       </template>
     </v-col>
-    <v-col cols="1" v-if="actions.length">
+    <v-col cols="2" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>
@@ -116,7 +116,7 @@ export default {
   },
   data () {
     return {
-      picker: new Date().toISOString().substr(0, 10),
+      pickerModel: new Date().toISOString().substr(0, 10),
       dateMenu: false
     }
   },

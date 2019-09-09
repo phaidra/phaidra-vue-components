@@ -506,42 +506,51 @@ const state = {
     },
     'irobjecttype': {
       terms: [
-        { '@id': 'https://vocab.phaidra.org/vocabulary/VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/T023-BGTD', 'skos:prefLabel': { 'eng': 'preprint' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/KGNB-AJ5C', 'skos:prefLabel': { 'eng': 'review' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/MF25-FDGW', 'skos:prefLabel': { 'eng': 'contribution to journal' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/47QB-8QF1', 'skos:prefLabel': { 'eng': 'book' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/XA52-09WA', 'skos:prefLabel': { 'eng': 'book part' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/1PHE-7VMS', 'skos:prefLabel': { 'eng': 'dissertation' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/QKDF-E5HA', 'skos:prefLabel': { 'eng': 'conference object' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' } }
+        { '@id': 'https://vocab.phaidra.org/vocabulary/VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' }, 'skos:definition': { 'eng': 'An article on a particular topic and published in a journal issue.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/T023-BGTD', 'skos:prefLabel': { 'eng': 'preprint' }, 'skos:definition': { 'eng': 'Pre-print describes the first draft of the article - before peer-review, even before any contact with a publisher. This use is common amongst academics for whom the key modification of an article is the peer-review process. Another use of the term pre-print is for the finished article, reviewed and amended, ready and accepted for publication - but separate from the version that is type-set or formatted by the publisher. This use is more common amongst publishers, for whom the final and significant stage of modification to an article is the arrangement of the material for putting to print.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper' }, 'skos:definition': { 'eng': 'An unpublished paper, usually circulated privately among a small group of peers, to provide information or with a request for comments or editorial improvement.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report' }, 'skos:definition': { 'eng': 'A report is a separately published record of research findings, research still in progress, or other technical findings, usually bearing a report number and sometimes a grant number assigned by the funding agency. Also, an official record of the activities of a committee or corporate entity, the proceedings of a government body, or an investigation by an agency, whether published or private, usually archived or submitted to a higher authority, voluntarily or under mandate. In a more general sense, any formal account of facts or information related to a specific event or phenomenon, sometimes given at regular intervals.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review' }, 'skos:definition': { 'eng': 'A review of others\' published or performed works (e.g., books, films, sound recordings, theater, etc.).' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/MF25-FDGW', 'skos:prefLabel': { 'eng': 'contribution to journal' }, 'skos:definition': { 'eng': 'A contribution to a journal denotes a work published in a journal. If applicable sub-terms should be chosen.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/47QB-8QF1', 'skos:prefLabel': { 'eng': 'book' }, 'skos:definition': { 'eng': 'Items comprising a collection of leaves of paper, parchment, wood, stiffened textile, ivory, metal tablets, or other flat material, that are blank, written on, or printed, and are strung or bound together in a volume.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/XA52-09WA', 'skos:prefLabel': { 'eng': 'book part' }, 'skos:definition': { 'eng': 'A defined chapter or section of a book, usually with a separate title or number.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/1PHE-7VMS', 'skos:prefLabel': { 'eng': 'dissertation' }, 'skos:definition': { 'eng': 'dissertation' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QKDF-E5HA', 'skos:prefLabel': { 'eng': 'conference object' }, 'skos:definition': { 'eng': 'All kind of digital resources contributed to a conference, like conference presentation (slides), conference report, conference lecture, abstracts, demonstrations.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture' }, 'skos:definition': { 'eng': 'Expositions of a given subject delivered before an audience or class, especially for the purposes of instruction.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset' }, 'skos:definition': { 'eng': 'A collection of related facts and data encoded in a defined structure.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation' }, 'skos:definition': { 'eng': 'An annotation in the sense of a legal note is a legally explanatory comment on a decision handed down by a court or arbitral tribunal.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' }, 'skos:definition': { 'eng': 'An object type not explicitly addressed in any concept in this vocabulary.' }  }
       ],
       loaded: true
     },
     'accessright': {
       terms: [
-        { '@id': 'https://vocab.phaidra.org/vocabulary/AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' } }
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' }, 'skos:definition': { 'eng': 'Open access refers to a resource that is immediately and permanently online, and free for all on the Web, without financial and technical barriers.The resource is either stored in the repository or referenced to an external journal or trustworthy archive.' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' }, 'skos:definition': { 'eng': 'Embargoed access refers to a resource that is metadata only access until released for open access on a certain date. Embargoes can be required by publishers and funders policies, or set by the author (e.g such as in the case of theses and dissertations).' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' }, 'skos:definition': { 'eng': 'Restricted access refers to a resource that is available in a system but with some type of restriction for full open access. This type of access can occur in a number of different situations. Some examples are described below: The user must log-in to the system in order to access the resource The user must send an email to the author or system administrator to access the resource Access to the resource is restricted to a specific community (e.g. limited to a university community).' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' }, 'skos:definition': { 'eng': 'Metadata only access refers to a resource in which access is limited to metadata only. The resource itself is described by the metadata, but neither is directly available through the system or platform nor can be referenced to an open access copy in an external journal or trustworthy archive.' } }
+      ],
+      loaded: true
+    },
+    'iraccessright': {
+      terms: [
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' }, 'skos:definition': { 'eng': 'Access to the resource is offered without any restrictions.' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' }, 'skos:definition': { 'eng': 'The resource cannot be accessed until a given date on which it will be released for open access. A copy can be requested via e-mail.' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to persons or groups of persons affiliated with the University of Vienna that we can specify as per your instructions. Others may request a copy via e-mail.' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to you.' } }
       ],
       loaded: true
     },
     'versiontypes': {
       terms: [
-        { '@id': 'https://vocab.phaidra.org/vocabulary/PHXV-R6B3', 'skos:prefLabel': { 'eng': 'accepted manuscript' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/TV31-080M', 'skos:prefLabel': { 'eng': 'author\'s original' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/MT1G-APSB', 'skos:prefLabel': { 'eng': 'corrected version of record' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/SSQW-AP1S', 'skos:prefLabel': { 'eng': 'enhanced version of record' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/KZB5-0F5G', 'skos:prefLabel': { 'eng': 'not applicable (or unknown)' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/83ZP-CPP2', 'skos:prefLabel': { 'eng': 'proof' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/JTD4-R26P', 'skos:prefLabel': { 'eng': 'submitted manuscript under review' } },
-        { '@id': 'https://vocab.phaidra.org/vocabulary/PMR8-3C8D', 'skos:prefLabel': { 'eng': 'version of record' } }
+        { '@id': 'https://vocab.phaidra.org/vocabulary/PHXV-R6B3', 'skos:prefLabel': { 'eng': 'accepted manuscript' }, 'skos:definition': { 'eng': 'The version of a resource that has been accepted for publication. A second party takes permanent responsibility for the resource. Content and layout follow publisher’s submission requirements.' } },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/TV31-080M', 'skos:prefLabel': { 'eng': 'author\'s original' }, 'skos:definition': { 'eng': 'Any version of a resource that is considered by the author to be of sufficient quality to be submitted for formal peer review by a second party. The author accepts full responsibility for the resource . May have a version number or date stamp. Content and layout as set out by the author.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/MT1G-APSB', 'skos:prefLabel': { 'eng': 'corrected version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource in which errors in the VoR have been corrected. The errors may be author errors, publisher errors, or other processing errors.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/SSQW-AP1S', 'skos:prefLabel': { 'eng': 'enhanced version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource that has been updated or enhanced by the provision of supplementary material.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/KZB5-0F5G', 'skos:prefLabel': { 'eng': 'not applicable (or unknown)' }, 'skos:definition': { 'eng': 'Not Applicable (or Unknown).' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/83ZP-CPP2', 'skos:prefLabel': { 'eng': 'proof' }, 'skos:definition': { 'eng': 'A version of a resource that is created as part of the publication process. This includes the copy-edited manuscript, galley proofs (i.e., a typeset version that has not been made up into pages), page proofs, and revised proofs. Some of these versions may remain essentially internal process versions, but others are commonly released from the internal environment (e.g., proofs are sent to authors) and may thus become public, even though they are not authorized to be so. Content has been changed from Accepted Manuscript; layout is the publisher’s.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/JTD4-R26P', 'skos:prefLabel': { 'eng': 'submitted manuscript under review' }, 'skos:definition': { 'eng': 'Any version of a resource that is under formal review managed by a socially recognized publishing entity. The entity recognizes its responsibility to provide objective expert review and feedback to the author, and, ultimately, to pass judgment on the fitness of the resource for publication with an “accept” or “reject” decision. May have a version number or date stamp. Content and layout follow publisher’s submission requirements.' }  },
+        { '@id': 'https://vocab.phaidra.org/vocabulary/PMR8-3C8D', 'skos:prefLabel': { 'eng': 'version of record' } , 'skos:definition': { 'eng': 'A fixed version of a resource that has been made available by any organization that acts as a publisher by formally and exclusively declaring the resource “published”. This includes any “early release” resource that is formally identified as being published even before the compilation of a volume issue and assignment of associated metadata, as long as it is citable via some permanent identifier(s). This does not include any “early release” resource that has not yet been “fixed” by processes that are still to be applied, such as copy-editing, proof corrections, layout, and typesetting.' } }
       ],
       loaded: true
     },
@@ -696,6 +705,24 @@ const mutations = {
     if (state.vocabularies['orgunits']['loaded'] === false) {
       state.vocabularies['orgunits']['terms'] = data
       state.vocabularies['orgunits']['loaded'] = true
+    }
+  },
+  disableVocabularyTerms (state, vocandterms) {
+    if (state.vocabularies[vocandterms.vocabulary]) {
+      for (let t of state.vocabularies[vocandterms.vocabulary].terms) {
+        for (let termid of vocandterms.termids) { 
+          if (t['@id'] === termid) {
+            t.disabled = true
+          }
+        }
+      }
+    }
+  },
+  enableAllVocabularyTerms (state, vocabulary) {
+    if (state.vocabularies[vocabulary]) {
+      for (let t of state.vocabularies[vocabulary].terms) {
+        t.disabled = false
+      }
     }
   }
 }

@@ -44,6 +44,7 @@ const fields = [
     component: 'p-select',
     vocabulary: 'versiontypes',
     label: 'Version type',
+    showValueDefinition: false,
     value: '',
     'skos:prefLabel': [],
     definition: 'The status in the publication process of journal articles.'
@@ -55,6 +56,7 @@ const fields = [
     component: 'p-select',
     vocabulary: 'accessright',
     label: 'Access right',
+    showValueDefinition: false,
     value: '',
     'skos:prefLabel': [],
     definition: 'Information about who can access the resource or an indication of its security status.'

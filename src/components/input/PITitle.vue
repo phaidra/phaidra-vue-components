@@ -1,5 +1,5 @@
 <template>
-  <v-row >
+  <v-row>
     <v-col cols="4">
       <v-text-field
         :value="title"
