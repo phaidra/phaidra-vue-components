@@ -1,7 +1,7 @@
 <template>
 
   <v-row >
-    <v-col cols="10">
+    <v-col cols="12">
 
       <v-card >
         <v-card-title class="title font-weight-light grey white--text">
@@ -66,7 +66,7 @@
               <v-col cols="8">
                 <v-text-field
                   :value="description"
-                  :label="'Description'"
+                  :label="$t('Description')"
                   v-on:input="$emit('input-description', $event)"
                  filled
                 ></v-text-field>
@@ -104,7 +104,7 @@
               <v-col cols="6">
                 <v-text-field
                   :value="identifier"
-                  :label="'Identifier'"
+                  :label="$t('Identifier')"
                   v-on:blur="$emit('input-identifier',$event.target.value)"
                   homepage
                  filled
@@ -114,7 +114,7 @@
               <v-col cols="6">
                 <v-text-field
                   :value="homepage"
-                  :label="'Homepage'"
+                  :label="$t('Homepage')"
                   v-on:blur="$emit('input-homepage',$event.target.value)"
                  filled
                 ></v-text-field>

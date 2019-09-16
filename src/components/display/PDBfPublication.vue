@@ -8,7 +8,7 @@
       <v-row  >
         <template v-for="(publisher, j) in o['bf:agent']">
           <template v-for="(publishername, i) in publisher['schema:name']">
-            <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'publnamel'+j+i">{{ $t('ORG_PUBLISHER') }}</v-col>
+            <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'publnamel'+j+i">{{ $t('PUBLISHER_VERLAG') }}</v-col>
             <v-col md="10" cols="12" :key="'publname'+j+i">
               <span class="valuefield">{{ publishername['@value'] }}</span>
             </v-col>

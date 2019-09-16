@@ -31,7 +31,7 @@
         >
           <v-chip
             close
-            :selected="data.selected"
+            :input-value="data.selected"
             :disabled="data.disabled"
             class="v-chip--select-multi"
             @input="data.parent.selectItem(data.item)"

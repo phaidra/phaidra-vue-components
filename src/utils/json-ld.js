@@ -12,6 +12,14 @@ export default {
           var f
 
           switch (key) {
+
+            // datacite:hasIdentifier
+            case 'datacite:hasIdentifier':
+              f = fields.getField('alternate-identifier')
+              f.value = value[i]['@value']
+              components.push(f)
+              break
+
             // dcterms:type
             case 'dcterms:type':
               f = fields.getField('resource-type')
@@ -314,6 +322,7 @@ export default {
                       f.publisherName = name['@value']
                     }
                   }
+                  // todo: exactMatch publisherOrgUnit
                 }
               }
               if (value[i]['bf:place']) {
@@ -1461,6 +1470,13 @@ export default {
       var f = formData.fields[j]
 
       switch (f.predicate) {
+
+        case 'datacite:hasIdentifier':
+          if (f.value) {
+            this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value }], null, f.type))
+          }
+          break
+
         case 'dce:title':
           if (f.title) {
             this.push_object(jsonld, f.predicate, this.get_json_dce_title(f.type, f.title, f.subtitle, f.language))

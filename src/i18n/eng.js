@@ -10,6 +10,8 @@ export default {
   'SEARCH_PLACEHOLDER': 'Search',
   'PHAIDRA_IS': 'Phaidra is the repository for the permanent secure storage of digital assets at the University of Vienna.',
 
+  'datacite:hasIdentifier': 'Alternative identifier',
+
   'bf:Title': 'Title',
   'bf:ParallelTitle': 'Parallel title',
 
@@ -94,7 +96,7 @@ export default {
   'DELETE_OBJECT': 'Here you can delete object {pid}.',
   'DELETE_OBJECT_CONFIRM': 'Are you sure you want to permanently delete object {pid}?',
 
-  'ORG_PUBLISHER': 'Publisher',
+  'PUBLISHER_VERLAG': 'Publisher',
 
   'SELECTION_LIMIT': 'Cannot select more than {limit} results.',
 

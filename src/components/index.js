@@ -1,5 +1,6 @@
 import PImg from './utils/PImg'
 import PDDimension from './display/PDDimension.vue'
+import PDIdentifier from './display/PDIdentifier.vue'
 import PDDuration from './display/PDDuration.vue'
 import PDEntity from './display/PDEntity.vue'
 import PDExactMatch from './display/PDExactMatch.vue'
@@ -62,6 +63,7 @@ const Components = {
   PImg,
   PDDuration,
   PDDimension,
+  PDIdentifier,
   PDEntity,
   PDExactMatch,
   PDFunder,

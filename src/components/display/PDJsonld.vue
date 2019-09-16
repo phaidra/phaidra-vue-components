@@ -11,6 +11,10 @@
 
     <template v-for="(o, p) in jsonld" >
 
+      <template v-if="p==='datacite:hasIdentifier'" slot="datacite:hasIdentifier">
+        <p-d-identifier :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'hasid'+j" ></p-d-identifier>
+      </template>
+
       <template v-if="p==='dcterms:type'" slot="dcterms:type">
         <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'type'+j" ></p-d-skos-preflabel>
       </template>

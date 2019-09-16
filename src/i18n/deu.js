@@ -531,6 +531,8 @@ export default {
   'seconds': 'Sekunden',
   'Language of subtitles': 'Untertitelsprache',
 
+  'datacite:hasIdentifier': 'Alternativer Identifikator',
+
   'bf:Title': 'Titel',
   'bf:ParallelTitle': 'Parallel titel',
 
@@ -629,6 +631,7 @@ export default {
   'Save': 'Speichern',
   'Sort': 'Sortieren',
   'Here you can sort members of this object (drag & drop).': 'Hier können Sie die Objekte innerhalb des Containers sortieren (drag & drop).',
-  'ORG_PUBLISHER': 'Verlag',
-  'e.g.: https://phaidra.org': 'z.B.: https://phaidra.org'
+  'PUBLISHER_VERLAG': 'Verlag',
+  'e.g.: https://phaidra.org': 'z.B.: https://phaidra.org',
+  'Subject (GND)': 'Schlagwort (GND)'
 }

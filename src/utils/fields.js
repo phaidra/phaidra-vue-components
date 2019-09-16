@@ -2,6 +2,17 @@ import uuid from './uuid'
 
 const fields = [
   {
+    id: 'alternate-identifier',
+    fieldname: 'Alternate identifier',
+    predicate: 'datacite:hasIdentifier',
+    component: 'p-alternate-identifier',
+    type: 'datacite:AlternateResourceIdentifier',
+    multiplicable: false,
+    label: 'Alternate identifier',
+    value: '',
+    definition: 'An alternative identifier (other than Phaidra persistent identifier) that uniquely identifies the resource.'
+  },
+  {
     id: 'resource-type',
     fieldname: 'Resource type',
     predicate: 'dcterms:type',
@@ -310,13 +321,29 @@ const fields = [
     component: 'p-series',
     label: 'Journal/Series',
     title: '',
-    titlelanguage: '',
+    titleLanguage: '',
     volume: '',
     issue: '',
     issued: '',
     issn: '',
     identifier: '',
     definition: 'Relates a resource to a resource in which a part has been issued; a title of a larger resource appears on a part.'
+  },
+  {
+    id: 'contained-in',
+    fieldname: 'Is contained in',
+    predicate: 'rdau:P60101',
+    type: 'schema:CreativeWork',
+    component: 'p-series',
+    label: 'Is contained in',
+    title: '',
+    titleLanguage: '',
+    volume: '',
+    issue: '',
+    issued: '',
+    issn: '',
+    identifier: '',
+    definition: 'Relates a resource to a larger resource of which a part is a discrete component.'
   },
   {
     id: 'movieadaptation',
@@ -327,7 +354,7 @@ const fields = [
     label: 'Is motion picture adaptation of',
     title: '',
     subtitle: '',
-    titlelanguage: '',
+    titleLanguage: '',
     firstname: '',
     lastname: '',
     name: '',
@@ -376,12 +403,15 @@ const fields = [
     component: 'p-bf-publication',
     multiplicable: true,
     label: 'Provision activity: Publication',
-    publisherNameLabel: 'ORG_PUBLISHER',
+    publisherType: 'other',
+    publisherNameLabel: 'PUBLISHER_VERLAG',
     publishingPlaceLabel: 'Place',
     publishingDateLabel: 'Date',
     publisherName: '',
+    publisherOrgUnit: '',
     publishingPlace: '',
     publishingDate: '',
+    publishingDatePicker: true,
     definition: 'Information relating to publication of a resource.'
   },
   {
@@ -841,6 +871,7 @@ const fields = [
 ]
 
 const predicateOrder = [
+  'datacite:hasIdentifier',
 
   'dcterms:type',
   'edm:hasType',

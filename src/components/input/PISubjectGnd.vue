@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col cols="8">
+    <v-col cols="10">
       <v-autocomplete
         v-model="model"
         v-on:input="$emit('input', $event)"
@@ -150,7 +150,7 @@ export default {
       self.loading = true
 
       var params = {
-        count: 20,
+        count: 200,
         searchterm: q
       }
 

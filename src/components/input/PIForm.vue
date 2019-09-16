@@ -279,7 +279,7 @@
                     ></p-i-dimension>
                   </template>
 
-                  <template v-else-if="f.component === 'p-literal'">
+                  <template v-else-if="(f.component === 'p-literal') || (f.component === 'p-alternate-identifier')">
                     <p-i-literal
                       v-bind.sync="f"
                       v-on:input-value="f.value=$event"
