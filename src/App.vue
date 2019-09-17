@@ -235,7 +235,6 @@ import PMDelete from '@/components/management/PMDelete'
 import PMSort from '@/components/management/PMSort'
 import PMRights from '@/components/management/PMRights'
 import PMRelationships from '@/components/management/PMRelationships'
-import PMObjectMembers from '@/components/management/PMObjectMembers'
 import PSearch from '@/components/search/PSearch'
 import { version } from '../package.json'
 import fields from '@/utils/fields'
@@ -250,8 +249,7 @@ export default {
     PMDelete,
     PMSort,
     PMRights,
-    PMRelationships,
-    PMObjectMembers
+    PMRelationships
   },
   computed: {
     loadedcmodel: function () {
@@ -624,13 +622,13 @@ export default {
       lang.value = 'deu'
       this.form.sections[0].fields.push(lang)
       this.form.sections[0].fields.push(fields.getField('role-extended'))
+      this.form.sections[0].fields.push(fields.getField('bf-publication'))
       this.form.sections[0].fields.push(fields.getField('note'))
       let pf = fields.getField('project')
       pf.multiplicable = true
       this.form.sections[0].fields.push(pf)
       this.form.sections[0].fields.push(fields.getField('funder'))
       this.form.sections[0].fields.push(fields.getField('association'))
-      this.form.sections[0].fields.push(fields.getField('bf-publication'))
       this.form.sections[0].fields.push(fields.getField('citation'))
       this.form.sections[1].fields.push(fields.getField('title'))
       this.form.sections[1].fields.push(fields.getField('role'))

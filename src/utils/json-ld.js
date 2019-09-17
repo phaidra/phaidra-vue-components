@@ -12,7 +12,6 @@ export default {
           var f
 
           switch (key) {
-
             // datacite:hasIdentifier
             case 'datacite:hasIdentifier':
               f = fields.getField('alternate-identifier')
@@ -317,12 +316,30 @@ export default {
               f = fields.getField('bf-publication')
               if (value[i]['bf:agent']) {
                 for (let pub of value[i]['bf:agent']) {
-                  if (pub['schema:name']) {
-                    for (let name of pub['schema:name']) {
-                      f.publisherName = name['@value']
+                  if (pub['skos:exactMatch']) {
+                    for (let id of pub['skos:exactMatch']) {
+                      if (id.startsWith('https://pid.phaidra.org/')) {
+                        f.publisherType = 'select'
+                        f.publisherOrgUnit = id
+                      } else {
+                        f.publisherType = 'other'
+                        if (pub['schema:name']) {
+                          for (let name of pub['schema:name']) {
+                            f.publisherName = name['@value']
+                          }
+                        }
+                      }
+                    }
+                  } else {
+                    if (pub['schema:name']) {
+                      f.publisherType = 'other'
+                      if (pub['schema:name']) {
+                        for (let name of pub['schema:name']) {
+                          f.publisherName = name['@value']
+                        }
+                      }
                     }
                   }
-                  // todo: exactMatch publisherOrgUnit
                 }
               }
               if (value[i]['bf:place']) {
@@ -1092,7 +1109,7 @@ export default {
     var h = {
       '@type': f.type
     }
-    if (f.type === 'schema:Person'){
+    if (f.type === 'schema:Person') {
       if (f.firstname) {
         h['schema:givenName'] = [
           {
@@ -1126,18 +1143,18 @@ export default {
           a['skos:exactMatch'] = [ f.affiliation ]
         }
         if (f.affiliationType === 'other') {
-          a['schema:name'] = [ 
+          a['schema:name'] = [
             {
-              '@value': f.affiliationText 
+              '@value': f.affiliationText
             }
           ]
         }
         if (
           (f.affiliationType === 'select' && f.affiliationSelectedName) ||
           (f.affiliationType === 'other' && f.affiliationText)
-          ) {
-            h['schema:affiliation'] = [ a ]
-          }
+        ) {
+          h['schema:affiliation'] = [ a ]
+        }
       }
     }
     if (f.type === 'schema:Organization') {
@@ -1145,11 +1162,11 @@ export default {
         h['schema:name'] = f.organizationSelectedName
         h['skos:exactMatch'] = [ f.organization ]
       }
-      if (f.organizationType == 'other') {
+      if (f.organizationType === 'other') {
         if (f.organizationText) {
-          h['schema:name'] = [ 
+          h['schema:name'] = [
             {
-              '@value': f.organizationText 
+              '@value': f.organizationText
             }
           ]
         }
@@ -1290,34 +1307,44 @@ export default {
     }
     return h
   },
-  get_json_bf_publication (publisherName, publishingPlace, publishingDate) {
+  get_json_bf_publication (f) {
     var h = {
       '@type': 'bf:Publication'
     }
-    if (publisherName) {
-      let pn = {
-        '@type': 'schema:Organization',
-        'schema:name': [
-          {
-            '@value': publisherName
-          }
-        ]
-      }
-      h['bf:agent'] = [ pn ]
+    let pa = {
+      '@type': 'schema:Organization',
+      'schema:name': []
     }
-    if (publishingPlace) {
+    if (f.publisherType === 'select') {
+      pa['schema:name'] = f.publisherSelectedName
+      pa['skos:exactMatch'] = [ f.publisherOrgUnit ]
+    }
+    if (f.publisherType === 'other') {
+      pa['schema:name'] = [
+        {
+          '@value': f.publisherName
+        }
+      ]
+    }
+    if (
+      (f.publisherType === 'select' && f.publisherSelectedName) ||
+      (f.publisherType === 'other' && f.publisherName)
+    ) {
+      h['bf:agent'] = [ pa ]
+    }
+    if (f.publishingPlace) {
       let pp = {
         '@type': 'schema:Place',
         'skos:prefLabel': [
           {
-            '@value': publishingPlace
+            '@value': f.publishingPlace
           }
         ]
       }
       h['bf:place'] = [ pp ]
     }
-    if (publishingDate) {
-      h['bf:date'] = [ publishingDate ]
+    if (f.publishingDate) {
+      h['bf:date'] = [ f.publishingDate ]
     }
 
     return h
@@ -1470,7 +1497,6 @@ export default {
       var f = formData.fields[j]
 
       switch (f.predicate) {
-
         case 'datacite:hasIdentifier':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value }], null, f.type))
@@ -1534,7 +1560,7 @@ export default {
           break
 
         case 'role':
-          if (f.role && (f.firstname || f.lastname || f.name  || f.organizationSelectedName || f.identifierText)) {
+          if (f.role && (f.firstname || f.lastname || f.name || f.organizationSelectedName || f.identifierText)) {
             this.push_object(jsonld, f.role, this.get_json_role(f))
           }
           break
@@ -1578,8 +1604,8 @@ export default {
           break
 
         case 'bf:provisionActivity':
-          if (f.publisherName || f.publishingPlace || f.publishingDate) {
-            this.push_object(jsonld, f.predicate, this.get_json_bf_publication(f.publisherName, f.publishingPlace, f.publishingDate))
+          if (f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
+            this.push_object(jsonld, f.predicate, this.get_json_bf_publication(f))
           }
           break
 

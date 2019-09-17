@@ -71,7 +71,7 @@
           <span>{{ $t('Select results')}}</span>
         </v-tooltip>
       </v-col>
-      
+
     </v-row>
   </v-container>
 </template>

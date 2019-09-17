@@ -27,8 +27,8 @@
       </v-row>
     </v-slide-y-transition>
     <v-divider v-if="selectioncheck"></v-divider>
-    <template v-for="(doc) in this.docs">
-      <v-row>
+    <template v-for="(doc, i) in this.docs">
+      <v-row :key="'doc'+i">
         <v-slide-x-transition hide-on-leave>
           <v-col cols="1" v-if="selectioncheck" align-self="center">
             <v-checkbox color="primary" @change="selectDoc($event, doc)" :value="selectionIncludes(doc)"></v-checkbox>
@@ -136,7 +136,7 @@ export default {
   methods: {
     selectionIncludes: function (doc) {
       for (let s of this.selection) {
-        if(s.pid === doc.pid) {
+        if (s.pid === doc.pid) {
           return true
         }
       }
@@ -154,7 +154,7 @@ export default {
           },
           body: httpFormData
         })
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
           this.$router.push({ name: 'detail', params: { pid: collection.pid } })
         } else {
@@ -181,7 +181,7 @@ export default {
           },
           body: httpFormData
         })
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
           this.$router.push({ name: 'detail', params: { pid: collection.pid } })
         } else {
@@ -208,7 +208,7 @@ export default {
           },
           body: httpFormData
         })
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
         } else {
           let json = await response.json()
@@ -216,7 +216,7 @@ export default {
             this.$store.commit('setAlerts', json.alerts)
           }
         }
-        this.loading = false  
+        this.loading = false
       } catch (error) {
         console.log(error)
         this.loading = false
@@ -234,7 +234,7 @@ export default {
           },
           body: httpFormData
         })
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
         } else {
           let json = await response.json()
@@ -242,7 +242,7 @@ export default {
             this.$store.commit('setAlerts', json.alerts)
           }
         }
-        this.loading = false  
+        this.loading = false
       } catch (error) {
         console.log(error)
         this.loading = false
@@ -252,11 +252,11 @@ export default {
       if (value) {
         let found = false
         for (let s of this.selection) {
-          if(s.pid === doc.pid) {
+          if (s.pid === doc.pid) {
             found = true
           }
         }
-        if (!found){
+        if (!found) {
           let t = ''
           if (doc.dc_title) {
             t = doc.dc_title[0]
@@ -269,7 +269,7 @@ export default {
       } else {
         let i = 0
         for (let s of this.selection) {
-          if(s.pid === doc.pid) {
+          if (s.pid === doc.pid) {
             this.selection.splice(i, 1)
             break
           }
@@ -281,11 +281,11 @@ export default {
       for (let d of this.docs) {
         let found = false
         for (let s of this.selection) {
-          if(s.pid === d.pid) {
+          if (s.pid === d.pid) {
             found = true
           }
         }
-        if (!found){
+        if (!found) {
           let t = ''
           if (d.dc_title) {
             t = d.dc_title[0]
@@ -301,7 +301,7 @@ export default {
       for (let d of this.docs) {
         let i = 0
         for (let s of this.selection) {
-          if(s.pid === d.pid) {
+          if (s.pid === d.pid) {
             this.selection.splice(i, 1)
             break
           }

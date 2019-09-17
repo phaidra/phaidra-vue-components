@@ -87,7 +87,7 @@ export default {
         })
         let json = await response.json()
         this.lists = json.lists
-        this.loading = false  
+        this.loading = false
       } catch (error) {
         console.log(error)
         this.loading = false

@@ -160,7 +160,7 @@ export default {
             }
           })
           let json = await response.json()
-          if ( response.status === 200 ) {
+          if (response.status === 200) {
             this.members = json.list.members
           } else {
             if (json.alerts && json.alerts.length > 0) {
@@ -218,7 +218,7 @@ export default {
           },
           body: httpFormData
         })
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
           this.$router.push({ name: 'detail', params: { pid: collection.pid } })
         } else {
@@ -256,7 +256,7 @@ export default {
           body: httpFormData
         })
         let json = await response.json()
-        if ( response.status !== 200 ) {
+        if (response.status !== 200) {
           if (json.alerts && json.alerts.length > 0) {
             this.$store.commit('setAlerts', json.alerts)
           }
@@ -271,7 +271,7 @@ export default {
           }
         })
         json = await response.json()
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.lists = json.lists
         }
       } catch (error) {
@@ -292,7 +292,7 @@ export default {
           }
         })
         let json = await response.json()
-        if ( response.status !== 200 ) {
+        if (response.status !== 200) {
           if (json.alerts && json.alerts.length > 0) {
             this.$store.commit('setAlerts', json.alerts)
           }
@@ -305,7 +305,7 @@ export default {
           }
         })
         json = await response.json()
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.lists = json.lists
         }
       } catch (error) {
@@ -319,7 +319,7 @@ export default {
       try {
         this.membersLoading = true
         var httpFormData = new FormData()
-        httpFormData.append('members', JSON.stringify({ members: [ member ]}))
+        httpFormData.append('members', JSON.stringify({ members: [ member ] }))
         let response = await fetch(this.instance.api + '/list/' + this.loadedList.listid + '/members/remove', {
           method: 'POST',
           mode: 'cors',
@@ -329,7 +329,7 @@ export default {
           body: httpFormData
         })
         let json = await response.json()
-        if ( response.status !== 200 ) {
+        if (response.status !== 200) {
           if (json.alerts && json.alerts.length > 0) {
             this.$store.commit('setAlerts', json.alerts)
           }
@@ -342,7 +342,7 @@ export default {
           }
         })
         json = await response.json()
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           this.members = json.list.members
         }
       } catch (error) {
@@ -364,14 +364,14 @@ export default {
           }
         })
         let json = await response.json()
-        if ( response.status === 200 ) {
+        if (response.status === 200) {
           vm.lists = json.lists
         } else {
           if (json.alerts && json.alerts.length > 0) {
             vm.$store.commit('setAlerts', json.alerts)
           }
         }
-        vm.listsLoading = false  
+        vm.listsLoading = false
       } catch (error) {
         console.log(error)
         vm.listsLoading = false

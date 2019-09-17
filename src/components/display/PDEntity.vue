@@ -16,9 +16,9 @@
           <template class="valuefield" v-for="(n) in entity['schema:name']">{{ n['@value'] }}</template>
         </template>
         <template v-if="entity['schema:affiliation']" class="grey--text">
-          <template v-for="(af) in entity['schema:affiliation']">
+          <template v-for="(af, i) in entity['schema:affiliation']">
             <template v-if="af['skos:exactMatch']">
-              {{ ' ' }}(<a class="valuefield" :href="af['skos:exactMatch'][0]" target="_blank">{{ getLocalizedValue(af['schema:name']) }}</a>)
+              {{ ' ' }}(<a :key="'af'+i" class="valuefield" :href="af['skos:exactMatch'][0]" target="_blank">{{ getLocalizedValue(af['schema:name']) }}</a>)
             </template>
             <template v-else>
               {{ ' ' }}(<template v-for="(afname) in af['schema:name']">{{ afname['@value'] }}</template>)

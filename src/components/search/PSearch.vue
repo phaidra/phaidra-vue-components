@@ -27,10 +27,10 @@
         </v-row>
         <v-row no-gutters>
           <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
-          <search-results 
-            :docs="docs" 
-            :total="total" 
-            :selectioncheck="selectioncheck" 
+          <search-results
+            :docs="docs"
+            :total="total"
+            :selectioncheck="selectioncheck"
             :getallresults="getAllResults">
           </search-results>
           <p-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
@@ -173,7 +173,7 @@ export default {
       if (this.total > this.appconfig.search.selectionlimit) {
         this.limitdialog = true
       } else {
-        let { searchdefarr, ands } = buildSearchDef(this)
+        let { ands } = buildSearchDef(this)
         let params = buildParams(this, ands)
         params.page = 0
         params.rows = this.total
@@ -217,7 +217,7 @@ export default {
       this.q = ''
       this.inCollection = ''
       this.owner = ''
-      // TODO pass showAuthorFiler 
+      // TODO pass showAuthorFiler
       // and showRoleFilter to searchFilters
       // as props so that we can hide toggle them off here
       // the same for roles
@@ -239,7 +239,7 @@ export default {
     },
     toggleSelection: function () {
       this.selectioncheck = !this.selectioncheck
-    },
+    }
   },
   mounted: function () {
     setSearchParams(this, this.$route.query)

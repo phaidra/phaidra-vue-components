@@ -269,7 +269,7 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-      if(!this.vocabularies['orgunits'].loaded ){
+      if (!this.vocabularies['orgunits'].loaded) {
         this.$store.dispatch('loadOrgUnits')
       }
       this.loading = !this.vocabularies['rolepredicate'].loaded

@@ -2,6 +2,7 @@
   <v-container  v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
       <v-tab class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
+      <v-tab @click="metadatapreview = getMetadata()"class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
     </v-tabs>
 
@@ -176,6 +177,7 @@
                     <p-i-bf-publication
                       v-bind.sync="f"
                       v-on:input-publisher-name="f.publisherName=$event"
+                      v-on:input-publisher-select="publisherSelectInput(f, $event)"
                       v-on:input-publishing-place="f.publishingPlace=$event"
                       v-on:input-publishing-date="f.publishingDate=$event"
                       v-on:add="addField(s.fields, f)"
@@ -439,6 +441,9 @@
         </v-row>
 
       </v-tab-item>
+      <v-tab-item class="pa-3">
+        <code>{{ metadatapreview }}</code>
+      </v-tab-item>
       <v-tab-item class="ma-4">
         <p-templates ref="templates" v-on:load-template="loadTemplate($event)"></p-templates>
       </v-tab-item>
@@ -667,14 +672,14 @@ export default {
       var self = this
       this.loading = true
       var httpFormData = new FormData()
-      
+
       switch (this.submittype) {
         case 'container':
-            for (var i = 0; i < this.form.sections.length; i++) {
+          for (var i = 0; i < this.form.sections.length; i++) {
             var s = this.form.sections[i]
             if (s.type === 'member') {
               for (var j = 0; j < s.fields.length; j++) {
-                if (s.fields[j].component === 'input-file') {
+                if (s.fields[j].component === 'p-file') {
                   if (s.fields[j].file !== '') {
                     httpFormData.append('member_' + s.id, s.fields[j].file)
                   }
@@ -683,21 +688,13 @@ export default {
             }
           }
           break
-        case 'resource':
-            for (var i = 0; i < this.form.sections.length; i++) {
-            var s = this.form.sections[i]
-            if (s.type === 'resourcelink') {
 
-            }
-          }
-          break
-      
         default:
           for (i = 0; i < this.form.sections.length; i++) {
             s = this.form.sections[i]
             if (s.fields) {
               for (j = 0; j < s.fields.length; j++) {
-                if (s.fields[j].component === 'input-file') {
+                if (s.fields[j].component === 'p-file') {
                   if (s.fields[j].file !== '') {
                     httpFormData.append('file', s.fields[j].file)
                   }
@@ -705,7 +702,7 @@ export default {
               }
             }
           }
-          break;
+          break
       }
 
       httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
@@ -846,6 +843,16 @@ export default {
         var preflabels = event['skos:prefLabel']
         Object.entries(preflabels).forEach(([key, value]) => {
           f.affiliationSelectedName.push({ '@value': value, '@language': key })
+        })
+      }
+    },
+    publisherSelectInput: function (f, event) {
+      if (event) {
+        f.publisherOrgUnit = event['@id']
+        f.publisherSelectedName = []
+        var preflabels = event['skos:prefLabel']
+        Object.entries(preflabels).forEach(([key, value]) => {
+          f.publisherSelectedName.push({ '@value': value, '@language': key })
         })
       }
     },
