@@ -6,6 +6,7 @@
         v-on:input="$emit('input-role', $event)"
         :label="$t('Role')"
         :items="vocabularies['rolepredicate'].terms"
+        :item-value="'@id'"
         :value="getTerm('rolepredicate', role)"
         :filter="autocompleteFilter"
        filled

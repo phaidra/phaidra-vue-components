@@ -2,7 +2,7 @@
   <v-container  v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
       <v-tab class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
-      <v-tab @click="metadatapreview = getMetadata()"class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
+      <v-tab @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
     </v-tabs>
 
@@ -149,6 +149,7 @@
                   <template v-else-if="f.component === 'p-series'">
                     <p-i-series
                       v-bind.sync="f"
+                      v-on:input-select-journal="selectJournal(f, $event)"
                       v-on:input-title="f.title=$event"
                       v-on:input-title-language="setSelected(f, 'titleLanguage', $event)"
                       v-on:input-volume="f.volume=$event"
@@ -176,7 +177,9 @@
                   <template v-else-if="f.component === 'p-bf-publication'">
                     <p-i-bf-publication
                       v-bind.sync="f"
+                      v-on:input-suggest-publisher="publisherSuggestInput(f, $event)"
                       v-on:input-publisher-name="f.publisherName=$event"
+                      v-on:change-type="f.publisherType = $event"
                       v-on:input-publisher-select="publisherSelectInput(f, $event)"
                       v-on:input-publishing-place="f.publishingPlace=$event"
                       v-on:input-publishing-date="f.publishingDate=$event"
@@ -221,15 +224,15 @@
                   <template v-else-if="f.component === 'p-entity-extended'">
                     <p-i-entity-extended
                       v-bind.sync="f"
-                      v-on:change-type="changeEntityType(f, $event)"
+                      v-on:change-type="f.type = $event"
                       v-on:input-firstname="f.firstname = $event"
                       v-on:input-lastname="f.lastname = $event"
                       v-on:input-name="f.name = $event"
                       v-on:input-identifier="f.identifierText = $event"
-                      v-on:change-affiliation-type="changeEntityAffiliationType(f, $event)"
+                      v-on:change-affiliation-type="f.affiliationType = $event"
                       v-on:input-affiliation-select="affiliationSelectInput(f, $event)"
                       v-on:input-affiliation-other="f.affiliationText = $event"
-                      v-on:change-organization-type="changeEntityOrganizationType(f, $event)"
+                      v-on:change-organization-type="f.organizationType = $event"
                       v-on:input-organization-select="organizationSelectInput(f, $event)"
                       v-on:input-organization-other="f.organizationText = $event"
                       v-on:input-role="roleInput(f, $event)"
@@ -827,14 +830,13 @@ export default {
     removeSection: function (s) {
       arrays.remove(this.form.sections, s)
     },
-    changeEntityType: function (f, event) {
-      f.type = event
-    },
-    changeEntityAffiliationType: function (f, event) {
-      f.affiliationType = event
-    },
-    changeEntityOrganizationType: function (f, event) {
-      f.organizationType = event
+    selectJournal: function (f, event) {
+      if (event.title) {
+        f.title = event.title
+      }
+      if (event.issn) {
+        f.issn = event.issn
+      }
     },
     affiliationSelectInput: function (f, event) {
       if (event) {
@@ -854,6 +856,11 @@ export default {
         Object.entries(preflabels).forEach(([key, value]) => {
           f.publisherSelectedName.push({ '@value': value, '@language': key })
         })
+      }
+    },
+    publisherSuggestInput: function (f, event) {
+      if (event) {
+        f.publisherName = event['name']
       }
     },
     organizationSelectInput: function (f, event) {

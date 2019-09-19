@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12">
-    <v-row no-gutters>
+    <v-row>
       <v-col cols="10">
         <!---->
         <v-autocomplete
@@ -9,6 +9,7 @@
           v-on:input="$emit('input', $event)"
           :rules="required ? [ v => !!v || 'Required'] : []"
           :items="vocabularies[vocabulary].terms"
+          :item-value="'@id'"
           :loading="loading"
           :filter="autocompleteFilter"
           hide-no-data
@@ -18,7 +19,6 @@
           clearable
           :disabled="disabled"
           :hint="hint"
-          :item-value="'@id'"
           :persistent-hint="hint ? true : false"
         >
           <!-- the attr binds the 'disabled' property of the vocabulary term (if defined) to the item component -->

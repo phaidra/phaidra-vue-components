@@ -8,6 +8,7 @@
         :value="getTerm('mimetypes', mimetype)"
         v-on:input="$emit('input-mimetype', $event )"
         :items="vocabularies['mimetypes'].terms"
+        :item-value="'@id'"
         :loading="loading"
         :filter="autocompleteFilter"
         hide-no-data

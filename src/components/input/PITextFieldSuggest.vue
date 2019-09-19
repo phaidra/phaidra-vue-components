@@ -3,8 +3,8 @@
     <v-col cols="8">
       <v-combobox
         v-model="model"
-        v-on:input="$emit('input', htmlToPlaintext($event))"
-        v-on:change="$emit('input', htmlToPlaintext($event))"
+        v-on:input="$emit('input', xmlUtils.htmlToPlaintext($event))"
+        v-on:change="$emit('input', xmlUtils.htmlToPlaintext($event))"
         :items="items"
         :loading="loading"
         :search-input.sync="search"
@@ -26,7 +26,7 @@
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-item-content>
-            <v-list-item-title inset>{{ htmlToPlaintext(item) }}</v-list-item-title>
+            <v-list-item-title inset>{{ xmlUtils.htmlToPlaintext(item) }}</v-list-item-title>
           </v-list-item-content>
         </template>
       </v-combobox>
@@ -36,6 +36,7 @@
         :value="getTerm('lang', language)"
         v-on:input="$emit('input-language', $event )"
         :items="vocabularies['lang'].terms"
+        :item-value="'@id'"
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
@@ -77,6 +78,7 @@
 import qs from 'qs'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+import xmlUtils from '../../utils/xml'
 
 export default {
   name: 'p-i-text-field-suggest',
@@ -122,9 +124,6 @@ export default {
     }
   },
   methods: {
-    htmlToPlaintext: function (text) {
-      return text ? String(text).replace(/<[^>]+>/gm, '') : ''
-    },
     querySuggestionsDebounce (value) {
       this.showList = true
 

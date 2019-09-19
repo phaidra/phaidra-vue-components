@@ -5,17 +5,19 @@
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4">
-      <v-row  >
-        <template v-for="(publisher, j) in o['bf:agent']">
-          <template v-for="(publishername, i) in publisher['schema:name']">
-            <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'publnamel'+j+i">{{ $t('PUBLISHER_VERLAG') }}</v-col>
-            <v-col md="10" cols="12" :key="'publname'+j+i">
-              <span class="valuefield">{{ publishername['@value'] }}</span>
-            </v-col>
+      <v-row>
+        <template v-for="(publisher, i) in o['bf:agent']">
+          <template v-if="localizedOrgUnit(publisher)">
+            <v-col :key="'publnamel'+i" md="2" cols="12" class="pdlabel primary--text text-right">{{ $t('PUBLISHER_VERLAG') }} ({{ localizedOrgUnit(publisher).language }})</v-col>
+            <v-col :key="'publname'+i" md="10" cols="12"><a class="valuefield" :href="localizedOrgUnit(publisher).id" target="_blank">{{ localizedOrgUnit(publisher).value }}</a></v-col>
+          </template>
+          <template v-else v-for="(publishername, i) in publisher['schema:name']">
+            <v-col :key="'publnamel'+i" md="2" cols="12" class="pdlabel primary--text text-right">{{ $t('PUBLISHER_VERLAG') }}<template v-if="publishername['@language']"> ({{ publishername['@language'] }})</template></v-col>
+            <v-col :key="'publname'+i" class="valuefield" md="10" cols="12">{{ publishername['@value'] }}</v-col>
           </template>
         </template>
       </v-row>
-      <v-row  >
+      <v-row>
         <template v-for="(publishingplace, j) in o['bf:place']">
           <template v-for="(place, i) in publishingplace['skos:prefLabel']">
             <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'publplacel'+j+i">{{ $t('Place') }}</v-col>
@@ -47,6 +49,27 @@ export default {
     },
     p: {
       type: String
+    }
+  },
+  methods: {
+    localizedOrgUnit: function (orgUnit) {
+      if (orgUnit['skos:exactMatch']) {
+        for (let name of orgUnit['schema:name']) {
+          if (name['@language'] === this.$i18n.locale) {
+            return {
+              value: name['@value'],
+              language: name['@language'],
+              id: name['skos:exactMatch']
+            }
+          }
+        }
+        return {
+          name: orgUnit['schema:name'][0]['@value'],
+          language: orgUnit['schema:name'][0]['@language'],
+          id: orgUnit['schema:name'][0]['skos:exactMatch']
+        }
+      }
+      return null
     }
   }
 }

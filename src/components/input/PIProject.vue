@@ -39,6 +39,7 @@
                   :value="getTerm('lang', nameLanguage)"
                   v-on:input="$emit('input-name-language', $event )"
                   :items="vocabularies['lang'].terms"
+                  :item-value="'@id'"
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t('Language')"
@@ -76,6 +77,7 @@
                   :value="getTerm('lang', descriptionLanguage)"
                   v-on:input="$emit('input-description-language', $event )"
                   :items="vocabularies['lang'].terms"
+                  :item-value="'@id'"
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t('Language')"

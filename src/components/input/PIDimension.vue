@@ -13,6 +13,7 @@
         v-on:blur="$emit('input-unit',$event.target.value)"
         :label="$t('Unit')"
         :items="vocabularies['uncefact'].terms"
+        :item-value="'@id'"
         :value="getTerm('uncefact', unit)"
        filled
       >

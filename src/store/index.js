@@ -16,6 +16,16 @@ export default new Vuex.Store({
       search: {
         selectionlimit: 5000
       },
+      apis: {
+        doi: {
+          baseurl: 'doi.org',
+          accept: 'application/vnd.citationstyles.csl+json'
+        },
+        sherparomeo: {
+          url: 'http://www.sherpa.ac.uk/romeo/api29.php',
+          key: 'V9cjsv6PTJE'
+        }
+      },
       suggesters: {}
     },
     user: {

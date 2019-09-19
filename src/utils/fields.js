@@ -327,6 +327,7 @@ const fields = [
     issued: '',
     issn: '',
     identifier: '',
+    journalSuggest: false,
     definition: 'Relates a resource to a resource in which a part has been issued; a title of a larger resource appears on a part.'
   },
   {

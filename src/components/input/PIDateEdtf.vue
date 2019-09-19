@@ -5,6 +5,7 @@
         v-on:input="$emit('input-date-type', $event)"
         :label="$t('Type of date')"
         :items="vocabularies['datepredicate'].terms"
+        :item-value="'@id'"
         :value="getTerm('datepredicate', type)"
         :filter="autocompleteFilter"
        filled
@@ -32,7 +33,6 @@
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
-          full-width
           max-width="290px"
           min-width="290px"
         >

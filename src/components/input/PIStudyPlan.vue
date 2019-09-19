@@ -25,6 +25,7 @@
         :value="getTerm('lang', nameLanguage)"
         v-on:input="$emit('input-name-language', $event )"
         :items="vocabularies['lang'].terms"
+        :item-value="'@id'"
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Name language')"

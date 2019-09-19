@@ -5,6 +5,7 @@
         v-on:input="$emit('input-place-type', $event)"
         :label="$t('Type of place')"
         :items="vocabularies['placepredicate'].terms"
+        :item-value="'@id'"
         :value="getTerm('placepredicate', type)"
         :filter="autocompleteFilter"
         :disabled="disabletype"

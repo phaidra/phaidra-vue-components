@@ -5,6 +5,7 @@
         v-on:input="$emit('input-citation-type', $event)"
         :label="$t('Citation type')"
         :items="vocabularies['citationpredicate'].terms"
+        :item-value="'@id'"
         :value="getTerm('citationpredicate', type)"
         :filter="autocompleteFilter"
         :disabled="disabletype"
@@ -40,6 +41,7 @@
         :value="getTerm('lang', citationLanguage)"
         v-on:input="$emit('input-citation-language', $event)"
         :items="vocabularies['lang'].terms"
+        :item-value="'@id'"
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"

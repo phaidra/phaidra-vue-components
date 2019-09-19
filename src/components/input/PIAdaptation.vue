@@ -53,6 +53,7 @@
                    filled
                     return-object
                     clearable
+                    :item-value="'@id'"
                   >
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>
@@ -109,6 +110,7 @@
                    filled
                     return-object
                     clearable
+                    :item-value="'@id'"
                   >
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>

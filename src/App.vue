@@ -629,6 +629,9 @@ export default {
       this.form.sections[0].fields.push(pf)
       this.form.sections[0].fields.push(fields.getField('funder'))
       this.form.sections[0].fields.push(fields.getField('association'))
+      let sf = fields.getField('series')
+      sf.journalSuggest = true
+      this.form.sections[0].fields.push(sf)
       this.form.sections[0].fields.push(fields.getField('citation'))
       this.form.sections[1].fields.push(fields.getField('title'))
       this.form.sections[1].fields.push(fields.getField('role'))

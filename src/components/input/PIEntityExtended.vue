@@ -28,6 +28,7 @@
                   v-on:input="$emit('input-role', $event)"
                   :label="$t('Role')"
                   :items="vocabularies['rolepredicate'].terms"
+                  :item-value="'@id'"
                   :value="getTerm('rolepredicate', role)"
                   :filter="autocompleteFilter"
                   filled
@@ -99,6 +100,7 @@
                     v-on:input="$emit('input-organization-select', $event )"
                     :rules="required ? [ v => !!v || 'Required'] : []"
                     :items="vocabularies['orgunits'].terms"
+                    :item-value="'@id'"
                     :loading="loading"
                     :filter="autocompleteFilter"
                     hide-no-data
@@ -153,6 +155,7 @@
                   v-on:input="$emit('input-affiliation-select', $event)"
                   :rules="required ? [ v => !!v || 'Required'] : []"
                   :items="vocabularies['orgunits'].terms"
+                  :item-value="'@id'"
                   :loading="loading"
                   :filter="autocompleteFilter"
                   hide-no-data
