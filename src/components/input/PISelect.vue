@@ -20,6 +20,7 @@
           :disabled="disabled"
           :hint="hint"
           :persistent-hint="hint ? true : false"
+          :error-messages="errorMessages"
         >
           <!-- the attr binds the 'disabled' property of the vocabulary term (if defined) to the item component -->
           <template slot="item" slot-scope="{ attr, item }">
@@ -92,6 +93,9 @@ export default {
     },
     hint: {
       type: String
+    },
+    errorMessages: {
+      type: Array
     }
   },
   data () {

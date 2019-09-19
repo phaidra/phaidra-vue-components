@@ -8,9 +8,10 @@
         :item-value="'@id'"
         :value="getTerm('datepredicate', type)"
         :filter="autocompleteFilter"
-       filled
+        filled
         return-object
         clearable
+        :error-messages="typeErrorMessages"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
@@ -45,6 +46,7 @@
               filled
               append-icon="event"
               v-on="on"
+              :error-messages="valueErrorMessages"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -65,7 +67,8 @@
           :required="required"
           :hint="'Format YYYY-MM-DD'"
           :rules="[validationrules.date]"
-        filled
+          filled
+          :error-messages="valueErrorMessages"
         ></v-text-field>
       </template>
     </v-col>
@@ -112,7 +115,13 @@ export default {
     },
     picker: {
       type: Boolean
-    }
+    },
+    valueErrorMessages: {
+      type: Array
+    },
+    typeErrorMessages: {
+      type: Array
+    },
   },
   data () {
     return {

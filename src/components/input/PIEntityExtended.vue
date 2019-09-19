@@ -34,6 +34,7 @@
                   filled
                   return-object
                   clearable
+                  :error-messages="roleErrorMessages"
                 >
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
@@ -63,7 +64,8 @@
                       :value="name"
                       :label="$t('Name')"
                       v-on:blur="$emit('input-name',$event.target.value)"
-                    filled
+                      filled
+                      :error-messages="nameErrorMessages"
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -73,7 +75,8 @@
                       :value="firstname"
                       :label="$t('Firstname')"
                       v-on:blur="$emit('input-firstname',$event.target.value)"
-                    filled
+                      filled
+                      :error-messages="firstnameErrorMessages"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="4">
@@ -81,7 +84,8 @@
                       :value="lastname"
                       :label="$t('Lastname')"
                       v-on:blur="$emit('input-lastname',$event.target.value)"
-                    filled
+                      filled
+                      :error-messages="lastnameErrorMessages"
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -109,6 +113,7 @@
                     return-object
                     clearable
                     :disabled="disabled"
+                    :error-messages="organizationErrorMessages"
                   >
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>
@@ -129,6 +134,7 @@
                     :label="$t('Organization')"
                     v-on:blur="$emit('input-organization-other', $event.target.value)"
                     filled
+                    :error-messages="organizationTextErrorMessages"
                   ></v-text-field>
                 </v-col>
               </template>
@@ -164,6 +170,7 @@
                   return-object
                   clearable
                   :disabled="disabled"
+                  :error-messages="affiliationErrorMessages"
                 >
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
@@ -183,7 +190,8 @@
                   :value="affiliationText"
                   :label="$t('Affiliation')"
                   v-on:blur="$emit('input-affiliation-other',$event.target.value)"
-                  filled
+                  filled,
+                  :error-messages="affiliationTextErrorMessages"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -250,6 +258,30 @@ export default {
     disablerole: {
       type: Boolean,
       default: false
+    },
+    nameErrorMessages: {
+      type: Array
+    },
+    firstnameErrorMessages: {
+      type: Array
+    },
+    lastnameErrorMessages: {
+      type: Array
+    },
+    roleErrorMessages: {
+      type: Array
+    },
+    affiliationErrorMessages: {
+      type: Array
+    },
+    affiliationTextErrorMessages: {
+      type: Array
+    },
+    organizationErrorMessages: {
+      type: Array
+    },
+    organizationTextErrorMessages: {
+      type: Array
     },
     showidentifier: {
       type: Boolean,

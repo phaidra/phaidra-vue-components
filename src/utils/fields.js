@@ -24,6 +24,7 @@ const fields = [
     label: 'Resource type',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The nature of the resource. Example: Image, Text, Sound'
   },
   {
@@ -35,6 +36,7 @@ const fields = [
     label: 'Object type',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography, Railway bridge, Tribe'
   },
   {
@@ -46,6 +48,7 @@ const fields = [
     label: 'Genre',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'Genre of the creative work, broadcast channel or group. Example: Master thesis, Comedy, Late Renaissance'
   },
   {
@@ -58,6 +61,7 @@ const fields = [
     showValueDefinition: false,
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The status in the publication process of journal articles.'
   },
   {
@@ -70,6 +74,7 @@ const fields = [
     showValueDefinition: false,
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'Information about who can access the resource or an indication of its security status.'
   },
   {
@@ -84,6 +89,7 @@ const fields = [
     ordergroup: 'title',
     titleLabel: '',
     title: '',
+    titleErrorMessages: [],
     subtitle: '',
     subtitleLabel: '',
     hideSubtitle: false,
@@ -144,6 +150,8 @@ const fields = [
     dateLabel: '',
     type: 'dcterms:created',
     hideType: false,
+    valueErrorMessages: [],
+    typeErrorMessages: [],
     definition: 'A point or period of time associated with an event in the lifecycle of the resource.'
   },
   {
@@ -205,6 +213,7 @@ const fields = [
     multiplicable: true,
     label: 'Language',
     value: '',
+    errorMessages: [],
     definition: 'A language of the resource.'
   },
   {
@@ -216,6 +225,7 @@ const fields = [
     multiplicable: true,
     label: 'Language of subtitles',
     value: '',
+    errorMessages: [],
     definition: 'Languages in which subtitles/captions are available.'
   },
   {
@@ -255,6 +265,14 @@ const fields = [
     lastname: '',
     name: '',
     role: '',
+    nameErrorMessages: [],
+    firstnameErrorMessages: [],
+    lastnameErrorMessages: [],
+    roleErrorMessages: [],
+    affiliationErrorMessages: [],
+    affiliationTextErrorMessages: [],
+    organizationErrorMessages: [],
+    organizationTextErrorMessages: [],
     hideRole: false,
     definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
   },
@@ -282,6 +300,7 @@ const fields = [
     label: 'Subject',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {
@@ -425,6 +444,7 @@ const fields = [
     label: 'Carrier type',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'Relates a resource to a categorization reflecting a format of a storage medium and housing of a carrier in combination with a type of intermediation device required to view, play, run, etc., the content of a resource.'
   },
   {
@@ -557,6 +577,7 @@ const fields = [
     label: 'Format',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The file format, physical medium, or dimensions of the resource.'
   },
   {
@@ -608,6 +629,7 @@ const fields = [
     label: 'Audience',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'A class of entity for whom the resource is intended or useful.'
   },
   {
@@ -619,6 +641,7 @@ const fields = [
     label: 'Regional encoding',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'A designation for one or more regions of the world for which a videodisc or video game carrier has been encoded, restricting playback to a device configured to decode it.'
   },
   {
@@ -631,6 +654,7 @@ const fields = [
     label: 'Technique',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The production or manufacturing processes, techniques, and methods incorporated in the fabrication or alteration of the work or image.'
   },
   {
@@ -657,6 +681,7 @@ const fields = [
     label: 'Material',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The substance of which a work or an image is composed.'
   },
   {
@@ -787,6 +812,7 @@ const fields = [
     label: 'MIME type',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The definition of the container if available as a MIME type.'
   },
   {
@@ -798,6 +824,7 @@ const fields = [
     label: 'License',
     value: '',
     'skos:prefLabel': [],
+    errorMessages: [],
     definition: 'The value will indicate the copyright, usage and access rights that apply to this digital representation.'
   },
   {
@@ -821,6 +848,8 @@ const fields = [
     mimeLabel: 'File type',
     value: '',
     mimetype: '',
+    fileErrorMessages: [],
+    mimetypeErrorMessages: [],
     definition: 'File input.'
   },
   {

@@ -5,7 +5,8 @@
         :value="title"
         :label="$t( titleLabel ? titleLabel : type )"
         v-on:blur="$emit('input-title',$event.target.value)"
-       filled
+        :error-messages="titleErrorMessages"
+        filled
       ></v-text-field>
     </v-col>
     <v-col cols="4" v-if="!hideSubtitle">
@@ -69,6 +70,9 @@ export default {
   props: {
     title: {
       type: String
+    },
+    titleErrorMessages: {
+      type: Array
     },
     titleLabel: {
       type: String
