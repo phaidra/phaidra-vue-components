@@ -29,6 +29,11 @@
 
 export default {
   name: 'p-templates',
+  props: {
+    tag: {
+      type: String
+    }
+  },
   data () {
     return {
       headers: [
@@ -98,7 +103,7 @@ export default {
     loadTemplates: function () {
       var self = this
       this.loading = true
-      var url = self.$store.state.instanceconfig.api + '/jsonld/templates'
+      var url = self.$store.state.instanceconfig.api + '/jsonld/templates' + (this.tag.length > 1 ? '?tag=' + this.tag : '')
       var promise = fetch(url, {
         method: 'GET',
         mode: 'cors',

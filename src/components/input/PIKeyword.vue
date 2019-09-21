@@ -3,8 +3,8 @@
     <v-col cols="8">
       <v-combobox
         v-model="model"
-        v-on:input="$emit('input', xmlUtils.htmlToPlaintext($event))"
-        v-on:change="$emit('input', xmlUtils.htmlToPlaintext($event))"
+        v-on:input="$emit('input', htmlToPlaintext($event))"
+        v-on:change="$emit('input', htmlToPlaintext($event))"
         :items="items"
         :loading="loading"
         :search-input.sync="search"
@@ -34,9 +34,10 @@
             :input-value="data.selected"
             :disabled="data.disabled"
             class="v-chip--select-multi"
+            @click:close="removeKeyword(data.item)"
             @input="data.parent.selectItem(data.item)"
           >
-            {{ xmlUtils.htmlToPlaintext(data.item) }}
+            {{ htmlToPlaintext(data.item) }}
           </v-chip>
         </template>
       </v-combobox>
@@ -89,6 +90,7 @@ import qs from 'qs'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 import xmlUtils from '../../utils/xml'
+import arrayUtils from '../../utils/arrays'
 
 export default {
   name: 'p-i-keyword',
@@ -134,6 +136,12 @@ export default {
     }
   },
   methods: {
+    removeKeyword (keyword) {
+      arrayUtils.remove(this.model, keyword)
+    },
+    htmlToPlaintext (html) {
+      return xmlUtils.htmlToPlaintext(html)
+    },
     querySuggestionsDebounce (value) {
       this.showList = true
 
