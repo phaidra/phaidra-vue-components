@@ -26,7 +26,7 @@
         </template>
       </v-autocomplete>
     </v-col>
-    <v-col cols="5">
+    <v-col :cols="hideType ? 10 : 5">
       <template v-if="picker">
         <v-menu
           ref="menu1"
