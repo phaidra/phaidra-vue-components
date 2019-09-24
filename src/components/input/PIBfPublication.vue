@@ -43,6 +43,7 @@
                   filled
                   return-object
                   clearable
+                  :error-messages="publisherOrgUnitErrorMessages"
                 >
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
@@ -99,6 +100,7 @@
                   :required="required"
                   :rules="required ? [ v => !!v || 'Required'] : []"
                   filled
+                  :error-messages="publisherNameErrorMessages"
                 ></v-text-field>
               </v-col>
             </template>
@@ -182,8 +184,14 @@ export default {
       type: String,
       required: true
     },
+    publisherNameErrorMessages: {
+      type: Array
+    },
     publisherOrgUnit: {
       type: String
+    },
+    publisherOrgUnitErrorMessages: {
+      type: Array
     },
     publishingDate: {
       type: String

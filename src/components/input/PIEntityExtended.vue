@@ -27,9 +27,9 @@
                   :disabled="disablerole"
                   v-on:input="$emit('input-role', $event)"
                   :label="$t('Role')"
-                  :items="vocabularies['rolepredicate'].terms"
+                  :items="vocabularies[roleVocabulary].terms"
                   :item-value="'@id'"
-                  :value="getTerm('rolepredicate', role)"
+                  :value="getTerm(roleVocabulary, role)"
                   :filter="autocompleteFilter"
                   filled
                   return-object
@@ -38,13 +38,13 @@
                 >
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
-                      <v-list-item-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                      <v-list-item-title  v-html="`${getLocalizedTermLabel(roleVocabulary, item['@id'])}`"></v-list-item-title>
                       <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
                     </v-list-item-content>
                   </template>
                   <template slot="selection" slot-scope="{ item }">
                     <v-list-item-content>
-                      <v-list-item-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                      <v-list-item-title v-html="`${getLocalizedTermLabel(roleVocabulary, item['@id'])}`"></v-list-item-title>
                     </v-list-item-content>
                   </template>
                 </v-autocomplete>
@@ -290,13 +290,16 @@ export default {
     showname: {
       type: Boolean,
       default: false
+    },
+    roleVocabulary: {
+      type: String,
+      default: 'rolepredicate'
     }
   },
   data () {
     return {
       loading: false,
       disabled: false,
-      vocabulary: 'rolepredicate',
       typeModel: this.type,
       affiliationRadio: this.affiliationType,
       organizationRadio: this.organizationType
@@ -307,10 +310,10 @@ export default {
       if (!this.vocabularies['orgunits'].loaded) {
         this.$store.dispatch('loadOrgUnits')
       }
-      this.loading = !this.vocabularies['rolepredicate'].loaded
+      this.loading = !this.vocabularies[this.roleVocabulary].loaded
       // emit input to set skos:prefLabel in parent
       if (this.role) {
-        this.$emit('input', this.getTerm('rolepredicate', this.role))
+        this.$emit('input', this.getTerm(this.roleVocabulary, this.role))
       }
       if (this.organization) {
         this.$emit('input-organization-select', this.getTerm('orgunits', this.organization))
