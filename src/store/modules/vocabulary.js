@@ -512,7 +512,7 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture' }, 'skos:definition': { 'eng': 'Expositions of a given subject delivered before an audience or class, especially for the purposes of instruction.' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset' }, 'skos:definition': { 'eng': 'A collection of related facts and data encoded in a defined structure.' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation' }, 'skos:definition': { 'eng': 'An annotation in the sense of a legal note is a legally explanatory comment on a decision handed down by a court or arbitral tribunal.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' }, 'skos:definition': { 'eng': 'An object type not explicitly addressed in any concept in this vocabulary.' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' }, 'skos:definition': { 'eng': 'An object type not explicitly addressed in any concept in this vocabulary.' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/A52A-CWMM', 'skos:prefLabel': { 'eng': 'map' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/GBWA-JJP8', 'skos:prefLabel': { 'eng': 'letter' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/EWZ9-3MPH', 'skos:prefLabel': { 'eng': 'musical composition' } },
