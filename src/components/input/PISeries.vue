@@ -61,6 +61,7 @@
                 :label="$t('Title')"
                 v-on:blur="$emit('input-title',$event.target.value)"
                 filled
+                :error-messages="titleErrorMessages"
               ></v-text-field>
             </v-col>
             <v-col cols="4">
@@ -209,6 +210,9 @@ export default {
     },
     journalSuggest: {
       type: Boolean
+    },
+    titleErrorMessages: {
+      type: Array
     }
   },
   computed: {
