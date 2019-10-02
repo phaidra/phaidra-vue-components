@@ -82,7 +82,7 @@
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content>
                       <v-list-item-title>{{ item.name }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ $t('Alias') + ': ' + item.alias }}</v-list-item-subtitle>
+                      <v-list-item-subtitle v-if="item.alias">{{ $t('Alias') + ': ' + item.alias }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </template>
                   <template slot="selection" slot-scope="{ item }">

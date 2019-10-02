@@ -1389,6 +1389,12 @@ export default {
     }
     return h
   },
+  get_json_identifier (type, value) {
+    return {
+      '@type': type,
+      '@value': value
+    }
+  },
   validate_object (object) {
     if (!object['@type']) {
       // console.error('JSON-LD validation: missing @type attribute', object)
@@ -1499,7 +1505,7 @@ export default {
       switch (f.predicate) {
         case 'datacite:hasIdentifier':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value }], null, f.type))
+            this.push_object(jsonld, f.predicate, this.get_json_identifier(f.type, f.value))
           }
           break
 

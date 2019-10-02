@@ -190,7 +190,7 @@
                   :value="affiliationText"
                   :label="$t('Affiliation')"
                   v-on:blur="$emit('input-affiliation-other',$event.target.value)"
-                  filled,
+                  filled
                   :error-messages="affiliationTextErrorMessages"
                 ></v-text-field>
               </v-col>

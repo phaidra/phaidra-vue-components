@@ -43,8 +43,8 @@
               <template slot="item" slot-scope="{ item }">
                 <v-list-item-content>
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ $t('ISSN') + ': ' + item.issn }}</v-list-item-subtitle>
-                  <v-list-item-subtitle>{{ $t('PUBLISHER_VERLAG') + ': ' + item.romeopub }}</v-list-item-subtitle>
+                  <v-list-item-subtitle v-if="item.issn">{{ $t('ISSN') + ': ' + item.issn }}</v-list-item-subtitle>
+                  <v-list-item-subtitle v-if="item.romeopub">{{ $t('PUBLISHER_VERLAG') + ': ' + item.romeopub }}</v-list-item-subtitle>
                 </v-list-item-content>
               </template>
               <template slot="selection" slot-scope="{ item }">
