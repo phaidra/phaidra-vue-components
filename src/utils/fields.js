@@ -850,6 +850,7 @@ const fields = [
     mimeLabel: 'File type',
     value: '',
     mimetype: '',
+    autoMimetype: false,
     fileErrorMessages: [],
     mimetypeErrorMessages: [],
     definition: 'File input.'

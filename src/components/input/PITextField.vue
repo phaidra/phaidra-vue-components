@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="8">
+    <v-col cols="12" :md="multilingual ? 8 : 10">
       <v-text-field v-if="!multiline"
         :value="value"
         v-on:blur="$emit('input',$event.target.value)"
@@ -18,7 +18,7 @@
        filled
       ></v-textarea>
     </v-col>
-    <v-col cols="2" v-if="multilingual">
+    <v-col cols="12" md="2" v-if="multilingual">
       <v-autocomplete
         :value="getTerm('lang', language)"
         v-on:input="$emit('input-language', $event )"
@@ -44,7 +44,7 @@
         </template>
       </v-autocomplete>
     </v-col>
-    <v-col cols="1" v-if="actions.length">
+    <v-col cols="12" md="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon>

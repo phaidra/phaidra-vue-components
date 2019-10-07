@@ -26,7 +26,7 @@
           <template slot="item" slot-scope="{ attr, item }">
             <v-list-item-content two-line>
               <v-list-item-title  v-html="`${getLocalizedTermLabel(vocabulary, item['@id'])}`"></v-list-item-title>
-              <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+              <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
             </v-list-item-content>
           </template>
           <template slot="selection" slot-scope="{ item }">
@@ -96,6 +96,10 @@ export default {
     },
     errorMessages: {
       type: Array
+    },
+    showIds: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

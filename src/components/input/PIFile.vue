@@ -1,9 +1,9 @@
 <template>
   <v-row >
-    <v-col cols="6">
-      <v-file-input :error-messages="fileErrorMessages" filled show-size @change="$emit('input-file', $event)" :label="$t(label)"></v-file-input>
+    <v-col :cols="autoMimetype ? 10 : 6">
+      <v-file-input :error-messages="fileErrorMessages" filled show-size @change="fileInput($event)" :label="$t(label)"></v-file-input>
     </v-col>
-    <v-col cols="4">
+    <v-col v-if="!autoMimetype" cols="4">
       <v-autocomplete
         :value="getTerm('mimetypes', mimetype)"
         v-on:input="$emit('input-mimetype', $event )"
@@ -68,6 +68,10 @@ export default {
       type: String,
       required: true
     },
+    autoMimetype: {
+      type: Boolean,
+      default: false
+    },
     fileErrorMessages: {
       type: Array
     },
@@ -78,6 +82,23 @@ export default {
   data () {
     return {
       loading: false
+    }
+  },
+  methods: {
+    fileInput(file) {
+      this.$emit('input-file', file)
+      if (this.autoMimetype) {
+        if (file.name) {
+          let ext = file.name.split('.').pop()
+          for (let mt of this.vocabularies['mimetypes'].terms) {
+            for (let notation of mt['skos:notation']) {
+              if (ext === notation) {
+                this.$emit('input-mimetype', mt)
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

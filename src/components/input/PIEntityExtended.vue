@@ -39,7 +39,7 @@
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
                       <v-list-item-title  v-html="`${getLocalizedTermLabel(roleVocabulary, item['@id'])}`"></v-list-item-title>
-                      <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                      <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                     </v-list-item-content>
                   </template>
                   <template slot="selection" slot-scope="{ item }">
@@ -118,7 +118,7 @@
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>
                         <v-list-item-title  v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
-                        <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                        <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                       </v-list-item-content>
                     </template>
                     <template slot="selection" slot-scope="{ item }">
@@ -175,7 +175,7 @@
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
                       <v-list-item-title  v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
-                      <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                      <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                     </v-list-item-content>
                   </template>
                   <template slot="selection" slot-scope="{ item }">
@@ -294,6 +294,10 @@ export default {
     roleVocabulary: {
       type: String,
       default: 'rolepredicate'
+    },
+    showIds: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

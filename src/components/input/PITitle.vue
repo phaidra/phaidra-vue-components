@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="4">
+    <v-col cols="12" :md="hideSubtitle ? ( multilingual ? 8 : 10 ) : ( multilingual ? 4 : 6 )">
       <v-text-field
         :value="title"
         :label="$t( titleLabel ? titleLabel : type )"
@@ -9,7 +9,7 @@
         filled
       ></v-text-field>
     </v-col>
-    <v-col cols="4" v-if="!hideSubtitle">
+    <v-col cols="12" md="4" v-if="!hideSubtitle">
       <v-text-field
         :value="subtitle"
         :label="$t( subtitleLabel ? subtitleLabel : 'Subtitle' )"
@@ -17,7 +17,7 @@
        filled
       ></v-text-field>
     </v-col>
-    <v-col cols="2" v-if="multilingual">
+    <v-col cols="12" md="2" v-if="multilingual">
       <v-autocomplete
         :value="getTerm('lang', language)"
         v-on:input="$emit('input-language', $event )"
