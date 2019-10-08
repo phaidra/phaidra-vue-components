@@ -55,7 +55,7 @@
             </v-combobox>
           </v-row>
           <v-row >
-            <v-col cols="8">
+            <v-col cols="12" :md="multilingual ? 10 : 12">
               <v-text-field
                 :value="title"
                 :label="$t('Title')"
@@ -64,7 +64,7 @@
                 :error-messages="titleErrorMessages"
               ></v-text-field>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="12" md="2" v-if="multilingual">
               <v-autocomplete
                 :value="getTerm('lang', titleLanguage)"
                 v-on:input="$emit('input-title-language', $event )"
@@ -80,7 +80,7 @@
                 <template slot="item" slot-scope="{ item }">
                   <v-list-item-content two-line>
                     <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
-                    <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                    <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                   </v-list-item-content>
                 </template>
                 <template slot="selection" slot-scope="{ item }">
@@ -114,14 +114,47 @@
             </v-col>
 
             <v-col cols="4" v-if="!hideIssued">
+              <template v-if="issuedDatePicker">
+                <v-menu
+                  ref="menu1"
+                  v-model="dateMenu"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  max-width="290px"
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      :value="issued"
+                      :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
+                      :rules="[validationrules.date]"
+                      filled
+                      append-icon="event"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    color="primary"
+                    :value="issued"
+                    :show-current="false"
+                    v-model="pickerModel"
+                    :locale="this.$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                    v-on:input="dateMenu = false; $emit('input-issued', $event)"
+                  ></v-date-picker>
+                </v-menu>
+              </template>
+              <template v-else>
                 <v-text-field
-                :value="issued"
-                :label="$t('Issued')"
-                v-on:blur="$emit('input-issued',$event.target.value)"
-                :hint="'Format YYYY-MM-DD'"
-                :rules="[validationrules.date]"
-                filled
-              ></v-text-field>
+                  :value="issued"
+                  v-on:blur="$emit('input-issued',$event.target.value)"
+                  :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
+                  :required="required"
+                  :hint="'Format YYYY-MM-DD'"
+                  :rules="[validationrules.date]"
+                  filled
+                ></v-text-field>
+              </template>
             </v-col>
 
           </v-row>
@@ -196,6 +229,13 @@ export default {
     issued: {
       type: String
     },
+    issuedDateLabel: {
+      type: String
+    },
+    issuedDatePicker: {
+      type: Boolean,
+      default: true
+    },
     hideIssn: {
       type: Boolean
     },
@@ -213,6 +253,10 @@ export default {
     },
     titleErrorMessages: {
       type: Array
+    },
+    multilingual: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -227,6 +271,8 @@ export default {
   },
   data () {
     return {
+      pickerModel: new Date().toISOString().substr(0, 10),
+      dateMenu: false,
       journalSearchModel: null,
       journalSearchItems: [],
       journalSearchErrors: [],

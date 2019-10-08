@@ -13,6 +13,7 @@
           :loading="loading"
           :filter="autocompleteFilter"
           hide-no-data
+          :height="7"
           :label="$t(label)"
           filled
           return-object

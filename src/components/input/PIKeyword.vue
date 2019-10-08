@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col cols="8">
+    <v-col cols="12" :md="multilingual ? 8 : 10">
       <v-combobox
         v-model="model"
         v-on:input="$emit('input', htmlToPlaintext($event))"
@@ -42,7 +42,7 @@
         </template>
       </v-combobox>
     </v-col>
-    <v-col cols="2" v-if="multilingual">
+    <v-col cols="12" md="2" v-if="multilingual">
       <v-autocomplete
         :value="getTerm('lang', language)"
         v-on:input="$emit('input-language', $event )"
@@ -58,7 +58,7 @@
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
             <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
-            <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
@@ -120,6 +120,10 @@ export default {
     debounce: {
       type: Number,
       default: 500
+    },
+    showIds: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

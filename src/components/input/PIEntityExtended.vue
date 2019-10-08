@@ -49,7 +49,7 @@
                   </template>
                 </v-autocomplete>
               </v-col>
-              <v-col cols="2">
+              <v-col v-if="enableTypeSelect" cols="2">
                 <v-radio-group v-model="typeModel" class="mt-0" @change="$emit('change-type', $event)">
                   <v-radio color="primary" :label="$t('Personal')" :value="'schema:Person'"></v-radio>
                   <v-radio color="primary" :label="$t('Corporate')" :value="'schema:Organization'"></v-radio>
@@ -93,11 +93,11 @@
               <template v-if="typeModel === 'schema:Organization'">
                 <v-col cols="2">
                   <v-radio-group v-model="organizationRadio" class="mt-0" @change="$emit('change-organization-type', $event)">
-                    <v-radio color="primary" :label="$t('Select organization')" :value="'select'"></v-radio>
-                    <v-radio color="primary" :label="$t('Other')" :value="'other'"></v-radio>
+                    <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
+                    <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
                   </v-radio-group>
                 </v-col>
-                <v-col cols="10" v-if="organizationRadio === 'select'">
+                <v-col cols="12" md="10" v-if="organizationRadio === 'select'">
                   <v-autocomplete
                     :value="getTerm('orgunits', organization)"
                     :required="required"
@@ -108,7 +108,7 @@
                     :loading="loading"
                     :filter="autocompleteFilter"
                     hide-no-data
-                    :label="$t('Please choose')"
+                    :label="$t(organizationSelectLabel)"
                     filled
                     return-object
                     clearable
@@ -128,7 +128,7 @@
                     </template>
                   </v-autocomplete>
                 </v-col>
-                <v-col cols="6" v-else>
+                <v-col cols="12" md="10" v-else>
                   <v-text-field
                     :value="organizationText"
                     :label="$t('Organization')"
@@ -150,11 +150,11 @@
             <v-row v-if="typeModel === 'schema:Person'">
               <v-col cols="2">
                 <v-radio-group v-model="affiliationRadio" class="mt-0" @change="$emit('change-affiliation-type', $event)">
-                  <v-radio color="primary" :label="$t('Select affiliation')" :value="'select'"></v-radio>
-                  <v-radio color="primary" :label="$t('Other')" :value="'other'"></v-radio>
+                  <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
+                  <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
                 </v-radio-group>
               </v-col>
-              <v-col cols="10" v-if="affiliationRadio === 'select'">
+              <v-col cols="12" md="10" v-if="affiliationRadio === 'select'">
                 <v-autocomplete
                   :value="getTerm('orgunits', affiliation)"
                   :required="required"
@@ -165,7 +165,7 @@
                   :loading="loading"
                   :filter="autocompleteFilter"
                   hide-no-data
-                  :label="$t('Please choose')"
+                  :label="$t(affiliationSelectLabel)"
                   filled
                   return-object
                   clearable
@@ -185,7 +185,7 @@
                   </template>
                 </v-autocomplete>
               </v-col>
-              <v-col cols="6" v-else>
+              <v-col cols="12" md="10" v-else>
                 <v-text-field
                   :value="affiliationText"
                   :label="$t('Affiliation')"
@@ -298,6 +298,26 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    enableTypeSelect: {
+      type: Boolean,
+      default: true
+    },
+    organizationSelectLabel: {
+      type: String,
+      default: 'Please choose'
+    },
+    affiliationSelectLabel: {
+      type: String,
+      default: 'Please choose'
+    }
+  },
+  computed: {
+    instanceconfig: function () {
+      return this.$root.$store.state.instanceconfig
+    },
+    appconfig: function () {
+      return this.$root.$store.state.appconfig
     }
   },
   data () {

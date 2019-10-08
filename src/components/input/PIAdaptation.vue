@@ -58,7 +58,7 @@
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>
                         <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
-                        <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                        <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                       </v-list-item-content>
                     </template>
                     <template slot="selection" slot-scope="{ item }">
@@ -115,7 +115,7 @@
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>
                         <v-list-item-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
-                        <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                        <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                       </v-list-item-content>
                     </template>
                     <template slot="selection" slot-scope="{ item }">
@@ -176,6 +176,10 @@ export default {
       default: false
     },
     showname: {
+      type: Boolean,
+      default: false
+    },
+    showIds: {
       type: Boolean,
       default: false
     }

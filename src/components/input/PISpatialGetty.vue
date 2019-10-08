@@ -16,7 +16,7 @@
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
             <v-list-item-title  v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-item-title>
-            <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
@@ -94,6 +94,10 @@ export default {
     },
     disabletype: {
       type: Boolean
+    },
+    showIds: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {

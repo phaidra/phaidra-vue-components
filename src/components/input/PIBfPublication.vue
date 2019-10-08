@@ -24,7 +24,7 @@
             <v-col cols="2">
               <v-radio-group v-model="typeModel" class="mt-0" @change="$emit('change-type', $event)">
                 <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
-                <v-radio color="primary" :label="$t('Other')" :value="'other'"></v-radio>
+                <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
               </v-radio-group>
             </v-col>
             <template v-if="typeModel === 'select'">
@@ -48,7 +48,7 @@
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
                       <v-list-item-title  v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
-                      <v-list-item-subtitle  v-html="`${item['@id']}`"></v-list-item-subtitle>
+                      <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                     </v-list-item-content>
                   </template>
                   <template slot="selection" slot-scope="{ item }">
@@ -60,7 +60,7 @@
               </v-col>
             </template>
             <template v-else>
-              <v-col cols="12" md="5">
+              <v-col v-if="publisherSearch" cols="12" md="5">
                 <v-combobox
                   v-model="publisherSearchModel"
                   :items="publisherSearchItems"
@@ -92,7 +92,7 @@
                   </template>
                 </v-combobox>
               </v-col>
-              <v-col cols="12" md="5">
+              <v-col cols="12" :md="publisherSearch ? 5 : 10">
                 <v-text-field
                   :value="publisherName"
                   v-on:blur="$emit('input-publisher-name',$event.target.value)"
@@ -106,7 +106,7 @@
             </template>
           </v-row>
           <v-row>
-            <v-col cols="8">
+            <v-col v-if="showPlace" cols="8">
               <v-text-field
                 :value="publishingPlace"
                 v-on:blur="$emit('input-publishing-place',$event.target.value)"
@@ -116,7 +116,7 @@
                filled
               ></v-text-field>
             </v-col>
-            <v-col cols="4">
+            <v-col v-if="showDate" cols="4">
               <template v-if="publishingDatePicker">
                 <v-menu
                   ref="menu1"
@@ -193,6 +193,10 @@ export default {
     publisherOrgUnitErrorMessages: {
       type: Array
     },
+    publisherSearch: {
+      type: Boolean,
+      default: true
+    },
     publishingDate: {
       type: String
     },
@@ -219,6 +223,14 @@ export default {
     },
     required: {
       type: Boolean
+    },
+    showPlace: {
+      type: Boolean,
+      default: true
+    },
+    showDate: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
