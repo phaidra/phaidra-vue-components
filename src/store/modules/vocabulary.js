@@ -626,7 +626,8 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/S9R7-X1M2', 'skos:prefLabel': { 'eng': 'Österreichischer Nationalfonds für Opfer des Nationalsozialismus' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/X4EX-JK51', 'skos:prefLabel': { 'eng': 'University of Vienna' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/XMYF-893X', 'skos:prefLabel': { 'eng': 'Vienna Science and Technology Fund (WWTF)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/6HPQ-MTZV', 'skos:prefLabel': { 'eng': 'Zukunftsfonds der Republik Österreich' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/6HPQ-MTZV', 'skos:prefLabel': { 'eng': 'Zukunftsfonds der Republik Österreich' } },
+        { '@id': 'other', 'skos:prefLabel': { 'eng': 'Other' } }
       ],
       loaded: true
     },

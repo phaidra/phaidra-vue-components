@@ -471,6 +471,22 @@ export default {
                     f.homepage = value[i]['foaf:homepage'][j]
                   }
                 }
+                if (value[i]['frapo:hasFundingAgency']) {
+                  for (let funder of value[i]['frapo:hasFundingAgency']) {
+                    if (funder['skos:prefLabel']) {
+                      for (let pl of funder['skos:prefLabel']) {
+                        f.funderName = pl['@value']
+                        f.funderNameLanguage = pl['@language'] ? pl['@language'] : 'eng'
+                      }
+                    }
+                    if (funder['skos:exactMatch']) {
+                      for (let em of funder['skos:exactMatch']) {
+                        f.funderIdentifier = em
+                      }
+                    }
+                  }
+                }
+                
                 components.push(f)
               } else {
                 if (value[i]['@type'] === 'aaiso:Programme') {
@@ -1177,7 +1193,7 @@ export default {
     }
     return h
   },
-  get_json_project (name, nameLanguage, description, descriptionLanguage, identifiers, homepage) {
+  get_json_project (name, nameLanguage, description, descriptionLanguage, identifiers, homepage, funderObject) {
     var h = {
       '@type': 'foaf:Project'
     }
@@ -1209,6 +1225,11 @@ export default {
     if (homepage) {
       h['foaf:homepage'] = [
         homepage
+      ]
+    }
+    if (funderObject) {
+      h['frapo:hasFundingAgency'] = [
+        funderObject
       ]
     }
     return h
@@ -1631,7 +1652,7 @@ export default {
             // project
             if (f.type === 'foaf:Project') {
               if (f.name || f.identifier || f.description || f.homepage) {
-                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage))
+                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier ? [f.funderIdentifier] : null)))
               }
             }
           }

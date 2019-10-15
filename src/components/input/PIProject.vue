@@ -124,6 +124,50 @@
             </v-row>
           </v-col>
         </v-row>
+        <v-row >
+          <v-col cols="6">
+            <v-text-field
+              :value="funderName"
+              :label="$t('Funder name')"
+              v-on:blur="$emit('input-funder-name',$event.target.value)"
+              filled
+            ></v-text-field>
+          </v-col>
+          <v-col cols="2">
+            <v-autocomplete
+              :value="getTerm('lang', funderNameLanguage)"
+              v-on:input="$emit('input-funder-name-language', $event )"
+              :items="vocabularies['lang'].terms"
+              :item-value="'@id'"
+              :filter="autocompleteFilter"
+              hide-no-data
+              :label="$t('Language')"
+              filled
+              return-object
+              clearable
+            >
+              <template slot="item" slot-scope="{ item }">
+                <v-list-item-content two-line>
+                  <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+                  <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
+                </v-list-item-content>
+              </template>
+              <template slot="selection" slot-scope="{ item }">
+                <v-list-item-content>
+                  <v-list-item-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="4">
+            <v-text-field
+              :value="funderIdentifier"
+              :label="'Funder identifier'"
+              v-on:blur="$emit('input-funder-identifier',$event.target.value)"
+              filled
+            ></v-text-field>
+          </v-col>
+        </v-row>
         </v-card-text>
       </v-card>
     </v-col>
@@ -147,7 +191,16 @@ export default {
     nameLanguage: {
       type: String
     },
+    funderName: {
+      type: String
+    },
+    funderNameLanguage: {
+      type: String
+    },
     identifier: {
+      type: String
+    },
+    funderIdentifier: {
       type: String
     },
     description: {
