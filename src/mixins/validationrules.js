@@ -1,7 +1,42 @@
 import moment from 'moment'
 
+const DOI_PATTERN = "\\b10\\.(?:97[89]\\.\\d{2,8}\\/\\d{1,7}|\\d{4,9}\\/\\S+)"
+const DOI_GLOBAL_PATTERN = new RegExp(DOI_PATTERN, "g")
+const DOI_SINGLE_PATTERN = new RegExp(DOI_PATTERN)
+const DOI_PATTERN_ONLY = "^10\\.(?:97[89]\\.\\d{2,8}\\/\\d{1,7}|\\d{4,9}\\/\\S+)"
+const DOI_VALID_ENDING = /(?:\w|\(.+\)|2-#)$/
+
+function extract(str) {
+  const matches = String(str).toLowerCase().match(DOI_GLOBAL_PATTERN)
+  if (!matches) {
+    return []
+  }
+  return matches.map(stripPunctuation).filter(Boolean)
+}
+
+function extractOne(str) {
+  const match = String(str).toLowerCase().match(DOI_SINGLE_PATTERN)
+  if (!match) {
+    return
+  }
+  return stripPunctuation(match[0])
+}
+
+function stripPunctuation(doi) {
+  if (DOI_VALID_ENDING.test(doi)) {
+    return doi
+  }
+  return extractOne(doi.replace(/\W$/, ""))
+}
+
 export const validationrules = {
   methods: {
+    isValidDOI: function (doistr) {
+      return String(doistr).toLowerCase().match(DOI_PATTERN_ONLY) !== null
+    },
+    extractDOI: function (doistr) {
+      return extract(doistr)
+    },
     isValidDuration: function (durationString) {
       return moment.duration(durationString).isValid()
     },
@@ -49,12 +84,15 @@ export const validationrules = {
   data () {
     return {
       validationrules: {
-        required: value => !!value || 'Required.',
+        required: value => !!value || 'Required',
         date: value => {
-          return typeof value === 'undefined' || value === '' || this.isValidDate(value) || 'Invalid date.'
+          return typeof value === 'undefined' || value === '' || this.isValidDate(value) || 'Invalid date'
         },
         duration: value => {
-          return typeof value === 'undefined' || value === '' || this.isValidDuration(value) || 'Invalid duration.'
+          return typeof value === 'undefined' || value === '' || this.isValidDuration(value) || 'Invalid duration'
+        },
+        doi: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidDOI(value) || 'Invalid DOI'
         }
       }
     }

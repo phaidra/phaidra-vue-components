@@ -27,14 +27,15 @@
     <template v-for="(f, i) in o['frapo:hasFundingAgency']">
       <v-row>
         <template v-for="(l, i) in f['skos:prefLabel']">
-          <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'fpl'+i">{{ $t('Funder') }} ({{ l['@language'] }})</v-col>
-          <v-col class="valuefield" md="10" cols="12" :key="'fpv'+i" >{{ l['@value'] }}</v-col>
-        </template>
-      </v-row>
-      <v-row>
-        <template v-for="(id, i) in f['skos:exactMatch']">
-          <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'idl'+i">{{ $t('Funder Id') }}</v-col>
-          <v-col md="10" cols="12" :key="'idv'+i">{{ id }}</v-col>
+          <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'fpl'+i">{{ $t('Funder') }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
+          <v-col class="valuefield" md="10" cols="12" :key="'fpv'+i" >
+            <template v-if="f['skos:exactMatch']">
+              <a :href="f['skos:exactMatch'][0]" target="_blank">{{ l['@value'] }}</a>
+            </template>
+            <template v-else>
+              {{ l['@value'] }}
+            </template>
+          </v-col>
         </template>
       </v-row>
     </template>

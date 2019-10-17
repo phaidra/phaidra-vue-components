@@ -23,6 +23,7 @@ import PDUwmetadata from './display/PDUwmetadata.vue'
 import PDValue from './display/PDValue.vue'
 import PIDimension from './input/PIDimension.vue'
 import PIDuration from './input/PIDuration.vue'
+import PIAlternateIdentifier from './input/PIAlternateIdentifier.vue'
 import PIEntity from './input/PIEntity.vue'
 import PIEntityExtended from './input/PIEntityExtended'
 import PIDateEdtf from './input/PIDateEdtf.vue'
@@ -84,6 +85,7 @@ const Components = {
   PDUwmetadata,
   PDValue,
   PIDimension,
+  PIAlternateIdentifier,
   PIEntity,
   PIEntityExtended,
   PIDateEdtf,

@@ -7,8 +7,11 @@ const fields = [
     predicate: 'datacite:hasIdentifier',
     component: 'p-alternate-identifier',
     type: 'datacite:AlternateResourceIdentifier',
+    identifierType: 'doi',
+    showType: true,
+    disableType: false,
     multiplicable: false,
-    label: 'Alternate identifier',
+    identifierLabel: 'Identifier',
     value: '',
     definition: 'An alternative identifier (other than Phaidra persistent identifier) that uniquely identifies the resource.'
   },

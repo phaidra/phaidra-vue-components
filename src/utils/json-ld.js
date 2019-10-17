@@ -486,7 +486,6 @@ export default {
                     }
                   }
                 }
-                
                 components.push(f)
               } else {
                 if (value[i]['@type'] === 'aaiso:Programme') {

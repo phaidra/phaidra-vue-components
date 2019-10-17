@@ -35,6 +35,23 @@ const state = {
       ],
       loaded: true
     },
+    'objectidentifiertype': {
+      terms: [
+        { '@id': 'doi', 'skos:prefLabel': { 'eng': 'DOI' } },
+        { '@id': 'handle', 'skos:prefLabel': { 'eng': 'Handle' } },
+        { '@id': 'acnumber', 'skos:prefLabel': { 'eng': 'AC number' } }
+      ],
+      loaded: true
+    },
+    'entityidentifiertype': {
+      terms: [
+        { '@id': 'orcid', 'skos:prefLabel': { 'eng': 'ORCID' } },
+        { '@id': 'gnd', 'skos:prefLabel': { 'eng': 'GND' } },
+        { '@id': 'viaf', 'skos:prefLabel': { 'eng': 'VIAF' } },
+        { '@id': 'wikidata', 'skos:prefLabel': { 'eng': 'Wikidata ID' } }
+      ],
+      loaded: true
+    },
     'citationpredicate': {
       terms: [
         { '@id': 'cito:cites', 'skos:prefLabel': { 'eng': 'Cites' } },
