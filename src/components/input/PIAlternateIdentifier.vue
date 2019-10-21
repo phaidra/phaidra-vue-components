@@ -4,9 +4,9 @@
       <v-autocomplete
         v-on:input="$emit('input-identifier-type', $event)"
         :label="$t('Type of identifier')"
-        :items="vocabularies['objectidentifiertype'].terms"
+        :items="vocabularies[vocabulary].terms"
         :item-value="'@id'"
-        :value="getTerm('objectidentifiertype', identifierType)"
+        :value="getTerm(vocabulary, identifierType)"
         :filter="autocompleteFilter"
         :disabled="disabletype"
         filled
@@ -15,13 +15,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
-            <v-list-item-title  v-html="`${getLocalizedTermLabel('objectidentifiertype', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel(vocabulary, item['@id'])}`"></v-list-item-title>
             <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-item-content>
-            <v-list-item-title v-html="`${getLocalizedTermLabel('objectidentifiertype', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title v-html="`${getLocalizedTermLabel(vocabulary, item['@id'])}`"></v-list-item-title>
           </v-list-item-content>
         </template>
       </v-autocomplete>
@@ -31,6 +31,7 @@
         :value="value"
         v-on:input="$emit('input-identifier', $event)"
         :label="$t(identifierLabel ? identifierLabel : 'Identifier')"
+        :placeholder="placeholder(identifierType)"
         :required="required"
         :rules="[validationrules[identifierType]]"
         filled
@@ -72,6 +73,10 @@ export default {
     identifierLabel: {
       type: String
     },
+    vocabulary: {
+      type: String,
+      default: 'objectidentifiertype'
+    },
     required: {
       type: Boolean
     },
@@ -86,13 +91,18 @@ export default {
       default: false
     }
   },
+  methods: {
+    placeholder: function (type) {
+      for (let i of this.vocabularies[this.vocabulary].terms) {
+        if (i['@id'] === type) {
+          return i['skos:example']
+        }
+      }
+    }
+  },
   mounted: function () {
     this.$nextTick(function () {
-      this.loading = !this.vocabularies['objectidentifiertype'].loaded
-      // emit input to set skos:prefLabel in parent
-      if (this.identifierType) {
-        this.$emit('input-identifier-type', this.getTerm('objectidentifiertype', this.identifierType))
-      }
+      this.loading = !this.vocabularies[this.vocabulary].loaded
     })
   }
 }

@@ -56,10 +56,10 @@
                 </v-radio-group>
               </v-col>
             </v-row>
-            <v-row>
-              <template v-if="typeModel === 'schema:Person'">
+            <template v-if="typeModel === 'schema:Person'">
+              <v-row>
                 <template v-if="showname">
-                  <v-col cols="8" >
+                  <v-col cols="12" >
                     <v-text-field
                       :value="name"
                       :label="$t('Name')"
@@ -70,7 +70,7 @@
                   </v-col>
                 </template>
                 <template v-else>
-                  <v-col cols="4">
+                  <v-col cols="6">
                     <v-text-field
                       :value="firstname"
                       :label="$t('Firstname')"
@@ -79,7 +79,7 @@
                       :error-messages="firstnameErrorMessages"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="4">
+                  <v-col cols="6">
                     <v-text-field
                       :value="lastname"
                       :label="$t('Lastname')"
@@ -89,8 +89,58 @@
                     ></v-text-field>
                   </v-col>
                 </template>
-              </template>
-              <template v-if="typeModel === 'schema:Organization'">
+              </v-row>
+              <v-row v-if="showIdentifier">
+                <v-col cols="12" md="6" v-if="showIdentifierType">
+                  <v-autocomplete
+                    v-on:input="$emit('input-identifier-type', $event)"
+                    :label="$t('Type of identifier')"
+                    :items="vocabularies[identifierVocabulary].terms"
+                    :item-value="'@id'"
+                    :value="getTerm(identifierVocabulary, identifierType)"
+                    :filter="autocompleteFilter"
+                    :disabled="disableIdentifierType"
+                    filled
+                    return-object
+                    clearable
+                  >
+                    <template slot="item" slot-scope="{ item }">
+                      <v-list-item-content two-line>
+                        <v-list-item-title  v-html="`${getLocalizedTermLabel(identifierVocabulary, item['@id'])}`"></v-list-item-title>
+                      </v-list-item-content>
+                    </template>
+                    <template slot="selection" slot-scope="{ item }">
+                      <v-list-item-content>
+                        <v-list-item-title v-html="`${getLocalizedTermLabel(identifierVocabulary, item['@id'])}`"></v-list-item-title>
+                      </v-list-item-content>
+                    </template>
+                  </v-autocomplete>
+                </v-col>
+                <v-col cols="12" md="6" >
+                  <v-text-field
+                    v-show="identifierType === 'orcid'"
+                    v-mask="'####-####-####-####'"
+                    :value="identifierText"
+                    :label="$t('Identifier')"
+                    v-on:blur="$emit('input-identifier', $event.target.value)"
+                    :placeholder="identifierTypePlaceholder"
+                    :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                    filled
+                  ></v-text-field>
+                  <v-text-field
+                    v-show="identifierType !== 'orcid'"
+                    :value="identifierText"
+                    :label="$t('Identifier')"
+                    v-on:blur="$emit('input-identifier', $event.target.value)"
+                    :placeholder="identifierTypePlaceholder"
+                    :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                    filled
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </template>
+            <template v-if="typeModel === 'schema:Organization'">
+              <v-row>
                 <v-col cols="2">
                   <v-radio-group v-model="organizationRadio" class="mt-0" @change="$emit('change-organization-type', $event)">
                     <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
@@ -137,16 +187,8 @@
                     :error-messages="organizationTextErrorMessages"
                   ></v-text-field>
                 </v-col>
-              </template>
-              <v-col cols="4" v-if="(typeModel === 'schema:Person') || (organizationRadio !== 'select')">
-                <v-text-field
-                  :value="identifierText"
-                  :label="$t('Identifier')"
-                  v-on:blur="$emit('input-identifier', $event.target.value)"
-                  filled
-                ></v-text-field>
-              </v-col>
-            </v-row>
+              </v-row>
+            </template>
             <v-row v-if="typeModel === 'schema:Person'">
               <v-col cols="2">
                 <v-radio-group v-model="affiliationRadio" class="mt-0" @change="$emit('change-affiliation-type', $event)">
@@ -203,12 +245,17 @@
 </template>
 
 <script>
+import { mask } from 'vue-the-mask'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-i-entity-extended',
-  mixins: [vocabulary, fieldproperties],
+  mixins: [vocabulary, fieldproperties, validationrules],
+  directives: {
+    mask
+  },
   props: {
     label: {
       type: String
@@ -242,6 +289,18 @@ export default {
     },
     identifierText: {
       type: String
+    },
+    identifierType: {
+      type: String
+    },
+    showIdentifier: {
+      type: Boolean
+    },
+    showIdentifierType: {
+      type: Boolean
+    },
+    disableIdentifierType: {
+      type: Boolean
     },
     role: {
       type: String
@@ -295,6 +354,10 @@ export default {
       type: String,
       default: 'rolepredicate'
     },
+    identifierVocabulary: {
+      type: String,
+      default: 'entityidentifiertype'
+    },
     showIds: {
       type: Boolean,
       default: false
@@ -318,6 +381,14 @@ export default {
     },
     appconfig: function () {
       return this.$root.$store.state.appconfig
+    },
+    identifierTypePlaceholder: function () {
+      for (let i of this.vocabularies[this.identifierVocabulary].terms) {
+        if (i['@id'] === this.identifierType) {
+          return i['skos:example']
+        }
+      }
+      return ''
     }
   },
   data () {

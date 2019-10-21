@@ -1,12 +1,12 @@
 import moment from 'moment'
 
-const DOI_PATTERN = "\\b10\\.(?:97[89]\\.\\d{2,8}\\/\\d{1,7}|\\d{4,9}\\/\\S+)"
-const DOI_GLOBAL_PATTERN = new RegExp(DOI_PATTERN, "g")
+const DOI_PATTERN = '\\b10\\.(?:97[89]\\.\\d{2,8}\\/\\d{1,7}|\\d{4,9}\\/\\S+)'
+const DOI_GLOBAL_PATTERN = new RegExp(DOI_PATTERN, 'g')
 const DOI_SINGLE_PATTERN = new RegExp(DOI_PATTERN)
-const DOI_PATTERN_ONLY = "^10\\.(?:97[89]\\.\\d{2,8}\\/\\d{1,7}|\\d{4,9}\\/\\S+)"
+const DOI_PATTERN_ONLY = '^10\\.(?:97[89]\\.\\d{2,8}\\/\\d{1,7}|\\d{4,9}\\/\\S+)'
 const DOI_VALID_ENDING = /(?:\w|\(.+\)|2-#)$/
 
-function extract(str) {
+function extract (str) {
   const matches = String(str).toLowerCase().match(DOI_GLOBAL_PATTERN)
   if (!matches) {
     return []
@@ -14,7 +14,7 @@ function extract(str) {
   return matches.map(stripPunctuation).filter(Boolean)
 }
 
-function extractOne(str) {
+function extractOne (str) {
   const match = String(str).toLowerCase().match(DOI_SINGLE_PATTERN)
   if (!match) {
     return
@@ -22,17 +22,38 @@ function extractOne(str) {
   return stripPunctuation(match[0])
 }
 
-function stripPunctuation(doi) {
+function stripPunctuation (doi) {
   if (DOI_VALID_ENDING.test(doi)) {
     return doi
   }
-  return extractOne(doi.replace(/\W$/, ""))
+  return extractOne(doi.replace(/\W$/, ''))
 }
 
 export const validationrules = {
   methods: {
-    isValidDOI: function (doistr) {
-      return String(doistr).toLowerCase().match(DOI_PATTERN_ONLY) !== null
+    isValidHandle: function (str) {
+      return true
+    },
+    isValidURN: function (str) {
+      return true
+    },
+    isValidACNumber: function (str) {
+      return true
+    },
+    isValidORCID: function (str) {
+      return true
+    },
+    isValidGND: function (str) {
+      return true
+    },
+    isValidVIAF: function (str) {
+      return true
+    },
+    isValidWikidata: function (str) {
+      return true
+    },
+    isValidDOI: function (str) {
+      return String(str).toLowerCase().match(DOI_PATTERN_ONLY) !== null
     },
     extractDOI: function (doistr) {
       return extract(doistr)
@@ -84,6 +105,7 @@ export const validationrules = {
   data () {
     return {
       validationrules: {
+        noop: value => { return true },
         required: value => !!value || 'Required',
         date: value => {
           return typeof value === 'undefined' || value === '' || this.isValidDate(value) || 'Invalid date'
@@ -93,6 +115,27 @@ export const validationrules = {
         },
         doi: value => {
           return typeof value === 'undefined' || value === '' || this.isValidDOI(value) || 'Invalid DOI'
+        },
+        handle: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidHandle(value) || 'Invalid Handle identifier'
+        },
+        urn: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidURN(value) || 'Invalid URN'
+        },
+        acnumber: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidACNumber(value) || 'Invalid AC-number'
+        },
+        orcid: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidORCID(value) || 'Invalid ORCID'
+        },
+        gnd: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidGND(value) || 'Invalid GND identifier'
+        },
+        viaf: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidVIAF(value) || 'Invalid VIAF identifier'
+        },
+        wikidata: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidWikidata(value) || 'Invalid Wikidata identifier'
         }
       }
     }

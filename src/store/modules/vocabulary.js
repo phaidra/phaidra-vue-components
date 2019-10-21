@@ -37,18 +37,27 @@ const state = {
     },
     'objectidentifiertype': {
       terms: [
-        { '@id': 'doi', 'skos:prefLabel': { 'eng': 'DOI' } },
-        { '@id': 'handle', 'skos:prefLabel': { 'eng': 'Handle' } },
-        { '@id': 'acnumber', 'skos:prefLabel': { 'eng': 'AC number' } }
+        { '@id': 'doi', 'skos:prefLabel': { 'eng': 'DOI' }, 'skos:example': '10.25365/phaidra.39' },
+        { '@id': 'handle', 'skos:prefLabel': { 'eng': 'Handle' }, 'skos:example': '11353/10.761200' },
+        { '@id': 'urn', 'skos:prefLabel': { 'eng': 'URN' }, 'skos:example': 'urn:nbn:at:at-ubw-21405.98566.193074-2' },
+        { '@id': 'acnumber', 'skos:prefLabel': { 'eng': 'AC number' }, 'skos:example': 'AC13399179' }
+      ],
+      loaded: true
+    },
+    'irobjectidentifiertype': {
+      terms: [
+        { '@id': 'doi', 'skos:prefLabel': { 'eng': 'DOI' }, 'skos:example': '10.25365/phaidra.39' },
+        { '@id': 'handle', 'skos:prefLabel': { 'eng': 'Handle' }, 'skos:example': '11353/10.761200' },
+        { '@id': 'urn', 'skos:prefLabel': { 'eng': 'URN' }, 'skos:example': 'urn:nbn:at:at-ubw-21405.98566.193074-2' }
       ],
       loaded: true
     },
     'entityidentifiertype': {
       terms: [
-        { '@id': 'orcid', 'skos:prefLabel': { 'eng': 'ORCID' } },
-        { '@id': 'gnd', 'skos:prefLabel': { 'eng': 'GND' } },
-        { '@id': 'viaf', 'skos:prefLabel': { 'eng': 'VIAF' } },
-        { '@id': 'wikidata', 'skos:prefLabel': { 'eng': 'Wikidata ID' } }
+        { '@id': 'orcid', 'skos:prefLabel': { 'eng': 'ORCID' }, 'skos:example': '0000-0002-1825-0097' },
+        { '@id': 'gnd', 'skos:prefLabel': { 'eng': 'GND' }, 'skos:example': '118635808' },
+        { '@id': 'viaf', 'skos:prefLabel': { 'eng': 'VIAF' }, 'skos:example': '89597697' },
+        { '@id': 'wikidata', 'skos:prefLabel': { 'eng': 'Wikidata ID' }, 'skos:example': 'Q129772' }
       ],
       loaded: true
     },

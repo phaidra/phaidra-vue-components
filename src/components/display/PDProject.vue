@@ -25,7 +25,7 @@
       </template>
     </v-row>
     <template v-for="(f, i) in o['frapo:hasFundingAgency']">
-      <v-row>
+      <v-row :key="'fnd'+i">
         <template v-for="(l, i) in f['skos:prefLabel']">
           <v-col md="2" cols="12" class="pdlabel primary--text text-right" :key="'fpl'+i">{{ $t('Funder') }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
           <v-col class="valuefield" md="10" cols="12" :key="'fpv'+i" >

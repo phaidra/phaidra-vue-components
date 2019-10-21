@@ -15,7 +15,13 @@ export default {
             // datacite:hasIdentifier
             case 'datacite:hasIdentifier':
               f = fields.getField('alternate-identifier')
-              f.value = value[i]['@value']
+              let val = value[i]['@value']
+              let prefix = val.match(/^(\w+):/)
+              if (prefix[1] !== 'urn') {
+                val = val.replace(prefix[0], '')
+              }
+              f.identifierType = prefix[1]
+              f.value = val
               components.push(f)
               break
 
@@ -819,7 +825,13 @@ export default {
                   }
                   if (role['skos:exactMatch']) {
                     for (let id of role['skos:exactMatch']) {
-                      f.identifierText = id
+                      let val = id
+                      let prefix = val.match(/^(\w+):/)
+                      if (prefix[1] !== 'urn') {
+                        val = val.replace(prefix[0], '')
+                      }
+                      f.identifierType = prefix[1]
+                      f.identifierText = val
                     }
                   }
                   if (role['schema:affiliation']) {
@@ -1147,7 +1159,7 @@ export default {
         ]
       }
       if (f.identifierText) {
-        h['skos:exactMatch'] = [ f.identifierText ]
+        h['skos:exactMatch'] = [ this.prefix_identifier(f.identifierType, f.identifierText) ]
       }
       if (f.affiliation || f.affiliationText) {
         let a = {
@@ -1409,10 +1421,39 @@ export default {
     }
     return h
   },
-  get_json_identifier (type, value) {
+  prefix_identifier (type, value) {
+    switch (type) {
+      case 'doi':
+        value = 'doi:' + value
+        break
+      case 'handle':
+        value = 'handle:' + value
+        break
+      case 'acnumber':
+        value = 'acnumber:' + value
+        break
+      case 'urn':
+        // noop
+        break
+      case 'orcid':
+        value = 'orcid:' + value
+        break
+      case 'gnd':
+        value = 'gnd:' + value
+        break
+      case 'viaf':
+        value = 'viaf:' + value
+        break
+      case 'wikidata':
+        value = 'wikidata:' + value
+        break
+    }
+    return value
+  },
+  get_json_identifier (type, identifierType, value) {
     return {
       '@type': type,
-      '@value': value
+      '@value': this.prefix_identifier(identifierType, value)
     }
   },
   validate_object (object) {
@@ -1525,7 +1566,7 @@ export default {
       switch (f.predicate) {
         case 'datacite:hasIdentifier':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_identifier(f.type, f.value))
+            this.push_object(jsonld, f.predicate, this.get_json_identifier(f.type, f.identifierType, f.value))
           }
           break
 

@@ -209,10 +209,7 @@
                       v-on:input-firstname="f.firstname=$event"
                       v-on:input-lastname="f.lastname=$event"
                       v-on:input-name="f.name=$event"
-                      v-on:input-affiliation-select="setSelected(f, 'affiliation', $event)"
-                      v-on:input-affiliation-text="f.affiliation=$event"
                       v-on:input-organization="f.organization=$event"
-                      v-on:input-identifier="f.identifier=$event"
                       v-on:input-role="roleInput(f, $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
@@ -228,6 +225,7 @@
                       v-on:input-firstname="f.firstname = $event"
                       v-on:input-lastname="f.lastname = $event"
                       v-on:input-name="f.name = $event"
+                      v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
                       v-on:input-identifier="f.identifierText = $event"
                       v-on:change-affiliation-type="f.affiliationType = $event"
                       v-on:input-affiliation-select="affiliationSelectInput(f, $event)"
@@ -284,13 +282,24 @@
                     ></p-i-dimension>
                   </template>
 
-                  <template v-else-if="(f.component === 'p-literal') || (f.component === 'p-alternate-identifier')">
+                  <template v-else-if="f.component === 'p-literal'">
                     <p-i-literal
                       v-bind.sync="f"
                       v-on:input-value="f.value=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-literal>
+                  </template>
+
+                  <template v-else-if="f.component === 'p-alternate-identifier'">
+                    <p-i-alternate-identifier
+                      v-bind.sync="f"
+                      v-on:input-identifier="f.value=$event"
+                      v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                      class="my-2"
+                    ></p-i-alternate-identifier>
                   </template>
 
                   <template v-else-if="f.component === 'p-study-plan'">
@@ -881,6 +890,13 @@ export default {
         f[property] = event['@id']
       }
       this.$emit('form-input-' + f.component, f)
+      // eg on
+      // v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
+      // the identifierType property of the component should be updated via
+      // v-bind.sync="f"
+      // because we changed f in this method
+      // but it seems to not work lately....
+      this.$forceUpdate()
     },
     updateSubject: function (f, event) {
       f['skos:prefLabel'] = event['skos:prefLabel']

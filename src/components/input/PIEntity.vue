@@ -104,9 +104,6 @@ export default {
     organizationLabel: {
       type: String
     },
-    identifier: {
-      type: String
-    },
     role: {
       type: String
     },
@@ -122,10 +119,6 @@ export default {
     disablerole: {
       type: Boolean,
       default: false
-    },
-    showidentifier: {
-      type: Boolean,
-      default: true
     },
     showname: {
       type: Boolean,
