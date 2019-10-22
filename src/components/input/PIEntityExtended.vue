@@ -59,7 +59,7 @@
             <template v-if="typeModel === 'schema:Person'">
               <v-row>
                 <template v-if="showname">
-                  <v-col cols="12" >
+                  <v-col cols="12" :md="(showIdentifier && !showIdentifierType) ? 8 : 12">
                     <v-text-field
                       :value="name"
                       :label="$t('Name')"
@@ -70,7 +70,7 @@
                   </v-col>
                 </template>
                 <template v-else>
-                  <v-col cols="6">
+                  <v-col cols="12" :md="(showIdentifier && !showIdentifierType) ? 4 : 6">
                     <v-text-field
                       :value="firstname"
                       :label="$t('Firstname')"
@@ -79,7 +79,7 @@
                       :error-messages="firstnameErrorMessages"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="6">
+                  <v-col cols="12" :md="(showIdentifier && !showIdentifierType) ? 4 : 6">
                     <v-text-field
                       :value="lastname"
                       :label="$t('Lastname')"
@@ -89,9 +89,32 @@
                     ></v-text-field>
                   </v-col>
                 </template>
+                <template v-if="showIdentifier && !showIdentifierType">
+                  <v-col cols="12" md="4">
+                    <v-text-field
+                      v-show="identifierType === 'orcid'"
+                      v-mask="'####-####-####-####'"
+                      :value="identifierText"
+                      :label="identifierLabel ? identifierLabel : $t('Identifier')"
+                      v-on:blur="$emit('input-identifier', $event.target.value)"
+                      :placeholder="identifierTypePlaceholder"
+                      :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                      filled
+                    ></v-text-field>
+                    <v-text-field
+                      v-show="identifierType !== 'orcid'"
+                      :value="identifierText"
+                      :label="identifierLabel ? identifierLabel : $t('Identifier')"
+                      v-on:blur="$emit('input-identifier', $event.target.value)"
+                      :placeholder="identifierTypePlaceholder"
+                      :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                      filled
+                    ></v-text-field>
+                  </v-col>
+                </template>
               </v-row>
-              <v-row v-if="showIdentifier">
-                <v-col cols="12" md="6" v-if="showIdentifierType">
+              <v-row v-if="showIdentifier && showIdentifierType">
+                <v-col cols="12" md="6">
                   <v-autocomplete
                     v-on:input="$emit('input-identifier-type', $event)"
                     :label="$t('Type of identifier')"
@@ -121,7 +144,7 @@
                     v-show="identifierType === 'orcid'"
                     v-mask="'####-####-####-####'"
                     :value="identifierText"
-                    :label="$t('Identifier')"
+                    :label="identifierLabel ? identifierLabel : $t('Identifier')"
                     v-on:blur="$emit('input-identifier', $event.target.value)"
                     :placeholder="identifierTypePlaceholder"
                     :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
@@ -130,7 +153,7 @@
                   <v-text-field
                     v-show="identifierType !== 'orcid'"
                     :value="identifierText"
-                    :label="$t('Identifier')"
+                    :label="identifierLabel ? identifierLabel : $t('Identifier')"
                     v-on:blur="$emit('input-identifier', $event.target.value)"
                     :placeholder="identifierTypePlaceholder"
                     :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
@@ -291,6 +314,9 @@ export default {
       type: String
     },
     identifierType: {
+      type: String
+    },
+    identifierLabel: {
       type: String
     },
     showIdentifier: {

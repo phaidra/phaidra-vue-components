@@ -41,7 +41,8 @@ export const validationrules = {
       return true
     },
     isValidORCID: function (str) {
-      return true
+      var regexORCID = /^0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX]$/
+      return regexORCID.test(str)
     },
     isValidGND: function (str) {
       return true

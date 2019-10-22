@@ -74,7 +74,7 @@ export default {
         case 'gnd':
           return 'https://d-nb.info/gnd/' + id.replace(prefix[0], '')
         case 'viaf':
-          return 'http://viaf.org/viaf/' + id.replace(prefix[0], '')
+          return 'https://viaf.org/viaf/' + id.replace(prefix[0], '')
         case 'wikidata':
           return 'https://wikidata.org/wiki/' + id.replace(prefix[0], '')
       }

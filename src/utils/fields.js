@@ -263,6 +263,7 @@ const fields = [
     organizationText: '',
     organizationType: 'select',
     identifierText: '',
+    identifierLabel: 'Identifier',
     showIdentifier: true,
     showIdentifierType: true,
     disableIdentifierType: false,
