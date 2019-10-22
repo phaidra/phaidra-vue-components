@@ -36,6 +36,7 @@ const fields = [
     predicate: 'edm:hasType',
     component: 'p-select',
     vocabulary: 'objecttype',
+    multiplicable: true,
     label: 'Object type',
     value: '',
     'skos:prefLabel': [],
