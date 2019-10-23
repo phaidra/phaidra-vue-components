@@ -929,17 +929,21 @@ export default {
         if (event['@type']) {
           f.type = event['@type']
         }
-        var preflabels = event['skos:prefLabel']
-        f['skos:prefLabel'] = []
-        Object.entries(preflabels).forEach(([key, value]) => {
-          f['skos:prefLabel'].push({ '@value': value, '@language': key })
-        })
-        var rdfslabels = event['rdfs:label']
-        if (rdfslabels) {
-          f['rdfs:label'] = []
-          Object.entries(rdfslabels).forEach(([key, value]) => {
-            f['rdfs:label'].push({ '@value': value, '@language': key })
+        if (event['skos:prefLabel']) {
+          let preflabels = event['skos:prefLabel']
+          f['skos:prefLabel'] = []
+          Object.entries(preflabels).forEach(([key, value]) => {
+            f['skos:prefLabel'].push({ '@value': value, '@language': key })
           })
+        }
+        if (event['rdfs:label']) {
+          let rdfslabels = event['rdfs:label']
+          if (rdfslabels) {
+            f['rdfs:label'] = []
+            Object.entries(rdfslabels).forEach(([key, value]) => {
+              f['rdfs:label'].push({ '@value': value, '@language': key })
+            })
+          }
         }
         f['skos:notation'] = event['skos:notation']
       } else {

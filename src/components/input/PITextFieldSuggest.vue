@@ -78,7 +78,6 @@
 import qs from 'qs'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
-import xmlUtils from '../../utils/xml'
 
 export default {
   name: 'p-i-text-field-suggest',

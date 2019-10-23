@@ -174,7 +174,7 @@
                   <v-autocomplete
                     :value="getTerm('orgunits', organization)"
                     :required="required"
-                    v-on:input="$emit('input-organization-select', $event )"
+                    v-on:input="handleInput($event, 'organizationPath', 'input-organization-select')"
                     :rules="required ? [ v => !!v || 'Required'] : []"
                     :items="vocabularies['orgunits'].terms"
                     :item-value="'@id'"
@@ -186,6 +186,7 @@
                     return-object
                     clearable
                     :disabled="disabled"
+                    :messages="organizationPath"
                     :error-messages="organizationErrorMessages"
                   >
                     <template slot="item" slot-scope="{ item }">
@@ -198,6 +199,9 @@
                       <v-list-item-content>
                         <v-list-item-title v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
                       </v-list-item-content>
+                    </template>
+                    <template v-slot:append-outer>
+                      <v-icon @click="$refs.organizationstreedialog.open()">mdi-file-tree</v-icon>
                     </template>
                   </v-autocomplete>
                 </v-col>
@@ -223,7 +227,7 @@
                 <v-autocomplete
                   :value="getTerm('orgunits', affiliation)"
                   :required="required"
-                  v-on:input="$emit('input-affiliation-select', $event)"
+                  v-on:input="handleInput($event, 'affiliationPath', 'input-affiliation-select')"
                   :rules="required ? [ v => !!v || 'Required'] : []"
                   :items="vocabularies['orgunits'].terms"
                   :item-value="'@id'"
@@ -235,6 +239,7 @@
                   return-object
                   clearable
                   :disabled="disabled"
+                  :messages="affiliationPath"
                   :error-messages="affiliationErrorMessages"
                 >
                   <template slot="item" slot-scope="{ item }">
@@ -247,6 +252,9 @@
                     <v-list-item-content>
                       <v-list-item-title v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
                     </v-list-item-content>
+                  </template>
+                  <template v-slot:append-outer>
+                    <v-icon @click="$refs.affiliationstreedialog.open()">mdi-file-tree</v-icon>
                   </template>
                 </v-autocomplete>
               </v-col>
@@ -264,6 +272,8 @@
         </v-card-text>
       </v-card>
     </v-col>
+    <org-units-tree-dialog ref="organizationstreedialog" @unit-selected="handleInput(getTerm('orgunits', $event), 'organizationPath', 'input-organization-select')"></org-units-tree-dialog>
+    <org-units-tree-dialog ref="affiliationstreedialog" @unit-selected="handleInput(getTerm('orgunits', $event), 'affiliationPath', 'input-affiliation-select')"></org-units-tree-dialog>
   </v-row>
 </template>
 
@@ -272,10 +282,14 @@ import { mask } from 'vue-the-mask'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 import { validationrules } from '../../mixins/validationrules'
+import OrgUnitsTreeDialog from '../select/OrgUnitsTreeDialog'
 
 export default {
   name: 'p-i-entity-extended',
   mixins: [vocabulary, fieldproperties, validationrules],
+  components: {
+    OrgUnitsTreeDialog
+  },
   directives: {
     mask
   },
@@ -423,13 +437,33 @@ export default {
       disabled: false,
       typeModel: this.type,
       affiliationRadio: this.affiliationType,
-      organizationRadio: this.organizationType
+      organizationRadio: this.organizationType,
+      affiliationPath: '',
+      organizationPath: ''
+    }
+  },
+  methods: {
+    getParentPath: function (unit, parentpath) {
+      if (unit['parent']) {
+        parentpath.push(unit.parent)
+        this.getParentPath(unit.parent, parentpath)
+      }
+    },
+    handleInput: function (unit, propName, eventName) {
+      this[propName] = ''
+      let parentpath = []
+      this.getParentPath(unit, parentpath)
+      for (let u of parentpath.reverse()) {
+        this[propName] = this[propName] + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+      }
+      this[propName] = this[propName] + unit['skos:prefLabel'][this.$i18n.locale]
+      this.$emit(eventName, unit)
     }
   },
   mounted: function () {
     this.$nextTick(function () {
       if (!this.vocabularies['orgunits'].loaded) {
-        this.$store.dispatch('loadOrgUnits')
+        this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
       }
       this.loading = !this.vocabularies[this.roleVocabulary].loaded
       // emit input to set skos:prefLabel in parent
@@ -437,10 +471,10 @@ export default {
         this.$emit('input', this.getTerm(this.roleVocabulary, this.role))
       }
       if (this.organization) {
-        this.$emit('input-organization-select', this.getTerm('orgunits', this.organization))
+        this.handleInput(this.getTerm('orgunits', this.organization), 'organizationPath', 'input-organization-select')
       }
       if (this.affiliation) {
-        this.$emit('input-affiliation-select', this.getTerm('orgunits', this.affiliation))
+        this.handleInput(this.getTerm('orgunits', this.affiliation), 'affiliationPath', 'input-affiliation-select')
       }
     })
   }

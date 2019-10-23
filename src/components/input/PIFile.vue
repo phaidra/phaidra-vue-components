@@ -89,7 +89,7 @@ export default {
     }
   },
   methods: {
-    fileInput(file) {
+    fileInput (file) {
       this.$emit('input-file', file)
       if (this.autoMimetype) {
         if (file.name) {

@@ -1,4 +1,5 @@
 import languages from '../../utils/lang'
+import orgunits from '../../utils/orgunits'
 
 const state = {
   vocabularies: {
@@ -798,6 +799,11 @@ const state = {
 }
 
 const mutations = {
+  sortOrgUnits (state, locale) {
+    state.vocabularies['orgunits']['terms'].sort(function (a, b) {
+      return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+    })
+  },
   setLangTerms (state, data) {
     if (state.vocabularies['lang']['loaded'] === false) {
       state.vocabularies['lang']['terms'] = data
@@ -834,9 +840,9 @@ const actions = {
   loadLanguages ({ commit }) {
     commit('setLangTerms', languages.get_lang())
   },
-  async loadOrgUnits ({ commit, rootState }) {
+  async loadOrgUnits ({ commit, rootState }, locale) {
     try {
-      let response = await fetch(rootState.instanceconfig.api + '/directory/org_get_units?flat=1', {
+      let response = await fetch(rootState.instanceconfig.api + '/directory/org_get_units', {
         method: 'GET',
         mode: 'cors'
       })
@@ -844,7 +850,10 @@ const actions = {
       if (json.alerts && json.alerts.length > 0) {
         commit('setAlerts', json.alerts)
       }
-      commit('setOrgUnitsTerms', json.units)
+      let terms = []
+      orgunits.getOrgUnitsTerms(terms, json.units, null)
+      commit('setOrgUnitsTerms', terms)
+      commit('sortOrgUnits', locale)
     } catch (error) {
       commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch org units: ' + error } ])
     }
