@@ -851,9 +851,10 @@ export default {
       }
     },
     affiliationSelectInput: function (f, event) {
+      f.affiliation = ''
+      f.affiliationSelectedName = []
       if (event) {
         f.affiliation = event['@id']
-        f.affiliationSelectedName = []
         var preflabels = event['skos:prefLabel']
         Object.entries(preflabels).forEach(([key, value]) => {
           f.affiliationSelectedName.push({ '@value': value, '@language': key })
@@ -861,9 +862,10 @@ export default {
       }
     },
     publisherSelectInput: function (f, event) {
+      f.publisherOrgUnit = ''
+      f.publisherSelectedName = []
       if (event) {
         f.publisherOrgUnit = event['@id']
-        f.publisherSelectedName = []
         var preflabels = event['skos:prefLabel']
         Object.entries(preflabels).forEach(([key, value]) => {
           f.publisherSelectedName.push({ '@value': value, '@language': key })
@@ -876,9 +878,10 @@ export default {
       }
     },
     organizationSelectInput: function (f, event) {
+      f.organization = ''
+      f.organizationSelectedName = []
       if (event) {
         f.organization = event['@id']
-        f.organizationSelectedName = []
         var preflabels = event['skos:prefLabel']
         Object.entries(preflabels).forEach(([key, value]) => {
           f.organizationSelectedName.push({ '@value': value, '@language': key })

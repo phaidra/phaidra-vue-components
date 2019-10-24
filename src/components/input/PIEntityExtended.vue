@@ -444,19 +444,23 @@ export default {
   },
   methods: {
     getParentPath: function (unit, parentpath) {
-      if (unit['parent']) {
-        parentpath.push(unit.parent)
-        this.getParentPath(unit.parent, parentpath)
+      if (unit) {
+        if (unit['parent']) {
+          parentpath.push(unit.parent)
+          this.getParentPath(unit.parent, parentpath)
+        }
       }
     },
     handleInput: function (unit, propName, eventName) {
       this[propName] = ''
       let parentpath = []
-      this.getParentPath(unit, parentpath)
-      for (let u of parentpath.reverse()) {
-        this[propName] = this[propName] + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+      if (unit) {
+        this.getParentPath(unit, parentpath)
+        for (let u of parentpath.reverse()) {
+          this[propName] = this[propName] + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+        }
+        this[propName] = this[propName] + unit['skos:prefLabel'][this.$i18n.locale]
       }
-      this[propName] = this[propName] + unit['skos:prefLabel'][this.$i18n.locale]
       this.$emit(eventName, unit)
     }
   },
