@@ -432,6 +432,43 @@ const state = {
       ],
       loaded: true
     },
+    'alllicenses': {
+      terms: [
+        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': { 'eng': '© All rights reserved' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': { 'eng': 'CC BY 4.0 International' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC 4.0 International' }, 'img': 'cc-by-nc.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 4.0 International' }, 'img': 'cc-by-nc-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 4.0 International' }, 'img': 'cc-by-nc-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-ND 4.0 International' }, 'img': 'cc-by-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-SA 4.0 International' }, 'img': 'cc-by-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by/3.0/', 'skos:prefLabel': { 'eng': 'CC BY 3.0 Unported' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/3.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC 3.0 Unported' }, 'img': 'cc-by-nc.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/3.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 3.0 Unported' }, 'img': 'cc-by-nc-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/3.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 3.0 Unported' }, 'img': 'cc-by-nc-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/3.0/', 'skos:prefLabel': { 'eng': 'CC BY-ND 3.0 Unported' }, 'img': 'cc-by-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/3.0/', 'skos:prefLabel': { 'eng': 'CC BY-SA 3.0 Unported' }, 'img': 'cc-by-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by/3.0/at/', 'skos:prefLabel': { 'eng': 'CC BY 3.0 Austria' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/3.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC 3.0 Austria' }, 'img': 'cc-by-nc.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/3.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 3.0 Austria' }, 'img': 'cc-by-nc-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/3.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 3.0 Austria' }, 'img': 'cc-by-nc-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/3.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-ND 3.0 Austria' }, 'img': 'cc-by-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/3.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-SA 3.0 Austria' }, 'img': 'cc-by-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by/2.0/', 'skos:prefLabel': { 'eng': 'CC BY 2.0 Generic' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/2.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC 2.0 Generic' }, 'img': 'cc-by-nc.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/2.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 2.0 Generic' }, 'img': 'cc-by-nc-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/2.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 2.0 Generic' }, 'img': 'cc-by-nc-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/2.0/', 'skos:prefLabel': { 'eng': 'CC BY-ND 2.0 Generic' }, 'img': 'cc-by-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/2.0/', 'skos:prefLabel': { 'eng': 'CC BY-SA 2.0 Generic' }, 'img': 'cc-by-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY 2.0 Austria' }, 'img': 'cc-by.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC 2.0 Austria' }, 'img': 'cc-by-nc.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-nd/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 2.0 Austria' }, 'img': 'cc-by-nc-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nc-sa/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 2.0 Austria' }, 'img': 'cc-by-nc-sa.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-nd/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-ND 2.0 Austria' }, 'img': 'cc-by-nd.png' },
+        { '@id': 'http://creativecommons.org/licenses/by-sa/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-SA 2.0 Austria' }, 'img': 'cc-by-sa.png' },
+
+      ],
+      loaded: true
+    },
     'uncefact': {
       terms: [
         { '@id': 'MTR', 'skos:prefLabel': { 'eng': 'm' } },

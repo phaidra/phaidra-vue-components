@@ -305,6 +305,7 @@ export default {
             // edm:rights
             case 'edm:rights':
               f = fields.getField('license')
+              f.vocabulary = 'alllicenses'
               f.value = value[i]
               components.push(f)
               break
