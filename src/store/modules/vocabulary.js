@@ -679,7 +679,7 @@ const state = {
     'irfunders': {
       terms: [
         { '@id': 'https://pid.phaidra.org/vocabulary/N3C4-ZVR0', 'skos:prefLabel': { 'eng': 'Austrian Science Fund (FWF)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EYN2-KEW2', 'skos:prefLabel': { 'eng': 'Bundesministerium für Wissenschaft und Forschung (BMWF)' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/EYN2-KEW2', 'skos:prefLabel': { 'eng': 'Bundesministerium für Bildung, Wissenschaft und Forschung (BMBWF)' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/74ZM-RFR6', 'skos:prefLabel': { 'eng': 'European Science Foundation (ESF)' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/RDY6-W6C3', 'skos:prefLabel': { 'eng': 'European Union (all programmes)' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/APPY-SKP2', 'skos:prefLabel': { 'eng': 'Jubiläumsfonds der Österreichischen Nationalbank' } },
@@ -830,6 +830,7 @@ const state = {
     },
     'orgunits': {
       terms: [],
+      tree: [],
       loaded: false
     }
   }
@@ -841,16 +842,17 @@ const mutations = {
       return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
     })
   },
+  setOrgUnits (state, data) {
+    if (state.vocabularies['orgunits']['loaded'] === false) {
+      state.vocabularies['orgunits']['tree'] = data.tree
+      state.vocabularies['orgunits']['terms'] = data.terms
+      state.vocabularies['orgunits']['loaded'] = true
+    }
+  },
   setLangTerms (state, data) {
     if (state.vocabularies['lang']['loaded'] === false) {
       state.vocabularies['lang']['terms'] = data
       state.vocabularies['lang']['loaded'] = true
-    }
-  },
-  setOrgUnitsTerms (state, data) {
-    if (state.vocabularies['orgunits']['loaded'] === false) {
-      state.vocabularies['orgunits']['terms'] = data
-      state.vocabularies['orgunits']['loaded'] = true
     }
   },
   disableVocabularyTerms (state, vocandterms) {
@@ -889,7 +891,7 @@ const actions = {
       }
       let terms = []
       orgunits.getOrgUnitsTerms(terms, json.units, null)
-      commit('setOrgUnitsTerms', terms)
+      commit('setOrgUnits', { tree: json.units, terms: terms })
       commit('sortOrgUnits', locale)
     } catch (error) {
       commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch org units: ' + error } ])

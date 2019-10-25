@@ -286,7 +286,7 @@ import OrgUnitsTreeDialog from '../select/OrgUnitsTreeDialog'
 
 export default {
   name: 'p-i-entity-extended',
-  mixins: [vocabulary, fieldproperties, validationrules],
+  mixins: [ vocabulary, fieldproperties, validationrules ],
   components: {
     OrgUnitsTreeDialog
   },
