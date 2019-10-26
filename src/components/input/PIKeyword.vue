@@ -137,6 +137,9 @@ export default {
   watch: {
     search (val) {
       val && this.querySuggestionsDebounce(val)
+    },
+    value (val) {
+      this.model = this.value ? this.value.split(',') : this.value
     }
   },
   methods: {

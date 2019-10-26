@@ -464,8 +464,7 @@ const state = {
         { '@id': 'http://creativecommons.org/licenses/by-nc-nd/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 2.0 Austria' }, 'img': 'cc-by-nc-nd.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc-sa/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 2.0 Austria' }, 'img': 'cc-by-nc-sa.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nd/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-ND 2.0 Austria' }, 'img': 'cc-by-nd.png' },
-        { '@id': 'http://creativecommons.org/licenses/by-sa/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-SA 2.0 Austria' }, 'img': 'cc-by-sa.png' },
-
+        { '@id': 'http://creativecommons.org/licenses/by-sa/2.0/at/', 'skos:prefLabel': { 'eng': 'CC BY-SA 2.0 Austria' }, 'img': 'cc-by-sa.png' }
       ],
       loaded: true
     },
