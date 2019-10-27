@@ -44,7 +44,12 @@
         </template>
 
         <template v-else-if="p.startsWith('role:')" slot="role">
-          <p-d-entity :role="p" :entity="e" v-for="(e, j) in o" :key="componentid+'entity'+p+j" ></p-d-entity>
+          <p-d-entity :role="p" :entity="e" v-for="(e, j) in getEntities(p, o)" :key="componentid+'entity'+p+j" ></p-d-entity>
+          <v-row v-if="entitiesLimited[p] && !showAllEntities[p]">
+            <v-col md="10" offset-md="2">
+              <span class="mx-2 primary--text" @click="setShowAllEntities(p)">... {{ $t('show all') }}</span>
+            </v-col>
+          </v-row>
         </template>
 
         <template v-else-if="p==='bf:note'" slot="bf:note">
@@ -313,6 +318,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import PDLicense from './PDLicense'
 import PDTitle from './PDTitle'
 import PDSkosPreflabel from './PDSkosPreflabel'
@@ -342,6 +348,10 @@ export default {
     jsonld: {
       type: Object,
       default: null
+    },
+    limitRoles: {
+      type: Number,
+      default: 0
     },
     pid: String
   },
@@ -373,6 +383,35 @@ export default {
     },
     componentid: function () {
       return Math.floor(Math.random() * 10000000)
+    }
+  },
+  data () {
+    return {
+      nrRoles: 0,
+      showAllEntities: {},
+      entitiesLimited: {}
+    }
+  },
+  methods: {
+    getEntities: function (p, o) {
+      if ((this.limitRoles === 0) || this.showAllEntities[p]) {
+        return o
+      }
+      let entities = []
+      let i = 0
+      for (let e of o) {
+        i++
+        if (i <= this.limitRoles) {
+          entities.push(e)  
+        } else {
+          this.entitiesLimited[p] = true
+          break
+        }
+      }
+      return entities
+    },
+    setShowAllEntities: function (p) {
+      Vue.set(this.showAllEntities, p, true)
     }
   },
   mounted: function () {
