@@ -44,6 +44,7 @@
     <slot name="vra:placeOfRepository"></slot>
     <slot name="vra:placeOfSite"></slot>
 
+    <slot name="rdau:P60550"></slot>
     <slot name="schema:numberOfPages"></slot>
     <slot name="bf:soundCharacteristic"></slot>
     <slot name="bf:supplementaryContent"></slot>

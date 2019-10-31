@@ -551,6 +551,17 @@ const fields = [
     definition: 'Use for identification number assigned to a particular donation or acquisition.'
   },
   {
+    id: 'extent',
+    fieldname: 'Extent',
+    predicate: 'rdau:P60550',
+    component: 'p-text-field',
+    label: 'Extent',
+    multilingual: true,
+    value: '',
+    language: '',
+    definition: 'Use to represent the extent of a resource.'
+  },
+  {
     id: 'number-of-pages',
     fieldname: 'Number of pages',
     predicate: 'schema:numberOfPages',
@@ -963,6 +974,7 @@ const predicateOrder = [
   'vra:placeOfSite',
   'spatial',
 
+  'rdau:P60550',
   'schema:numberOfPages',
   'bf:soundCharacteristic',
   'bf:supplementaryContent',

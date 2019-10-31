@@ -167,6 +167,10 @@
           <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'physloc'+j" ></p-d-lang-value>
         </template>
 
+        <template v-else-if="p==='rdau:P60550'" slot="rdau:P60550">
+          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'extent'+j" ></p-d-lang-value>
+        </template>
+
         <template v-else-if="p==='bf:shelfMark'" slot="bf:shelfMark">
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'callnr'+j" ></p-d-value>
         </template>

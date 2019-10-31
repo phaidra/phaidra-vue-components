@@ -623,6 +623,14 @@ export default {
               components.push(f)
               break
 
+            // rdau:P60550
+            case 'rdau:P60550':
+              f = fields.getField('extent')
+              f.value = value[i]['@value']
+              f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'
+              components.push(f)
+              break
+
             // vra:hasInscription
             case 'vra:hasInscription':
               if (value[i]['@type'] === 'vra:Inscription') {
@@ -1641,6 +1649,8 @@ export default {
 
         case 'dce:rights':
         case 'dcterms:temporal':
+        case 'rdau:P60550':
+        case 'bf:physicalLocation':
           if (f.value) {
             this.push_value(jsonld, f.predicate, this.get_json_valueobject(f.value, f.language))
           }
@@ -1714,12 +1724,6 @@ export default {
         case 'bf:shelfMark':
           if (f.value) {
             this.push_literal(jsonld, f.predicate, f.value)
-          }
-          break
-
-        case 'bf:physicalLocation':
-          if (f.value) {
-            this.push_value(jsonld, f.predicate, this.get_json_valueobject(f.value, f.language))
           }
           break
 
