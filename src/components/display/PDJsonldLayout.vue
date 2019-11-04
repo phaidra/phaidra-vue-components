@@ -73,7 +73,7 @@
 
     <slot name="dcterms:type"></slot>
     <slot name="pid"></slot>
-    <slot name="datacite:hasIdentifier"></slot>
+    <slot name="rdam:P30004"></slot>
 
     <slot name="oaire:version"></slot>
     <slot name="dcterms:accessRights"></slot>

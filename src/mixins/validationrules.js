@@ -31,6 +31,26 @@ function stripPunctuation (doi) {
 
 export const validationrules = {
   methods: {
+    getIdentifierRuleName: function (type) {
+      switch (type) {
+        case 'ids:doi':
+          return 'doi'
+        case 'ids:hdl':
+          return 'hdl'
+        case 'ids:urn':
+          return 'urn'
+        case 'ids:gnd':
+          return 'gnd'
+        case 'ids:orcid':
+          return 'orcid'
+        case 'ids:viaf':
+          return 'viaf'
+        case 'ids:wikidata':
+          return 'wikidata'
+        case 'phaidra:acnumber':
+          return 'acnumber'
+      }
+    },
     isValidHandle: function (str) {
       return true
     },
@@ -117,7 +137,7 @@ export const validationrules = {
         doi: value => {
           return typeof value === 'undefined' || value === '' || this.isValidDOI(value) || 'Invalid DOI'
         },
-        handle: value => {
+        hdl: value => {
           return typeof value === 'undefined' || value === '' || this.isValidHandle(value) || 'Invalid Handle identifier'
         },
         urn: value => {

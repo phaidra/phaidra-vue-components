@@ -11,7 +11,7 @@
 
     <template v-for="(o, p) in jsonld">
 
-        <template v-if="p==='datacite:hasIdentifier'" slot="datacite:hasIdentifier">
+        <template v-if="p==='rdam:P30004'" slot="rdam:P30004">
           <p-d-identifier :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'hasid'+j" ></p-d-identifier>
         </template>
 

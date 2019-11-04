@@ -6,7 +6,7 @@
         :label="$t('Type of identifier')"
         :items="vocabularies[vocabulary].terms"
         :item-value="'@id'"
-        :value="getTerm(vocabulary, identifierType)"
+        :value="getTerm(vocabulary, type)"
         :filter="autocompleteFilter"
         :disabled="disabletype"
         filled
@@ -31,9 +31,9 @@
         :value="value"
         v-on:input="$emit('input-identifier', $event)"
         :label="$t(identifierLabel ? identifierLabel : 'Identifier')"
-        :placeholder="placeholder(identifierType)"
+        :placeholder="placeholder(type)"
         :required="required"
-        :rules="[validationrules[identifierType]]"
+        :rules="[validationrules[getIdentifierRuleName(type)]]"
         filled
       ></v-text-field>
     </v-col>
@@ -67,7 +67,7 @@ export default {
       type: String,
       required: true
     },
-    identifierType: {
+    type: {
       type: String
     },
     identifierLabel: {

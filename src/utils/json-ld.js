@@ -12,16 +12,11 @@ export default {
           var f
 
           switch (key) {
-            // datacite:hasIdentifier
-            case 'datacite:hasIdentifier':
+            // rdam:P30004
+            case 'rdam:P30004':
               f = fields.getField('alternate-identifier')
-              let val = value[i]['@value']
-              let prefix = val.match(/^(\w+):/)
-              if (prefix[1] !== 'urn') {
-                val = val.replace(prefix[0], '')
-              }
-              f.identifierType = prefix[1]
-              f.value = val
+              f.type = value[i]['@type']
+              f.value = value[i]['@value']
               components.push(f)
               break
 
@@ -834,13 +829,8 @@ export default {
                   }
                   if (role['skos:exactMatch']) {
                     for (let id of role['skos:exactMatch']) {
-                      let val = id
-                      let prefix = val.match(/^(\w+):/)
-                      if (prefix[1] !== 'urn') {
-                        val = val.replace(prefix[0], '')
-                      }
-                      f.identifierType = prefix[1]
-                      f.identifierText = val
+                      f.identifierType = id['@type']
+                      f.identifierText = id['@value']
                     }
                   }
                   if (role['schema:affiliation']) {
@@ -1168,7 +1158,12 @@ export default {
         ]
       }
       if (f.identifierText) {
-        h['skos:exactMatch'] = [ this.prefix_identifier(f.identifierType, f.identifierText) ]
+        h['skos:exactMatch'] = [ 
+          {
+            '@type': f.identifierType,
+            '@value': f.identifierText
+          } 
+        ]
       }
       if (f.affiliation || f.affiliationText) {
         let a = {
@@ -1430,39 +1425,10 @@ export default {
     }
     return h
   },
-  prefix_identifier (type, value) {
-    switch (type) {
-      case 'doi':
-        value = 'doi:' + value
-        break
-      case 'handle':
-        value = 'handle:' + value
-        break
-      case 'acnumber':
-        value = 'acnumber:' + value
-        break
-      case 'urn':
-        // noop
-        break
-      case 'orcid':
-        value = 'orcid:' + value
-        break
-      case 'gnd':
-        value = 'gnd:' + value
-        break
-      case 'viaf':
-        value = 'viaf:' + value
-        break
-      case 'wikidata':
-        value = 'wikidata:' + value
-        break
-    }
-    return value
-  },
-  get_json_identifier (type, identifierType, value) {
+  get_json_identifier (type, value) {
     return {
       '@type': type,
-      '@value': this.prefix_identifier(identifierType, value)
+      '@value': value
     }
   },
   validate_object (object) {
@@ -1573,9 +1539,9 @@ export default {
       var f = formData.fields[j]
 
       switch (f.predicate) {
-        case 'datacite:hasIdentifier':
+        case 'rdam:P30004':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_identifier(f.type, f.identifierType, f.value))
+            this.push_object(jsonld, f.predicate, this.get_json_identifier(f.type, f.value))
           }
           break
 

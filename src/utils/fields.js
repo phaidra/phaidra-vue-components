@@ -4,16 +4,15 @@ const fields = [
   {
     id: 'alternate-identifier',
     fieldname: 'Alternate identifier',
-    predicate: 'datacite:hasIdentifier',
+    predicate: 'rdam:P30004',
     component: 'p-alternate-identifier',
-    type: 'datacite:AlternateResourceIdentifier',
-    identifierType: 'doi',
+    type: 'ids:doi',
     showType: true,
     disableType: false,
     multiplicable: false,
     identifierLabel: 'Identifier',
     value: '',
-    definition: 'An alternative identifier (other than Phaidra persistent identifier) that uniquely identifies the resource.'
+    definition: 'An alternative identifier (other than Phaidra persistent identifier) that uniquely identifies the resource. Relates a manifestation to an appellation of manifestation that consists of a code, number, or other string, usually independent of natural language and social naming conventions, used to identify a manifestation.'
   },
   {
     id: 'resource-type',
@@ -936,7 +935,7 @@ const fields = [
 ]
 
 const predicateOrder = [
-  'datacite:hasIdentifier',
+  'rdam:P30004',
 
   'dcterms:type',
   'edm:hasType',

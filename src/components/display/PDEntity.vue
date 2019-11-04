@@ -58,25 +58,26 @@ export default {
     getLocalizedTermLabel: function (role) {
       return this.$store.getters.getLocalizedTermLabel('rolepredicate', role, this.$i18n.locale)
     },
-    getResolverURL: function (id) {
-      let prefix = id.match(/^(\w+):/)
-      switch (prefix[1]) {
-        case 'doi':
-          return 'https://doi.org/' + id.replace(prefix[0], '')
-        case 'handle':
-          return 'https://hdl.handle.net/' + id.replace(prefix[0], '')
-        case 'acnumber':
-          return 'https://ubdata.univie.ac.at/' + id.replace(prefix[0], '')
-        case 'urn':
-          return 'https://resolver.obvsg.at/resolver?identifier=' + id
-        case 'orcid':
-          return 'https://orcid.org/' + id.replace(prefix[0], '')
-        case 'gnd':
-          return 'https://d-nb.info/gnd/' + id.replace(prefix[0], '')
-        case 'viaf':
-          return 'https://viaf.org/viaf/' + id.replace(prefix[0], '')
-        case 'wikidata':
-          return 'https://wikidata.org/wiki/' + id.replace(prefix[0], '')
+    getResolverURL: function (exactMatch) {
+      let type = exactMatch['@type']
+      let value = exactMatch['@value']
+      switch (type) {
+        case 'ids:doi':
+          return 'https://doi.org/' + value
+        case 'ids:handle':
+          return 'https://hdl.handle.net/' + value
+        case 'phaidra:acnumber':
+          return 'https://ubdata.univie.ac.at/' + value
+        case 'ids:urn':
+          return 'https://resolver.obvsg.at/resolver?identifier=' + value
+        case 'ids:orcid':
+          return 'https://orcid.org/' + value
+        case 'ids:gnd':
+          return 'https://d-nb.info/gnd/' + value
+        case 'ids:viaf':
+          return 'https://viaf.org/viaf/' + value
+        case 'ids:wikidata':
+          return 'https://wikidata.org/wiki/' + value
       }
     }
   }

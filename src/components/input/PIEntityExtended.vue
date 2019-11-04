@@ -92,22 +92,22 @@
                 <template v-if="showIdentifier && !showIdentifierType">
                   <v-col cols="12" md="4">
                     <v-text-field
-                      v-show="identifierType === 'orcid'"
+                      v-show="identifierType === 'ids:orcid'"
                       v-mask="'####-####-####-####'"
                       :value="identifierText"
                       :label="identifierLabel ? identifierLabel : $t('Identifier')"
                       v-on:blur="$emit('input-identifier', $event.target.value)"
                       :placeholder="identifierTypePlaceholder"
-                      :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                      :rules="identifierType ? [validationrules['orcid']] : [validationrules['noop']]"
                       filled
                     ></v-text-field>
                     <v-text-field
-                      v-show="identifierType !== 'orcid'"
+                      v-show="identifierType !== 'ids:orcid'"
                       :value="identifierText"
                       :label="identifierLabel ? identifierLabel : $t('Identifier')"
                       v-on:blur="$emit('input-identifier', $event.target.value)"
                       :placeholder="identifierTypePlaceholder"
-                      :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                      :rules="identifierType ? [validationrules[getIdentifierRuleName(identifierType)]] : [validationrules['noop']]"
                       filled
                     ></v-text-field>
                   </v-col>
@@ -141,22 +141,22 @@
                 </v-col>
                 <v-col cols="12" md="6" >
                   <v-text-field
-                    v-show="identifierType === 'orcid'"
+                    v-show="identifierType === 'ids:orcid'"
                     v-mask="'####-####-####-####'"
                     :value="identifierText"
                     :label="identifierLabel ? identifierLabel : $t('Identifier')"
                     v-on:blur="$emit('input-identifier', $event.target.value)"
                     :placeholder="identifierTypePlaceholder"
-                    :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                    :rules="identifierType ? [validationrules['orcid']] : [validationrules['noop']]"
                     filled
                   ></v-text-field>
                   <v-text-field
-                    v-show="identifierType !== 'orcid'"
+                    v-show="identifierType !== 'ids:orcid'"
                     :value="identifierText"
                     :label="identifierLabel ? identifierLabel : $t('Identifier')"
                     v-on:blur="$emit('input-identifier', $event.target.value)"
                     :placeholder="identifierTypePlaceholder"
-                    :rules="identifierType ? [validationrules[identifierType]] : [validationrules['noop']]"
+                    :rules="identifierType ? [validationrules[getIdentifierRuleName(identifierType)]] : [validationrules['noop']]"
                     filled
                   ></v-text-field>
                 </v-col>
@@ -381,10 +381,6 @@ export default {
     },
     organizationTextErrorMessages: {
       type: Array
-    },
-    showidentifier: {
-      type: Boolean,
-      default: true
     },
     showname: {
       type: Boolean,
