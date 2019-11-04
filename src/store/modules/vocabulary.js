@@ -472,7 +472,24 @@ const state = {
       terms: [
         { '@id': 'MTR', 'skos:prefLabel': { 'eng': 'm' } },
         { '@id': 'CMT', 'skos:prefLabel': { 'eng': 'cm' } },
+        { '@id': 'MMT', 'skos:prefLabel': { 'eng': 'mm' } },
+        { '@id': 'GRM', 'skos:prefLabel': { 'eng': 'g' } },
+        { '@id': 'KGM', 'skos:prefLabel': { 'eng': 'kg' } },
+      ],
+      loaded: true
+    },
+    'uncefactsize': {
+      terms: [
+        { '@id': 'MTR', 'skos:prefLabel': { 'eng': 'm' } },
+        { '@id': 'CMT', 'skos:prefLabel': { 'eng': 'cm' } },
         { '@id': 'MMT', 'skos:prefLabel': { 'eng': 'mm' } }
+      ],
+      loaded: true
+    },
+    'uncefactweight': {
+      terms: [
+        { '@id': 'GRM', 'skos:prefLabel': { 'eng': 'g' } },
+        { '@id': 'KGM', 'skos:prefLabel': { 'eng': 'kg' } }
       ],
       loaded: true
     },

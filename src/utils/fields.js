@@ -734,6 +734,7 @@ const fields = [
     component: 'p-dimension',
     label: 'Height',
     unit: 'CMT',
+    vocabulary: 'uncefactsize',
     value: '',
     definition: 'The height of the item.'
   },
@@ -744,6 +745,7 @@ const fields = [
     component: 'p-dimension',
     label: 'Width',
     unit: 'CMT',
+    vocabulary: 'uncefactsize',
     value: '',
     definition: 'The width of the item.'
   },
@@ -754,6 +756,7 @@ const fields = [
     component: 'p-dimension',
     label: 'Depth',
     unit: 'CMT',
+    vocabulary: 'uncefactsize',
     value: '',
     definition: 'The depth of the item.'
   },
@@ -764,6 +767,7 @@ const fields = [
     component: 'p-dimension',
     label: 'Weight',
     unit: 'KGM',
+    vocabulary: 'uncefactweight',
     value: '',
     definition: 'The weight of the item.'
   },

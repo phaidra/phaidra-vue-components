@@ -12,20 +12,20 @@
       <v-select
         v-on:blur="$emit('input-unit',$event.target.value)"
         :label="$t('Unit')"
-        :items="vocabularies['uncefact'].terms"
+        :items="vocabularies[vocabulary].terms"
         :item-value="'@id'"
-        :value="getTerm('uncefact', unit)"
+        :value="getTerm(vocabulary, unit)"
        filled
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
-            <v-list-item-title  v-html="`${getLocalizedTermLabel('uncefact', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel(vocabulary, item['@id'])}`"></v-list-item-title>
             <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-item-content>
-            <v-list-item-title v-html="`${getLocalizedTermLabel('uncefact', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title v-html="`${getLocalizedTermLabel(vocabulary, item['@id'])}`"></v-list-item-title>
           </v-list-item-content>
         </template>
       </v-select>
@@ -57,6 +57,10 @@ export default {
   props: {
     unit: {
       type: String
+    },
+    vocabulary: {
+      type: String,
+      default: 'uncefact'
     },
     value: {
       type: String
