@@ -12,6 +12,7 @@ import PDLangValue from './display/PDLangValue.vue'
 import PDLicense from './display/PDLicense.vue'
 import PDProject from './display/PDProject.vue'
 import PDSeries from './display/PDSeries.vue'
+import PDContainedIn from './display/PDContainedIn.vue'
 import PDBfPublication from './display/PDBfPublication.vue'
 import PDCitation from './display/PDCitation.vue'
 import PDAdaptation from './display/PDAdaptation.vue'
@@ -32,6 +33,7 @@ import PIForm from './input/PIForm.vue'
 import PIFunder from './input/PIFunder.vue'
 import PIAssociation from './input/PIAssociation.vue'
 import PISeries from './input/PISeries.vue'
+import PIContainedIn from './input/PIContainedIn.vue'
 import PIBfPublication from './input/PIBfPublication.vue'
 import PICitation from './input/PICitation.vue'
 import PIAdaptation from './input/PIAdaptation.vue'
@@ -74,6 +76,7 @@ const Components = {
   PDLangValue,
   PDLicense,
   PDSeries,
+  PDContainedIn,
   PDBfPublication,
   PDCitation,
   PDAdaptation,
@@ -95,6 +98,7 @@ const Components = {
   PIFunder,
   PIAssociation,
   PISeries,
+  PIContainedIn,
   PIBfPublication,
   PICitation,
   PIAdaptation,

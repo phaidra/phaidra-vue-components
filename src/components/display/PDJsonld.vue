@@ -45,7 +45,7 @@
 
         <template v-else-if="p.startsWith('role:')" slot="role">
           <p-d-entity :role="p" :entity="e" v-for="(e, j) in getEntities(p, o)" :key="componentid+'entity'+p+j" ></p-d-entity>
-          <v-row v-if="entitiesLimited[p] && !showAllEntities[p]">
+          <v-row v-if="entitiesLimited[p] && !showAllEntities[p]" :key="componentid+'entitymore'+p+j">
             <v-col md="10" offset-md="2">
               <span class="mx-2 primary--text" @click="setShowAllEntities(p)">... {{ $t('show all') }}</span>
             </v-col>
@@ -125,7 +125,7 @@
         </template>
 
         <template v-else-if="p==='rdau:P60101'" slot="rdau:P60101">
-          <p-d-series class="my-4" :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'seriesbook'+j" ></p-d-series>
+          <p-d-contained-in class="my-4" :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'contained-in'+j" ></p-d-contained-in>
         </template>
 
         <template v-else-if="p==='bf:provisionActivity'" slot="bf:provisionActivity">
@@ -339,6 +339,7 @@ import PDProject from './PDProject'
 import PDBfPublication from './PDBfPublication'
 import PDStudyPlan from './PDStudyPlan'
 import PDSeries from './PDSeries'
+import PDContainedIn from './PDContainedIn'
 import PDAdaptation from './PDAdaptation'
 import PDCitation from './PDCitation'
 import PDJsonldLayout from './PDJsonldLayout'
@@ -377,6 +378,7 @@ export default {
     PDBfPublication,
     PDStudyPlan,
     PDSeries,
+    PDContainedIn,
     PDAdaptation,
     PDCitation,
     PIUnknownReadonly
@@ -406,7 +408,7 @@ export default {
       for (let e of o) {
         i++
         if (i <= this.limitRoles) {
-          entities.push(e)  
+          entities.push(e)
         } else {
           this.entitiesLimited[p] = true
           break

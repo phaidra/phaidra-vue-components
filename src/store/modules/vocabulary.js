@@ -41,6 +41,7 @@ const state = {
         { '@id': 'ids:doi', 'skos:prefLabel': { 'eng': 'DOI' }, 'skos:example': '10.25365/phaidra.39' },
         { '@id': 'ids:hdl', 'skos:prefLabel': { 'eng': 'Handle' }, 'skos:example': '11353/10.761200' },
         { '@id': 'ids:urn', 'skos:prefLabel': { 'eng': 'URN' }, 'skos:example': 'urn:nbn:at:at-ubw-21405.98566.193074-2' },
+        { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI' }, 'skos:example': 'https://example.com/path/resource.txt' },
         { '@id': 'phaidra:acnumber', 'skos:prefLabel': { 'eng': 'AC number' }, 'skos:example': 'AC13399179' }
       ],
       loaded: true
@@ -49,7 +50,8 @@ const state = {
       terms: [
         { '@id': 'ids:doi', 'skos:prefLabel': { 'eng': 'DOI' }, 'skos:example': '10.25365/phaidra.39' },
         { '@id': 'ids:hdl', 'skos:prefLabel': { 'eng': 'Handle' }, 'skos:example': '11353/10.761200' },
-        { '@id': 'ids:urn', 'skos:prefLabel': { 'eng': 'URN' }, 'skos:example': 'urn:nbn:at:at-ubw-21405.98566.193074-2' }
+        { '@id': 'ids:urn', 'skos:prefLabel': { 'eng': 'URN' }, 'skos:example': 'urn:nbn:at:at-ubw-21405.98566.193074-2' },
+        { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI' }, 'skos:example': 'https://example.com/path/resource.txt' }
       ],
       loaded: true
     },
@@ -474,7 +476,7 @@ const state = {
         { '@id': 'CMT', 'skos:prefLabel': { 'eng': 'cm' } },
         { '@id': 'MMT', 'skos:prefLabel': { 'eng': 'mm' } },
         { '@id': 'GRM', 'skos:prefLabel': { 'eng': 'g' } },
-        { '@id': 'KGM', 'skos:prefLabel': { 'eng': 'kg' } },
+        { '@id': 'KGM', 'skos:prefLabel': { 'eng': 'kg' } }
       ],
       loaded: true
     },

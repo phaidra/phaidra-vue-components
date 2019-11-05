@@ -367,15 +367,28 @@ const fields = [
     fieldname: 'Is contained in',
     predicate: 'rdau:P60101',
     type: 'schema:CreativeWork',
-    component: 'p-series',
+    seriesType: 'schema:CreativeWork',
+    component: 'p-contained-in',
     label: 'Is contained in',
     title: '',
     titleLanguage: '',
-    volume: '',
-    issue: '',
-    issued: '',
-    issn: '',
-    identifier: '',
+    roles: [
+      {
+        id: 'contained-in-role',
+        role: 'role:edt',
+        firstname: '',
+        lastname: '',
+        ordergroup: 'contained-in-role'
+      }
+    ],
+    seriesLabel: 'Is in series',
+    seriesTitle: '',
+    seriesTitleLanguage: '',
+    seriesVolume: '',
+    seriesIssue: '',
+    seriesIssued: '',
+    seriesIssn: '',
+    seriesIdentifier: '',
     definition: 'Relates a resource to a larger resource of which a part is a discrete component.'
   },
   {

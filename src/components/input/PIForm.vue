@@ -203,6 +203,27 @@
                     ></p-i-adaptation>
                   </template>
 
+                  <template v-else-if="f.component === 'p-contained-in'">
+                    <p-i-contained-in
+                      v-bind.sync="f"
+                      v-on:input-title="f.title=$event"
+                      v-on:input-subtitle="f.subtitle=$event"
+                      v-on:input-title-language="setSelected(f, 'titleLanguage', $event)"
+                      v-on:input-role="containedInRoleInput(f, $event)"
+                      v-on:input-series-title="f.seriesTitle=$event"
+                      v-on:input-series-title-language="setSelected(f, 'seriesTitleLanguage', $event)"
+                      v-on:input-series-volume="f.seriesVolume=$event"
+                      v-on:input-series-issue="f.seriesIssue=$event"
+                      v-on:input-series-issued="f.seriesIssued=$event"
+                      v-on:input-series-issn="f.seriesIssn=$event"
+                      v-on:input-series-identifier="f.seriesIdentifier=$event"
+                      v-on:add-role="addContainedInRole(f.roles, $event)"
+                      v-on:remove-role="removeContainedInRole(f.roles, $event)"
+                      v-on:up-role="sortContainedInRoleUp(f.roles, $event)"
+                      v-on:down-role="sortContainedInRoleDown(f.roles, $event)"
+                    ></p-i-contained-in>
+                  </template>
+
                   <template v-else-if="f.component === 'p-entity'">
                     <p-i-entity
                       v-bind.sync="f"
@@ -489,6 +510,7 @@ import PIProject from './PIProject'
 import PIFunder from './PIFunder'
 import PIAssociation from './PIAssociation'
 import PISeries from './PISeries'
+import PIContainedIn from './PIContainedIn'
 import PICitation from './PICitation'
 import PIBfPublication from './PIBfPublication'
 import PIAdaptation from './PIAdaptation'
@@ -523,6 +545,7 @@ export default {
     PIFunder,
     PIAssociation,
     PISeries,
+    PIContainedIn,
     PICitation,
     PIBfPublication,
     PIAdaptation,
@@ -809,6 +832,34 @@ export default {
         }
       }
     },
+    addContainedInRole: function (arr, f) {
+      var newField = arrays.duplicate(arr, f)
+      if (newField) {
+        newField.id = (new Date()).getTime()
+        newField.removable = true
+      }
+    },
+    removeContainedInRole: function (arr, f) {
+      if (arr.length > 1) {
+        arrays.remove(arr, f)
+      }
+    },
+    sortContainedInRoleUp: function (arr, f) {
+      var i = arr.indexOf(f)
+      if (arr[i - 1]) {
+        if (arr[i - 1].ordergroup === f.ordergroup) {
+          arrays.moveUp(arr, f)
+        }
+      }
+    },
+    sortContainedInRoleDown: function (arr, f) {
+      var i = arr.indexOf(f)
+      if (arr[i + 1]) {
+        if (arr[i + 1].ordergroup === f.ordergroup) {
+          arrays.moveDown(arr, f)
+        }
+      }
+    },
     sortMemberUp: function (s) {
       var i = this.form.sections.indexOf(s)
       if (this.form.sections[i - 1]) {
@@ -958,6 +1009,24 @@ export default {
     roleInput: function (f, event) {
       f.role = event['@id']
       this.$emit('form-input-' + f.component, f)
+    },
+    containedInRoleInput: function (f, event) {
+      for (let r of f.roles) {
+        if (r.id === event.role.id) {
+          if (event.roleTerm) {
+            r.role = event.roleTerm['@id']
+          }
+          if (event.name) {
+            r.name = event.name
+          }
+          if (event.firstname) {
+            r.firstname = event.firstname
+          }
+          if (event.lastname) {
+            r.lastname = event.lastname
+          }
+        }
+      }
     },
     setFilename: function (f, event) {
       f.value = event.name

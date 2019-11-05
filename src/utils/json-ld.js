@@ -184,7 +184,6 @@ export default {
               break
 
             case 'rdau:P60193':
-            case 'rdau:P60101':
               f = fields.getField('series')
               if (value[i]['dce:title']) {
                 for (let t of value[i]['dce:title']) {
@@ -225,9 +224,103 @@ export default {
                   f.identifier = v
                 }
               }
-              if (value[i]['bibo:volume']) {
-                for (let v of value[i]['bibo:volume']) {
-                  f.volume = v
+              components.push(f)
+              break
+
+            case 'rdau:P60101':
+              f = fields.getField('contained-in')
+              if (value[i]['dce:title']) {
+                for (let t of value[i]['dce:title']) {
+                  if (t['bf:mainTitle']) {
+                    for (let mt of t['bf:mainTitle']) {
+                      if (mt['@value']) {
+                        f.title = mt['@value']
+                      }
+                      if (mt['@language']) {
+                        f.titleLanguage = mt['@language']
+                      }
+                    }
+                  }
+                  if (t['bf:subtitle']) {
+                    for (let st of t['bf:subtitle']) {
+                      if (st['@value']) {
+                        f.subtitle = st['@value']
+                      }
+                    }
+                  }
+                }
+              }
+              f.roles = []
+              Object.entries(value[i]).forEach(([key, value]) => {
+                if (key.startsWith('role')) {
+                  let roleidx = 0
+                  for (let role of value) {
+                    roleidx++
+                    let entity = {
+                      id: 'contained-in-role-' + roleidx,
+                      role: key,
+                      ordergroup: 'contained-in-role'
+                    }
+                    if (role['schema:name']) {
+                      for (let name of role['schema:name']) {
+                        entity.name = name['@value']
+                      }
+                    }
+                    if (role['schema:familyName']) {
+                      for (let lastname of role['schema:familyName']) {
+                        entity.lastname = lastname['@value']
+                      }
+                    }
+                    if (role['schema:givenName']) {
+                      for (let firstname of role['schema:givenName']) {
+                        entity.firstname = firstname['@value']
+                      }
+                    }
+                    f.roles.push(entity)
+                  }
+                }
+              })
+              if (value[i]['rdau:P60193']) {
+                for (let series of value[i]['rdau:P60193']) {
+                  if (series['dce:title']) {
+                    for (let t of series['dce:title']) {
+                      if (t['bf:mainTitle']) {
+                        for (let mt of t['bf:mainTitle']) {
+                          if (mt['@value']) {
+                            f.seriesTitle = mt['@value']
+                          }
+                          if (mt['@language']) {
+                            f.seriesTitleLanguage = mt['@language']
+                          }
+                        }
+                      }
+                    }
+                  }
+                  if (series['bibo:volume']) {
+                    for (let v of series['bibo:volume']) {
+                      f.seriesVolume = v
+                    }
+                  }
+                  if (series['bibo:issue']) {
+                    for (let v of series['bibo:issue']) {
+                      f.seriesIssue = v
+                    }
+                  }
+                  if (series['dcterms:issued']) {
+                    for (let v of series['dcterms:issued']) {
+                      f.seriesIssued = v
+                    }
+                  }
+                  if (series['identifiers:issn']) {
+                    for (let v of series['identifiers:issn']) {
+                      f.seriesIssn = v
+                    }
+                  }
+                  if (series['skos:exactMatch']) {
+                    for (let v of series['skos:exactMatch']) {
+                      f.seriesIdentifier = v
+                    }
+                  }
                 }
               }
               components.push(f)
@@ -1158,11 +1251,11 @@ export default {
         ]
       }
       if (f.identifierText) {
-        h['skos:exactMatch'] = [ 
+        h['skos:exactMatch'] = [
           {
             '@type': f.identifierType,
             '@value': f.identifierText
-          } 
+          }
         ]
       }
       if (f.affiliation || f.affiliationText) {
@@ -1283,6 +1376,105 @@ export default {
       if (identifiers.length > 0) {
         h['skos:exactMatch'] = identifiers
       }
+    }
+    return h
+  },
+  get_json_contained_in (f) {
+    var h = {
+      '@type': f.type
+    }
+    if (f.title) {
+      let tit = {
+        '@type': 'bf:Title',
+        'bf:mainTitle': [
+          {
+            '@value': f.title
+          }
+        ]
+      }
+      if (f.titleLanguage) {
+        tit['bf:mainTitle'][0]['@language'] = f.titleLanguage
+      }
+      if (f.subtitle) {
+        tit['bf:subtitle'] = [
+          {
+            '@value': f.subtitle
+          }
+        ]
+        if (f.titleLanguage) {
+          tit['bf:subtitle'][0]['@language'] = f.titleLanguage
+        }
+      }
+      h['dce:title'] = [ tit ]
+    }
+    if (f.roles.length > 0) {
+      for (let role of f.roles) {
+        if (role.role && (role.firstname || role.lastname || role.name)) {
+          let entity = {
+            '@type': 'schema:Person'
+          }
+          if (role.name) {
+            entity['schema:name'] = [
+              {
+                '@value': role.name
+              }
+            ]
+          }
+          if (role.firstname) {
+            entity['schema:givenName'] = [
+              {
+                '@value': role.firstname
+              }
+            ]
+          }
+          if (role.lastname) {
+            entity['schema:familyName'] = [
+              {
+                '@value': role.lastname
+              }
+            ]
+          }
+          if (!h[role.role]) {
+            h[role.role] = []
+          }
+          h[role.role].push(entity)
+        }
+      }
+    }
+    if (f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.seriesIdentifier) {
+      let series = {
+        '@type': f.seriesType
+      }
+      if (f.seriesTitle) {
+        let tit = {
+          '@type': 'bf:Title',
+          'bf:mainTitle': [
+            {
+              '@value': f.seriesTitle
+            }
+          ]
+        }
+        if (f.seriesTitleLanguage) {
+          tit['bf:mainTitle'][0]['@language'] = f.seriesTitleLanguage
+        }
+        series['dce:title'] = [ tit ]
+      }
+      if (f.seriesVolume) {
+        series['bibo:volume'] = [ f.seriesVolume ]
+      }
+      if (f.seriesIssue) {
+        series['bibo:issue'] = [ f.seriesIssue ]
+      }
+      if (f.seriesIssued) {
+        series['dcterms:issued'] = [ f.seriesIssued ]
+      }
+      if (f.seriesIssn) {
+        series['identifiers:issn'] = [ f.seriesIssn ]
+      }
+      if (f.seriesIdentifier) {
+        series['skos:exactMatch'] = [ f.seriesIdentifier ]
+      }
+      h['rdau:P60193'] = [ series ]
     }
     return h
   },
@@ -1635,9 +1827,14 @@ export default {
           break
 
         case 'rdau:P60193':
-        case 'rdau:P60101':
           if (f.title || f.volume || f.issue || f.issued || f.issn || f.identifier) {
             this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier ? [f.identifier] : null))
+          }
+          break
+
+        case 'rdau:P60101':
+          if (f.title || f.volume || (f.roles.length > 0) || f.seriesTitle || seriesVolume || seriesIssue || seriesIssued || seriesIssn) {
+            this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
           }
           break
 

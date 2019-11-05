@@ -270,7 +270,7 @@ export default {
   },
   data () {
     return {
-      window: 3,
+      window: 2,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -294,7 +294,7 @@ export default {
         password: ''
       },
       version: version,
-      contentmodel: 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ',
+      contentmodel: 'https://pid.phaidra.org/vocabulary/44TN-P1S0',
       contentmodels: [
         {
           text: 'Data',
@@ -585,6 +585,7 @@ export default {
             id: 1,
             fields: []
           },
+          /*
           {
             title: 'Digitized object',
             type: 'phaidra:Subject',
@@ -598,6 +599,7 @@ export default {
             multiplicable: true,
             fields: []
           },
+          */
           {
             title: 'File',
             id: 4,
@@ -611,6 +613,16 @@ export default {
       rt.value = this.contentmodel
       this.form.sections[0].fields.push(rt)
       this.form.sections[0].fields.push(fields.getField('title'))
+      let containedIn = fields.getField('contained-in')
+      containedIn.label = 'Book'
+      containedIn.seriesLabel = 'Series'
+      this.form.sections[0].fields.push(containedIn)
+
+      this.form.sections[1].fields.push(fields.getField('file'))
+      this.form.sections[1].fields.push(fields.getField('license'))
+      this.form.sections[1].fields.push(fields.getField('rights'))
+
+      /*
       this.form.sections[0].fields.push(fields.getField('description'))
       this.form.sections[0].fields.push(fields.getField('table-of-contents'))
       var gnd = fields.getField('gnd-subject')
@@ -642,7 +654,6 @@ export default {
       this.form.sections[1].fields.push(fields.getField('page-start'))
       this.form.sections[1].fields.push(fields.getField('page-end'))
       this.form.sections[1].fields.push(fields.getField('scale'))
-      // eingangsdatum
       var accessiondate = fields.getField('date-edtf')
       accessiondate.type = 'phaidra:dateAccessioned'
       this.form.sections[1].fields.push(accessiondate)
@@ -684,6 +695,7 @@ export default {
       this.form.sections[3].fields.push(fields.getField('file'))
       this.form.sections[3].fields.push(fields.getField('license'))
       this.form.sections[3].fields.push(fields.getField('rights'))
+      */
     },
     createContainerForm: function () {
       this.createSimpleForm()
@@ -717,7 +729,7 @@ export default {
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
     this.$store.commit('initStore')
 
-    this.createContainerForm()
+    this.createSimpleForm()
   }
 }
 </script>

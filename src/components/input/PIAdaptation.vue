@@ -2,7 +2,6 @@
 
   <v-row>
     <v-col cols="12">
-
       <v-card >
         <v-card-title class="title font-weight-light grey white--text">
             <span>{{ $t(label) }}</span>
@@ -22,7 +21,6 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
-
           <v-row>
             <v-col>
               <v-row >
@@ -69,8 +67,33 @@
                   </v-autocomplete>
                 </v-col>
               </v-row>
-
-              <v-row >
+              <v-row>
+                <v-col cols="4">
+                  <v-autocomplete
+                    :disabled="disablerole"
+                    v-on:input="$emit('input-role', $event)"
+                    :label="$t('Role')"
+                    :items="vocabularies['rolepredicate'].terms"
+                    :value="getTerm('rolepredicate', role)"
+                    :filter="autocompleteFilter"
+                   filled
+                    return-object
+                    clearable
+                    :item-value="'@id'"
+                  >
+                    <template slot="item" slot-scope="{ item }">
+                      <v-list-item-content two-line>
+                        <v-list-item-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                        <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
+                      </v-list-item-content>
+                    </template>
+                    <template slot="selection" slot-scope="{ item }">
+                      <v-list-item-content>
+                        <v-list-item-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                      </v-list-item-content>
+                    </template>
+                  </v-autocomplete>
+                </v-col>
                 <template v-if="showname">
                   <v-col cols="4" >
                     <v-text-field
@@ -99,37 +122,9 @@
                     ></v-text-field>
                   </v-col>
                 </template>
-                <v-col cols="4">
-                  <v-autocomplete
-                    :disabled="disablerole"
-                    v-on:input="$emit('input-role', $event)"
-                    :label="$t('Role')"
-                    :items="vocabularies['rolepredicate'].terms"
-                    :value="getTerm('rolepredicate', role)"
-                    :filter="autocompleteFilter"
-                   filled
-                    return-object
-                    clearable
-                    :item-value="'@id'"
-                  >
-                    <template slot="item" slot-scope="{ item }">
-                      <v-list-item-content two-line>
-                        <v-list-item-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
-                        <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
-                      </v-list-item-content>
-                    </template>
-                    <template slot="selection" slot-scope="{ item }">
-                      <v-list-item-content>
-                        <v-list-item-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
-                      </v-list-item-content>
-                    </template>
-                  </v-autocomplete>
-                </v-col>
               </v-row>
-
             </v-col>
           </v-row>
-
         </v-card-text>
       </v-card>
     </v-col>

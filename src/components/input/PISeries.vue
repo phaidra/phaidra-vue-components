@@ -149,7 +149,6 @@
                   :value="issued"
                   v-on:blur="$emit('input-issued',$event.target.value)"
                   :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
-                  :required="required"
                   :hint="'Format YYYY-MM-DD'"
                   :rules="[validationrules.date]"
                   filled
