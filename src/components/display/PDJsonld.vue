@@ -44,8 +44,8 @@
         </template>
 
         <template v-else-if="p.startsWith('role:')" slot="role">
-          <p-d-entity :role="p" :entity="e" v-for="(e, j) in getEntities(p, o)" :key="componentid+'entity'+p+j" ></p-d-entity>
-          <v-row v-if="entitiesLimited[p] && !showAllEntities[p]" :key="componentid+'entitymore'+p+j">
+          <p-d-entity :role="p" :entity="e" :hideLabel="j !== 0" v-for="(e, j) in getEntities(p, o)" :key="componentid+'entity'+p+j" ></p-d-entity>
+          <v-row v-if="entitiesLimited[p] && !showAllEntities[p]" :key="componentid+'entitymore'+p">
             <v-col md="10" offset-md="2">
               <span class="mx-2 primary--text" @click="setShowAllEntities(p)">... {{ $t('show all') }}</span>
             </v-col>
@@ -121,15 +121,15 @@
         </template>
 
         <template v-else-if="p==='rdau:P60193'" slot="rdau:P60193">
-          <p-d-series class="my-4" :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'series'+j" ></p-d-series>
+          <p-d-series :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'series'+j" ></p-d-series>
         </template>
 
         <template v-else-if="p==='rdau:P60101'" slot="rdau:P60101">
-          <p-d-contained-in class="my-4" :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'contained-in'+j" ></p-d-contained-in>
+          <p-d-contained-in :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'contained-in'+j" ></p-d-contained-in>
         </template>
 
         <template v-else-if="p==='bf:provisionActivity'" slot="bf:provisionActivity">
-          <p-d-bf-publication class="my-4" :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'bfpubl'+j" ></p-d-bf-publication>
+          <p-d-bf-publication :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'bfpubl'+j" ></p-d-bf-publication>
         </template>
 
         <template v-else-if="p==='cito:cites'" slot="cito:cites">
@@ -141,7 +141,7 @@
         </template>
 
         <template v-else-if="p==='rdau:P60227'" slot="rdau:P60227">
-          <p-d-adaptation class="my-4" :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'adaptation'+j" ></p-d-adaptation>
+          <p-d-adaptation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'adaptation'+j" ></p-d-adaptation>
         </template>
 
         <template v-else-if="p==='frapo:isOutputOf'" slot="frapo:isOutputOf">

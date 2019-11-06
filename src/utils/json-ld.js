@@ -1833,7 +1833,7 @@ export default {
           break
 
         case 'rdau:P60101':
-          if (f.title || f.volume || (f.roles.length > 0) || f.seriesTitle || seriesVolume || seriesIssue || seriesIssued || seriesIssn) {
+          if (f.title || f.volume || (f.roles.length > 0) || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn) {
             this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
           }
           break

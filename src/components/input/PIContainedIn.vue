@@ -54,7 +54,7 @@
                   </v-autocomplete>
                 </v-col>
               </v-row>
-              <v-row v-for="role in roles">
+              <v-row v-for="(role, i) in roles" :key="'role'+i">
                 <v-col cols="4">
                   <v-autocomplete
                     :disabled="disablerole"
@@ -127,109 +127,111 @@
             </v-col>
           </v-row>
           <v-row no-gutters>
-            <v-card >
-              <v-card-title class="title font-weight-light grey white--text">
-                <span>{{ $t(seriesLabel) }}</span>
-              </v-card-title>
-              <v-card-text class="mt-4">
-                <v-container>
-                  <v-row >
-                    <v-col cols="12" :md="multilingual ? 10 : 12">
-                      <v-text-field
-                        :value="seriesTitle"
-                        :label="$t('Title')"
-                        v-on:blur="$emit('input-series-title',$event.target.value)"
-                        filled
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="2" v-if="multilingual">
-                      <v-autocomplete
-                        :value="getTerm('lang', seriesTitleLanguage)"
-                        v-on:input="$emit('input-series-title-language', $event )"
-                        :items="vocabularies['lang'].terms"
-                        :item-value="'@id'"
-                        :filter="autocompleteFilter"
-                        hide-no-data
-                        :label="$t('Language')"
-                        filled
-                        return-object
-                        clearable
-                      >
-                        <template slot="item" slot-scope="{ item }">
-                          <v-list-item-content two-line>
-                            <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
-                            <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
-                          </v-list-item-content>
-                        </template>
-                        <template slot="selection" slot-scope="{ item }">
-                          <v-list-item-content>
-                            <v-list-item-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
-                          </v-list-item-content>
-                        </template>
-                      </v-autocomplete>
-                    </v-col>
+            <v-col cols="12">
+              <v-card>
+                <v-card-title class="title font-weight-light grey white--text">
+                  <span>{{ $t(seriesLabel) }}</span>
+                </v-card-title>
+                <v-card-text class="mt-4">
+                  <v-container>
+                    <v-row >
+                      <v-col cols="12" :md="multilingual ? 10 : 12">
+                        <v-text-field
+                          :value="seriesTitle"
+                          :label="$t('Title')"
+                          v-on:blur="$emit('input-series-title',$event.target.value)"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" md="2" v-if="multilingual">
+                        <v-autocomplete
+                          :value="getTerm('lang', seriesTitleLanguage)"
+                          v-on:input="$emit('input-series-title-language', $event )"
+                          :items="vocabularies['lang'].terms"
+                          :item-value="'@id'"
+                          :filter="autocompleteFilter"
+                          hide-no-data
+                          :label="$t('Language')"
+                          filled
+                          return-object
+                          clearable
+                        >
+                          <template slot="item" slot-scope="{ item }">
+                            <v-list-item-content two-line>
+                              <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+                              <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
+                            </v-list-item-content>
+                          </template>
+                          <template slot="selection" slot-scope="{ item }">
+                            <v-list-item-content>
+                              <v-list-item-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
+                            </v-list-item-content>
+                          </template>
+                        </v-autocomplete>
+                      </v-col>
 
-                  </v-row>
+                    </v-row>
 
-                  <v-row >
+                    <v-row >
 
-                    <v-col cols="4" v-if="!hideSeriesVolume">
-                      <v-text-field
-                        :value="seriesVolume"
-                        :label="$t('Volume')"
-                        v-on:blur="$emit('input-series-volume',$event.target.value)"
-                        filled
-                      ></v-text-field>
-                    </v-col>
+                      <v-col cols="4" v-if="!hideSeriesVolume">
+                        <v-text-field
+                          :value="seriesVolume"
+                          :label="$t('Volume')"
+                          v-on:blur="$emit('input-series-volume',$event.target.value)"
+                          filled
+                        ></v-text-field>
+                      </v-col>
 
-                    <v-col cols="4" v-if="!hideSeriesIssue">
-                      <v-text-field
-                        :value="seriesIssue"
-                        :label="$t('Issue')"
-                        v-on:blur="$emit('input-series-issue',$event.target.value)"
-                        filled
-                      ></v-text-field>
-                    </v-col>
+                      <v-col cols="4" v-if="!hideSeriesIssue">
+                        <v-text-field
+                          :value="seriesIssue"
+                          :label="$t('Issue')"
+                          v-on:blur="$emit('input-series-issue',$event.target.value)"
+                          filled
+                        ></v-text-field>
+                      </v-col>
 
-                    <v-col cols="4" v-if="!hideSeriesIssued">
- 
-                      <v-text-field
-                        :value="seriesIssued"
-                        v-on:blur="$emit('input-series-issued',$event.target.value)"
-                        :label="$t(seriesIssuedDateLabel ? seriesIssuedDateLabel : 'Issued')"
-                        :hint="'Format YYYY-MM-DD'"
-                        :rules="[validationrules.date]"
-                        filled
-                      ></v-text-field>
+                      <v-col cols="4" v-if="!hideSeriesIssued">
 
-                    </v-col>
+                        <v-text-field
+                          :value="seriesIssued"
+                          v-on:blur="$emit('input-series-issued',$event.target.value)"
+                          :label="$t(seriesIssuedDateLabel ? seriesIssuedDateLabel : 'Issued')"
+                          :hint="'Format YYYY-MM-DD'"
+                          :rules="[validationrules.date]"
+                          filled
+                        ></v-text-field>
 
-                  </v-row>
+                      </v-col>
 
-                  <v-row >
+                    </v-row>
 
-                    <v-col cols="4" v-if="!hideSeriesIssn">
-                      <v-text-field
-                        :value="seriesIssn"
-                        :label="$t('ISSN')"
-                        v-on:blur="$emit('input-series-issn',$event.target.value)"
-                        filled
-                      ></v-text-field>
-                    </v-col>
+                    <v-row >
 
-                    <v-col cols="4" v-if="!hideSeriesIdentifier">
-                      <v-text-field
-                        :value="seriesIdentifier"
-                        :label="$t('Identifier')"
-                        v-on:blur="$emit('input-series-identifier',$event.target.value)"
-                        filled
-                      ></v-text-field>
-                    </v-col>
+                      <v-col cols="4" v-if="!hideSeriesIssn">
+                        <v-text-field
+                          :value="seriesIssn"
+                          :label="$t('ISSN')"
+                          v-on:blur="$emit('input-series-issn',$event.target.value)"
+                          filled
+                        ></v-text-field>
+                      </v-col>
 
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
+                      <v-col cols="4" v-if="!hideSeriesIdentifier">
+                        <v-text-field
+                          :value="seriesIdentifier"
+                          :label="$t('Identifier')"
+                          v-on:blur="$emit('input-series-identifier',$event.target.value)"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
+            </v-col>
           </v-row>
         </v-card-text>
       </v-card>
