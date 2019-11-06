@@ -108,6 +108,15 @@
                       </v-list-item>
                     </div>
                   </v-item>
+                  <v-item>
+                    <div slot-scope="{ active, toggle }">
+                      <v-list-item @click="toggle">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('Browse') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </div>
+                  </v-item>
                 </v-item-group>
               </v-list>
             </v-navigation-drawer>
@@ -204,6 +213,18 @@
                   </v-card-text>
                 </v-card>
               </v-window-item>
+              <v-window-item>
+                <v-card>
+                  <v-toolbar class="grey" dark>
+                    <v-toolbar-title>{{ $t('Collection gallery') }}</v-toolbar-title>
+                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
+                    <v-spacer></v-spacer>
+                  </v-toolbar>
+                  <v-card-text>
+                    <p-collection-gallery :collection="collection"></p-collection-gallery>
+                  </v-card-text>
+                </v-card>
+              </v-window-item>
             </v-window>
           </v-col>
         </v-row>
@@ -236,6 +257,7 @@ import PMSort from '@/components/management/PMSort'
 import PMRights from '@/components/management/PMRights'
 import PMRelationships from '@/components/management/PMRelationships'
 import PSearch from '@/components/search/PSearch'
+import PCollectionGallery from '@/components/browse/PCollectionGallery'
 import { version } from '../package.json'
 import fields from '@/utils/fields'
 import jsonLd from '@/utils/json-ld'
@@ -249,7 +271,8 @@ export default {
     PMDelete,
     PMSort,
     PMRights,
-    PMRelationships
+    PMRelationships,
+    PCollectionGallery
   },
   computed: {
     loadedcmodel: function () {
@@ -270,7 +293,7 @@ export default {
   },
   data () {
     return {
-      window: 2,
+      window: 5,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
