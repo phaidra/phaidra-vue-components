@@ -562,8 +562,9 @@ export default {
 
   'schema:pageStart': 'von Seite',
   'schema:pageEnd': 'bis Seite',
-  'rdau:P60193': 'Is in series',
+  'rdau:P60193': 'Erschienen in',
   'rdau:P60101': 'Is contained in',
+  'rdau:P60101_rdau:P60193': 'Reihe',
   'rdau:P60227': 'Is motion picture adaptation of',
 
   'dcterms:spatial': 'Depicted / Represented place',

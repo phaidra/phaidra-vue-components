@@ -52,6 +52,7 @@ export default {
   'schema:pageEnd': 'To page',
   'rdau:P60193': 'Is in series',
   'rdau:P60101': 'Is contained in',
+  'rdau:P60101_rdau:P60193': 'Series',
   'rdau:P60227': 'Is motion picture adaptation of',
   'bf:provisionActivity': 'Provision activity: Publication',
   'cito:cites': 'Cites',

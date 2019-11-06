@@ -35,8 +35,8 @@
                 </v-col>
               </template>
             </v-row>
-            <v-row v-for="(series, k) in o['rdau:P60193']">
-              <v-col md="2" cols="12" class="pdlabel primary--text">{{ $t('rdau:P60193') }}</v-col>
+            <v-row v-for="(series, k) in o['rdau:P60193']" :key="'series'+k">
+              <v-col md="2" cols="12" class="pdlabel primary--text">{{ $t('rdau:P60101_rdau:P60193') }}</v-col>
               <v-col md="10" cols="12">
                 <v-card flat>
                   <v-card-text class="border-left">
