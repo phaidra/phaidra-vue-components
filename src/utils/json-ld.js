@@ -1557,7 +1557,7 @@ export default {
       ]
     }
     if (
-      (f.publisherType === 'select' && (f.publisherSelectedName || f.publisherOrgUnit) ||
+      (f.publisherType === 'select' && (f.publisherSelectedName || f.publisherOrgUnit)) ||
       (f.publisherType === 'other' && f.publisherName)
     ) {
       h['bf:agent'] = [ pa ]
