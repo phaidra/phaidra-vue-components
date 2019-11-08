@@ -314,6 +314,16 @@ export default {
         this.publisherSearchLoading = false
       }
     }
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      if (!this.vocabularies['orgunits'].loaded) {
+        this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
+      }
+      if (this.publisherOrgUnit) {
+        this.$emit('input-publisher-select', this.getTerm('orgunits', this.publisherOrgUnit))
+      }
+    })
   }
 }
 </script>
