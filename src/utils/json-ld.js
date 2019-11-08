@@ -1407,37 +1407,39 @@ export default {
       }
       h['dce:title'] = [ tit ]
     }
-    if (f.roles.length > 0) {
-      for (let role of f.roles) {
-        if (role.role && (role.firstname || role.lastname || role.name)) {
-          let entity = {
-            '@type': 'schema:Person'
+    if (f.roles) {
+      if (f.roles.length > 0) {
+        for (let role of f.roles) {
+          if (role.role && (role.firstname || role.lastname || role.name)) {
+            let entity = {
+              '@type': 'schema:Person'
+            }
+            if (role.name) {
+              entity['schema:name'] = [
+                {
+                  '@value': role.name
+                }
+              ]
+            }
+            if (role.firstname) {
+              entity['schema:givenName'] = [
+                {
+                  '@value': role.firstname
+                }
+              ]
+            }
+            if (role.lastname) {
+              entity['schema:familyName'] = [
+                {
+                  '@value': role.lastname
+                }
+              ]
+            }
+            if (!h[role.role]) {
+              h[role.role] = []
+            }
+            h[role.role].push(entity)
           }
-          if (role.name) {
-            entity['schema:name'] = [
-              {
-                '@value': role.name
-              }
-            ]
-          }
-          if (role.firstname) {
-            entity['schema:givenName'] = [
-              {
-                '@value': role.firstname
-              }
-            ]
-          }
-          if (role.lastname) {
-            entity['schema:familyName'] = [
-              {
-                '@value': role.lastname
-              }
-            ]
-          }
-          if (!h[role.role]) {
-            h[role.role] = []
-          }
-          h[role.role].push(entity)
         }
       }
     }
