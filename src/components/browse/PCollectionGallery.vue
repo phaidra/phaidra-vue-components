@@ -217,7 +217,7 @@ export default {
               id: 'o:13', 
               name: 'Subcollection 1-3'
             },
-          ],
+          ]
         },
         {
           id: 'o:2',
@@ -235,7 +235,7 @@ export default {
               id: 'o:23', 
               name: 'Subcollection 2-3'
             },
-          ],
+          ]
         },
         {
           id: 'o:3',
@@ -253,7 +253,7 @@ export default {
               id: 'o:33', 
               name: 'Subcollection 3-3'
             },
-          ],
+          ]
         },
         {
           id: 'o:4',
@@ -271,7 +271,7 @@ export default {
               id: 'o:43', 
               name: 'Subcollection 4-3'
             },
-          ],
+          ]
         },
         {
           id: 'o:5',
@@ -289,7 +289,7 @@ export default {
               id: 'o:53', 
               name: 'Subcollection 5-3'
             },
-          ],
+          ]
         }
       ]
     }
