@@ -895,6 +895,15 @@ export default {
               components.push(f)
               break
 
+            // phaidra:systemTag
+            case 'phaidra:systemTag':
+              f = fields.getField('system-tag')
+              for (j = 0; j < value[i].length; j++) {
+                f.value = value[i]
+              }
+              components.push(f)
+              break
+
             default:
 
               // role
@@ -1944,6 +1953,7 @@ export default {
         case 'schema:duration':
         case 'schema:pageStart':
         case 'schema:pageEnd':
+        case 'phaidra:systemTag':
           if (f.value) {
             this.push_literal(jsonld, f.predicate, f.value)
           }

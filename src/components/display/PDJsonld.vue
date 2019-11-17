@@ -309,6 +309,10 @@
 
         <template v-else-if="p==='@type'"></template>
 
+        <template v-else-if="p==='phaidra:systemTag' && showSystemFields" slot="phaidra:systemTag">
+          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'systemTag'+j" ></p-d-value>
+        </template>
+
         <template v-else slot="unknown-predicate">
           <v-container class="my-4" :key="p">
             <v-alert :type="'error'" :value="true" transition="fade-transition">Unknown predicate <b>{{p}}</b></v-alert>
@@ -357,6 +361,10 @@ export default {
     limitRoles: {
       type: Number,
       default: 0
+    },
+    showSystemFields: {
+      type: Boolean,
+      default: false
     },
     pid: String
   },

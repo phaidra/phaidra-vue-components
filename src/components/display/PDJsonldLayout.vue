@@ -82,6 +82,8 @@
 
     <slot name="dcterms:subject"></slot>
 
+    <slot name="phaidra:systemTag"></slot>
+
     <slot name="unknown-predicate"></slot>
   </v-container>
 </template>

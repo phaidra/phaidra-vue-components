@@ -944,6 +944,15 @@ const fields = [
     value: '',
     readonly: true,
     definition: 'Getty spatial object readonly.'
+  },
+  {
+    id: 'system-tag',
+    fieldname: 'System tag',
+    predicate: 'phaidra:systemTag',
+    component: 'p-literal',
+    label: 'System tag',
+    value: '',
+    definition: 'A tag for the purpose of identification or to give other information'
   }
 ]
 
@@ -1026,7 +1035,9 @@ const predicateOrder = [
   'frapo:hasFundingAgency',
   'frapo:isOutputOf',
   'rdax:P00009',
-  'citation'
+  'citation',
+
+  'phaidra:systemTag'
 ]
 
 export default {
