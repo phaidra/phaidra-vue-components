@@ -542,6 +542,9 @@ export default {
       this.collection = this.sampleCollection
     },
     login: function () {
+      this.$store.commit('setInstanceApi', this.apibaseurl)
+      this.$store.commit('setInstanceSolr', this.solrbaseurl)
+      this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
       this.$store.dispatch('login', this.credentials)
     },
     logout: function () {
