@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     instanceconfig: {
       api: '',
-      solr: ''
+      solr: '',
+      baseurl: ''
     },
     appconfig: {
       search: {

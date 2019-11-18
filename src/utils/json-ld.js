@@ -1844,7 +1844,7 @@ export default {
           break
 
         case 'rdau:P60101':
-          if (f.title || f.volume || ( (f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText) ) || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn) {
+          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn) {
             this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
           }
           break
