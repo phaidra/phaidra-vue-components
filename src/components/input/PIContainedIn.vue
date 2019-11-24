@@ -131,8 +131,13 @@
               <v-card>
                 <v-card-title class="title font-weight-light grey white--text">
                   <span>{{ $t(seriesLabel) }}</span>
+                  <v-spacer></v-spacer>
+                  <span>
+                    <v-icon dark v-show="collapseSeriesModel" @click="collapseSeriesModel=!collapseSeriesModel">mdi-arrow-right-drop-circle</v-icon>
+                    <v-icon dark v-show="!collapseSeriesModel" @click="collapseSeriesModel=!collapseSeriesModel">mdi-arrow-down-drop-circle</v-icon>
+                  </span>
                 </v-card-title>
-                <v-card-text class="mt-4">
+                <v-card-text class="mt-4" v-show="!collapseSeriesModel">
                   <v-container>
                     <v-row >
                       <v-col cols="12" :md="multilingual ? 10 : 12">
@@ -322,6 +327,10 @@ export default {
     },
     seriesIdentifier: {
       type: String
+    },
+    collapseSeries: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -332,6 +341,11 @@ export default {
       arr.push({ title: this.$t('Move up'), event: 'up-role' })
       arr.push({ title: this.$t('Move down'), event: 'down-role' })
       return arr
+    }
+  },
+  data () {
+    return {
+      collapseSeriesModel: this.collapseSeries
     }
   }
 }

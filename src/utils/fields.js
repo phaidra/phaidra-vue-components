@@ -389,6 +389,7 @@ const fields = [
     seriesIssued: '',
     seriesIssn: '',
     seriesIdentifier: '',
+    collapseSeries: false,
     definition: 'Relates a resource to a larger resource of which a part is a discrete component.'
   },
   {
