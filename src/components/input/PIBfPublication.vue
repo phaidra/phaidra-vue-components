@@ -32,7 +32,7 @@
                 <v-autocomplete
                   :value="getTerm('orgunits', publisherOrgUnit)"
                   :required="required"
-                  v-on:input="$emit('input-publisher-select', $event)"
+                  v-on:input="handleInput($event, 'organizationPath', 'input-publisher-select')"
                   :rules="required ? [ v => !!v || 'Required'] : []"
                   :items="vocabularies['orgunits'].terms"
                   :item-value="'@id'"
@@ -44,6 +44,7 @@
                   return-object
                   clearable
                   :error-messages="publisherOrgUnitErrorMessages"
+                  :messages="organizationPath"
                 >
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
@@ -55,6 +56,9 @@
                     <v-list-item-content>
                       <v-list-item-title v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
                     </v-list-item-content>
+                  </template>
+                  <template v-slot:append-outer>
+                    <v-icon @click="$refs.organizationstreedialog.open()">mdi-file-tree</v-icon>
                   </template>
                 </v-autocomplete>
               </v-col>
@@ -164,6 +168,7 @@
         </v-card-text>
       </v-card>
     </v-col>
+    <org-units-tree-dialog ref="organizationstreedialog" @unit-selected="handleInput(getTerm('orgunits', $event), 'organizationPath', 'input-publisher-select')"></org-units-tree-dialog>
   </v-row>
 </template>
 
@@ -174,11 +179,15 @@ import { vocabulary } from '../../mixins/vocabulary'
 import xmlUtils from '../../utils/xml'
 import qs from 'qs'
 import axios from 'axios'
+import OrgUnitsTreeDialog from '../select/OrgUnitsTreeDialog'
 var iconv = require('iconv-lite')
 
 export default {
   name: 'p-i-bf-publication',
   mixins: [validationrules, fieldproperties, vocabulary],
+  components: {
+    OrgUnitsTreeDialog
+  },
   props: {
     publisherName: {
       type: String,
@@ -260,7 +269,8 @@ export default {
       publisherSearchQuery: '',
       publisherSearchDebounce: 500,
       publisherSearchMinLetters: 3,
-      publisherSearchDebounceTask: null
+      publisherSearchDebounceTask: null,
+      organizationPath: ''
     }
   },
   methods: {
@@ -313,6 +323,26 @@ export default {
       } finally {
         this.publisherSearchLoading = false
       }
+    },
+    getParentPath: function (unit, parentpath) {
+      if (unit) {
+        if (unit['parent']) {
+          parentpath.push(unit.parent)
+          this.getParentPath(unit.parent, parentpath)
+        }
+      }
+    },
+    handleInput: function (unit, propName, eventName) {
+      this[propName] = ''
+      let parentpath = []
+      if (unit) {
+        this.getParentPath(unit, parentpath)
+        for (let u of parentpath.reverse()) {
+          this[propName] = this[propName] + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+        }
+        this[propName] = this[propName] + unit['skos:prefLabel'][this.$i18n.locale]
+      }
+      this.$emit(eventName, unit)
     }
   },
   mounted: function () {

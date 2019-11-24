@@ -66,6 +66,8 @@ export const vocabulary = {
           return 'https://viaf.org/viaf/' + value
         case 'ids:wikidata':
           return 'https://wikidata.org/wiki/' + value
+        case 'ids:uri':
+          return value
       }
     }
   }

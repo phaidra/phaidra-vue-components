@@ -419,6 +419,8 @@ const fields = [
     descriptionLanguage: '',
     identifier: '',
     homepage: '',
+    funderName: '',
+    funderIdentifier: '',
     definition: 'An administrative entity that enabled an endeavour such as a research investigation.'
   },
   {

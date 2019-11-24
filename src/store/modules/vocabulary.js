@@ -51,7 +51,7 @@ const state = {
         { '@id': 'ids:doi', 'skos:prefLabel': { 'eng': 'DOI' }, 'skos:example': '10.25365/phaidra.39' },
         { '@id': 'ids:hdl', 'skos:prefLabel': { 'eng': 'Handle' }, 'skos:example': '11353/10.761200' },
         { '@id': 'ids:urn', 'skos:prefLabel': { 'eng': 'URN' }, 'skos:example': 'urn:nbn:at:at-ubw-21405.98566.193074-2' },
-        { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI' }, 'skos:example': 'https://example.com/path/resource.txt' }
+        { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI/URL' }, 'skos:example': 'https://example.com/path/resource.txt' }
       ],
       loaded: true
     },
@@ -683,14 +683,14 @@ const state = {
     },
     'versiontypes': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/PHXV-R6B3', 'skos:notation': ['AM'], 'skos:prefLabel': { 'eng': 'accepted version', 'deu': 'angenommene Version' }, 'skos:definition': { 'eng': 'The version of a resource that has been accepted for publication. A second party takes permanent responsibility for the resource. Content and layout follow publisher’s submission requirements.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/TV31-080M', 'skos:notation': ['AO'], 'skos:prefLabel': { 'eng': 'draft', 'deu': 'Entwurf' }, 'skos:definition': { 'eng': 'Any version of a resource that is considered by the author to be of sufficient quality to be submitted for formal peer review by a second party. The author accepts full responsibility for the resource . May have a version number or date stamp. Content and layout as set out by the author.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MT1G-APSB', 'skos:notation': ['CVoR'], 'skos:prefLabel': { 'eng': 'corrected version', 'deu': 'korrigierte Version' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource in which errors in the VoR have been corrected. The errors may be author errors, publisher errors, or other processing errors.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/SSQW-AP1S', 'skos:notation': ['EVoR'], 'skos:prefLabel': { 'eng': 'enhanced version', 'deu': 'erweiterte Version' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource that has been updated or enhanced by the provision of supplementary material.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KZB5-0F5G', 'skos:notation': ['NA'], 'skos:prefLabel': { 'eng': 'not applicable (or unknown)', 'deu': 'nicht zutreffend/unbekannt' }, 'skos:definition': { 'eng': 'Not Applicable (or Unknown).' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/83ZP-CPP2', 'skos:notation': ['P'], 'skos:prefLabel': { 'eng': 'proofs', 'deu': 'Druckfahnen' }, 'skos:definition': { 'eng': 'A version of a resource that is created as part of the publication process. This includes the copy-edited manuscript, galley proofs (i.e., a typeset version that has not been made up into pages), page proofs, and revised proofs. Some of these versions may remain essentially internal process versions, but others are commonly released from the internal environment (e.g., proofs are sent to authors) and may thus become public, even though they are not authorized to be so. Content has been changed from Accepted Manuscript; layout is the publisher’s.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JTD4-R26P', 'skos:notation': ['SMUR'], 'skos:prefLabel': { 'eng': 'submitted version', 'deu': 'eingereichte Version' }, 'skos:definition': { 'eng': 'Any version of a resource that is under formal review managed by a socially recognized publishing entity. The entity recognizes its responsibility to provide objective expert review and feedback to the author, and, ultimately, to pass judgment on the fitness of the resource for publication with an “accept” or “reject” decision. May have a version number or date stamp. Content and layout follow publisher’s submission requirements.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PMR8-3C8D', 'skos:notation': ['VoR'], 'skos:prefLabel': { 'eng': 'published version', 'deu': 'veröffentlichte Version' }, 'skos:definition': { 'eng': 'A fixed version of a resource that has been made available by any organization that acts as a publisher by formally and exclusively declaring the resource “published”. This includes any “early release” resource that is formally identified as being published even before the compilation of a volume issue and assignment of associated metadata, as long as it is citable via some permanent identifier(s). This does not include any “early release” resource that has not yet been “fixed” by processes that are still to be applied, such as copy-editing, proof corrections, layout, and typesetting.' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/TV31-080M', 'skos:notation': ['AO'], 'skos:prefLabel': { 'eng': 'author\'s original' }, 'skos:definition': { 'eng': 'Any version of a resource that is considered by the author to be of sufficient quality to be submitted for formal peer review by a second party. The author accepts full responsibility for the resource . May have a version number or date stamp. Content and layout as set out by the author.' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/JTD4-R26P', 'skos:notation': ['SMUR'], 'skos:prefLabel': { 'eng': 'submitted manuscript under review' }, 'skos:definition': { 'eng': 'Any version of a resource that is under formal review managed by a socially recognized publishing entity. The entity recognizes its responsibility to provide objective expert review and feedback to the author, and, ultimately, to pass judgment on the fitness of the resource for publication with an “accept” or “reject” decision. May have a version number or date stamp. Content and layout follow publisher’s submission requirements.' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/PHXV-R6B3', 'skos:notation': ['AM'], 'skos:prefLabel': { 'eng': 'accepted version' }, 'skos:definition': { 'eng': 'The version of a resource that has been accepted for publication. A second party takes permanent responsibility for the resource. Content and layout follow publisher’s submission requirements.' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/83ZP-CPP2', 'skos:notation': ['P'], 'skos:prefLabel': { 'eng': 'proof' }, 'skos:definition': { 'eng': 'A version of a resource that is created as part of the publication process. This includes the copy-edited manuscript, galley proofs (i.e., a typeset version that has not been made up into pages), page proofs, and revised proofs. Some of these versions may remain essentially internal process versions, but others are commonly released from the internal environment (e.g., proofs are sent to authors) and may thus become public, even though they are not authorized to be so. Content has been changed from Accepted Manuscript; layout is the publisher’s.' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/PMR8-3C8D', 'skos:notation': ['VoR'], 'skos:prefLabel': { 'eng': 'version of record (published version)' }, 'skos:definition': { 'eng': 'A fixed version of a resource that has been made available by any organization that acts as a publisher by formally and exclusively declaring the resource “published”. This includes any “early release” resource that is formally identified as being published even before the compilation of a volume issue and assignment of associated metadata, as long as it is citable via some permanent identifier(s). This does not include any “early release” resource that has not yet been “fixed” by processes that are still to be applied, such as copy-editing, proof corrections, layout, and typesetting.' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/MT1G-APSB', 'skos:notation': ['CVoR'], 'skos:prefLabel': { 'eng': 'corrected version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource in which errors in the VoR have been corrected. The errors may be author errors, publisher errors, or other processing errors.' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/SSQW-AP1S', 'skos:notation': ['EVoR'], 'skos:prefLabel': { 'eng': 'enhanced version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource that has been updated or enhanced by the provision of supplementary material.' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/KZB5-0F5G', 'skos:notation': ['NA'], 'skos:prefLabel': { 'eng': 'not applicable (or unknown)' }, 'skos:definition': { 'eng': 'Not Applicable (or Unknown).' } }
       ],
       loaded: true
     },
@@ -919,24 +919,24 @@ const actions = {
 
 const getters = {
   getLocalizedTermLabel: (state) => (voc, id, lang) => {
-    var terms = state.vocabularies[voc].terms
-    for (var i = 0; i < terms.length; i++) {
+    let terms = state.vocabularies[voc].terms
+    for (let i = 0; i < terms.length; i++) {
       if (terms[i]['@id'] === id) {
         return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng']
       }
     }
   },
   getTerm: (state) => (voc, id) => {
-    var terms = state.vocabularies[voc].terms
-    for (var i = 0; i < terms.length; i++) {
+    let terms = state.vocabularies[voc].terms
+    for (let i = 0; i < terms.length; i++) {
       if (terms[i]['@id'] === id) {
         return terms[i]
       }
     }
   },
   getTermProperty: (state) => (voc, id, prop) => {
-    var terms = state.vocabularies[voc].terms
-    for (var i = 0; i < terms.length; i++) {
+    let terms = state.vocabularies[voc].terms
+    for (let i = 0; i < terms.length; i++) {
       if (terms[i]['@id'] === id) {
         return terms[i][prop]
       }

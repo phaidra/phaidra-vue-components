@@ -28,36 +28,40 @@
     </v-col>
     <v-col :cols="hideType ? 10 : 5">
       <template v-if="picker">
-        <v-menu
-          ref="menu1"
-          v-model="dateMenu"
-          :close-on-content-click="false"
-          transition="scale-transition"
-          offset-y
-          max-width="290px"
-          min-width="290px"
+        <v-text-field
+          :value="value"
+          :label="$t(dateLabel ? dateLabel : 'Date')"
+          :required="required"
+          :rules="[validationrules.date]"
+          filled
+          :error-messages="valueErrorMessages"
         >
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              :value="value"
-              :label="$t(dateLabel ? dateLabel : 'Date')"
-              :required="required"
-              :rules="[validationrules.date]"
-              filled
-              append-icon="event"
-              v-on="on"
-              :error-messages="valueErrorMessages"
-            ></v-text-field>
+          <template v-slot:append>
+            <v-fade-transition leave-absolute>
+              <v-menu
+                ref="menu1"
+                v-model="dateMenu"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                max-width="290px"
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">mdi-calendar</v-icon>
+                </template>
+                <v-date-picker
+                  color="primary"
+                  :value="value"
+                  :show-current="false"
+                  v-model="pickerModel"
+                  :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                  v-on:input="dateMenu = false; $emit('input-date', $event)"
+                ></v-date-picker>
+              </v-menu>
+            </v-fade-transition>
           </template>
-          <v-date-picker
-            color="primary"
-            :value="value"
-            :show-current="false"
-            v-model="pickerModel"
-            :locale="this.$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
-            v-on:input="dateMenu = false; $emit('input-date', $event)"
-          ></v-date-picker>
-        </v-menu>
+        </v-text-field>
       </template>
       <template v-else>
         <v-text-field
