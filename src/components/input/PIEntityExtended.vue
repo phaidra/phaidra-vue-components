@@ -6,6 +6,9 @@
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
           <v-btn icon @click="$emit('add', $event)">
+            <v-icon dark>mdi-content-duplicate</v-icon>
+          </v-btn>
+          <v-btn icon @click="$emit('add-clear', $event)">
             <v-icon dark>mdi-plus</v-icon>
           </v-btn>
           <v-btn icon @click="$emit('remove', $event)">

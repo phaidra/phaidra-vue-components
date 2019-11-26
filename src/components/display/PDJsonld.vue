@@ -429,7 +429,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.dispatch('loadLanguages')
+    this.$store.dispatch('loadLanguages', this.$i18n.locale)
   }
 }
 </script>

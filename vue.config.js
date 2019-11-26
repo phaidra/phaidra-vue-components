@@ -4,6 +4,7 @@ module.exports = {
       library: 'PhaidraVueComponents',
       libraryExport: 'default'
     },
+    /*
     externals: {
       vue: {
         commonjs: 'vue',
@@ -12,5 +13,6 @@ module.exports = {
         amd: 'vue'
       }
     }
+    */
   }
 }

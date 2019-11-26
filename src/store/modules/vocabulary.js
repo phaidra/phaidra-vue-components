@@ -826,6 +826,7 @@ const state = {
     },
     'lang': {
       terms: [],
+      sorted: { deu: [], eng: [] },
       loaded: false
     },
     'orgunits': {
@@ -876,8 +877,10 @@ const mutations = {
 }
 
 const actions = {
-  loadLanguages ({ commit }) {
-    commit('setLangTerms', languages.get_lang())
+  loadLanguages ({ commit }, locale) {
+    let langterms = languages.get_lang()
+    langterms.sort((a, b) => a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale))
+    commit('setLangTerms', langterms)
   },
   async loadOrgUnits ({ commit, rootState }, locale) {
     try {

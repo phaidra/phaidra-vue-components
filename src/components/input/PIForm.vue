@@ -256,6 +256,7 @@
                       v-on:input-organization-other="f.organizationText = $event"
                       v-on:input-role="roleInput(f, $event)"
                       v-on:add="addField(s.fields, f)"
+                      v-on:add-clear="addEntityClear(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                       v-on:up="sortFieldUp(s.fields, f)"
                       v-on:down="sortFieldDown(s.fields, f)"
@@ -810,6 +811,28 @@ export default {
       var newField = arrays.duplicate(arr, f)
       if (newField) {
         newField.id = (new Date()).getTime()
+        newField.firstname = ''
+        newField.lastname = ''
+        newField.identifierText = ''
+        newField.removable = true
+      }
+    },
+    addEntityClear: function (arr, f) {
+      var newField = arrays.duplicate(arr, f)
+      if (newField) {
+        newField.id = (new Date()).getTime()
+        newField.role = ''
+        newField.name = ''
+        newField.firstname = ''
+        newField.lastname = ''
+        newField.identifierText = ''
+        newField.affiliation = ''
+        newField.affiliationText = ''
+        newField.affiliationType = 'select'
+        newField.organization = ''
+        newField.organizationText = ''
+        newField.organizationType = 'select'
+        newField.type = 'schema:Person'
         newField.removable = true
       }
     },
@@ -1057,7 +1080,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.dispatch('loadLanguages')
+    this.$store.dispatch('loadLanguages', this.$i18n.locale)
   }
 }
 </script>

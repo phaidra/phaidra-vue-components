@@ -3725,7 +3725,7 @@ export default {
         '@id': 'zgh',
         'skos:prefLabel': {
           'eng': 'Standard Moroccan Tamazight',
-          'deu': '',
+          'deu': 'Standard Moroccan Tamazight',
           'fra': 'amazighe standard marocain'
         }
       },
