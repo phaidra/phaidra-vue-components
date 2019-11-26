@@ -293,6 +293,7 @@ const fields = [
     predicate: 'dce:subject',
     component: 'p-keyword',
     suggester: 'keywordsuggester',
+    disableSuggest: false,
     multiplicable: true,
     multilingual: true,
     label: 'Keywords',

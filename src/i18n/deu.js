@@ -47,6 +47,9 @@ export default {
   'All rights reserved': 'alle Rechte vorbehalten',
   'Public Domain Mark': 'Public Domain Marke',
 
+  'Page start': 'Seitenanfang',
+  'Page end': 'Seitenende',
+
   'More': 'Mehr',
   'Contact': 'Kontakt',
   'Add owner': 'Owner auswählen',

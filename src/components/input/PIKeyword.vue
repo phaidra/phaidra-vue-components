@@ -7,7 +7,7 @@
         v-on:change="$emit('input', htmlToPlaintext($event))"
         :items="items"
         :loading="loading"
-        :search-input.sync="search"
+        :search-input.sync="disableSuggest ? null : search"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
         hide-no-data
@@ -122,6 +122,10 @@ export default {
       default: 500
     },
     showIds: {
+      type: Boolean,
+      default: false
+    },
+    disableSuggest: {
       type: Boolean,
       default: false
     }
