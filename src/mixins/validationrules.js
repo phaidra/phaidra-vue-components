@@ -33,6 +33,8 @@ export const validationrules = {
   methods: {
     getIdentifierRuleName: function (type) {
       switch (type) {
+        case 'ids:isbn':
+          return 'isbn'
         case 'ids:doi':
           return 'doi'
         case 'ids:hdl':
@@ -65,6 +67,9 @@ export const validationrules = {
       return regexORCID.test(str)
     },
     isValidGND: function (str) {
+      return true
+    },
+    isValidISBN: function (str) {
       return true
     },
     isValidVIAF: function (str) {
@@ -133,6 +138,9 @@ export const validationrules = {
         },
         duration: value => {
           return typeof value === 'undefined' || value === '' || this.isValidDuration(value) || 'Invalid duration'
+        },
+        isbn: value => {
+          return typeof value === 'undefined' || value === '' || this.isValidISBN(value) || 'Invalid ISBN'
         },
         doi: value => {
           return typeof value === 'undefined' || value === '' || this.isValidDOI(value) || 'Invalid DOI'

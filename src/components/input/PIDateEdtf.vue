@@ -30,6 +30,7 @@
       <template v-if="picker">
         <v-text-field
           :value="value"
+          v-on:blur="$emit('input-date',$event.target.value)"
           :label="$t(dateLabel ? dateLabel : 'Date')"
           :required="required"
           :rules="[validationrules.date]"
