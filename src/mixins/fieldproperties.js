@@ -3,6 +3,10 @@ export const fieldproperties = {
     multiplicable: {
       type: Boolean
     },
+    multiplicableCleared: {
+      type: Boolean,
+      default: false
+    },
     ordered: {
       type: Boolean
     },
@@ -30,6 +34,9 @@ export const fieldproperties = {
           }
           if (this.multiplicable) {
             arr.push({ title: this.$t('Duplicate'), event: 'add' })
+          }
+          if (this.multiplicableCleared) {
+            arr.push({ title: this.$t('Add'), event: 'add-clear' })
           }
           if (this.ordered) {
             arr.push({ title: this.$t('Move up'), event: 'up' })

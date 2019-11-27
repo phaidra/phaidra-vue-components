@@ -50,6 +50,7 @@ export default {
   'Page start': 'Seitenanfang',
   'Page end': 'Seitenende',
 
+  'Add': 'Hinzufügen',
   'More': 'Mehr',
   'Contact': 'Kontakt',
   'Add owner': 'Owner auswählen',
