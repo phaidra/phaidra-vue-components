@@ -208,7 +208,6 @@
                     <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event" @order-saved="orderSaved($event)"></p-m-sort>
                     <p-m-rights :pid="pid"></p-m-rights>
                     <p-m-relationships :pid="pid"></p-m-relationships>
-                    <p-m-files :pid="pid"></p-m-files>
                     <p-m-delete :pid="pid" :cmodel="loadedcmodel" :members="members"></p-m-delete>
                   </v-card-text>
                 </v-card>
@@ -293,7 +292,7 @@ export default {
   },
   data () {
     return {
-      window: 5,
+      window: 0,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -439,10 +438,8 @@ export default {
       this.loadMembers(pid)
       this.loadDoc(pid)
     },
-    loadDoc: function (pid) {
-      var self = this
-
-      this.members = []
+    loadDoc: async function (pid) {
+      this.piddoc = {}
 
       var params = {
         q: 'pid:"' + pid + '"',
@@ -451,29 +448,24 @@ export default {
         qf: 'pid^5'
       }
 
-      var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
-      var url = self.instance.solr + '/select?' + query
-      var promise = fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.response.numFound > 0) {
-            self.piddoc = json.response.docs[0]
-          } else {
-            self.piddoc = {}
-          }
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.instance.solr + '/select',
+          params: params
         })
-        .catch(function (error) {
-          console.log(error) // eslint-disable-line no-console
-        })
-
-      return promise
+        if (response.data.response.numFound > 0) {
+          this.piddoc = json.response.docs[0]
+        } else {
+          this.piddoc = {}
+        }
+      } catch (error) {
+        console.log(error) // eslint-disable-line no-console
+      } finally {
+        this.loading = false
+      }
     },
-    loadMembers: function (pid) {
-      var self = this
-
+    loadMembers: async function (pid) {
       this.members = []
 
       var params = {
@@ -485,44 +477,45 @@ export default {
         sort: 'pos_in_' + pid.replace(':', '_') + ' asc'
       }
 
-      var query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
-      var url = self.instance.solr + '/select?' + query
-      var promise = fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.response.numFound > 0) {
-            self.members = json.response.docs
-          } else {
-            self.members = []
-          }
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.instance.solr + '/select?',
+          params: params
         })
-        .catch(function (error) {
-          console.log(error) // eslint-disable-line no-console
-        })
-
-      return promise
+        if (response.data.response.numFound > 0) {
+          this.members = response.data.response.docs
+        } else {
+          this.members = []
+        }
+      } catch (error) {
+        console.log(error) // eslint-disable-line no-console
+      } finally {
+        this.loading = false
+      }
     },
-    loadMetadata: function (pid) {
+    loadMetadata: async function (pid) {
       this.loadedMetadata = []
-      var self = this
-      var url = self.$store.state.instanceconfig.api + '/object/' + pid + '/metadata?mode=resolved'
-      var promise = fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.metadata['JSON-LD']) {
-            return json.metadata['JSON-LD']
+      this.loading = true
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.instanceconfig.api + '/object/' + pid + '/metadata',
+          params: {
+            mode: 'resolved'
           }
         })
-        .catch(function (error) {
-          console.log(error) // eslint-disable-line no-console
-        })
-      return promise
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        if (response.data.metadata['JSON-LD']) {
+          return response.data.metadata['JSON-LD']
+        }
+      } catch (error) {
+        console.log(error) // eslint-disable-line no-console
+      } finally {
+        this.loading = false
+      }
     },
     loadDisplay: function () {
       this.displayjsonld = {}
@@ -639,6 +632,7 @@ export default {
       rt.value = this.contentmodel
       this.form.sections[0].fields.push(rt)
       this.form.sections[0].fields.push(fields.getField('title'))
+      this.form.sections[0].fields.push(fields.getField('keyword'))
       let containedIn = fields.getField('contained-in')
       containedIn.label = 'Book'
       containedIn.seriesLabel = 'Series'

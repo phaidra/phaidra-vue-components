@@ -659,33 +659,31 @@ export default {
       this.$emit('load-form', form)
       this.activetab = 0
     },
-    saveAsTemplate: function () {
-      var self = this
+    saveAsTemplate: async function () {
       var httpFormData = new FormData()
       this.loading = true
       httpFormData.append('name', this.templatename)
       httpFormData.append('form', JSON.stringify(this.form))
-      var url = self.$store.state.instanceconfig.api + '/jsonld/template/add'
-      var promise = fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
+      try {
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.$store.state.instanceconfig.api + '/jsonld/template/add',
+          headers: {
+          'Content-Type': 'multipart/form-data',
           'X-XSRF-TOKEN': this.$store.state.user.token
-        },
-        body: httpFormData
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.alerts && json.alerts.length > 0) {
-            self.$store.commit('setAlerts', json.alerts)
-          }
-          self.loading = false
-          self.templatedialog = false
+          },
+          data: httpFormData
         })
-        .catch(function (error) {
-          console.log(error)
-        })
-      return promise
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+      } catch (error) {
+        console.log(error) // eslint-disable-line no-console
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
+        this.templatedialog = false
+      }
     },
     getObjectType: function (contentmodel) {
       switch (contentmodel) {
@@ -707,8 +705,7 @@ export default {
           return 'unknown'
       }
     },
-    submit: function () {
-      var self = this
+    submit: async function () {
       this.loading = true
       var httpFormData = new FormData()
 
@@ -744,68 +741,66 @@ export default {
           break
       }
 
-      httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
+      httpFormData.append('metadata', JSON.stringify(this.getMetadata()))
 
-      fetch(self.$store.state.instanceconfig.api + '/' + this.submittype + '/create', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          // 'Authorization': 'Basic ' + base64.encode(self.$store.state.instanceconfig.adminuser + ':' + self.$store.state.instanceconfig.adminpass),
+      try {
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.$store.state.instanceconfig.api + '/' + this.submittype + '/create',
+          headers: {
+          'Content-Type': 'multipart/form-data',
           'X-XSRF-TOKEN': this.$store.state.user.token
-        },
-        body: httpFormData
-      })
-        .then(response => response.json())
-        .then(function (json) {
-          if (json.alerts && json.alerts.length > 0) {
-            self.$store.commit('setAlerts', json.alerts)
-          }
-          self.loading = false
-          if (json.status === 200) {
-            if (json.pid) {
-              self.$emit('object-created', json.pid)
-            }
-          }
-          self.$vuetify.goTo(0)
+          },
+          data: httpFormData
         })
-        .catch(function (error) {
-          self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-          self.loading = false
-          self.$vuetify.goTo(0)
-        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        if (response.data.status === 200) {
+          if (response.data.pid) {
+            this.$emit('object-created', response.data.pid)
+          }
+        }
+      } catch (error) {
+        console.log(error) // eslint-disable-line no-console
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.$vuetify.goTo(0)
+        this.loading = false
+      }
     },
-    save: function () {
-      var self = this
+    save: async function () {
       this.loading = true
       var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify(self.getMetadata()))
-      fetch(self.$store.state.instanceconfig.api + '/object/' + self.targetpid + '/metadata', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'X-XSRF-TOKEN': self.$store.state.user.token
-        },
-        body: httpFormData
-      })
-        .then(response => response.json())
-        .then(function (json) {
-          if (json.alerts && json.alerts.length > 0) {
-            if (json.status === 401) {
-              json.alerts.push({ type: 'danger', msg: 'Please log in' })
-            }
-            self.$store.commit('setAlerts', json.alerts)
-          }
-          self.loading = false
-          if (json.status === 200) {
-            self.$emit('object-saved', self.targetpid)
-          }
-          self.$vuetify.goTo(0)
+      httpFormData.append('metadata', JSON.stringify(this.getMetadata()))
+      try {
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.$store.state.instanceconfig.api + '/object/' + this.targetpid + '/metadata',
+          headers: {
+          'Content-Type': 'multipart/form-data',
+          'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          data: httpFormData
         })
-        .catch(function (error) {
-          self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-          self.loading = false
-          self.$vuetify.goTo(0)
-        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          if (response.data.status === 401) {
+            response.data.alerts.push({ type: 'danger', msg: 'Please log in' })
+          }
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        if (response.data.status === 200) {
+          if (response.data.pid) {
+            this.$emit('object-saved', this.targetpid)
+          }
+        }
+      } catch (error) {
+        console.log(error) // eslint-disable-line no-console
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.$vuetify.goTo(0)
+        this.loading = false
+      }
     },
     addField: function (arr, f) {
       var newField = arrays.duplicate(arr, f)

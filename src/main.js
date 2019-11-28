@@ -10,6 +10,7 @@ import ita from './i18n/ita'
 import App from './App.vue'
 import moment from 'moment'
 import vuetify from './plugins/vuetify'
+import axios from 'axios'
 
 Vue.config.productionTip = false
 
@@ -73,6 +74,8 @@ const router = new VueRouter({
     }
   ]
 })
+
+Vue.prototype.$http = axios
 
 new Vue({
   store,

@@ -165,38 +165,33 @@ export default {
         return this.querySuggestions(value)
       }
     },
-    querySuggestions (q) {
-      var self = this
-
+    querySuggestions: async function (q) {
       if (q.length < this.min || !this.suggester) return
 
-      self.loading = true
+      this.loading = true
 
       var params = {
         suggest: true,
-        'suggest.dictionary': self.suggester,
+        'suggest.dictionary': this.suggester,
         wt: 'json',
         'suggest.q': q
       }
 
-      var query = qs.stringify(params)
-
-      fetch(self.$store.state.instanceconfig.solr + '/suggest?' + query, {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          self.items = []
-          for (var i = 0; i < json.suggest[self.suggester][q].suggestions.length; i++) {
-            self.items.push(json.suggest[self.suggester][q].suggestions[i].term)
-          }
-          self.loading = false
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.instanceconfig.solr + '/suggest',
+          params: params
         })
-        .catch(function (error) {
-          console.log(error)
-          self.loading = false
-        })
+        this.items = []
+        for (var i = 0; i < response.data.suggest[this.suggester][q].suggestions.length; i++) {
+          this.items.push(response.data.suggest[this.suggester][q].suggestions[i].term)
+        }
+      } catch (error) {
+        console.log(error) // eslint-disable-line no-console
+      } finally {
+        this.loading = false
+      }
     }
   }
 

@@ -346,6 +346,7 @@ import PDSeries from './PDSeries'
 import PDContainedIn from './PDContainedIn'
 import PDAdaptation from './PDAdaptation'
 import PDCitation from './PDCitation'
+import PDIdentifier from './PDIdentifier'
 import PDJsonldLayout from './PDJsonldLayout'
 import PIUnknownReadonly from '../input/PIUnknownReadonly'
 import { vocabulary } from '../../mixins/vocabulary'
@@ -388,6 +389,7 @@ export default {
     PDSeries,
     PDContainedIn,
     PDAdaptation,
+    PDIdentifier,
     PDCitation,
     PIUnknownReadonly
   },
