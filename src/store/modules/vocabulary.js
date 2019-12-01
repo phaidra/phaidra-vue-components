@@ -1,5 +1,6 @@
 import languages from '../../utils/lang'
 import orgunits from '../../utils/orgunits'
+import axios from 'axios'
 
 const state = {
   vocabularies: {
@@ -886,19 +887,19 @@ const actions = {
   },
   async loadOrgUnits ({ commit, rootState }, locale) {
     try {
-      let response = await fetch(rootState.instanceconfig.api + '/directory/org_get_units', {
+      let response = await axios.request({
         method: 'GET',
-        mode: 'cors'
+        url: rootState.instanceconfig.api + '/directory/org_get_units'
       })
-      let json = await response.json()
-      if (json.alerts && json.alerts.length > 0) {
-        commit('setAlerts', json.alerts)
+      if (response.data.alerts && response.data.alerts.length > 0) {
+        commit('setAlerts', response.data.alerts)
       }
       let terms = []
-      orgunits.getOrgUnitsTerms(terms, json.units, null)
-      commit('setOrgUnits', { tree: json.units, terms: terms })
+      orgunits.getOrgUnitsTerms(terms, response.data.units, null)
+      commit('setOrgUnits', { tree: response.data.units, terms: terms })
       commit('sortOrgUnits', locale)
     } catch (error) {
+      console.log(error)
       commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch org units: ' + error } ])
     }
   }

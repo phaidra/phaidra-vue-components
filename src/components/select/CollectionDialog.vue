@@ -83,29 +83,28 @@ export default {
     open: async function () {
       this.dialog = true
       this.loading = true
+      let params = {
+        q: '*:*',
+        defType: 'edismax',
+        wt: 'json',
+        start: 0,
+        rows: 1000,
+        sort: 'created desc',
+        fq: [ 'resourcetype:collection', 'owner:' + this.$store.state.user.username ]
+      }
       try {
-        let params = {
-          q: '*:*',
-          defType: 'edismax',
-          wt: 'json',
-          start: 0,
-          rows: 1000,
-          sort: 'created desc',
-          fq: [ 'resourcetype:collection', 'owner:' + this.$store.state.user.username ]
-        }
-        let query = qs.stringify(params, { encodeValuesOnly: true, indices: false })
-        let response = await fetch(this.instance.solr + '/select', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.solr + '/select',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          body: query
+          params: params
         })
-        let json = await response.json()
-        this.collections = json.response.docs
+         this.collections = response.data.response.docs
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.loading = false
       }

@@ -47,80 +47,72 @@ export default {
     }
   },
   methods: {
-    loadTemplate: function (tid) {
-      var self = this
+    loadTemplate: async function (tid) {
       this.loading = true
-      var url = self.$store.state.instanceconfig.api + '/jsonld/template/' + tid
-      var promise = fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
-        }
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.alerts && json.alerts.length > 0) {
-            self.$store.commit('setAlerts', json.alerts)
-          }
-          self.$emit('load-template', json.template.form)
-          self.loading = false
-        })
-        .catch(function (error) {
-          console.log(error)
-          self.loading = false
-        })
-      return promise
-    },
-    deleteTemplate: function (tid) {
-      if (confirm(this.$t('Are you sure you want to delete this template?'))) {
-        var self = this
-        this.loading = true
-        var url = self.$store.state.instanceconfig.api + '/jsonld/template/' + tid + '/remove'
-        var promise = fetch(url, {
-          method: 'POST',
-          mode: 'cors',
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.instanceconfig.api + '/jsonld/template/' + tid,
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-          .then(function (response) { return response.json() })
-          .then(function (json) {
-            if (json.alerts && json.alerts.length > 0) {
-              self.$store.commit('setAlerts', json.alerts)
-            }
-            self.loading = false
-            self.deletetempconfirm = false
-            self.loadTemplates()
-          })
-          .catch(function (error) {
-            console.log(error)
-            self.loading = false
-          })
-        return promise
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        this.$emit('load-template', response.data.template.form)
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
       }
     },
-    loadTemplates: function () {
-      var self = this
-      this.loading = true
-      var url = self.$store.state.instanceconfig.api + '/jsonld/templates' + ((this.tag && this.tag.length > 1) ? '?tag=' + this.tag : '')
-      var promise = fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
-        }
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          self.templates = json.templates
-          self.loading = false
-        })
-        .catch(function (error) {
+    deleteTemplate: async function (tid) {
+      if (confirm(this.$t('Are you sure you want to delete this template?'))) {
+        this.loading = true
+        try {
+          let response = await this.$http.request({
+            method: 'GET',
+            url: this.$store.state.instanceconfig.api + '/jsonld/template/' + tid + '/remove',
+            headers: {
+              'X-XSRF-TOKEN': this.$store.state.user.token
+            }
+          })
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
+          }
+          this.deletetempconfirm = false
+          this.loadTemplates()
+        } catch (error) {
           console.log(error)
-          self.loading = false
+          this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        } finally {
+          this.loading = false
+        }
+      }
+    },
+    loadTemplates: async function () {
+      this.loading = true
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.instanceconfig.api + '/jsonld/templates' + ((this.tag && this.tag.length > 1) ? '?tag=' + this.tag : ''),
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
         })
-      return promise
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        this.templates = json.templates
+        this.loading = false
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
+      }
     }
   },
   mounted: function () {

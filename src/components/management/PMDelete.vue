@@ -56,38 +56,34 @@ export default {
     }
   },
   methods: {
-    deleteObject: function (pid) {
-      var self = this
-      self.loading = true
-      var url = self.$store.state.instanceconfig.api + '/object/' + pid + '/delete'
-      var promise = fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
+    deleteObject: async function (pid) {
+      this.loading = true
+      try {
+        let response = await vm.$http.request({
+          method: 'POST',
+          url: this.$store.state.instanceconfig.api + '/object/' + pid + '/delete',
+          headers: {
           'X-XSRF-TOKEN': this.$store.state.user.token
-        }
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          if (json.status === 200) {
-            self.$emit('object-deleted', self.pid)
+          }
+        })
+        if (response.data.status === 200) {
+            this.$emit('object-deleted', this.pid)
           } else {
-            if (json.alerts && json.alerts.length > 0) {
-              self.$store.commit('setAlerts', json.alerts)
+            if (response.data.alerts && response.data.alerts.length > 0) {
+              this.$store.commit('setAlerts', response.data.alerts)
             }
           }
-          self.loading = false
-          self.dialog = false
-          self.$vuetify.goTo(0)
-        })
-        .catch(function (error) {
-          self.$store.commit('setAlerts', [{ type: 'danger', msg: 'Error deleting object: ' + error }])
-          console.log(error)
-          self.loading = false
-          self.dialog = false
-          self.$vuetify.goTo(0)
-        })
-      return promise
+          
+          this.dialog = false
+          this.$vuetify.goTo(0)
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: 'Error deleting object: ' + error }])
+      } finally {
+        this.loading = false
+        this.dialog = false
+        this.$vuetify.goTo(0)
+      }
     }
   }
 }

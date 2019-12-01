@@ -152,19 +152,18 @@ export default {
       if (this.loadedList) {
         this.membersLoading = true
         try {
-          let response = await fetch(this.instance.api + '/list/' + this.loadedList.listid, {
+          let response = await this.$http.request({
             method: 'GET',
-            mode: 'cors',
+            url: this.instance.api + '/list/' + this.loadedList.listid,
             headers: {
               'X-XSRF-TOKEN': this.$store.state.user.token
             }
           })
-          let json = await response.json()
           if (response.status === 200) {
-            this.members = json.list.members
+            this.members = response.data.list.members
           } else {
-            if (json.alerts && json.alerts.length > 0) {
-              this.$store.commit('setAlerts', json.alerts)
+            if (response.data.alerts && response.data.alerts.length > 0) {
+              this.$store.commit('setAlerts', response.data.alerts)
             }
           }
         } catch (error) {
@@ -210,25 +209,26 @@ export default {
       try {
         var httpFormData = new FormData()
         httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.members } }))
-        let response = await fetch(this.instance.api + '/collection/' + collection.pid + '/members/add', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/collection/' + collection.pid + '/members/add',
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
+          'Content-Type': 'multipart/form-data',
+          'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          body: httpFormData
+          data: httpFormData
         })
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
           this.$router.push({ name: 'detail', params: { pid: collection.pid } })
         } else {
-          let json = await response.json()
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
         }
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.loading = false
       }
@@ -247,35 +247,35 @@ export default {
         this.listsLoading = true
         var httpFormData = new FormData()
         httpFormData.append('name', this.newListName)
-        let response = await fetch(this.instance.api + '/list/add', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/list/add',
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
+          'Content-Type': 'multipart/form-data',
+          'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          body: httpFormData
+          data: httpFormData
         })
-        let json = await response.json()
-        if (response.status !== 200) {
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
-          }
-        } else {
+        if (response.data.status === 200) {
           this.newListName = ''
+        } else {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
+          }
         }
-        response = await fetch(this.instance.api + '/lists', {
+        response = await this.$http.request({
           method: 'GET',
-          mode: 'cors',
+          url: this.instance.api + '/lists',
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
+          'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        json = await response.json()
-        if (response.status === 200) {
-          this.lists = json.lists
+        if (response.data.status === 200) {
+          this.lists = response.data.lists
         }
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.listsLoading = false
       }
@@ -284,32 +284,31 @@ export default {
       this.deleteDialog = false
       this.listsLoading = true
       try {
-        let response = await fetch(this.instance.api + '/list/' + this.listToDelete.listid + '/remove', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/list/' + this.listToDelete.listid + '/remove',
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
+          'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        let json = await response.json()
-        if (response.status !== 200) {
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
+        if (response.data.status !== 200) {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
         }
-        response = await fetch(this.instance.api + '/lists', {
+        response = await this.$http.request({
           method: 'GET',
-          mode: 'cors',
+          url: this.instance.api + '/lists',
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
+          'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        json = await response.json()
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           this.lists = json.lists
         }
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.listsLoading = false
         this.listToDelete = null
@@ -320,33 +319,31 @@ export default {
         this.membersLoading = true
         var httpFormData = new FormData()
         httpFormData.append('members', JSON.stringify({ members: [ member ] }))
-        let response = await fetch(this.instance.api + '/list/' + this.loadedList.listid + '/members/remove', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/list/' + this.loadedList.listid + '/members/remove',
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          },
-          body: httpFormData
+          'X-XSRF-TOKEN': this.$store.state.user.token
+          }
         })
-        let json = await response.json()
-        if (response.status !== 200) {
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
+        if (response.data.status !== 200) {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
         }
-        response = await fetch(this.instance.api + '/list/' + this.loadedList.listid, {
+        response = await this.$http.request({
           method: 'GET',
-          mode: 'cors',
+          url: this.instance.api + '/list/' + this.loadedList.listid,
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
+          'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        json = await response.json()
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           this.members = json.list.members
         }
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.membersLoading = false
       }
@@ -356,24 +353,24 @@ export default {
     next(async vm => {
       vm.listsLoading = true
       try {
-        let response = await fetch(vm.instance.api + '/lists', {
+        let response = await vm.$http.request({
           method: 'GET',
-          mode: 'cors',
+          url: vm.instance.api + '/lists',
           headers: {
-            'X-XSRF-TOKEN': vm.$store.state.user.token
+          'X-XSRF-TOKEN': vm.$store.state.user.token
           }
         })
-        let json = await response.json()
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           vm.lists = json.lists
         } else {
-          if (json.alerts && json.alerts.length > 0) {
-            vm.$store.commit('setAlerts', json.alerts)
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            vm.$store.commit('setAlerts', response.data.alerts)
           }
         }
-        vm.listsLoading = false
       } catch (error) {
         console.log(error)
+        vm.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
         vm.listsLoading = false
       }
     })

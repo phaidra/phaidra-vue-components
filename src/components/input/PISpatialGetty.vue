@@ -122,51 +122,46 @@ export default {
     }
   },
   methods: {
-    resolve: function (uri) {
-      var self = this
+    resolve: async function (uri) {
 
       if (uri) {
-        self.loading = true
+        this.loading = true
 
         var params = {
           uri: uri
         }
 
-        var query = qs.stringify(params)
+        try {
+          let response = await this.$http.request({
+            method: 'GET',
+            url: this.$store.state.instanceconfig.api + '/resolve',
+            params: params
+          })
 
-        fetch(self.$store.state.instanceconfig.api + '/resolve/?' + query, {
-          method: 'GET',
-          mode: 'cors'
-        })
-          .then(function (response) {
-            return response.json()
-          })
-          .then(function (json) {
-            self.loading = false
-            self.preflabel = json[uri]['skos:prefLabel']
-            self.rdfslabel = json[uri]['rdfs:label']
-            for (var i = 0; i < self.rdfslabel.length; i++) {
-              self.resolved = '<a href="' + uri + '" target="_blank">' + self.rdfslabel[i]['@value'] + '</a>'
-            }
-            if (json[uri]['schema:GeoCoordinates']) {
-              self.coordinates = [
-                {
-                  '@type': 'schema:GeoCoordinates',
-                  'schema:latitude': [
-                    json[uri]['schema:GeoCoordinates']['schema:latitude']
-                  ],
-                  'schema:longitude': [
-                    json[uri]['schema:GeoCoordinates']['schema:longitude']
-                  ]
-                }
-              ]
-            }
-            self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel, coordinates: self.coordinates })
-          })
-          .catch(function (error) {
-            console.log(error)
-            self.loading = false
-          })
+          this.preflabel = response.data[uri]['skos:prefLabel']
+          this.rdfslabel = response.data[uri]['rdfs:label']
+          for (var i = 0; i < this.rdfslabel.length; i++) {
+            this.resolved = '<a href="' + uri + '" target="_blank">' + this.rdfslabel[i]['@value'] + '</a>'
+          }
+          if (response.data[uri]['schema:GeoCoordinates']) {
+            this.coordinates = [
+              {
+                '@type': 'schema:GeoCoordinates',
+                'schema:latitude': [
+                  response.data[uri]['schema:GeoCoordinates']['schema:latitude']
+                ],
+                'schema:longitude': [
+                  response.data[uri]['schema:GeoCoordinates']['schema:longitude']
+                ]
+              }
+            ]
+          }
+          this.$emit('resolve', { 'skos:prefLabel': this.preflabel, 'rdfs:label': this.rdfslabel, coordinates: this.coordinates })
+        } catch (error) {
+          console.log(error)
+        } finally {
+          this.loading = false
+        }
       }
     },
     querySuggestionsDebounce (q) {
@@ -179,7 +174,7 @@ export default {
         return this.querySuggestions(q)
       }
     },
-    querySuggestions (q) {
+    querySuggestions: async function (q) {
       var self = this
 
       self.loading = true
@@ -190,23 +185,21 @@ export default {
         searchstring: q
       }
 
-      var query = qs.stringify(params)
-
-      fetch(self.$store.state.appconfig.suggesters.getty + '?' + query, {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          for (var i = 0; i < json[1].length; i++) {
-            self.items.push({ text: json[1][i], value: json[3][i] })
-          }
-          self.loading = false
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.appconfig.suggesters.getty,
+          params: params
         })
-        .catch(function (error) {
-          console.log(error)
-        })
-        .finally(() => (self.loading = false))
+        this.items = []
+        for (var i = 0; i < response.data[1].length; i++) {
+          this.items.push({ text: response.data[1][i], value: response.data[3][i] })
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
     }
   },
   mounted: function () {

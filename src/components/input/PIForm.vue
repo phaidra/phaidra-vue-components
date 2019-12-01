@@ -678,7 +678,7 @@ export default {
           this.$store.commit('setAlerts', response.data.alerts)
         }
       } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.loading = false
@@ -762,7 +762,7 @@ export default {
           }
         }
       } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.$vuetify.goTo(0)
@@ -795,7 +795,7 @@ export default {
           }
         }
       } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.$vuetify.goTo(0)

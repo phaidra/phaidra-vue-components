@@ -94,44 +94,39 @@ export default {
     }
   },
   methods: {
-    resolve: function (uri) {
-      var self = this
+    resolve: async function (uri) {
 
       if (uri) {
-        self.loading = true
+        this.loading = true
 
         var params = {
           uri: uri
         }
 
-        var query = qs.stringify(params)
+        try {
+          let response = await this.$http.request({
+            method: 'GET',
+            url: this.$store.state.instanceconfig.api + '/resolve',
+            params: params
+          })
 
-        fetch(self.$store.state.instanceconfig.api + '/resolve/?' + query, {
-          method: 'GET',
-          mode: 'cors'
-        })
-          .then(function (response) {
-            return response.json()
-          })
-          .then(function (json) {
-            self.loading = false
-            self.preflabel = json[uri]['skos:prefLabel']
-            self.rdfslabel = json[uri]['rdfs:label']
-            if (self.rdfslabel) {
-              var rdfslabelarr = []
-              for (var i = 0; i < self.rdfslabel.length; i++) {
-                rdfslabelarr.push(self.rdfslabel[i]['@value'])
-              }
-              self.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'
-            } else {
-              self.resolved = ''
+          this.preflabel = response.data[uri]['skos:prefLabel']
+          this.rdfslabel = response.data[uri]['rdfs:label']
+          if (this.rdfslabel) {
+            var rdfslabelarr = []
+            for (var i = 0; i < this.rdfslabel.length; i++) {
+              rdfslabelarr.push(this.rdfslabel[i]['@value'])
             }
-            self.$emit('resolve', { 'skos:prefLabel': self.preflabel, 'rdfs:label': self.rdfslabel })
-          })
-          .catch(function (error) {
-            console.log(error)
-            self.loading = false
-          })
+            this.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'
+          } else {
+            this.resolved = ''
+          }
+          this.$emit('resolve', { 'skos:prefLabel': this.preflabel, 'rdfs:label': this.rdfslabel })
+        } catch (error) {
+          console.log(error)
+        } finally {
+          this.loading = false
+        }
       }
     },
     querySuggestionsDebounce (q) {
@@ -144,10 +139,8 @@ export default {
         return this.querySuggestions(q)
       }
     },
-    querySuggestions (q) {
-      var self = this
-
-      self.loading = true
+    querySuggestions: async function (q) {
+      this.loading = true
 
       var params = {
         count: 200,
@@ -162,23 +155,21 @@ export default {
         params['exact_type'] = this.exactvoc
       }
 
-      var query = qs.stringify(params)
-
-      fetch(self.$store.state.appconfig.suggesters.gnd + '?' + query, {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(function (response) { return response.json() })
-        .then(function (json) {
-          for (var i = 0; i < json[1].length; i++) {
-            self.items.push({ text: json[1][i], value: json[3][i] })
-          }
-          self.loading = false
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.appconfig.suggesters.gnd,
+          params: params
         })
-        .catch(function (error) {
-          console.log(error)
-        })
-        .finally(() => (self.loading = false))
+        this.items = []
+        for (var i = 0; i < response.data[1].length; i++) {
+          this.items.push({ text: response.data[1][i], value: response.data[3][i] })
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
     }
   },
   mounted: function () {

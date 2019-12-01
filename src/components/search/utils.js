@@ -3,12 +3,12 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
 
   for (let i = 0; i < sortdef.length; i++) {
     if (sortdef[i].active) {
-      searchdefarr.push('sortdef=' + window.encodeURIComponent(sortdef[i].id))
+      searchdefarr.push('sortdef=' + encodeURIComponent(sortdef[i].id))
     }
   }
 
   if (q) {
-    searchdefarr.push('q=' + window.encodeURIComponent(q))
+    searchdefarr.push('q=' + encodeURIComponent(q))
   }
   searchdefarr.push('page=' + page)
   if (pagesize) {
@@ -69,7 +69,7 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
     let v = corpAuthors.values[j]
     if (v !== '') {
       ands.push('(' + corpAuthors.field + ':"' + v + '")')
-      searchdefarr.push('fr=' + corpAuthors.field + '_' + window.encodeURIComponent(v))
+      searchdefarr.push('fr=' + corpAuthors.field + '_' + encodeURIComponent(v))
     }
   }
 
@@ -77,7 +77,7 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
     let v = persAuthors.values[j]
     if (v !== '') {
       ands.push('(' + persAuthors.field + ':"' + v + '")')
-      searchdefarr.push('fr=' + persAuthors.field + '_' + window.encodeURIComponent(v))
+      searchdefarr.push('fr=' + persAuthors.field + '_' + encodeURIComponent(v))
     }
   }
 
@@ -87,7 +87,7 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
       let v = field.values[j]
       if (v !== '') {
         ands.push('(' + field.field + ':"' + v + '")')
-        searchdefarr.push('fr=' + field.field + '_' + window.encodeURIComponent(v))
+        searchdefarr.push('fr=' + field.field + '_' + encodeURIComponent(v))
       }
     }
   }

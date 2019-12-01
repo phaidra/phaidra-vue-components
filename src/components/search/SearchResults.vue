@@ -146,25 +146,26 @@ export default {
       try {
         var httpFormData = new FormData()
         httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.selection } }))
-        let response = await fetch(this.instance.api + '/collection/' + collection.pid + '/members/add', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/collection/' + collection.pid + '/members/add',
           headers: {
+            'Content-Type': 'multipart/form-data',
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          body: httpFormData
+          data: httpFormData
         })
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
           this.$router.push({ name: 'detail', params: { pid: collection.pid } })
         } else {
-          let json = await response.json()
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
         }
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.loading = false
       }
@@ -173,25 +174,26 @@ export default {
       try {
         var httpFormData = new FormData()
         httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.selection } }))
-        let response = await fetch(this.instance.api + '/collection/' + collection.pid + '/members/remove', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/collection/' + collection.pid + '/members/remove',
           headers: {
+            'Content-Type': 'multipart/form-data',
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          body: httpFormData
+          data: httpFormData
         })
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
           this.$router.push({ name: 'detail', params: { pid: collection.pid } })
         } else {
-          let json = await response.json()
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
         }
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.loading = false
       }
@@ -200,25 +202,26 @@ export default {
       try {
         var httpFormData = new FormData()
         httpFormData.append('members', JSON.stringify({ members: this.selection }))
-        let response = await fetch(this.instance.api + '/list/' + list.listid + '/members/add', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/list/' + list.listid + '/members/add',
           headers: {
+            'Content-Type': 'multipart/form-data',
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          body: httpFormData
+          data: httpFormData
         })
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
         } else {
-          let json = await response.json()
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
         }
-        this.loading = false
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
         this.loading = false
       }
     },
@@ -226,25 +229,26 @@ export default {
       try {
         var httpFormData = new FormData()
         httpFormData.append('members', JSON.stringify({ members: this.selection }))
-        let response = await fetch(this.instance.api + '/list/' + list.listid + '/members/remove', {
+        let response = await this.$http.request({
           method: 'POST',
-          mode: 'cors',
+          url: this.instance.api + '/list/' + list.listid + '/members/remove',
           headers: {
+            'Content-Type': 'multipart/form-data',
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          body: httpFormData
+          data: httpFormData
         })
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
         } else {
-          let json = await response.json()
-          if (json.alerts && json.alerts.length > 0) {
-            this.$store.commit('setAlerts', json.alerts)
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
         }
-        this.loading = false
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
         this.loading = false
       }
     },

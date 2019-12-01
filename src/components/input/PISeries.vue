@@ -300,43 +300,45 @@ export default {
       }
     },
     async suggestJournals (q) {
-      if (q.length < this.journalSearchMinLetters || !this.appconfig.apis.sherparomeo) return
+      if (process.browser) {
+        if (q.length < this.journalSearchMinLetters || !this.appconfig.apis.sherparomeo) return
 
-      this.journalSearchLoading = true
-      this.journalSearchItems = []
+        this.journalSearchLoading = true
+        this.journalSearchItems = []
 
-      var params = {
-        ak: this.appconfig.apis.sherparomeo.key,
-        versions: 'all',
-        qtype: 'contains',
-        jtitle: q
-      }
-
-      var query = qs.stringify(params)
-
-      try {
-        let response = await axios.request({
-          method: 'GET',
-          url: this.appconfig.apis.sherparomeo.url + '?' + query,
-          responseType: 'arraybuffer'
-        })
-        let utfxml = iconv.decode(Buffer.from(response.data), 'ISO-8859-1')
-        let dp = new window.DOMParser()
-        let obj = xmlUtils.xmlToJson(dp.parseFromString(utfxml, 'text/xml'))
-        for (let j of obj.romeoapi[1].journals.journal) {
-          this.journalSearchItems.push(
-            {
-              title: j.jtitle['#text'],
-              issn: j.issn['#text'],
-              romeopub: j.romeopub['#text'] ? j.romeopub['#text'] : this.$t('Not available')
-            }
-          )
+        var params = {
+          ak: this.appconfig.apis.sherparomeo.key,
+          versions: 'all',
+          qtype: 'contains',
+          jtitle: q
         }
-      } catch (error) {
-        console.log(error)
-        this.journalSearchErrors.push(error)
-      } finally {
-        this.journalSearchLoading = false
+
+        var query = qs.stringify(params)
+
+        try {
+          let response = await axios.request({
+            method: 'GET',
+            url: this.appconfig.apis.sherparomeo.url + '?' + query,
+            responseType: 'arraybuffer'
+          })
+          let utfxml = iconv.decode(Buffer.from(response.data), 'ISO-8859-1')
+          let dp = new window.DOMParser()
+          let obj = xmlUtils.xmlToJson(dp.parseFromString(utfxml, 'text/xml'))
+          for (let j of obj.romeoapi[1].journals.journal) {
+            this.journalSearchItems.push(
+              {
+                title: j.jtitle['#text'],
+                issn: j.issn['#text'],
+                romeopub: j.romeopub['#text'] ? j.romeopub['#text'] : this.$t('Not available')
+              }
+            )
+          }
+        } catch (error) {
+          console.log(error)
+          this.journalSearchErrors.push(error)
+        } finally {
+          this.journalSearchLoading = false
+        }
       }
     }
   }

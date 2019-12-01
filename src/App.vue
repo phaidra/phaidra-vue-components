@@ -460,7 +460,7 @@ export default {
           this.piddoc = {}
         }
       } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
       } finally {
         this.loading = false
       }
@@ -489,7 +489,7 @@ export default {
           this.members = []
         }
       } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
       } finally {
         this.loading = false
       }
@@ -512,7 +512,7 @@ export default {
           return response.data.metadata['JSON-LD']
         }
       } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
       } finally {
         this.loading = false
       }

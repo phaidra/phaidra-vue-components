@@ -188,7 +188,7 @@ export default {
           this.items.push(response.data.suggest[this.suggester][q].suggestions[i].term)
         }
       } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
       } finally {
         this.loading = false
       }

@@ -56,44 +56,42 @@ export default {
     }
   },
   methods: {
-    save: function () {
-      var self = this
-      self.loading = true
+    save: async function () {
+      this.loading = true
       let colorder = []
       let i = 0
       for (let m of this.membersdata) {
         i++
         colorder.push({ pid: m.pid, pos: i })
       }
-      var httpFormData = new FormData()
-      httpFormData.append('metadata', JSON.stringify({ metadata: { members: colorder } }))
-      fetch(self.instance.api + '/' + this.cmodel.toLowerCase() + '/' + self.pid + '/members/order', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'X-XSRF-TOKEN': self.$store.state.user.token
-        },
-        body: httpFormData
-      })
-        .then(response => response.json())
-        .then(function (json) {
-          if (json.alerts && json.alerts.length > 0) {
-            if (json.status === 401) {
-              json.alerts.push({ type: 'danger', msg: 'Please log in' })
-            }
-            self.$store.commit('setAlerts', json.alerts)
-          }
-          self.loading = false
-          if (json.status === 200) {
-            self.$emit('order-saved', self.pid)
-          }
-          self.$vuetify.goTo(0)
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('metadata', JSON.stringify({ metadata: { members: colorder } }))
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.api + '/' + this.cmodel.toLowerCase() + '/' + this.pid + '/members/order',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          data: httpFormData
         })
-        .catch(function (error) {
-          self.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-          self.loading = false
-          self.$vuetify.goTo(0)
-        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          if (response.data.status === 401) {
+            response.data.alerts.push({ type: 'danger', msg: 'Please log in' })
+          }
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        if (response.data.status === 200) {
+          this.$emit('order-saved', this.pid)
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
+        this.$vuetify.goTo(0)
+      }
     }
   }
 }

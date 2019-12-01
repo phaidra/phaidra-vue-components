@@ -36,23 +36,22 @@ export default {
     open: async function () {
       this.dialog = true
       this.loading = true
-      var url = this.$store.state.instanceconfig.api + '/directory/org_get_units'
       try {
-        let response = await fetch(url, {
+        let response = await this.$http.request({
           method: 'GET',
-          mode: 'cors',
+          url: this.$store.state.instanceconfig.api + '/directory/org_get_units',
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        let json = await response.json()
-        if (json.alerts && json.alerts.length > 0) {
-          this.$store.commit('setAlerts', json.alerts)
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
         }
-        this.orgunits = json.units
+        this.orgunits = response.data.units
         this.addNames(this.orgunits)
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.loading = false
       }

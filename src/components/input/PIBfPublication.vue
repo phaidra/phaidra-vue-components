@@ -286,42 +286,44 @@ export default {
       }
     },
     async suggestPublishers (q) {
-      if (q.length < this.publisherSearchMinLetters || !this.appconfig.apis.sherparomeo) return
+      if (process.browser) {
+        if (q.length < this.publisherSearchMinLetters || !this.appconfig.apis.sherparomeo) return
 
-      this.publisherSearchLoading = true
-      this.publisherSearchItems = []
+        this.publisherSearchLoading = true
+        this.publisherSearchItems = []
 
-      var params = {
-        ak: this.appconfig.apis.sherparomeo.key,
-        versions: 'all',
-        qtype: 'exact',
-        pub: q
-      }
-
-      var query = qs.stringify(params)
-
-      try {
-        let response = await axios.request({
-          method: 'GET',
-          url: this.appconfig.apis.sherparomeo.url + '?' + query,
-          responseType: 'arraybuffer'
-        })
-        let utfxml = iconv.decode(Buffer.from(response.data), 'ISO-8859-1')
-        let dp = new window.DOMParser()
-        let obj = xmlUtils.xmlToJson(dp.parseFromString(utfxml, 'text/xml'))
-        for (let p of obj.romeoapi[1].publishers.publisher) {
-          this.publisherSearchItems.push(
-            {
-              name: p.name['#text'],
-              alias: p.alias['#text']
-            }
-          )
+        var params = {
+          ak: this.appconfig.apis.sherparomeo.key,
+          versions: 'all',
+          qtype: 'exact',
+          pub: q
         }
-      } catch (error) {
-        console.log(error)
-        this.publisherSearchErrors.push(error)
-      } finally {
-        this.publisherSearchLoading = false
+
+        var query = qs.stringify(params)
+
+        try {
+          let response = await axios.request({
+            method: 'GET',
+            url: this.appconfig.apis.sherparomeo.url + '?' + query,
+            responseType: 'arraybuffer'
+          })
+          let utfxml = iconv.decode(Buffer.from(response.data), 'ISO-8859-1')
+          let dp = new window.DOMParser()
+          let obj = xmlUtils.xmlToJson(dp.parseFromString(utfxml, 'text/xml'))
+          for (let p of obj.romeoapi[1].publishers.publisher) {
+            this.publisherSearchItems.push(
+              {
+                name: p.name['#text'],
+                alias: p.alias['#text']
+              }
+            )
+          }
+        } catch (error) {
+          console.log(error)
+          this.publisherSearchErrors.push(error)
+        } finally {
+          this.publisherSearchLoading = false
+        }
       }
     },
     getParentPath: function (unit, parentpath) {

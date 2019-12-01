@@ -78,18 +78,18 @@ export default {
       this.dialog = true
       this.loading = true
       try {
-        let response = await fetch(this.instance.api + '/lists', {
+        let response = await this.$http.request({
           method: 'GET',
-          mode: 'cors',
+          url: this.instance.api + '/lists',
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        let json = await response.json()
-        this.lists = json.lists
-        this.loading = false
+        this.lists = response.data.lists
       } catch (error) {
         console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
         this.loading = false
       }
     },
