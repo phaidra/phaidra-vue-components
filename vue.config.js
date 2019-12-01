@@ -3,7 +3,7 @@ module.exports = {
     output: {
       library: 'PhaidraVueComponents',
       libraryExport: 'default'
-    },
+    }
     /*
     externals: {
       vue: {

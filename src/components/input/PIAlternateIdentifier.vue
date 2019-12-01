@@ -48,7 +48,7 @@
           <v-icon @click="$emit('remove', $event)">mdi-minus</v-icon>
         </v-col>
       </template>
-      <v-col cols="1" v-else="actions.length">
+      <v-col cols="1" v-else-if="actions.length">
         <v-menu open-on-hover bottom offset-y>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon>

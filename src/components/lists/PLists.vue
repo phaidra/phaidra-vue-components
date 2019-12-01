@@ -213,8 +213,8 @@ export default {
           method: 'POST',
           url: this.instance.api + '/collection/' + collection.pid + '/members/add',
           headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
           },
           data: httpFormData
         })
@@ -251,8 +251,8 @@ export default {
           method: 'POST',
           url: this.instance.api + '/list/add',
           headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
           },
           data: httpFormData
         })
@@ -267,7 +267,7 @@ export default {
           method: 'GET',
           url: this.instance.api + '/lists',
           headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
         if (response.data.status === 200) {
@@ -288,7 +288,7 @@ export default {
           method: 'POST',
           url: this.instance.api + '/list/' + this.listToDelete.listid + '/remove',
           headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
         if (response.data.status !== 200) {
@@ -300,11 +300,11 @@ export default {
           method: 'GET',
           url: this.instance.api + '/lists',
           headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
         if (response.data.status === 200) {
-          this.lists = json.lists
+          this.lists = response.data.lists
         }
       } catch (error) {
         console.log(error)
@@ -323,7 +323,7 @@ export default {
           method: 'POST',
           url: this.instance.api + '/list/' + this.loadedList.listid + '/members/remove',
           headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
         if (response.data.status !== 200) {
@@ -335,11 +335,11 @@ export default {
           method: 'GET',
           url: this.instance.api + '/list/' + this.loadedList.listid,
           headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
         if (response.data.status === 200) {
-          this.members = json.list.members
+          this.members = response.data.list.members
         }
       } catch (error) {
         console.log(error)
@@ -357,11 +357,11 @@ export default {
           method: 'GET',
           url: vm.instance.api + '/lists',
           headers: {
-          'X-XSRF-TOKEN': vm.$store.state.user.token
+            'X-XSRF-TOKEN': vm.$store.state.user.token
           }
         })
         if (response.data.status === 200) {
-          vm.lists = json.lists
+          vm.lists = response.data.lists
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
             vm.$store.commit('setAlerts', response.data.alerts)

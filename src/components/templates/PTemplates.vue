@@ -105,7 +105,7 @@ export default {
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
-        this.templates = json.templates
+        this.templates = response.data.templates
         this.loading = false
       } catch (error) {
         console.log(error)

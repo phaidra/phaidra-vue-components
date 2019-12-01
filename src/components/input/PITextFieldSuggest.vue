@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import qs from 'qs'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 

@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import qs from 'qs'
-
 export default {
   props: {
     id: String,

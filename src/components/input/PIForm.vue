@@ -669,8 +669,8 @@ export default {
           method: 'POST',
           url: this.$store.state.instanceconfig.api + '/jsonld/template/add',
           headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
           },
           data: httpFormData
         })
@@ -748,8 +748,8 @@ export default {
           method: 'POST',
           url: this.$store.state.instanceconfig.api + '/' + this.submittype + '/create',
           headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
           },
           data: httpFormData
         })
@@ -778,8 +778,8 @@ export default {
           method: 'POST',
           url: this.$store.state.instanceconfig.api + '/object/' + this.targetpid + '/metadata',
           headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
           },
           data: httpFormData
         })

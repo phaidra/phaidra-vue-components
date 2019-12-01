@@ -150,7 +150,10 @@ export default {
         let response = await this.$http.request({
           method: 'GET',
           url: this.instance.solr + '/select',
-          params: params
+          params: params,
+          paramsSerializer: function (params) {
+            return qs.stringify(params, { arrayFormat: 'repeat' })
+          }
         })
         this.docs = response.data.response.docs
         this.total = response.data.response.numFound
@@ -181,7 +184,10 @@ export default {
           let response = await this.$http.request({
             method: 'POST',
             url: this.instance.solr + '/select',
-            params: params
+            params: params,
+            paramsSerializer: function (params) {
+              return qs.stringify(params, { arrayFormat: 'repeat' })
+            }
           })
           return response.data.response.docs
         } catch (error) {

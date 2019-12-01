@@ -248,7 +248,6 @@
 </template>
 
 <script>
-import qs from 'qs'
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
 import PMDelete from '@/components/management/PMDelete'
@@ -455,7 +454,7 @@ export default {
           params: params
         })
         if (response.data.response.numFound > 0) {
-          this.piddoc = json.response.docs[0]
+          this.piddoc = response.data.response.docs[0]
         } else {
           this.piddoc = {}
         }

@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import qs from 'qs'
 import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
@@ -95,7 +94,6 @@ export default {
   },
   methods: {
     resolve: async function (uri) {
-
       if (uri) {
         this.loading = true
 

@@ -59,23 +59,23 @@ export default {
     deleteObject: async function (pid) {
       this.loading = true
       try {
-        let response = await vm.$http.request({
+        let response = await this.$http.request({
           method: 'POST',
           url: this.$store.state.instanceconfig.api + '/object/' + pid + '/delete',
           headers: {
-          'X-XSRF-TOKEN': this.$store.state.user.token
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
         if (response.data.status === 200) {
-            this.$emit('object-deleted', this.pid)
-          } else {
-            if (response.data.alerts && response.data.alerts.length > 0) {
-              this.$store.commit('setAlerts', response.data.alerts)
-            }
+          this.$emit('object-deleted', this.pid)
+        } else {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
           }
-          
-          this.dialog = false
-          this.$vuetify.goTo(0)
+        }
+
+        this.dialog = false
+        this.$vuetify.goTo(0)
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: 'Error deleting object: ' + error }])

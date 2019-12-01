@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import qs from 'qs'
-
 export default {
   name: 'collection-dialog',
   computed: {
@@ -101,7 +99,7 @@ export default {
           },
           params: params
         })
-         this.collections = response.data.response.docs
+        this.collections = response.data.response.docs
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
