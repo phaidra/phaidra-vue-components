@@ -910,8 +910,16 @@ const fields = [
     component: 'p-filename-readonly',
     label: '',
     value: '',
-    readonly: true,
     definition: 'Filename readonly.'
+  },
+  {
+    id: 'filename',
+    fieldname: 'Filename',
+    predicate: 'ebucore:filename',
+    component: 'p-filename',
+    label: '',
+    value: '',
+    definition: 'Filename. Filename is also automatically provided when using the \'File\' field.'
   },
   {
     id: 'readonly',

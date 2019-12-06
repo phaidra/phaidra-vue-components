@@ -29,6 +29,7 @@ import PIEntity from './input/PIEntity.vue'
 import PIEntityExtended from './input/PIEntityExtended'
 import PIDateEdtf from './input/PIDateEdtf.vue'
 import PIFilenameReadonly from './input/PIFilenameReadonly.vue'
+import PIFilename from './input/PIFilename.vue'
 import PIForm from './input/PIForm.vue'
 import PIFunder from './input/PIFunder.vue'
 import PIAssociation from './input/PIAssociation.vue'
@@ -93,6 +94,7 @@ const Components = {
   PIEntityExtended,
   PIDateEdtf,
   PIFilenameReadonly,
+  PIFilename,
   PIFile,
   PIForm,
   PIFunder,

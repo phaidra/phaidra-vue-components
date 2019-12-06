@@ -372,6 +372,13 @@
                     ></p-i-association>
                   </template>
 
+                  <template v-else-if="f.component === 'p-filename'">
+                    <p-i-filename
+                      v-bind.sync="f"
+                      v-on:input-value="f.value=$event"
+                    ></p-i-filename>
+                  </template>
+
                   <template v-else-if="f.component === 'p-filename-readonly'">
                     <p-i-filename-readonly v-bind.sync="f"></p-i-filename-readonly>
                   </template>

@@ -4,7 +4,7 @@
       <v-text-field
         :value="value"
         :label="$t('Filename')"
-        readonly
+        v-on:blur="$emit('input-value',$event.target.value)"
         filled
       ></v-text-field>
     </v-col>
@@ -13,7 +13,7 @@
 <script>
 
 export default {
-  name: 'p-i-filename-readonly',
+  name: 'p-i-filename',
   props: {
     value: {
       type: String

@@ -669,7 +669,7 @@ export default {
 
             // ebucore:filename
             case 'ebucore:filename':
-              f = fields.getField('filename-readonly')
+              f = fields.getField('filename')
               f.predicate = key
               f.label = key
               f.value = value[i]
