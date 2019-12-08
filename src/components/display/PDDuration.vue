@@ -1,16 +1,17 @@
 <template>
   <v-row>
-    <v-col md="2" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
-    <v-col md="10" cols="12"><template v-if="duration.hours > 0">{{ duration.hours }} {{$t('hours') + ' '}}</template> <template v-if="duration.minutes > 0">{{ duration.minutes }} {{$t('minutes') + ' '}}</template> <template v-if="duration.seconds > 0">{{ duration.seconds }} {{$t('seconds')}}</template></v-col>
+    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
+    <v-col :md="valueColMd" cols="12"><template v-if="duration.hours > 0">{{ duration.hours }} {{$t('hours') + ' '}}</template> <template v-if="duration.minutes > 0">{{ duration.minutes }} {{$t('minutes') + ' '}}</template> <template v-if="duration.seconds > 0">{{ duration.seconds }} {{$t('seconds')}}</template></v-col>
   </v-row>
 </template>
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import { displayproperties } from '../../mixins/displayproperties'
 
 export default {
   name: 'p-d-duration',
-  mixins: [vocabulary],
+  mixins: [vocabulary, displayproperties],
   props: {
     o: {
       type: String,

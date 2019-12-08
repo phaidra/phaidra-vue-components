@@ -1,16 +1,17 @@
 <template>
   <v-row>
-    <v-col md="2" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
-    <v-col md="10" cols="12"><a :href="getIDResolverURL(o)" target="_blank">{{ o['@value'] }}</a></v-col>
+    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
+    <v-col :md="valueColMd" cols="12"><a :href="getIDResolverURL(o)" target="_blank">{{ o['@value'] }}</a></v-col>
   </v-row>
 </template>
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import { displayproperties } from '../../mixins/displayproperties'
 
 export default {
   name: 'p-d-identifier',
-  mixins: [vocabulary],
+  mixins: [vocabulary, displayproperties],
   props: {
     o: {
       type: Object,
