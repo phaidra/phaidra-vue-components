@@ -293,7 +293,7 @@ export default {
   },
   data () {
     return {
-      window: 0,
+      window: 5,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -307,11 +307,11 @@ export default {
       members: [],
       pid: '',
       piddoc: {},
-      collection: '',
+      collection: 'o:724719',
       sampleCollection: 'o:541829',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
-      phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
-      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra',
+      phaidrabaseurl: 'phaidra.univie.ac.at',
+      apibaseurl: 'https://services.phaidra.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''
@@ -740,15 +740,33 @@ export default {
       this.form.sections[3].fields.push(fields.getField('role'))
       this.form.sections[3].fields.push(fields.getField('license'))
       this.form.sections[3].fields.push(fields.getField('rights'))
+    },
+    getCookie: function (name) {
+      var value = '; ' + document.cookie
+      var parts = value.split('; ' + name + '=')
+      if (parts.length === 2) {
+        var val = parts.pop().split(';').shift()
+        return val === ' ' ? null : val
+      }
     }
   },
-  mounted: function () {
+  created: function () {
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
     this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
     this.$store.commit('initStore')
+  },
+  mounted: function () {
+    var token = this.getCookie('X-XSRF-TOKEN')
+    if (token) {
+      this.$store.commit('setToken', token)
+      if (!this.$store.state.user.username) {
+        this.$store.dispatch('getLoginData')
+      }
+    }
+    
 
     this.createSimpleForm()
   }

@@ -148,11 +148,11 @@ export default {
 
       try {
         let response = await this.$http.request({
-          method: 'GET',
+          method: 'POST',
           url: this.instance.solr + '/select',
-          params: params,
-          paramsSerializer: function (params) {
-            return qs.stringify(params, { arrayFormat: 'repeat' })
+          data: qs.stringify(params, { arrayFormat: 'repeat' }),
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded'
           }
         })
         this.docs = response.data.response.docs
@@ -184,9 +184,9 @@ export default {
           let response = await this.$http.request({
             method: 'POST',
             url: this.instance.solr + '/select',
-            params: params,
-            paramsSerializer: function (params) {
-              return qs.stringify(params, { arrayFormat: 'repeat' })
+            data: qs.stringify(params, { arrayFormat: 'repeat' }),
+            headers: {
+              'content-type': 'application/x-www-form-urlencoded'
             }
           })
           return response.data.response.docs
