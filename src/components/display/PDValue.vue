@@ -1,13 +1,16 @@
 <template>
   <v-row>
-    <v-col md="2" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
-    <v-col md="10" cols="12">{{ o }}</v-col>
+    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
+    <v-col :md="valueColMd" cols="12">{{ o }}</v-col>
   </v-row>
 </template>
 
 <script>
+import { displayproperties } from '../../mixins/displayproperties'
+
 export default {
   name: 'p-d-value',
+  mixins: [displayproperties],
   props: {
     o: {
       type: String,

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import store from './store'
 import VueRouter from 'vue-router'
-import Vuetify from 'vuetify/lib'
 import VueI18n from 'vue-i18n'
 import SvgIcon from 'vue-svgicon'
 import eng from './i18n/eng'
@@ -15,7 +14,6 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-Vue.use(Vuetify)
 Vue.use(VueI18n)
 Vue.use(SvgIcon, {
   tagName: 'icon',

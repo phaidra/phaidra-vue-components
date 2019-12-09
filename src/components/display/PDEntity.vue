@@ -1,7 +1,7 @@
 <template>
   <v-row v-if="entity">
-    <v-col md="2" cols="12" class="pdlabel primary--text text-right"><span v-show="!hideLabel">{{ getLocalizedTermLabel(this.role) }}</span></v-col>
-    <v-col md="10" cols="12">
+    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right"><span v-show="!hideLabel">{{ getLocalizedTermLabel(this.role) }}</span></v-col>
+    <v-col :md="valueColMd" cols="12">
       <template v-if="entity['@type'] === 'schema:Person'">
         <template v-if="entity['skos:exactMatch']">
           <a class="valuefield" :href="getIDResolverURL(entity['skos:exactMatch'][0])" target="_blank">
@@ -40,10 +40,11 @@
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import { displayproperties } from '../../mixins/displayproperties'
 
 export default {
   name: 'p-d-entity',
-  mixins: [vocabulary],
+  mixins: [vocabulary, displayproperties],
   props: {
     entity: {
       type: Object,

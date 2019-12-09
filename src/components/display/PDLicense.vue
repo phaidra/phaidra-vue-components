@@ -1,8 +1,8 @@
 <template>
   <a v-if="hideLabel" :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
   <v-row v-else>
-    <v-col md="2" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
-    <v-col md="10" cols="12">
+    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
+    <v-col :md="valueColMd" cols="12">
       <a :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
       <!--
         <v-img :src="'../../assets/' + getTermProperty('licenses', o, 'img')" :alt="o" class="license-icon"/>
@@ -13,10 +13,11 @@
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import { displayproperties } from '../../mixins/displayproperties'
 
 export default {
   name: 'p-d-license',
-  mixins: [vocabulary],
+  mixins: [vocabulary, displayproperties],
   props: {
     o: {
       type: String,

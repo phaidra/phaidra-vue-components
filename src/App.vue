@@ -136,6 +136,8 @@
                     <p-d-jsonld
                       :jsonld="displayjsonld"
                       :pid="pid"
+                      :labelColMd="'2'"
+                      :valueColMd="'10'"
                     ></p-d-jsonld>
                   </v-card-text>
                 </v-card>

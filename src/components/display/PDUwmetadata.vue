@@ -114,10 +114,11 @@
 <script>
 import PDLicense from './PDLicense'
 import { vocabulary } from '../../mixins/vocabulary'
+import { displayproperties } from '../../mixins/displayproperties'
 
 export default {
   name: 'p-d-uwmetadata',
-  mixins: [vocabulary],
+  mixins: [vocabulary, displayproperties],
   props: {
     pid: {
       type: String
