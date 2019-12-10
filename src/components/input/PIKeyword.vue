@@ -3,26 +3,26 @@
     <v-col cols="12" :md="multilingual ? 8 : 10">
       <v-combobox
         v-model="model"
-        v-on:input="$emit('input', htmlToPlaintext($event))"
-        v-on:change="$emit('input', htmlToPlaintext($event))"
+        v-on:input="onInput($event)"
+        v-on:change="onInput($event)"
         :items="items"
         :loading="loading"
         :search-input.sync="disableSuggest ? null : search"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
         hide-no-data
-        item-text="text"
-        item-value="value"
+        :item-text="'term'"
+        :item-value="'payload'"
         :label="$t(label)"
         multiple
         clearable
         chips
         deletable-chips
-       filled
+        filled
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
-            <v-list-item-title inset v-html="item"></v-list-item-title>
+            <v-list-item-title inset v-html="item.term"></v-list-item-title>
           </v-list-item-content>
         </template>
         <template
@@ -35,7 +35,6 @@
             :disabled="data.disabled"
             class="v-chip--select-multi"
             @click:close="removeKeyword(data.item)"
-            @input="data.parent.selectItem(data.item)"
           >
             {{ htmlToPlaintext(data.item) }}
           </v-chip>
@@ -51,7 +50,7 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-       filled
+        filled
         return-object
         clearable
       >
@@ -96,7 +95,7 @@ export default {
   mixins: [vocabulary, fieldproperties],
   props: {
     value: {
-      type: String,
+      type: Array,
       required: true
     },
     language: {
@@ -133,7 +132,7 @@ export default {
     return {
       items: [],
       loading: false,
-      model: this.value ? this.value.split(',') : this.value,
+      model: this.value,
       search: null
     }
   },
@@ -142,10 +141,21 @@ export default {
       val && this.querySuggestionsDebounce(val)
     },
     value (val) {
-      this.model = this.value ? this.value.split(',') : this.value
+      this.model = this.value
     }
   },
   methods: {
+    onInput (value) {
+      let arr = []
+      for (let v of value) {
+        if (v.payload) {
+          arr.push(v.payload)
+        } else {
+          arr.push(v)
+        }
+      }
+      this.$emit('input', arr)
+    },
     removeKeyword (keyword) {
       arrayUtils.remove(this.model, keyword)
     },
@@ -184,7 +194,7 @@ export default {
         })
         this.items = []
         for (var i = 0; i < response.data.suggest[this.suggester][q].suggestions.length; i++) {
-          this.items.push(response.data.suggest[this.suggester][q].suggestions[i].term)
+          this.items.push(response.data.suggest[this.suggester][q].suggestions[i])
         }
       } catch (error) {
         console.log(error)

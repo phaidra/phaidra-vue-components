@@ -293,7 +293,7 @@ export default {
   },
   data () {
     return {
-      window: 5,
+      window: 0,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -309,9 +309,9 @@ export default {
       piddoc: {},
       collection: 'o:724719',
       sampleCollection: 'o:541829',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra',
-      phaidrabaseurl: 'phaidra.univie.ac.at',
-      apibaseurl: 'https://services.phaidra.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
+      phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
+      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''
@@ -634,10 +634,10 @@ export default {
       this.form.sections[0].fields.push(rt)
       this.form.sections[0].fields.push(fields.getField('title'))
       this.form.sections[0].fields.push(fields.getField('keyword'))
-      let containedIn = fields.getField('contained-in')
+      /* let containedIn = fields.getField('contained-in')
       containedIn.label = 'Book'
       containedIn.seriesLabel = 'Series'
-      this.form.sections[0].fields.push(containedIn)
+      this.form.sections[0].fields.push(containedIn) */
 
       this.form.sections[1].fields.push(fields.getField('file'))
       this.form.sections[1].fields.push(fields.getField('license'))

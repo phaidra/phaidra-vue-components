@@ -297,7 +297,7 @@ const fields = [
     multiplicable: true,
     multilingual: true,
     label: 'Keywords',
-    value: '',
+    value: [],
     language: '',
     definition: 'The topic of the resource, represented using keywords.'
   },

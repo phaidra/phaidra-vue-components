@@ -4,6 +4,32 @@ export default {
   json2components: function (jsonld) {
     var components = []
 
+    // all dce:subjects in the same language are handled by 1 component
+    let keywords = {}
+    Object.entries(jsonld).forEach(([key, value]) => {
+      if (key === 'dce:subject') {
+        for (let v of value) {
+          if (v['@type'] === 'skos:Concept') {
+            for (let pl of v['skos:prefLabel']) {
+              let lang = pl['@language'] ? pl['@language'] : 'xxx'
+              if (!keywords[lang]) {
+                keywords[lang] = []
+              }
+              keywords[lang].push(pl['@value'])
+            }
+          }
+        }
+      }
+    })
+    Object.entries(keywords).forEach(([key, value]) => {
+      let f = fields.getField('keyword')
+      if (key !== 'xxx') {
+        f.language = key
+      }
+      f.value = value
+      components.push(f)
+    })
+
     Object.entries(jsonld).forEach(([key, value]) => {
       if (key !== '@type') {
         var i
@@ -145,15 +171,8 @@ export default {
 
             // dce:subject
             case 'dce:subject':
-              if (value[i]['@type'] === 'skos:Concept') {
-                f = fields.getField('keyword')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
-                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
-                }
-                components.push(f)
-              }
-              break
+              // noop - we handled this already
+              break;
 
             // dcterms:subject
             case 'dcterms:subject':
@@ -168,8 +187,9 @@ export default {
                   }
                 }
                 if (value[i]['skos:notation']) {
+                  f['skos:notation'] = []
                   for (j = 0; j < value[i]['skos:notation'].length; j++) {
-                    f['skos:notation'] = value[i]['skos:notation'][j]
+                    f['skos:notation'].push(value[i]['skos:notation'][j])
                   }
                 }
                 f.predicate = key
@@ -1827,7 +1847,9 @@ export default {
 
         case 'dce:subject':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'skos:Concept'))
+            for (let kw of f.value) {
+              this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': kw, '@language': f.language }], null, 'skos:Concept'))
+            }
           }
           break
 

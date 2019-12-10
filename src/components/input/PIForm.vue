@@ -523,6 +523,7 @@ import PICitation from './PICitation'
 import PIBfPublication from './PIBfPublication'
 import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
+import PIFilename from './PIFilename'
 import PIFile from './PIFile'
 import PISpatialGettyReadonly from './PISpatialGettyReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
@@ -560,6 +561,7 @@ export default {
     PILiteral,
     PIKeyword,
     PIFilenameReadonly,
+    PIFilename,
     PIFile,
     PIVocabExtReadonly,
     PISpatialGettyReadonly,

@@ -8,7 +8,11 @@
         :label="$t(label)"
         readonly
        filled
-      ></v-text-field>
+      >
+        <template v-slot:message="{ message, key }">
+          <span v-html="message"></span>
+        </template>
+      </v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
@@ -55,21 +59,19 @@ export default {
       return prefLabel
     },
     notation: function () {
-      var i
-      if (this['skos:notation']) {
-        for (i = 0; i < this['skos:notation'].length; i++) {
-          return this['skos:notation'][i]
-        }
+      for (let n of this['skos:notation']) {
+        return n
       }
       return false
     },
     messages: function () {
-      var ret
-      if (this['skos:exactMatch']) {
-        ret = '<a href="' + this['skos:exactMatch'][0] + '" target="_blank">' + this['skos:exactMatch'][0] + '</a>'
+      let ret
+      let not
+      for (let n of this['skos:notation']) {
+        not = n
       }
-      if (this['skos:notation']) {
-        ret = ret + (ret ? ret + ' ' : '') + 'Notation: ' + this['skos:notation']
+      if (this['skos:exactMatch']) {
+        ret = '<a href="' + this['skos:exactMatch'][0] + '" target="_blank">' + this['skos:exactMatch'][0] + '</a>' + (this.notation ? ' Notation: ' + this.notation : '')
       }
       return ret
     }

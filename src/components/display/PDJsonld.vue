@@ -9,6 +9,10 @@
       </v-row>
     </template>
 
+    <template slot="dce:subject">
+      <p-d-keyword :p="'dce:subject'" :language="language" :keywords="keywords" v-for="(keywords, language) in langKeywords" :key="componentid+'kw'+language" v-bind.sync="displayProperties"></p-d-keyword>
+    </template>
+
     <template v-for="(o, p) in jsonld">
 
         <template v-if="p==='rdam:P30004'" slot="rdam:P30004">
@@ -58,10 +62,6 @@
 
         <template v-else-if="p==='bf:tableOfContents'" slot="bf:tableOfContents">
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'toc'+j" v-bind.sync="displayProperties"></p-d-skos-preflabel>
-        </template>
-
-        <template v-else-if="p==='dce:subject'" slot="dce:subject">
-          <p-d-keyword :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'keyword'+j" v-bind.sync="displayProperties"></p-d-keyword>
         </template>
 
         <template v-else-if="p==='dcterms:language'" slot="dcterms:language">
@@ -309,6 +309,8 @@
 
         <template v-else-if="p==='@type'"></template>
 
+        <template v-else-if="p==='dce:subject'"></template>
+
         <template v-else-if="p==='phaidra:systemTag'" slot="phaidra:systemTag">
           <p-d-value v-if="showSystemFields" :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'systemTag'+j" v-bind.sync="displayProperties"></p-d-value>
         </template>
@@ -406,6 +408,27 @@ export default {
         labelColMd: this.labelColMd,
         valueColMd: this.valueColMd
       }
+    },
+    langKeywords: function () {
+      let hash = {}
+      if (this.jsonld) {
+        Object.entries(this.jsonld).forEach(([key, value]) => {
+          if (key === 'dce:subject') {
+            for (let v of value) {
+              if (v['@type'] === 'skos:Concept') {
+                for (let pl of v['skos:prefLabel']) {
+                  let lang = pl['@language'] ? pl['@language'] : 'xxx'
+                  if (!hash[lang]) {
+                    hash[lang] = []
+                  }
+                  hash[lang].push(pl['@value'])
+                }
+              }
+            }
+          }
+        })
+      }
+      return hash
     }
   },
   data () {
