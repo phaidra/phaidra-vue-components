@@ -10,7 +10,7 @@
     </template>
 
     <template slot="dce:subject">
-      <p-d-keyword :p="'dce:subject'" :language="language" :keywords="keywords" v-for="(keywords, language) in langKeywords" :key="componentid+'kw'+language" v-bind.sync="displayProperties"></p-d-keyword>
+      <p-d-keyword :p="'dce:subject'" :language="language === 'xxx' ? null : language" :keywords="keywords" v-for="(keywords, language) in langKeywords" :key="componentid+'kw'+language" v-bind.sync="displayProperties"></p-d-keyword>
     </template>
 
     <template v-for="(o, p) in jsonld">
