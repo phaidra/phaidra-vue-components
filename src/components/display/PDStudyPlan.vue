@@ -3,12 +3,12 @@
     <template v-for="(l, i) in o['skos:prefLabel']">
       <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right" :key="'pl'+i">{{ $t('Study plan') }}</v-col>
       <v-col :md="valueColMd" cols="12" :key="'spl'+i">
-        <v-container>
-          <v-row class="valuefield" >{{ l['@value'] }}</v-row>
+        
+          <v-row no-gutters class="valuefield" >{{ l['@value'] }}</v-row>
           <template v-for="(id, i) in o['skos:notation']">
-            <v-row class="grey--text cols"  :key="'notation'+i">[{{ id }}]</v-row>
+            <v-row  no-gutters class="grey--text cols"  :key="'notation'+i">[{{ id }}]</v-row>
           </template>
-        </v-container>
+        
       </v-col>
     </template>
   </v-row>
