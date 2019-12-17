@@ -172,7 +172,7 @@ export default {
             // dce:subject
             case 'dce:subject':
               // noop - we handled this already
-              break;
+              break
 
             // dcterms:subject
             case 'dcterms:subject':

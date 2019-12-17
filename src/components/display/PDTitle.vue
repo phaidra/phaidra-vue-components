@@ -2,7 +2,7 @@
   <span>
     <template>
       <v-row v-for="(mt, i) in o['bf:mainTitle']" :key="'mt'+i">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">
           {{ $t(o['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template>
         </v-col>
         <v-col :md="valueColMd" cols="12">

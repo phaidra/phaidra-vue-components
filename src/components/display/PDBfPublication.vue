@@ -1,10 +1,10 @@
 <template>
   <v-row>
-    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">{{ $t('PUBLISHER_VERLAG') }}</v-col>
+    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t('PUBLISHER_VERLAG') }}</v-col>
     <v-col :md="valueColMd" cols="12">
       <template v-for="(publisher, i) in o['bf:agent']">
         <template v-if="localizedOrgUnit(publisher)">
-          <span :key="'publname'+i"><a class="valuefield" :href="localizedOrgUnit(publisher).id" target="_blank">{{ localizedOrgUnit(publisher).value }}</a></span>
+          <a :key="'publname'+i" class="valuefield" :href="localizedOrgUnit(publisher).id" target="_blank">{{ localizedOrgUnit(publisher).value }}</a>
         </template>
         <template v-else v-for="(publishername, i) in publisher['schema:name']">
           <span :key="'publname'+i" class="valuefield">{{ publishername['@value'] }}</span>
@@ -45,7 +45,7 @@ export default {
             return {
               value: name['@value'],
               language: name['@language'],
-              id: name['skos:exactMatch']
+              id: orgUnit['skos:exactMatch']
             }
           }
         }

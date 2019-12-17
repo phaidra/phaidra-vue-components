@@ -305,7 +305,7 @@ export default {
         sections: []
       },
       members: [],
-      pid: '',
+      pid: 'o:575043',
       piddoc: {},
       collection: 'o:724719',
       sampleCollection: 'o:541829',

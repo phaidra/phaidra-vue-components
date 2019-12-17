@@ -1,7 +1,7 @@
 <template>
   <a v-if="hideLabel" :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
   <v-row v-else>
-    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">{{ $t(p) }}</v-col>
+    <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t(p) }}</v-col>
     <v-col :md="valueColMd" cols="12">
       <a :href="o" target="_blank">{{ getLocalizedTermLabel('licenses', o) }}</a>
       <!--

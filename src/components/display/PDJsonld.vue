@@ -4,7 +4,7 @@
 
     <template v-if="pid" slot="pid">
       <v-row>
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-right">{{ $t('Persistent identifier') }}</v-col>
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t('Persistent identifier') }}</v-col>
         <v-col :md="valueColMd" cols="12">https://{{ instance.baseurl }}/{{ pid }}</v-col>
       </v-row>
     </template>
@@ -469,5 +469,13 @@ export default {
 <style>
 .valuefield {
   white-space: pre-wrap;
+}
+
+.v-card__subtitle, .v-card__text {
+  font-weight: 300;
+}
+
+.theme--light.v-card > .v-card__text {
+  color: black;
 }
 </style>
