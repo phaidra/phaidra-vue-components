@@ -245,7 +245,7 @@ function buildDateFacet () {
       }
 
       monthsFacet.queries.push({
-        query: 'tcreated:[' + year + '-' + month + '-01T00:00:00Z TO ' + year + '-' + month + '-' + daysOfMonth + 'T00:00:00Z]',
+        query: 'tcreated:[' + year + '-' + month + '-01T00:00:00Z TO ' + year + '-' + month + '-' + daysOfMonth + 'T23:59:59Z]',
         id: year + '-' + month,
         label: month + '.' + year,
         childFacet: daysFacet
@@ -253,7 +253,7 @@ function buildDateFacet () {
     }
 
     yearsFacet.queries.push({
-      query: 'tcreated:[' + year + '-01-01T00:00:00Z TO ' + year + '-12-31T00:00:00Z]',
+      query: 'tcreated:[' + year + '-01-01T00:00:00Z TO ' + year + '-12-31T23:59:59Z]',
       id: year,
       label: year,
       childFacet: monthsFacet
