@@ -1,21 +1,30 @@
 <template>
   <v-container v-if="form">
     <v-card>
-      <v-card-title class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
+      <v-card-title class="font-weight-light grey white--text">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
       <v-card-text>
         <v-tabs v-model="activetab" align-with-title>
-          <v-tab v-for="(s, i) in this.form" :key="'tab'+i">
-            <span v-t="s.xmlname"></span>
-          </v-tab>
+          <template v-for="(s, i) in this.form"> 
+            <v-tab v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tab'+i">
+              <span v-t="s.xmlname"></span>
+            </v-tab>
+          </template>
         </v-tabs>
         <v-tabs-items v-model="activetab">
-          <v-tab-item class="pa-3" v-for="(s, i) in this.form" :key="'tabitem'+i">
-            <template v-if="s.children">
-              <p-uwm-field-renderer :children="s.children"></p-uwm-field-renderer>
-            </template>
-           </v-tab-item>
+          <template v-for="(s, i) in this.form"> 
+            <v-tab-item class="pa-3" v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tabitem'+i">
+              <template v-if="s.children">
+                <p-uwm-field-renderer :children="s.children"></p-uwm-field-renderer>
+              </template>
+            </v-tab-item>
+          </template>
         </v-tabs-items>
       </v-card-text>
+      <v-divider></v-divider>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn @click="save()" dark color="primary">{{ $t('Save') }}</v-btn>
+      </v-card-actions>
     </v-card>
   </v-container>
 </template>
@@ -54,7 +63,7 @@ export default {
   methods: {
     getMetadata: function () {
       let json
-      let md = { metadata: { 'uwmetadata': form } }
+      let md = { metadata: { 'uwmetadata': this.form } }
       return md
     },
     save: async function () {

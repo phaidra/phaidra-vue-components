@@ -256,7 +256,6 @@
             </v-window>
           </v-col>
         </v-row>
-
         <v-row justify="center">
           <v-spacer></v-spacer>
           <v-col offset="9" cols="2">
