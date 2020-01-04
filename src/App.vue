@@ -117,6 +117,15 @@
                       </v-list-item>
                     </div>
                   </v-item>
+                  <v-item>
+                    <div slot-scope="{ active, toggle }">
+                      <v-list-item @click="toggle">
+                        <v-list-item-content>
+                          <v-list-item-title>{{ $t('Uwmetadata editor') }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </div>
+                  </v-item>
                 </v-item-group>
               </v-list>
             </v-navigation-drawer>
@@ -226,6 +235,24 @@
                   </v-card-text>
                 </v-card>
               </v-window-item>
+              <v-window-item>
+                <v-card>
+                  <v-toolbar class="grey" dark>
+                    <v-toolbar-title>{{ $t('Uwmetadata Editor') }}</v-toolbar-title>
+                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'o:123456789'" v-model="pid"></v-text-field>
+                    <v-spacer></v-spacer>
+                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadUwmetadataEdit()">Load</v-btn>
+                  </v-toolbar>
+                  <v-card-text>
+                    <p-uwmetadata-editor 
+                      :form="uwmetadataeditform"
+                      :targetpid="this.pid"
+                      v-on:object-saved="objectSaved($event)"
+                      v-on:load-form="uwmetadataeditform = $event"
+                    ></p-uwmetadata-editor>
+                  </v-card-text>
+                </v-card>
+              </v-window-item>
             </v-window>
           </v-col>
         </v-row>
@@ -257,6 +284,7 @@ import PMSort from '@/components/management/PMSort'
 import PMRights from '@/components/management/PMRights'
 import PMRelationships from '@/components/management/PMRelationships'
 import PSearch from '@/components/search/PSearch'
+import PUwmetadataEditor from '@/components/legacy/PUwmetadataEditor'
 import PCollectionGallery from '@/components/browse/PCollectionGallery'
 import { version } from '../package.json'
 import fields from '@/utils/fields'
@@ -272,7 +300,8 @@ export default {
     PMSort,
     PMRights,
     PMRelationships,
-    PCollectionGallery
+    PCollectionGallery,
+    PUwmetadataEditor
   },
   computed: {
     loadedcmodel: function () {
@@ -293,7 +322,7 @@ export default {
   },
   data () {
     return {
-      window: 0,
+      window: 6,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -301,11 +330,12 @@ export default {
       ],
       displayjsonld: {},
       editform: {},
+      uwmetadataeditform: [],
       form: {
         sections: []
       },
       members: [],
-      pid: 'o:575043',
+      pid: 'o:16081',
       piddoc: {},
       collection: 'o:724719',
       sampleCollection: 'o:541829',
@@ -495,6 +525,29 @@ export default {
         this.loading = false
       }
     },
+    loadUwmetadata: async function (pid) {
+      this.loadedMetadata = []
+      this.loading = true
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.instanceconfig.api + '/object/' + pid + '/metadata',
+          params: {
+            mode: 'full'
+          }
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        if (response.data.metadata['uwmetadata']) {
+          return response.data.metadata['uwmetadata']
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+    },
     loadMetadata: async function (pid) {
       this.loadedMetadata = []
       this.loading = true
@@ -529,6 +582,12 @@ export default {
       let self = this
       this.loadMetadata(self.pid).then(function (jsonld) {
         self.editform = jsonLd.json2form(jsonld)
+      })
+    },
+    loadUwmetadataEdit: function () {
+      let self = this
+      this.loadUwmetadata(self.pid).then(function (json) {
+        self.uwmetadataeditform = json
       })
     },
     loadSearch: function () {
