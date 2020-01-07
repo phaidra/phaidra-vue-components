@@ -14,7 +14,7 @@
     </v-row>
     <v-row>
       <v-col md="auto">
-        <v-treeview 
+        <v-treeview
           :items="collections"
           :load-children="getChildren"
           :active.sync="active"

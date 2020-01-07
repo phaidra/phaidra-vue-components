@@ -31,7 +31,7 @@ export const marcRoles = {
   'degreegrantor': 'Degree grantor',
   'uploader': 'Uploader',
   'dtc': 'Data contributor',
-  // 'aut': 'Author', has a separate inputfilled
+  // 'aut': 'Author', has a separate input field
   'pbl': 'Publisher',
   'edt': 'Editor',
   'dsr': 'Designer',

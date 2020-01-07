@@ -9,7 +9,8 @@
         :value="getTerm(vocabulary, type)"
         :filter="autocompleteFilter"
         :disabled="disabletype"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >
@@ -34,7 +35,8 @@
         :placeholder="placeholder(type)"
         :required="required"
         :rules="[validationrules[getIdentifierRuleName(type)]]"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <template v-if="actions.length">

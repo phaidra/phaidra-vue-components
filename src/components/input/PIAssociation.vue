@@ -12,7 +12,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t(label)"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
         :disabled="disabled"

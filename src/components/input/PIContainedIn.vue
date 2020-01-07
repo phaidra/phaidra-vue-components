@@ -16,7 +16,8 @@
                     :value="title"
                     :label="$t('Title')"
                     v-on:blur="$emit('input-title',$event.target.value)"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" :md="multilingual ? 4 : 6">
@@ -24,7 +25,8 @@
                     :value="subtitle"
                     :label="$t('Subtitle')"
                     v-on:blur="$emit('input-subtitle',$event.target.value)"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" v-if="multilingual">
@@ -35,7 +37,8 @@
                     :filter="autocompleteFilter"
                     hide-no-data
                     :label="$t('Language')"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                     return-object
                     clearable
                     :item-value="'@id'"
@@ -63,7 +66,8 @@
                     :items="vocabularies['rolepredicate'].terms"
                     :value="getTerm('rolepredicate', role.role)"
                     :filter="autocompleteFilter"
-                   filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                     return-object
                     clearable
                     :item-value="'@id'"
@@ -87,7 +91,8 @@
                       :value="role.name"
                       :label="$t('Name')"
                       v-on:blur="$emit('input-role',{ role: role, name: $event.target.value })"
-                     filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -97,7 +102,8 @@
                       :value="role.firstname"
                       :label="$t('Firstname')"
                       v-on:blur="$emit('input-role',{ role: role, firstname: $event.target.value })"
-                     filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="3">
@@ -105,7 +111,8 @@
                       :value="role.lastname"
                       :label="$t('Lastname')"
                       v-on:blur="$emit('input-role',{ role: role, lastname: $event.target.value })"
-                     filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -145,7 +152,8 @@
                           :value="seriesTitle"
                           :label="$t('Title')"
                           v-on:blur="$emit('input-series-title',$event.target.value)"
-                          filled
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" md="2" v-if="multilingual">
@@ -157,7 +165,8 @@
                           :filter="autocompleteFilter"
                           hide-no-data
                           :label="$t('Language')"
-                          filled
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
                           return-object
                           clearable
                         >
@@ -184,7 +193,8 @@
                           :value="seriesVolume"
                           :label="$t('Volume')"
                           v-on:blur="$emit('input-series-volume',$event.target.value)"
-                          filled
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
 
@@ -193,7 +203,8 @@
                           :value="seriesIssue"
                           :label="$t('Issue')"
                           v-on:blur="$emit('input-series-issue',$event.target.value)"
-                          filled
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
 
@@ -205,7 +216,8 @@
                           :label="$t(seriesIssuedDateLabel ? seriesIssuedDateLabel : 'Issued')"
                           :hint="'Format YYYY-MM-DD'"
                           :rules="[validationrules.date]"
-                          filled
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
                         ></v-text-field>
 
                       </v-col>
@@ -219,7 +231,8 @@
                           :value="seriesIssn"
                           :label="$t('ISSN')"
                           v-on:blur="$emit('input-series-issn',$event.target.value)"
-                          filled
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
 
@@ -228,7 +241,8 @@
                           :value="seriesIdentifier"
                           :label="$t('Identifier')"
                           v-on:blur="$emit('input-series-identifier',$event.target.value)"
-                          filled
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
 
@@ -245,12 +259,13 @@
 </template>
 
 <script>
+import { fieldproperties } from '../../mixins/fieldproperties'
 import { vocabulary } from '../../mixins/vocabulary'
 import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-i-contained-in',
-  mixins: [vocabulary, validationrules],
+  mixins: [fieldproperties, vocabulary, validationrules],
   props: {
     type: {
       type: String

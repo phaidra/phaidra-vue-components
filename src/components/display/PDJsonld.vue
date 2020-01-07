@@ -180,7 +180,7 @@
         </template>
 
         <template v-else-if="p==='dcterms:spatial'" slot="dcterms:spatial">
-          <p-d-georeference :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'spatial'+j"v-bind.sync="displayProperties" ></p-d-georeference>
+          <p-d-georeference :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'spatial'+j" v-bind.sync="displayProperties" ></p-d-georeference>
         </template>
 
         <template v-else-if="p==='vra:placeOfCreation'" slot="vra:placeOfCreation">

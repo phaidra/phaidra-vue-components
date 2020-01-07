@@ -6,7 +6,8 @@
         :value="name"
         :label="$t('Funder name')"
         v-on:blur="$emit('input-name',$event.target.value)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="2">
@@ -18,7 +19,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >
@@ -40,7 +42,8 @@
         :value="identifier"
         :label="'Funder identifier'"
         v-on:blur="$emit('input-identifier',$event.target.value)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">

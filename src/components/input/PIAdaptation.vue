@@ -29,7 +29,8 @@
                     :value="title"
                     :label="$t('Title')"
                     v-on:blur="$emit('input-title',$event.target.value)"
-                   filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4">
@@ -37,7 +38,8 @@
                     :value="subtitle"
                     :label="$t('Subtitle')"
                     v-on:blur="$emit('input-subtitle',$event.target.value)"
-                   filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4">
@@ -48,7 +50,8 @@
                     :filter="autocompleteFilter"
                     hide-no-data
                     :label="$t('Language')"
-                   filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                     return-object
                     clearable
                     :item-value="'@id'"
@@ -76,7 +79,8 @@
                     :items="vocabularies['rolepredicate'].terms"
                     :value="getTerm('rolepredicate', role)"
                     :filter="autocompleteFilter"
-                   filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                     return-object
                     clearable
                     :item-value="'@id'"
@@ -100,7 +104,8 @@
                       :value="name"
                       :label="$t('Name')"
                       v-on:blur="$emit('input-name',$event.target.value)"
-                     filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -110,7 +115,8 @@
                       :value="firstname"
                       :label="$t('Firstname')"
                       v-on:blur="$emit('input-firstname',$event.target.value)"
-                     filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="4">
@@ -118,7 +124,8 @@
                       :value="lastname"
                       :label="$t('Lastname')"
                       v-on:blur="$emit('input-lastname',$event.target.value)"
-                     filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                   </v-col>
                 </template>

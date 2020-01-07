@@ -36,7 +36,8 @@
               item-text="title"
               item-value="issn"
               :placeholder="$t('please enter exact journal title or ISSN')"
-              filled
+              :filled="inputStyle==='filled'"
+              :outlined="inputStyle==='outlined'"
               clearable
               append-icon="search"
             >
@@ -60,7 +61,8 @@
                 :value="title"
                 :label="$t('Title')"
                 v-on:blur="$emit('input-title',$event.target.value)"
-                filled
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
                 :error-messages="titleErrorMessages"
               ></v-text-field>
             </v-col>
@@ -73,7 +75,8 @@
                 :filter="autocompleteFilter"
                 hide-no-data
                 :label="$t('Language')"
-                filled
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
                 return-object
                 clearable
               >
@@ -100,7 +103,8 @@
                 :value="volume"
                 :label="$t('Volume')"
                 v-on:blur="$emit('input-volume',$event.target.value)"
-                filled
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
 
@@ -109,7 +113,8 @@
                 :value="issue"
                 :label="$t('Issue')"
                 v-on:blur="$emit('input-issue',$event.target.value)"
-                filled
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
 
@@ -119,7 +124,8 @@
                   :value="issued"
                   :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
                   :rules="[validationrules.date]"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                 >
                   <template v-slot:append>
                     <v-fade-transition leave-absolute>
@@ -155,7 +161,8 @@
                   :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
                   :hint="'Format YYYY-MM-DD'"
                   :rules="[validationrules.date]"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </template>
             </v-col>
@@ -169,7 +176,8 @@
                 :value="issn"
                 :label="$t('ISSN')"
                 v-on:blur="$emit('input-issn',$event.target.value)"
-                filled
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
 
@@ -178,7 +186,8 @@
                 :value="identifier"
                 :label="$t('Identifier')"
                 v-on:blur="$emit('input-identifier',$event.target.value)"
-                filled
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
 

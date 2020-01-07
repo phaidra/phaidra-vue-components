@@ -34,7 +34,8 @@
                   :item-value="'@id'"
                   :value="getTerm(roleVocabulary, role)"
                   :filter="autocompleteFilter"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   return-object
                   clearable
                   :error-messages="roleErrorMessages"
@@ -67,7 +68,8 @@
                       :value="name"
                       :label="$t('Name')"
                       v-on:blur="$emit('input-name',$event.target.value)"
-                      filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                       :error-messages="nameErrorMessages"
                     ></v-text-field>
                   </v-col>
@@ -78,7 +80,8 @@
                       :value="firstname"
                       :label="$t('Firstname')"
                       v-on:blur="$emit('input-firstname',$event.target.value)"
-                      filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                       :error-messages="firstnameErrorMessages"
                     ></v-text-field>
                   </v-col>
@@ -87,7 +90,8 @@
                       :value="lastname"
                       :label="$t('Lastname')"
                       v-on:blur="$emit('input-lastname',$event.target.value)"
-                      filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                       :error-messages="lastnameErrorMessages"
                     ></v-text-field>
                   </v-col>
@@ -102,7 +106,8 @@
                       v-on:blur="$emit('input-identifier', $event.target.value)"
                       :placeholder="identifierTypePlaceholder"
                       :rules="identifierType ? [validationrules['orcid']] : [validationrules['noop']]"
-                      filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                     <v-text-field
                       v-show="identifierType !== 'ids:orcid'"
@@ -111,7 +116,8 @@
                       v-on:blur="$emit('input-identifier', $event.target.value)"
                       :placeholder="identifierTypePlaceholder"
                       :rules="identifierType ? [validationrules[getIdentifierRuleName(identifierType)]] : [validationrules['noop']]"
-                      filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -126,7 +132,8 @@
                     :value="getTerm(identifierVocabulary, identifierType)"
                     :filter="autocompleteFilter"
                     :disabled="disableIdentifierType"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                     return-object
                     clearable
                   >
@@ -151,7 +158,8 @@
                     v-on:blur="$emit('input-identifier', $event.target.value)"
                     :placeholder="identifierTypePlaceholder"
                     :rules="identifierType ? [validationrules['orcid']] : [validationrules['noop']]"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                   ></v-text-field>
                   <v-text-field
                     v-show="identifierType !== 'ids:orcid'"
@@ -160,7 +168,8 @@
                     v-on:blur="$emit('input-identifier', $event.target.value)"
                     :placeholder="identifierTypePlaceholder"
                     :rules="identifierType ? [validationrules[getIdentifierRuleName(identifierType)]] : [validationrules['noop']]"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -185,7 +194,8 @@
                     :filter="autocompleteFilter"
                     hide-no-data
                     :label="$t(organizationSelectLabel)"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                     return-object
                     clearable
                     :disabled="disabled"
@@ -213,7 +223,8 @@
                     :value="organizationText"
                     :label="$t('Organization')"
                     v-on:blur="$emit('input-organization-other', $event.target.value)"
-                    filled
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                     :error-messages="organizationTextErrorMessages"
                   ></v-text-field>
                 </v-col>
@@ -238,7 +249,8 @@
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t(affiliationSelectLabel)"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   return-object
                   clearable
                   :disabled="disabled"
@@ -266,7 +278,8 @@
                   :value="affiliationText"
                   :label="$t('Affiliation')"
                   v-on:blur="$emit('input-affiliation-other',$event.target.value)"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   :error-messages="affiliationTextErrorMessages"
                 ></v-text-field>
               </v-col>

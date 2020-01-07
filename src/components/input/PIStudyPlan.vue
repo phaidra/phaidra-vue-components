@@ -7,7 +7,8 @@
         :label="$t('Study plan notation')"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="4">
@@ -17,7 +18,8 @@
         :label="$t('Study plan name')"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="2" v-if="multilingual">
@@ -29,7 +31,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Name language')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >

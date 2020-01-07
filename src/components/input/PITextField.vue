@@ -7,7 +7,8 @@
         :label="$t(label)"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
       <v-textarea v-if="multiline"
         :value="value"
@@ -15,7 +16,8 @@
         :label="$t(label)"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-textarea>
     </v-col>
     <v-col cols="12" md="2" v-if="multilingual">
@@ -27,7 +29,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >

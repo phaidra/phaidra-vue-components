@@ -13,7 +13,8 @@
         item-text="text"
         item-value="value"
         :label="$t(label)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         clearable
         :messages="resolved"
       ></v-autocomplete>

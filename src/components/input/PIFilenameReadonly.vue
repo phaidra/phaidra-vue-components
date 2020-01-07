@@ -5,15 +5,18 @@
         :value="value"
         :label="$t('Filename')"
         readonly
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
   </v-row>
 </template>
 <script>
+import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-filename-readonly',
+  mixins: [fieldproperties],
   props: {
     value: {
       type: String

@@ -8,7 +8,8 @@
         :item-value="'@id'"
         :value="getTerm('datepredicate', type)"
         :filter="autocompleteFilter"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
         :error-messages="typeErrorMessages"
@@ -34,7 +35,8 @@
           :label="$t(dateLabel ? dateLabel : 'Date')"
           :required="required"
           :rules="[validationrules.date]"
-          filled
+          :filled="inputStyle==='filled'"
+          :outlined="inputStyle==='outlined'"
           :error-messages="valueErrorMessages"
         >
           <template v-slot:append>
@@ -72,7 +74,8 @@
           :required="required"
           :hint="'Format YYYY-MM-DD'"
           :rules="[validationrules.date]"
-          filled
+          :filled="inputStyle==='filled'"
+          :outlined="inputStyle==='outlined'"
           :error-messages="valueErrorMessages"
         ></v-text-field>
       </template>

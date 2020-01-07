@@ -40,7 +40,8 @@
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t('Please choose')"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   return-object
                   clearable
                   :error-messages="publisherOrgUnitErrorMessages"
@@ -79,7 +80,8 @@
                   item-text="name"
                   item-value="name"
                   :placeholder="$t('search publishers')"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   clearable
                   append-icon="search"
                 >
@@ -103,7 +105,8 @@
                   :label="$t(publisherNameLabel ? publisherNameLabel : '')"
                   :required="required"
                   :rules="required ? [ v => !!v || 'Required'] : []"
-                  filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   :error-messages="publisherNameErrorMessages"
                 ></v-text-field>
               </v-col>
@@ -117,7 +120,8 @@
                 :label="$t(publishingPlaceLabel ? publishingPlaceLabel : '')"
                 :required="required"
                 :rules="required ? [ v => !!v || 'Required'] : []"
-               filled
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
             <v-col v-if="showDate" cols="4">
@@ -137,7 +141,8 @@
                       :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
                       :required="required"
                       :rules="[validationrules.date]"
-                      filled
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
                       append-icon="event"
                       v-on="on"
                     ></v-text-field>
@@ -160,7 +165,8 @@
                   :required="required"
                   :hint="'Format YYYY-MM-DD'"
                   :rules="[validationrules.date]"
-                filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </template>
             </v-col>

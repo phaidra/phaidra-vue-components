@@ -9,7 +9,8 @@
         :value="getTerm('citationpredicate', type)"
         :filter="autocompleteFilter"
         :disabled="disabletype"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >
@@ -33,7 +34,8 @@
         :label="$t(citationLabel)"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="2">
@@ -45,7 +47,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >
@@ -69,7 +72,8 @@
         :label="$t(identifierLabel)"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">

@@ -6,7 +6,8 @@
         :label="$t( titleLabel ? titleLabel : type )"
         v-on:blur="$emit('input-title',$event.target.value)"
         :error-messages="titleErrorMessages"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="12" md="4" v-if="!hideSubtitle">
@@ -14,7 +15,8 @@
         :value="subtitle"
         :label="$t( subtitleLabel ? subtitleLabel : 'Subtitle' )"
         v-on:blur="$emit('input-subtitle',$event.target.value)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="12" md="2" v-if="multilingual">
@@ -26,7 +28,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >

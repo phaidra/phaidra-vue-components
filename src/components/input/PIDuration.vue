@@ -7,7 +7,8 @@
         type="number"
         :label="$t('Duration')"
         :suffix="$t('hours')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="3" v-if="!hideMinutes">
@@ -17,7 +18,8 @@
         type="number"
         :label="$t('Duration')"
         :suffix="$t('minutes')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="3" v-if="!hideSeconds">
@@ -27,7 +29,8 @@
         type="number"
         :label="$t('Duration')"
         :suffix="$t('seconds')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">

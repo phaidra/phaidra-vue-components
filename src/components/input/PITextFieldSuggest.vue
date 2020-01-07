@@ -16,7 +16,8 @@
         item-text="text"
         item-value="value"
         :label="$t(label)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         clearable
       >
         <template slot="item" slot-scope="{ item }">
@@ -40,7 +41,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >

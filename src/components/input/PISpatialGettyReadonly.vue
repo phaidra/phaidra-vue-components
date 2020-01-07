@@ -7,7 +7,8 @@
         :messages="value"
         :label="$t(label)"
         readonly
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">

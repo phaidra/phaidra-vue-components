@@ -31,7 +31,8 @@
                   :value="name"
                   :label="$t('Name')"
                   v-on:blur="$emit('input-name',$event.target.value)"
-                 filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </v-col>
               <v-col cols="3">
@@ -43,7 +44,8 @@
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t('Language')"
-                 filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   return-object
                   clearable
                 >
@@ -69,7 +71,8 @@
                   :value="description"
                   :label="$t('Description')"
                   v-on:input="$emit('input-description', $event)"
-                 filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </v-col>
               <v-col cols="3">
@@ -81,7 +84,8 @@
                   :filter="autocompleteFilter"
                   hide-no-data
                   :label="$t('Language')"
-                 filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                   return-object
                   clearable
                 >
@@ -109,7 +113,8 @@
                   :label="$t('Identifier')"
                   v-on:blur="$emit('input-identifier',$event.target.value)"
                   homepage
-                 filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </v-col>
 
@@ -118,7 +123,8 @@
                   :value="homepage"
                   :label="$t('Homepage')"
                   v-on:blur="$emit('input-homepage',$event.target.value)"
-                 filled
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -130,7 +136,8 @@
               :value="funderName"
               :label="$t('Funder name')"
               v-on:blur="$emit('input-funder-name',$event.target.value)"
-              filled
+              :filled="inputStyle==='filled'"
+              :outlined="inputStyle==='outlined'"
             ></v-text-field>
           </v-col>
           <v-col cols="2">
@@ -142,7 +149,8 @@
               :filter="autocompleteFilter"
               hide-no-data
               :label="$t('Language')"
-              filled
+              :filled="inputStyle==='filled'"
+              :outlined="inputStyle==='outlined'"
               return-object
               clearable
             >
@@ -164,7 +172,8 @@
               :value="funderIdentifier"
               :label="'Funder identifier'"
               v-on:blur="$emit('input-funder-identifier',$event.target.value)"
-              filled
+              :filled="inputStyle==='filled'"
+              :outlined="inputStyle==='outlined'"
             ></v-text-field>
           </v-col>
         </v-row>

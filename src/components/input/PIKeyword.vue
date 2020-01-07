@@ -18,7 +18,8 @@
         clearable
         chips
         deletable-chips
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
@@ -50,7 +51,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >

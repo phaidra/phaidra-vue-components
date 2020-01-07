@@ -9,7 +9,8 @@
         :item-value="'@id'"
         :value="getTerm('rolepredicate', role)"
         :filter="autocompleteFilter"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >
@@ -33,7 +34,8 @@
             :value="name"
             :label="$t('Name')"
             v-on:blur="$emit('input-name',$event.target.value)"
-           filled
+            :filled="inputStyle==='filled'"
+            :outlined="inputStyle==='outlined'"
           ></v-text-field>
         </v-col>
       </template>
@@ -43,7 +45,8 @@
             :value="firstname"
             :label="$t('Firstname')"
             v-on:blur="$emit('input-firstname',$event.target.value)"
-           filled
+            :filled="inputStyle==='filled'"
+            :outlined="inputStyle==='outlined'"
           ></v-text-field>
         </v-col>
         <v-col cols="3">
@@ -51,7 +54,8 @@
             :value="lastname"
             :label="$t('Lastname')"
             v-on:blur="$emit('input-lastname',$event.target.value)"
-           filled
+            :filled="inputStyle==='filled'"
+            :outlined="inputStyle==='outlined'"
           ></v-text-field>
         </v-col>
       </template>
@@ -61,7 +65,8 @@
         :value="organization"
         :label="$t( organizationLabel ? organizationLabel : 'Organization' )"
         v-on:blur="$emit('input-organization',$event.target.value)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">

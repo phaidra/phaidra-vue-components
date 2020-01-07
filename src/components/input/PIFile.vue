@@ -1,7 +1,14 @@
 <template>
   <v-row >
     <v-col :cols="autoMimetype ? 10 : 6">
-      <v-file-input :error-messages="fileErrorMessages" filled show-size @change="fileInput($event)" :label="$t(label)"></v-file-input>
+      <v-file-input 
+        :error-messages="fileErrorMessages" 
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'" 
+        show-size 
+        @change="fileInput($event)" 
+        :label="$t(label)"
+      ></v-file-input>
     </v-col>
     <v-col v-if="!autoMimetype" cols="4">
       <v-autocomplete
@@ -13,7 +20,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t(mimeLabel)"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
         :error-messages="mimetypeErrorMessages"

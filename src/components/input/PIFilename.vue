@@ -5,15 +5,18 @@
         :value="value"
         :label="$t('Filename')"
         v-on:blur="$emit('input-value',$event.target.value)"
-        filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
   </v-row>
 </template>
 <script>
+import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-filename',
+  mixins: [fieldproperties],
   props: {
     value: {
       type: String

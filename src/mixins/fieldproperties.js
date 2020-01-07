@@ -18,6 +18,10 @@ export const fieldproperties = {
     },
     removeOnly: {
       type: Boolean
+    },
+    inputStyle: {
+      type: String,
+      default: 'filled'
     }
   },
   computed: {

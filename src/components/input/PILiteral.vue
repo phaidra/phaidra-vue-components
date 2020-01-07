@@ -5,7 +5,8 @@
         :value="value"
         v-on:blur="$emit('input-value',$event.target.value)"
         :label="$t(label)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">

@@ -15,7 +15,8 @@
           hide-no-data
           :height="7"
           :label="$t(label)"
-          filled
+          :filled="inputStyle==='filled'"
+          :outlined="inputStyle==='outlined'"
           return-object
           clearable
           :disabled="disabled"

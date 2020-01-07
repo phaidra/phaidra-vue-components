@@ -131,7 +131,7 @@
             </v-navigation-drawer>
           </v-col>
 
-          <v-col>
+          <v-col cols="10">
             <v-window v-model="window">
               <v-window-item>
                 <v-card>
@@ -244,7 +244,7 @@
                     <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadUwmetadataEdit()">Load</v-btn>
                   </v-toolbar>
                   <v-card-text>
-                    <p-uwmetadata-editor 
+                    <p-uwmetadata-editor
                       :form="uwmetadataeditform"
                       :targetpid="this.pid"
                       v-on:object-saved="objectSaved($event)"
@@ -824,7 +824,6 @@ export default {
         this.$store.dispatch('getLoginData')
       }
     }
-    
 
     this.createSimpleForm()
   }

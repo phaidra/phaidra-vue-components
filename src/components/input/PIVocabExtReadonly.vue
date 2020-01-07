@@ -7,7 +7,8 @@
         :messages="messages"
         :label="$t(label)"
         readonly
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       >
         <template v-slot:message="{ message, key }">
           <span v-html="message"></span>
@@ -66,10 +67,6 @@ export default {
     },
     messages: function () {
       let ret
-      let not
-      for (let n of this['skos:notation']) {
-        not = n
-      }
       if (this['skos:exactMatch']) {
         ret = '<a href="' + this['skos:exactMatch'][0] + '" target="_blank">' + this['skos:exactMatch'][0] + '</a>' + (this.notation ? ' Notation: ' + this.notation : '')
       }

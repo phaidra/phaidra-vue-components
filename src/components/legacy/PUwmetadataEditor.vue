@@ -4,14 +4,14 @@
       <v-card-title class="font-weight-light grey white--text">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
       <v-card-text>
         <v-tabs v-model="activetab" align-with-title>
-          <template v-for="(s, i) in this.form"> 
+          <template v-for="(s, i) in this.form">
             <v-tab v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tab'+i">
-              <span v-t="s.xmlname"></span>
+              <span v-t="s.labels[alpha2locale]"></span>
             </v-tab>
           </template>
         </v-tabs>
         <v-tabs-items v-model="activetab">
-          <template v-for="(s, i) in this.form"> 
+          <template v-for="(s, i) in this.form">
             <v-tab-item class="pa-3" v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tabitem'+i">
               <template v-if="s.children">
                 <p-uwm-field-renderer :children="s.children"></p-uwm-field-renderer>
@@ -46,6 +46,16 @@ export default {
       type: String
     }
   },
+  computed: {
+    alpha2locale: function () {
+      switch (this.$i18n.locale) {
+        case 'eng': return 'en'
+        case 'deu': return 'de'
+        case 'ita': return 'it'
+        default: return 'en'
+      }
+    }
+  },
   data () {
     return {
       activetab: null,
@@ -62,7 +72,6 @@ export default {
   },
   methods: {
     getMetadata: function () {
-      let json
       let md = { metadata: { 'uwmetadata': this.form } }
       return md
     },
@@ -138,11 +147,10 @@ export default {
           f.organizationSelectedName.push({ '@value': value, '@language': key })
         })
       }
-    },
+    }
   },
   mounted: function () {
     this.$store.dispatch('loadLanguages', this.$i18n.locale)
   }
 }
 </script>
-

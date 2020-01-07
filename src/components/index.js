@@ -62,7 +62,7 @@ import PMObjectMembers from './management/PMObjectMembers'
 import PMCollectionMembers from './management/PMCollectionMembers'
 import PTemplates from './templates/PTemplates'
 import PLists from './lists/PLists'
-import PUwmetadataEditor from  './legacy/PUwmetadataEditor'
+import PUwmetadataEditor from './legacy/PUwmetadataEditor'
 
 const Components = {
   PImg,

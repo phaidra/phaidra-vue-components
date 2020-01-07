@@ -11,7 +11,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t(selectlabel)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >
@@ -35,7 +36,8 @@
         :label="$t(label)"
         :required="required"
         :rules="required ? [ v => !!v || 'Required'] : []"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="3" v-if="multilingual">
@@ -47,7 +49,8 @@
         :filter="autocompleteFilter"
         hide-no-data
         :label="$t('Language')"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
         return-object
         clearable
       >

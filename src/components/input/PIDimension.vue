@@ -5,7 +5,8 @@
         :value="value"
         v-on:blur="$emit('input-value',$event.target.value)"
         :label="$t(label)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
     <v-col cols="2">
@@ -15,7 +16,8 @@
         :items="vocabularies[vocabulary].terms"
         :item-value="'@id'"
         :value="getTerm(vocabulary, unit)"
-       filled
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
