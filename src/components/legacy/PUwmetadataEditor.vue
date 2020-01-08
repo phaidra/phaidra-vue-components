@@ -14,7 +14,7 @@
           <template v-for="(s, i) in this.form">
             <v-tab-item class="pa-3" v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tabitem'+i">
               <template v-if="s.children">
-                <p-uwm-field-renderer :children="s.children"></p-uwm-field-renderer>
+                <p-uwm-field-renderer :children="s.children" :parent="s"></p-uwm-field-renderer>
               </template>
             </v-tab-item>
           </template>
@@ -23,7 +23,7 @@
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click="save()" dark color="primary">{{ $t('Save') }}</v-btn>
+        <v-btn @click="save()" :loading="loading" :disabled="loading" color="primary">{{ $t('Save') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
