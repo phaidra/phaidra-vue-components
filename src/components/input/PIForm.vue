@@ -289,6 +289,7 @@
                       v-bind.sync="f"
                       v-on:input="f.value=$event"
                       v-on:input-place-type="setSelected(f, 'type', $event)"
+                      v-on:input-language="setSelected(f, 'language', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-spatial-text>
