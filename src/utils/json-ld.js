@@ -1,7 +1,7 @@
 import fields from './fields'
 
 export default {
-  json2components: function (jsonld) {
+  json2components: function (jsonld, options) {
     var components = []
 
     // all dce:subjects in the same language are handled by 1 component
@@ -929,7 +929,11 @@ export default {
               // role
               if (key.startsWith('role')) {
                 let role = value[i]
-                f = fields.getField('role-extended')
+                if (options && options['role'] && options['role']['component'] && (options['role']['component'] === 'p-entity')) {
+                  f = fields.getField('role')
+                } else {
+                  f = fields.getField('role-extended')
+                }
                 f.role = key
                 f.type = role['@type']
                 if (role['@type'] === 'schema:Person') {
@@ -1042,14 +1046,14 @@ export default {
     }
     return ordered
   },
-  json2form: function (jsonld) {
+  json2form: function (jsonld, options) {
     var levels = {
       digital: {
         components: []
       }
     }
 
-    levels.digital.components = this.json2components(jsonld)
+    levels.digital.components = this.json2components(jsonld, options)
 
     Object.entries(jsonld).forEach(([key, value]) => {
       var i
@@ -1057,7 +1061,7 @@ export default {
         levels['subject'] = []
         for (i = 0; i < value.length; i++) {
           if (value[i]['@type'] === 'phaidra:Subject') {
-            var subcomp = this.json2components(value[i])
+            var subcomp = this.json2components(value[i], options)
             if (subcomp.length > 0) {
               levels.subject.push({ components: subcomp })
             }

@@ -1,5 +1,5 @@
 <template>
-  <v-container  v-if="form && form.sections">
+  <v-container fluid v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
       <v-tab class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
       <v-tab @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
@@ -481,7 +481,8 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-btn v-if="targetpid" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
+          <v-btn fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
+          <v-btn v-else-if="targetpid && !floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
           <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()"><span v-t="'Submit'"></span></v-btn>
         </v-row>
 
@@ -588,6 +589,10 @@ export default {
     templating: {
       type: Boolean,
       default: true
+    },
+    floatingsavebutton: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
