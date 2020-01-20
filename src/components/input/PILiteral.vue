@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col cols="10">
+    <v-col :cols="actions.length ? 10 : 12">
       <v-text-field
         :value="value"
         v-on:blur="$emit('input-value',$event.target.value)"

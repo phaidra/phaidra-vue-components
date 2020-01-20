@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="12" :md="hideSubtitle ? ( multilingual ? 8 : 10 ) : ( multilingual ? 4 : 6 )">
+    <v-col cols="12" :md="hideSubtitle ? ( multilingual ? 8 : (actions.length ? 10 : 12) ) : ( multilingual ? 4 : (actions.length ? 6 : 8) )">
       <v-text-field
         :value="title"
         :label="$t( titleLabel ? titleLabel : type )"

@@ -27,7 +27,7 @@
         </template>
       </v-autocomplete>
     </v-col>
-    <v-col :cols="hideType ? 10 : 5">
+    <v-col :cols="hideType ? (actions.length ? 10 : 12) : (actions.length ? 5 : 7)">
       <template v-if="picker">
         <v-text-field
           :value="value"

@@ -321,7 +321,7 @@ export default {
   },
   data () {
     return {
-      window: 6,
+      window: 2,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -690,7 +690,12 @@ export default {
       var rt = fields.getField('resource-type')
       rt.value = this.contentmodel
       this.form.sections[0].fields.push(rt)
-      this.form.sections[0].fields.push(fields.getField('title'))
+      let t = fields.getField('title')
+      t.hideSubtitle = true
+      t.multilingual = false
+      t.multiplicable = false
+      this.form.sections[0].fields.push(t)
+      
       this.form.sections[0].fields.push(fields.getField('keyword'))
       /* let containedIn = fields.getField('contained-in')
       containedIn.label = 'Book'

@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col :cols="autoMimetype ? 10 : 6">
+    <v-col :cols="autoMimetype ? (actions.length ? 10 : 12) : (actions.length ? 6 : 8)">
       <v-file-input 
         :error-messages="fileErrorMessages" 
         :filled="inputStyle==='filled'"
@@ -8,6 +8,8 @@
         show-size 
         @change="fileInput($event)" 
         :label="$t(label)"
+        :prepend-icon="false"
+        :prepend-inner-icon="'mdi-paperclip'"
       ></v-file-input>
     </v-col>
     <v-col v-if="!autoMimetype" cols="4">

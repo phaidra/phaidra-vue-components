@@ -27,7 +27,7 @@
         </template>
       </v-autocomplete>
     </v-col>
-    <v-col cols="12" :md="showType ? 5 : 10">
+    <v-col cols="12" :md="showType ? (actions.length ? 5 : 7) : (actions.length ? 10 : 12) ">
       <v-text-field
         :value="value"
         v-on:input="$emit('input-identifier', $event)"
