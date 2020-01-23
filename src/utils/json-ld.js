@@ -244,6 +244,18 @@ export default {
                   f.identifier = v
                 }
               }
+              Object.entries(jsonld).forEach(([key1, value1]) => {
+                if (key1 === 'schema:pageStart') {
+                  for (let ps of value1) {
+                    f.pageStart =  ps
+                  }
+                }
+                if (key1 === 'schema:pageEnd') {
+                  for (let pe of value1) {
+                    f.pageEnd =  pe
+                  }
+                }
+              })
               components.push(f)
               break
 
@@ -297,6 +309,18 @@ export default {
                       }
                     }
                     f.roles.push(entity)
+                  }
+                }
+              })
+              Object.entries(jsonld).forEach(([key1, value1]) => {
+                if (key1 === 'schema:pageStart') {
+                  for (let ps of value1) {
+                    f.pageStart =  ps
+                  }
+                }
+                if (key1 === 'schema:pageEnd') {
+                  for (let pe of value1) {
+                    f.pageEnd =  pe
                   }
                 }
               })
@@ -888,24 +912,6 @@ export default {
               }
               break
 
-            // schema:pageStart
-            case 'schema:pageStart':
-              f = fields.getField('page-start')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
-              }
-              components.push(f)
-              break
-
-            // schema:pageEnd
-            case 'schema:pageEnd':
-              f = fields.getField('page-end')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
-              }
-              components.push(f)
-              break
-
             // schema:duration
             case 'schema:duration':
               f = fields.getField('duration')
@@ -922,6 +928,12 @@ export default {
                 f.value = value[i]
               }
               components.push(f)
+              break
+
+            // pages, handled insisde rdau:P60193 or rdau:P60101
+            case 'schema:pageStart':
+            case 'schema:pageEnd':
+              // noop
               break
 
             default:
@@ -1867,11 +1879,23 @@ export default {
           if (f.title || f.volume || f.issue || f.issued || f.issn || f.identifier) {
             this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier ? [f.identifier] : null))
           }
+          if (f.pageStart) {
+            this.push_literal(jsonld, 'schema:pageStart', f.pageStart)
+          }
+          if (f.pageEnd) {
+            this.push_literal(jsonld, 'schema:pageEnd', f.pageEnd)
+          }
           break
 
         case 'rdau:P60101':
           if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn) {
             this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
+          }
+          if (f.pageStart) {
+            this.push_literal(jsonld, 'schema:pageStart', f.pageStart)
+          }
+          if (f.pageEnd) {
+            this.push_literal(jsonld, 'schema:pageEnd', f.pageEnd)
           }
           break
 
@@ -1977,8 +2001,6 @@ export default {
           break
 
         case 'schema:duration':
-        case 'schema:pageStart':
-        case 'schema:pageEnd':
         case 'phaidra:systemTag':
           if (f.value) {
             this.push_literal(jsonld, f.predicate, f.value)

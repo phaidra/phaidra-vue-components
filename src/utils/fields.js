@@ -360,6 +360,11 @@ const fields = [
     issuedDatePicker: true,
     issn: '',
     identifier: '',
+    hidePages: true,
+    pageStart: '',
+    pageEnd: '',
+    pageStartLabel: 'Page start',
+    pageEndLabel: 'Page end',
     journalSuggest: false,
     definition: 'Relates a resource to a resource in which a part has been issued; a title of a larger resource appears on a part.'
   },
@@ -382,6 +387,10 @@ const fields = [
         ordergroup: 'contained-in-role'
       }
     ],
+    pageStart: '',
+    pageEnd: '',
+    pageStartLabel: 'Page start',
+    pageEndLabel: 'Page end',
     seriesLabel: 'Is in series',
     seriesTitle: '',
     seriesTitleLanguage: '',
@@ -585,24 +594,6 @@ const fields = [
     label: 'Number of pages',
     value: '',
     definition: 'The number of pages in the resource.'
-  },
-  {
-    id: 'page-start',
-    fieldname: 'Page start',
-    predicate: 'schema:pageStart',
-    component: 'p-literal',
-    label: 'Page start',
-    value: '',
-    definition: 'The page on which the work starts; for example "135".'
-  },
-  {
-    id: 'page-end',
-    fieldname: 'Page end',
-    predicate: 'schema:pageEnd',
-    component: 'p-literal',
-    label: 'Page end',
-    value: '',
-    definition: 'The page on which the work ends; for example "138".'
   },
   {
     id: 'sound-characteristic',

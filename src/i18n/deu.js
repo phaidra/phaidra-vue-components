@@ -49,6 +49,7 @@ export default {
 
   'Page start': 'Seitenanfang',
   'Page end': 'Seitenende',
+  'Number of pages': 'Seitenanzahl',
 
   'Add': 'Hinzufügen',
   'More': 'Mehr',

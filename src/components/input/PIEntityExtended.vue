@@ -2,23 +2,23 @@
   <v-row>
     <v-col cols="12">
       <v-card width="100%">
-        <v-card-title class="title font-weight-light">
+        <v-card-title class="title font-weight-light grey white--text">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
-          <v-btn icon @click="$emit('add', $event)">
-            <v-icon dark>mdi-content-duplicate</v-icon>
+          <v-btn icon dark @click="$emit('add', $event)">
+            <v-icon>mdi-content-duplicate</v-icon>
           </v-btn>
-          <v-btn icon @click="$emit('add-clear', $event)">
-            <v-icon dark>mdi-plus</v-icon>
+          <v-btn icon dark @click="$emit('add-clear', $event)">
+            <v-icon>mdi-plus</v-icon>
           </v-btn>
-          <v-btn icon @click="$emit('remove', $event)">
-            <v-icon dark>mdi-minus</v-icon>
+          <v-btn icon dark @click="$emit('remove', $event)">
+            <v-icon>mdi-minus</v-icon>
           </v-btn>
-          <v-btn icon @click="$emit('up', $event)">
-            <v-icon dark>mdi-chevron-up</v-icon>
+          <v-btn icon dark @click="$emit('up', $event)">
+            <v-icon>mdi-chevron-up</v-icon>
           </v-btn>
-          <v-btn icon @click="$emit('down', $event)">
-            <v-icon dark>mdi-chevron-down</v-icon>
+          <v-btn icon dark @click="$emit('down', $event)">
+            <v-icon>mdi-chevron-down</v-icon>
           </v-btn>
         </v-card-title>
         <v-divider></v-divider>

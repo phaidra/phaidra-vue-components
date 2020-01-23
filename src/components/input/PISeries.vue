@@ -169,6 +169,27 @@
 
           </v-row>
 
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-text-field
+                :value="pageStart"
+                :label="$t(pageStartLabel)"
+                v-on:blur="$emit('input-page-start',$event.target.value)"
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-text-field
+                :value="pageEnd"
+                :label="$t(pageEndLabel)"
+                v-on:blur="$emit('input-page-end',$event.target.value)"
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
           <v-row >
 
             <v-col cols="6" v-if="!hideIssn">
@@ -265,6 +286,22 @@ export default {
     },
     titleErrorMessages: {
       type: Array
+    },
+    hidePages: {
+      type: Boolean,
+      default: true
+    },
+    pageStartLabel: {
+      type: String
+    },
+    pageEndLabel: {
+      type: String
+    },
+    pageStart: {
+      type: String
+    },
+    pageEnd: {
+      type: String
     },
     multilingual: {
       type: Boolean,

@@ -157,6 +157,8 @@
                       v-on:input-issued="f.issued=$event"
                       v-on:input-issn="f.issn=$event"
                       v-on:input-identifier="f.identifier=$event"
+                      v-on:input-page-start="f.pageStart=$event"
+                      v-on:input-page-end="f.pageEnd=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-series>
@@ -305,7 +307,7 @@
                     ></p-i-dimension>
                   </template>
 
-                  <template v-else-if="f.component === 'p-literal'">
+                  <template v-else-if="(f.component === 'p-literal') && (f.predicate !== 'schema:pageStart') && (f.predicate !== 'schema:pageEnd')">
                     <p-i-literal
                       v-bind.sync="f"
                       v-on:input-value="f.value=$event"
