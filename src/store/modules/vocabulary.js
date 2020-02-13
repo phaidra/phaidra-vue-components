@@ -72,7 +72,9 @@ const state = {
         { '@id': 'ids:orcid', 'skos:prefLabel': { 'eng': 'ORCID' }, 'skos:example': '0000-0002-1825-0097' },
         { '@id': 'ids:gnd', 'skos:prefLabel': { 'eng': 'GND' }, 'skos:example': '118635808' },
         { '@id': 'ids:viaf', 'skos:prefLabel': { 'eng': 'VIAF' }, 'skos:example': '89597697' },
-        { '@id': 'ids:wikidata', 'skos:prefLabel': { 'eng': 'Wikidata ID' }, 'skos:example': 'Q129772' }
+        { '@id': 'ids:wikidata', 'skos:prefLabel': { 'eng': 'Wikidata ID' }, 'skos:example': 'Q129772' },
+        { '@id': 'ids:lcnaf', 'skos:prefLabel': { 'eng': 'LCNAF' }, 'skos:example': 'n79021164' },
+        { '@id': 'ids:isni', 'skos:prefLabel': { 'eng': 'ISNI' }, 'skos:example': '0000000121174585' }
       ],
       loaded: true
     },
@@ -861,6 +863,11 @@ const mutations = {
       state.vocabularies['orgunits']['terms'] = data.terms
       state.vocabularies['orgunits']['loaded'] = true
     }
+  },
+  sortRoles (state, locale) {
+    state.vocabularies['rolepredicate']['terms'].sort(function (a, b) {
+      return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+    })
   },
   setLangTerms (state, data) {
     if (state.vocabularies['lang']['loaded'] === false) {

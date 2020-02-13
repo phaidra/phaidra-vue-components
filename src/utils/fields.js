@@ -100,6 +100,25 @@ const fields = [
     definition: 'A name given to the resource. Typically, a Title will be a name by which the resource is formally known.'
   },
   {
+    id: 'parallel-title',
+    fieldname: 'Parallel title',
+    predicate: 'dce:title',
+    component: 'p-title',
+    type: 'bf:ParallelTitle',
+    required: true,
+    multiplicable: true,
+    multilingual: true,
+    ordergroup: 'title',
+    titleLabel: '',
+    title: '',
+    titleErrorMessages: [],
+    subtitle: '',
+    subtitleLabel: '',
+    hideSubtitle: false,
+    language: '',
+    definition: 'Title in another language and/or script.'
+  },
+  {
     id: 'description',
     fieldname: 'Description',
     predicate: 'bf:note',
