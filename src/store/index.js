@@ -26,6 +26,10 @@ export default new Vuex.Store({
         sherparomeo: {
           url: 'http://www.sherpa.ac.uk/romeo/api29.php',
           key: 'V9cjsv6PTJE'
+        },
+        vocserver: {
+          url: 'https://vocab.phaidra.org/fuseki/',
+          dataset: 'vocab'
         }
       },
       suggesters: {}
@@ -62,6 +66,9 @@ export default new Vuex.Store({
     },
     setInstanceApi (state, api) {
       Vue.set(state.instanceconfig, 'api', api)
+    },
+    setVocServer (state, vocserver) {
+      Vue.set(state.appconfig.apis, 'vocserver', vocserver)
     },
     setInstanceSolr (state, solr) {
       Vue.set(state.instanceconfig, 'solr', solr)

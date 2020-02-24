@@ -1,6 +1,12 @@
 import languages from '../../utils/lang'
+import lang3to2map from '../../utils/lang3to2map'
 import orgunits from '../../utils/orgunits'
 import axios from 'axios'
+
+const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
+  ret[lang3to2map[key]] = key;
+  return ret;
+}, {})
 
 const state = {
   vocabularies: {
@@ -892,6 +898,39 @@ const mutations = {
         t.disabled = false
       }
     }
+  },
+  loadVocabulary (state, payload) {
+    let id = payload.id
+    let data = payload.data
+
+    let terms = []
+
+    let labHash
+    for (let lab of data.results.bindings) {
+      // TODO: remove replace once pid. is exported to triplestore instead of vocab.
+      let id = lab.id.value.replace('vocab.phaidra.org', 'pid.phaidra.org')
+      let lang = lang2to3map[lab.label['xml:lang']]
+      let found = false
+      for (let term of terms) {
+        if (term['@id'] === id) {
+          term['skos:prefLabel'][lang] = lab.label.value
+          found = true
+          break
+        }
+      }
+      if (!found) {
+        terms.push({
+          '@id': id,
+          'skos:prefLabel': {
+            lang: lab.label.value
+          }
+        })
+      }
+    }
+    state.vocabularies[id] = {
+      terms: terms,
+      loaded: true
+    }
   }
 }
 
@@ -917,6 +956,43 @@ const actions = {
     } catch (error) {
       console.log(error)
       commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch org units: ' + error } ])
+    }
+  },
+  async loadVocabulary ({ commit, state, rootState }, vocabId) {
+    if (state.vocabularies[vocabId]) {
+      if (state.vocabularies[vocabId].loaded) {
+        return
+      }
+    }
+    try {
+      var raw = 'PREFIX v: <' + rootState.appconfig.apis.vocserver.ns + '>\
+      PREFIX : <' + rootState.appconfig.apis.vocserver.ns + 'schema#>\
+      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\
+      SELECT ?id ?label ?exp\
+      WHERE {\
+        graph ?g {\
+          ?id :memberOf  v:' + vocabId + ' .\
+          ?id skos:prefLabel ?label .\
+            OPTIONAL {\
+              ?id :expires ?exp .\
+            }\
+        }\
+      }'
+      let response = await axios.request({
+        method: 'POST',
+        url: rootState.appconfig.apis.vocserver.url + rootState.appconfig.apis.vocserver.dataset + '/query',
+        headers: {'Content-Type': 'application/sparql-query'},
+        data: raw
+      })
+      if (response.data && response.data.results && response.data.results.bindings) {
+        commit('loadVocabulary', { id: vocabId, data: response.data })
+      } else {
+        console.log('Failed to fetch vocabulary ' + vocabId)
+        commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch vocabulary ' + vocabId + ': ' + error } ])
+      }
+    } catch (error) {
+      console.log(error)
+      commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch vocabulary ' + vocabId + ': ' + error } ])
     }
   }
 }
