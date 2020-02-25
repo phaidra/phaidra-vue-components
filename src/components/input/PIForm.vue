@@ -4,6 +4,7 @@
       <v-tab class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
       <v-tab @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
+      <v-tab v-if="importing" class="title font-weight-light text-capitalize">{{ $t('Import') }}</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="activetab">
@@ -495,6 +496,16 @@
       <v-tab-item class="ma-4">
         <p-templates ref="templates" v-on:load-template="loadTemplate($event)"></p-templates>
       </v-tab-item>
+      <v-tab-item>
+        <v-row no-gutters>
+          <h3 class="title font-weight-light primary--text my-4">{{ $t('Import metadata from existing object') }}</h3>
+        </v-row>
+        <v-row no-gutters>
+          <v-col cols="12">
+            <object-from-search v-on:object-selected="importFromObject($event)"></object-from-search>
+          </v-col>
+        </v-row>
+      </v-tab-item>
     </v-tabs-items>
 
   </v-container>
@@ -536,6 +547,7 @@ import PILiteral from './PILiteral'
 import PIStudyPlan from './PIStudyPlan'
 import PIKeyword from './PIKeyword'
 import PTemplates from '../templates/PTemplates'
+import ObjectFromSearch from '../select/ObjectFromSearch'
 
 export default {
   name: 'p-i-form',
@@ -570,7 +582,8 @@ export default {
     PIVocabExtReadonly,
     PISpatialGettyReadonly,
     PIUnknownReadonly,
-    PTemplates
+    PTemplates,
+    ObjectFromSearch
   },
   props: {
     form: {
@@ -589,6 +602,10 @@ export default {
       default: true
     },
     templating: {
+      type: Boolean,
+      default: true
+    },
+    importing: {
       type: Boolean,
       default: true
     },
@@ -634,6 +651,42 @@ export default {
     }
   },
   methods: {
+    importFromObject: async function (doc) {
+      this.loading = true
+      try {
+        let response = await fetch(this.$store.state.instanceconfig.api + '/object/' + doc.pid + '/jsonld', {
+          method: 'GET',
+          mode: 'cors'
+        })
+        let json = await response.json()
+        let form = jsonLd.json2form(json)
+        for (let s of form.sections) {
+          let isFileSection = false
+          for (let f of s.fields) {
+            if (f.predicate === 'ebucore:filename') {
+              isFileSection = true
+              break
+            }
+          }
+          if (isFileSection) {
+            let newFields = []
+            for (let f of s.fields) {
+              if ((f.predicate !== 'ebucore:filename') && (f.predicate !== 'ebucore:hasMimeType')) {
+                newFields.push(f)
+              }
+            }
+            s.fields = newFields
+            newFields.push(fields.getField('file'))
+          }
+        }
+        this.$emit('load-form', form)
+        this.activetab = 0
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.loading = false
+      }
+    },
     getMetadata: function () {
       let jsonlds
       if (!this.targetpid && (this.submittype === 'container')) {

@@ -4,9 +4,9 @@
       <v-autocomplete
         v-on:input="$emit('input-place-type', $event)"
         :label="$t('Type of place')"
-        :items="vocabularies['placepredicate'].terms"
+        :items="vocabularies['placetype'].terms"
         :item-value="'@id'"
-        :value="getTerm('placepredicate', type)"
+        :value="getTerm('placetype', type)"
         :filter="autocompleteFilter"
         :disabled="disabletype"
         :filled="inputStyle==='filled'"
@@ -16,13 +16,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
-            <v-list-item-title  v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel('placetype', item['@id'])}`"></v-list-item-title>
             <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-item-content>
-            <v-list-item-title v-html="`${getLocalizedTermLabel('placepredicate', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title v-html="`${getLocalizedTermLabel('placetype', item['@id'])}`"></v-list-item-title>
           </v-list-item-content>
         </template>
       </v-autocomplete>
@@ -204,10 +204,10 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-      this.loading = !this.vocabularies['placepredicate'].loaded
+      this.loading = !this.vocabularies['placetype'].loaded
       // emit input to set skos:prefLabel in parent
       if (this.type) {
-        this.$emit('input-place-type', this.getTerm('placepredicate', this.type))
+        this.$emit('input-place-type', this.getTerm('placetype', this.type))
       }
     })
     if (this.initquery) {

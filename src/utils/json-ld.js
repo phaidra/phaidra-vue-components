@@ -383,17 +383,32 @@ export default {
             case 'vra:placeOfCreation':
             case 'vra:placeOfRepository':
             case 'vra:placeOfSite':
-              if (value[i]['@type'] === 'schema:Place' && !(value[i]['skos:exactMatch'])) {
+              let fieldidprefix
+              switch (key) {
+                case 'dcterms:spatial':
+                  fieldidprefix = 'spatial'
+                  break
+                case 'vra:placeOfCreation':
+                  fieldidprefix = 'place-of-creation'
+                  break
+                case 'vra:placeOfRepository':
+                  fieldidprefix = 'place-of-repository'
+                  break
+                case 'vra:placeOfSite':
+                  fieldidprefix = 'place-of-site'
+                  break
+              }
+              if (((value[i]['@type'] === 'schema:Place') || (value[i]['@type'] === 'schema:AdministrativeArea')) && !(value[i]['skos:exactMatch'])) {
                 // freetext
-                f = fields.getField('spatial-text')
-                f.type = key
+                f = fields.getField(fieldidprefix + '-text')
+                f.type = value[i]['@type']
                 for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
                   f.value = value[i]['skos:prefLabel'][j]['@value']
                   f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
                 }
                 components.push(f)
               } else {
-                if (value[i]['@type'] === 'schema:Place' && value[i]['skos:exactMatch']) {
+                if (((value[i]['@type'] === 'schema:Place') || (value[i]['@type'] === 'schema:AdministrativeArea')) && value[i]['skos:exactMatch']) {
                   // getty
                   f = fields.getField('spatial-getty-readonly')
                   if (value[i]['skos:exactMatch']) {
@@ -405,12 +420,12 @@ export default {
                   f['rdfs:label'] = value[i]['rdfs:label']
                   f.coordinates = value[i]['schema:geo']
                   f.predicate = key
-                  f.type = key
+                  f.type = value[i]['@type']
                   f.label = key
                   components.push(f)
-                  f = fields.getField('spatial-getty')
+                  f = fields.getField(fieldidprefix + '-getty')
                   f.predicate = key
-                  f.type = key
+                  f.type = value[i]['@type']
                   components.push(f)
                 }
               }
@@ -2035,10 +2050,10 @@ export default {
         case 'vra:placeOfRepository':
         case 'vra:placeOfSite':
           if (((f.component === 'p-spatial-getty') || (f.component === 'p-spatial-getty-readonly')) && f.value) {
-            this.push_object(jsonld, f.type, this.get_json_spatial(f['rdfs:label'], f['skos:prefLabel'], f.coordinates, 'schema:Place', [f.value]))
+            this.push_object(jsonld, f.predicate, this.get_json_spatial(f['rdfs:label'], f['skos:prefLabel'], f.coordinates, f.type, [f.value]))
           } else {
             if (f.value) {
-              this.push_object(jsonld, f.type, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'schema:Place'))
+              this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
             }
           }
           break

@@ -8,7 +8,7 @@
         show-size 
         @change="fileInput($event)" 
         :label="$t(label)"
-        :prepend-icon="false"
+        :prepend-icon="''"
         :prepend-inner-icon="'mdi-paperclip'"
       ></v-file-input>
     </v-col>
