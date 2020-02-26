@@ -16,7 +16,8 @@
       :filled="!solo"
       single-line
       :solo="solo"
-      hide-details
+      append-icon="search"
+      :messages="messages"
     />
     <div :class="`${getClassName('list')} autocomplete autocomplete-list elevation-2`" v-show="showList && suggestions && suggestions.length">
       <v-list>
@@ -67,7 +68,9 @@ export default {
       default: 0
     },
 
-    onSelect: Function
+    onSelect: Function,
+
+    messages: Array
   },
 
   data () {

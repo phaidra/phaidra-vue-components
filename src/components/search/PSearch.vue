@@ -1,8 +1,8 @@
 <template>
-    <v-row  >
-      <v-col cols="9" class="border-right pr-2" >
-        <v-row>
-          <v-col cols="5">
+    <v-row no-gutters>
+      <v-col md="9" cols="12" class="border-right pr-2" >
+        <v-row align="start">
+          <v-col md="6" cols="9">
             <autocomplete
               placeholder="Search..."
               name="autocomplete"
@@ -12,11 +12,11 @@
               :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
               :onSelect="handleSelect"
               solo
+              :messages="[ total + ' ' + $t('objects') ]"
             ></autocomplete>
           </v-col>
-          <v-col cols="2" align-self="center"><span>{{ total }} {{ $t('objects') }}</span></v-col>
           <v-spacer></v-spacer>
-          <v-col cols="4" align-self="center">
+          <v-col  md="6" cols="12">
             <search-toolbar
               :setSort="setSort"
               :sortIsActive="sortIsActive"
@@ -24,6 +24,30 @@
               :toggleSelection="toggleSelection"
               :selectioncheck="selectioncheck" />
           </v-col>
+        </v-row>
+        <v-row class="hidden-md-and-up">
+          <v-bottom-sheet v-model="filterdialog" scrollable>
+            <template v-slot:activator="{ on }">
+              <v-btn class="ml-4" color="primary" v-on="on">Filters</v-btn>
+            </template>
+            <v-card height="400px">
+              <v-card-title class="border-bottom">
+                <h3 class="title font-weight-light primary--text pa-2">Filters</h3>
+                <v-spacer></v-spacer>
+                <v-icon @click="filterdialog = !filterdialog">mdi-close</v-icon>
+              </v-card-title>
+              <v-card-text>
+                <search-filters
+                  :search="search"
+                  :facetQueries="facetQueries"
+                  :persAuthorsProp="persAuthors"
+                  :journalsProp="journals"
+                  :funderProp="funder"
+                ></search-filters>
+              </v-card-text>
+              <v-divider></v-divider>
+            </v-card>
+          </v-bottom-sheet>
         </v-row>
         <v-row no-gutters>
           <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
@@ -62,6 +86,16 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      <v-col cols="3" class="pa-2 hidden-sm-and-down">
+        <h3 class="title font-weight-light primary--text border-bottom pa-2">Filters</h3>
+        <search-filters
+          :search="search"
+          :facetQueries="facetQueries"
+          :persAuthorsProp="persAuthors"
+          :journalsProp="journals"
+          :funderProp="funder"
+        ></search-filters>
+      </v-col>
     </v-row>
 </template>
 
@@ -269,6 +303,7 @@ export default {
       limitdialog: false,
       linkdialog: false,
       selectioncheck: false,
+      filterdialog: false,
       q: '',
       inCollection: this.collection,
       currentPage: 1,
