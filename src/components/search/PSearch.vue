@@ -41,8 +41,9 @@
                   :search="search"
                   :facetQueries="facetQueries"
                   :persAuthorsProp="persAuthors"
-                  :journalsProp="journals"
-                  :funderProp="funder"
+                  :corpAuthorsProp="corpAuthors"
+                  :rolesProp="roles"
+                  :ownerProp="owner"
                 ></search-filters>
               </v-card-text>
               <v-divider></v-divider>
@@ -60,7 +61,7 @@
           <p-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
         </v-row>
       </v-col>
-      <v-col cols="3" class="pa-2">
+      <v-col cols="3" class="pa-2 hidden-sm-and-down">
         <h3 class="title font-weight-light primary--text border-bottom pa-2">Filters</h3>
         <search-filters
           :search="search"
@@ -86,16 +87,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-col cols="3" class="pa-2 hidden-sm-and-down">
-        <h3 class="title font-weight-light primary--text border-bottom pa-2">Filters</h3>
-        <search-filters
-          :search="search"
-          :facetQueries="facetQueries"
-          :persAuthorsProp="persAuthors"
-          :journalsProp="journals"
-          :funderProp="funder"
-        ></search-filters>
-      </v-col>
     </v-row>
 </template>
 
