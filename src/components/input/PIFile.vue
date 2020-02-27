@@ -9,7 +9,7 @@
         @change="fileInput($event)" 
         :label="$t(label)"
         :prepend-icon="''"
-        :prepend-inner-icon="'mdi-paperclip'"
+        :append-icon="'mdi-paperclip'"
       ></v-file-input>
     </v-col>
     <v-col v-if="!autoMimetype" cols="4">
