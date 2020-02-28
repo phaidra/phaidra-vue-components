@@ -409,8 +409,7 @@ export default {
                 components.push(f)
               } else {
                 if (((value[i]['@type'] === 'schema:Place') || (value[i]['@type'] === 'schema:AdministrativeArea')) && value[i]['skos:exactMatch']) {
-                  // getty
-                  f = fields.getField('spatial-getty-readonly')
+                  f = fields.getField('spatial-readonly')
                   if (value[i]['skos:exactMatch']) {
                     for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
                       f.value = value[i]['skos:exactMatch'][j]
@@ -423,7 +422,12 @@ export default {
                   f.type = value[i]['@type']
                   f.label = key
                   components.push(f)
-                  f = fields.getField(fieldidprefix + '-getty')
+                  if (f.value.startsWith('http://vocab.getty.edu')) {
+                    f = fields.getField(fieldidprefix + '-getty')
+                  }
+                  if (f.value.startsWith('http://www.geonames.org')) {
+                    f = fields.getField(fieldidprefix + '-geonames')
+                  }
                   f.predicate = key
                   f.type = value[i]['@type']
                   components.push(f)
@@ -2049,7 +2053,7 @@ export default {
         case 'vra:placeOfCreation':
         case 'vra:placeOfRepository':
         case 'vra:placeOfSite':
-          if (((f.component === 'p-spatial-getty') || (f.component === 'p-spatial-getty-readonly')) && f.value) {
+          if (((f.component === 'p-spatial-getty') || (f.component === 'p-spatial-geonames') || (f.component === 'p-spatial-readonly')) && f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_spatial(f['rdfs:label'], f['skos:prefLabel'], f.coordinates, f.type, [f.value]))
           } else {
             if (f.value) {

@@ -850,6 +850,21 @@ const fields = [
     definition: 'Depicted/Represented place.'
   },
   {
+    id: 'spatial-geonames',
+    fieldname: 'Depicted/Represented place (Geonames)',
+    predicate: 'dcterms:spatial',
+    component: 'p-spatial-geonames',
+    multiplicable: true,
+    voc: 'tgn',
+    label: 'Depicted/Represented place',
+    value: '',
+    type: 'schema:Place',
+    disabletype: false,
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    definition: 'Depicted/Represented place.'
+  },
+  {
     id: 'spatial-text',
     fieldname: 'Depicted/Represented place',
     predicate: 'dcterms:spatial',
@@ -868,6 +883,21 @@ const fields = [
     fieldname: 'Place of creation (Getty TGN)',
     predicate: 'vra:placeOfCreation',
     component: 'p-spatial-getty',
+    multiplicable: true,
+    voc: 'tgn',
+    label: 'Place of creation',
+    value: '',
+    type: 'schema:Place',
+    disabletype: false,
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    definition: 'Place of creation.'
+  },
+  {
+    id: 'place-of-creation-geonames',
+    fieldname: 'Place of creation (Geonames)',
+    predicate: 'vra:placeOfCreation',
+    component: 'p-spatial-geonames',
     multiplicable: true,
     voc: 'tgn',
     label: 'Place of creation',
@@ -908,6 +938,21 @@ const fields = [
     definition: 'Place of repository.'
   },
   {
+    id: 'place-of-repository-geonames',
+    fieldname: 'Place of repository (Geonames)',
+    predicate: 'vra:placeOfRepository',
+    component: 'p-spatial-geonames',
+    multiplicable: true,
+    voc: 'tgn',
+    label: 'Place of repository',
+    value: '',
+    type: 'schema:Place',
+    disabletype: false,
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    definition: 'Place of repository.'
+  },
+  {
     id: 'place-of-repository-text',
     fieldname: 'Place of repository',
     predicate: 'vra:placeOfRepository',
@@ -926,6 +971,21 @@ const fields = [
     fieldname: 'Place of site (Getty TGN)',
     predicate: 'vra:placeOfSite',
     component: 'p-spatial-getty',
+    multiplicable: true,
+    voc: 'tgn',
+    label: 'Place of site',
+    value: '',
+    type: 'schema:Place',
+    disabletype: false,
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    definition: 'Place of site.'
+  },
+  {
+    id: 'place-of-site-geonames',
+    fieldname: 'Place of site (Geonames)',
+    predicate: 'vra:placeOfSite',
+    component: 'p-spatial-geonames',
     multiplicable: true,
     voc: 'tgn',
     label: 'Place of site',
@@ -1042,17 +1102,17 @@ const fields = [
     definition: 'Vocabulary value readonly.'
   },
   {
-    id: 'spatial-getty-readonly',
-    fieldname: 'Getty spatial object  readonly',
+    id: 'spatial-readonly',
+    fieldname: 'Readonly spatial object',
     predicate: '',
-    component: 'p-spatial-getty-readonly',
+    component: 'p-spatial-readonly',
     label: '',
     'skos:prefLabel': [],
     'rdfs:label': [],
     coordinates: [],
     value: '',
     readonly: true,
-    definition: 'Getty spatial object readonly.'
+    definition: 'Readonly spatial object.'
   },
   {
     id: 'system-tag',

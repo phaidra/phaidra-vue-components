@@ -181,7 +181,7 @@ export default {
 
       var params = {
         voc: 'tgn',
-        count: 20,
+        count: 30,
         searchstring: q
       }
 

@@ -40,6 +40,7 @@ import PICitation from './input/PICitation.vue'
 import PIAdaptation from './input/PIAdaptation.vue'
 import PISubjectGnd from './input/PISubjectGnd.vue'
 import PISpatialGetty from './input/PISpatialGetty.vue'
+import PISpatialGeonames from './input/PISpatialGeonames.vue'
 import PISpatialText from './input/PISpatialText.vue'
 import PIProject from './input/PIProject.vue'
 import PISelect from './input/PISelect.vue'
@@ -50,7 +51,7 @@ import PITitle from './input/PITitle.vue'
 import PIFile from './input/PIFile'
 import PIUnknownReadonly from './input/PIUnknownReadonly.vue'
 import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
-import PISpatialGettyReadonly from './input/PISpatialGettyReadonly'
+import PISpatialReadonly from './input/PISpatialReadonly'
 import PILiteral from './input/PILiteral'
 import PIKeyword from './input/PIKeyword'
 import PSearch from './search/PSearch'
@@ -107,6 +108,7 @@ const Components = {
   PIAdaptation,
   PISubjectGnd,
   PISpatialGetty,
+  PISpatialGeonames,
   PISpatialText,
   PIProject,
   PISelect,
@@ -116,7 +118,7 @@ const Components = {
   PITitle,
   PIUnknownReadonly,
   PIVocabExtReadonly,
-  PISpatialGettyReadonly,
+  PISpatialReadonly,
   PILiteral,
   PIKeyword,
   PIDuration,

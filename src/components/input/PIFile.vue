@@ -15,7 +15,7 @@
     <v-col v-if="!autoMimetype" cols="4">
       <v-autocomplete
         :value="getTerm('mimetypes', mimetype)"
-        v-on:input="$emit('input-mimetype', $event )"
+        v-on:input="$emit('input-mimetype', $event)"
         :items="vocabularies['mimetypes'].terms"
         :item-value="'@id'"
         :loading="loading"

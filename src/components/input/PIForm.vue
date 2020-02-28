@@ -287,6 +287,17 @@
                     ></p-i-spatial-getty>
                   </template>
 
+                  <template v-else-if="f.component === 'p-spatial-geonames'">
+                    <p-i-spatial-geonames
+                      v-bind.sync="f"
+                      v-on:input="f.value=$event"
+                      v-on:input-place-type="setSelected(f, 'type', $event)"
+                      v-on:resolve="updatePlace(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-spatial-geonames>
+                  </template>
+
                   <template v-else-if="f.component === 'p-spatial-text'">
                     <p-i-spatial-text
                       v-bind.sync="f"
@@ -398,11 +409,11 @@
                     ></p-i-vocab-ext-readonly>
                   </template>
 
-                  <template v-else-if="f.component === 'p-spatial-getty-readonly'">
-                    <p-i-spatial-getty-readonly
+                  <template v-else-if="f.component === 'p-spatial-readonly'">
+                    <p-i-spatial-readonly
                       v-bind.sync="f"
                       v-on:remove="removeField(s.fields, f)"
-                    ></p-i-spatial-getty-readonly>
+                    ></p-i-spatial-readonly>
                   </template>
 
                   <template v-else-if="f.component === 'p-file'">
@@ -526,6 +537,7 @@ import PISelect from './PISelect'
 import PISelectText from './PISelectText'
 import PISubjectGnd from './PISubjectGnd'
 import PISpatialGetty from './PISpatialGetty'
+import PISpatialGeonames from './PISpatialGeonames'
 import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
 import PIDuration from './PIDuration'
@@ -540,7 +552,7 @@ import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
 import PIFilename from './PIFilename'
 import PIFile from './PIFile'
-import PISpatialGettyReadonly from './PISpatialGettyReadonly'
+import PISpatialReadonly from './PISpatialReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
 import PIUnknownReadonly from './PIUnknownReadonly'
 import PILiteral from './PILiteral'
@@ -562,6 +574,7 @@ export default {
     PISelectText,
     PISubjectGnd,
     PISpatialGetty,
+    PISpatialGeonames,
     PISpatialText,
     PIDimension,
     PIDuration,
@@ -580,7 +593,7 @@ export default {
     PIFilename,
     PIFile,
     PIVocabExtReadonly,
-    PISpatialGettyReadonly,
+    PISpatialReadonly,
     PIUnknownReadonly,
     PTemplates,
     ObjectFromSearch
