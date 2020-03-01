@@ -9,7 +9,6 @@
         :label="$t('Show only my objects')"
       ></v-switch>
     </v-card-title>
-    
     <v-card-text>
       <v-text-field
         v-model="objectsSearch"
@@ -86,7 +85,7 @@ export default {
       handler () {
         this.search()
       },
-      deep: true,
+      deep: true 
     },
     ownerFilter: {
       handler () {
@@ -101,7 +100,7 @@ export default {
         q: this.objectsSearch ? this.objectsSearch : '*:*',
         defType: 'edismax',
         wt: 'json',
-        start: (this.options.page - 1)*this.options.itemsPerPage,
+        start: (this.options.page - 1) * this.options.itemsPerPage,
         rows: this.options.itemsPerPage,
         sort: 'created desc',
         fq: []
@@ -128,7 +127,7 @@ export default {
       }
     },
     handleKeyDown (e) {
-      if (e.keyCode == 13) {
+      if (e.keyCode === 13) {
         this.search()
       }
     },

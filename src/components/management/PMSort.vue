@@ -1,9 +1,9 @@
 <template>
-  <v-card >
+  <v-card>
     <v-card-title class="title font-weight-light grey white--text">{{ $t('Sort') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4" v-if="members.length > 0">
-      <v-col>{{ $t('Here you can sort members of this object (drag & drop).') }}</v-col>
+      <div>{{ $t('Here you can sort members of this object (drag & drop).') }}</div>
       <PSortableList lockAxis="y" v-model="memberscomputed">
         <PSortableSolrDoc v-for="(item, index) in memberscomputed" :index="index" :key="index" :item="item"/>
       </PSortableList>

@@ -1005,6 +1005,14 @@ const getters = {
       }
     }
   },
+  getLocalizedTermLabelByNotation: (state) => (voc, notation, lang) => {
+    let terms = state.vocabularies[voc].terms
+    for (let i = 0; i < terms.length; i++) {
+      if (terms[i]['skos:notation'] === notation) {
+        return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng']
+      }
+    }
+  },
   getTerm: (state) => (voc, id) => {
     let terms = state.vocabularies[voc].terms
     for (let i = 0; i < terms.length; i++) {

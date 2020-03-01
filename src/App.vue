@@ -321,7 +321,7 @@ export default {
   },
   data () {
     return {
-      window: 2,
+      window: 4,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -334,7 +334,7 @@ export default {
         sections: []
       },
       members: [],
-      pid: 'o:16081',
+      pid: 'o:585511',
       piddoc: {},
       collection: 'o:724719',
       sampleCollection: 'o:541829',

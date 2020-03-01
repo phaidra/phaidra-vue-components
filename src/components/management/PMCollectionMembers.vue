@@ -3,7 +3,7 @@
     <v-card-title class="title font-weight-light grey white--text">{{ $t('Collection members') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4">
-      <v-col>{{ $t('Here you can add or remove some of the members this collection is composed of.') }}</v-col>
+      <div>{{ $t('Here you can add or remove some of the members this collection is composed of.') }}</div>
     </v-card-text>
   </v-card>
 </template>

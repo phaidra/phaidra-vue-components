@@ -3,7 +3,7 @@
     <v-card-title class="title font-weight-light grey white--text">{{ $t('Relationships') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4">
-      <v-col>{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</v-col>
+      <div>{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</div>
     </v-card-text>
   </v-card>
 </template>
