@@ -19,12 +19,16 @@
                   :loading-text="$t('Loading...')"
                   :items-per-page="1000"
                 >
+                  <template v-slot:item.description="{ item }">
+                    <span :title="item.notation">{{ item.description }}</span>
+                  </template>
                   <template v-slot:item.expires="{ item }">
                     {{ item.expires | date }}
                   </template>
                   <template v-slot:item.actions="{ item }">
-                    <v-btn text color="primary" @click="setExpiration(item)">{{ $t('Set exipiration date') }}</v-btn>
-                    <v-btn text color="error" @click="removeRight(item)">{{ $t('Remove') }}</v-btn>
+                    <v-btn text color="primary" @click="openDateDialog(item)">{{ $t('Edit exipiration date') }}</v-btn>
+                    <v-btn v-if="item.expires" text color="primary" @click="removeExpires(item)">{{ $t('Remove exipiration date') }}</v-btn>
+                    <v-btn text color="error" @click="removeRight(item)">{{ $t('Remove right') }}</v-btn>
                   </template>
                 </v-data-table>
               </v-card-text>
@@ -41,10 +45,10 @@
                   <v-row>
                     <v-col cols="8">
                       <v-autocomplete
+                        v-model="orgunit"
                         v-on:input="handleInput($event)"
                         :items="vocabularies['orgunits'].terms"
                         :item-value="'@id'"
-                        :loading="loading"
                         :filter="autocompleteFilter"
                         :label="$t('Select organizational unit')"
                         :messages="path"
@@ -55,7 +59,7 @@
                       >
                         <template slot="item" slot-scope="{ item }">
                           <v-list-item-content two-line>
-                            <v-list-item-title  v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
+                            <v-list-item-title v-html="`${getLocalizedTermLabel('orgunits', item['@id'])}`"></v-list-item-title>
                             <v-list-item-subtitle v-html="`${item['@id']}`"></v-list-item-subtitle>
                           </v-list-item-content>
                         </template>
@@ -70,18 +74,102 @@
                       </v-autocomplete>
                     </v-col>
                     <org-units-tree-dialog ref="orgunitstreedialog" @unit-selected="handleInput(getTerm('orgunits', $event))"></org-units-tree-dialog>
+                    <v-col cols="1" class="pt-6">
+                      <v-btn class="primary" :disabled="loading" @click="addOrgUnit()">{{ $t('Apply') }}</v-btn>
+                    </v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-card>
+              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular persons') }}</v-card-title>
+              <v-divider></v-divider>
+              <v-card-text class="mt-4">
+                <v-container>
+                  <v-row>
+                    <v-col cols="8">
+                      <v-autocomplete
+                        v-model="userSearchModel"
+                        :items="userSearchItems.length > 0 ? userSearchItems : []"
+                        :loading="userSearchLoading"
+                        :search-input.sync="userSearch"
+                        :label="$t('User search')"
+                        :placeholder="$t('Start typing to Search')"
+                        item-value="uid"
+                        item-text="value"
+                        prepend-icon="mdi-database-search"
+                        hide-no-data
+                        hide-selected
+                        return-object
+                        clearable
+                        @click:clear="userSearchItems=[]"
+                      >
+                        <template slot="item" slot-scope="{ item }">
+                          <template v-if="item">
+                            <v-list-item-content two-line>
+                              <v-list-item-title>{{ item.value }}</v-list-item-title>
+                              <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
+                            </v-list-item-content>
+                          </template>
+                        </template>
+                      </v-autocomplete>
+                    </v-col>
+                    <v-col cols="1" class="pt-6">
+                      <v-btn class="primary" :disabled="loading" @click="addUser()">{{ $t('Apply') }}</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-card>
+              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular groups') }}</v-card-title>
+              <v-divider></v-divider>
+              <v-card-text class="mt-4">
+                <v-data-table
+                  :items="groups"
+                  :headers="groupsHeaders"
+                  :loading="groupsLoading"
+                  :loading-text="$t('Loading...')"
+                  :items-per-page="5"
+                >
+                  <template v-slot:item.description="{ item }">
+                    <span :title="item.groupid">{{ item.name }}</span>
+                  </template>
+                  <template v-slot:item.actions="{ item }">
+                    <v-btn text :disabled="loading" color="primary" @click="addGroup(item)">{{ $t('Apply') }}</v-btn>
+                  </template>
+                </v-data-table>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-dialog
+          ref="dialog"
+          v-model="dateDialog"
+          persistent
+          width="290px"
+        >
+          <v-date-picker v-model="dateModel" scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="dateDialog = false">Cancel</v-btn>
+            <v-btn text color="primary" @click="setExpires()">OK</v-btn>
+          </v-date-picker>
+        </v-dialog>
       </v-container>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import arrays from '../../utils/arrays'
 import { vocabulary } from '../../mixins/vocabulary'
 import OrgUnitsTreeDialog from '../select/OrgUnitsTreeDialog'
 
@@ -93,8 +181,7 @@ export default {
   },
   props: {
     pid: {
-      type: String,
-      required: true
+      type: String
     }
   },
   computed: {
@@ -105,19 +192,63 @@ export default {
   data () {
     return {
       loading: false,
+      userSearchLoading: false,
+      groupsLoading: false,
+      groupsHeaders: [
+        { text: 'Name', align: 'left', value: 'description', sortable: false },
+        { text: '', align: 'right', value: 'actions', sortable: false }
+      ],
+      groups: [],
       rightsjson: {},
       path: '',
       rightsArray: [],
       rightsHeaders: [
-        { text: 'Notation', align: 'left', value: 'notation', sortable: false },
-        { text: 'Description', align: 'left', value: 'description', sortable: false },
+        { text: 'Rule', align: 'left', value: 'description', sortable: false },
         { text: 'Expires', align: 'left', value: 'expires', sortable: false },
         { text: '', align: 'right', value: 'actions', sortable: false }
-      ]
+      ],
+      dateModel: new Date().toISOString().substr(0, 10),
+      dateDialog: false,
+      dateDialogItem: null,
+      orgunit: null,
+      userSearch: null,
+      userSearchModel: null,
+      userSearchItems: []
+    }
+  },
+  watch: {
+    userSearch: async function (val) {
+      if (val && (val.length < 4)) {
+        this.userSearchItems = []
+        return
+      }
+      if (this.userSearchItems.length > 0) return
+      if (this.userSearchLoading) return
+      this.userSearchLoading = true
+      try {
+        let response = await this.$http.get(this.instance.api + '/directory/user/search', {
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          params: {
+            q: val
+          }
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          commit('setAlerts', response.data.alerts)
+        }
+        this.userSearchItems = response.data.accounts ? response.data.accounts : []
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.userSearchLoading = false
+      }
     }
   },
   methods: {
     handleInput: function (unit) {
+      this.orgunit = unit
       this.path = ''
       let parentpath = []
       this.getParentPath(unit, parentpath)
@@ -127,13 +258,60 @@ export default {
       if (unit['skos:prefLabel']) {
         this.path = this.path + unit['skos:prefLabel'][this.$i18n.locale]
       }
-      this.$emit('input', unit)
     },
     getParentPath: function (unit, parentpath) {
       if (unit['parent']) {
         parentpath.push(unit.parent)
         this.getParentPath(unit.parent, parentpath)
       }
+    },
+    openDateDialog: function (item) {
+      this.dateDialogItem = item
+      this.dateDialog = true
+    },
+    removeExpires: async function (item) {
+      item.expires = null
+      this.saveRights()
+    },
+    setExpires: async function () {
+      this.dateDialogItem.expires = this.dateModel
+      this.dateDialog = false
+      this.saveRights()
+    },
+    removeRight: async function (item) {
+      arrays.remove(this.rightsArray, item)
+      this.saveRights()
+    },
+    addUser: function () {
+      this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
+      this.saveRights()
+    },
+    addGroup: function (group) {
+      this.rightsArray.push({ type: 'gruppe', notation: group.groupid, description: group.name, expires: null })
+      this.saveRights()
+    },
+    addOrgUnit: function () {
+      let type = ''
+      // let's say if parent is faculty, this is a 'department' type rule
+      if (this.orgunit.parent) {
+        if (this.orgunit.parent['@type'] === 'aiiso:Faculty') {
+          type = 'department'
+        } else {
+          type = 'faculty'
+        }
+      } else {
+        type = 'faculty'
+      }
+      let notation = 'A' + this.orgunit['skos:notation']
+      if (this.orgunit['skos:notation'] === 0) {
+        notation = 'A-1'
+      }
+      let description = this.getLocalizedTermLabel('orgunits', this.orgunit['@id'])
+      if (!description) {
+        description = notation
+      }
+      this.rightsArray.push({ type: type, notation: notation, description: description, expires: null })
+      this.saveRights()
     },
     getNameFromUsername: async function (username) {
       this.loading = true
@@ -173,6 +351,51 @@ export default {
         this.loading = false
       }
     },
+    saveRights: async function () {
+      let rights = {}
+      for (let r of this.rightsArray) {
+        if (!rights[r.type]) {
+          rights[r.type] = []
+        }
+        if (r.expires) {
+          rights[r.type].push({ value: r.notation, expires: new Date(r.expires).toISOString() })
+        } else {
+          rights[r.type].push(r.notation)
+        }
+      }
+      if (this.pid) {
+        this.loading = true
+        var httpFormData = new FormData()
+        httpFormData.append('metadata', JSON.stringify({ metadata: { rights: rights } }))
+        this.rightsArray = []
+        this.rightsjson = {}
+        try {
+          let response = await this.$http.request({
+            method: 'POST',
+            url: this.instance.api + '/object/' + this.pid + '/rights',
+            data: httpFormData,
+            headers: {
+              'X-XSRF-TOKEN': this.$store.state.user.token,
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          if (response.status === 200) {
+            this.$store.commit('setAlerts', [{ type: 'success', msg: 'Rights for object ' + this.pid + ' saved' }])
+          } else {
+            if (response.data.alerts && response.data.alerts.length > 0) {
+              this.$store.commit('setAlerts', response.data.alerts)
+            }
+          }
+        } catch (error) {
+          console.log(error)
+          this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        } finally {
+          await this.loadRights()
+        }
+      } else {
+        this.$emit('input-rights', rights)
+      }
+    },
     loadRights: async function () {
       this.loading = true
       try {
@@ -198,7 +421,7 @@ export default {
                 notation = r
               }
               name = await this.getNameFromUsername(notation)
-              this.rightsArray.push( { notation: notation, description: name, expires: expires } )
+              this.rightsArray.push( { type: 'username', notation: notation, description: name, expires: expires } )
             }
           }
           if (this.rightsjson['department']) {
@@ -216,8 +439,11 @@ export default {
                 name = this.$t('Whole University')
               } else {
                 name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
+                if (!name) {
+                  name = notation
+                }
               }
-              this.rightsArray.push( { notation: notation, description: name, expires: expires } )
+              this.rightsArray.push( { type: 'department', notation: notation, description: name, expires: expires } )
             }
           }
           if (this.rightsjson['faculty']) {
@@ -235,8 +461,11 @@ export default {
                 name = this.$t('Whole University')
               } else {
                 name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
+                if (!name) {
+                  name = notation
+                }
               }
-              this.rightsArray.push( { notation: notation, description: name, expires: expires } )
+              this.rightsArray.push( { type: 'faculty', notation: notation, description: name, expires: expires } )
             }
           }
           if (this.rightsjson['gruppe']) {
@@ -251,7 +480,7 @@ export default {
                 notation = r
               }
               name = await this.getGroupName(notation)
-              this.rightsArray.push( { notation: notation, description: name, expires: expires } )
+              this.rightsArray.push( { type: 'gruppe', notation: notation, description: name, expires: expires } )
             }
           }
         } else {
@@ -265,6 +494,30 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    loadGroups: async function () {
+      this.groupsLoading = true
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.instance.api + '/groups',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
+        })
+        if (response.status === 200) {
+          this.groups = response.data.groups
+        } else {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
+          }
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.groupsLoading = false
+      }
     }
   },
   mounted: async function () {    
@@ -273,6 +526,7 @@ export default {
         this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
       }
       this.loadRights()
+      this.loadGroups()
     })
   }
 }
