@@ -65,8 +65,8 @@
                 {{ item.updated | unixtime }}
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon color="primary" class="mx-3" @click="loadedList = item">edit</v-icon>
-                <v-icon color="grey" class="mx-3" @click="deleteListDialog(item)">delete</v-icon>
+                <v-icon color="primary" class="mx-3" @click="loadedList = item">mdi-edit</v-icon>
+                <v-icon color="grey" class="mx-3" @click="deleteListDialog(item)">mdi-delete</v-icon>
               </template>
             </v-data-table>
           </v-card-text>
@@ -108,7 +108,7 @@
                 {{ item.title | truncate(100) }}
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon color="grey" class="mx-3" @click="removeMember(item)">delete</v-icon>
+                <v-icon color="grey" class="mx-3" @click="removeMember(item)">mdi-delete</v-icon>
               </template>
             </v-data-table>
           </v-card-text>

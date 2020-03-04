@@ -203,8 +203,8 @@ export default {
       path: '',
       rightsArray: [],
       rightsHeaders: [
-        { text: 'Rule', align: 'left', value: 'description', sortable: false },
-        { text: 'Expires', align: 'left', value: 'expires', sortable: false },
+        { text: this.$t('Rule'), align: 'left', value: 'description', sortable: false },
+        { text:  this.$t('Expires'), align: 'left', value: 'expires', sortable: false },
         { text: '', align: 'right', value: 'actions', sortable: false }
       ],
       dateModel: new Date().toISOString().substr(0, 10),

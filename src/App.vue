@@ -334,7 +334,7 @@ export default {
         sections: []
       },
       members: [],
-      pid: 'o:585511',
+      pid: 'o:585891',
       piddoc: {},
       collection: 'o:724719',
       sampleCollection: 'o:541829',
