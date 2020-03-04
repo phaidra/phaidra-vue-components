@@ -24,6 +24,55 @@
             </v-data-table>
           </v-col>
         </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-card>
+              <v-card-title class="title font-weight-light grey white--text">{{ $t('Add new relationship of object') + ' ' + pid }}</v-card-title>
+              <v-divider></v-divider>
+              <v-card-text class="mt-4">
+                <v-container>
+                  <v-row>
+                    <v-col cols="4">
+                      <v-select
+                        v-model="selectedRelationship"
+                        :label="$t('Choose relationship')"
+                        :items="relationshipSelect"
+                      />
+                    </v-col>
+                    <v-col cols="5">
+                      <v-autocomplete
+                        v-model="objectSearchModel"
+                        :items="objectSearchItems.length > 0 ? objectSearchItems : []"
+                        :loading="objectSearchLoading"
+                        :search-input.sync="objectSearch"
+                        :label="$t('Object search')"
+                        :placeholder="$t('Start typing to search')"
+                        prepend-inner-icon="mdi-magnify"
+                        hide-no-data
+                        hide-selected
+                        return-object
+                        clearable
+                        @click:clear="userSearchItems=[]"
+                      >
+                        <template slot="item" slot-scope="{ item }">
+                          <template v-if="item">
+                            <v-list-item-content two-line>
+                              <v-list-item-title>{{ item.text }}</v-list-item-title>
+                              <v-list-item-subtitle>{{ item.value }}</v-list-item-subtitle>
+                            </v-list-item-content>
+                          </template>
+                        </template>
+                      </v-autocomplete>
+                    </v-col>
+                    <v-col cols="1" class="pt-6">
+                      <v-btn class="primary" :disabled="loading" @click="addRelationship()">{{ $t('Add') }}</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card-text>
   </v-card>
@@ -43,6 +92,13 @@ export default {
   computed: {
     instance: function () {
       return this.$store.state.instanceconfig
+    },
+    relationshipSelect: function () {
+      let arr = []
+      Object.entries(this.map).forEach(([key, value]) => {
+        arr.push( { text: value.label, value: value.uri } )
+      })
+      return arr
     }
   },
   data () {
@@ -93,7 +149,50 @@ export default {
         { text: this.$t('Object'), align: 'left', value: 'object' },
         { text: this.$t('Title'), align: 'left', value: 'title' },
         { text: '', align: 'right', value: 'actions', sortable: false }
-      ]
+      ],
+      selectedRelationship: null,
+      objectSearch: null,
+      objectSearchModel: null,
+      objectSearchItems: [],
+      objectSearchLoading: false
+    }
+  },
+  watch: {
+    objectSearch: async function (val) {
+      if (val && (val.length < 4)) {
+        this.objectSearchItems = []
+        return
+      }
+      if (this.objectSearchItems.length > 0) return
+      if (this.objectSearchLoading) return
+      this.objectSearchLoading = true
+      try {
+        let params = {
+          q: val,
+          defType: 'edismax',
+          wt: 'json',
+          fl: 'pid,dc_title',
+          start: 0,
+          rows: 100
+        }
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.solr + '/select',
+          data: qs.stringify(params, { arrayFormat: 'repeat' }),
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+          }
+        })
+        this.objectSearchItems = []
+        for (let d of response.data.response.docs) {
+          this.objectSearchItems.push( { text: d['dc_title'][0], value: d.pid } )
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.objectSearchLoading = false
+      }
     }
   },
   methods: {
@@ -169,6 +268,10 @@ export default {
       return titles
     },
     removeRelationship: async function (item) {
+      this.loadRelationships()
+    },
+    addRelationship: async function () {
+      alert(this.selectedRelationship + ' to ' + this.objectSearchModel)
       this.loadRelationships()
     }
   },

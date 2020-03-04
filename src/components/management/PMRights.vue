@@ -98,7 +98,7 @@
                         :loading="userSearchLoading"
                         :search-input.sync="userSearch"
                         :label="$t('User search')"
-                        :placeholder="$t('Start typing to Search')"
+                        :placeholder="$t('Start typing to search')"
                         item-value="uid"
                         item-text="value"
                         prepend-icon="mdi-database-search"
