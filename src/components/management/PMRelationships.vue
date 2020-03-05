@@ -15,11 +15,14 @@
               :loading-text="$t('Loading...')"
               :items-per-page="1000"
             >
+              <template v-slot:item.relationship="{ item }">
+                {{ map[item.relationship].label }}
+              </template>
               <template v-slot:item.object="{ item }">
                 <a target="_blank" :href="'https://' + instance.baseurl + '/' + item.object">{{ item.object }}</a>
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon color="grey" class="mx-3" @click="removeRelationship(item)">mdi-delete</v-icon>
+                <v-icon :disabled="loading" color="grey" class="mx-3" @click="removeRelationship(item)">mdi-delete</v-icon>
               </template>
             </v-data-table>
           </v-col>
@@ -54,6 +57,11 @@
                         clearable
                         @click:clear="userSearchItems=[]"
                       >
+                        <template slot="selection" slot-scope="{ item }">
+                          <v-list-item-content>
+                            <v-list-item-title><span class="primary--text">{{ item.value }}:</span> {{ item.text }}</v-list-item-title>
+                          </v-list-item-content>
+                        </template>
                         <template slot="item" slot-scope="{ item }">
                           <template v-if="item">
                             <v-list-item-content two-line>
@@ -129,10 +137,6 @@ export default {
           uri: 'http://phaidra.org/XML/V1.0/relations#isAlternativeVersionOf',
           label: this.$t('Is alternative version of')
         },
-        isinadminset: {
-          uri: 'http://phaidra.org/ontology/isInAdminSet',
-          label: this.$t('Is in admin set')
-        },
         haspart: {
           uri: 'info:fedora/fedora-system:def/relations-external#hasCollectionMember',
           label: this.$t('Has part')
@@ -160,11 +164,11 @@ export default {
   watch: {
     objectSearch: async function (val) {
       if (val && (val.length < 4)) {
-        this.objectSearchItems = []
         return
       }
-      if (this.objectSearchItems.length > 0) return
       if (this.objectSearchLoading) return
+      if (this.objectSearchModel) return
+      this.objectSearchItems = []
       this.objectSearchLoading = true
       try {
         let params = {
@@ -183,7 +187,6 @@ export default {
             'content-type': 'application/x-www-form-urlencoded'
           }
         })
-        this.objectSearchItems = []
         for (let d of response.data.response.docs) {
           this.objectSearchItems.push( { text: d['dc_title'][0], value: d.pid } )
         }
@@ -222,7 +225,7 @@ export default {
           Object.entries(this.map).forEach(([key, value]) => {
             if (this.relationships[key]) {
               for ( let o of this.relationships[key]) {
-                this.relationshipsArray.push( { relationship: this.map[key].label, object: o, title: titles[o] } )
+                this.relationshipsArray.push( { relationship: key,  object: o, title: titles[o] } )
               }
             }
           })
@@ -271,7 +274,63 @@ export default {
       this.loadRelationships()
     },
     addRelationship: async function () {
-      alert(this.selectedRelationship + ' to ' + this.objectSearchModel)
+      this.loading = true
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('predicate', this.selectedRelationship)
+        httpFormData.append('object', 'info:fedora/' + this.objectSearchModel.value)
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.api + '/object/' + this.pid + '/relationship/add',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          data: httpFormData
+        })
+        if (response.status === 200) {
+          this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly added' }])
+        } else {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
+          }
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
+      }
+      this.loadRelationships()
+    },
+    removeRelationship: async function (item) {
+      this.loading = true
+      try {
+        var httpFormData = new FormData()
+        httpFormData.append('predicate', this.map[item.relationship].uri)
+        httpFormData.append('object', 'info:fedora/' + item.object)
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.api + '/object/' + this.pid + '/relationship/remove',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          data: httpFormData
+        })
+        if (response.status === 200) {
+          this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly removed' }])
+        } else {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
+          }
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
+      }
       this.loadRelationships()
     }
   },
