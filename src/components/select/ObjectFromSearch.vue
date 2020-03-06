@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="grey white--text">
-      <span class="title font-weight-light">{{ $t('Select an object') }}</span>
+      <span class="title font-weight-light">{{ title ? title : $t('Select an object') }}</span>
       <v-spacer></v-spacer>
       <v-switch
         dark
@@ -12,7 +12,7 @@
     <v-card-text>
       <v-text-field
         v-model="objectsSearch"
-        append-icon="search"
+        append-icon="mdi-magnify"
         :label="$t('Search...')"
         @keydown="handleKeyDown"
         single-line
@@ -53,6 +53,11 @@ export default {
   computed: {
     instance: function () {
       return this.$store.state.instanceconfig
+    }
+  },
+  props: {
+    title: {
+      type: String
     }
   },
   data () {

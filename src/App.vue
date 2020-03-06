@@ -186,10 +186,13 @@
                   <v-card-text>
                     <p-i-form
                       :form="form"
+                      :rights="submitRights"
+                      :enablerights="true"
                       v-on:object-created="objectCreated($event)"
                       v-on:load-form="form = $event"
                       v-on:form-input-p-select="handleSelect($event)"
                       v-on:add-phaidrasubject-section="addPhaidrasubjectSection($event)"
+                      v-on:input-rights="submitRights = $event"
                     ></p-i-form>
                   </v-card-text>
                 </v-card>
@@ -321,7 +324,7 @@ export default {
   },
   data () {
     return {
-      window: 4,
+      window: 2,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -377,7 +380,8 @@ export default {
           value: 'https://pid.phaidra.org/vocabulary/T8GH-F4V8'
         }
       ],
-      psvis: true
+      psvis: true,
+      submitRights: {}
     }
   },
   methods: {

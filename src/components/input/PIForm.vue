@@ -5,6 +5,7 @@
       <v-tab @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
       <v-tab v-if="importing" class="title font-weight-light text-capitalize">{{ $t('Import') }}</v-tab>
+      <v-tab v-if="enablerights" class="title font-weight-light text-capitalize">{{ $t('Rights') }}</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="activetab">
@@ -509,11 +510,15 @@
       </v-tab-item>
       <v-tab-item>
         <v-row no-gutters>
-          <h3 class="title font-weight-light primary--text my-4">{{ $t('Import metadata from existing object') }}</h3>
+          <v-col cols="12">
+            <object-from-search :title="$t('Import metadata from existing object')" v-on:object-selected="importFromObject($event)"></object-from-search>
+          </v-col>
         </v-row>
+      </v-tab-item>
+      <v-tab-item>
         <v-row no-gutters>
           <v-col cols="12">
-            <object-from-search v-on:object-selected="importFromObject($event)"></object-from-search>
+            <p-m-rights v-on:input-rights="$emit('input-rights', $event)" :rights="rights" :title="$t('Restrict access to uploaded object(s)')" ></p-m-rights>
           </v-col>
         </v-row>
       </v-tab-item>
@@ -560,6 +565,7 @@ import PIStudyPlan from './PIStudyPlan'
 import PIKeyword from './PIKeyword'
 import PTemplates from '../templates/PTemplates'
 import ObjectFromSearch from '../select/ObjectFromSearch'
+import PMRights from '../management/PMRights'
 
 export default {
   name: 'p-i-form',
@@ -596,7 +602,8 @@ export default {
     PISpatialReadonly,
     PIUnknownReadonly,
     PTemplates,
-    ObjectFromSearch
+    ObjectFromSearch,
+    PMRights
   },
   props: {
     form: {
@@ -610,6 +617,9 @@ export default {
       // IIF the current user is authorized to do so in phaidra-api
       type: String
     },
+    rights: {
+      type: Object
+    },
     addbutton: {
       type: Boolean,
       default: true
@@ -621,6 +631,10 @@ export default {
     importing: {
       type: Boolean,
       default: true
+    },
+    enablerights: {
+      type: Boolean,
+      default: false
     },
     floatingsavebutton: {
       type: Boolean,
@@ -730,6 +744,9 @@ export default {
       }
       if (this.owner) {
         md['metadata']['ownerid'] = this.owner
+      }
+      if (this.rights) {
+        md['metadata']['rights'] = this.rights
       }
       return md
     },

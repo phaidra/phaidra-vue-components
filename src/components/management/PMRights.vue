@@ -1,14 +1,14 @@
 <template>
   <v-card>
-    <v-card-title class="title font-weight-light grey white--text">{{ $t('Access rights') }}</v-card-title>
+    <v-card-title class="title font-weight-light grey white--text">{{ title ? title : $t('Access rights') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4">
       <v-container>
-        <v-row class="title font-weight-light">{{ $t('Here you can restrict access to this object. Any other objects, like members (if this is a container or a collection), pages (if this is a book) different versions or related objects will not be affected.') }}</v-row>
+        <!--<v-row class="title font-weight-light">{{ $t('Here you can restrict access to this object. Any other objects, like members (if this is a container or a collection), pages (if this is a book) different versions or related objects will not be affected.') }}</v-row>-->
         <v-row>
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('The following entities have access to the object') }}</v-card-title>
+              <v-card-title class="title font-weight-light grey white--text">{{ (rightsArray.length > 0) ? $t('The following entities have access to the object') : $t('This object is worldwide accessible') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
                 <v-data-table
@@ -18,6 +18,7 @@
                   :loading="loading"
                   :loading-text="$t('Loading...')"
                   :items-per-page="1000"
+                  :no-data-text="$t('No access restrictions are defined')"
                 >
                   <template v-slot:item.description="{ item }">
                     <span :title="item.notation">{{ item.description }}</span>
@@ -182,6 +183,12 @@ export default {
   props: {
     pid: {
       type: String
+    },
+    rights: {
+      type: Object
+    },
+    title: {
+      type: String
     }
   },
   computed: {
@@ -217,6 +224,10 @@ export default {
     }
   },
   watch: {
+    rights: async function (val) {
+      this.rightsjson = val
+      this.rightsJsonToRightsArray()
+    },
     userSearch: async function (val) {
       if (val && (val.length < 4)) {
         this.userSearchItems = []
@@ -396,6 +407,84 @@ export default {
         this.$emit('input-rights', rights)
       }
     },
+    rightsJsonToRightsArray: async function () {
+      this.rightsArray = []
+      // 'username' => 1, 'department' => 1, 'faculty' => 1, 'gruppe' => 1, 'spl' => 1, 'kennzahl' => 1, 'perfunk' => 1
+      if (this.rightsjson['username']) {
+        for ( let r of this.rightsjson['username']) {
+          let notation = ''
+          let name = ''
+          let expires = ''
+          if (r['value']) {
+            notation = r['value']
+            expires = r['expires']
+          } else {
+            notation = r
+          }
+          name = await this.getNameFromUsername(notation)
+          this.rightsArray.push( { type: 'username', notation: notation, description: name, expires: expires } )
+        }
+      }
+      if (this.rightsjson['department']) {
+        for ( let r of this.rightsjson['department']) {
+          let notation = ''
+          let name = ''
+          let expires = ''
+          if (r['value']) {
+            notation = r['value']
+            expires = r['expires']
+          } else {
+            notation = r
+          }
+          if (notation === 'A-1') {
+            name = this.$t('Whole University')
+          } else {
+            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
+            if (!name) {
+              name = notation
+            }
+          }
+          this.rightsArray.push( { type: 'department', notation: notation, description: name, expires: expires } )
+        }
+      }
+      if (this.rightsjson['faculty']) {
+        for ( let r of this.rightsjson['faculty']) {
+          let notation = ''
+          let name = ''
+          let expires = ''
+          if (r['value']) {
+            notation = r['value']
+            expires = r['expires']
+          } else {
+            notation = r
+          }
+          if (notation === 'A-1') {
+            name = this.$t('Whole University')
+          } else {
+            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
+            if (!name) {
+              name = notation
+            }
+          }
+          this.rightsArray.push( { type: 'faculty', notation: notation, description: name, expires: expires } )
+        }
+      }
+      if (this.rightsjson['gruppe']) {
+        for ( let r of this.rightsjson['gruppe']) {
+          let notation = ''
+          let name = ''
+          let expires = ''
+          if (r['value']) {
+            notation = r['value']
+            expires = r['expires']
+          } else {
+            notation = r
+          }
+          name = await this.getGroupName(notation)
+          this.rightsArray.push( { type: 'gruppe', notation: notation, description: name, expires: expires } )
+        }
+      }
+    },
     loadRights: async function () {
       this.loading = true
       try {
@@ -408,81 +497,7 @@ export default {
         })
         if (response.data.metadata.status === 200) {
           this.rightsjson = response.data.metadata.rights
-          // 'username' => 1, 'department' => 1, 'faculty' => 1, 'gruppe' => 1, 'spl' => 1, 'kennzahl' => 1, 'perfunk' => 1
-          if (this.rightsjson['username']) {
-            for ( let r of this.rightsjson['username']) {
-              let notation = ''
-              let name = ''
-              let expires = ''
-              if (r['value']) {
-                notation = r['value']
-                expires = r['expires']
-              } else {
-                notation = r
-              }
-              name = await this.getNameFromUsername(notation)
-              this.rightsArray.push( { type: 'username', notation: notation, description: name, expires: expires } )
-            }
-          }
-          if (this.rightsjson['department']) {
-            for ( let r of this.rightsjson['department']) {
-              let notation = ''
-              let name = ''
-              let expires = ''
-              if (r['value']) {
-                notation = r['value']
-                expires = r['expires']
-              } else {
-                notation = r
-              }
-              if (notation === 'A-1') {
-                name = this.$t('Whole University')
-              } else {
-                name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
-                if (!name) {
-                  name = notation
-                }
-              }
-              this.rightsArray.push( { type: 'department', notation: notation, description: name, expires: expires } )
-            }
-          }
-          if (this.rightsjson['faculty']) {
-            for ( let r of this.rightsjson['faculty']) {
-              let notation = ''
-              let name = ''
-              let expires = ''
-              if (r['value']) {
-                notation = r['value']
-                expires = r['expires']
-              } else {
-                notation = r
-              }
-              if (notation === 'A-1') {
-                name = this.$t('Whole University')
-              } else {
-                name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
-                if (!name) {
-                  name = notation
-                }
-              }
-              this.rightsArray.push( { type: 'faculty', notation: notation, description: name, expires: expires } )
-            }
-          }
-          if (this.rightsjson['gruppe']) {
-            for ( let r of this.rightsjson['gruppe']) {
-              let notation = ''
-              let name = ''
-              let expires = ''
-              if (r['value']) {
-                notation = r['value']
-                expires = r['expires']
-              } else {
-                notation = r
-              }
-              name = await this.getGroupName(notation)
-              this.rightsArray.push( { type: 'gruppe', notation: notation, description: name, expires: expires } )
-            }
-          }
+          await this.rightsJsonToRightsArray()
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
             this.$store.commit('setAlerts', response.data.alerts)
@@ -490,7 +505,7 @@ export default {
         }
       } catch (error) {
         console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        // this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.loading = false
       }
@@ -525,7 +540,9 @@ export default {
       if (!this.vocabularies['orgunits'].loaded) {
         this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
       }
-      this.loadRights()
+      if (this.pid) {
+        this.loadRights()
+      }
       this.loadGroups()
     })
   }
