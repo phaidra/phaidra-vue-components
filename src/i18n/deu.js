@@ -542,7 +542,7 @@ export default {
   'bf:ParallelTitle': 'Parallel titel',
 
   'bf:Note': 'Beschreibung',
-  'bf:Summary': 'Abstrakt',
+  'bf:Summary': 'Abstract',
   'phaidra:Remark': 'Anmerkung',
   'arm:ConditionAssessment': 'Zustand',
   'phaidra:ReproductionNote': 'Reproduction note',
