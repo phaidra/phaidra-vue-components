@@ -45,7 +45,11 @@
         clearable
         :messages="resolved"
         autocomplete="off"
-      ></v-autocomplete>
+      >
+        <template v-slot:message="{ key, message }">
+          <span v-html="`${message}`"></span>
+        </template>
+      </v-autocomplete>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
