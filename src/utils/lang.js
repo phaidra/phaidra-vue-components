@@ -437,7 +437,7 @@ export default {
         '@id': 'spa',
         'skos:prefLabel': {
           'eng': 'Spanish | Castilian',
-          'deu': 'Spanisch',
+          'deu': 'Spanisch | Kastilisch',
           'fra': 'espagnol | castillan'
         }
       },
