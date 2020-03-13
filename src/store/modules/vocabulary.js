@@ -843,6 +843,13 @@ const state = {
       ],
       loaded: true
     },
+    'lang_vocab': {
+      terms: [
+        { '@id': 'https://pid.phaidra.org/vocabulary/KJ67-VB82', 'skos:prefLabel': { 'eng': 'Castilian', 'deu': 'Kastilisch' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/MKXZ-SARM', 'skos:prefLabel': { 'eng': 'Lebanese', 'deu': 'Libanesisch-Arabisch' } }
+      ],
+      loaded: true
+    },
     'lang': {
       terms: [],
       sorted: { deu: [], eng: [] },

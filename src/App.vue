@@ -700,6 +700,11 @@ export default {
       t.multiplicable = false
       this.form.sections[0].fields.push(t)
       
+      this.form.sections[0].fields.push(fields.getField('language'))
+      let lang_vocab = fields.getField('language')
+      lang_vocab.vocabulary = 'lang_vocab'
+      this.form.sections[0].fields.push(lang_vocab)
+
       this.form.sections[0].fields.push(fields.getField('keyword'))
       /* let containedIn = fields.getField('contained-in')
       containedIn.label = 'Book'

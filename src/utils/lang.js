@@ -909,7 +909,7 @@ export default {
         '@id': 'glg',
         'skos:prefLabel': {
           'eng': 'Galician',
-          'deu': 'Galicisch',
+          'deu': 'Galizisch',
           'fra': 'galicien'
         }
       },

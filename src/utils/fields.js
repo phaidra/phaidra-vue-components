@@ -231,7 +231,7 @@ const fields = [
     predicate: 'dcterms:language',
     component: 'p-select',
     vocabulary: 'lang',
-    required: true,
+    required: false,
     multiplicable: true,
     label: 'Language',
     value: '',

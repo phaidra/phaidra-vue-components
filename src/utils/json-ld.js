@@ -30,26 +30,23 @@ export default {
       components.push(f)
     })
 
-    Object.entries(jsonld).forEach(([key, value]) => {
+    Object.entries(jsonld).forEach(([key, values]) => {
       if (key !== '@type') {
-        var i
-        var j
-        for (i = 0; i < value.length; i++) {
-          var f
-
+        for (let obj of values) {
+          let f
           switch (key) {
             // rdam:P30004
             case 'rdam:P30004':
               f = fields.getField('alternate-identifier')
-              f.type = value[i]['@type']
-              f.value = value[i]['@value']
+              f.type = obj['@type']
+              f.value = obj['@value']
               components.push(f)
               break
 
             // dcterms:type
             case 'dcterms:type':
               f = fields.getField('resource-type')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -58,7 +55,7 @@ export default {
             // edm:hasType
             case 'edm:hasType':
               f = fields.getField('object-type')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -67,7 +64,7 @@ export default {
             // schema:genre
             case 'schema:genre':
               f = fields.getField('genre')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -76,7 +73,7 @@ export default {
             // oaire:version
             case 'oaire:version':
               f = fields.getField('version-type')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -85,7 +82,7 @@ export default {
             // dcterms:accessRights
             case 'dcterms:accessRights':
               f = fields.getField('access-right')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -93,18 +90,18 @@ export default {
 
             // dce:title
             case 'dce:title':
-              if ((value[i]['@type'] === 'bf:Title') || (value[i]['@type'] === 'bf:ParallelTitle')) {
+              if ((obj['@type'] === 'bf:Title') || (obj['@type'] === 'bf:ParallelTitle')) {
                 f = fields.getField('title')
-                f.type = value[i]['@type']
-                if (value[i]['bf:mainTitle']) {
-                  for (j = 0; j < value[i]['bf:mainTitle'].length; j++) {
-                    f.title = value[i]['bf:mainTitle'][j]['@value']
-                    f.language = value[i]['bf:mainTitle'][j]['@language'] ? value[i]['bf:mainTitle'][j]['@language'] : 'eng'
+                f.type = obj['@type']
+                if (obj['bf:mainTitle']) {
+                  for (let title of obj['bf:mainTitle']) {
+                    f.title = title['@value']
+                    f.language = title['@language'] ? title['@language'] : 'eng'
                   }
                 }
-                if (value[i]['bf:subtitle']) {
-                  for (j = 0; j < value[i]['bf:subtitle'].length; j++) {
-                    f.subtitle = value[i]['bf:subtitle'][j]['@value']
+                if (obj['bf:subtitle']) {
+                  for (let subtitle of obj['bf:subtitle']) {
+                    f.subtitle = subtitle['@value']
                   }
                 }
                 components.push(f)
@@ -113,7 +110,7 @@ export default {
 
             // bf:note
             case 'bf:note':
-              switch (value[i]['@type']) {
+              switch (obj['@type']) {
                 case 'bf:Note':
                   f = fields.getField('description')
                   break
@@ -134,7 +131,7 @@ export default {
                   break
               }
 
-              for (let prefLabel of value[i]['skos:prefLabel']) {
+              for (let prefLabel of obj['skos:prefLabel']) {
                 f.value = prefLabel['@value']
                 f.language = prefLabel['@language'] ? prefLabel['@language'] : ''
               }
@@ -144,7 +141,7 @@ export default {
             // bf:tableOfContents
             case 'bf:tableOfContents':
               f = fields.getField('table-of-contents')
-              for (let prefLabel of value[i]['skos:prefLabel']) {
+              for (let prefLabel of obj['skos:prefLabel']) {
                 f.value = prefLabel['@value']
                 f.language = prefLabel['@language'] ? prefLabel['@language'] : ''
               }
@@ -154,8 +151,13 @@ export default {
             // dcterms:language
             case 'dcterms:language':
               f = fields.getField('language')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
+              if (obj['skos:exactMatch']) {
+                f.vocabulary = 'lang_vocab'
+                for (let v of obj['skos:exactMatch']) { 
+                  f.value = v
+                }
+              } else {
+                f.value = obj
               }
               components.push(f)
               break
@@ -163,8 +165,9 @@ export default {
             // schema:subtitleLanguage
             case 'schema:subtitleLanguage':
               f = fields.getField('subtitle-language')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
+              f.value = obj
+              if (obj['skos:exactMatch']) {
+                f.vocabulary = 'lang_vocab'
               }
               components.push(f)
               break
@@ -176,20 +179,20 @@ export default {
 
             // dcterms:subject
             case 'dcterms:subject':
-              if (value[i]['@type'] === 'skos:Concept') {
+              if (obj['@type'] === 'skos:Concept') {
                 f = fields.getField('vocab-ext-readonly')
-                f['skos:exactMatch'] = value[i]['skos:exactMatch']
-                f['skos:prefLabel'] = value[i]['skos:prefLabel']
-                f['rdfs:label'] = value[i]['rdfs:label']
-                if (value[i]['skos:exactMatch']) {
-                  for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                    f.value = value[i]['skos:exactMatch'][j]
+                f['skos:exactMatch'] = obj['skos:exactMatch']
+                f['skos:prefLabel'] = obj['skos:prefLabel']
+                f['rdfs:label'] = obj['rdfs:label']
+                if (obj['skos:exactMatch']) {
+                  for (let v of obj['skos:exactMatch']) {
+                    f.value = v
                   }
                 }
-                if (value[i]['skos:notation']) {
+                if (obj['skos:notation']) {
                   f['skos:notation'] = []
-                  for (j = 0; j < value[i]['skos:notation'].length; j++) {
-                    f['skos:notation'].push(value[i]['skos:notation'][j])
+                  for (let v of obj['skos:notation']) {
+                    f['skos:notation'].push(v)
                   }
                 }
                 f.predicate = key
@@ -197,7 +200,7 @@ export default {
                 components.push(f)
                 // TODO: add classification
               } else {
-                if (value[i]['@type'] === 'phaidra:Subject') {
+                if (obj['@type'] === 'phaidra:Subject') {
                   // ignore, handled elsewhere
                 }
               }
@@ -205,8 +208,8 @@ export default {
 
             case 'rdau:P60193':
               f = fields.getField('series')
-              if (value[i]['dce:title']) {
-                for (let t of value[i]['dce:title']) {
+              if (obj['dce:title']) {
+                for (let t of obj['dce:title']) {
                   if (t['bf:mainTitle']) {
                     for (let mt of t['bf:mainTitle']) {
                       if (mt['@value']) {
@@ -219,28 +222,28 @@ export default {
                   }
                 }
               }
-              if (value[i]['bibo:volume']) {
-                for (let v of value[i]['bibo:volume']) {
+              if (obj['bibo:volume']) {
+                for (let v of obj['bibo:volume']) {
                   f.volume = v
                 }
               }
-              if (value[i]['bibo:issue']) {
-                for (let v of value[i]['bibo:issue']) {
+              if (obj['bibo:issue']) {
+                for (let v of obj['bibo:issue']) {
                   f.issue = v
                 }
               }
-              if (value[i]['dcterms:issued']) {
-                for (let v of value[i]['dcterms:issued']) {
+              if (obj['dcterms:issued']) {
+                for (let v of obj['dcterms:issued']) {
                   f.issued = v
                 }
               }
-              if (value[i]['identifiers:issn']) {
-                for (let v of value[i]['identifiers:issn']) {
+              if (obj['identifiers:issn']) {
+                for (let v of obj['identifiers:issn']) {
                   f.issn = v
                 }
               }
-              if (value[i]['skos:exactMatch']) {
-                for (let v of value[i]['skos:exactMatch']) {
+              if (obj['skos:exactMatch']) {
+                for (let v of obj['skos:exactMatch']) {
                   f.identifier = v
                 }
               }
@@ -261,8 +264,8 @@ export default {
 
             case 'rdau:P60101':
               f = fields.getField('contained-in')
-              if (value[i]['dce:title']) {
-                for (let t of value[i]['dce:title']) {
+              if (obj['dce:title']) {
+                for (let t of obj['dce:title']) {
                   if (t['bf:mainTitle']) {
                     for (let mt of t['bf:mainTitle']) {
                       if (mt['@value']) {
@@ -283,7 +286,7 @@ export default {
                 }
               }
               f.roles = []
-              Object.entries(value[i]).forEach(([key, value]) => {
+              Object.entries(obj).forEach(([key, value]) => {
                 if (key.startsWith('role')) {
                   let roleidx = 0
                   for (let role of value) {
@@ -324,8 +327,8 @@ export default {
                   }
                 }
               })
-              if (value[i]['rdau:P60193']) {
-                for (let series of value[i]['rdau:P60193']) {
+              if (obj['rdau:P60193']) {
+                for (let series of obj['rdau:P60193']) {
                   if (series['dce:title']) {
                     for (let t of series['dce:title']) {
                       if (t['bf:mainTitle']) {
@@ -373,8 +376,8 @@ export default {
             // dcterms:temporal
             case 'dcterms:temporal':
               f = fields.getField('temporal-coverage')
-              f.value = value[i]['@value']
-              f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'
+              f.value = obj['@value']
+              f.language = obj['@language'] ? obj['@language'] : 'eng'
               components.push(f)
               break
 
@@ -398,28 +401,28 @@ export default {
                   fieldidprefix = 'place-of-site'
                   break
               }
-              if (((value[i]['@type'] === 'schema:Place') || (value[i]['@type'] === 'schema:AdministrativeArea')) && !(value[i]['skos:exactMatch'])) {
+              if (((obj['@type'] === 'schema:Place') || (obj['@type'] === 'schema:AdministrativeArea')) && !(obj['skos:exactMatch'])) {
                 // freetext
                 f = fields.getField(fieldidprefix + '-text')
-                f.type = value[i]['@type']
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
-                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                f.type = obj['@type']
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
+                  f.language = pl['@language'] ? pl['@language'] : 'eng'
                 }
                 components.push(f)
               } else {
-                if (((value[i]['@type'] === 'schema:Place') || (value[i]['@type'] === 'schema:AdministrativeArea')) && value[i]['skos:exactMatch']) {
+                if (((obj['@type'] === 'schema:Place') || (obj['@type'] === 'schema:AdministrativeArea')) && obj['skos:exactMatch']) {
                   f = fields.getField('spatial-readonly')
-                  if (value[i]['skos:exactMatch']) {
-                    for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                      f.value = value[i]['skos:exactMatch'][j]
+                  if (obj['skos:exactMatch']) {
+                    for (let v of  obj['skos:exactMatch']) {
+                      f.value = v
                     }
                   }
-                  f['skos:prefLabel'] = value[i]['skos:prefLabel']
-                  f['rdfs:label'] = value[i]['rdfs:label']
-                  f.coordinates = value[i]['schema:geo']
+                  f['skos:prefLabel'] = obj['skos:prefLabel']
+                  f['rdfs:label'] = obj['rdfs:label']
+                  f.coordinates = obj['schema:geo']
                   f.predicate = key
-                  f.type = value[i]['@type']
+                  f.type = obj['@type']
                   f.label = key
                   components.push(f)
                   if (f.value.startsWith('http://vocab.getty.edu')) {
@@ -429,7 +432,7 @@ export default {
                     f = fields.getField(fieldidprefix + '-geonames')
                   }
                   f.predicate = key
-                  f.type = value[i]['@type']
+                  f.type = obj['@type']
                   components.push(f)
                 }
               }
@@ -438,7 +441,7 @@ export default {
             // dce:format
             case 'dce:format':
               f = fields.getField('dce-format-vocab')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -447,7 +450,7 @@ export default {
             // rdau:P60048
             case 'rdau:P60048':
               f = fields.getField('carrier-type')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -457,23 +460,23 @@ export default {
             case 'edm:rights':
               f = fields.getField('license')
               f.vocabulary = 'alllicenses'
-              f.value = value[i]
+              f.value = obj
               components.push(f)
               break
 
             // dce:rights
             case 'dce:rights':
               f = fields.getField('rights')
-              f.value = value[i]['@value']
-              f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'
+              f.value = obj['@value']
+              f.language = obj['@language'] ? obj['@language'] : 'eng'
               components.push(f)
               break
 
             // bf:provisionActivity
             case 'bf:provisionActivity':
               f = fields.getField('bf-publication')
-              if (value[i]['bf:agent']) {
-                for (let pub of value[i]['bf:agent']) {
+              if (obj['bf:agent']) {
+                for (let pub of obj['bf:agent']) {
                   if (pub['skos:exactMatch']) {
                     for (let id of pub['skos:exactMatch']) {
                       if (id.startsWith('https://pid.phaidra.org/')) {
@@ -500,8 +503,8 @@ export default {
                   }
                 }
               }
-              if (value[i]['bf:place']) {
-                for (let pl of value[i]['bf:place']) {
+              if (obj['bf:place']) {
+                for (let pl of obj['bf:place']) {
                   if (pl['skos:prefLabel']) {
                     for (let pllab of pl['skos:prefLabel']) {
                       f.publishingPlace = pllab['@value']
@@ -509,8 +512,8 @@ export default {
                   }
                 }
               }
-              if (value[i]['bf:date']) {
-                for (let pdate of value[i]['bf:date']) {
+              if (obj['bf:date']) {
+                for (let pdate of obj['bf:date']) {
                   f.publishingDate = pdate
                 }
               }
@@ -522,11 +525,11 @@ export default {
             case 'cito:isCitedBy':
               f = fields.getField('citation')
               f.type = key
-              for (let prefLabel of value[i]['skos:prefLabel']) {
+              for (let prefLabel of obj['skos:prefLabel']) {
                 f.citation = prefLabel['@value']
                 f.citationLanguage = prefLabel['@language'] ? prefLabel['@language'] : ''
               }
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.identifier = em
               }
               components.push(f)
@@ -535,8 +538,8 @@ export default {
             // rdau:P60227
             case 'rdau:P60227':
               f = fields.getField('movieadaptation')
-              if (value[i]['dce:title']) {
-                for (let t of value[i]['dce:title']) {
+              if (obj['dce:title']) {
+                for (let t of obj['dce:title']) {
                   if (t['bf:mainTitle']) {
                     for (let mt of t['bf:mainTitle']) {
                       if (mt['@value']) {
@@ -556,9 +559,9 @@ export default {
                   }
                 }
               }
-              for (let [pred, obj] of Object.entries(value[i])) {
+              for (let [pred, o] of Object.entries(obj)) {
                 if (pred.startsWith('role')) {
-                  for (let role of obj) {
+                  for (let role of o) {
                     if (role['@type'] === 'schema:Person') {
                       f.role = pred
                       if (role['schema:name']) {
@@ -586,16 +589,16 @@ export default {
 
             // frapo:hasFundingAgency
             case 'frapo:hasFundingAgency':
-              if (value[i]['@type'] === 'frapo:FundingAgency') {
+              if (obj['@type'] === 'frapo:FundingAgency') {
                 f = fields.getField('funder')
-                if (value[i]['skos:prefLabel']) {
-                  for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                    f.name = value[i]['skos:prefLabel'][j]['@value']
-                    f.nameLanguage = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                if (obj['skos:prefLabel']) {
+                  for (let pl of obj['skos:prefLabel']) {
+                    f.name = pl['@value']
+                    f.nameLanguage = pl['@language'] ? pl['@language'] : 'eng'
                   }
                 }
-                if (value[i]['skos:exactMatch']) {
-                  for (let em of value[i]['skos:exactMatch']) {
+                if (obj['skos:exactMatch']) {
+                  for (let em of obj['skos:exactMatch']) {
                     f.identifier = em
                   }
                 }
@@ -605,32 +608,32 @@ export default {
 
             // frapo:isOutputOf
             case 'frapo:isOutputOf':
-              if (value[i]['@type'] === 'foaf:Project') {
+              if (obj['@type'] === 'foaf:Project') {
                 f = fields.getField('project')
-                if (value[i]['skos:prefLabel']) {
-                  for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                    f.name = value[i]['skos:prefLabel'][j]['@value']
-                    f.nameLanguage = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                if (obj['skos:prefLabel']) {
+                  for (let pl of obj['skos:prefLabel']) {
+                    f.name = pl['@value']
+                    f.nameLanguage = pl['@language'] ? pl['@language'] : 'eng'
                   }
                 }
-                if (value[i]['rdfs:comment']) {
-                  for (j = 0; j < value[i]['rdfs:comment'].length; j++) {
-                    f.description = value[i]['rdfs:comment'][j]['@value']
-                    f.descriptionLanguage = value[i]['rdfs:comment'][j]['@language'] ? value[i]['rdfs:comment'][j]['@language'] : 'eng'
+                if (obj['rdfs:comment']) {
+                  for (let c of obj['rdfs:comment']) {
+                    f.description = c['@value']
+                    f.descriptionLanguage = c['@language'] ? c['@language'] : 'eng'
                   }
                 }
-                if (value[i]['skos:exactMatch']) {
-                  for (j = 0; j < value[i]['skos:exactMatch'].length; j++) {
-                    f.identifier = value[i]['skos:exactMatch'][j]
+                if (obj['skos:exactMatch']) {
+                  for (let v of obj['skos:exactMatch']) {
+                    f.identifier = v
                   }
                 }
-                if (value[i]['foaf:homepage']) {
-                  for (j = 0; j < value[i]['foaf:homepage'].length; j++) {
-                    f.homepage = value[i]['foaf:homepage'][j]
+                if (obj['foaf:homepage']) {
+                  for (let hp of obj['foaf:homepage']) {
+                    f.homepage = hp
                   }
                 }
-                if (value[i]['frapo:hasFundingAgency']) {
-                  for (let funder of value[i]['frapo:hasFundingAgency']) {
+                if (obj['frapo:hasFundingAgency']) {
+                  for (let funder of obj['frapo:hasFundingAgency']) {
                     if (funder['skos:prefLabel']) {
                       for (let pl of funder['skos:prefLabel']) {
                         f.funderName = pl['@value']
@@ -646,17 +649,17 @@ export default {
                 }
                 components.push(f)
               } else {
-                if (value[i]['@type'] === 'aaiso:Programme') {
+                if (obj['@type'] === 'aaiso:Programme') {
                   f = fields.getField('study-plan')
-                  if (value[i]['skos:prefLabel']) {
-                    for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                      f.name = value[i]['skos:prefLabel'][j]['@value']
-                      f.nameLanguage = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                  if (obj['skos:prefLabel']) {
+                    for (let pl of obj['skos:prefLabel']) {
+                      f.name = pl['@value']
+                      f.nameLanguage = pl['@language'] ? pl['@language'] : 'eng'
                     }
                   }
-                  if (value[i]['skos:notation']) {
-                    for (j = 0; j < value[i]['skos:notation'].length; j++) {
-                      f.notation = value[i]['skos:notation'][j]
+                  if (obj['skos:notation']) {
+                    for (let n of obj['skos:notation']) {
+                      f.notation = n
                     }
                   }
                   components.push(f)
@@ -667,7 +670,7 @@ export default {
             // rdax:P00009
             case 'rdax:P00009':
               f = fields.getField('association')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -675,11 +678,11 @@ export default {
 
             // dcterms:provenance
             case 'dcterms:provenance':
-              if (value[i]['@type'] === 'dcterms:ProvenanceStatement') {
+              if (obj['@type'] === 'dcterms:ProvenanceStatement') {
                 f = fields.getField('provenance')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
-                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
+                  f.language = pl['@language'] ? pl['@language'] : 'eng'
                 }
                 components.push(f)
               }
@@ -689,7 +692,7 @@ export default {
             case 'schema:numberOfPages':
               f = fields.getField('number-of-pages')
               f.label = key
-              f.value = value[i]
+              f.value = obj
               components.push(f)
               break
 
@@ -697,16 +700,16 @@ export default {
             case 'bf:soundCharacteristic':
               f = fields.getField('sound-characteristic')
               f.label = key
-              f.value = value[i]
+              f.value = obj
               components.push(f)
               break
 
             // bf:supplementaryContent
             case 'bf:supplementaryContent':
               f = fields.getField('supplementary-content')
-              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                f.value = value[i]['skos:prefLabel'][j]['@value']
-                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+              for (let pl of obj['skos:prefLabel']) {
+                f.value = pl['@value']
+                f.language = pl['@language'] ? pl['@language'] : 'eng'
               }
               components.push(f)
               break
@@ -714,9 +717,9 @@ export default {
             // bf:awards
             case 'bf:awards':
               f = fields.getField('award')
-              for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                f.value = value[i]['skos:prefLabel'][j]['@value']
-                f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+              for (let pl of obj['skos:prefLabel']) {
+                f.value = pl['@value']
+                f.language = pl['@language'] ? pl['@language'] : 'eng'
               }
               components.push(f)
               break
@@ -724,7 +727,7 @@ export default {
             // rdau:P60059
             case 'rdau:P60059':
               f = fields.getField('regional-encoding')
-              for (let em of value[i]['skos:exactMatch']) {
+              for (let em of obj['skos:exactMatch']) {
                 f.value = em
               }
               components.push(f)
@@ -735,60 +738,54 @@ export default {
               f = fields.getField('filename')
               f.predicate = key
               f.label = key
-              f.value = value[i]
+              f.value = obj
               components.push(f)
               break
 
             // ebucore:hasMimeType
             case 'ebucore:hasMimeType':
               f = fields.getField('mime-type')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
-              }
+              f.value = obj
               components.push(f)
               break
 
             // opaque:cco_accessionNumber
             case 'opaque:cco_accessionNumber':
               f = fields.getField('accession-number')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
-              }
+              f.value = obj
               components.push(f)
               break
 
             // bf:shelfMark
             case 'bf:shelfMark':
               f = fields.getField('shelf-mark')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
-              }
+              f.value = obj
               components.push(f)
               break
 
             // bf:physicalLocation
             case 'bf:physicalLocation':
               f = fields.getField('physical-location')
-              f.value = value[i]['@value']
-              f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'
+              f.value = obj['@value']
+              f.language = obj['@language'] ? obj['@language'] : 'eng'
               components.push(f)
               break
 
             // rdau:P60550
             case 'rdau:P60550':
               f = fields.getField('extent')
-              f.value = value[i]['@value']
-              f.language = value[i]['@language'] ? value[i]['@language'] : 'eng'
+              f.value = obj['@value']
+              f.language = obj['@language'] ? obj['@language'] : 'eng'
               components.push(f)
               break
 
             // vra:hasInscription
             case 'vra:hasInscription':
-              if (value[i]['@type'] === 'vra:Inscription') {
+              if (obj['@type'] === 'vra:Inscription') {
                 f = fields.getField('inscription')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
-                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
+                  f.language = pl['@language'] ? pl['@language'] : 'eng'
                 }
                 components.push(f)
               }
@@ -796,10 +793,10 @@ export default {
 
             // bf:scale
             case 'bf:scale':
-              if (value[i]['@type'] === 'bf:Scale') {
+              if (obj['@type'] === 'bf:Scale') {
                 f = fields.getField('scale')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
                 }
                 components.push(f)
               }
@@ -807,18 +804,18 @@ export default {
 
             // vra:material
             case 'vra:material':
-              if (value[i]['@type'] === 'vra:Material') {
+              if (obj['@type'] === 'vra:Material') {
                 f = fields.getField('material-text')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
-                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
+                  f.language = pl['@language'] ? pl['@language'] : 'eng'
                 }
                 components.push(f)
               } else {
                 // vra:material - vocab
-                if (value[i]['@type'] === 'vra:material' && (value[i]['skos:exactMatch'])) {
+                if (obj['@type'] === 'vra:material' && (obj['skos:exactMatch'])) {
                   f = fields.getField('material-vocab')
-                  for (let em of value[i]['skos:exactMatch']) {
+                  for (let em of obj['skos:exactMatch']) {
                     f.value = em
                   }
                   components.push(f)
@@ -828,18 +825,18 @@ export default {
 
             // vra:hasTechnique
             case 'vra:hasTechnique':
-              if (value[i]['@type'] === 'vra:Technique' && !(value[i]['skos:exactMatch'])) {
+              if (obj['@type'] === 'vra:Technique' && !(obj['skos:exactMatch'])) {
                 f = fields.getField('technique-text')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
-                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
+                  f.language = pl['@language'] ? pl['@language'] : 'eng'
                 }
                 components.push(f)
               } else {
                 // vra:hasTechnique - vocab
-                if (value[i]['@type'] === 'vra:Technique' && (value[i]['skos:exactMatch'])) {
+                if (obj['@type'] === 'vra:Technique' && (obj['skos:exactMatch'])) {
                   f = fields.getField('technique-vocab')
-                  for (let em of value[i]['skos:exactMatch']) {
+                  for (let em of obj['skos:exactMatch']) {
                     f.value = em
                   }
                   components.push(f)
@@ -849,18 +846,18 @@ export default {
 
             // dcterms:audience
             case 'dcterms:audience':
-              if (value[i]['@type'] === 'dcterms:audience' && !(value[i]['skos:exactMatch'])) {
+              if (obj['@type'] === 'dcterms:audience' && !(obj['skos:exactMatch'])) {
                 f = fields.getField('audience')
-                for (j = 0; j < value[i]['skos:prefLabel'].length; j++) {
-                  f.value = value[i]['skos:prefLabel'][j]['@value']
-                  f.language = value[i]['skos:prefLabel'][j]['@language'] ? value[i]['skos:prefLabel'][j]['@language'] : 'eng'
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
+                  f.language = pl['@language'] ? pl['@language'] : 'eng'
                 }
                 components.push(f)
               } else {
                 // dcterms:audience - select
-                if (value[i]['@type'] === 'dcterms:audience' && (value[i]['skos:exactMatch'])) {
+                if (obj['@type'] === 'dcterms:audience' && (obj['skos:exactMatch'])) {
                   f = fields.getField('audience-vocab')
-                  for (let em of value[i]['skos:exactMatch']) {
+                  for (let em of obj['skos:exactMatch']) {
                     f.value = em
                   }
                   components.push(f)
@@ -870,13 +867,13 @@ export default {
 
             // schema:width
             case 'schema:width':
-              if (value[i]['@type'] === 'schema:QuantitativeValue') {
+              if (obj['@type'] === 'schema:QuantitativeValue') {
                 f = fields.getField('width')
-                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {
-                  f.unit = value[i]['schema:unitCode'][j]
+                for (let c of obj['schema:unitCode']) {
+                  f.unit = c
                 }
-                for (j = 0; j < value[i]['schema:value'].length; j++) {
-                  f.value = value[i]['schema:value'][j]
+                for (let v of obj['schema:value']) {
+                  f.value = v
                 }
                 components.push(f)
               }
@@ -884,13 +881,13 @@ export default {
 
             // schema:height
             case 'schema:height':
-              if (value[i]['@type'] === 'schema:QuantitativeValue') {
+              if (obj['@type'] === 'schema:QuantitativeValue') {
                 f = fields.getField('height')
-                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {
-                  f.unit = value[i]['schema:unitCode'][j]
+                for (let c of obj['schema:unitCode']) {
+                  f.unit = c
                 }
-                for (j = 0; j < value[i]['schema:value'].length; j++) {
-                  f.value = value[i]['schema:value'][j]
+                for (let v of obj['schema:value']) {
+                  f.value = v
                 }
                 components.push(f)
               }
@@ -898,13 +895,13 @@ export default {
 
             // schema:depth
             case 'schema:depth':
-              if (value[i]['@type'] === 'schema:QuantitativeValue') {
+              if (obj['@type'] === 'schema:QuantitativeValue') {
                 f = fields.getField('depth')
-                for (j = 0; j < value[i]['schema:unitCode'].length; j++) {
-                  f.unit = value[i]['schema:unitCode'][j]
+                for (let c of obj['schema:unitCode']) {
+                  f.unit = c
                 }
-                for (j = 0; j < value[i]['schema:value'].length; j++) {
-                  f.value = value[i]['schema:value'][j]
+                for (let v of obj['schema:value']) {
+                  f.value = v
                 }
                 components.push(f)
               }
@@ -923,10 +920,10 @@ export default {
             case 'rdau:P60071':
             case 'phaidra:dateAccessioned':
               // only edtf now (later time can be edm:TimeSpan)
-              if (typeof value[i] === 'string') {
+              if (typeof obj === 'string') {
                 f = fields.getField('date-edtf')
                 f.type = key
-                f.value = value[i]
+                f.value = obj
                 components.push(f)
               }
               break
@@ -934,18 +931,14 @@ export default {
             // schema:duration
             case 'schema:duration':
               f = fields.getField('duration')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
-              }
+              f.value = obj
               components.push(f)
               break
 
             // phaidra:systemTag
             case 'phaidra:systemTag':
               f = fields.getField('system-tag')
-              for (j = 0; j < value[i].length; j++) {
-                f.value = value[i]
-              }
+              f.value = obj
               components.push(f)
               break
 
@@ -959,7 +952,7 @@ export default {
 
               // role
               if (key.startsWith('role')) {
-                let role = value[i]
+                let role = obj
                 if (options && options['role'] && options['role']['component'] && (options['role']['component'] === 'p-entity')) {
                   f = fields.getField('role')
                 } else {
@@ -1045,7 +1038,7 @@ export default {
               } else {
                 // unknown predicate
                 f = fields.getField('readonly')
-                f.jsonld = value[i]
+                f.jsonld = obj
                 f.predicate = key
                 f.label = key
                 components.push(f)
@@ -1091,8 +1084,8 @@ export default {
       if (key === 'dcterms:subject') {
         levels['subject'] = []
         for (i = 0; i < value.length; i++) {
-          if (value[i]['@type'] === 'phaidra:Subject') {
-            var subcomp = this.json2components(value[i], options)
+          if (obj['@type'] === 'phaidra:Subject') {
+            var subcomp = this.json2components(obj, options)
             if (subcomp.length > 0) {
               levels.subject.push({ components: subcomp })
             }
@@ -1819,7 +1812,11 @@ export default {
 
         case 'dcterms:language':
           if (f.value) {
-            this.push_literal(jsonld, f.predicate, f.value)
+            if (f.value.startsWith('https://pid.phaidra.org/')) {
+              this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+            } else {
+              this.push_literal(jsonld, f.predicate, f.value)
+            }
           }
           break
 
