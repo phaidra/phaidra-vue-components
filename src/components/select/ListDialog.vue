@@ -5,7 +5,7 @@
       <v-card-text>
         <v-text-field
           v-model="listsSearch"
-          append-icon="search"
+          append-icon="mdi-magnify"
           :label="$t('Search...')"
           single-line
           hide-details

@@ -83,7 +83,7 @@
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
                   clearable
-                  append-icon="search"
+                  append-icon="mdi-magnify"
                 >
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content>
@@ -143,7 +143,7 @@
                       :rules="[validationrules.date]"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
-                      append-icon="event"
+                      append-icon="mdi-calendar"
                       v-on="on"
                     ></v-text-field>
                   </template>

@@ -370,6 +370,52 @@ export default {
                   }
                 }
               }
+              if (obj['bf:provisionActivity']) {
+                for (let prov of obj['bf:provisionActivity']) {
+                  if (prov['bf:agent']) {
+                    for (let pub of prov['bf:agent']) {
+                      if (pub['skos:exactMatch']) {
+                        for (let id of pub['skos:exactMatch']) {
+                          if (id.startsWith('https://pid.phaidra.org/')) {
+                            f.publisherType = 'select'
+                            f.publisherOrgUnit = id
+                          } else {
+                            f.publisherType = 'other'
+                            if (pub['schema:name']) {
+                              for (let name of pub['schema:name']) {
+                                f.publisherName = name['@value']
+                              }
+                            }
+                          }
+                        }
+                      } else {
+                        if (pub['schema:name']) {
+                          f.publisherType = 'other'
+                          if (pub['schema:name']) {
+                            for (let name of pub['schema:name']) {
+                              f.publisherName = name['@value']
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  if (prov['bf:place']) {
+                    for (let pl of prov['bf:place']) {
+                      if (pl['skos:prefLabel']) {
+                        for (let pllab of pl['skos:prefLabel']) {
+                          f.publishingPlace = pllab['@value']
+                        }
+                      }
+                    }
+                  }
+                  if (prov['bf:date']) {
+                    for (let pdate of prov['bf:date']) {
+                      f.publishingDate = pdate
+                    }
+                  }
+                }
+              }
               components.push(f)
               break
 
@@ -1535,6 +1581,9 @@ export default {
       }
       h['rdau:P60193'] = [ series ]
     }
+    if (f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
+      h['bf:provisionActivity'] = [ this.get_json_bf_publication(f) ]
+    }
     return h
   },
   get_json_adaptation (type, title, subtitle, titleLanguage, role, name, firstname, lastname) {
@@ -1904,7 +1953,7 @@ export default {
           break
 
         case 'rdau:P60101':
-          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn) {
+          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
             this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
           }
           if (f.pageStart) {

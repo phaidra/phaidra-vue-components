@@ -16,7 +16,7 @@
       :filled="!solo"
       single-line
       :solo="solo"
-      append-icon="search"
+      append-icon="mdi-magnify"
       @click:append="onSelect({ term: type })"
       :messages="messages"
     />

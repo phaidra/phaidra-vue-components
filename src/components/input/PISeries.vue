@@ -39,7 +39,7 @@
               :filled="inputStyle==='filled'"
               :outlined="inputStyle==='outlined'"
               clearable
-              append-icon="search"
+              append-icon="mdi-magnify"
             >
               <template slot="item" slot-scope="{ item }">
                 <v-list-item-content>
