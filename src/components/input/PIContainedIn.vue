@@ -155,7 +155,7 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-card>
+              <v-card class="mb-8">
                 <v-card-title class="title font-weight-light grey white--text">
                   <span>{{ $t(seriesLabel) }}</span>
                   <v-spacer></v-spacer>
@@ -274,7 +274,7 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-card >
+              <v-card>
                 <v-card-title class="title font-weight-light grey white--text">
                   <span>{{ $t(publisherLabel) }}</span>
                   <v-spacer></v-spacer>
