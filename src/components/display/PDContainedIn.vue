@@ -84,6 +84,33 @@
                 </v-card>
               </v-col>
             </v-row>
+            <v-row v-for="(pub, k) in o['bf:provisionActivity']" :key="'pub'+k">
+              <v-col md="2" cols="12" class="pdlabel primary--text">{{ $t('rdau:P60101_bf:provisionActivity') }}</v-col>
+              <v-col md="10" cols="12">
+                <v-card flat>
+                  <v-card-text class="border-left">
+                    <v-container>
+                      <template v-for="(publisher, i) in pub['bf:agent']">
+                        <template v-if="localizedOrgUnit(publisher)">
+                          <a :key="'publname'+i" class="valuefield" :href="localizedOrgUnit(publisher).id" target="_blank">{{ localizedOrgUnit(publisher).value }}</a>
+                        </template>
+                        <template v-else v-for="(publishername, i) in publisher['schema:name']">
+                          <span :key="'publname'+i" class="valuefield">{{ publishername['@value'] }}</span>
+                        </template>
+                      </template>
+                      <template v-for="(publishingplace, j) in pub['bf:place']">
+                        <template v-for="(place, i) in publishingplace['skos:prefLabel']">
+                          <span class="valuefield" :key="'publplace'+j+i">, {{ place['@value'] }}</span>
+                        </template>
+                      </template>
+                      <template v-for="(publishingdate, j) in pub['bf:date']">
+                          <span :key="'publdate'+j">, {{ publishingdate }}</span>
+                      </template>
+                    </v-container>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-container>
         </v-card-text>
       </v-card>
@@ -105,6 +132,27 @@ export default {
     },
     p: {
       type: String
+    }
+  },
+  methods: {
+    localizedOrgUnit: function (orgUnit) {
+      if (orgUnit['skos:exactMatch']) {
+        for (let name of orgUnit['schema:name']) {
+          if (name['@language'] === this.$i18n.locale) {
+            return {
+              value: name['@value'],
+              language: name['@language'],
+              id: orgUnit['skos:exactMatch']
+            }
+          }
+        }
+        return {
+          name: orgUnit['schema:name'][0]['@value'],
+          language: orgUnit['schema:name'][0]['@language'],
+          id: orgUnit['schema:name'][0]['skos:exactMatch']
+        }
+      }
+      return null
     }
   }
 }

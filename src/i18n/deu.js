@@ -570,6 +570,7 @@ export default {
   'rdau:P60193': 'Erschienen in',
   'rdau:P60101': 'Is contained in',
   'rdau:P60101_rdau:P60193': 'Reihe',
+  'rdau:P60101_bf:provisionActivity': 'Verlag',
   'rdau:P60227': 'Is motion picture adaptation of',
 
   'dcterms:spatial': 'Depicted / Represented place',

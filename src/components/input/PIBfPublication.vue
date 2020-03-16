@@ -138,6 +138,7 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       :value="publishingDate"
+                      v-on:blur="$emit('input-publishing-date',$event.target.value)"
                       :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
                       :required="required"
                       :rules="[validationrules.date]"
