@@ -13,7 +13,43 @@
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'input_text'">
-        <v-col cols="12">
+        <v-col v-if="(ch.datatype === 'ClassificationSource') && (ch.vocabularies)" cols="12">
+          <v-select
+            :loading="clsLoading"
+            v-model="ch.ui_value"
+            :items="ch.vocabularies[0].terms"
+            :item-value="'uri'"
+            :label="ch.labels[alpha2locale]"
+            @change="selectHandler(ch, $event)"
+            outlined
+          >
+            <template v-slot:item="{ item, index }">
+              <span>{{ item.labels[alpha2locale] }}</span>
+            </template>
+            <template v-slot:selection="{ item, index }">
+              <span>{{ item.labels[alpha2locale] }}</span>
+            </template>
+          </v-select>
+        </v-col>
+        <v-col v-else-if="(ch.datatype === 'Taxon') && (ch.vocabularies)" cols="12">
+          <v-select
+            :loading="clsLoading"
+            v-model="ch.ui_value"
+            :items="ch.vocabularies[0].terms"
+            :item-value="'uri'"
+            :label="ch.labels[alpha2locale]"
+            @change="selectHandler(ch, $event)"
+            outlined
+          >
+            <template v-slot:item="{ item, index }">
+              <span>{{ item.labels[alpha2locale] }}</span>
+            </template>
+            <template v-slot:selection="{ item, index }">
+              <span>{{ item.labels[alpha2locale] }}</span>
+            </template>
+          </v-select>
+        </v-col>
+        <v-col v-else cols="12">
           <v-text-field
             v-model="ch.ui_value"
             :label="ch.labels[alpha2locale]"
@@ -61,6 +97,7 @@
       <template v-else-if="ch.input_type === 'select'">
         <v-col cols="12">
           <v-select
+            :loading="(ch.xmlname === 'faculty') ? orgLoading : (ch.xmlname === 'spl') ? splLoading : false"
             v-model="ch.ui_value"
             :items="ch.vocabularies[0].terms"
             :item-value="'uri'"
@@ -125,7 +162,7 @@
           <v-divider></v-divider>
           <v-card-text>
             <template v-if="ch.children">
-              <p-uwm-field-renderer :children="ch.children" :parent="ch"></p-uwm-field-renderer>
+              <p-uwm-field-renderer :children="ch.children" :parent="ch" @update-parent="$forceUpdate()"></p-uwm-field-renderer>
             </template>
           </v-card-text>
           <v-divider v-if="ch.xmlname === 'curriculum'"></v-divider>
@@ -159,6 +196,9 @@ export default {
     },
     children: {
       type: Array
+    },
+    classifications: {
+      type: Array
     }
   },
   computed: {
@@ -185,17 +225,146 @@ export default {
   },
   data () {
     return {
-      loading: false
+      loading: false,
+      orgLoading: false,
+      splLoading: false,
+      clsLoading: false
     }
   },
   methods: {
-    studyName: function (node) {
-      if (node.study_name[this.alpha2locale]) {
-        return node.study_name[this.alpha2locale]
-      } else {
-        Object.entries(node.study_name).forEach(([key, value]) => {
-          return value
+    _getTermChildren: async function (uri) {
+      this.clsLoading = true
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.$store.state.instanceconfig.api + '/terms/children',
+          params: {
+            uri: uri
+          },
+          paramsSerializer: params => {
+            return qs.stringify(params, { arrayFormat: 'repeat' })
+          }
         })
+        return response.data.terms
+        this.$forceUpdate()
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.clsLoading = false
+      }
+    },
+    loadClassifications: async function (node) {
+      let termChildren = await this._getTermChildren('http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification')
+      node['vocabularies'] = [
+        {
+          'terms': termChildren
+        }
+      ]
+      this.$forceUpdate()
+    },
+    loadSiblings: async function (node) {
+      let prevNode = null
+      for (let ch of this.children) {
+        if (ch.ui_value === node.ui_value) {
+          break
+        } else {
+          prevNode = ch
+        }
+      }
+      if (prevNode) {
+        let termChildren = await this._getTermChildren(prevNode.ui_value)
+        node['vocabularies'] = [
+          {
+            'terms': termChildren
+          }
+        ]
+        this.$forceUpdate()
+      }
+    },
+    loadNextTermSelect: async function (node) {
+      if ((node.datatype === 'ClassificationSource') || (node.datatype === 'Taxon')) {
+        let prevNode = null
+        let nrPrevNodes = 0
+        for (let ch of this.children) {
+          if (ch.ui_value === node.ui_value) {
+            break
+          } else {
+            nrPrevNodes++
+            prevNode = ch
+          }
+        }
+        if (prevNode) {
+          this.children.length = nrPrevNodes + 1
+          let termChildren = await this._getTermChildren(node.ui_value)
+          if (termChildren.length > 0) {
+            this.children.push(
+              {
+                "labels": {
+                    "de": "Pfad",
+                    "en": "Path",
+                    "it": "Percorso",
+                    "sr": "putanja"
+                },
+                "datatype": "Taxon",
+                "field_order": 9999,
+                "input_type": "input_text",
+                "ordered": 1,
+                "data_order": nrPrevNodes, // source (cls node) is also counted, so no +1
+                "ui_value": "",
+                "value_lang": "",
+                "xmlname": "taxon",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification",
+                "vocabularies": [
+                  {
+                    'terms': termChildren
+                  }
+                ]
+              }
+            )
+          }
+          this.$forceUpdate()
+        } else {
+          this.children.length = 1
+          let termChildren = await this._getTermChildren(node.ui_value)
+          if (termChildren.length > 0) {
+            this.children.push(
+              {
+                "labels": {
+                    "de": "Pfad",
+                    "en": "Path",
+                    "it": "Percorso",
+                    "sr": "putanja"
+                },
+                "datatype": "Taxon",
+                "field_order": 9999,
+                "input_type": "input_text",
+                "ordered": 1,
+                "data_order": 0,
+                "ui_value": "",
+                "value_lang": "",
+                "xmlname": "taxon",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification",
+                "vocabularies": [
+                  {
+                    'terms': termChildren
+                  }
+                ]
+              }
+            )
+          }
+          this.$forceUpdate()
+        }
+      }
+    },
+    studyName: function (node) {
+      if (node.study_name) {
+        if (node.study_name[this.alpha2locale]) {
+          return node.study_name[this.alpha2locale]
+        } else {
+          Object.entries(node.study_name).forEach(([key, value]) => {
+            return value
+          })
+        }
       }
     },
     getStudyNameHashId: function (node) {
@@ -239,45 +408,60 @@ export default {
         }
       })
       node.study_name = response.data.study_name
+      this.$emit('update-parent')
     },
     selectHandler: async function (node, event) {
       if (node.xmlname === 'faculty') {
-        let response = await this.$http.request({
-          method: 'GET',
-          url: this.$store.state.instanceconfig.api + '/directory/get_org_units',
-          params: {
-            parent_id: node.ui_value.replace('http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_faculty/', ''),
-            values_namespace: 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_department/'
+        this.orgLoading = true
+        try {
+          let response = await this.$http.request({
+            method: 'GET',
+            url: this.$store.state.instanceconfig.api + '/directory/get_org_units',
+            params: {
+              parent_id: node.ui_value.replace('http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_faculty/', ''),
+              values_namespace: 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_department/'
+            }
+          })
+          for (let ch of this.children) {
+            if (ch.xmlname === 'department') {
+              ch.ui_value = ''
+              ch.vocabularies[0].terms = response.data.terms
+            }
           }
-        })
-        for (let ch of this.children) {
-          if (ch.xmlname === 'department') {
-            ch.ui_value = ''
-            ch.vocabularies[0].terms = response.data.terms
-          }
+        } catch (error) {
+          console.error(error)
+        } finally {
+          this.orgLoading = false
         }
       }
       if (node.xmlname === 'spl') {
-        let spl = node.ui_value.replace('http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_spl/', '')
-        let response = await this.$http.request({
-          method: 'GET',
-          url: this.$store.state.instanceconfig.api + '/directory/get_study',
-          params: {
-            spl: spl,
-            values_namespace: 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_kennzahl/'
+        this.splLoading = true
+        try {
+          let spl = node.ui_value.replace('http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_spl/', '')
+          let response = await this.$http.request({
+            method: 'GET',
+            url: this.$store.state.instanceconfig.api + '/directory/get_study',
+            params: {
+              spl: spl,
+              values_namespace: 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_kennzahl/'
+            }
+          })
+          for (let ch of this.children) {
+            // set up first kennzahl
+            if (ch.xmlname === 'kennzahl') {
+              ch.ui_value = ''
+              ch.vocabularies[0].terms = response.data.terms
+              break
+            }
           }
-        })
-        for (let ch of this.children) {
-          // set up first kennzahl
-          if (ch.xmlname === 'kennzahl') {
-            ch.ui_value = ''
-            ch.vocabularies[0].terms = response.data.terms
-            break
-          }
+          // remove all other kennzahls
+          this.children.length = 2
+          this.getStudyName(this.parent)
+        } catch (error) {
+          console.error(error)
+        } finally {
+          this.splLoading = false
         }
-        // remove all other kennzahls
-        this.children.length = 2
-        this.getStudyName(this.parent)
       }
       if (node.xmlname === 'kennzahl') {
         let trimLength = 0
@@ -319,6 +503,7 @@ export default {
         }
         this.getStudyName(this.parent)
       }
+      this.loadNextTermSelect(node)
     },
     skip: function (node) {
       if (node.hidden) {
@@ -382,6 +567,20 @@ export default {
         }
       }
     }
+  },
+  mounted: async function () {
+    let lastClsChild
+    for (let ch of this.children) {
+      if (ch.datatype === 'ClassificationSource') {
+        lastClsChild = ch
+        await this.loadClassifications(ch)
+      }
+      if (ch.datatype === 'Taxon') {
+        lastClsChild = ch
+        await this.loadSiblings(ch)
+      }
+    }
+    await this.loadNextTermSelect(lastClsChild)
   }
 }
 </script>
