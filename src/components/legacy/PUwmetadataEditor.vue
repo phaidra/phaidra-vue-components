@@ -14,7 +14,7 @@
           <template v-for="(s, i) in this.form">
             <v-tab-item class="pa-3" v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tabitem'+i">
               <template v-if="s.children">
-                <p-uwm-field-renderer :children="s.children" :parent="s"></p-uwm-field-renderer>
+                <p-uwm-field-renderer :children="s.children" :parent="s" @add-field="addField($event)" @remove-field="removeField($event)"></p-uwm-field-renderer>
               </template>
             </v-tab-item>
           </template>
@@ -46,6 +46,11 @@ export default {
       type: String
     }
   },
+  watch: {
+    form: function () {
+      this.assignIdsAndParentsRec(this.form, 'root', { id: 'root', children: this.form })
+    }
+  },
   computed: {
     alpha2locale: function () {
       switch (this.$i18n.locale) {
@@ -67,10 +72,32 @@ export default {
       templatename: '',
       previewMember: '',
       searchfieldsinput: '',
-      metadatapreview: {}
+      metadatapreview: {},
+      parents: {}
     }
   },
   methods: {
+    assignIdsAndParentsRec: function (arr, path, parent) {
+      let i = 0
+      for (let e of arr) {
+        i++
+        e.id = path + e.xmlname + i
+        this.parents[e.id] = parent
+        if (e.children) {
+          this.assignIdsAndParentsRec(e.children, e.id, e)
+        }
+      }
+    },
+    addField: function (node) {
+      let f = arrays.duplicate(this.parents[node.id].children, node)
+      f.removable = true
+      this.assignIdsAndParentsRec(this.form, 'root', { id: 'root', children: this.form })
+      this.$emit('load-form', this.form)
+    },
+    removeField: function (node) {
+      arrays.remove(this.parents[node.id].children, node)
+      this.$emit('load-form', this.form)
+    },
     getMetadata: function () {
       let md = { metadata: { 'uwmetadata': this.form } }
       return md
@@ -106,46 +133,6 @@ export default {
       } finally {
         this.$vuetify.goTo(0)
         this.loading = false
-      }
-    },
-    addField: function (arr, f) {
-      var newField = arrays.duplicate(arr, f)
-      if (newField) {
-        newField.id = (new Date()).getTime()
-        newField.firstname = ''
-        newField.lastname = ''
-        newField.identifierText = ''
-        newField.removable = true
-      }
-    },
-    removeField: function (arr, f) {
-      arrays.remove(arr, f)
-    },
-    sortFieldUp: function (arr, f) {
-      var i = arr.indexOf(f)
-      if (arr[i - 1]) {
-        if (arr[i - 1].ordergroup === f.ordergroup) {
-          arrays.moveUp(arr, f)
-        }
-      }
-    },
-    sortFieldDown: function (arr, f) {
-      var i = arr.indexOf(f)
-      if (arr[i + 1]) {
-        if (arr[i + 1].ordergroup === f.ordergroup) {
-          arrays.moveDown(arr, f)
-        }
-      }
-    },
-    organizationSelectInput: function (f, event) {
-      f.organization = ''
-      f.organizationSelectedName = []
-      if (event) {
-        f.organization = event['@id']
-        var preflabels = event['skos:prefLabel']
-        Object.entries(preflabels).forEach(([key, value]) => {
-          f.organizationSelectedName.push({ '@value': value, '@language': key })
-        })
       }
     }
   },

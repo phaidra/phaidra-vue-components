@@ -4,12 +4,16 @@
       <template v-if="skip(ch)"></template>
       <template v-else-if="ch.input_type === 'static'">
         <v-col>
-          <v-text-field
-            v-model="ch.ui_value"
-            :label="ch.labels[alpha2locale]"
-            :readonly="true"
-            outlined
-          ></v-text-field>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="ch.ui_value"
+                :label="ch.labels[alpha2locale]"
+                :readonly="true"
+                outlined
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'input_text'">
@@ -49,120 +53,257 @@
             </template>
           </v-select>
         </v-col>
-        <v-col v-else cols="12">
-          <v-text-field
-            v-model="ch.ui_value"
-            :label="ch.labels[alpha2locale]"
-            outlined
-            :readonly="readOnly(ch)"
-          ></v-text-field>
-        </v-col>
+        <template v-else>
+          <v-col :cols="ch.cardinality !== 1 ? 10 : 12">
+            <v-row>
+              <v-col>
+                <v-text-field
+                  v-model="ch.ui_value"
+                  :label="ch.labels[alpha2locale]"
+                  outlined
+                  :readonly="readOnly(ch)"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col v-if="ch.cardinality !== 1" cols="2">
+            <v-btn icon @click="$emit('add-field', ch)">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+              <v-icon>mdi-minus</v-icon>
+            </v-btn>
+          </v-col>
+        </template>
       </template>
       <template v-else-if="ch.input_type === 'input_text_lang'">
-        <v-col cols="12" md="10">
-          <v-text-field
-            v-model="ch.ui_value"
-            :label="ch.labels[alpha2locale]"
-            outlined
-          ></v-text-field>
+        <v-col :cols="ch.cardinality !== 1 ? 10 : 12">
+          <v-row>
+            <v-col cols="12" md="10">
+              <v-text-field
+                v-model="ch.ui_value"
+                :label="ch.labels[alpha2locale]"
+                outlined
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="2">
+              <v-select
+                v-model="ch.value_lang"
+                :items="languages"
+                :label="$t('Language')"
+                outlined
+              >
+              </v-select>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col cols="12" md="2">
-          <v-select
-            v-model="ch.value_lang"
-            :items="languages"
-            :label="$t('Language')"
-            outlined
-          >
-          </v-select>
+        <v-col v-if="ch.cardinality !== 1" cols="2">
+          <v-row>
+            <v-col>
+              <v-btn icon @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'input_textarea_lang'">
-        <v-col cols="12" md="10">
-          <v-textarea
-            v-model="ch.ui_value"
-            :label="ch.labels[alpha2locale]"
-            outlined
-          ></v-textarea>
+        <v-col :cols="ch.cardinality !== 1 ? 10 : 12">
+          <v-row>
+            <v-col cols="12" md="10">
+              <v-textarea
+                v-model="ch.ui_value"
+                :label="ch.labels[alpha2locale]"
+                outlined
+              ></v-textarea>
+            </v-col>
+            <v-col cols="12" md="2">
+              <v-select
+                v-model="ch.value_lang"
+                :items="languages"
+                :label="$t('Language')"
+                outlined
+              >
+              </v-select>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col cols="12" md="2">
-          <v-select
-            v-model="ch.value_lang"
-            :items="languages"
-            :label="$t('Language')"
-            outlined
-          >
-          </v-select>
+        <v-col v-if="ch.cardinality !== 1" cols="2">
+          <v-row>
+            <v-col>
+              <v-btn icon @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'select'">
-        <v-col cols="12">
-          <v-select
-            :loading="(ch.xmlname === 'faculty') ? orgLoading : (ch.xmlname === 'spl') ? splLoading : false"
-            v-model="ch.ui_value"
-            :items="ch.vocabularies[0].terms"
-            :item-value="'uri'"
-            :label="ch.labels[alpha2locale]"
-            @change="selectHandler(ch, $event)"
-            outlined
-          >
-            <template v-slot:item="{ item, index }">
-              <span>{{ item.labels[alpha2locale] }}</span>
-            </template>
-            <template v-slot:selection="{ item, index }">
-              <span>{{ item.labels[alpha2locale] }}</span>
-            </template>
-          </v-select>
+        <v-col :cols="((ch.cardinality !== 1) && (ch.xmlname === 'faculty') && (ch.xmlname === 'spl')) ? 10 : 12">
+          <v-row>
+            <v-col cols="12">
+              <v-select
+                :loading="(ch.xmlname === 'faculty') ? orgLoading : (ch.xmlname === 'spl') ? splLoading : false"
+                v-model="ch.ui_value"
+                :items="ch.vocabularies[0].terms"
+                :item-value="'uri'"
+                :label="ch.labels[alpha2locale]"
+                @change="selectHandler(ch, $event)"
+                outlined
+              >
+                <template v-slot:item="{ item, index }">
+                  <span>{{ item.labels[alpha2locale] }}</span>
+                </template>
+                <template v-slot:selection="{ item, index }">
+                  <span>{{ item.labels[alpha2locale] }}</span>
+                </template>
+              </v-select>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col v-if="(ch.cardinality !== 1) && (ch.xmlname === 'faculty') && (ch.xmlname === 'spl')" cols="2">
+          <v-row>
+            <v-col>
+              <v-btn icon @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'language_select'">
-        <v-col cols="12">
-          <v-select
-            v-model="ch.ui_value"
-            :items="languages"
-            :label="ch.labels[alpha2locale]"
-            outlined
-          >
-          </v-select>
+         <v-col :cols="ch.cardinality !== 1 ? 10 : 12">
+            <v-row>
+              <v-col cols="12">
+                <v-select
+                  v-model="ch.ui_value"
+                  :items="languages"
+                  :label="ch.labels[alpha2locale]"
+                  outlined
+                >
+                </v-select>
+              </v-col>
+            </v-row>
+         </v-col>
+        <v-col v-if="ch.cardinality !== 1" cols="2">
+          <v-row>
+            <v-col>
+              <v-btn icon @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'input_datetime'">
-        <v-col cols="12">
-          <v-text-field
-            v-model="ch.ui_value"
-            :label="ch.labels[alpha2locale]"
-            :hint="'Format YYYY-MM-DD'"
-            :rules="[validationrules.date]"
-            outlined
-          ></v-text-field>
+        <v-col :cols="ch.cardinality !== 1 ? 10 : 12">
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                v-model="ch.ui_value"
+                :label="ch.labels[alpha2locale]"
+                :hint="'Format YYYY-MM-DD'"
+                :rules="[validationrules.date]"
+                outlined
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col v-if="ch.cardinality !== 1" cols="2">
+          <v-row>
+            <v-col>
+              <v-btn icon @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'input_duration'">
-        <v-col cols="12">
-          <p-i-duration
-            :value="ch.ui_value"
-            v-on:input="ch.ui_value=$event"
-            :label="ch.labels[alpha2locale]"
-            :input-style="'outlined'"
-          ></p-i-duration>
+        <v-col :cols="ch.cardinality !== 1 ? 10 : 12">
+          <v-row>
+            <v-col cols="12">
+              <p-i-duration
+                :value="ch.ui_value"
+                v-on:input="ch.ui_value=$event"
+                :label="ch.labels[alpha2locale]"
+                :input-style="'outlined'"
+              ></p-i-duration>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col v-if="ch.cardinality !== 1" cols="2">
+          <v-row>
+            <v-col>
+              <v-btn icon @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'select_yesno'">
-        <v-col cols="12">
-          <v-checkbox
-            v-model="ch.ui_value"
-            :false-value="'no'"
-            :true-value="'yes'"
-            :label="ch.labels[alpha2locale]"
-          ></v-checkbox>
+        <v-col :cols="ch.cardinality !== 1 ? 10 : 12">
+          <v-row>
+            <v-col cols="12">
+              <v-checkbox
+                v-model="ch.ui_value"
+                :false-value="'no'"
+                :true-value="'yes'"
+                :label="ch.labels[alpha2locale]"
+              ></v-checkbox>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col v-if="ch.cardinality !== 1" cols="2">
+          <v-row>
+            <v-col>
+              <v-btn icon @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'node'">
         <v-card class="ma-3" :width="'100%'">
-          <v-card-title class="font-weight-light grey white--text">{{ ch.labels[alpha2locale] }}</v-card-title>
+          <v-card-title class="font-weight-light grey white--text">
+            <span>{{ ch.labels[alpha2locale] }}</span>
+            <v-spacer></v-spacer>
+            <template v-if="ch.cardinality !== 1">
+              <v-btn icon dark @click="$emit('add-field', ch)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn v-if="ch.removable" icon dark @click="$emit('remove-field', ch)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </template>
+          </v-card-title>
           <v-divider></v-divider>
           <v-card-text>
             <template v-if="ch.children">
-              <p-uwm-field-renderer :children="ch.children" :parent="ch" @update-parent="$forceUpdate()"></p-uwm-field-renderer>
+              <p-uwm-field-renderer :children="ch.children" :parent="ch" @update-parent="$forceUpdate()" @add-field="$emit('add-field', $event)" @remove-field="$emit('remove-field', $event)"></p-uwm-field-renderer>
             </template>
           </v-card-text>
           <v-divider v-if="ch.xmlname === 'curriculum'"></v-divider>
@@ -580,7 +721,9 @@ export default {
         await this.loadSiblings(ch)
       }
     }
-    await this.loadNextTermSelect(lastClsChild)
+    if (lastClsChild) {
+      await this.loadNextTermSelect(lastClsChild)
+    }
   }
 }
 </script>
