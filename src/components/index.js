@@ -63,7 +63,8 @@ import PMObjectMembers from './management/PMObjectMembers'
 import PMCollectionMembers from './management/PMCollectionMembers'
 import PTemplates from './templates/PTemplates'
 import PLists from './lists/PLists'
-import PUwmetadataEditor from './legacy/PUwmetadataEditor'
+import PIFormUwm from './legacy/PIFormUwm'
+import PDUwmRec from './legacy/PDUwmRec'
 
 const Components = {
   PImg,
@@ -131,7 +132,8 @@ const Components = {
   PMCollectionMembers,
   PTemplates,
   PLists,
-  PUwmetadataEditor
+  PIFormUwm,
+  PDUwmRec
 }
 
 export default {

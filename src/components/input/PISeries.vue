@@ -98,7 +98,7 @@
 
           <v-row >
 
-            <v-col cols="4" v-if="!hideVolume">
+            <v-col cols="12" :md="(hideIssue && hideIssued)? 12 : 4" v-if="!hideVolume">
               <v-text-field
                 :value="volume"
                 :label="$t('Volume')"
@@ -108,7 +108,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="4" v-if="!hideIssue">
+            <v-col cols="12" :md="(hideVolume && hideIssued)? 12 : 4" v-if="!hideIssue">
               <v-text-field
                 :value="issue"
                 :label="$t('Issue')"
@@ -118,7 +118,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="4" v-if="!hideIssued">
+            <v-col cols="12" :md="(hideVolume && hideIssue)? 12 : 4" v-if="!hideIssued">
               <template v-if="issuedDatePicker">
                 <v-text-field
                   :value="issued"
@@ -169,7 +169,7 @@
 
           </v-row>
 
-          <v-row>
+          <v-row v-if="!hidePages">
             <v-col cols="12" md="6">
               <v-text-field
                 :value="pageStart"

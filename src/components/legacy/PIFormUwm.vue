@@ -14,7 +14,7 @@
           <template v-for="(s, i) in this.form">
             <v-tab-item class="pa-3" v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tabitem'+i">
               <template v-if="s.children">
-                <p-uwm-field-renderer :children="s.children" :parent="s" @add-field="addField($event)" @remove-field="removeField($event)"></p-uwm-field-renderer>
+                <p-i-uwm-rec :children="s.children" :parent="s" @add-field="addField($event)" @remove-field="removeField($event)"></p-i-uwm-rec>
               </template>
             </v-tab-item>
           </template>
@@ -31,12 +31,12 @@
 
 <script>
 import arrays from '../../utils/arrays'
-import PUwmFieldRenderer from './PUwmFieldRenderer'
+import PIUwmRec from './PIUwmRec'
 
 export default {
-  name: 'p-uwmetadata-editor',
+  name: 'p-i-form-uwm',
   components: {
-    PUwmFieldRenderer
+    PIUwmRec
   },
   props: {
     form: {

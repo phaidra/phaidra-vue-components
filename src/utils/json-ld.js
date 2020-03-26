@@ -1546,6 +1546,9 @@ export default {
         }
       }
     }
+    if (f.isbn) {
+      h['ids:isbn'].push(f.isbn)
+    }
     if (f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.seriesIdentifier) {
       let series = {
         '@type': f.seriesType
@@ -1831,7 +1834,7 @@ export default {
         delete jsonlds[key]
       }
     })
-
+    jsonlds = JSON.parse(JSON.stringify(jsonlds).replace(/"\s+|\s+"/g,'"'))
     return jsonlds
   },
   fields2json (jsonld, formData) {
@@ -1953,7 +1956,7 @@ export default {
           break
 
         case 'rdau:P60101':
-          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
+          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.isbn || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
             this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
           }
           if (f.pageStart) {

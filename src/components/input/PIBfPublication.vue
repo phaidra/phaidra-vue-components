@@ -113,7 +113,7 @@
             </template>
           </v-row>
           <v-row>
-            <v-col v-if="showPlace" cols="8">
+            <v-col v-if="showPlace" cols="12" :md="showDate ? 8 : 12">
               <v-text-field
                 :value="publishingPlace"
                 v-on:blur="$emit('input-publishing-place',$event.target.value)"
@@ -124,39 +124,44 @@
                 :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
-            <v-col v-if="showDate" cols="4">
+            <v-col v-if="showDate" cols="12":md="showPlace ? 4 : 12">
               <template v-if="publishingDatePicker">
-                <v-menu
-                  ref="menu1"
-                  v-model="dateMenu"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
-                  offset-y
-                  max-width="290px"
-                  min-width="290px"
+                <v-text-field
+                  :value="publishingDate"
+                  v-on:blur="$emit('input-publishing-date',$event.target.value)"
+                  :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
+                  :required="required"
+                  :rules="[validationrules.date]"
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
+                  :error-messages="publishingDateErrorMessages"
                 >
-                  <template v-slot:activator="{ on }">
-                    <v-text-field
-                      :value="publishingDate"
-                      v-on:blur="$emit('input-publishing-date',$event.target.value)"
-                      :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
-                      :required="required"
-                      :rules="[validationrules.date]"
-                      :filled="inputStyle==='filled'"
-                      :outlined="inputStyle==='outlined'"
-                      append-icon="mdi-calendar"
-                      v-on="on"
-                    ></v-text-field>
+                  <template v-slot:append>
+                    <v-fade-transition leave-absolute>
+                      <v-menu
+                        ref="menu1"
+                        v-model="dateMenu"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                        min-width="290px"
+                      >
+                        <template v-slot:activator="{ on }">
+                          <v-icon v-on="on">mdi-calendar</v-icon>
+                        </template>
+                        <v-date-picker
+                          color="primary"
+                          :value="publishingDate"
+                          :show-current="false"
+                          v-model="pickerModel"
+                          :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                          v-on:input="dateMenu = false; $emit('input-publishing-date', $event)"
+                        ></v-date-picker>
+                      </v-menu>
+                    </v-fade-transition>
                   </template>
-                  <v-date-picker
-                    color="primary"
-                    :value="publishingDate"
-                    :show-current="false"
-                    v-model="pickerModel"
-                    :locale="this.$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
-                    v-on:input="dateMenu = false; $emit('input-publishing-date', $event)"
-                  ></v-date-picker>
-                </v-menu>
+                </v-text-field>
               </template>
               <template v-else>
                 <v-text-field
@@ -231,6 +236,9 @@ export default {
     publishingPlaceLabel: {
       type: String
     },
+    publishingDateErrorMessages: {
+      type: Array
+    },
     publisherType: {
       type: String
     },
@@ -247,6 +255,10 @@ export default {
     showDate: {
       type: Boolean,
       default: true
+    },
+    showIds: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

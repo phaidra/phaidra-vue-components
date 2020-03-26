@@ -410,6 +410,8 @@ const fields = [
     pageEnd: '',
     pageStartLabel: 'Page start',
     pageEndLabel: 'Page end',
+    isbn: '',
+    isbnLabel: 'ISBN',
     seriesLabel: 'Is in series',
     seriesTitle: '',
     seriesTitleLanguage: '',

@@ -303,7 +303,7 @@
           <v-divider></v-divider>
           <v-card-text>
             <template v-if="ch.children">
-              <p-uwm-field-renderer :children="ch.children" :parent="ch" @update-parent="$forceUpdate()" @add-field="$emit('add-field', $event)" @remove-field="$emit('remove-field', $event)"></p-uwm-field-renderer>
+              <p-i-uwm-rec :children="ch.children" :parent="ch" @update-parent="$forceUpdate()" @add-field="$emit('add-field', $event)" @remove-field="$emit('remove-field', $event)"></p-i-uwm-rec>
             </template>
           </v-card-text>
           <v-divider v-if="ch.xmlname === 'curriculum'"></v-divider>
@@ -326,7 +326,7 @@ import lang3to2map from '../../utils/lang3to2map'
 import { validationrules } from '../../mixins/validationrules'
 
 export default {
-  name: 'p-uwm-field-renderer',
+  name: 'p-i-uwm-rec',
   mixins: [ validationrules ],
   components: {
     PIDuration

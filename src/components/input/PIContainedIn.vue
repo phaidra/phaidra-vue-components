@@ -18,6 +18,7 @@
                     v-on:blur="$emit('input-title',$event.target.value)"
                     :filled="inputStyle==='filled'"
                     :outlined="inputStyle==='outlined'"
+                    :error-messages="titleErrorMessages"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" :md="multilingual ? 4 : 6">
@@ -148,6 +149,18 @@
                     v-on:blur="$emit('input-page-end',$event.target.value)"
                     :filled="inputStyle==='filled'"
                     :outlined="inputStyle==='outlined'"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    :value="isbn"
+                    :label="$t(isbnLabel)"
+                    v-on:blur="$emit('input-isbn',$event.target.value)"
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
+                    :error-messages="isbnErrorMessages"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -374,7 +387,7 @@
                     </template>
                   </v-row>
                   <v-row>
-                    <v-col v-if="publisherShowPlace" cols="8">
+                    <v-col v-if="publisherShowPlace" cols="12" :cols="publisherShowDate ? 8 : 12">
                       <v-text-field
                         :value="publishingPlace"
                         v-on:blur="$emit('input-publishing-place',$event.target.value)"
@@ -383,7 +396,7 @@
                         :outlined="inputStyle==='outlined'"
                       ></v-text-field>
                     </v-col>
-                    <v-col v-if="publisherShowDate" cols="4">
+                    <v-col v-if="publisherShowDate" cols="12" :cols="publisherShowPlace ? 4 : 12">
                       <template v-if="publishingDatePicker">
                         <v-menu
                           ref="menu1"
@@ -469,6 +482,9 @@ export default {
     title: {
       type: String
     },
+    titleErrorMessages: {
+      type: Array
+    },
     subtitle: {
       type: String
     },
@@ -501,6 +517,12 @@ export default {
     },
     pageEnd: {
       type: String
+    },
+    isbn: {
+      type: String
+    },
+    isbnErrorMessages: {
+      type: Array
     },
     seriesLabel: {
       type: String
