@@ -285,6 +285,9 @@ export default {
                   }
                 }
               }
+              if (obj['ids:isbn']) {
+                f.isbn = obj['ids:isbn']
+              }
               f.roles = []
               Object.entries(obj).forEach(([key, value]) => {
                 if (key.startsWith('role')) {
@@ -1547,7 +1550,7 @@ export default {
       }
     }
     if (f.isbn) {
-      h['ids:isbn'].push(f.isbn)
+      h['ids:isbn'] = [ f.isbn ]
     }
     if (f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.seriesIdentifier) {
       let series = {

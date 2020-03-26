@@ -11,6 +11,7 @@ const fields = [
     disableType: false,
     multiplicable: false,
     identifierLabel: 'Identifier',
+    valueErrorMessages: [],
     value: '',
     definition: 'An alternative identifier (other than Phaidra persistent identifier) that uniquely identifies the resource. Relates a manifestation to an appellation of manifestation that consists of a code, number, or other string, usually independent of natural language and social naming conventions, used to identify a manifestation.'
   },
@@ -397,6 +398,7 @@ const fields = [
     label: 'Is contained in',
     title: '',
     titleLanguage: '',
+    titleErrorMessages: [],
     roles: [
       {
         id: 'contained-in-role',
@@ -412,6 +414,7 @@ const fields = [
     pageEndLabel: 'Page end',
     isbn: '',
     isbnLabel: 'ISBN',
+    isbnErrorMessages: [],
     seriesLabel: 'Is in series',
     seriesTitle: '',
     seriesTitleLanguage: '',
@@ -589,6 +592,22 @@ const fields = [
     textvalue: '',
     value: '',
     vocabulary: '',
+    language: '',
+    definition: 'Location in the holding agency where the item is shelved or stored. Select box value will be combined with text field.'
+  },
+  {
+    id: 'physical-location-select-text-pool',
+    fieldname: 'Standort / Arbeitsbereich (Mediathek - Romanistik)',
+    predicate: 'bf:physicalLocation',
+    component: 'p-select-text',
+    label: 'Arbeitsbereich',
+    selectlabel: 'Standort',
+    multilingual: true,
+    selectdisabled: false,
+    selectvalue: '',
+    textvalue: '',
+    value: '',
+    vocabulary: 'pool',
     language: '',
     definition: 'Location in the holding agency where the item is shelved or stored. Select box value will be combined with text field.'
   },

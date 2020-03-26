@@ -37,6 +37,7 @@
         :rules="[validationrules[getIdentifierRuleName(type)]]"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
+        :error-messages="valueErrorMessages"
       ></v-text-field>
     </v-col>
     <template v-if="actions.length">
@@ -86,6 +87,9 @@ export default {
     },
     identifierLabel: {
       type: String
+    },
+    valueErrorMessages: {
+      type: Array
     },
     vocabulary: {
       type: String,

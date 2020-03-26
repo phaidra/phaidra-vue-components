@@ -521,6 +521,9 @@ export default {
     isbn: {
       type: String
     },
+    isbnLabel: {
+      type: String
+    },
     isbnErrorMessages: {
       type: Array
     },
