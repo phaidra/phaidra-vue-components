@@ -386,8 +386,8 @@ export default {
             return qs.stringify(params, { arrayFormat: 'repeat' })
           }
         })
-        return response.data.terms
         this.$forceUpdate()
+        return response.data.terms
       } catch (error) {
         console.error(error)
       } finally {

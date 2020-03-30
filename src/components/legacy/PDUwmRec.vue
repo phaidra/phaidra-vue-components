@@ -78,16 +78,16 @@
           </v-col>
         </template>
         <template v-else-if="nodePath(ch) === 'uwm_provenience_contribute'">
-          <v-card outlined class="ma-3" :width="'100%'">entity
+          <v-card outlined class="ma-3" :width="'100%'">
             <v-card-text>
               <div class="overline mb-4">{{ $t(nodePath(ch)) }}</div>
               <v-row>
-                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath('uwm_provenience_contribute_resource')) }}</v-col>
-                <v-col cols="12" md="10" v-if="ch.labels">{{ getChildLabel(ch, 'resource') }}</v-col>
+                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t('uwm_provenience_contribute_resource') }}</v-col>
+                <v-col cols="12" md="10">{{ getChildLabel(ch, 'resource') }}</v-col>
               </v-row>
               <v-row>
-                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath('uwm_provenience_contribute_comment')) }}<template v-if="getLangAttr(getChild(ch, 'comment'))"> ({{getLangAttr(getChild(ch, 'comment'))}})</template></v-col>
-                <v-col cols="12" md="10" v-if="ch.labels">{{ getChildValue(ch, 'comment') }}</v-col>
+                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t('uwm_provenience_contribute_comment') }}<template v-if="getLangAttr(getChild(ch, 'comment'))"> ({{getLangAttr(getChild(ch, 'comment'))}})</template></v-col>
+                <v-col cols="12" md="10">{{ getChildValue(ch, 'comment') }}</v-col>
               </v-row>
               <v-row>
                 <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ getChildLabel(ch, 'role') }}</v-col>
@@ -109,12 +109,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath('uwm_provenience_contribute_comment')) }}<template v-if="getLangAttr(getChild(ch, 'comment'))"> ({{getLangAttr(getChild(ch, 'comment'))}})</template></v-col>
-                <v-col cols="12" md="10" v-if="ch.labels">{{ getChildValue(ch, 'comment') }}</v-col>
+                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t('uwm_provenience_contribute_chronological') }}<template v-if="getLangAttr(getChild(ch, 'comment'))"> ({{getLangAttr(getChild(ch, 'comment'))}})</template></v-col>
+                <v-col cols="12" md="10">{{ getChildValue(ch, 'chronological') }}</v-col>
               </v-row>
               <v-row>
-                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath('uwm_provenience_contribute_comment')) }}<template v-if="getLangAttr(getChild(ch, 'comment'))"> ({{getLangAttr(getChild(ch, 'comment'))}})</template></v-col>
-                <v-col cols="12" md="10" v-if="ch.labels">{{ getChildValue(ch, 'comment') }}</v-col>
+                <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t('uwm_provenience_contribute_location') }}<template v-if="getLangAttr(getChild(ch, 'comment'))"> ({{getLangAttr(getChild(ch, 'comment'))}})</template></v-col>
+                <v-col cols="12" md="10">{{ getChildValue(ch, 'location') }}</v-col>
               </v-row>
             </v-card-text>
           </v-card>
