@@ -160,6 +160,7 @@
                     v-on:blur="$emit('input-isbn',$event.target.value)"
                     :filled="inputStyle==='filled'"
                     :outlined="inputStyle==='outlined'"
+                    :placeholder="isbnPlaceholder"
                     :error-messages="isbnErrorMessages"
                   ></v-text-field>
                 </v-col>
@@ -523,6 +524,10 @@ export default {
     },
     isbnLabel: {
       type: String
+    },
+    isbnPlaceholder: {
+      type: String,
+      default: '978-3-16-148410-0'
     },
     isbnErrorMessages: {
       type: Array

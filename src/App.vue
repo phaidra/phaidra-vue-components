@@ -358,883 +358,1788 @@ export default {
       editform: {},
       uwmetadataeditform: [],
       uwmetadatadisplay: [
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-        "xmlname": "general",
-        "input_type": "node",
-        "children": [
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "o:454073",
-            "xmlname": "identifier",
-            "input_type": "input_text",
-            "datatype": "CharacterString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "Tolerance and reward equity predict cooperation in ravens (Corvus corax)",
-            "xmlname": "title",
-            "input_type": "input_text",
-            "attributes": [
-              {
-                "ui_value": "en",
-                "xmlname": "lang",
-                "input_type": "select"
-              }
-            ],
-            "datatype": "LangString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "en",
-            "xmlname": "language",
-            "input_type": "select",
-            "datatype": "Language"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "Cooperative decision rules have so far been shown experimentally mainly in mammal species that have variable and complex social networks. However, these traits should not necessarily be restricted to mammals. Therefore, we tested cooperative problem solving in ravens. We showed that, without training, nine ravens spontaneously cooperated in a loose-string task. Corroborating findings in several species, ravensâ cooperative success increased with increasing inter-individual tolerance levels. Importantly, we found this in both a forced dyadic setting, and in a group setting where individuals had an open choice to cooperate with whomever. The ravens, moreover, also paid attention to the resulting reward distribution and ceased cooperation when being cheated upon. Nevertheless, the ravens did not seem to pay attention to the behavior of their partners while cooperating, and future research should reveal whether this is task specific or a general pattern. Given their natural propensity to cooperate and the results we present here, we consider ravens as an interesting model species to study the evolution of, and the mechanisms underlying cooperation.",
-            "xmlname": "description",
-            "input_type": "input_text",
-            "attributes": [
-              {
-                "ui_value": "en",
-                "xmlname": "lang",
-                "input_type": "select"
-              }
-            ],
-            "datatype": "LangString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "Animal behaviour",
-            "xmlname": "keyword",
-            "input_type": "input_text",
-            "attributes": [
-              {
-                "ui_value": "en",
-                "xmlname": "lang",
-                "input_type": "select"
-              }
-            ],
-            "datatype": "LangString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "Behavioural ecology",
-            "xmlname": "keyword",
-            "input_type": "input_text",
-            "attributes": [
-              {
-                "ui_value": "en",
-                "xmlname": "lang",
-                "input_type": "select"
-              }
-            ],
-            "datatype": "LangString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "Social evolution",
-            "xmlname": "keyword",
-            "input_type": "input_text",
-            "attributes": [
-              {
-                "ui_value": "en",
-                "xmlname": "lang",
-                "input_type": "select"
-              }
-            ],
-            "datatype": "LangString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-            "ui_value": "yes",
-            "xmlname": "irdata",
-            "input_type": "select",
-            "labels": {
-              "en": "Yes",
-              "it": "SÃ¬",
-              "de": "Ja"
+            {
+                "children": [
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "o:588288",
+                        "xmlname": "identifier",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "The Rubicon of Art",
+                        "xmlname": "title",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "Precultural rationalism in the works of Stone",
+                        "xmlname": "subtitle",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "Capitalist discourse and subtextual objectivism",
+                        "xmlname": "alt_title",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                    },
+                    {
+                        "datatype": "Language",
+                        "input_type": "select",
+                        "ui_value": "en",
+                        "xmlname": "language",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "In the works of Joyce, a predominant concept is the concept of dialectic\nculture. Therefore, Prinn[1] suggests that we have to choose\nbetween dialectic situationism and pretextual modern theory. Any number of\nnarratives concerning the collapse, and hence the economy, of neotextual class\nmay be revealed. \n\nThe primary theme of the works of Tarantino is not, in fact, construction,\nbut postconstruction. Thus, the subject is contextualised into a subtextual\nobjectivism that includes sexuality as a paradox. The premise of precultural\nrationalism states that society, somewhat surprisingly, has intrinsic meaning.",
+                        "xmlname": "description",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "capitalism, Joyce, pomo",
+                        "xmlname": "keyword",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "nonsense",
+                        "xmlname": "coverage",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "HTTP/WWW",
+                                    "en": "HTTP/WWW",
+                                    "it": "HTTP/WWW",
+                                    "sr": "HTTP/WWW"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_31/1552102",
+                                "xmlname": "resource",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "http://www.elsewhere.org/pomo/",
+                                "xmlname": "identifier",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "identifiers",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "general",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
             },
-            "datatype": "Boolean"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-            "xmlname": "identifiers",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_31/1552099",
-                "xmlname": "resource",
-                "input_type": "select",
-                "labels": {
-                  "en": "DOI",
-                  "it": "DOI",
-                  "de": "DOI",
-                  "sr": "DOI"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-                "ui_value": "10.1038/srep15021",
-                "xmlname": "identifier",
-                "input_type": "input_text",
-                "datatype": "CharacterString"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-            "xmlname": "identifiers",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_31/1552101",
-                "xmlname": "resource",
-                "input_type": "select",
-                "labels": {
-                  "en": "ISSN",
-                  "it": "ISSN",
-                  "de": "ISSN",
-                  "sr": "ISSN"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-                "ui_value": "2045-2322",
-                "xmlname": "identifier",
-                "input_type": "input_text",
-                "datatype": "CharacterString"
-              }
-            ],
-            "datatype": "Node"
-          }
+            {
+                "children": [
+                    {
+                        "datatype": "DateTime",
+                        "input_type": "input_text",
+                        "ui_value": "2020-03-27T08:35:21.643Z",
+                        "xmlname": "upload_date",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "Vocabulary",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "Fertig",
+                            "en": "Complete",
+                            "it": "Completo",
+                            "sr": "kompletno"
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_2/44",
+                        "xmlname": "status",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "Boolean",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "Nein",
+                            "en": "No",
+                            "it": "No"
+                        },
+                        "ui_value": "no",
+                        "xmlname": "peer_reviewed",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "input_text",
+                                "ui_value": "0",
+                                "xmlname": "data_order"
+                            }
+                        ],
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "AutorIn des digitalen Objekts",
+                                    "en": "Author of the digital object",
+                                    "it": "Autore dell'oggetto digitale",
+                                    "sr": "autor digitalnog objekta"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_3/46",
+                                "xmlname": "role",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "children": [
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Agnes",
+                                        "xmlname": "firstname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "V. L. McElwaine",
+                                        "xmlname": "lastname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Department of English, University of Illinois",
+                                        "xmlname": "institution",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    }
+                                ],
+                                "datatype": "Node",
+                                "input_type": "node",
+                                "xmlname": "entity",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "1",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "children": [
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Engelbert",
+                                        "xmlname": "firstname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Humperdinck",
+                                        "xmlname": "lastname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "person",
+                                        "xmlname": "type",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    }
+                                ],
+                                "datatype": "Node",
+                                "input_type": "node",
+                                "xmlname": "entity",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "contribute",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "input_text",
+                                "ui_value": "1",
+                                "xmlname": "data_order"
+                            }
+                        ],
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "EditorIn",
+                                    "en": "Editor",
+                                    "it": "Curatore",
+                                    "sr": "urednik"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_3/52",
+                                "xmlname": "role",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "children": [
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Rastislav",
+                                        "xmlname": "firstname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Hudak",
+                                        "xmlname": "lastname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Zentraler Informatikdienst, Universität Wien",
+                                        "xmlname": "institution",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Mgr.",
+                                        "xmlname": "title1",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Csc.",
+                                        "xmlname": "title2",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "118517376",
+                                        "xmlname": "gnd",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "n79056735",
+                                        "xmlname": "lcnaf",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity"
+                                    }
+                                ],
+                                "datatype": "Node",
+                                "input_type": "node",
+                                "xmlname": "entity",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                            },
+                            {
+                                "datatype": "DateTime",
+                                "input_type": "input_text",
+                                "ui_value": "2020-03-12",
+                                "xmlname": "date",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "contribute",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "Vocabulary",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "acceptedVersion",
+                            "en": "acceptedVersion",
+                            "it": "acceptedVersion",
+                            "sr": "acceptedVersion"
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_38/1556249",
+                        "xmlname": "infoeurepoversion",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "lifecycle",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "application/pdf",
+                        "xmlname": "format",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "FileSize",
+                        "input_type": "input_text",
+                        "ui_value": "1115",
+                        "xmlname": "size",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "http://phaidra-sandbox.univie.ac.at/o:588288",
+                        "xmlname": "location",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "But the main theme of la Tournier’s[2] critique of\nprecultural rationalism is the dialectic of constructivist sexual identity. The\nmeaninglessness, and subsequent futility, of dialectic situationism which is a\ncentral theme of Tarantino’s Pulp Fiction emerges again in Reservoir\nDogs, although in a more mythopoetical sense.",
+                        "xmlname": "installremarks",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "Thus, Sontag uses the term ‘precultural rationalism’ to denote the common\nground between reality and class. The premise of neotextual deconstructive\ntheory states that consciousness is capable of intent, but only if reality is\nequal to narrativity; if that is not the case, we can assume that the purpose\nof the reader is social comment.\n{link}google.com{/link}",
+                        "xmlname": "otherrequirements",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "Duration",
+                        "input_type": "input_text",
+                        "ui_value": "PT32H45M22S",
+                        "xmlname": "duration",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "technical",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Experiment",
+                                    "en": "Experiment",
+                                    "it": "Esperimento",
+                                    "sr": "eksperiment"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_11/1699",
+                                "xmlname": "learningresourcetype",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Erklärend",
+                                    "en": "Expositive",
+                                    "it": "Descrittiva",
+                                    "sr": "opisna"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_10/1686",
+                                "xmlname": "interactivitytype",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Mittel",
+                                    "en": "Medium",
+                                    "it": "Medio",
+                                    "sr": "srednji"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_12/1705",
+                                "xmlname": "interactivitylevel",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Studierende",
+                                    "en": "Learner",
+                                    "it": "Allievo",
+                                    "sr": "u?enik"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_14/1715",
+                                "xmlname": "enduserrole",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Hochschule",
+                                    "en": "Higher Education",
+                                    "it": "Istruzione universitaria",
+                                    "sr": "visoko obrazovanje"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_15/1718",
+                                "xmlname": "context",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "32",
+                                "xmlname": "agerange",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Sehr schwer",
+                                    "en": "Very difficult",
+                                    "it": "Molto difficile",
+                                    "sr": "veoma teko"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_16/1725",
+                                "xmlname": "difficulty",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Duration",
+                                "input_type": "input_text",
+                                "ui_value": "PT12H54M43S",
+                                "xmlname": "learningtime",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "If one examines precultural rationalism, one is faced with a choice: either\nreject the materialist paradigm of narrative or conclude that the media is\ncapable of deconstruction, given that Derrida’s model of dialectic situationism\nis valid. Thus, the premise of precultural rationalism suggests that the raison\nd’etre of the participant is significant form. Lyotard promotes the use of\nDerridaist reading to deconstruct hierarchy.",
+                                "xmlname": "description",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Language",
+                                "input_type": "select",
+                                "ui_value": "ba",
+                                "xmlname": "language",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "educationals",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "children": [
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Übung",
+                                    "en": "Exercise",
+                                    "it": "Esercizio",
+                                    "sr": "veba"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_11/1688",
+                                "xmlname": "learningresourcetype",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Aktiv",
+                                    "en": "Active",
+                                    "it": "Dinamica",
+                                    "sr": "aktivna"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_10/1685",
+                                "xmlname": "interactivitytype",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Niedrig",
+                                    "en": "Low",
+                                    "it": "Basso",
+                                    "sr": "nizak"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_12/1704",
+                                "xmlname": "interactivitylevel",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "StudienprogrammleiterIn",
+                                    "en": "Manager",
+                                    "it": "Gestore",
+                                    "sr": "rukovodilac"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_14/1716",
+                                "xmlname": "enduserrole",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Schule",
+                                    "en": "School",
+                                    "it": "Scuola",
+                                    "sr": "kola"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_15/1717",
+                                "xmlname": "context",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "54",
+                                "xmlname": "agerange",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Leicht",
+                                    "en": "Easy",
+                                    "it": "Facile",
+                                    "sr": "lako"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational/voc_16/1722",
+                                "xmlname": "difficulty",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Duration",
+                                "input_type": "input_text",
+                                "ui_value": "PT16H55M23S",
+                                "xmlname": "learningtime",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "The main theme of Geoffrey’s[3] analysis of subtextual\nobjectivism is the bridge between society and consciousness. However, Lacan\nuses the term ‘precultural rationalism’ to denote the role of the poet as\nartist. In Satanic Verses, Rushdie examines precultural capitalism; in\nMidnight’s Children, although, he deconstructs precultural rationalism.",
+                                "xmlname": "description",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            },
+                            {
+                                "datatype": "Language",
+                                "input_type": "select",
+                                "ui_value": "bm",
+                                "xmlname": "language",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/educational"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "educationals",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "educational",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "datatype": "Boolean",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "Nein",
+                            "en": "No",
+                            "it": "No"
+                        },
+                        "ui_value": "no",
+                        "xmlname": "cost",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "Boolean",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "Ja",
+                            "en": "Yes",
+                            "it": "SÃ¬"
+                        },
+                        "ui_value": "yes",
+                        "xmlname": "copyright",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "License",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "CC BY 4.0 International",
+                            "en": "CC BY 4.0 International"
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_21/16",
+                        "xmlname": "license",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "If you license your content under the terms of this license, you allow every licensee to copy and to redistribute the material in any medium or format, to remix, to transform, and build upon the material for any purpose, even commercially.\n\nYou cannot revoke these freedoms as long as the licensee follows the license terms.\n",
+                        "xmlname": "description",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "datatype": "Vocabulary",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "openAccess",
+                            "en": "openAccess",
+                            "it": "openAccess",
+                            "sr": "openAccess"
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_36/1556227",
+                        "xmlname": "infoeurepoaccess",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                    },
+                    {
+                        "datatype": "DateTime",
+                        "input_type": "input_text",
+                        "ui_value": "2030-10-12",
+                        "xmlname": "infoeurepoembargo",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "rights",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "datatype": "Vocabulary",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "Disziplin",
+                            "en": "Discipline",
+                            "it": "Materia",
+                            "sr": "disciplina"
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_6/70",
+                        "xmlname": "purpose",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "ClassificationSource",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "ÖFOS 2012",
+                                    "en": "ÖFOS 2012",
+                                    "it": null,
+                                    "nl": null,
+                                    "ru": null,
+                                    "sr": null
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_16",
+                                "xmlname": "source",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "AGRARWISSENSCHAFTEN, VETERINÄRMEDIZIN",
+                                    "en": "AGRICULTURAL SCIENCES, VETERINARY MEDICINE"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_16/1072421",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "1",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Agrarbiotechnologie, Lebensmittelbiotechnologie",
+                                    "en": "Agricultural Biotechnology, Food Biotechnology"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_16/1072512",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "2",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Agrarbiotechnologie, Lebensmittelbiotechnologie",
+                                    "en": "Agricultural Biotechnology, Food Biotechnology"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_16/1073606",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "3",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Biopharming",
+                                    "en": "Biopharming"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_16/1072513",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "taxonpath",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "ClassificationSource",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Getty Art & Architecture Thesaurus",
+                                    "en": "Getty Art & Architecture Thesaurus",
+                                    "it": null,
+                                    "nl": null,
+                                    "ru": null,
+                                    "sr": null
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_5",
+                                "xmlname": "source",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Physical Attributes Facet",
+                                    "en": "Physical Attributes Facet"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_5/17180",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "1",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Color",
+                                    "en": "Color"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_5/17954",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "2",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "color and color-related phenomena",
+                                    "en": "color and color-related phenomena"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_5/18298",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "3",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "color",
+                                    "en": "color"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_5/18299",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "4",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Taxon",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "luminous color",
+                                    "en": "luminous color"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification/cls_5/18302",
+                                "xmlname": "taxon",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "taxonpath",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "classification",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "datatype": "Vocabulary",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "Artikel in Zeitschrift",
+                            "en": "Article",
+                            "it": "Articolo"
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552253",
+                        "xmlname": "hoschtyp",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                    },
+                    {
+                        "datatype": "DateTime",
+                        "input_type": "input_text",
+                        "ui_value": "2010-01-23",
+                        "xmlname": "approbation_period",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "Faculty",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Support facilities",
+                                    "en": "Support facilities"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_faculty/A0",
+                                "xmlname": "faculty",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                            },
+                            {
+                                "datatype": "Department",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Zentraler Informatikdienst",
+                                    "en": "Vienna University Computer Center"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_department/A140",
+                                "xmlname": "department",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "orgassignment",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "SPL",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "SPL 24: Kultur- und Sozialanthropologie"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_spl/24",
+                                "xmlname": "spl",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Curriculum",
+                                "input_type": "select",
+                                "ui_value": "218",
+                                "xmlname": "kennzahl",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "1",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "datatype": "Curriculum",
+                                "input_type": "select",
+                                "ui_value": "216",
+                                "xmlname": "kennzahl",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "curriculum",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "Eisenstadt-Umgebung",
+                        "xmlname": "further_allocation",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "organization",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "In a sense, the characteristic theme of the works of Rushdie is the economy of modernist sexual identity. Sargeant[4] implies that we have to choose between dialectic situationism and posttextual narrative.",
+                        "xmlname": "inscription",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "input_text",
+                                "ui_value": "0",
+                                "xmlname": "data_order"
+                            }
+                        ],
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Analoger Film",
+                                    "en": "Analog Film",
+                                    "it": "Pellicola analogica",
+                                    "sr": "analogni film"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_24/1552150",
+                                "xmlname": "resource",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "cm",
+                                    "en": "cm",
+                                    "it": "cm",
+                                    "sr": "cm"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_22/10880",
+                                "xmlname": "dimension_unit",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "15",
+                                "xmlname": "length",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "54",
+                                "xmlname": "width",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "33",
+                                "xmlname": "height",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "54",
+                                "xmlname": "diameter",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "dimensions",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "input_text",
+                                "ui_value": "1",
+                                "xmlname": "data_order"
+                            }
+                        ],
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Glasplattendia",
+                                    "en": "Glass Plate Dia",
+                                    "it": "Diapositiva su lastra di vetro",
+                                    "sr": "Staklene plo?e Dia"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_24/1552077",
+                                "xmlname": "resource",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "ft.",
+                                    "en": "ft.",
+                                    "it": "ft"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_22/10884",
+                                "xmlname": "dimension_unit",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "2",
+                                "xmlname": "length",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "14",
+                                "xmlname": "width",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "2",
+                                "xmlname": "height",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "5",
+                                "xmlname": "diameter",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "dimensions",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "GND subject",
+                                    "en": "GND subject",
+                                    "it": "GND subject"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_25/1562802",
+                                "xmlname": "reference",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "118517376",
+                                "xmlname": "number",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "reference_number",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Förderungsnummer: Universität Wien",
+                                    "en": "Grant Number: University of Vienna",
+                                    "it": "Grant Number: University of Vienna",
+                                    "sr": "Grant Number: University of Vienna"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_25/1562640",
+                                "xmlname": "reference",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            },
+                            {
+                                "datatype": "CharacterString",
+                                "input_type": "input_text",
+                                "ui_value": "11112-32",
+                                "xmlname": "number",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "reference_number",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                    },
+                    {
+                        "datatype": "Vocabulary",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "Rundstempel - mit Adler (Fraktur), Variante 1",
+                            "en": "Rundstempel - mit Adler (Fraktur), Variante 1",
+                            "it": "Rundstempel - mit Adler (Fraktur), Variante 1",
+                            "sr": ""
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_23/10900",
+                        "xmlname": "stamp",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "However, Marx uses the term ‘precultural rationalism’ to denote a\nself-fulfilling paradox. If dialectic situationism holds, the works of Rushdie\nare an example of mythopoetical rationalism.",
+                        "xmlname": "note",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "histkult",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Analoger Film",
+                                    "en": "Analog Film",
+                                    "it": "Pellicola analogica",
+                                    "sr": "analogni film"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/voc_24/1552150",
+                                "xmlname": "resource",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "But the subject is contextualised into a cultural desublimation that\nincludes reality as a totality. Debord suggests the use of dialectic\nsituationism to challenge and read culture.",
+                                "xmlname": "comment",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "BearbeiterIn",
+                                    "en": "Adapter",
+                                    "it": "Adattatore"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/voc_3/1557099",
+                                "xmlname": "role",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "children": [
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Rasta",
+                                        "xmlname": "firstname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Blasta",
+                                        "xmlname": "lastname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "ZID, Univie",
+                                        "xmlname": "institution",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/entity"
+                                    }
+                                ],
+                                "datatype": "Node",
+                                "input_type": "node",
+                                "xmlname": "entity",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "datatype": "DateTime",
+                                "input_type": "input_text",
+                                "ui_value": "2000-01-11",
+                                "xmlname": "date_from",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "datatype": "DateTime",
+                                "input_type": "input_text",
+                                "ui_value": "2030-10-23",
+                                "xmlname": "date_to",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "Postmodernism",
+                                "xmlname": "chronological",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "Elswhere",
+                                "xmlname": "location",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "contribute",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                    },
+                    {
+                        "children": [
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "Glasplattendia",
+                                    "en": "Glass Plate Dia",
+                                    "it": "Diapositiva su lastra di vetro",
+                                    "sr": "Staklene plo?e Dia"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/voc_24/1552077",
+                                "xmlname": "resource",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "But the subject is contextualised into a cultural desublimation that\nincludes reality as a totality. \n\nDebord suggests the use of dialectic\nsituationism to challenge and read culture.",
+                                "xmlname": "comment",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "datatype": "Vocabulary",
+                                "input_type": "select",
+                                "labels": {
+                                    "de": "zugeschriebene/r AutorIn",
+                                    "en": "Attributed name",
+                                    "it": "Nome attribuito"
+                                },
+                                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/voc_3/1557128",
+                                "xmlname": "role",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "input_text",
+                                        "ui_value": "0",
+                                        "xmlname": "data_order"
+                                    }
+                                ],
+                                "children": [
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Rasta",
+                                        "xmlname": "firstname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/entity"
+                                    },
+                                    {
+                                        "datatype": "CharacterString",
+                                        "input_type": "input_text",
+                                        "ui_value": "Pasta",
+                                        "xmlname": "lastname",
+                                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/entity"
+                                    }
+                                ],
+                                "datatype": "Node",
+                                "input_type": "node",
+                                "xmlname": "entity",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "datatype": "DateTime",
+                                "input_type": "input_text",
+                                "ui_value": "2012-01-23",
+                                "xmlname": "date_from",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "datatype": "DateTime",
+                                "input_type": "input_text",
+                                "ui_value": "2050-12-11",
+                                "xmlname": "date_to",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "14th century",
+                                "xmlname": "chronological",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            },
+                            {
+                                "attributes": [
+                                    {
+                                        "input_type": "select",
+                                        "ui_value": "en",
+                                        "xmlname": "lang"
+                                    }
+                                ],
+                                "datatype": "LangString",
+                                "input_type": "input_text",
+                                "ui_value": "magreb",
+                                "xmlname": "location",
+                                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                            }
+                        ],
+                        "datatype": "Node",
+                        "input_type": "node",
+                        "xmlname": "contribute",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "provenience",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0"
+            },
+            {
+                "children": [
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "Communications From Elsewhere",
+                        "xmlname": "name_magazine",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "12",
+                        "xmlname": "pagination",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "Postmodernism Generator",
+                        "xmlname": "reihentitel",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "2",
+                        "xmlname": "volume",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "12",
+                        "xmlname": "booklet",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "43",
+                        "xmlname": "from_page",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "66",
+                        "xmlname": "to_page",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "Communications From Elsewhere",
+                        "xmlname": "name_collection",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "Gloggnitz",
+                        "xmlname": "publisherlocation",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "And/Or Press",
+                        "xmlname": "publisher",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "DateTime",
+                        "input_type": "input_text",
+                        "ui_value": "2020-03-27",
+                        "xmlname": "releaseyear",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "33",
+                        "xmlname": "edition",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "attributes": [
+                            {
+                                "input_type": "select",
+                                "ui_value": "en",
+                                "xmlname": "lang"
+                            }
+                        ],
+                        "datatype": "LangString",
+                        "input_type": "input_text",
+                        "ui_value": "Therefore, Werther[9] suggests that we have to choose\nbetween Baudrillardist simulacra and the precapitalist paradigm of context.\nBaudrillard uses the term ‘precultural rationalism’ to denote the stasis, and\neventually the dialectic, of textual sexual identity.",
+                        "xmlname": "release_notes",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "Vocabulary",
+                        "input_type": "select",
+                        "labels": {
+                            "de": "CD",
+                            "en": "CD",
+                            "it": "CD",
+                            "sr": "CD"
+                        },
+                        "ui_value": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0/voc_32/1552130",
+                        "xmlname": "medium",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    },
+                    {
+                        "datatype": "CharacterString",
+                        "input_type": "input_text",
+                        "ui_value": "http://www.elsewhere.org/pomo/",
+                        "xmlname": "alephurl",
+                        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+                    }
+                ],
+                "datatype": "Node",
+                "input_type": "node",
+                "xmlname": "digitalbook",
+                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0"
+            }
         ],
-        "datatype": "Node"
-      },
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-        "xmlname": "lifecycle",
-        "input_type": "node",
-        "children": [
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "2016-08-23T11:53:04.000Z",
-            "xmlname": "upload_date",
-            "input_type": "input_text",
-            "datatype": "DateTime"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_2/44",
-            "xmlname": "status",
-            "input_type": "select",
-            "labels": {
-              "en": "Complete",
-              "it": "Completo",
-              "de": "Fertig",
-              "sr": "kompletno"
-            },
-            "datatype": "Vocabulary"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-            "ui_value": "yes",
-            "xmlname": "peer_reviewed",
-            "input_type": "select",
-            "labels": {
-              "en": "Yes",
-              "it": "SÃ¬",
-              "de": "Ja"
-            },
-            "datatype": "Boolean"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "xmlname": "contribute",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_3/46",
-                "xmlname": "role",
-                "input_type": "select",
-                "labels": {
-                  "en": "Author of the digital object",
-                  "it": "Autore dell'oggetto digitale",
-                  "de": "AutorIn des digitalen Objekts",
-                  "sr": "autor digitalnog objekta"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Jorg J. M.",
-                    "xmlname": "firstname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Massen",
-                    "xmlname": "lastname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "0",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "761",
-                    "xmlname": "institution",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "institution",
-                    "xmlname": "type",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "1",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              }
-            ],
-            "attributes": [
-              {
-                "ui_value": "0",
-                "xmlname": "data_order",
-                "input_type": "input_text"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "xmlname": "contribute",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_3/46",
-                "xmlname": "role",
-                "input_type": "select",
-                "labels": {
-                  "en": "Author of the digital object",
-                  "de": "AutorIn des digitalen Objekts",
-                  "it": "Autore dell'oggetto digitale",
-                  "sr": "autor digitalnog objekta"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Caroline",
-                    "xmlname": "firstname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Ritter",
-                    "xmlname": "lastname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "0",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "761",
-                    "xmlname": "institution",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "institution",
-                    "xmlname": "type",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "1",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              }
-            ],
-            "attributes": [
-              {
-                "ui_value": "1",
-                "xmlname": "data_order",
-                "input_type": "input_text"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "xmlname": "contribute",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_3/46",
-                "xmlname": "role",
-                "input_type": "select",
-                "labels": {
-                  "en": "Author of the digital object",
-                  "de": "AutorIn des digitalen Objekts",
-                  "it": "Autore dell'oggetto digitale",
-                  "sr": "autor digitalnog objekta"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Thomas",
-                    "xmlname": "firstname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Bugnyar",
-                    "xmlname": "lastname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "0",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "761",
-                    "xmlname": "institution",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "institution",
-                    "xmlname": "type",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "1",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              }
-            ],
-            "attributes": [
-              {
-                "ui_value": "2",
-                "xmlname": "data_order",
-                "input_type": "input_text"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "xmlname": "contribute",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_3/1557146",
-                "xmlname": "role",
-                "input_type": "select",
-                "labels": {
-                  "en": "Uploader",
-                  "it": "Uploader",
-                  "de": "Uploader",
-                  "sr": "Uploader"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Institutional",
-                    "xmlname": "firstname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Repository",
-                    "xmlname": "lastname",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "0",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              }
-            ],
-            "attributes": [
-              {
-                "ui_value": "3",
-                "xmlname": "data_order",
-                "input_type": "input_text"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "xmlname": "contribute",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_3/47",
-                "xmlname": "role",
-                "input_type": "select",
-                "labels": {
-                  "en": "Publisher",
-                  "it": "Editore",
-                  "de": "HerausgeberIn",
-                  "sr": "izdava?"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-                "xmlname": "entity",
-                "input_type": "node",
-                "children": [
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "Nature Publishing Group",
-                    "xmlname": "institution",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  },
-                  {
-                    "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity",
-                    "ui_value": "institution",
-                    "xmlname": "type",
-                    "input_type": "input_text",
-                    "datatype": "CharacterString"
-                  }
-                ],
-                "attributes": [
-                  {
-                    "ui_value": "0",
-                    "xmlname": "data_order",
-                    "input_type": "input_text"
-                  }
-                ],
-                "datatype": "Node"
-              }
-            ],
-            "attributes": [
-              {
-                "ui_value": "4",
-                "xmlname": "data_order",
-                "input_type": "input_text"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-            "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_38/1556250",
-            "xmlname": "infoeurepoversion",
-            "input_type": "select",
-            "labels": {
-              "en": "publishedVersion",
-              "it": "publishedVersion",
-              "de": "publishedVersion",
-              "sr": "publishedVersion"
-            },
-            "datatype": "Vocabulary"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-            "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_40/1557088",
-            "xmlname": "metadataqualitycheck",
-            "input_type": "select",
-            "labels": {
-              "en": "ok",
-              "it": "ok",
-              "de": "ok",
-              "sr": "ok"
-            },
-            "datatype": "Vocabulary"
-          }
-        ],
-        "datatype": "Node"
-      },
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-        "xmlname": "technical",
-        "input_type": "node",
-        "children": [
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "application/pdf",
-            "xmlname": "format",
-            "input_type": "input_text",
-            "datatype": "CharacterString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "650007",
-            "xmlname": "size",
-            "input_type": "input_text",
-            "datatype": "FileSize"
-          }
-        ],
-        "datatype": "Node"
-      },
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-        "xmlname": "rights",
-        "input_type": "node",
-        "children": [
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "no",
-            "xmlname": "cost",
-            "input_type": "select",
-            "labels": {
-              "en": "No",
-              "it": "No",
-              "de": "Nein"
-            },
-            "datatype": "Boolean"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "yes",
-            "xmlname": "copyright",
-            "input_type": "select",
-            "labels": {
-              "en": "Yes",
-              "it": "SÃ¬",
-              "de": "Ja"
-            },
-            "datatype": "Boolean"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-            "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/voc_21/16",
-            "xmlname": "license",
-            "input_type": "select",
-            "labels": {
-              "en": "CC BY 4.0 International",
-              "de": "CC BY 4.0 International"
-            },
-            "datatype": "License"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0",
-            "ui_value": "http://phaidra.univie.ac.at/XML/metadata/extended/V1.0/voc_36/1556227",
-            "xmlname": "infoeurepoaccess",
-            "input_type": "select",
-            "labels": {
-              "en": "openAccess",
-              "it": "openAccess",
-              "de": "openAccess",
-              "sr": "openAccess"
-            },
-            "datatype": "Vocabulary"
-          }
-        ],
-        "datatype": "Node"
-      },
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-        "xmlname": "classification",
-        "input_type": "node",
-        "datatype": "Node"
-      },
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0",
-        "xmlname": "organization",
-        "input_type": "node",
-        "children": [
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-            "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552253",
-            "xmlname": "hoschtyp",
-            "input_type": "select",
-            "labels": {
-              "en": "Article",
-              "it": "Articolo",
-              "de": "Artikel in Zeitschrift"
-            },
-            "datatype": "Vocabulary"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-            "xmlname": "orgassignment",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_faculty/A50",
-                "xmlname": "faculty",
-                "input_type": "select",
-                "labels": {
-                  "en": "Faculty of Life Sciences",
-                  "de": "Fakultat fur Lebenswissenschaften"
-                },
-                "datatype": "Faculty"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_department/A761",
-                "xmlname": "department",
-                "input_type": "select",
-                "labels": {
-                  "en": "Department of Cognitive Biology",
-                  "de": "Department fur Kognitionsbiologie"
-                },
-                "datatype": "Department"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-            "xmlname": "orgassignment",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_faculty/A50",
-                "xmlname": "faculty",
-                "input_type": "select",
-                "labels": {
-                  "en": "Faculty of Life Sciences",
-                  "de": "Fakultat fur Lebenswissenschaften"
-                },
-                "datatype": "Faculty"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_department/A761",
-                "xmlname": "department",
-                "input_type": "select",
-                "labels": {
-                  "en": "Department of Cognitive Biology",
-                  "de": "Department fur Kognitionsbiologie"
-                },
-                "datatype": "Department"
-              }
-            ],
-            "datatype": "Node"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-            "xmlname": "orgassignment",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_faculty/A50",
-                "xmlname": "faculty",
-                "input_type": "select",
-                "labels": {
-                  "en": "Faculty of Life Sciences",
-                  "de": "Fakultat fur Lebenswissenschaften"
-                },
-                "datatype": "Faculty"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_department/A761",
-                "xmlname": "department",
-                "input_type": "select",
-                "labels": {
-                  "en": "Department of Cognitive Biology",
-                  "de": "Department fur Kognitionsbiologie"
-                },
-                "datatype": "Department"
-              }
-            ],
-            "datatype": "Node"
-          }
-        ],
-        "datatype": "Node"
-      },
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0",
-        "xmlname": "histkult",
-        "input_type": "node",
-        "children": [
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0",
-            "xmlname": "reference_number",
-            "input_type": "node",
-            "children": [
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0",
-                "ui_value": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0/voc_25/1557094",
-                "xmlname": "reference",
-                "input_type": "select",
-                "labels": {
-                  "en": "Grant Number: Austrian Science Fund (FWF)",
-                  "it": "Grant Number: Austrian Science Fund (FWF)",
-                  "de": "Förderungsnummer: Fonds zur Förderung der wissenschaftlichen Forschung (FWF)",
-                  "sr": "Grant Number: Austrian Science Fund (FWF)"
-                },
-                "datatype": "Vocabulary"
-              },
-              {
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/histkult/V1.0",
-                "ui_value": "M1351-B17",
-                "xmlname": "number",
-                "input_type": "input_text",
-                "datatype": "CharacterString"
-              }
-            ],
-            "datatype": "Node"
-          }
-        ],
-        "datatype": "Node"
-      },
-      {
-        "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0",
-        "xmlname": "digitalbook",
-        "input_type": "node",
-        "children": [
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0",
-            "ui_value": "Scientific Reports",
-            "xmlname": "name_magazine",
-            "input_type": "input_text",
-            "attributes": [
-              {
-                "ui_value": "en",
-                "xmlname": "lang",
-                "input_type": "select"
-              }
-            ],
-            "datatype": "LangString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0",
-            "ui_value": "5",
-            "xmlname": "volume",
-            "input_type": "input_text",
-            "datatype": "CharacterString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0",
-            "ui_value": "15021",
-            "xmlname": "from_page",
-            "input_type": "input_text",
-            "datatype": "CharacterString"
-          },
-          {
-            "xmlns": "http://phaidra.univie.ac.at/XML/metadata/digitalbook/V1.0",
-            "ui_value": "2015",
-            "xmlname": "releaseyear",
-            "input_type": "input_text",
-            "datatype": "DateTime"
-          }
-        ],
-        "datatype": "Node"
-      }
-    ],
       form: {
         sections: []
       },
       members: [],
-      pid: 'o:585891',
+      pid: 'o:588288',
       piddoc: {},
       collection: 'o:724719',
       sampleCollection: 'o:541829',

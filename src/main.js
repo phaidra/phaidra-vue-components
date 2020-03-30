@@ -33,6 +33,26 @@ Vue.filter('date', function (value) {
   }
 })
 
+Vue.filter('datetime', function (value) {
+  if (value) {
+    return moment(String(value)).format('DD.MM.YYYY hh:mm:ss')
+  }
+})
+
+Vue.filter('datetimeutc', function (value) {
+  if (value) {
+    return moment.utc(String(value)).format('DD.MM.YYYY hh:mm:ss')
+  }
+})
+
+Vue.filter('bytes', function (bytes, precision) {
+  if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-'
+  if (typeof precision === 'undefined') precision = 1
+  var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB']
+  var number = Math.floor(Math.log(bytes) / Math.log(1024))
+  return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number]
+})
+
 Vue.filter('truncate', function (text, length, clamp) {
   clamp = clamp || '...'
   length = length || 30
