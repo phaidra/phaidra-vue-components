@@ -430,6 +430,6 @@ export default {
 }
 
 .wiv {
-  font-weight: bold;
+  font-weight: 400;
 }
 </style>

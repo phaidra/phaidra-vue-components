@@ -1,7 +1,7 @@
 <template>
-  <v-card>
-    <v-card-title class="title font-weight-light grey white--text">{{ title ? title : $t('Access rights') }}</v-card-title>
-    <v-divider></v-divider>
+  <v-card :flat="!title">
+    <v-card-title v-if="title" class="title font-weight-light grey white--text">{{ title }}</v-card-title>
+    <v-divider v-if="title"></v-divider>
     <v-card-text class="mt-4">
       <v-container>
         <!--<v-row class="title font-weight-light">{{ $t('Here you can restrict access to this object. Any other objects, like members (if this is a container or a collection), pages (if this is a book) different versions or related objects will not be affected.') }}</v-row>-->
@@ -313,10 +313,7 @@ export default {
       } else {
         type = 'faculty'
       }
-      let notation = 'A' + this.orgunit['skos:notation']
-      if (this.orgunit['skos:notation'] === 0) {
-        notation = 'A-1'
-      }
+      let notation = this.orgunit['skos:notation']
       let description = this.getLocalizedTermLabel('orgunits', this.orgunit['@id'])
       if (!description) {
         description = notation

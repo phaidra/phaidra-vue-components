@@ -4,6 +4,7 @@
     :headers="headers"
     :items="templates"
     :loading="loading"
+    :items-per-page="itemsPerPage"
     class="elevation-1"
   >
     <template v-slot:item.name="{ item }">
@@ -32,6 +33,10 @@ export default {
   props: {
     tag: {
       type: String
+    },
+    itemsPerPage: {
+      type: Number,
+      default: 10
     }
   },
   data () {

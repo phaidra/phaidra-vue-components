@@ -527,7 +527,7 @@
       <v-tab-item>
         <v-row no-gutters>
           <v-col cols="12">
-            <p-m-rights v-on:input-rights="$emit('input-rights', $event)" :rights="rights" :title="$t('Restrict access to uploaded object(s)')" ></p-m-rights>
+            <p-m-rights v-on:input-rights="$emit('input-rights', $event)" :rights="rights" ></p-m-rights>
           </v-col>
         </v-row>
       </v-tab-item>
