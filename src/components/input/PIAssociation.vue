@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col cols="8">
+    <v-col cols="10">
       <v-autocomplete
         :value="getTerm('orgunits', value)"
         :required="required"

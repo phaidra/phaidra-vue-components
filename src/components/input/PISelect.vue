@@ -54,7 +54,7 @@
       </v-col>
     </v-row>
     <v-slide-y-transition hide-on-leave>
-      <v-row no-gutters v-if="showValueDefinition" v-show="value" :class=" hint ? 'mt-2 mb-6' : 'mb-6'">
+      <v-row no-gutters v-if="showValueDefinition" v-show="value && getLocalizedDefinition(vocabulary, value)" :class=" hint ? 'mt-2 mb-6' : 'mb-6'">
         <v-col cols="10">
           <p>{{ getLocalizedDefinition(vocabulary, value) }}</p>
         </v-col>

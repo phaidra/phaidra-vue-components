@@ -29,8 +29,8 @@
             </v-card-text>
           </v-card>
 
-          <v-card v-else-if="(s.type !== 'accessrights')" width="100%">
-            <v-card-title class="title font-weight-light grey white--text">
+          <v-card :flat="!s.title" v-else-if="(s.type !== 'accessrights')" width="100%">
+            <v-card-title v-if="s.title" class="title font-weight-light grey white--text">
               <span v-t="s.title"></span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
@@ -115,6 +115,9 @@
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-select>
+                    <v-col cols="12" v-if="(f.predicate === 'edm:rights') && f.showValueDefinition && license">
+                      <p-d-license-info :license="license"></p-d-license-info>
+                    </v-col>
                   </template>
 
                   <template v-else-if="f.component === 'p-select-text'">
@@ -575,6 +578,7 @@ import PIKeyword from './PIKeyword'
 import PTemplates from '../templates/PTemplates'
 import ObjectFromSearch from '../select/ObjectFromSearch'
 import PMRights from '../management/PMRights'
+import PDLicenseInfo from '../utils/PDLicenseInfo'
 
 export default {
   name: 'p-i-form',
@@ -612,7 +616,8 @@ export default {
     PIUnknownReadonly,
     PTemplates,
     ObjectFromSearch,
-    PMRights
+    PMRights,
+    PDLicenseInfo
   },
   props: {
     form: {
@@ -683,7 +688,8 @@ export default {
       templatename: '',
       previewMember: '',
       searchfieldsinput: '',
-      metadatapreview: {}
+      metadatapreview: {},
+      license: null
     }
   },
   methods: {
@@ -1135,6 +1141,11 @@ export default {
         f['rdfs:label'] = []
         f['skos:notation'] = []
       }
+
+      if (f.predicate === 'edm:rights') {
+        this.license = f.value
+      }
+
       this.$emit('form-input-' + f.component, f)
     },
     roleInput: function (f, event) {

@@ -48,7 +48,11 @@ export const vocabulary = {
     getLocalizedDefinition: function (vocabulary, value) {
       if (vocabulary && value) {
         let item = this.$store.getters.getTerm(vocabulary, value)
-        return item['skos:definition'][this.$i18n.locale] ? item['skos:definition'][this.$i18n.locale] : item['skos:definition']['eng']
+        if (item['skos:definition']) {
+          return item['skos:definition'][this.$i18n.locale] ? item['skos:definition'][this.$i18n.locale] : item['skos:definition']['eng']
+        } else {
+          return false
+        }
       }
     },
     getIDResolverURL: function (exactMatch) {
