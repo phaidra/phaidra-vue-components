@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="form">
-    <v-card>
-      <v-card-title class="font-weight-light grey white--text">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
+    <v-card :outlined="!title">
+      <v-card-title v-if="title" class="font-weight-light grey white--text">{{ $t(title) }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
       <v-card-text>
         <v-tabs v-model="activetab" align-with-title>
           <template v-for="(s, i) in this.form">
@@ -20,8 +20,8 @@
           </template>
         </v-tabs-items>
       </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
+      <v-divider v-if="targetpid"></v-divider>
+      <v-card-actions v-if="targetpid">
         <v-spacer></v-spacer>
         <v-btn @click="save()" :loading="loading" :disabled="loading" color="primary">{{ $t('Save') }}</v-btn>
       </v-card-actions>
@@ -43,6 +43,9 @@ export default {
       type: Array
     },
     targetpid: {
+      type: String
+    },
+    title: {
       type: String
     }
   },

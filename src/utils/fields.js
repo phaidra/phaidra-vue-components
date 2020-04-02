@@ -681,6 +681,7 @@ const fields = [
     component: 'p-text-field',
     multiplicable: true,
     multilingual: true,
+    multiline: true,
     label: 'Supplementary content',
     value: '',
     language: '',
