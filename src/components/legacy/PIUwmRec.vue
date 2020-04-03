@@ -11,6 +11,7 @@
                 :label="ch.labels[alpha2locale]"
                 :readonly="true"
                 outlined
+                :disabled="disabled"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -20,10 +21,12 @@
         <v-col v-if="(ch.datatype === 'ClassificationSource') && (ch.vocabularies)" cols="12">
           <v-select
             :loading="clsLoading"
+            :disabled="disabled"
             v-model="ch.ui_value"
             :items="ch.vocabularies[0].terms"
             :item-value="'uri'"
             :label="ch.labels[alpha2locale]"
+            :error-messages="ch.errorMessages"
             @change="selectHandler(ch, $event)"
             outlined
           >
@@ -38,10 +41,12 @@
         <v-col v-else-if="(ch.datatype === 'Taxon') && (ch.vocabularies)" cols="12">
           <v-select
             :loading="clsLoading"
+            :disabled="disabled"
             v-model="ch.ui_value"
             :items="ch.vocabularies[0].terms"
             :item-value="'uri'"
             :label="ch.labels[alpha2locale]"
+            :error-messages="ch.errorMessages"
             @change="selectHandler(ch, $event)"
             outlined
           >
@@ -59,7 +64,9 @@
               <v-col>
                 <v-text-field
                   v-model="ch.ui_value"
+                  :disabled="disabled"
                   :label="ch.labels[alpha2locale]"
+                  :error-messages="ch.errorMessages"
                   outlined
                   :readonly="readOnly(ch)"
                 ></v-text-field>
@@ -82,18 +89,21 @@
             <v-col cols="12" md="10">
               <v-text-field
                 v-model="ch.ui_value"
+                :disabled="disabled"
                 :label="ch.labels[alpha2locale]"
+                :error-messages="ch.errorMessages"
                 outlined
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="2">
               <v-select
                 v-model="ch.value_lang"
+                :disabled="disabled"
                 :items="languages"
                 :label="$t('Language')"
+                :error-messages="ch.langErrorMessages"
                 outlined
-              >
-              </v-select>
+              ></v-select>
             </v-col>
           </v-row>
         </v-col>
@@ -116,18 +126,21 @@
             <v-col cols="12" md="10">
               <v-textarea
                 v-model="ch.ui_value"
+                :disabled="disabled"
                 :label="ch.labels[alpha2locale]"
+                :error-messages="ch.errorMessages"
                 outlined
               ></v-textarea>
             </v-col>
             <v-col cols="12" md="2">
               <v-select
                 v-model="ch.value_lang"
+                :disabled="disabled"
                 :items="languages"
+                :error-messages="ch.langErrorMessages"
                 :label="$t('Language')"
                 outlined
-              >
-              </v-select>
+              ></v-select>
             </v-col>
           </v-row>
         </v-col>
@@ -151,9 +164,11 @@
               <v-select
                 :loading="(ch.xmlname === 'faculty') ? orgLoading : (ch.xmlname === 'spl') ? splLoading : false"
                 v-model="ch.ui_value"
+                :disabled="disabled"
                 :items="ch.vocabularies[0].terms"
                 :item-value="'uri'"
                 :label="ch.labels[alpha2locale]"
+                :error-messages="ch.errorMessages"
                 @change="selectHandler(ch, $event)"
                 outlined
               >
@@ -186,7 +201,9 @@
               <v-col cols="12">
                 <v-select
                   v-model="ch.ui_value"
+                  :disabled="disabled"
                   :items="languages"
+                  :error-messages="ch.errorMessages"
                   :label="ch.labels[alpha2locale]"
                   outlined
                 >
@@ -213,7 +230,9 @@
             <v-col cols="12">
               <v-text-field
                 v-model="ch.ui_value"
+                :disabled="disabled"
                 :label="ch.labels[alpha2locale]"
+                :error-messages="ch.errorMessages"
                 :hint="'Format YYYY-MM-DD'"
                 :rules="[validationrules.date]"
                 outlined
@@ -240,8 +259,10 @@
             <v-col cols="12">
               <p-i-duration
                 :value="ch.ui_value"
+                :disabled="disabled"
                 v-on:input="ch.ui_value=$event"
                 :label="ch.labels[alpha2locale]"
+                :error-messages="ch.errorMessages"
                 :input-style="'outlined'"
               ></p-i-duration>
             </v-col>
@@ -266,8 +287,10 @@
             <v-col cols="12">
               <v-checkbox
                 v-model="ch.ui_value"
+                :disabled="disabled"
                 :false-value="'no'"
                 :true-value="'yes'"
+                :error-messages="ch.errorMessages"
                 :label="ch.labels[alpha2locale]"
               ></v-checkbox>
             </v-col>
@@ -340,6 +363,9 @@ export default {
     },
     classifications: {
       type: Array
+    },
+    disabled: {
+      type: Boolean
     }
   },
   computed: {
@@ -659,6 +685,8 @@ export default {
               case 'cost':
               case 'copyright':
               case 'purpose':
+              case 'identifier':
+              case 'upload_date':
                 return true
               default:
                 return false 

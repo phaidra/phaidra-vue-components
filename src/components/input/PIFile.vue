@@ -1,6 +1,6 @@
 <template>
   <v-row >
-    <v-col :cols="autoMimetype ? (actions.length ? 10 : 12) : (actions.length ? 6 : 8)">
+    <v-col :cols="!showMimetype ? (actions.length ? 10 : 12) : (actions.length ? 6 : 8)">
       <v-file-input 
         :error-messages="fileErrorMessages" 
         :filled="inputStyle==='filled'"
@@ -10,9 +10,10 @@
         :label="$t(label)"
         :prepend-icon="''"
         :append-icon="'mdi-paperclip'"
+        :disabled="disabled"
       ></v-file-input>
     </v-col>
-    <v-col v-if="!autoMimetype" cols="4">
+    <v-col v-if="showMimetype" cols="4">
       <v-autocomplete
         :value="getTerm('mimetypes', mimetype)"
         v-on:input="$emit('input-mimetype', $event)"
@@ -26,6 +27,7 @@
         :outlined="inputStyle==='outlined'"
         return-object
         clearable
+        :disabled="disabled"
         :error-messages="mimetypeErrorMessages"
       >
         <template slot="item" slot-scope="{ item }">
@@ -82,6 +84,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showMimetype: {
+      type: Boolean,
+      default: true
+    },
     fileErrorMessages: {
       type: Array
     },
@@ -91,6 +97,9 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean
     }
   },
   data () {
