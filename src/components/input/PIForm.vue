@@ -2,7 +2,7 @@
   <v-container fluid v-if="form && form.sections">
     <v-tabs v-model="activetab" align-with-title>
       <v-tab class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
-      <v-tab @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
+      <v-tab v-if="debug" @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
       <v-tab v-if="importing" class="title font-weight-light text-capitalize">{{ $t('Import') }}</v-tab>
       <v-tab v-if="enablerights" class="title font-weight-light text-capitalize">{{ $t('Rights') }}</v-tab>
@@ -514,20 +514,20 @@
         </v-row>
 
       </v-tab-item>
-      <v-tab-item class="pa-3">
+      <v-tab-item v-if="debug" class="pa-3">
         <code>{{ metadatapreview }}</code>
       </v-tab-item>
-      <v-tab-item class="ma-4">
+      <v-tab-item v-if="templating" class="ma-4">
         <p-templates ref="templates" v-on:load-template="loadTemplate($event)"></p-templates>
       </v-tab-item>
-      <v-tab-item>
+      <v-tab-item  v-if="importing">
         <v-row no-gutters>
           <v-col cols="12">
             <object-from-search :title="$t('Import metadata from existing object')" v-on:object-selected="importFromObject($event)"></object-from-search>
           </v-col>
         </v-row>
       </v-tab-item>
-      <v-tab-item>
+      <v-tab-item v-if="enablerights">
         <v-row no-gutters>
           <v-col cols="12">
             <p-m-rights v-on:input-rights="$emit('input-rights', $event)" :rights="rights" ></p-m-rights>
@@ -643,6 +643,10 @@ export default {
       default: true
     },
     importing: {
+      type: Boolean,
+      default: true
+    },
+    debug: {
       type: Boolean,
       default: true
     },

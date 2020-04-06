@@ -567,7 +567,13 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
       ],
       loaded: true
     },
@@ -606,7 +612,14 @@ const state = {
         { '@id': 'https://pid.phaidra.org/vocabulary/A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
         { '@id': 'https://pid.phaidra.org/vocabulary/PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } }
+        { '@id': 'https://pid.phaidra.org/vocabulary/2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
+        
       ],
       loaded: true
     },
