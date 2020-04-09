@@ -24,6 +24,8 @@ const fields = [
     required: true,
     multiplicable: false,
     disabled: true,
+    hidden: false,
+    readonly: true,
     label: 'Resource type',
     value: '',
     'skos:prefLabel': [],

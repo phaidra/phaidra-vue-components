@@ -13,6 +13,7 @@
         :outlined="inputStyle==='outlined'"
         return-object
         clearable
+        :error-messages="roleErrorMessages"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
@@ -36,6 +37,7 @@
             v-on:blur="$emit('input-name',$event.target.value)"
             :filled="inputStyle==='filled'"
             :outlined="inputStyle==='outlined'"
+            :error-messages="nameErrorMessages"
           ></v-text-field>
         </v-col>
       </template>
@@ -47,6 +49,7 @@
             v-on:blur="$emit('input-firstname',$event.target.value)"
             :filled="inputStyle==='filled'"
             :outlined="inputStyle==='outlined'"
+            :error-messages="firstnameErrorMessages"
           ></v-text-field>
         </v-col>
         <v-col cols="3">
@@ -56,6 +59,7 @@
             v-on:blur="$emit('input-lastname',$event.target.value)"
             :filled="inputStyle==='filled'"
             :outlined="inputStyle==='outlined'"
+            :error-messages="lastnameErrorMessages"
           ></v-text-field>
         </v-col>
       </template>
@@ -67,6 +71,7 @@
         v-on:blur="$emit('input-organization',$event.target.value)"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
+        :error-messages="organizationErrorMessages"
       ></v-text-field>
     </v-col>
     <v-col cols="1" v-if="actions.length">
@@ -132,6 +137,21 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    nameErrorMessages: {
+      type: Array
+    },
+    firstnameErrorMessages: {
+      type: Array
+    },
+    lastnameErrorMessages: {
+      type: Array
+    },
+    roleErrorMessages: {
+      type: Array
+    },
+    organizationErrorMessages: {
+      type: Array
     }
   },
   data () {

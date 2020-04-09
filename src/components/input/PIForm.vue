@@ -13,7 +13,7 @@
 
         <v-row v-for="(s) in this.form.sections" :key="s.id" class="ma-3">
 
-          <v-card v-if="s.type === 'resourcelink'" width="100%">
+          <v-card v-if="s.type === 'resourcelink'" width="100%" class="mb-6">
             <v-card-title class="title font-weight-light grey white--text">
               <span>{{s.title}}</span>
               <v-spacer></v-spacer>
@@ -60,7 +60,7 @@
                 </v-list>
               </v-menu>
             </v-card-title>
-            <v-card-text class="mt-4">
+            <v-card-text class="mt-4 pb-0">
 
               <template v-for="(f) in s.fields">
                 <v-row no-gutters :key="f.id">
@@ -433,7 +433,7 @@
                     <p-i-file
                       v-bind.sync="f"
                       v-on:input-file="setFilename(f, $event)"
-                      v-on:input-mimetype="setSelected(f, 'mimetype', $event)"
+                      v-on:input-mimetype="setMimetype(s, f, 'mimetype', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-file>
@@ -491,7 +491,7 @@
           </v-card>
         </v-row>
 
-        <v-row align="center" justify="end"  class="ma-3">
+        <v-row align="center" justify="end"  class="mt-4 mx-3">
           <v-dialog v-if="templating" v-model="templatedialog" width="500">
             <template v-slot:activator="{ on }">
               <v-btn class="mr-3" v-on="on" dark raised :loading="loading" :disabled="loading" color="grey"><span v-t="'Save as template'"></span></v-btn>
@@ -508,9 +508,11 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-btn fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
-          <v-btn v-else-if="targetpid && !floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
-          <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()"><span v-t="'Submit'"></span></v-btn>
+          <template v-if="!disablesave">
+            <v-btn fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
+            <v-btn v-else-if="targetpid && !floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
+            <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()"><span v-t="'Submit'"></span></v-btn>
+          </template>
         </v-row>
 
       </v-tab-item>
@@ -523,7 +525,7 @@
       <v-tab-item  v-if="importing">
         <v-row no-gutters>
           <v-col cols="12">
-            <object-from-search :title="$t('Import metadata from existing object')" v-on:object-selected="importFromObject($event)"></object-from-search>
+            <object-from-search :title="$t('Import metadata from existing object')" v-on:object-selected="importFromObject($event)" :jsonld-only="true"></object-from-search>
           </v-col>
         </v-row>
       </v-tab-item>
@@ -648,7 +650,7 @@ export default {
     },
     debug: {
       type: Boolean,
-      default: true
+      default: false
     },
     enablerights: {
       type: Boolean,
@@ -657,20 +659,29 @@ export default {
     floatingsavebutton: {
       type: Boolean,
       default: false
+    },
+    disablesave: {
+      type: Boolean,
+      default: false
+    },
+    validate: {
+      type: Function,
+      required: true
     }
   },
   computed: {
     submittype: function () {
+      let resourcetype
       for (let s of this.form.sections) {
         if (s.fields && (s.type !== 'member')) {
           for (let field of s.fields) {
             if (field.predicate === 'dcterms:type') {
-              return this.getObjectType(field.value)
+              resourcetype = field.value
             }
           }
         }
       }
-      return null
+      return this.getSubmitType(resourcetype)
     },
     filteredMetadatafields () {
       let list = fields.getEditableFields()
@@ -804,8 +815,8 @@ export default {
         this.templatedialog = false
       }
     },
-    getObjectType: function (contentmodel) {
-      switch (contentmodel) {
+    getSubmitType: function (resourcetype) {
+      switch (resourcetype) {
         case 'https://pid.phaidra.org/vocabulary/44TN-P1S0':
           return 'picture'
         case 'https://pid.phaidra.org/vocabulary/8YB5-1M0J':
@@ -825,6 +836,9 @@ export default {
       }
     },
     submit: async function () {
+      if (!this.validate()) {
+        return
+      }
       this.loading = true
       var httpFormData = new FormData()
 
@@ -889,6 +903,9 @@ export default {
       }
     },
     save: async function () {
+      if (!this.validate()) {
+        return
+      }
       this.loading = true
       var httpFormData = new FormData()
       httpFormData.append('metadata', JSON.stringify(this.getMetadata()))
@@ -1076,17 +1093,61 @@ export default {
         })
       }
     },
+    mimeToResourceType: function (mime) {
+      switch (mime) {
+        case 'image/jpeg':
+        case 'image/tiff':
+        case 'image/gif':
+        case 'image/png':
+        case 'image/x-ms-bmp':
+          // picture
+          return 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
+
+        case 'audio/wav':
+        case 'audio/mpeg':
+        case 'audio/flac':
+        case 'audio/ogg':
+          // audio
+          return 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
+
+        case 'application/pdf':
+          // document
+          return 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
+
+        case 'video/mpeg':
+        case 'video/avi':
+        case 'video/mp4':
+        case 'video/quicktime':
+        case 'video/x-matroska':
+          // video
+          return 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
+
+        default:
+          // data
+          return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
+      }
+    },
+    setMimetype: function (s, f, property, event) {
+      let resourcetype = this.mimeToResourceType(event['@id'])
+      if (s.fields) {
+        for (let field of s.fields) {
+          if (field.predicate === 'dcterms:type') {
+            field.value = resourcetype
+          }
+        }
+      }
+      this.setSelected(f, property, event)
+    },
     setSelected: function (f, property, event) {
       if (event) {
-        f[property] = event['@id']
+        this.$set(f, property, event['@id'])
       }
       this.$emit('form-input-' + f.component, f)
       // eg on
       // v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
-      // the identifierType property of the component should be updated via
+      // the type property of the component should be updated, but
       // v-bind.sync="f"
-      // because we changed f in this method
-      // but it seems to not work lately....
+      // does not work, probably because the update is too deep (form -> field -> property)
       this.$forceUpdate()
     },
     updateSubject: function (f, event) {
@@ -1211,5 +1272,9 @@ export default {
 
 .prewrap {
   white-space: pre-wrap;
+}
+
+.v-input__control {
+  font-weight: 400;
 }
 </style>

@@ -537,6 +537,18 @@ const state = {
       ],
       loaded: true
     },
+    'resourcetypenocontainer': {
+      terms: [
+        { '@id': 'https://pid.phaidra.org/vocabulary/44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
+        { '@id': 'https://pid.phaidra.org/vocabulary/T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
+      ],
+      loaded: true
+    },
     'genre': {
       terms: [
         { '@id': 'https://pid.phaidra.org/vocabulary/9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },

@@ -58,6 +58,10 @@ export default {
   props: {
     title: {
       type: String
+    },
+    jsonldOnly: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -112,6 +116,9 @@ export default {
       }
       if (this.ownerFilter) {
         params.fq.push('owner:' + this.$store.state.user.username)
+      }
+      if (this.jsonldOnly) {
+        params.fq.push('datastreams:"JSON-LD"')
       }
       try {
         let response = await this.$http.request({

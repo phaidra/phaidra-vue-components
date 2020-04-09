@@ -1133,8 +1133,8 @@ export default {
       if (key === 'dcterms:subject') {
         levels['subject'] = []
         for (i = 0; i < value.length; i++) {
-          if (obj['@type'] === 'phaidra:Subject') {
-            var subcomp = this.json2components(obj, options)
+          if (value['@type'] === 'phaidra:Subject') {
+            var subcomp = this.json2components(value, options)
             if (subcomp.length > 0) {
               levels.subject.push({ components: subcomp })
             }

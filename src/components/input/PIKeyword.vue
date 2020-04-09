@@ -20,6 +20,7 @@
         deletable-chips
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
+        :error-messages="errorMessages"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
@@ -99,6 +100,9 @@ export default {
     value: {
       type: Array,
       required: true
+    },
+    errorMessages: {
+      type: Array
     },
     language: {
       type: String

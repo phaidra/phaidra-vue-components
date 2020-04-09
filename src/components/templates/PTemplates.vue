@@ -37,6 +37,10 @@ export default {
     itemsPerPage: {
       type: Number,
       default: 10
+    },
+    idOnly: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -53,6 +57,10 @@ export default {
   },
   methods: {
     loadTemplate: async function (tid) {
+      if (this.idOnly) {
+        this.$emit('load-template', tid)
+        return
+      }
       this.loading = true
       try {
         let response = await this.$http.request({

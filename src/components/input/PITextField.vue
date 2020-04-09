@@ -9,6 +9,7 @@
         :rules="required ? [ v => !!v || 'Required'] : []"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
+        :error-messages="errorMessages"
       ></v-text-field>
       <v-textarea v-if="multiline"
         :value="value"
@@ -18,6 +19,7 @@
         :rules="required ? [ v => !!v || 'Required'] : []"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
+        :error-messages="errorMessages"
       ></v-textarea>
     </v-col>
     <v-col cols="12" md="2" v-if="multilingual">
@@ -75,6 +77,9 @@ export default {
     value: {
       type: String,
       required: true
+    },
+    errorMessages: {
+      type: Array
     },
     language: {
       type: String

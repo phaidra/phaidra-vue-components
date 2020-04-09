@@ -172,6 +172,7 @@
                     <p-i-form
                       :form="editform"
                       :targetpid="this.pid"
+                      :validate="validate"
                       v-on:object-saved="objectSaved($event)"
                       v-on:load-form="form = $event"
                     ></p-i-form>
@@ -197,6 +198,7 @@
                       :form="form"
                       :rights="submitRights"
                       :enablerights="true"
+                      :validate="validate"
                       v-on:object-created="objectCreated($event)"
                       v-on:load-form="form = $event"
                       v-on:form-input-p-select="handleSelect($event)"
@@ -2187,6 +2189,9 @@ export default {
     }
   },
   methods: {
+    validate: function () {
+      return true
+    },
     getResourceTypeFromMimeType: function (mime) {
       switch (mime) {
         case 'image/jpeg':
