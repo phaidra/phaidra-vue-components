@@ -1391,8 +1391,7 @@ export default {
       if (f.organizationType === 'select') {
         h['schema:name'] = f.organizationSelectedName
         h['skos:exactMatch'] = [ f.organization ]
-      }
-      if (f.organizationType === 'other') {
+      } else {
         if (f.organizationText) {
           h['schema:name'] = [
             {
@@ -1912,7 +1911,7 @@ export default {
           break
 
         case 'role':
-          if (f.role && (f.firstname || f.lastname || f.name || f.organizationSelectedName || f.identifierText)) {
+          if (f.role && (f.firstname || f.lastname || f.name || f.organizationSelectedName || f.organizationText || f.identifierText)) {
             this.push_object(jsonld, f.role, this.get_json_role(f))
           }
           break

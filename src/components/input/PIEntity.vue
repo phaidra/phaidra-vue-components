@@ -66,7 +66,7 @@
     </template>
     <v-col cols="6" v-if="type === 'schema:Organization'">
       <v-text-field
-        :value="organization"
+        :value="organizationText"
         :label="$t( organizationLabel ? organizationLabel : 'Organization' )"
         v-on:blur="$emit('input-organization',$event.target.value)"
         :filled="inputStyle==='filled'"
@@ -108,7 +108,7 @@ export default {
     name: {
       type: String
     },
-    organization: {
+    organizationText: {
       type: String
     },
     organizationLabel: {
