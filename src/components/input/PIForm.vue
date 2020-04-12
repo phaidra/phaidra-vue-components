@@ -108,6 +108,20 @@
                     ></p-i-title>
                   </template>
 
+                  <template v-else-if="f.component === 'p-resource-type-buttongroup'">
+                    <p-i-resource-type 
+                      v-bind.sync="f"
+                      v-on:input="selectInput(f, $event)"
+                    ></p-i-resource-type>
+                  </template>
+
+                  <template v-else-if="f.component === 'p-object-type-checkboxes'">
+                    <p-i-object-type 
+                      v-bind.sync="f"
+                      v-on:input="selectInput(f, $event)"
+                    ></p-i-object-type>
+                  </template>
+
                   <template v-else-if="f.component === 'p-select'">
                     <p-i-select
                       v-bind.sync="f"
@@ -433,7 +447,7 @@
                     <p-i-file
                       v-bind.sync="f"
                       v-on:input-file="setFilename(f, $event)"
-                      v-on:input-mimetype="setMimetype(s, f, 'mimetype', $event)"
+                      v-on:input-mimetype="setMimetype(f, 'mimetype', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-file>
@@ -581,6 +595,8 @@ import PTemplates from '../templates/PTemplates'
 import ObjectFromSearch from '../select/ObjectFromSearch'
 import PMRights from '../management/PMRights'
 import PDLicenseInfo from '../utils/PDLicenseInfo'
+import PIObjectType from './PIObjectType'
+import PIResourceType from './PIResourceType'
 
 export default {
   name: 'p-i-form',
@@ -619,7 +635,9 @@ export default {
     PTemplates,
     ObjectFromSearch,
     PMRights,
-    PDLicenseInfo
+    PDLicenseInfo,
+    PIObjectType,
+    PIResourceType
   },
   props: {
     form: {
@@ -661,6 +679,10 @@ export default {
       default: false
     },
     disablesave: {
+      type: Boolean,
+      default: false
+    },
+    toggleResourcetype: {
       type: Boolean,
       default: false
     },
@@ -1127,15 +1149,9 @@ export default {
           return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
       }
     },
-    setMimetype: function (s, f, property, event) {
+    setMimetype: function (f, property, event) {
       let resourcetype = this.mimeToResourceType(event['@id'])
-      if (s.fields) {
-        for (let field of s.fields) {
-          if (field.predicate === 'dcterms:type') {
-            field.value = resourcetype
-          }
-        }
-      }
+      this.handleResourceTypeChange(resourcetype)
       this.setSelected(f, property, event)
     },
     setSelected: function (f, property, event) {
@@ -1209,6 +1225,21 @@ export default {
 
       if (f.predicate === 'edm:rights') {
         this.license = f.value
+      }
+
+      if (f.predicate === 'dcterms:type') {
+        // set resourceType property of 'object type' field
+        // so that it can filter terms from object types vocab
+        for (let s of this.form.sections) {
+          if (s.fields && (s.type !== 'member')) {
+            for (let field of s.fields) {
+              if (field.predicate === 'edm:hasType') {
+                field.resourceType = f.value
+              }
+            }
+          }
+        }
+        this.$emit('form-input-resource-type', f.value)
       }
 
       this.$emit('form-input-' + f.component, f)

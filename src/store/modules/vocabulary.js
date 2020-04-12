@@ -8,6 +8,49 @@ const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
   return ret;
 }, {})
 
+const ot4rt = {
+  // image
+  'https://pid.phaidra.org/vocabulary/44TN-P1S0': [
+    // drawing
+    'https://pid.phaidra.org/vocabulary/85QM-7TZ3',
+    // painting
+    'https://pid.phaidra.org/vocabulary/WWS3-0ACP',
+    // print
+    'https://pid.phaidra.org/vocabulary/7WYH-AZ8C',
+    // wallchart
+    'https://pid.phaidra.org/vocabulary/QM0R-ZTAA'
+  ],
+  // text
+  'https://pid.phaidra.org/vocabulary/69ZZ-2KGX': [
+
+  ],
+  // collection
+  'https://pid.phaidra.org/vocabulary/GXS7-ENXJ': [
+
+  ],
+  // video
+  'https://pid.phaidra.org/vocabulary/B0Y6-GYT8': [
+
+  ],
+  // data
+  'https://pid.phaidra.org/vocabulary/7AVS-Y482': [
+
+  ],
+  // sound
+  'https://pid.phaidra.org/vocabulary/8YB5-1M0J': [
+    // interview
+    'https://pid.phaidra.org/vocabulary/8KGA-CH97',
+    // music album
+    'https://pid.phaidra.org/vocabulary/M789-K5E0',
+    // music album
+    'https://pid.phaidra.org/vocabulary/EWZ9-3MPH'
+  ],
+  // resource
+  'https://pid.phaidra.org/vocabulary/T8GH-F4V8': [
+
+  ]
+}
+
 const state = {
   vocabularies: {
     'pool': {
@@ -1104,6 +1147,17 @@ const getters = {
         return terms[i][prop]
       }
     }
+  },
+  getObjectTypeForResourceType: (state) => (rtId) => {
+    let arr = []
+    for (let otId of ot4rt[rtId]) {
+      for (let term of state.vocabularies['objecttype'].terms) {
+        if (term['@id'] === otId) {
+          arr.push(term)
+        }
+      }
+    }
+    return arr
   }
 }
 

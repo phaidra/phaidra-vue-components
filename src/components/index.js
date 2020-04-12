@@ -54,6 +54,8 @@ import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
 import PISpatialReadonly from './input/PISpatialReadonly'
 import PILiteral from './input/PILiteral'
 import PIKeyword from './input/PIKeyword'
+import PIObjectType from './input/PIObjectType'
+import PIResourceType from './input/PIResourceType'
 import PSearch from './search/PSearch'
 import PMDelete from './management/PMDelete'
 import PMSort from './management/PMSort'
@@ -122,6 +124,8 @@ const Components = {
   PISpatialReadonly,
   PILiteral,
   PIKeyword,
+  PIObjectType,
+  PIResourceType,
   PIDuration,
   PSearch,
   PMDelete,
