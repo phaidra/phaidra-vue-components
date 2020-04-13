@@ -40,8 +40,8 @@ export default {
       toggleResourcetypeModelArr: [
         'https://pid.phaidra.org/vocabulary/44TN-P1S0',
         'https://pid.phaidra.org/vocabulary/8YB5-1M0J',
-        'https://pid.phaidra.org/vocabulary/69ZZ-2KGX',
         'https://pid.phaidra.org/vocabulary/B0Y6-GYT8',
+        'https://pid.phaidra.org/vocabulary/69ZZ-2KGX',
         'https://pid.phaidra.org/vocabulary/7AVS-Y482',
         'https://pid.phaidra.org/vocabulary/GXS7-ENXJ',
         'https://pid.phaidra.org/vocabulary/T8GH-F4V8'

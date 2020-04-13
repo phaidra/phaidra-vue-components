@@ -1880,6 +1880,16 @@ export default {
           }
           break
 
+        case 'edm:hasType':
+          if (Array.isArray(f.value)) {
+            for (let ot of f.value) {
+              this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+            }
+          } else {
+            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+          }
+          break
+
         case 'dcterms:type':
         case 'edm:hasType':
         case 'schema:genre':

@@ -6,6 +6,8 @@
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
       <v-tab v-if="importing" class="title font-weight-light text-capitalize">{{ $t('Import') }}</v-tab>
       <v-tab v-if="enablerights" class="title font-weight-light text-capitalize">{{ $t('Rights') }}</v-tab>
+      <v-tab v-if="help" class="title font-weight-light text-capitalize">{{ $t('Help') }}</v-tab>
+      <v-tab v-if="feedback" class="title font-weight-light text-capitalize">{{ $t('Feedback') }}</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="activetab">
@@ -118,7 +120,7 @@
                   <template v-else-if="f.component === 'p-object-type-checkboxes'">
                     <p-i-object-type 
                       v-bind.sync="f"
-                      v-on:input="selectInput(f, $event)"
+                      v-on:input="f.value = $event"
                     ></p-i-object-type>
                   </template>
 
@@ -550,6 +552,12 @@
           </v-col>
         </v-row>
       </v-tab-item>
+      <v-tab-item v-if="help" class="pa-3">
+        <p-help :url="'google.com'"></p-help>
+      </v-tab-item>
+      <v-tab-item v-if="feedback" class="pa-3">
+        <p-feedback :firstname="feedbackUser.firstname" :lastname="feedbackUser.lastname" :email="feedbackUser.email"></p-feedback>
+      </v-tab-item>
     </v-tabs-items>
 
   </v-container>
@@ -597,6 +605,8 @@ import PMRights from '../management/PMRights'
 import PDLicenseInfo from '../utils/PDLicenseInfo'
 import PIObjectType from './PIObjectType'
 import PIResourceType from './PIResourceType'
+import PFeedback from '../utils/PFeedback'
+import PHelp from '../utils/PHelp'
 
 export default {
   name: 'p-i-form',
@@ -637,7 +647,8 @@ export default {
     PMRights,
     PDLicenseInfo,
     PIObjectType,
-    PIResourceType
+    PIResourceType,
+    PHelp
   },
   props: {
     form: {
@@ -689,6 +700,17 @@ export default {
     validate: {
       type: Function,
       required: true
+    },
+    help: {
+      type: Boolean,
+      default: false
+    },
+    feedback: {
+      type: Boolean,
+      default: false
+    },
+    feedbackUser: {
+      type: Object
     }
   },
   computed: {

@@ -1,9 +1,14 @@
 <template>
-  <v-row>
-    <v-col cols="12" md="4" v-for="(term, i) in terms" :key="'ot'+i">
-      <v-checkbox v-model="selected" @click.capture="$emit('input', selected)" :label="getLocalizedTermLabel(vocabulary, term['@id'])" :value="term['@id']"></v-checkbox>
-    </v-col>
-  </v-row>
+  <div>
+    <v-alert :value="errorMessages.length > 0" dismissible type="error" transition="slide-y-transition">
+      <span v-for="(em, i) in errorMessages" :key="'em'+i">{{ em }}<br/></span>
+    </v-alert>
+    <v-row no-gutters>
+      <v-col cols="12" md="4" v-for="(term, i) in terms" :key="'ot'+i">
+        <v-checkbox class="mt-0 check" v-model="selected" @click.capture="$emit('input', selected)" :label="getLocalizedTermLabel(vocabulary, term['@id'])" :value="term['@id']"></v-checkbox>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -13,9 +18,6 @@ export default {
   name: 'p-i-object-type',
   mixins: [vocabulary],
   props: {
-    value: {
-      type: String
-    },
     label: {
       type: String,
       required: true
@@ -26,6 +28,14 @@ export default {
     },
     resourceType: {
       type: String
+    },
+    errorMessages: {
+      type: Array
+    }
+  },
+  watch: {
+    resourceType (val) {
+      this.selected = []
     }
   },
   computed: {
@@ -37,7 +47,15 @@ export default {
     return {
       selected: []
     }
+  },
+  mounted: function () {
+    this.$store.getters.getObjectTypeForResourceType(this.resourceType)
   }
 }
 </script>
 
+<style scoped>
+.check {
+  min-width: 180px;
+}
+</style>

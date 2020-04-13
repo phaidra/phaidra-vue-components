@@ -67,6 +67,7 @@ import PTemplates from './templates/PTemplates'
 import PLists from './lists/PLists'
 import PIFormUwm from './legacy/PIFormUwm'
 import PDUwmRec from './legacy/PDUwmRec'
+import PFeedback from './utils/PFeedback'
 
 const Components = {
   PImg,
@@ -137,7 +138,8 @@ const Components = {
   PTemplates,
   PLists,
   PIFormUwm,
-  PDUwmRec
+  PDUwmRec,
+  PFeedback
 }
 
 export default {

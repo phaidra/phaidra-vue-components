@@ -8,46 +8,178 @@ const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
   return ret;
 }, {})
 
+const ns = 'https://pid.phaidra.org/vocabulary/'
+
 const ot4rt = {
   // image
   'https://pid.phaidra.org/vocabulary/44TN-P1S0': [
     // drawing
-    'https://pid.phaidra.org/vocabulary/85QM-7TZ3',
+    ns + '85QM-7TZ3',
     // painting
-    'https://pid.phaidra.org/vocabulary/WWS3-0ACP',
+    ns + 'WWS3-0ACP',
     // print
-    'https://pid.phaidra.org/vocabulary/7WYH-AZ8C',
-    // wallchart
-    'https://pid.phaidra.org/vocabulary/QM0R-ZTAA'
+    ns + '7WYH-AZ8C',
+    // wall chart
+    ns + 'QM0R-ZTAA',
+    // score
+    ns + 'XTVH-3MG3',
+    // arrangement (music)
+    ns + '2WRQ-GSE9',
+    // musical notation
+    ns + '8A6X-FKB1',
+    // cartographic material
+    ns + '62RJ-SFV2',
+    // atlas
+    ns + '9J46-2X9E',
+    // map
+    ns + 'A52A-CWMM',
+    // newspaper
+    ns + 'DCHD-W3GM',
+    // newspaper article
+    ns + 'CJJG-VKRQ',
+    // magazine
+    ns + 'EHPQ-XYA3',
+    // photograph
+    ns + '7CAB-P987',
+    // negative
+    ns + '9W35-5Q94',
+    // postcard
+    ns + 'Q4Q5-3554',
+    // poster
+    ns + '6EFK-BRQD',
+    // letter
+    ns + 'GBWA-JJP8',
+    // manuscript
+    ns + 'KMRH-NFR9',
+    // cultural artifact
+    ns + 'CPVB-YXG6',
+    // slide (Diapositiv)
+    ns + '431H-5YSA',
+    // learning object
+    ns + 'YA8R-1M0D',
+    // diary
+    ns + 'A9K1-3WQA',
+    // cover
+    ns + 'CEET-8C4S',
+    // album cover
+    ns + '985A-GCQJ',
+    // sculpture
+    ns + '21HZ-XP29',
+    // yearbook
+    ns + 'HARH-6R3C',
+    // other
+    ns + 'PYRE-RAWJ'
   ],
   // text
   'https://pid.phaidra.org/vocabulary/69ZZ-2KGX': [
-
-  ],
-  // collection
-  'https://pid.phaidra.org/vocabulary/GXS7-ENXJ': [
-
+    // print
+    ns + '7WYH-AZ8C',
+    // interview
+    ns + '8KGA-CH97',
+    // score
+    ns + 'XTVH-3MG3',
+    // musical notation
+    ns + '8A6X-FKB1',
+    // periodical
+    ns + 'GY3Z-50FT',
+    // newspaper
+    ns + 'DCHD-W3GM',
+    // newspaper article
+    ns + 'CJJG-VKRQ',
+    // magazine
+    ns + 'EHPQ-XYA3',
+    // postcard
+    ns + 'Q4Q5-3554',
+    // poster
+    ns + '6EFK-BRQD',
+    // letter (correspondence)
+    ns + 'GBWA-JJP8',
+    // slide
+    ns + '431H-5YSA',
+    // report part
+    ns + 'PHQ7-BGFA',
+    // internal report
+    ns + 'QXRQ-Z2PJ',
+    // other type of report
+    ns + '6QRG-9GN2',
+    // policy report
+    ns + 'XWWK-533P',
+    // project deliverable
+    ns + 'T8PK-GADB',
+    // data management plan
+    ns + 'W2Z3-3YA6',
+    // report to funding agency
+    ns + 'APV5-CJSF',
+    // research report
+    ns + '7J0J-HC61',
+    // research software
+    ns + 'VM3E-HXE6',
+    // memorandum
+    ns + 'MCN9-1NSA',
+    // book review
+    ns + 'VP4W-DQ1P',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // annual report
+    ns + '8EBX-CA9X',
+    // questionnaire
+    ns + 'MZ2Q-R099',
+    // learning object
+    ns + 'YA8R-1M0D',
+    // diary
+    ns + 'A9K1-3WQA',
+    // conference object
+    ns + 'QKDF-E5HA',
+    // yearbook
+    ns + 'HARH-6R3C',
+    // other
+    ns + 'PYRE-RAWJ'
   ],
   // video
   'https://pid.phaidra.org/vocabulary/B0Y6-GYT8': [
-
+    // interview
+    ns + '8KGA-CH97',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // learning object
+    ns + 'YA8R-1M0D',
+    // podcast
+    ns + 'JF85-NYRJ',
+    // other
+    ns + 'PYRE-RAWJ'
   ],
   // data
   'https://pid.phaidra.org/vocabulary/7AVS-Y482': [
-
+    // questionnaire
+    ns + 'MZ2Q-R099',
+    // learning object
+    ns + 'YA8R-1M0D',
+    // other
+    ns + 'PYRE-RAWJ'
   ],
   // sound
   'https://pid.phaidra.org/vocabulary/8YB5-1M0J': [
     // interview
-    'https://pid.phaidra.org/vocabulary/8KGA-CH97',
+    ns + '8KGA-CH97',
     // music album
-    'https://pid.phaidra.org/vocabulary/M789-K5E0',
+    ns + 'M789-K5E0',
     // music album
-    'https://pid.phaidra.org/vocabulary/EWZ9-3MPH'
+    ns + 'EWZ9-3MPH',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // learning object
+    ns + 'YA8R-1M0D',
+    // podcast
+    ns + 'JF85-NYRJ',
+    // other
+    ns + 'PYRE-RAWJ'
   ],
   // resource
   'https://pid.phaidra.org/vocabulary/T8GH-F4V8': [
-
+    // learning object
+    ns + 'YA8R-1M0D',
+    // other
+    ns + 'PYRE-RAWJ'
   ]
 }
 
@@ -559,406 +691,404 @@ const state = {
     },
     'carriertype': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/2FTX-ZPZV', 'skos:prefLabel': { 'eng': 'ADAT' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/A3BG-65F5', 'skos:prefLabel': { 'eng': 'CD' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/4CQF-7HHF', 'skos:prefLabel': { 'eng': 'DAT' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/HXSS-NBZ4', 'skos:prefLabel': { 'eng': 'audiocassette' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/X627-FCV9', 'skos:prefLabel': { 'eng': 'tape' } }
+        { '@id': ns + '2FTX-ZPZV', 'skos:prefLabel': { 'eng': 'ADAT' } },
+        { '@id': ns + 'A3BG-65F5', 'skos:prefLabel': { 'eng': 'CD' } },
+        { '@id': ns + '4CQF-7HHF', 'skos:prefLabel': { 'eng': 'DAT' } },
+        { '@id': ns + 'HXSS-NBZ4', 'skos:prefLabel': { 'eng': 'audiocassette' } },
+        { '@id': ns + 'X627-FCV9', 'skos:prefLabel': { 'eng': 'tape' } }
       ],
       loaded: true
     },
     'resourcetype': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8MY0-BQDQ', 'skos:prefLabel': { 'eng': 'container' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
+        { '@id': ns + '44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
+        { '@id': ns + '69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
+        { '@id': ns + 'GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
+        { '@id': ns + 'B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
+        { '@id': ns + '7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
+        { '@id': ns + '8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
+        { '@id': ns + '8MY0-BQDQ', 'skos:prefLabel': { 'eng': 'container' } },
+        { '@id': ns + 'T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
       ],
       loaded: true
     },
     'resourcetypenocontainer': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
+        { '@id': ns + '44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
+        { '@id': ns + '69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
+        { '@id': ns + 'GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
+        { '@id': ns + 'B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
+        { '@id': ns + '7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
+        { '@id': ns + '8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
+        { '@id': ns + 'T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
       ],
       loaded: true
     },
     'genre': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7RZF-5216', 'skos:prefLabel': { 'eng': 'musical' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
+        { '@id': ns + '9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
+        { '@id': ns + 'P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
+        { '@id': ns + '1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
+        { '@id': ns + 'ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
+        { '@id': ns + '9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
+        { '@id': ns + 'H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } },
+        { '@id': ns + 'QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
+        { '@id': ns + '31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
+        { '@id': ns + 'DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
+        { '@id': ns + 'MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion' } },
+        { '@id': ns + 'WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film' } },
+        { '@id': ns + 'XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama' } },
+        { '@id': ns + 'GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy' } },
+        { '@id': ns + 'KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film' } },
+        { '@id': ns + 'MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film' } },
+        { '@id': ns + 'G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror' } },
+        { '@id': ns + 'GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy' } },
+        { '@id': ns + 'NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime' } },
+        { '@id': ns + 'BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film' } },
+        { '@id': ns + 'AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film' } },
+        { '@id': ns + '7RZF-5216', 'skos:prefLabel': { 'eng': 'musical' } },
+        { '@id': ns + 'A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast' } },
+        { '@id': ns + 'B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance' } },
+        { '@id': ns + 'XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire' } },
+        { '@id': ns + 'YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction' } },
+        { '@id': ns + 'A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
+        { '@id': ns + '1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
+        { '@id': ns + 'PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
+        { '@id': ns + '2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
+        { '@id': ns + 'G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
+        { '@id': ns + 'W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
+        { '@id': ns + 'QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
+        { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
+        { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
+        { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
       ],
       loaded: true
     },
     'thesisgenre': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } }
+        { '@id': ns + '9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
+        { '@id': ns + 'P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
+        { '@id': ns + '1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
+        { '@id': ns + 'ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
+        { '@id': ns + '9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
+        { '@id': ns + 'H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } }
       ],
       loaded: true
     },
     'moviegenre': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7RZF-5216', 'skos:prefLabel': { 'eng': 'musical' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
+        { '@id': ns + 'QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
+        { '@id': ns + '31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
+        { '@id': ns + 'DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
+        { '@id': ns + 'MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion' } },
+        { '@id': ns + 'WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film' } },
+        { '@id': ns + 'XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama' } },
+        { '@id': ns + 'GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy' } },
+        { '@id': ns + 'KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film' } },
+        { '@id': ns + 'MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film' } },
+        { '@id': ns + 'G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror' } },
+        { '@id': ns + 'GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy' } },
+        { '@id': ns + 'NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime' } },
+        { '@id': ns + 'BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film' } },
+        { '@id': ns + 'AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film' } },
+        { '@id': ns + '7RZF-5216', 'skos:prefLabel': { 'eng': 'musical' } },
+        { '@id': ns + 'A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast' } },
+        { '@id': ns + 'B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance' } },
+        { '@id': ns + 'XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire' } },
+        { '@id': ns + 'YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction' } },
+        { '@id': ns + 'A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
+        { '@id': ns + '1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
+        { '@id': ns + 'PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
+        { '@id': ns + '2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
+        { '@id': ns + 'G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
+        { '@id': ns + 'W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
+        { '@id': ns + 'QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
+        { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
+        { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
+        { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
         
       ],
       loaded: true
     },
     'objecttype': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/985A-GCQJ', 'skos:prefLabel': { 'eng': 'album cover', 'deu': 'Albumcover' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation', 'deu': 'Anmerkung' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8EBX-CA9X', 'skos:prefLabel': { 'eng': 'annual report', 'deu': 'Jahresbericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2WRQ-GSE9', 'skos:prefLabel': { 'eng': 'arrangement (music)', 'deu': 'Arrangement (Musik)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9J46-2X9E', 'skos:prefLabel': { 'eng': 'atlas', 'deu': 'Atlas' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/47QB-8QF1', 'skos:prefLabel': { 'eng': 'book', 'deu': 'Buch' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XA52-09WA', 'skos:prefLabel': { 'eng': 'book part', 'deu': 'Buchkapitel' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/VP4W-DQ1P', 'skos:prefLabel': { 'eng': 'book review', 'deu': 'Buchrezension' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/62RJ-SFV2', 'skos:prefLabel': { 'eng': 'cartographic material', 'deu': 'kartographisches Material' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QKDF-E5HA', 'skos:prefLabel': { 'eng': 'conference object', 'deu': 'Konferenzveröffentlichung' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MF25-FDGW', 'skos:prefLabel': { 'eng': 'contribution to journal', 'deu': 'Zeitschriftenbeitrag' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/CEET-8C4S', 'skos:prefLabel': { 'eng': 'cover', 'deu': 'Abdeckung' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/CPVB-YXG6', 'skos:prefLabel': { 'eng': 'cultural artifact', 'deu': 'Kulturartefakt' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/W2Z3-3YA6', 'skos:prefLabel': { 'eng': 'data management plan', 'deu': 'Datenmanagementplan' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset', 'deu': 'Dataset' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/A9K1-3WQA', 'skos:prefLabel': { 'eng': 'diary', 'deu': 'Tagebuch' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/85QM-7TZ3', 'skos:prefLabel': { 'eng': 'drawing', 'deu': 'Zeichnung' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QXRQ-Z2PJ', 'skos:prefLabel': { 'eng': 'internal report', 'deu': 'interner Bericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8KGA-CH97', 'skos:prefLabel': { 'eng': 'interview', 'deu': 'Interview' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article', 'deu': 'Wissenschaftlicher Artikel' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/YA8R-1M0D', 'skos:prefLabel': { 'eng': 'learning object', 'deu': 'Lernobjekt' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture', 'deu': 'Vortrag' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GBWA-JJP8', 'skos:prefLabel': { 'eng': 'letter (correspondence)', 'deu': 'Brief' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EHPQ-XYA3', 'skos:prefLabel': { 'eng': 'magazine', 'deu': 'Informationszeitschrift' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KMRH-NFR9', 'skos:prefLabel': { 'eng': 'manuscript', 'deu': 'Manuskript' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/A52A-CWMM', 'skos:prefLabel': { 'eng': 'map', 'deu': 'Karte' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MCN9-1NSA', 'skos:prefLabel': { 'eng': 'memorandum', 'deu': 'Memorandum' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/M789-K5E0', 'skos:prefLabel': { 'eng': 'music album', 'deu': 'Musikalbum' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EWZ9-3MPH', 'skos:prefLabel': { 'eng': 'musical composition', 'deu': 'musikalische Komposition' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8A6X-FKB1', 'skos:prefLabel': { 'eng': 'musical notation', 'deu': 'Musiknotation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9W35-5Q94', 'skos:prefLabel': { 'eng': 'negative', 'deu': 'Negativ' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DCHD-W3GM', 'skos:prefLabel': { 'eng': 'newspaper', 'deu': 'Zeitung' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/CJJG-VKRQ', 'skos:prefLabel': { 'eng': 'newspaper article', 'deu': 'Zeitungsartikel' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other', 'deu': 'sonstige' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/6QRG-9GN2', 'skos:prefLabel': { 'eng': 'other type of report', 'deu': 'Sonstiger Bericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/WWS3-0ACP', 'skos:prefLabel': { 'eng': 'painting', 'deu': 'Malerei' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GY3Z-50FT', 'skos:prefLabel': { 'eng': 'periodical', 'deu': 'Periodikum' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7CAB-P987', 'skos:prefLabel': { 'eng': 'photograph', 'deu': 'Fotografie' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/R4W3-ZQ76', 'skos:prefLabel': { 'eng': 'picture', 'deu': 'Bild' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JF85-NYRJ', 'skos:prefLabel': { 'eng': 'podcast', 'deu': 'Podcast' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XWWK-533P', 'skos:prefLabel': { 'eng': 'policy report', 'deu': 'politischer Bericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/Q4Q5-3554', 'skos:prefLabel': { 'eng': 'postcard', 'deu': 'Postkarte' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/6EFK-BRQD', 'skos:prefLabel': { 'eng': 'poster', 'deu': 'Plakat' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T023-BGTD', 'skos:prefLabel': { 'eng': 'preprint', 'deu': 'Preprint' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7WYH-AZ8C', 'skos:prefLabel': { 'eng': 'print', 'deu': 'druckgraphisches Blatt' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T8PK-GADB', 'skos:prefLabel': { 'eng': 'project deliverable', 'deu': 'Projektergebnis' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MZ2Q-R099', 'skos:prefLabel': { 'eng': 'questionnaire', 'deu': 'Fragebogen' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/YBTD-Q94N', 'skos:prefLabel': { 'eng': 'railroad bridge', 'deu': 'Eisenbahnbrücke' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report', 'deu': 'Bericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PHQ7-BGFA', 'skos:prefLabel': { 'eng': 'report part', 'deu': 'Teilbericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/APV5-CJSF', 'skos:prefLabel': { 'eng': 'report to funding agency', 'deu': 'Bericht an Förderorganisation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7J0J-HC61', 'skos:prefLabel': { 'eng': 'research report', 'deu': 'Forschungsbericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/VM3E-HXE6', 'skos:prefLabel': { 'eng': 'research software', 'deu': 'Forschungssoftware' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review', 'deu': 'Rezension' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XTVH-3MG3', 'skos:prefLabel': { 'eng': 'score', 'deu': 'Partitur' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/21HZ-XP29', 'skos:prefLabel': { 'eng': 'sculpture', 'deu': 'Skulptur' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/431H-5YSA', 'skos:prefLabel': { 'eng': 'slide', 'deu': 'Diapositiv' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/622D-CM27', 'skos:prefLabel': { 'eng': 'software', 'deu': 'Software' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DF69-TVE8', 'skos:prefLabel': { 'eng': 'technical report', 'deu': 'technischer Bericht' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/6FG3-514E', 'skos:prefLabel': { 'eng': 'transcript', 'deu': 'Transkript' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QT7P-HNZB', 'skos:prefLabel': { 'eng': 'tribe (kinship group)', 'deu': '' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QM0R-ZTAA', 'skos:prefLabel': { 'eng': 'wall chart', 'deu': 'Wandtafel' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/R1WF-V45Y', 'skos:prefLabel': { 'eng': 'website', 'deu': 'Website' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper', 'deu': 'Arbeitspapier' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/HARH-6R3C', 'skos:prefLabel': { 'eng': 'yearbook', 'deu': 'Jahrbuch' } },
+        { '@id': ns + '985A-GCQJ', 'skos:prefLabel': { 'eng': 'album cover', 'deu': 'Albumcover' } },
+        { '@id': ns + 'N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation', 'deu': 'Anmerkung' } },
+        { '@id': ns + '8EBX-CA9X', 'skos:prefLabel': { 'eng': 'annual report', 'deu': 'Jahresbericht' } },
+        { '@id': ns + '2WRQ-GSE9', 'skos:prefLabel': { 'eng': 'arrangement (music)', 'deu': 'Arrangement (Musik)' } },
+        { '@id': ns + '9J46-2X9E', 'skos:prefLabel': { 'eng': 'atlas', 'deu': 'Atlas' } },
+        { '@id': ns + '47QB-8QF1', 'skos:prefLabel': { 'eng': 'book', 'deu': 'Buch' } },
+        { '@id': ns + 'XA52-09WA', 'skos:prefLabel': { 'eng': 'book part', 'deu': 'Buchkapitel' } },
+        { '@id': ns + 'VP4W-DQ1P', 'skos:prefLabel': { 'eng': 'book review', 'deu': 'Buchrezension' } },
+        { '@id': ns + '62RJ-SFV2', 'skos:prefLabel': { 'eng': 'cartographic material', 'deu': 'kartographisches Material' } },
+        { '@id': ns + 'QKDF-E5HA', 'skos:prefLabel': { 'eng': 'conference object', 'deu': 'Konferenzveröffentlichung' } },
+        { '@id': ns + 'MF25-FDGW', 'skos:prefLabel': { 'eng': 'contribution to journal', 'deu': 'Zeitschriftenbeitrag' } },
+        { '@id': ns + 'CEET-8C4S', 'skos:prefLabel': { 'eng': 'cover', 'deu': 'Abdeckung' } },
+        { '@id': ns + 'CPVB-YXG6', 'skos:prefLabel': { 'eng': 'cultural artifact', 'deu': 'Kulturartefakt' } },
+        { '@id': ns + 'W2Z3-3YA6', 'skos:prefLabel': { 'eng': 'data management plan', 'deu': 'Datenmanagementplan' } },
+        { '@id': ns + 'KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset', 'deu': 'Dataset' } },
+        { '@id': ns + 'A9K1-3WQA', 'skos:prefLabel': { 'eng': 'diary', 'deu': 'Tagebuch' } },
+        { '@id': ns + '85QM-7TZ3', 'skos:prefLabel': { 'eng': 'drawing', 'deu': 'Zeichnung' } },
+        { '@id': ns + 'QXRQ-Z2PJ', 'skos:prefLabel': { 'eng': 'internal report', 'deu': 'interner Bericht' } },
+        { '@id': ns + '8KGA-CH97', 'skos:prefLabel': { 'eng': 'interview', 'deu': 'Interview' } },
+        { '@id': ns + 'VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article', 'deu': 'Wissenschaftlicher Artikel' } },
+        { '@id': ns + 'YA8R-1M0D', 'skos:prefLabel': { 'eng': 'learning object', 'deu': 'Lernobjekt' } },
+        { '@id': ns + 'F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture', 'deu': 'Vortrag' } },
+        { '@id': ns + 'GBWA-JJP8', 'skos:prefLabel': { 'eng': 'letter (correspondence)', 'deu': 'Brief' } },
+        { '@id': ns + 'EHPQ-XYA3', 'skos:prefLabel': { 'eng': 'magazine', 'deu': 'Informationszeitschrift' } },
+        { '@id': ns + 'KMRH-NFR9', 'skos:prefLabel': { 'eng': 'manuscript', 'deu': 'Manuskript' } },
+        { '@id': ns + 'A52A-CWMM', 'skos:prefLabel': { 'eng': 'map', 'deu': 'Karte' } },
+        { '@id': ns + 'MCN9-1NSA', 'skos:prefLabel': { 'eng': 'memorandum', 'deu': 'Memorandum' } },
+        { '@id': ns + 'M789-K5E0', 'skos:prefLabel': { 'eng': 'music album', 'deu': 'Musikalbum' } },
+        { '@id': ns + 'EWZ9-3MPH', 'skos:prefLabel': { 'eng': 'musical composition', 'deu': 'musikalische Komposition' } },
+        { '@id': ns + '8A6X-FKB1', 'skos:prefLabel': { 'eng': 'musical notation', 'deu': 'Musiknotation' } },
+        { '@id': ns + '9W35-5Q94', 'skos:prefLabel': { 'eng': 'negative', 'deu': 'Negativ' } },
+        { '@id': ns + 'DCHD-W3GM', 'skos:prefLabel': { 'eng': 'newspaper', 'deu': 'Zeitung' } },
+        { '@id': ns + 'CJJG-VKRQ', 'skos:prefLabel': { 'eng': 'newspaper article', 'deu': 'Zeitungsartikel' } },
+        { '@id': ns + 'PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other', 'deu': 'sonstige' } },
+        { '@id': ns + '6QRG-9GN2', 'skos:prefLabel': { 'eng': 'other type of report', 'deu': 'Sonstiger Bericht' } },
+        { '@id': ns + 'WWS3-0ACP', 'skos:prefLabel': { 'eng': 'painting', 'deu': 'Malerei' } },
+        { '@id': ns + 'GY3Z-50FT', 'skos:prefLabel': { 'eng': 'periodical', 'deu': 'Periodikum' } },
+        { '@id': ns + '7CAB-P987', 'skos:prefLabel': { 'eng': 'photograph', 'deu': 'Fotografie' } },
+        { '@id': ns + 'R4W3-ZQ76', 'skos:prefLabel': { 'eng': 'picture', 'deu': 'Bild' } },
+        { '@id': ns + 'JF85-NYRJ', 'skos:prefLabel': { 'eng': 'podcast', 'deu': 'Podcast' } },
+        { '@id': ns + 'XWWK-533P', 'skos:prefLabel': { 'eng': 'policy report', 'deu': 'politischer Bericht' } },
+        { '@id': ns + 'Q4Q5-3554', 'skos:prefLabel': { 'eng': 'postcard', 'deu': 'Postkarte' } },
+        { '@id': ns + '6EFK-BRQD', 'skos:prefLabel': { 'eng': 'poster', 'deu': 'Plakat' } },
+        { '@id': ns + 'T023-BGTD', 'skos:prefLabel': { 'eng': 'preprint', 'deu': 'Preprint' } },
+        { '@id': ns + '7WYH-AZ8C', 'skos:prefLabel': { 'eng': 'print', 'deu': 'druckgraphisches Blatt' } },
+        { '@id': ns + 'T8PK-GADB', 'skos:prefLabel': { 'eng': 'project deliverable', 'deu': 'Projektergebnis' } },
+        { '@id': ns + 'MZ2Q-R099', 'skos:prefLabel': { 'eng': 'questionnaire', 'deu': 'Fragebogen' } },
+        { '@id': ns + 'JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report', 'deu': 'Bericht' } },
+        { '@id': ns + 'PHQ7-BGFA', 'skos:prefLabel': { 'eng': 'report part', 'deu': 'Teilbericht' } },
+        { '@id': ns + 'APV5-CJSF', 'skos:prefLabel': { 'eng': 'report to funding agency', 'deu': 'Bericht an Förderorganisation' } },
+        { '@id': ns + '7J0J-HC61', 'skos:prefLabel': { 'eng': 'research report', 'deu': 'Forschungsbericht' } },
+        { '@id': ns + 'VM3E-HXE6', 'skos:prefLabel': { 'eng': 'research software', 'deu': 'Forschungssoftware' } },
+        { '@id': ns + 'JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review', 'deu': 'Rezension' } },
+        { '@id': ns + 'XTVH-3MG3', 'skos:prefLabel': { 'eng': 'score', 'deu': 'Partitur' } },
+        { '@id': ns + '21HZ-XP29', 'skos:prefLabel': { 'eng': 'sculpture', 'deu': 'Skulptur' } },
+        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'slide', 'deu': 'Diapositiv' } },
+        { '@id': ns + '622D-CM27', 'skos:prefLabel': { 'eng': 'software', 'deu': 'Software' } },
+        { '@id': ns + 'DF69-TVE8', 'skos:prefLabel': { 'eng': 'technical report', 'deu': 'technischer Bericht' } },
+        { '@id': ns + '6FG3-514E', 'skos:prefLabel': { 'eng': 'transcript', 'deu': 'Transkript' } },
+        { '@id': ns + 'QM0R-ZTAA', 'skos:prefLabel': { 'eng': 'wall chart', 'deu': 'Wandtafel' } },
+        { '@id': ns + 'R1WF-V45Y', 'skos:prefLabel': { 'eng': 'website', 'deu': 'Website' } },
+        { '@id': ns + '489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper', 'deu': 'Arbeitspapier' } },
+        { '@id': ns + 'HARH-6R3C', 'skos:prefLabel': { 'eng': 'yearbook', 'deu': 'Jahrbuch' } },
       ],
       loaded: true
     },
     'irobjecttype': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' }, 'skos:definition': { 'eng': 'An article on a particular topic and published in a journal issue.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T023-BGTD', 'skos:prefLabel': { 'eng': 'preprint' }, 'skos:definition': { 'eng': 'Pre-print describes the first draft of the article - before peer-review, even before any contact with a publisher. This use is common amongst academics for whom the key modification of an article is the peer-review process. Another use of the term pre-print is for the finished article, reviewed and amended, ready and accepted for publication - but separate from the version that is type-set or formatted by the publisher. This use is more common amongst publishers, for whom the final and significant stage of modification to an article is the arrangement of the material for putting to print.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper' }, 'skos:definition': { 'eng': 'An unpublished paper, usually circulated privately among a small group of peers, to provide information or with a request for comments or editorial improvement.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report' }, 'skos:definition': { 'eng': 'A report is a separately published record of research findings, research still in progress, or other technical findings, usually bearing a report number and sometimes a grant number assigned by the funding agency. Also, an official record of the activities of a committee or corporate entity, the proceedings of a government body, or an investigation by an agency, whether published or private, usually archived or submitted to a higher authority, voluntarily or under mandate. In a more general sense, any formal account of facts or information related to a specific event or phenomenon, sometimes given at regular intervals.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review' }, 'skos:definition': { 'eng': 'A review of others\' published or performed works (e.g., books, films, sound recordings, theater, etc.).' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MF25-FDGW', 'skos:prefLabel': { 'eng': 'contribution to journal' }, 'skos:definition': { 'eng': 'A contribution to a journal denotes a work published in a journal. If applicable sub-terms should be chosen.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/47QB-8QF1', 'skos:prefLabel': { 'eng': 'book' }, 'skos:definition': { 'eng': 'Items comprising a collection of leaves of paper, parchment, wood, stiffened textile, ivory, metal tablets, or other flat material, that are blank, written on, or printed, and are strung or bound together in a volume.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XA52-09WA', 'skos:prefLabel': { 'eng': 'book part' }, 'skos:definition': { 'eng': 'A defined chapter or section of a book, usually with a separate title or number.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/1PHE-7VMS', 'skos:prefLabel': { 'eng': 'dissertation' }, 'skos:definition': { 'eng': 'dissertation' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QKDF-E5HA', 'skos:prefLabel': { 'eng': 'conference object' }, 'skos:definition': { 'eng': 'All kind of digital resources contributed to a conference, like conference presentation (slides), conference report, conference lecture, abstracts, demonstrations.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture' }, 'skos:definition': { 'eng': 'Expositions of a given subject delivered before an audience or class, especially for the purposes of instruction.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset' }, 'skos:definition': { 'eng': 'A collection of related facts and data encoded in a defined structure.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation' }, 'skos:definition': { 'eng': 'An annotation in the sense of a legal note is a legally explanatory comment on a decision handed down by a court or arbitral tribunal.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' }, 'skos:definition': { 'eng': 'An object type not explicitly addressed in any concept in this vocabulary.' } }
+        { '@id': ns + 'VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' }, 'skos:definition': { 'eng': 'An article on a particular topic and published in a journal issue.' } },
+        { '@id': ns + 'T023-BGTD', 'skos:prefLabel': { 'eng': 'preprint' }, 'skos:definition': { 'eng': 'Pre-print describes the first draft of the article - before peer-review, even before any contact with a publisher. This use is common amongst academics for whom the key modification of an article is the peer-review process. Another use of the term pre-print is for the finished article, reviewed and amended, ready and accepted for publication - but separate from the version that is type-set or formatted by the publisher. This use is more common amongst publishers, for whom the final and significant stage of modification to an article is the arrangement of the material for putting to print.' } },
+        { '@id': ns + '489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper' }, 'skos:definition': { 'eng': 'An unpublished paper, usually circulated privately among a small group of peers, to provide information or with a request for comments or editorial improvement.' } },
+        { '@id': ns + 'JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report' }, 'skos:definition': { 'eng': 'A report is a separately published record of research findings, research still in progress, or other technical findings, usually bearing a report number and sometimes a grant number assigned by the funding agency. Also, an official record of the activities of a committee or corporate entity, the proceedings of a government body, or an investigation by an agency, whether published or private, usually archived or submitted to a higher authority, voluntarily or under mandate. In a more general sense, any formal account of facts or information related to a specific event or phenomenon, sometimes given at regular intervals.' } },
+        { '@id': ns + 'JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review' }, 'skos:definition': { 'eng': 'A review of others\' published or performed works (e.g., books, films, sound recordings, theater, etc.).' } },
+        { '@id': ns + 'MF25-FDGW', 'skos:prefLabel': { 'eng': 'contribution to journal' }, 'skos:definition': { 'eng': 'A contribution to a journal denotes a work published in a journal. If applicable sub-terms should be chosen.' } },
+        { '@id': ns + '47QB-8QF1', 'skos:prefLabel': { 'eng': 'book' }, 'skos:definition': { 'eng': 'Items comprising a collection of leaves of paper, parchment, wood, stiffened textile, ivory, metal tablets, or other flat material, that are blank, written on, or printed, and are strung or bound together in a volume.' } },
+        { '@id': ns + 'XA52-09WA', 'skos:prefLabel': { 'eng': 'book part' }, 'skos:definition': { 'eng': 'A defined chapter or section of a book, usually with a separate title or number.' } },
+        { '@id': ns + '1PHE-7VMS', 'skos:prefLabel': { 'eng': 'dissertation' }, 'skos:definition': { 'eng': 'dissertation' } },
+        { '@id': ns + 'QKDF-E5HA', 'skos:prefLabel': { 'eng': 'conference object' }, 'skos:definition': { 'eng': 'All kind of digital resources contributed to a conference, like conference presentation (slides), conference report, conference lecture, abstracts, demonstrations.' } },
+        { '@id': ns + 'F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture' }, 'skos:definition': { 'eng': 'Expositions of a given subject delivered before an audience or class, especially for the purposes of instruction.' } },
+        { '@id': ns + 'KW6N-2VTP', 'skos:prefLabel': { 'eng': 'dataset' }, 'skos:definition': { 'eng': 'A collection of related facts and data encoded in a defined structure.' } },
+        { '@id': ns + 'N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation' }, 'skos:definition': { 'eng': 'An annotation in the sense of a legal note is a legally explanatory comment on a decision handed down by a court or arbitral tribunal.' } },
+        { '@id': ns + 'PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' }, 'skos:definition': { 'eng': 'An object type not explicitly addressed in any concept in this vocabulary.' } }
       ],
       loaded: true
     },
     'irobjecttypearticle': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' }, 'skos:definition': { 'eng': 'An article on a particular topic and published in a journal issue.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report' }, 'skos:definition': { 'eng': 'A report is a separately published record of research findings, research still in progress, or other technical findings, usually bearing a report number and sometimes a grant number assigned by the funding agency. Also, an official record of the activities of a committee or corporate entity, the proceedings of a government body, or an investigation by an agency, whether published or private, usually archived or submitted to a higher authority, voluntarily or under mandate. In a more general sense, any formal account of facts or information related to a specific event or phenomenon, sometimes given at regular intervals.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review' }, 'skos:definition': { 'eng': 'A review of others\' published or performed works (e.g., books, films, sound recordings, theater, etc.).' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' }, 'skos:definition': { 'eng': 'An object type not explicitly addressed in any concept in this vocabulary.' } }
+        { '@id': ns + 'VKA6-9XTY', 'skos:prefLabel': { 'eng': 'journal article' }, 'skos:definition': { 'eng': 'An article on a particular topic and published in a journal issue.' } },
+        { '@id': ns + 'JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report' }, 'skos:definition': { 'eng': 'A report is a separately published record of research findings, research still in progress, or other technical findings, usually bearing a report number and sometimes a grant number assigned by the funding agency. Also, an official record of the activities of a committee or corporate entity, the proceedings of a government body, or an investigation by an agency, whether published or private, usually archived or submitted to a higher authority, voluntarily or under mandate. In a more general sense, any formal account of facts or information related to a specific event or phenomenon, sometimes given at regular intervals.' } },
+        { '@id': ns + 'JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review' }, 'skos:definition': { 'eng': 'A review of others\' published or performed works (e.g., books, films, sound recordings, theater, etc.).' } },
+        { '@id': ns + 'PYRE-RAWJ', 'skos:prefLabel': { 'eng': 'other' }, 'skos:definition': { 'eng': 'An object type not explicitly addressed in any concept in this vocabulary.' } }
       ],
       loaded: true
     },
     'accessright': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' }, 'skos:definition': { 'eng': 'Open access refers to a resource that is immediately and permanently online, and free for all on the Web, without financial and technical barriers.The resource is either stored in the repository or referenced to an external journal or trustworthy archive.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' }, 'skos:definition': { 'eng': 'Embargoed access refers to a resource that is metadata only access until released for open access on a certain date. Embargoes can be required by publishers and funders policies, or set by the author (e.g such as in the case of theses and dissertations).' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' }, 'skos:definition': { 'eng': 'Restricted access refers to a resource that is available in a system but with some type of restriction for full open access. This type of access can occur in a number of different situations. Some examples are described below: The user must log-in to the system in order to access the resource The user must send an email to the author or system administrator to access the resource Access to the resource is restricted to a specific community (e.g. limited to a university community).' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' }, 'skos:definition': { 'eng': 'Metadata only access refers to a resource in which access is limited to metadata only. The resource itself is described by the metadata, but neither is directly available through the system or platform nor can be referenced to an open access copy in an external journal or trustworthy archive.' } }
+        { '@id': ns + 'QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' }, 'skos:definition': { 'eng': 'Open access refers to a resource that is immediately and permanently online, and free for all on the Web, without financial and technical barriers.The resource is either stored in the repository or referenced to an external journal or trustworthy archive.' } },
+        { '@id': ns + 'AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' }, 'skos:definition': { 'eng': 'Embargoed access refers to a resource that is metadata only access until released for open access on a certain date. Embargoes can be required by publishers and funders policies, or set by the author (e.g such as in the case of theses and dissertations).' } },
+        { '@id': ns + 'KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' }, 'skos:definition': { 'eng': 'Restricted access refers to a resource that is available in a system but with some type of restriction for full open access. This type of access can occur in a number of different situations. Some examples are described below: The user must log-in to the system in order to access the resource The user must send an email to the author or system administrator to access the resource Access to the resource is restricted to a specific community (e.g. limited to a university community).' } },
+        { '@id': ns + 'QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' }, 'skos:definition': { 'eng': 'Metadata only access refers to a resource in which access is limited to metadata only. The resource itself is described by the metadata, but neither is directly available through the system or platform nor can be referenced to an open access copy in an external journal or trustworthy archive.' } }
       ],
       loaded: true
     },
     'iraccessright': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' }, 'skos:definition': { 'eng': 'Access to the resource is offered without any restrictions.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' }, 'skos:definition': { 'eng': 'The resource cannot be accessed until a given date on which it will be released for open access. A copy can be requested via e-mail.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to persons or groups of persons affiliated with the University of Vienna that we can specify as per your instructions. Others may request a copy via e-mail.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to you.' } }
+        { '@id': ns + 'QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' }, 'skos:definition': { 'eng': 'Access to the resource is offered without any restrictions.' } },
+        { '@id': ns + 'AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' }, 'skos:definition': { 'eng': 'The resource cannot be accessed until a given date on which it will be released for open access. A copy can be requested via e-mail.' } },
+        { '@id': ns + 'KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to persons or groups of persons affiliated with the University of Vienna that we can specify as per your instructions. Others may request a copy via e-mail.' } },
+        { '@id': ns + 'QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to you.' } }
       ],
       loaded: true
     },
     'versiontypes': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/TV31-080M', 'skos:notation': ['AO'], 'skos:prefLabel': { 'eng': 'author\'s original' }, 'skos:definition': { 'eng': 'Any version of a resource that is considered by the author to be of sufficient quality to be submitted for formal peer review by a second party. The author accepts full responsibility for the resource . May have a version number or date stamp. Content and layout as set out by the author.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/JTD4-R26P', 'skos:notation': ['SMUR'], 'skos:prefLabel': { 'eng': 'submitted manuscript under review' }, 'skos:definition': { 'eng': 'Any version of a resource that is under formal review managed by a socially recognized publishing entity. The entity recognizes its responsibility to provide objective expert review and feedback to the author, and, ultimately, to pass judgment on the fitness of the resource for publication with an “accept” or “reject” decision. May have a version number or date stamp. Content and layout follow publisher’s submission requirements.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PHXV-R6B3', 'skos:notation': ['AM'], 'skos:prefLabel': { 'eng': 'accepted version' }, 'skos:definition': { 'eng': 'The version of a resource that has been accepted for publication. A second party takes permanent responsibility for the resource. Content and layout follow publisher’s submission requirements.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/83ZP-CPP2', 'skos:notation': ['P'], 'skos:prefLabel': { 'eng': 'proof' }, 'skos:definition': { 'eng': 'A version of a resource that is created as part of the publication process. This includes the copy-edited manuscript, galley proofs (i.e., a typeset version that has not been made up into pages), page proofs, and revised proofs. Some of these versions may remain essentially internal process versions, but others are commonly released from the internal environment (e.g., proofs are sent to authors) and may thus become public, even though they are not authorized to be so. Content has been changed from Accepted Manuscript; layout is the publisher’s.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PMR8-3C8D', 'skos:notation': ['VoR'], 'skos:prefLabel': { 'eng': 'version of record (published version)' }, 'skos:definition': { 'eng': 'A fixed version of a resource that has been made available by any organization that acts as a publisher by formally and exclusively declaring the resource “published”. This includes any “early release” resource that is formally identified as being published even before the compilation of a volume issue and assignment of associated metadata, as long as it is citable via some permanent identifier(s). This does not include any “early release” resource that has not yet been “fixed” by processes that are still to be applied, such as copy-editing, proof corrections, layout, and typesetting.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MT1G-APSB', 'skos:notation': ['CVoR'], 'skos:prefLabel': { 'eng': 'corrected version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource in which errors in the VoR have been corrected. The errors may be author errors, publisher errors, or other processing errors.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/SSQW-AP1S', 'skos:notation': ['EVoR'], 'skos:prefLabel': { 'eng': 'enhanced version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource that has been updated or enhanced by the provision of supplementary material.' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KZB5-0F5G', 'skos:notation': ['NA'], 'skos:prefLabel': { 'eng': 'not applicable (or unknown)' }, 'skos:definition': { 'eng': 'Not Applicable (or Unknown).' } }
+        { '@id': ns + 'TV31-080M', 'skos:notation': ['AO'], 'skos:prefLabel': { 'eng': 'author\'s original' }, 'skos:definition': { 'eng': 'Any version of a resource that is considered by the author to be of sufficient quality to be submitted for formal peer review by a second party. The author accepts full responsibility for the resource . May have a version number or date stamp. Content and layout as set out by the author.' } },
+        { '@id': ns + 'JTD4-R26P', 'skos:notation': ['SMUR'], 'skos:prefLabel': { 'eng': 'submitted manuscript under review' }, 'skos:definition': { 'eng': 'Any version of a resource that is under formal review managed by a socially recognized publishing entity. The entity recognizes its responsibility to provide objective expert review and feedback to the author, and, ultimately, to pass judgment on the fitness of the resource for publication with an “accept” or “reject” decision. May have a version number or date stamp. Content and layout follow publisher’s submission requirements.' } },
+        { '@id': ns + 'PHXV-R6B3', 'skos:notation': ['AM'], 'skos:prefLabel': { 'eng': 'accepted version' }, 'skos:definition': { 'eng': 'The version of a resource that has been accepted for publication. A second party takes permanent responsibility for the resource. Content and layout follow publisher’s submission requirements.' } },
+        { '@id': ns + '83ZP-CPP2', 'skos:notation': ['P'], 'skos:prefLabel': { 'eng': 'proof' }, 'skos:definition': { 'eng': 'A version of a resource that is created as part of the publication process. This includes the copy-edited manuscript, galley proofs (i.e., a typeset version that has not been made up into pages), page proofs, and revised proofs. Some of these versions may remain essentially internal process versions, but others are commonly released from the internal environment (e.g., proofs are sent to authors) and may thus become public, even though they are not authorized to be so. Content has been changed from Accepted Manuscript; layout is the publisher’s.' } },
+        { '@id': ns + 'PMR8-3C8D', 'skos:notation': ['VoR'], 'skos:prefLabel': { 'eng': 'version of record (published version)' }, 'skos:definition': { 'eng': 'A fixed version of a resource that has been made available by any organization that acts as a publisher by formally and exclusively declaring the resource “published”. This includes any “early release” resource that is formally identified as being published even before the compilation of a volume issue and assignment of associated metadata, as long as it is citable via some permanent identifier(s). This does not include any “early release” resource that has not yet been “fixed” by processes that are still to be applied, such as copy-editing, proof corrections, layout, and typesetting.' } },
+        { '@id': ns + 'MT1G-APSB', 'skos:notation': ['CVoR'], 'skos:prefLabel': { 'eng': 'corrected version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource in which errors in the VoR have been corrected. The errors may be author errors, publisher errors, or other processing errors.' } },
+        { '@id': ns + 'SSQW-AP1S', 'skos:notation': ['EVoR'], 'skos:prefLabel': { 'eng': 'enhanced version of record' }, 'skos:definition': { 'eng': 'A version of the Version of Record of a resource that has been updated or enhanced by the provision of supplementary material.' } },
+        { '@id': ns + 'KZB5-0F5G', 'skos:notation': ['NA'], 'skos:prefLabel': { 'eng': 'not applicable (or unknown)' }, 'skos:definition': { 'eng': 'Not Applicable (or Unknown).' } }
       ],
       loaded: true
     },
     'irfunders': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/N3C4-ZVR0', 'skos:prefLabel': { 'eng': 'Austrian Science Fund (FWF)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EYN2-KEW2', 'skos:prefLabel': { 'eng': 'Bundesministerium für Bildung, Wissenschaft und Forschung (BMBWF)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/74ZM-RFR6', 'skos:prefLabel': { 'eng': 'European Science Foundation (ESF)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/RDY6-W6C3', 'skos:prefLabel': { 'eng': 'European Union (all programmes)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/APPY-SKP2', 'skos:prefLabel': { 'eng': 'Jubiläumsfonds der Österreichischen Nationalbank' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/TF8A-AS8X', 'skos:prefLabel': { 'eng': 'Österreichische Akademie der Wissenschaften (ÖAW)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/RX5K-E2KX', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsförderungsgesellschaft mbH (FFG)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/RESE-5QGF', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsgemeinschaft (ÖFG)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/SN0W-4T4J', 'skos:prefLabel': { 'eng': 'Österreichischer Austauschdienst (OeAD)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/S9R7-X1M2', 'skos:prefLabel': { 'eng': 'Österreichischer Nationalfonds für Opfer des Nationalsozialismus' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/X4EX-JK51', 'skos:prefLabel': { 'eng': 'University of Vienna' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XMYF-893X', 'skos:prefLabel': { 'eng': 'Vienna Science and Technology Fund (WWTF)' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/6HPQ-MTZV', 'skos:prefLabel': { 'eng': 'Zukunftsfonds der Republik Österreich' } },
+        { '@id': ns + 'N3C4-ZVR0', 'skos:prefLabel': { 'eng': 'Austrian Science Fund (FWF)' } },
+        { '@id': ns + 'EYN2-KEW2', 'skos:prefLabel': { 'eng': 'Bundesministerium für Bildung, Wissenschaft und Forschung (BMBWF)' } },
+        { '@id': ns + '74ZM-RFR6', 'skos:prefLabel': { 'eng': 'European Science Foundation (ESF)' } },
+        { '@id': ns + 'RDY6-W6C3', 'skos:prefLabel': { 'eng': 'European Union (all programmes)' } },
+        { '@id': ns + 'APPY-SKP2', 'skos:prefLabel': { 'eng': 'Jubiläumsfonds der Österreichischen Nationalbank' } },
+        { '@id': ns + 'TF8A-AS8X', 'skos:prefLabel': { 'eng': 'Österreichische Akademie der Wissenschaften (ÖAW)' } },
+        { '@id': ns + 'RX5K-E2KX', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsförderungsgesellschaft mbH (FFG)' } },
+        { '@id': ns + 'RESE-5QGF', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsgemeinschaft (ÖFG)' } },
+        { '@id': ns + 'SN0W-4T4J', 'skos:prefLabel': { 'eng': 'Österreichischer Austauschdienst (OeAD)' } },
+        { '@id': ns + 'S9R7-X1M2', 'skos:prefLabel': { 'eng': 'Österreichischer Nationalfonds für Opfer des Nationalsozialismus' } },
+        { '@id': ns + 'X4EX-JK51', 'skos:prefLabel': { 'eng': 'University of Vienna' } },
+        { '@id': ns + 'XMYF-893X', 'skos:prefLabel': { 'eng': 'Vienna Science and Technology Fund (WWTF)' } },
+        { '@id': ns + '6HPQ-MTZV', 'skos:prefLabel': { 'eng': 'Zukunftsfonds der Republik Österreich' } },
         { '@id': 'other', 'skos:prefLabel': { 'eng': 'Other' } }
       ],
       loaded: true
     },
     'technique': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/AH0S-F3BV', 'skos:prefLabel': { 'eng': 'black-and-white film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/K818-FSM5', 'skos:prefLabel': { 'eng': 'color film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/748F-SQW9', 'skos:prefLabel': { 'eng': 'silent film' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/1K09-VXQ4', 'skos:prefLabel': { 'eng': 'sound film' } }
+        { '@id': ns + 'NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
+        { '@id': ns + 'DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography' } },
+        { '@id': ns + 'AH0S-F3BV', 'skos:prefLabel': { 'eng': 'black-and-white film' } },
+        { '@id': ns + 'K818-FSM5', 'skos:prefLabel': { 'eng': 'color film' } },
+        { '@id': ns + '748F-SQW9', 'skos:prefLabel': { 'eng': 'silent film' } },
+        { '@id': ns + '1K09-VXQ4', 'skos:prefLabel': { 'eng': 'sound film' } }
       ],
       loaded: true
     },
     'material': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/CRGV-097N', 'skos:prefLabel': { 'eng': 'black marble' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EXRJ-GCYG', 'skos:prefLabel': { 'eng': 'shampoo' } }
+        { '@id': ns + 'CRGV-097N', 'skos:prefLabel': { 'eng': 'black marble' } },
+        { '@id': ns + 'EXRJ-GCYG', 'skos:prefLabel': { 'eng': 'shampoo' } }
       ],
       loaded: true
     },
     'reproduction': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/AYRE-RQAS', 'skos:prefLabel': { 'eng': 'original' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/BD33-7WA2', 'skos:prefLabel': { 'eng': 'copy' } }
+        { '@id': ns + 'AYRE-RQAS', 'skos:prefLabel': { 'eng': 'original' } },
+        { '@id': ns + 'BD33-7WA2', 'skos:prefLabel': { 'eng': 'copy' } }
       ],
       loaded: true
     },
     'audience': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/TEPR-J4EZ', 'skos:prefLabel': { 'eng': 'FSK ab 0 freigegeben' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7ANY-9744', 'skos:prefLabel': { 'eng': 'FSK ab 6 freigegeben' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/4DQY-TNPT', 'skos:prefLabel': { 'eng': 'FSK ab 12 freigegeben' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/HSDH-MD0J', 'skos:prefLabel': { 'eng': 'FSK ab 16 freigegeben' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/F2VP-9Z07', 'skos:prefLabel': { 'eng': 'FSK ab 18 freigegeben' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/C2TK-3DTQ', 'skos:prefLabel': { 'eng': 'Freigegeben gemäß §14 JuSchG FSK' } }
+        { '@id': ns + 'TEPR-J4EZ', 'skos:prefLabel': { 'eng': 'FSK ab 0 freigegeben' } },
+        { '@id': ns + '7ANY-9744', 'skos:prefLabel': { 'eng': 'FSK ab 6 freigegeben' } },
+        { '@id': ns + '4DQY-TNPT', 'skos:prefLabel': { 'eng': 'FSK ab 12 freigegeben' } },
+        { '@id': ns + 'HSDH-MD0J', 'skos:prefLabel': { 'eng': 'FSK ab 16 freigegeben' } },
+        { '@id': ns + 'F2VP-9Z07', 'skos:prefLabel': { 'eng': 'FSK ab 18 freigegeben' } },
+        { '@id': ns + 'C2TK-3DTQ', 'skos:prefLabel': { 'eng': 'Freigegeben gemäß §14 JuSchG FSK' } }
       ],
       loaded: true
     },
     'regionalencoding': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/AR9M-B9J4', 'skos:prefLabel': { 'eng': '1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/6Z5R-XEG2', 'skos:prefLabel': { 'eng': '2' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2YZZ-TX6M', 'skos:prefLabel': { 'eng': '3' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/36BC-K989', 'skos:prefLabel': { 'eng': '4' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/ADS3-D2RC', 'skos:prefLabel': { 'eng': '5' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9NQT-YAJ4', 'skos:prefLabel': { 'eng': '6' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QN10-XAKZ', 'skos:prefLabel': { 'eng': '7' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KE1K-8NT7', 'skos:prefLabel': { 'eng': '8' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GSVQ-6H7P', 'skos:prefLabel': { 'eng': 'A/1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/149W-4F0N', 'skos:prefLabel': { 'eng': 'B/2' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/VHCV-2WY3', 'skos:prefLabel': { 'eng': 'C/3' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/3MQF-RDQQ', 'skos:prefLabel': { 'eng': 'region free' } }
+        { '@id': ns + 'AR9M-B9J4', 'skos:prefLabel': { 'eng': '1' } },
+        { '@id': ns + '6Z5R-XEG2', 'skos:prefLabel': { 'eng': '2' } },
+        { '@id': ns + '2YZZ-TX6M', 'skos:prefLabel': { 'eng': '3' } },
+        { '@id': ns + '36BC-K989', 'skos:prefLabel': { 'eng': '4' } },
+        { '@id': ns + 'ADS3-D2RC', 'skos:prefLabel': { 'eng': '5' } },
+        { '@id': ns + '9NQT-YAJ4', 'skos:prefLabel': { 'eng': '6' } },
+        { '@id': ns + 'QN10-XAKZ', 'skos:prefLabel': { 'eng': '7' } },
+        { '@id': ns + 'KE1K-8NT7', 'skos:prefLabel': { 'eng': '8' } },
+        { '@id': ns + 'GSVQ-6H7P', 'skos:prefLabel': { 'eng': 'A/1' } },
+        { '@id': ns + '149W-4F0N', 'skos:prefLabel': { 'eng': 'B/2' } },
+        { '@id': ns + 'VHCV-2WY3', 'skos:prefLabel': { 'eng': 'C/3' } },
+        { '@id': ns + '3MQF-RDQQ', 'skos:prefLabel': { 'eng': 'region free' } }
       ],
       loaded: true
     },
     'dceformat': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/J6JG-69V6', 'skos:prefLabel': { 'eng': '3gp' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/3F67-KMTM', 'skos:prefLabel': { 'eng': 'AAC+' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7A81-FXCX', 'skos:prefLabel': { 'eng': 'Barco Auro' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/FRJJ-4376', 'skos:prefLabel': { 'eng': 'DTS' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EHF7-FEAP', 'skos:prefLabel': { 'eng': 'DTS 96/24' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T5SX-Z04Y', 'skos:prefLabel': { 'eng': 'DTS Discrete 5.1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9FGJ-Z8DH', 'skos:prefLabel': { 'eng': 'DTS ES Discrete 6.1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/ESQT-3YY5', 'skos:prefLabel': { 'eng': 'DTS ES Matrix 6.1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/348K-MZZ6', 'skos:prefLabel': { 'eng': 'DTS HD' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/EN75-Q4HC', 'skos:prefLabel': { 'eng': 'DTS NEO:6' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T7Q0-M2FS', 'skos:prefLabel': { 'eng': 'DTS++' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/28X4-0935', 'skos:prefLabel': { 'eng': 'DTS:X' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/3W6M-5MP3', 'skos:prefLabel': { 'eng': 'Datasat' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MCQ6-HPAH', 'skos:prefLabel': { 'eng': 'Digital Surround 7.1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8T8J-936P', 'skos:prefLabel': { 'eng': 'Dolby Atmos' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9SHY-VVN6', 'skos:prefLabel': { 'eng': 'Dolby Digital' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/61PF-1NEJ', 'skos:prefLabel': { 'eng': 'Dolby Digital 5.1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GHEV-3W1J', 'skos:prefLabel': { 'eng': 'Dolby Digital EX' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/VN51-WRAF', 'skos:prefLabel': { 'eng': 'Dolby Digital Plus' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/8RFW-88Q3', 'skos:prefLabel': { 'eng': 'Dolby Pro Logic II' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/55WB-XQ4P', 'skos:prefLabel': { 'eng': 'Dolby SR-D' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2JPY-C523', 'skos:prefLabel': { 'eng': 'Dolby SR-D-EX' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/XZNA-QKBP', 'skos:prefLabel': { 'eng': 'Dolby Stereo' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/W56N-VX1X', 'skos:prefLabel': { 'eng': 'Dolby Surround' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DCZS-VZ7X', 'skos:prefLabel': { 'eng': 'Dolby TrueHD' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/SDE9-JMJJ', 'skos:prefLabel': { 'eng': 'Dolby-SR' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/1DE8-XDG2', 'skos:prefLabel': { 'eng': 'MPEG-4 ALS' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/K9BD-K8GP', 'skos:prefLabel': { 'eng': 'Mono' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2BCB-S1B5', 'skos:prefLabel': { 'eng': 'SDDS' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7FMD-95WA', 'skos:prefLabel': { 'eng': 'Stereo' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KCDR-Q08F', 'skos:prefLabel': { 'eng': 'Stereo 2.0' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DBKT-3BQ3', 'skos:prefLabel': { 'eng': 'Surround 5.1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/G1KV-MAFP', 'skos:prefLabel': { 'eng': 'VCD' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/RQK2-8156', 'skos:prefLabel': { 'eng': 'aif' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/52G8-44YX', 'skos:prefLabel': { 'eng': 'ape' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/C5G1-JQQZ', 'skos:prefLabel': { 'eng': 'asf' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/AFZ7-4AY9', 'skos:prefLabel': { 'eng': 'au' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KF60-K40F', 'skos:prefLabel': { 'eng': 'avi' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/44YA-6HGK', 'skos:prefLabel': { 'eng': 'divx' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GDTY-V9H4', 'skos:prefLabel': { 'eng': 'dv' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/GW3R-K19G', 'skos:prefLabel': { 'eng': 'evo' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/D3GB-MPSY', 'skos:prefLabel': { 'eng': 'fla' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/E2EJ-277K', 'skos:prefLabel': { 'eng': 'flac' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/29PG-5AKN', 'skos:prefLabel': { 'eng': 'flv' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/2CRY-PD3C', 'skos:prefLabel': { 'eng': 'ggf' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/KPT0-47XA', 'skos:prefLabel': { 'eng': 'm2ts' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/YK2W-SAFC', 'skos:prefLabel': { 'eng': 'm4a' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/S9PM-AGHF', 'skos:prefLabel': { 'eng': 'mac' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/9594-QH49', 'skos:prefLabel': { 'eng': 'mka' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/RRWW-7W5N', 'skos:prefLabel': { 'eng': 'mkv' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/15DS-TAGX', 'skos:prefLabel': { 'eng': 'mp3' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/F487-H20C', 'skos:prefLabel': { 'eng': 'mp3HD' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/AFA0-APVK', 'skos:prefLabel': { 'eng': 'mpeg' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/DT3X-PH6D', 'skos:prefLabel': { 'eng': 'mpeg-1' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/B008-MRZD', 'skos:prefLabel': { 'eng': 'mpeg-2' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/PQ4H-JT2Y', 'skos:prefLabel': { 'eng': 'mpeg-4' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/26M9-M5MR', 'skos:prefLabel': { 'eng': 'mpg' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/NZKM-SH76', 'skos:prefLabel': { 'eng': 'mts' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/T59Z-PCFE', 'skos:prefLabel': { 'eng': 'mxf' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/TR4G-6P0B', 'skos:prefLabel': { 'eng': 'ogg' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7ZVE-WQQ2', 'skos:prefLabel': { 'eng': 'ra' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/J5QX-S86N', 'skos:prefLabel': { 'eng': 'ram' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/P66F-9ERB', 'skos:prefLabel': { 'eng': 'rm' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/BJDK-FC30', 'skos:prefLabel': { 'eng': 'snd' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/N0QE-B24V', 'skos:prefLabel': { 'eng': 'vob' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/X2ZR-7C1F', 'skos:prefLabel': { 'eng': 'voc' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/QYGZ-K8W4', 'skos:prefLabel': { 'eng': 'wav' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/6S1H-S5GF', 'skos:prefLabel': { 'eng': 'webm' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/783J-J5PD', 'skos:prefLabel': { 'eng': 'wma' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/7B2N-07A7', 'skos:prefLabel': { 'eng': 'wmv' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/VTY6-58WQ', 'skos:prefLabel': { 'eng': 'xvid' } }
+        { '@id': ns + 'J6JG-69V6', 'skos:prefLabel': { 'eng': '3gp' } },
+        { '@id': ns + '3F67-KMTM', 'skos:prefLabel': { 'eng': 'AAC+' } },
+        { '@id': ns + '7A81-FXCX', 'skos:prefLabel': { 'eng': 'Barco Auro' } },
+        { '@id': ns + 'FRJJ-4376', 'skos:prefLabel': { 'eng': 'DTS' } },
+        { '@id': ns + 'EHF7-FEAP', 'skos:prefLabel': { 'eng': 'DTS 96/24' } },
+        { '@id': ns + 'T5SX-Z04Y', 'skos:prefLabel': { 'eng': 'DTS Discrete 5.1' } },
+        { '@id': ns + '9FGJ-Z8DH', 'skos:prefLabel': { 'eng': 'DTS ES Discrete 6.1' } },
+        { '@id': ns + 'ESQT-3YY5', 'skos:prefLabel': { 'eng': 'DTS ES Matrix 6.1' } },
+        { '@id': ns + '348K-MZZ6', 'skos:prefLabel': { 'eng': 'DTS HD' } },
+        { '@id': ns + 'EN75-Q4HC', 'skos:prefLabel': { 'eng': 'DTS NEO:6' } },
+        { '@id': ns + 'T7Q0-M2FS', 'skos:prefLabel': { 'eng': 'DTS++' } },
+        { '@id': ns + '28X4-0935', 'skos:prefLabel': { 'eng': 'DTS:X' } },
+        { '@id': ns + '3W6M-5MP3', 'skos:prefLabel': { 'eng': 'Datasat' } },
+        { '@id': ns + 'MCQ6-HPAH', 'skos:prefLabel': { 'eng': 'Digital Surround 7.1' } },
+        { '@id': ns + '8T8J-936P', 'skos:prefLabel': { 'eng': 'Dolby Atmos' } },
+        { '@id': ns + '9SHY-VVN6', 'skos:prefLabel': { 'eng': 'Dolby Digital' } },
+        { '@id': ns + '61PF-1NEJ', 'skos:prefLabel': { 'eng': 'Dolby Digital 5.1' } },
+        { '@id': ns + 'GHEV-3W1J', 'skos:prefLabel': { 'eng': 'Dolby Digital EX' } },
+        { '@id': ns + 'VN51-WRAF', 'skos:prefLabel': { 'eng': 'Dolby Digital Plus' } },
+        { '@id': ns + '8RFW-88Q3', 'skos:prefLabel': { 'eng': 'Dolby Pro Logic II' } },
+        { '@id': ns + '55WB-XQ4P', 'skos:prefLabel': { 'eng': 'Dolby SR-D' } },
+        { '@id': ns + '2JPY-C523', 'skos:prefLabel': { 'eng': 'Dolby SR-D-EX' } },
+        { '@id': ns + 'XZNA-QKBP', 'skos:prefLabel': { 'eng': 'Dolby Stereo' } },
+        { '@id': ns + 'W56N-VX1X', 'skos:prefLabel': { 'eng': 'Dolby Surround' } },
+        { '@id': ns + 'DCZS-VZ7X', 'skos:prefLabel': { 'eng': 'Dolby TrueHD' } },
+        { '@id': ns + 'SDE9-JMJJ', 'skos:prefLabel': { 'eng': 'Dolby-SR' } },
+        { '@id': ns + '1DE8-XDG2', 'skos:prefLabel': { 'eng': 'MPEG-4 ALS' } },
+        { '@id': ns + 'K9BD-K8GP', 'skos:prefLabel': { 'eng': 'Mono' } },
+        { '@id': ns + '2BCB-S1B5', 'skos:prefLabel': { 'eng': 'SDDS' } },
+        { '@id': ns + '7FMD-95WA', 'skos:prefLabel': { 'eng': 'Stereo' } },
+        { '@id': ns + 'KCDR-Q08F', 'skos:prefLabel': { 'eng': 'Stereo 2.0' } },
+        { '@id': ns + 'DBKT-3BQ3', 'skos:prefLabel': { 'eng': 'Surround 5.1' } },
+        { '@id': ns + 'G1KV-MAFP', 'skos:prefLabel': { 'eng': 'VCD' } },
+        { '@id': ns + 'RQK2-8156', 'skos:prefLabel': { 'eng': 'aif' } },
+        { '@id': ns + '52G8-44YX', 'skos:prefLabel': { 'eng': 'ape' } },
+        { '@id': ns + 'C5G1-JQQZ', 'skos:prefLabel': { 'eng': 'asf' } },
+        { '@id': ns + 'AFZ7-4AY9', 'skos:prefLabel': { 'eng': 'au' } },
+        { '@id': ns + 'KF60-K40F', 'skos:prefLabel': { 'eng': 'avi' } },
+        { '@id': ns + '44YA-6HGK', 'skos:prefLabel': { 'eng': 'divx' } },
+        { '@id': ns + 'GDTY-V9H4', 'skos:prefLabel': { 'eng': 'dv' } },
+        { '@id': ns + 'GW3R-K19G', 'skos:prefLabel': { 'eng': 'evo' } },
+        { '@id': ns + 'D3GB-MPSY', 'skos:prefLabel': { 'eng': 'fla' } },
+        { '@id': ns + 'E2EJ-277K', 'skos:prefLabel': { 'eng': 'flac' } },
+        { '@id': ns + '29PG-5AKN', 'skos:prefLabel': { 'eng': 'flv' } },
+        { '@id': ns + '2CRY-PD3C', 'skos:prefLabel': { 'eng': 'ggf' } },
+        { '@id': ns + 'KPT0-47XA', 'skos:prefLabel': { 'eng': 'm2ts' } },
+        { '@id': ns + 'YK2W-SAFC', 'skos:prefLabel': { 'eng': 'm4a' } },
+        { '@id': ns + 'S9PM-AGHF', 'skos:prefLabel': { 'eng': 'mac' } },
+        { '@id': ns + '9594-QH49', 'skos:prefLabel': { 'eng': 'mka' } },
+        { '@id': ns + 'RRWW-7W5N', 'skos:prefLabel': { 'eng': 'mkv' } },
+        { '@id': ns + '15DS-TAGX', 'skos:prefLabel': { 'eng': 'mp3' } },
+        { '@id': ns + 'F487-H20C', 'skos:prefLabel': { 'eng': 'mp3HD' } },
+        { '@id': ns + 'AFA0-APVK', 'skos:prefLabel': { 'eng': 'mpeg' } },
+        { '@id': ns + 'DT3X-PH6D', 'skos:prefLabel': { 'eng': 'mpeg-1' } },
+        { '@id': ns + 'B008-MRZD', 'skos:prefLabel': { 'eng': 'mpeg-2' } },
+        { '@id': ns + 'PQ4H-JT2Y', 'skos:prefLabel': { 'eng': 'mpeg-4' } },
+        { '@id': ns + '26M9-M5MR', 'skos:prefLabel': { 'eng': 'mpg' } },
+        { '@id': ns + 'NZKM-SH76', 'skos:prefLabel': { 'eng': 'mts' } },
+        { '@id': ns + 'T59Z-PCFE', 'skos:prefLabel': { 'eng': 'mxf' } },
+        { '@id': ns + 'TR4G-6P0B', 'skos:prefLabel': { 'eng': 'ogg' } },
+        { '@id': ns + '7ZVE-WQQ2', 'skos:prefLabel': { 'eng': 'ra' } },
+        { '@id': ns + 'J5QX-S86N', 'skos:prefLabel': { 'eng': 'ram' } },
+        { '@id': ns + 'P66F-9ERB', 'skos:prefLabel': { 'eng': 'rm' } },
+        { '@id': ns + 'BJDK-FC30', 'skos:prefLabel': { 'eng': 'snd' } },
+        { '@id': ns + 'N0QE-B24V', 'skos:prefLabel': { 'eng': 'vob' } },
+        { '@id': ns + 'X2ZR-7C1F', 'skos:prefLabel': { 'eng': 'voc' } },
+        { '@id': ns + 'QYGZ-K8W4', 'skos:prefLabel': { 'eng': 'wav' } },
+        { '@id': ns + '6S1H-S5GF', 'skos:prefLabel': { 'eng': 'webm' } },
+        { '@id': ns + '783J-J5PD', 'skos:prefLabel': { 'eng': 'wma' } },
+        { '@id': ns + '7B2N-07A7', 'skos:prefLabel': { 'eng': 'wmv' } },
+        { '@id': ns + 'VTY6-58WQ', 'skos:prefLabel': { 'eng': 'xvid' } }
       ],
       loaded: true
     },
     'lang_vocab': {
       terms: [
-        { '@id': 'https://pid.phaidra.org/vocabulary/KJ67-VB82', 'skos:prefLabel': { 'eng': 'Castilian', 'deu': 'Kastilisch' } },
-        { '@id': 'https://pid.phaidra.org/vocabulary/MKXZ-SARM', 'skos:prefLabel': { 'eng': 'Lebanese', 'deu': 'Libanesisch-Arabisch' } }
+        { '@id': ns + 'KJ67-VB82', 'skos:prefLabel': { 'eng': 'Castilian', 'deu': 'Kastilisch' } },
+        { '@id': ns + 'MKXZ-SARM', 'skos:prefLabel': { 'eng': 'Lebanese', 'deu': 'Libanesisch-Arabisch' } }
       ],
       loaded: true
     },
@@ -1150,10 +1280,12 @@ const getters = {
   },
   getObjectTypeForResourceType: (state) => (rtId) => {
     let arr = []
-    for (let otId of ot4rt[rtId]) {
-      for (let term of state.vocabularies['objecttype'].terms) {
-        if (term['@id'] === otId) {
-          arr.push(term)
+    if (rtId !== ns + 'GXS7-ENXJ') {
+      for (let otId of ot4rt[rtId]) {
+        for (let term of state.vocabularies['objecttype'].terms) {
+          if (term['@id'] === otId) {
+            arr.push(term)
+          }
         }
       }
     }
