@@ -112,12 +112,11 @@ export default {
   mounted: function () {
     this.$nextTick(function () {
       if (this.vocabulary) {
-        this.loading = !this.vocabularies[this.vocabulary].loaded
         // emit input to set skos:prefLabel in parent
         if (this.value) {
-          for (var i = 0; i < this.vocabularies[this.vocabulary].terms.length; i++) {
-            if (this.vocabularies[this.vocabulary].terms[i]['@id'] === this.value) {
-              this.$emit('input', this.vocabularies[this.vocabulary].terms[i])
+          for (let term of this.vocabularies[this.vocabulary].terms) {
+            if (term['@id'] === this.value) {
+              this.$emit('input', term)
             }
           }
         }

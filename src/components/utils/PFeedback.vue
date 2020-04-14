@@ -1,9 +1,9 @@
 <template>
-  <v-card >
+  <v-card>
     <v-card-title class="title font-weight-light grey white--text">{{ $t('Feedback') }}</v-card-title>
     <v-divider></v-divider>
     <v-card-text class="mt-4">
-      <v-form ref="form" v-model="valid">
+      <v-form v-if="!sent" ref="form" v-model="valid">
         <v-container>
           <v-row>
             <v-col cols="12" md="4">
@@ -11,7 +11,6 @@
                 v-model="fn"
                 :rules="nameRules"
                 :label="$t('Firstname')"
-                :value="firstname"
                 required
                 filled
               ></v-text-field>
@@ -48,10 +47,12 @@
           </v-row>
         </v-container>
       </v-form>
+      <span v-else class="ma-8">{{ $t('Thank you for your feedback!') }}</span>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn class="primary" :loading="loading" :disabled="loading" @click="send()">{{ $t('Send') }}</v-btn>
+      <v-btn v-if="!sent" class="primary" :loading="loading" :disabled="loading" @click="send()">{{ $t('Send') }}</v-btn>
+      <v-btn v-if="sent":loading="loading" :disabled="loading" @click="newFeedback()">{{ $t('New feedback') }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -67,6 +68,9 @@ export default {
       type: String
     },
     email: {
+      type: String
+    },
+    context: {
       type: String
     }
   },
@@ -87,14 +91,50 @@ export default {
       feedbackRules: [
         v => !!v || this.$t('Name is required')
       ],
-      loading: false
+      loading: false,
+      sent: false
     }
   },
   methods: {
-    send () {
+    send: async function () {
       if(this.$refs.form.validate()) {
-        alert('send')
+        this.loading = true
+        var httpFormData = new FormData()
+        httpFormData.append('context', this.context)
+        httpFormData.append('firstname', this.fn)
+        httpFormData.append('lastname', this.ln)
+        httpFormData.append('email', this.mail)
+        httpFormData.append('message', this.feedback)
+        this.rightsArray = []
+        this.rightsjson = {}
+        try {
+          let response = await this.$http.request({
+            method: 'POST',
+            url: this.$store.state.instanceconfig.api + '/feedback',
+            data: httpFormData,
+            headers: {
+              'X-XSRF-TOKEN': this.$store.state.user.token,
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          if (response.status === 200) {
+            this.sent = true
+          } else {
+            if (response.data.alerts && response.data.alerts.length > 0) {
+              this.$store.commit('setAlerts', response.data.alerts)
+            }
+          }
+        } catch (error) {
+          console.log(error)
+          this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        } finally {
+          this.loading = false
+        }
       }
+    },
+    newFeedback: function () {
+      this.feedback = ''
+      this.sent = false
     }
   }
 }

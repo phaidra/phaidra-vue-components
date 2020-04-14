@@ -71,8 +71,7 @@ const fields = [
     resourceType: '',
     multiplicable: true,
     label: 'Object type',
-    value: '',
-    'skos:prefLabel': [],
+    selectedTerms: [],
     errorMessages: [],
     definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography, Railway bridge, Tribe'
   },

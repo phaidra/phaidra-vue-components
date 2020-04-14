@@ -120,7 +120,7 @@
                   <template v-else-if="f.component === 'p-object-type-checkboxes'">
                     <p-i-object-type 
                       v-bind.sync="f"
-                      v-on:input="f.value = $event"
+                      v-on:input="handleObjectTypeCheckboxesInput(f, $event)"
                     ></p-i-object-type>
                   </template>
 
@@ -449,7 +449,7 @@
                     <p-i-file
                       v-bind.sync="f"
                       v-on:input-file="setFilename(f, $event)"
-                      v-on:input-mimetype="setMimetype(f, 'mimetype', $event)"
+                      v-on:input-mimetype="setSelected(f, 'mimetype', $event)"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-file>
@@ -553,10 +553,10 @@
         </v-row>
       </v-tab-item>
       <v-tab-item v-if="help" class="pa-3">
-        <p-help :url="'google.com'"></p-help>
+        <p-help :url="guidelinesUrl"></p-help>
       </v-tab-item>
       <v-tab-item v-if="feedback" class="pa-3">
-        <p-feedback :firstname="feedbackUser.firstname" :lastname="feedbackUser.lastname" :email="feedbackUser.email"></p-feedback>
+        <p-feedback :firstname="feedbackUser.firstname" :lastname="feedbackUser.lastname" :email="feedbackUser.email" :context="feedbackContext"></p-feedback>
       </v-tab-item>
     </v-tabs-items>
 
@@ -711,6 +711,17 @@ export default {
     },
     feedbackUser: {
       type: Object
+    },
+    feedbackContext: {
+      type: String
+    },
+    guidelinesUrl: {
+      type: String
+    }
+  },
+  watch: {
+    form (val) {
+      this.license = null
     }
   },
   computed: {
@@ -886,15 +897,18 @@ export default {
       this.loading = true
       var httpFormData = new FormData()
 
+      let mime = null
       switch (this.submittype) {
         case 'container':
-          for (var i = 0; i < this.form.sections.length; i++) {
-            var s = this.form.sections[i]
+          for (let s of this.form.sections) {
             if (s.type === 'member') {
-              for (var j = 0; j < s.fields.length; j++) {
-                if (s.fields[j].component === 'p-file') {
-                  if (s.fields[j].file !== '') {
-                    httpFormData.append('member_' + s.id, s.fields[j].file)
+              for (let field of s.fields) {
+                if (field.component === 'p-file') {
+                  if (field.file !== '') {
+                    httpFormData.append('member_' + s.id, field.file)
+                  }
+                  if (field.mimetype) {
+                    mime = field.mimetype
                   }
                 }
               }
@@ -903,13 +917,15 @@ export default {
           break
 
         default:
-          for (i = 0; i < this.form.sections.length; i++) {
-            s = this.form.sections[i]
+          for (let s of this.form.sections) {
             if (s.fields) {
-              for (j = 0; j < s.fields.length; j++) {
-                if (s.fields[j].component === 'p-file') {
-                  if (s.fields[j].file !== '') {
-                    httpFormData.append('file', s.fields[j].file)
+              for (let field of s.fields) {
+                if (field.component === 'p-file') {
+                  if (field.file !== '') {
+                    httpFormData.append('file', field.file)
+                  }
+                  if (field.mimetype) {
+                    mime = field.mimetype
                   }
                 }
               }
@@ -919,6 +935,9 @@ export default {
       }
 
       httpFormData.append('metadata', JSON.stringify(this.getMetadata()))
+      if (mime) {
+        httpFormData.append('mimetype', mime)
+      }
 
       try {
         let response = await this.$http.request({
@@ -1171,11 +1190,6 @@ export default {
           return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
       }
     },
-    setMimetype: function (f, property, event) {
-      let resourcetype = this.mimeToResourceType(event['@id'])
-      this.handleResourceTypeChange(resourcetype)
-      this.setSelected(f, property, event)
-    },
     setSelected: function (f, property, event) {
       if (event) {
         this.$set(f, property, event['@id'])
@@ -1212,6 +1226,25 @@ export default {
       f['rdfs:label'] = event['rdfs:label']
       f.coordinates = event.coordinates
       this.$emit('form-input-' + f.component, f)
+    },
+    handleObjectTypeCheckboxesInput: function (f, event) {
+      f.selectedTerms = []
+      if (Array.isArray(event)) {
+        for (let ot of event) {
+          let term = this.$store.getters.getTerm('objecttype', ot)
+          let field = {
+            value: term['@id']
+          }
+          if (term['skos:prefLabel']) {
+            let preflabels = term['skos:prefLabel']
+            field['skos:prefLabel'] = []
+            Object.entries(preflabels).forEach(([key, value]) => {
+              field['skos:prefLabel'].push({ '@value': value, '@language': key })
+            })
+          }
+          f.selectedTerms.push(field)
+        }
+      }
     },
     selectInput: function (f, event) {
       if (event) {
@@ -1291,6 +1324,7 @@ export default {
     setFilename: function (f, event) {
       f.value = event.name
       f.file = event
+      this.setSelected(f, 'mimetype', {'@id': event.type})
       this.$emit('form-input-' + f.component, f)
     },
     addFieldAutocompleteFilter: function (item, queryText) {

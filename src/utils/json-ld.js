@@ -1881,9 +1881,11 @@ export default {
           break
 
         case 'edm:hasType':
-          if (Array.isArray(f.value)) {
-            for (let ot of f.value) {
-              this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
+          if (f.hasOwnProperty('selectedTerms')) {
+            if (Array.isArray(f.selectedTerms)) {
+              for (let t of f.selectedTerms) {
+                this.push_object(jsonld, f.predicate, this.get_json_object(t['skos:prefLabel'], null, 'skos:Concept', [t.value]))
+              }
             }
           } else {
             this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))

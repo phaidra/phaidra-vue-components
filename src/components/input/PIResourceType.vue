@@ -47,6 +47,18 @@ export default {
         'https://pid.phaidra.org/vocabulary/T8GH-F4V8'
       ]
     }
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      // emit input to set skos:prefLabel in parent
+      if (this.value) {
+        for (let term of this.vocabularies['resourcetype'].terms) {
+          if (term['@id'] === this.value) {
+            this.$emit('input', term)
+          }
+        }
+      }
+    })
   }
 }
 </script>
