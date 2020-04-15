@@ -507,28 +507,42 @@
           </v-card>
         </v-row>
 
-        <v-row align="center" justify="end"  class="mt-4 mx-3">
-          <v-dialog v-if="templating" v-model="templatedialog" width="500">
-            <template v-slot:activator="{ on }">
-              <v-btn class="mr-3" v-on="on" dark raised :loading="loading" :disabled="loading" color="grey"><span v-t="'Save as template'"></span></v-btn>
+        <v-row class="mx-4" v-if="uploadProgress">
+          <v-col cols="12">
+            <v-row no-gutters>
+              <v-progress-linear :indeterminate="uploadProgress === 100" v-model="uploadProgress" color="primary"></v-progress-linear>
+            </v-row>
+            <v-row no-gutters class="primary--text mt-1">
+              <span v-if="uploadProgress < 100">{{ $t('Uploading...') + ' ' + Math.ceil(uploadProgress) }}%</span>
+              <span v-else>{{ $t('Processing...') }}</span>
+            </v-row>
+          </v-col>
+        </v-row>
+
+        <v-row class="mt-4 mx-4">
+          <v-col cols="12">
+            <v-dialog v-if="templating" v-model="templatedialog" width="500">
+              <template v-slot:activator="{ on }">
+                <v-btn class="mr-3 float-left" v-on="on" dark raised :loading="loading" :disabled="loading" color="grey"><span v-t="'Save as template'"></span></v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="title font-weight-light grey lighten-2" primary-title><span v-t="'Save as template'"></span></v-card-title>
+                <v-card-text>
+                  <v-text-field class="mt-4" hide-details filled single-line v-model="templatename" :label="$t('Template name')" ></v-text-field>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn :loading="loading" :disabled="loading" color="grey" dark @click="templatedialog= false"><span v-t="'Cancel'"></span></v-btn>
+                  <v-btn :loading="loading" :disabled="loading" color="primary" @click="saveAsTemplate()"><span v-t="'Save'"></span></v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <template v-if="!disablesave">
+              <v-btn fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
+              <v-btn v-else-if="targetpid && !floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary float-right" @click="save()"><span v-t="'Save'"></span></v-btn>
+              <v-btn v-else raised :loading="loading" :disabled="loading" class="primary float-right" @click="submit()"><span v-t="'Submit'"></span></v-btn>
             </template>
-            <v-card>
-              <v-card-title class="title font-weight-light grey lighten-2" primary-title><span v-t="'Save as template'"></span></v-card-title>
-              <v-card-text>
-                <v-text-field class="mt-4" hide-details filled single-line v-model="templatename" :label="$t('Template name')" ></v-text-field>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn :loading="loading" :disabled="loading" color="grey" dark @click="templatedialog= false"><span v-t="'Cancel'"></span></v-btn>
-                <v-btn :loading="loading" :disabled="loading" color="primary" @click="saveAsTemplate()"><span v-t="'Save'"></span></v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <template v-if="!disablesave">
-            <v-btn fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
-            <v-btn v-else-if="targetpid && !floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
-            <v-btn v-else raised :loading="loading" :disabled="loading" color="primary" @click="submit()"><span v-t="'Submit'"></span></v-btn>
-          </template>
+          </v-col>
         </v-row>
 
       </v-tab-item>
@@ -759,7 +773,8 @@ export default {
       previewMember: '',
       searchfieldsinput: '',
       metadatapreview: {},
-      license: null
+      license: null,
+      uploadProgress: 0
     }
   },
   methods: {
@@ -939,6 +954,7 @@ export default {
         httpFormData.append('mimetype', mime)
       }
 
+      let self = this
       try {
         let response = await this.$http.request({
           method: 'POST',
@@ -947,7 +963,10 @@ export default {
             'Content-Type': 'multipart/form-data',
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
-          data: httpFormData
+          data: httpFormData,
+          onUploadProgress: function (progressEvent) {
+            self.uploadProgress = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+          }
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
@@ -963,6 +982,7 @@ export default {
       } finally {
         this.$vuetify.goTo(0)
         this.loading = false
+        this.uploadProgress = 0
       }
     },
     save: async function () {
