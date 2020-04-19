@@ -216,7 +216,7 @@ export default {
     },
     publisherSearch: {
       type: Boolean,
-      default: true
+      default: false
     },
     publishingDate: {
       type: String

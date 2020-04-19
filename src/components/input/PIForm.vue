@@ -707,10 +707,6 @@ export default {
       type: Boolean,
       default: false
     },
-    toggleResourcetype: {
-      type: Boolean,
-      default: false
-    },
     validate: {
       type: Function,
       required: true

@@ -282,7 +282,8 @@ export default {
       type: String
     },
     journalSuggest: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     titleErrorMessages: {
       type: Array

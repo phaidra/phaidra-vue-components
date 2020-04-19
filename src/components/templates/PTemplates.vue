@@ -86,7 +86,7 @@ export default {
         this.loading = true
         try {
           let response = await this.$http.request({
-            method: 'GET',
+            method: 'POST',
             url: this.$store.state.instanceconfig.api + '/jsonld/template/' + tid + '/remove',
             headers: {
               'X-XSRF-TOKEN': this.$store.state.user.token

@@ -4,7 +4,6 @@
     <v-divider v-if="title"></v-divider>
     <v-card-text class="mt-4">
       <v-container>
-        <!--<v-row class="title font-weight-light">{{ $t('Here you can restrict access to this object. Any other objects, like members (if this is a container or a collection), pages (if this is a book) different versions or related objects will not be affected.') }}</v-row>-->
         <v-row>
           <v-col cols="12">
             <v-card>

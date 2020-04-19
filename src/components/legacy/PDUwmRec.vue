@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <v-row v-for="(ch, i) in children" :key="ch.xmlname+i">
-      <template v-if="skip(ch)"></template>
+      <template v-if="skip(ch) || isEmpty(ch)"></template>
       <template v-else-if="ch.input_type === 'static'">
         <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}</v-col>
         <v-col cols="12" md="10">{{ ch.ui_value }}</v-col>
@@ -366,6 +366,24 @@ export default {
     },
     nodePath: function (ch) {
       return this.path ? this.path + '_' + ch.xmlname : ch.xmlname
+    },
+    isEmpty: function (node) {
+      let isEmpty = true
+      if (node.ui_value) {
+        return false
+      }
+      if (node.hasOwnProperty('children')) {
+        if (Array.isArray(node.children)) {
+          for (let ch of node.children) {
+            if (ch.ui_value) {
+              isEmpty = false
+            } else {
+              isEmpty = this.isEmpty(ch)
+            }
+          }
+        }
+      }
+      return isEmpty
     },
     skip: function (node) {
       if (node.hidden) {
