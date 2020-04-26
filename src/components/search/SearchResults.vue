@@ -39,9 +39,11 @@
           <v-row :key="'prev'+doc.pid">
             <v-col cols="2" class="preview-maxwidth">
               <p-img :src="'https://' + instance.baseurl + '/preview/' + doc.pid + '///120'" class="elevation-1 mt-2">
-                <div class="fill-height ma-0" slot="placeholder" align="center" justify="center">
-                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                </div>
+                <template v-slot:placeholder>
+                  <div class="fill-height ma-0" align="center" justify="center" >
+                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                  </div>
+                </template>
               </p-img>
             </v-col>
             <v-col cols="10">

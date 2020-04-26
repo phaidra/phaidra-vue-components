@@ -1,7 +1,7 @@
 <template>
-  <v-card >
-    <v-card-title class="title font-weight-light grey white--text">{{ $t('Relationships') }}</v-card-title>
-    <v-divider></v-divider>
+  <v-card :flat="!title">
+    <v-card-title v-if="title" class="title font-weight-light grey white--text">{{ title }}</v-card-title>
+    <v-divider v-if="title"></v-divider>
     <v-card-text class="mt-4">
       <v-container>
         <v-row class="title font-weight-light">{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</v-row>
@@ -15,8 +15,8 @@
               :loading-text="$t('Loading...')"
               :items-per-page="1000"
             >
-              <template v-slot:item.relationship="{ item }">
-                {{ map[item.relationship].label }}
+              <template v-slot:item.relation="{ item }">
+                {{ getLocalizedTermLabel('relations', item.relation) }}
               </template>
               <template v-slot:item.object="{ item }">
                 <a target="_blank" :href="'https://' + instance.baseurl + '/' + item.object">{{ item.object }}</a>
@@ -87,14 +87,23 @@
 </template>
 
 <script>
+import { vocabulary } from '../../mixins/vocabulary'
 import qs from 'qs'
 
 export default {
   name: 'p-m-relationships',
+  mixins: [ vocabulary ],
   props: {
     pid: {
       type: String,
       required: true
+    },
+    relationships: {
+      type: Object,
+      required: true
+    },
+    title: {
+      type: String
     }
   },
   computed: {
@@ -103,53 +112,30 @@ export default {
     },
     relationshipSelect: function () {
       let arr = []
-      Object.entries(this.map).forEach(([key, value]) => {
-        arr.push( { text: value.label, value: value.uri } )
-      })
+      for (let rel of this.vocabularies['relations'].terms) {
+        arr.push( { text: this.getLocalizedTermLabel('relations', rel['@id']), value: rel['@id'] } )
+      }
       return arr
+    },
+    map: function () {
+      let map = {}
+      for (let rel of this.vocabularies['relations'].terms) {
+        for (let notation of rel['skos:notation']) {
+          map[notation.toLowerCase()] = {
+            uri: rel['@id']
+          }
+          break
+        }
+      }
+      return map
     }
   },
   data () {
     return {
       loading: false,
-      map: {
-        references: {
-          uri: 'http://purl.org/dc/terms/references',
-          label: this.$t('References')
-        },
-        isbacksideof: {
-          uri: 'http://phaidra.org/XML/V1.0/relations#isBackSideOf',
-          label: this.$t('Is back side of')
-        },
-        isthumbnailfor: {
-          uri: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor',
-          label: this.$t('Is thumbnail for')
-        },
-        hassuccessor: {
-          uri: 'http://phaidra.univie.ac.at/XML/V1.0/relations#hasSuccessor',
-          label: this.$t('Has successor')
-        },
-        isalternativeformatof: {
-          uri: 'http://phaidra.org/XML/V1.0/relations#isAlternativeFormatOf',
-          label: this.$t('Is alternative format of')
-        },
-        isalternativeversionof: {
-          uri: 'http://phaidra.org/XML/V1.0/relations#isAlternativeVersionOf',
-          label: this.$t('Is alternative version of')
-        },
-        haspart: {
-          uri: 'info:fedora/fedora-system:def/relations-external#hasCollectionMember',
-          label: this.$t('Has part')
-        },
-        hasmember: {
-          uri: 'http://pcdm.org/models#hasMember',
-          label: this.$t('Has member')
-        }
-      },
-      relationships: {},
       relationshipsArray: [],
       relationshipsHeaders: [
-        { text: this.$t('Relationship'), align: 'left', value: 'relationship' },
+        { text: this.$t('Relation'), align: 'left', value: 'relation' },
         { text: this.$t('Object'), align: 'left', value: 'object' },
         { text: this.$t('Title'), align: 'left', value: 'title' },
         { text: '', align: 'right', value: 'actions', sortable: false }
@@ -162,8 +148,27 @@ export default {
     }
   },
   watch: {
+    relationships: async function (val) {
+      let pids = []
+      Object.entries(val).forEach(([key, value]) => {
+        for (let o of value) {
+          pids.push(o)
+        }
+      })
+      this.relationshipsArray = []
+      let titles = await this.getTitlesHash(pids)
+      Object.entries(val).forEach(([key, value]) => {
+        if (this.map[key]) {
+          for (let o of value) {
+            this.relationshipsArray.push({ relation: this.map[key].uri, object: o, title: titles[o] })
+          }
+        } else {
+          console.log('Error loading relationships: unknown relation: ' + key)
+        }
+      })
+    },
     objectSearch: async function (val) {
-      if (val && (val.length < 4)) {
+      if (val && (val.length < 2)) {
         return
       }
       if (this.objectSearchLoading) return
@@ -199,48 +204,6 @@ export default {
     }
   },
   methods: {
-    loadRelationships: async function () {
-      this.loading = true
-      this.relationships = {}
-      this.relationshipsArray = []
-      try {
-        let response = await this.$http.request({
-          method: 'GET',
-          url: this.instance.api + '/object/' + this.pid + '/relationships',
-          headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          }
-        })
-        if (response.status === 200) {
-          this.relationships = response.data.relationships
-          let pids = []
-          Object.entries(this.map).forEach(([key, value]) => {
-            if (this.relationships[key]) {
-              for ( let o of this.relationships[key]) {
-                pids.push(o)
-              }
-            }
-          })
-          let titles = await this.getTitlesHash(pids)
-          Object.entries(this.map).forEach(([key, value]) => {
-            if (this.relationships[key]) {
-              for ( let o of this.relationships[key]) {
-                this.relationshipsArray.push( { relationship: key,  object: o, title: titles[o] } )
-              }
-            }
-          })
-        } else {
-          if (response.data.alerts && response.data.alerts.length > 0) {
-            this.$store.commit('setAlerts', response.data.alerts)
-          }
-        }
-      } catch (error) {
-        console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-      } finally {
-        this.loading = false
-      }
-    },
     getTitlesHash: async function (pids) {
       let titles = {}
       try {
@@ -270,74 +233,74 @@ export default {
       }
       return titles
     },
-    removeRelationship: async function (item) {
-      this.loadRelationships()
-    },
     addRelationship: async function () {
-      this.loading = true
-      try {
-        var httpFormData = new FormData()
-        httpFormData.append('predicate', this.selectedRelationship)
-        httpFormData.append('object', 'info:fedora/' + this.objectSearchModel.value)
-        let response = await this.$http.request({
-          method: 'POST',
-          url: this.instance.api + '/object/' + this.pid + '/relationship/add',
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          },
-          data: httpFormData
-        })
-        if (response.status === 200) {
-          this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly added' }])
-        } else {
-          if (response.data.alerts && response.data.alerts.length > 0) {
-            this.$store.commit('setAlerts', response.data.alerts)
+      if (this.pid) {
+        this.loading = true
+        try {
+          var httpFormData = new FormData()
+          httpFormData.append('predicate', this.selectedRelationship)
+          httpFormData.append('object', 'info:fedora/' + this.objectSearchModel.value)
+          let response = await this.$http.request({
+            method: 'POST',
+            url: this.instance.api + '/object/' + this.pid + '/relationship/add',
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'X-XSRF-TOKEN': this.$store.state.user.token
+            },
+            data: httpFormData
+          })
+          if (response.status === 200) {
+            this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly added' }])
+          } else {
+            if (response.data.alerts && response.data.alerts.length > 0) {
+              this.$store.commit('setAlerts', response.data.alerts)
+            }
           }
+        } catch (error) {
+          console.log(error)
+          this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        } finally {
+          this.loading = false
+          this.$emit('load-relationships')
         }
-      } catch (error) {
-        console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-      } finally {
-        this.loading = false
+      } else {
+        this.$emit('add-relationship', { s: 'self', p: this.selectedRelationship, o: 'info:fedora/' + this.objectSearchModel.value })
       }
-      this.loadRelationships()
     },
     removeRelationship: async function (item) {
-      this.loading = true
-      try {
-        var httpFormData = new FormData()
-        httpFormData.append('predicate', this.map[item.relationship].uri)
-        httpFormData.append('object', 'info:fedora/' + item.object)
-        let response = await this.$http.request({
-          method: 'POST',
-          url: this.instance.api + '/object/' + this.pid + '/relationship/remove',
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          },
-          data: httpFormData
-        })
-        if (response.status === 200) {
-          this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly removed' }])
-        } else {
-          if (response.data.alerts && response.data.alerts.length > 0) {
-            this.$store.commit('setAlerts', response.data.alerts)
+      if (this.pid) {
+        this.loading = true
+        try {
+          var httpFormData = new FormData()
+          httpFormData.append('predicate', item.relation)
+          httpFormData.append('object', 'info:fedora/' + item.object)
+          let response = await this.$http.request({
+            method: 'POST',
+            url: this.instance.api + '/object/' + this.pid + '/relationship/remove',
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'X-XSRF-TOKEN': this.$store.state.user.token
+            },
+            data: httpFormData
+          })
+          if (response.status === 200) {
+            this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly removed' }])
+          } else {
+            if (response.data.alerts && response.data.alerts.length > 0) {
+              this.$store.commit('setAlerts', response.data.alerts)
+            }
           }
+        } catch (error) {
+          console.log(error)
+          this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        } finally {
+          this.loading = false
+          this.$emit('load-relationships')
         }
-      } catch (error) {
-        console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-      } finally {
-        this.loading = false
+      } else {
+        this.$emit('remove-relationship', { s: 'self', p: item.relation, o: 'info:fedora/' + item.object })
       }
-      this.loadRelationships()
     }
-  },
-  mounted: async function () {    
-    this.$nextTick(function () {
-      this.loadRelationships()
-    })
   }
 }
 </script>

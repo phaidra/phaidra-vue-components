@@ -184,7 +184,8 @@ export default {
       type: String
     },
     rights: {
-      type: Object
+      type: Object,
+      required: true
     },
     title: {
       type: String
@@ -397,7 +398,8 @@ export default {
           console.log(error)
           this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
         } finally {
-          await this.loadRights()
+          this.$emit('load-rights')
+          this.loading = false
         }
       } else {
         this.$emit('input-rights', rights)
@@ -435,7 +437,7 @@ export default {
           if (notation === 'A-1') {
             name = this.$t('Whole University')
           } else {
-            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
+            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation, this.$i18n.locale)
             if (!name) {
               name = notation
             }
@@ -457,7 +459,7 @@ export default {
           if (notation === 'A-1') {
             name = this.$t('Whole University')
           } else {
-            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation.replace('A',''), this.$i18n.locale)
+            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation, this.$i18n.locale)
             if (!name) {
               name = notation
             }
@@ -479,31 +481,6 @@ export default {
           name = await this.getGroupName(notation)
           this.rightsArray.push( { type: 'gruppe', notation: notation, description: name, expires: expires } )
         }
-      }
-    },
-    loadRights: async function () {
-      this.loading = true
-      try {
-        let response = await this.$http.request({
-          method: 'GET',
-          url: this.instance.api + '/object/' + this.pid + '/rights',
-          headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          }
-        })
-        if (response.data.metadata.status === 200) {
-          this.rightsjson = response.data.metadata.rights
-          await this.rightsJsonToRightsArray()
-        } else {
-          if (response.data.alerts && response.data.alerts.length > 0) {
-            this.$store.commit('setAlerts', response.data.alerts)
-          }
-        }
-      } catch (error) {
-        console.log(error)
-        // this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-      } finally {
-        this.loading = false
       }
     },
     loadGroups: async function () {
@@ -535,9 +512,6 @@ export default {
     this.$nextTick(function () {
       if (!this.vocabularies['orgunits'].loaded) {
         this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
-      }
-      if (this.pid) {
-        this.loadRights()
       }
       this.loadGroups()
     })

@@ -185,6 +185,19 @@ const ot4rt = {
 
 const state = {
   vocabularies: {
+    'relations': {
+      terms: [
+        { '@id': 'http://purl.org/dc/terms/references', 'skos:prefLabel': { 'eng': 'References' }, 'skos:notation': [ 'references' ] },
+        { '@id': 'http://phaidra.org/XML/V1.0/relations#isBackSideOf', 'skos:prefLabel': { 'eng': 'Is back side of' }, 'skos:notation': [ 'isBackSideOf' ] },
+        { '@id': 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', 'skos:prefLabel': { 'eng': 'Is thumbnail for' }, 'skos:notation': [ 'isThumbnailFor' ] },
+        { '@id': 'http://phaidra.univie.ac.at/XML/V1.0/relations#hasSuccessor', 'skos:prefLabel': { 'eng': 'Is older version of' }, 'skos:notation': [ 'hasSuccessor' ] },
+        { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeFormatOf', 'skos:prefLabel': { 'eng': 'Is alternative format of' }, 'skos:notation': [ 'isAlternativeFormatOf' ] },
+        { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeVersionOf', 'skos:prefLabel': { 'eng': 'Is alternative version of' }, 'skos:notation': [ 'isAlternativeVersionOf' ] },
+        { '@id': 'info:fedora/fedora-system:def/relations-external#hasCollectionMember', 'skos:prefLabel': { 'eng': 'Has part' }, 'skos:notation': [ 'hasCollectionMember' ] },
+        { '@id': 'http://pcdm.org/models#hasMember', 'skos:prefLabel': { 'eng': 'Has member' }, 'skos:notation': [ 'hasMember' ] }
+      ],
+      loaded: true
+    },
     'pool': {
       terms: [
         { '@id': 'Bibliothek', 'skos:prefLabel': { 'eng': 'Bibliothek' } },

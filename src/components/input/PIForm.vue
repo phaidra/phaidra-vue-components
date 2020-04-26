@@ -6,6 +6,7 @@
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
       <v-tab v-if="importing" class="title font-weight-light text-capitalize">{{ $t('Import') }}</v-tab>
       <v-tab v-if="enablerights" class="title font-weight-light text-capitalize">{{ $t('Rights') }}</v-tab>
+      <v-tab v-if="enablerelationships" class="title font-weight-light text-capitalize">{{ $t('Relationships') }}</v-tab>
       <v-tab v-if="help" class="title font-weight-light text-capitalize">{{ $t('Help') }}</v-tab>
       <v-tab v-if="feedback" class="title font-weight-light text-capitalize">{{ $t('Feedback') }}</v-tab>
     </v-tabs>
@@ -559,10 +560,17 @@
           </v-col>
         </v-row>
       </v-tab-item>
-      <v-tab-item v-if="enablerights">
+      <v-tab-item v-if="enablerights && !targetpid">
         <v-row no-gutters>
           <v-col cols="12">
             <p-m-rights v-on:input-rights="$emit('input-rights', $event)" :rights="rights" ></p-m-rights>
+          </v-col>
+        </v-row>
+      </v-tab-item>
+      <v-tab-item v-if="enablerelationships && !targetpid">
+        <v-row no-gutters>
+          <v-col cols="12">
+            <p-m-relationships v-on:remove-relationship="$emit('remove-relationship', $event)" v-on:add-relationship="$emit('add-relationship', $event)" :relationships="relationships" ></p-m-relationships>
           </v-col>
         </v-row>
       </v-tab-item>
@@ -679,6 +687,9 @@ export default {
     rights: {
       type: Object
     },
+    relationships: {
+      type: Object
+    },
     addbutton: {
       type: Boolean,
       default: true
@@ -696,6 +707,10 @@ export default {
       default: false
     },
     enablerights: {
+      type: Boolean,
+      default: false
+    },
+    enablerelationships: {
       type: Boolean,
       default: false
     },
@@ -835,8 +850,18 @@ export default {
       if (colorder.length > 0) {
         md['metadata']['membersorder'] = colorder
       }
+      if (this.relationships) {
+        md['metadata']['relationships'] = this.relationships
+      }
       if (this.previewMember) {
-        md['metadata']['relationships'] = [ { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' } ]
+        let rel = { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' }
+        if (md['metadata'].hasOwnProperty('relationships')) {
+          if (Array.isArray(md['metadata']['relationships'])) {
+            md['metadata']['relationships'].push(rel)
+          }
+        } else {
+          md['metadata']['relationships'] = [ rel ]
+        }
       }
       if (this.owner) {
         md['metadata']['ownerid'] = this.owner

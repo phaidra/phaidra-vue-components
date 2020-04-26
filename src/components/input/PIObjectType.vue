@@ -4,8 +4,9 @@
       <span v-for="(em, i) in errorMessages" :key="'em'+i">{{ em }}<br/></span>
     </v-alert>
     <v-row no-gutters>
-      <v-col cols="12" md="4" v-for="(term, i) in terms" :key="'ot'+i">
+      <v-col cols="12" md="3" v-for="(term, i) in terms" :key="'ot'+i">
         <v-checkbox class="mt-0 check" v-model="selected" @click.capture="$emit('input', selected)" :label="getLocalizedTermLabel(vocabulary, term['@id'])" :value="term['@id']"></v-checkbox>
+        <v-spacer></v-spacer>
       </v-col>
     </v-row>
   </div>
@@ -56,6 +57,6 @@ export default {
 
 <style scoped>
 .check {
-  min-width: 180px;
+  min-width: 220px;
 }
 </style>
