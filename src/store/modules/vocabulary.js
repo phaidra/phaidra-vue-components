@@ -1113,7 +1113,8 @@ const state = {
     'orgunits': {
       terms: [],
       tree: [],
-      loaded: false
+      loaded: false,
+      linked: false
     }
   }
 }
@@ -1201,22 +1202,28 @@ const actions = {
     langterms.sort((a, b) => a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale))
     commit('setLangTerms', langterms)
   },
-  async loadOrgUnits ({ commit, rootState }, locale) {
-    try {
-      let response = await axios.request({
-        method: 'GET',
-        url: rootState.instanceconfig.api + '/directory/org_get_units'
-      })
-      if (response.data.alerts && response.data.alerts.length > 0) {
-        commit('setAlerts', response.data.alerts)
+  async loadOrgUnits ({ commit, rootState, state }, locale) {
+    if (state.vocabularies['orgunits']['loaded'] === false) {
+      try {
+        let response = await axios.request({
+          method: 'GET',
+          url: rootState.instanceconfig.api + '/directory/org_get_units'
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          commit('setAlerts', response.data.alerts)
+        }
+        let terms = []
+        orgunits.getOrgUnitsTerms(terms, response.data.units, null)
+        commit('setOrgUnits', { tree: response.data.units, terms: terms, locale: locale })
+        commit('sortOrgUnits', locale)
+      } catch (error) {
+        console.log(error)
+        commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch org units: ' + error } ])
       }
-      let terms = []
-      orgunits.getOrgUnitsTerms(terms, response.data.units, null)
-      commit('setOrgUnits', { tree: response.data.units, terms: terms })
-      commit('sortOrgUnits', locale)
-    } catch (error) {
-      console.log(error)
-      commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch org units: ' + error } ])
+    } else {
+      if (state.vocabularies['orgunits']['locale'] !== locale) {
+        commit('sortOrgUnits', locale)
+      }
     }
   },
   async loadVocabulary ({ commit, state, rootState }, vocabId) {

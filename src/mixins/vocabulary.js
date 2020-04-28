@@ -78,6 +78,25 @@ export const vocabulary = {
         case 'ids:uri':
           return value
       }
+    },
+    getOrgPath: function (term, subunits, affiliationPath) {
+      for (let u of subunits) {
+        if (u['@id'] === term['@id']) {
+          affiliationPath.push(u)
+          return true
+        } else {
+          if (u.hasOwnProperty('subunits')) {
+            if (Array.isArray(u.subunits)) {
+              if (u.subunits.length > 0) {
+                if (this.getOrgPath(term, u.subunits, affiliationPath)) {
+                  affiliationPath.push(u)
+                  return true
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

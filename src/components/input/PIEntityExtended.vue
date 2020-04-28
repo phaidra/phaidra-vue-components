@@ -455,32 +455,23 @@ export default {
     }
   },
   methods: {
-    getParentPath: function (unit, parentpath) {
-      if (unit) {
-        if (unit['parent']) {
-          parentpath.push(unit.parent)
-          this.getParentPath(unit.parent, parentpath)
-        }
-      }
-    },
     handleInput: function (unit, propName, eventName) {
       this[propName] = ''
-      let parentpath = []
       if (unit) {
-        this.getParentPath(unit, parentpath)
-        for (let u of parentpath.reverse()) {
-          this[propName] = this[propName] + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+        let path = []
+        this.getOrgPath(unit, this.vocabularies['orgunits'].tree, path)
+        let pathLabels = []
+        for (let u of path) {
+          pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
         }
-        this[propName] = this[propName] + unit['skos:prefLabel'][this.$i18n.locale]
+        this[propName] = pathLabels.join(' > ')
       }
       this.$emit(eventName, unit)
     }
   },
   mounted: function () {
     this.$nextTick(function () {
-      if (!this.vocabularies['orgunits'].loaded) {
-        this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
-      }
+      this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
       this.loading = !this.vocabularies[this.roleVocabulary].loaded
       // emit input to set skos:prefLabel in parent
       if (this.role) {

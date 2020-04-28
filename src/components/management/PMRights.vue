@@ -261,20 +261,13 @@ export default {
     handleInput: function (unit) {
       this.orgunit = unit
       this.path = ''
-      let parentpath = []
-      this.getParentPath(unit, parentpath)
-      for (let u of parentpath.reverse()) {
-        this.path = this.path + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+      let pathArr = []
+      this.getOrgPath(unit, this.vocabularies['orgunits'].tree, pathArr)
+      let pathLabels = []
+      for (let u of pathArr) {
+        pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
       }
-      if (unit['skos:prefLabel']) {
-        this.path = this.path + unit['skos:prefLabel'][this.$i18n.locale]
-      }
-    },
-    getParentPath: function (unit, parentpath) {
-      if (unit['parent']) {
-        parentpath.push(unit.parent)
-        this.getParentPath(unit.parent, parentpath)
-      }
+      this.path = pathLabels.join(' > ')
     },
     openDateDialog: function (item) {
       this.dateDialogItem = item

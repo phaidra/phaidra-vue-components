@@ -4,7 +4,7 @@
     <v-col cols="12">
       <v-card >
         <v-card-title class="title font-weight-light grey white--text">
-            <span>{{ $t(label) }}</span>
+          <span>{{ $t(label) }}</span>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
@@ -726,23 +726,16 @@ export default {
         }
       }
     },
-    getParentPath: function (unit, parentpath) {
-      if (unit) {
-        if (unit['parent']) {
-          parentpath.push(unit.parent)
-          this.getParentPath(unit.parent, parentpath)
-        }
-      }
-    },
     handleInput: function (unit, propName, eventName) {
       this[propName] = ''
-      let parentpath = []
       if (unit) {
-        this.getParentPath(unit, parentpath)
-        for (let u of parentpath.reverse()) {
-          this[propName] = this[propName] + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+        let path = []
+        this.getOrgPath(unit, this.vocabularies['orgunits'].tree, path)
+        let pathLabels = []
+        for (let u of path) {
+          pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
         }
-        this[propName] = this[propName] + unit['skos:prefLabel'][this.$i18n.locale]
+        this[propName] = pathLabels.join(' > ')
       }
       this.$emit(eventName, unit)
     }

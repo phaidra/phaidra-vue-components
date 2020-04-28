@@ -9,11 +9,13 @@
       </v-row>
     </template>
 
-    <template slot="dce:subject">
+    <template v-if="!predicatesToHide.includes('dce:subject')" slot="dce:subject">
       <p-d-keyword :p="'dce:subject'" :language="language === 'xxx' ? null : language" :keywords="keywords" v-for="(keywords, language) in langKeywords" :key="componentid+'kw'+language" v-bind.sync="displayProperties"></p-d-keyword>
     </template>
 
     <template v-for="(o, p) in jsonld">
+
+      <template v-if="!predicatesToHide.includes(p)">
 
         <template v-if="p==='rdam:P30004'" slot="rdam:P30004">
           <p-d-identifier :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'hasid'+j" v-bind.sync="displayProperties"></p-d-identifier>
@@ -328,6 +330,8 @@
           </v-container>
         </template>
 
+      </template>
+
     </template>
   </p-d-jsonld-layout>
 
@@ -375,6 +379,10 @@ export default {
     showSystemFields: {
       type: Boolean,
       default: false
+    },
+    predicatesToHide: {
+      type: Array,
+      default: () => []
     },
     pid: String
   },
@@ -453,7 +461,7 @@ export default {
       let i = 0
       for (let e of o) {
         i++
-        if (i <= this.limitRoles) {
+        if (i < this.limitRoles) {
           entities.push(e)
         } else {
           this.entitiesLimited[p] = true

@@ -67,21 +67,14 @@ export default {
   methods: {
     handleInput: function (unit) {
       this.path = ''
-      let parentpath = []
-      this.getParentPath(unit, parentpath)
-      for (let u of parentpath.reverse()) {
-        this.path = this.path + u['skos:prefLabel'][this.$i18n.locale] + ' > '
+      let pathArr = []
+      this.getOrgPath(unit, this.vocabularies['orgunits'].tree, pathArr)
+      let pathLabels = []
+      for (let u of pathArr) {
+        pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
       }
-      if (unit['skos:prefLabel']) {
-        this.path = this.path + unit['skos:prefLabel'][this.$i18n.locale]
-      }
+      this.path = pathLabels.join(' > ')
       this.$emit('input', unit)
-    },
-    getParentPath: function (unit, parentpath) {
-      if (unit['parent']) {
-        parentpath.push(unit.parent)
-        this.getParentPath(unit.parent, parentpath)
-      }
     }
   },
   props: {

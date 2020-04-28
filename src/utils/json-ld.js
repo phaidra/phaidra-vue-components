@@ -1207,8 +1207,20 @@ export default {
     if (preflabels) {
       if (preflabels.length > 0) {
         h['skos:prefLabel'] = []
-        for (var j = 0; j < preflabels.length; j++) {
-          h['skos:prefLabel'].push(preflabels[j])
+        for (let pl of preflabels) {
+          if (pl.hasOwnProperty('@value')) {
+            if (pl['@value']) {
+              let l = {
+                '@value': pl['@value']
+              }
+              if (pl.hasOwnProperty('@language')) {
+                if (pl['@language']) {
+                  l['@language'] = pl['@language']
+                }
+              }
+              h['skos:prefLabel'].push(l)
+            }
+          }
         }
       }
     }

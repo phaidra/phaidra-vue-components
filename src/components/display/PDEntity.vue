@@ -17,8 +17,8 @@
         </template>
         <template v-if="entity['schema:affiliation']" class="grey--text">
           <template v-for="(af, i) in entity['schema:affiliation']">
-            <template v-if="af['skos:exactMatch']">
-              {{ ' ' }}(<a :key="'af'+i" class="valuefield" :href="af['skos:exactMatch'][0]" target="_blank">{{ getLocalizedValue(af['schema:name']) }}</a>)
+            <template v-if="af['skos:exactMatch'] && affiliation">
+              {{ ' ' }}(<a :key="'af'+i" class="valuefield" :href="af['skos:exactMatch'][0]" target="_blank">{{ affiliation }}</a>)
             </template>
             <template v-else>
               {{ ' ' }}(<template v-for="(afname) in af['schema:name']">{{ afname['@value'] }}</template>)
@@ -59,10 +59,41 @@ export default {
       defualt: false
     }
   },
+  computed: {
+    affiliation: function () {
+      if (this.entity['@type'] === 'schema:Person') {
+        if(this.entity.hasOwnProperty('schema:affiliation')) {
+          for (let af of this.entity['schema:affiliation']) {
+            if (af.hasOwnProperty('skos:exactMatch')) {
+              for (let id of af['skos:exactMatch']) {
+                let term = this.getTerm('orgunits', id)
+                let affiliationPath = []
+                this.getOrgPath(term, this.vocabularies['orgunits'].tree, affiliationPath)
+                let pathLabels = []
+                for (let u of affiliationPath) {
+                  // skip division "Faculties and Centers"
+                  if (u['@id'] !== 'https://pid.phaidra.org/univie-org/1DVY-S9TG') {
+                    pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
+                  }
+                }
+                return pathLabels.join(', ')
+              }
+            }
+          }
+        }
+      }
+      return ''
+    }
+  },
   methods: {
     getLocalizedTermLabel: function (role) {
       return this.$store.getters.getLocalizedTermLabel('rolepredicate', role, this.$i18n.locale)
     }
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
+    })
   }
 }
 </script>

@@ -18,6 +18,12 @@
                 </template>
               </template>
             </v-row>
+            <template v-if="o.hasOwnProperty('ids:isbn')">
+              <v-row v-for="(isbn, i) in o['ids:isbn']" :key="'isbn'+i">
+                <v-col md="2" cols="12" class="pdlabel primary--text">{{ getLocalizedTermLabel('objectidentifiertype', 'ids:isbn') }}</v-col>
+                <v-col md="10" cols="12" class="valuefield">{{ isbn }}</v-col>
+              </v-row>
+            </template>
             <v-row v-for="(obj, pred, i) in o" :key="'role' + i">
               <template v-if="pred.startsWith('role')">
                 <v-col md="2" cols="12" class="pdlabel primary--text ">{{ getLocalizedTermLabel('rolepredicate', pred) }}</v-col>
@@ -87,28 +93,22 @@
             <v-row v-for="(pub, k) in o['bf:provisionActivity']" :key="'pub'+k">
               <v-col md="2" cols="12" class="pdlabel primary--text">{{ $t('rdau:P60101_bf:provisionActivity') }}</v-col>
               <v-col md="10" cols="12">
-                <v-card flat>
-                  <v-card-text class="border-left">
-                    <v-container>
-                      <template v-for="(publisher, i) in pub['bf:agent']">
-                        <template v-if="localizedOrgUnit(publisher)">
-                          <a :key="'publname'+i" class="valuefield" :href="localizedOrgUnit(publisher).id" target="_blank">{{ localizedOrgUnit(publisher).value }}</a>
-                        </template>
-                        <template v-else v-for="(publishername, i) in publisher['schema:name']">
-                          <span :key="'publname'+i" class="valuefield">{{ publishername['@value'] }}</span>
-                        </template>
-                      </template>
-                      <template v-for="(publishingplace, j) in pub['bf:place']">
-                        <template v-for="(place, i) in publishingplace['skos:prefLabel']">
-                          <span class="valuefield" :key="'publplace'+j+i">, {{ place['@value'] }}</span>
-                        </template>
-                      </template>
-                      <template v-for="(publishingdate, j) in pub['bf:date']">
-                          <span :key="'publdate'+j">, {{ publishingdate }}</span>
-                      </template>
-                    </v-container>
-                  </v-card-text>
-                </v-card>
+                <template v-for="(publisher, i) in pub['bf:agent']">
+                  <template v-if="localizedOrgUnit(publisher)">
+                    <a :key="'publname'+i" class="valuefield" :href="localizedOrgUnit(publisher).id" target="_blank">{{ localizedOrgUnit(publisher).value }}</a>
+                  </template>
+                  <template v-else v-for="(publishername, i) in publisher['schema:name']">
+                    <span :key="'publname'+i" class="valuefield">{{ publishername['@value'] }}</span>
+                  </template>
+                </template>
+                <template v-for="(publishingplace, j) in pub['bf:place']">
+                  <template v-for="(place, i) in publishingplace['skos:prefLabel']">
+                    <span class="valuefield" :key="'publplace'+j+i">, {{ place['@value'] }}</span>
+                  </template>
+                </template>
+                <template v-for="(publishingdate, j) in pub['bf:date']">
+                    <span :key="'publdate'+j">, {{ publishingdate }}</span>
+                </template>
               </v-col>
             </v-row>
           </v-container>
