@@ -237,8 +237,8 @@ export default {
                   f.issued = v
                 }
               }
-              if (obj['identifiers:issn']) {
-                for (let v of obj['identifiers:issn']) {
+              if (obj['ids:issn']) {
+                for (let v of obj['ids:issn']) {
                   f.issn = v
                 }
               }
@@ -361,8 +361,8 @@ export default {
                       f.seriesIssued = v
                     }
                   }
-                  if (series['identifiers:issn']) {
-                    for (let v of series['identifiers:issn']) {
+                  if (series['ids:issn']) {
+                    for (let v of series['ids:issn']) {
                       f.seriesIssn = v
                     }
                   }
@@ -1487,7 +1487,7 @@ export default {
       h['dcterms:issued'] = [ issued ]
     }
     if (issn) {
-      h['identifiers:issn'] = [ issn ]
+      h['ids:issn'] = [ issn ]
     }
     if (identifiers) {
       if (identifiers.length > 0) {
@@ -1591,7 +1591,7 @@ export default {
         series['dcterms:issued'] = [ f.seriesIssued ]
       }
       if (f.seriesIssn) {
-        series['identifiers:issn'] = [ f.seriesIssn ]
+        series['ids:issn'] = [ f.seriesIssn ]
       }
       if (f.seriesIdentifier) {
         series['skos:exactMatch'] = [ f.seriesIdentifier ]

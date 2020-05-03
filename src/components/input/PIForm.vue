@@ -538,9 +538,10 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
+            <v-spacer></v-spacer>
             <template v-if="!disablesave">
               <v-btn fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
-              <v-btn v-else-if="targetpid && !floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary float-right" @click="save()"><span v-t="'Save'"></span></v-btn>
+              <v-btn v-else-if="targetpid && !floatingsavebutton" raised :loading="loading" :disabled="loading" class="primary float-right" @click="save()"><span v-t="'Save'"></span></v-btn>
               <v-btn v-else raised :loading="loading" :disabled="loading" class="primary float-right" @click="submit()"><span v-t="'Submit'"></span></v-btn>
             </template>
           </v-col>

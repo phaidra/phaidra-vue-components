@@ -19,7 +19,8 @@
           :outlined="inputStyle==='outlined'"
           return-object
           clearable
-          :disabled="disabled"
+          :readonly="readonly"
+          :disabled="disabled || readonly"
           :hint="hint"
           :persistent-hint="hint ? true : false"
           :error-messages="errorMessages"
@@ -100,6 +101,10 @@ export default {
       type: Array
     },
     showIds: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
       type: Boolean,
       default: false
     }

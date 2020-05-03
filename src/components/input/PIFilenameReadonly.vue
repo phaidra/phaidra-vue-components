@@ -5,6 +5,7 @@
         :value="value"
         :label="$t('Filename')"
         readonly
+        disabled
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
       ></v-text-field>

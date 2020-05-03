@@ -469,9 +469,9 @@ export default {
       this.$emit(eventName, unit)
     }
   },
-  mounted: function () {
-    this.$nextTick(function () {
-      this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
+  mounted: async function () {
+    this.$nextTick(async function () {
+      await this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
       this.loading = !this.vocabularies[this.roleVocabulary].loaded
       // emit input to set skos:prefLabel in parent
       if (this.role) {

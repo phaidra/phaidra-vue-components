@@ -567,8 +567,8 @@ const state = {
     },
     'irrolepredicate': {
       terms: [
-        { '@id': 'role:aut', 'skos:prefLabel': { 'eng': 'Author', 'deu': 'Autor', 'ita': 'Author' } },
-        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'EditorIn', 'ita': 'Curatore' } }
+        { '@id': 'role:aut', 'skos:prefLabel': { 'eng': 'Author', 'deu': 'Autor*inn', 'ita': 'Author' } },
+        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Editor*inn', 'ita': 'Curatore' } }
       ],
       loaded: true
     },
@@ -1114,16 +1114,20 @@ const state = {
       terms: [],
       tree: [],
       loaded: false,
-      linked: false
+      linked: false,
+      sorted: ''
     }
   }
 }
 
 const mutations = {
   sortOrgUnits (state, locale) {
-    state.vocabularies['orgunits']['terms'].sort(function (a, b) {
-      return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
-    })
+    if (state.vocabularies['orgunits'].sorted !== locale) {
+      state.vocabularies['orgunits']['terms'].sort(function (a, b) {
+        return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+      })
+      state.vocabularies['orgunits'].sorted = locale
+    }
   },
   setOrgUnits (state, data) {
     if (state.vocabularies['orgunits']['loaded'] === false) {

@@ -19,7 +19,7 @@
         :outlined="inputStyle==='outlined'"
       ></v-text-field>
     </v-col>
-    <v-col cols="12" md="2" v-if="multilingual">
+    <v-col cols="12" :md="actions.length ? 2 : 4" v-if="multilingual">
       <v-autocomplete
         :value="getTerm('lang', language)"
         v-on:input="$emit('input-language', $event )"
