@@ -567,8 +567,8 @@ const state = {
     },
     'irrolepredicate': {
       terms: [
-        { '@id': 'role:aut', 'skos:prefLabel': { 'eng': 'Author', 'deu': 'Autor*inn', 'ita': 'Author' } },
-        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Editor*inn', 'ita': 'Curatore' } }
+        { '@id': 'role:aut', 'skos:prefLabel': { 'eng': 'Author', 'deu': 'Autor*in', 'ita': 'Author' } },
+        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Editor*in', 'ita': 'Curatore' } }
       ],
       loaded: true
     },
