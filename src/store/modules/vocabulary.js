@@ -387,7 +387,7 @@ const state = {
         { '@id': 'role:dnr', 'skos:prefLabel': { 'eng': 'Donor', 'deu': 'Stifter*in', 'ita': 'Donatore' } },
         { '@id': 'role:drm', 'skos:prefLabel': { 'eng': 'Draftsman', 'deu': 'Bauzeichner*in / Konstruktionszeichner*in / technische/r Zeichner*in', 'ita': 'Draftsman' } },
         { '@id': 'role:dub', 'skos:prefLabel': { 'eng': 'Dubious author', 'deu': 'zweifelhafte Autor*in', 'ita': 'Autore incerto' } },
-        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Editor*in', 'ita': 'Curatore' } },
+        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Herausgeber*in', 'ita': 'Curatore' } },
         { '@id': 'role:edc', 'skos:prefLabel': { 'eng': 'Editor of compilation', 'deu': 'Editor*in der Zusammenstellung / des Sammelwerks', 'ita': 'Editor of compilation' } },
         { '@id': 'role:edm', 'skos:prefLabel': { 'eng': 'Editor of moving image work', 'deu': 'Film-Editor*in', 'ita': 'Editor of moving image work' } },
         { '@id': 'role:elg', 'skos:prefLabel': { 'eng': 'Electrician', 'deu': 'Elektriker*in', 'ita': 'Electrician' } },
@@ -494,7 +494,7 @@ const state = {
         { '@id': 'role:pdr', 'skos:prefLabel': { 'eng': 'Project director', 'deu': 'Projektleiter*in', 'ita': 'Project director' } },
         { '@id': 'role:pfr', 'skos:prefLabel': { 'eng': 'Proofreader', 'deu': 'Lektor*in', 'ita': 'Correttore' } },
         { '@id': 'role:prv', 'skos:prefLabel': { 'eng': 'Provider', 'deu': 'Anbieter*in / Lieferant*in', 'ita': 'Provider' } },
-        { '@id': 'role:pbl', 'skos:prefLabel': { 'eng': 'Publisher', 'deu': 'Herausgeber*in', 'ita': 'Editore' } },
+        { '@id': 'role:pbl', 'skos:prefLabel': { 'eng': 'Publisher', 'deu': 'Verleger*in', 'ita': 'Editore' } },
         { '@id': 'role:pbd', 'skos:prefLabel': { 'eng': 'Publishing director', 'deu': 'Verlagsleiter*in', 'ita': 'Publishing director' } },
         { '@id': 'role:ppt', 'skos:prefLabel': { 'eng': 'Puppeteer', 'deu': 'Puppenspieler*in', 'ita': 'Puppeteer' } },
         { '@id': 'role:rdd', 'skos:prefLabel': { 'eng': 'Radio director', 'deu': 'Rund/Hörfunkdirektorin / Rundfunkintendant*in', 'ita': 'Radio director' } },
@@ -568,7 +568,7 @@ const state = {
     'irrolepredicate': {
       terms: [
         { '@id': 'role:aut', 'skos:prefLabel': { 'eng': 'Author', 'deu': 'Autor*in', 'ita': 'Author' } },
-        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Editor*in', 'ita': 'Curatore' } }
+        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Herausgeber*in', 'ita': 'Curatore' } }
       ],
       loaded: true
     },
