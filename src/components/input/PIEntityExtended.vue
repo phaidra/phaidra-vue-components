@@ -462,7 +462,9 @@ export default {
         this.getOrgPath(unit, this.vocabularies['orgunits'].tree, path)
         let pathLabels = []
         for (let u of path) {
-          pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
+          if (this.$i18n) {
+            pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
+          }
         }
         this[propName] = pathLabels.join(' > ')
       }

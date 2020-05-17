@@ -64,8 +64,8 @@
                     :disabled="disablerole"
                     v-on:input="$emit('input-role', { role: role, roleTerm: $event })"
                     :label="$t('Role')"
-                    :items="vocabularies['rolepredicate'].terms"
-                    :value="getTerm('rolepredicate', role.role)"
+                    :items="vocabularies[rolesVocabulary].terms"
+                    :value="getTerm(rolesVocabulary, role.role)"
                     :filter="autocompleteFilter"
                     :filled="inputStyle==='filled'"
                     :outlined="inputStyle==='outlined'"
@@ -75,13 +75,13 @@
                   >
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>
-                        <v-list-item-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                        <v-list-item-title  v-html="`${getLocalizedTermLabel(rolesVocabulary, item['@id'])}`"></v-list-item-title>
                         <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
                       </v-list-item-content>
                     </template>
                     <template slot="selection" slot-scope="{ item }">
                       <v-list-item-content>
-                        <v-list-item-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+                        <v-list-item-title v-html="`${getLocalizedTermLabel(rolesVocabulary, item['@id'])}`"></v-list-item-title>
                       </v-list-item-content>
                     </template>
                   </v-autocomplete>
@@ -399,36 +399,42 @@
                     </v-col>
                     <v-col v-if="publisherShowDate" cols="12" :cols="publisherShowPlace ? 4 : 12">
                       <template v-if="publishingDatePicker">
-                        <v-menu
-                          ref="menu1"
-                          v-model="publisherDateMenu"
-                          :close-on-content-click="false"
-                          transition="scale-transition"
-                          offset-y
-                          max-width="290px"
-                          min-width="290px"
+                        <v-text-field
+                          :value="publishingDate"
+                          v-on:blur="$emit('input-publishing-date',$event.target.value)"
+                          :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
+                          :required="required"
+                          :rules="[validationrules.date]"
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
+                          :error-messages="publishingDateErrorMessages"
                         >
-                          <template v-slot:activator="{ on }">
-                            <v-text-field
-                              :value="publishingDate"
-                              v-on:blur="$emit('input-publishing-date',$event.target.value)"
-                              :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
-                              :rules="[validationrules.date]"
-                              :filled="inputStyle==='filled'"
-                              :outlined="inputStyle==='outlined'"
-                              append-icon="mdi-calendar"
-                              v-on="on"
-                            ></v-text-field>
+                          <template v-slot:append>
+                            <v-fade-transition leave-absolute>
+                              <v-menu
+                                ref="menu1"
+                                v-model="publisherDateMenu"
+                                :close-on-content-click="false"
+                                transition="scale-transition"
+                                offset-y
+                                max-width="290px"
+                                min-width="290px"
+                              >
+                                <template v-slot:activator="{ on }">
+                                  <v-icon v-on="on">mdi-calendar</v-icon>
+                                </template>
+                                <v-date-picker
+                                  color="primary"
+                                  :value="publishingDate"
+                                  :show-current="false"
+                                  v-model="publisherPickerModel"
+                                  :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                                  v-on:input="publisherDateMenu = false; $emit('input-publishing-date', $event)"
+                                ></v-date-picker>
+                              </v-menu>
+                            </v-fade-transition>
                           </template>
-                          <v-date-picker
-                            color="primary"
-                            :value="publishingDate"
-                            :show-current="false"
-                            v-model="publisherPickerModel"
-                            :locale="this.$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
-                            v-on:input="publisherDateMenu = false; $emit('input-publishing-date', $event)"
-                          ></v-date-picker>
-                        </v-menu>
+                        </v-text-field>
                       </template>
                       <template v-else>
                         <v-text-field
@@ -494,6 +500,10 @@ export default {
     },
     roles: {
       type: Array
+    },
+    rolesVocabulary: {
+      type: String,
+      default: 'rolepredicate'
     },
     disablerole: {
       type: Boolean,

@@ -51,6 +51,8 @@ export const validationrules = {
           return 'wikidata'
         case 'phaidra:acnumber':
           return 'acnumber'
+        default:
+          return 'noop'
       }
     },
     isValidHandle: function (str) {
