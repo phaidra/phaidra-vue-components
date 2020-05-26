@@ -95,8 +95,7 @@ export default {
   mixins: [ vocabulary ],
   props: {
     pid: {
-      type: String,
-      required: true
+      type: String
     },
     relationships: {
       type: Object,
@@ -149,7 +148,9 @@ export default {
   },
   watch: {
     relationships: async function (val) {
+      this.loading = true
       let pids = []
+      console.log('new rels value: ' + JSON.stringify(val))
       Object.entries(val).forEach(([key, value]) => {
         for (let o of value) {
           pids.push(o)
@@ -166,6 +167,8 @@ export default {
           console.log('Error loading relationships: unknown relation: ' + key)
         }
       })
+      console.log('new rels array: ' + JSON.stringify(this.relationshipsArray))
+      this.loading = false
     },
     objectSearch: async function (val) {
       if (val && (val.length < 2)) {

@@ -488,13 +488,13 @@
                         <v-container>
                           <v-row>
                             <v-col v-if="addfieldselection.length > 0">
-                              <span v-t="'Selected fields:'" class="mr-2"></span> <v-chip :key="index" v-for="(ch, index) in addfieldselection" close @click:close="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
+                              <span v-t="'Selected fields:'" class="mr-2"></span> <v-chip class="mx-1" :key="index" v-for="(ch, index) in addfieldselection" close @click:close="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
                             </v-col>
                             <v-col v-else><span v-t="'Please select metadata fields from the list'"></span></v-col>
                           </v-row>
                           <v-row justify="end">
-                            <v-btn color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
-                            <v-btn color="primary" @click="addFields(s)"><span v-t="'Add'"></span></v-btn>
+                            <v-btn class="mx-1" color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
+                            <v-btn class="mx-1" color="primary" @click="addFields(s)"><span v-t="'Add'"></span></v-btn>
                           </v-row>
                         </v-container>
                       </v-card-actions>
