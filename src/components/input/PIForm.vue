@@ -588,6 +588,7 @@
 </template>
 
 <script>
+import { vocabulary } from '../../mixins/vocabulary'
 import arrays from '../../utils/arrays'
 import jsonLd from '../../utils/json-ld'
 import fields from '../../utils/fields'
@@ -633,6 +634,7 @@ import PHelp from '../utils/PHelp'
 
 export default {
   name: 'p-i-form',
+  mixins: [ vocabulary ],
   components: {
     PITextField,
     PITextFieldSuggest,
@@ -691,6 +693,9 @@ export default {
     relationships: {
       type: Object
     },
+    foreignRelationships: {
+      type: Object
+    },
     addbutton: {
       type: Boolean,
       default: true
@@ -746,8 +751,11 @@ export default {
     }
   },
   watch: {
-    form (val) {
-      this.license = null
+    form: {
+      handler: function (val) {
+        this.license = null
+      },
+      deep: true
     }
   },
   computed: {
@@ -851,8 +859,55 @@ export default {
       if (colorder.length > 0) {
         md['metadata']['membersorder'] = colorder
       }
+      if (this.foreignRelationships) {
+        Object.entries(this.foreignRelationships).forEach(([relation, pids]) => {
+          let predicate
+          for (let rel of this.vocabularies['relations'].terms) {
+            for (let notation of rel['skos:notation']) {
+              if (notation.toLowerCase() === relation ) {
+                predicate = rel['@id']
+              }
+              break
+            }
+          }
+          if (Array.isArray(pids)) {
+            for (let pid of pids) {
+              let rel = { s: pid, p: predicate, o: 'self' }
+              if (md['metadata'].hasOwnProperty('relationships')) {
+                if (Array.isArray(md['metadata']['relationships'])) {
+                  md['metadata']['relationships'].push({rel})
+                }
+              } else {
+                md['metadata']['relationships'] = [ rel ]
+              }
+            }
+          }
+        })
+      }
       if (this.relationships) {
-        md['metadata']['relationships'] = this.relationships
+        Object.entries(this.relationships).forEach(([relation, pids]) => {
+          let predicate
+          for (let rel of this.vocabularies['relations'].terms) {
+            for (let notation of rel['skos:notation']) {
+              if (notation.toLowerCase() === relation ) {
+                predicate = rel['@id']
+              }
+              break
+            }
+          }
+          if (Array.isArray(pids)) {
+            for (let pid of pids) {
+              let rel = { s: 'self', p: predicate, o: pid }
+              if (md['metadata'].hasOwnProperty('relationships')) {
+                if (Array.isArray(md['metadata']['relationships'])) {
+                  md['metadata']['relationships'].push({rel})
+                }
+              } else {
+                md['metadata']['relationships'] = [ rel ]
+              }
+            }
+          }
+        })
       }
       if (this.previewMember) {
         let rel = { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' }

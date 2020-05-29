@@ -55,8 +55,11 @@ export default {
     }
   },
   watch: {
-    form: function () {
-      this.assignIdsAndParentsRec(this.form, 'root', { id: 'root', children: this.form })
+    form: {
+      handler: function () {
+        this.assignIdsAndParentsRec(this.form, 'root', { id: 'root', children: this.form })
+      },
+      deep: true
     }
   },
   computed: {

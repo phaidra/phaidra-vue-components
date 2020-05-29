@@ -146,8 +146,11 @@ export default {
     search (val) {
       val && this.querySuggestionsDebounce(val)
     },
-    value (val) {
-      this.model = this.value
+    value: {
+      handler: function (val) {
+        this.model = this.value
+      },
+      deep: true
     }
   },
   methods: {

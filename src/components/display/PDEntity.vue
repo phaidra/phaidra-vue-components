@@ -66,9 +66,8 @@ export default {
           for (let af of this.entity['schema:affiliation']) {
             if (af.hasOwnProperty('skos:exactMatch')) {
               for (let id of af['skos:exactMatch']) {
-                let term = this.getTerm('orgunits', id)
                 let affiliationPath = []
-                this.getOrgPath(term, this.vocabularies['orgunits'].tree, affiliationPath)
+                this.getOrgPath(this.getTerm('orgunits', id), this.vocabularies['orgunits'].tree, affiliationPath)
                 let pathLabels = []
                 for (let u of affiliationPath) {
                   // skip division "Faculties and Centers"

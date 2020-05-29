@@ -224,9 +224,12 @@ export default {
     }
   },
   watch: {
-    rights: async function (val) {
+    rights: {
+      handler: async function (val) {
       this.rightsjson = val
       this.rightsJsonToRightsArray()
+      },
+      deep: true
     },
     userSearch: async function (val) {
       if (val && (val.length < 4)) {
@@ -262,6 +265,9 @@ export default {
       this.orgunit = unit
       this.path = ''
       let pathArr = []
+      if (!unit.hasOwnProperty('@id')) {
+        unit = this.getTerm('orgunits', unit)
+      }
       this.getOrgPath(unit, this.vocabularies['orgunits'].tree, pathArr)
       let pathLabels = []
       for (let u of pathArr) {

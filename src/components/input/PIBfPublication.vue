@@ -349,6 +349,9 @@ export default {
       this[propName] = ''
       if (unit) {
         let path = []
+        if (!unit.hasOwnProperty('@id')) {
+          unit = this.getTerm('orgunits', unit)
+        }
         this.getOrgPath(unit, this.vocabularies['orgunits'].tree, path)
         let pathLabels = []
         for (let u of path) {

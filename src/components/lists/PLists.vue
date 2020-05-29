@@ -148,30 +148,33 @@ export default {
     }
   },
   watch: {
-    loadedList: async function () {
-      if (this.loadedList) {
-        this.membersLoading = true
-        try {
-          let response = await this.$http.request({
-            method: 'GET',
-            url: this.instance.api + '/list/' + this.loadedList.listid,
-            headers: {
-              'X-XSRF-TOKEN': this.$store.state.user.token
+    loadedList: {
+      handler: async function () {
+        if (this.loadedList) {
+          this.membersLoading = true
+          try {
+            let response = await this.$http.request({
+              method: 'GET',
+              url: this.instance.api + '/list/' + this.loadedList.listid,
+              headers: {
+                'X-XSRF-TOKEN': this.$store.state.user.token
+              }
+            })
+            if (response.status === 200) {
+              this.members = response.data.list.members
+            } else {
+              if (response.data.alerts && response.data.alerts.length > 0) {
+                this.$store.commit('setAlerts', response.data.alerts)
+              }
             }
-          })
-          if (response.status === 200) {
-            this.members = response.data.list.members
-          } else {
-            if (response.data.alerts && response.data.alerts.length > 0) {
-              this.$store.commit('setAlerts', response.data.alerts)
-            }
+          } catch (error) {
+            console.log(error)
+          } finally {
+            this.membersLoading = false
           }
-        } catch (error) {
-          console.log(error)
-        } finally {
-          this.membersLoading = false
         }
-      }
+      },
+      deep: true
     }
   },
   data () {

@@ -147,28 +147,29 @@ export default {
     }
   },
   watch: {
-    relationships: async function (val) {
-      this.loading = true
-      let pids = []
-      console.log('new rels value: ' + JSON.stringify(val))
-      Object.entries(val).forEach(([key, value]) => {
-        for (let o of value) {
-          pids.push(o)
-        }
-      })
-      this.relationshipsArray = []
-      let titles = await this.getTitlesHash(pids)
-      Object.entries(val).forEach(([key, value]) => {
-        if (this.map[key]) {
+    relationships: {
+      handler: async function (val) {
+        this.loading = true
+        let pids = []
+        Object.entries(val).forEach(([key, value]) => {
           for (let o of value) {
-            this.relationshipsArray.push({ relation: this.map[key].uri, object: o, title: titles[o] })
+            pids.push(o)
           }
-        } else {
-          console.log('Error loading relationships: unknown relation: ' + key)
-        }
-      })
-      console.log('new rels array: ' + JSON.stringify(this.relationshipsArray))
-      this.loading = false
+        })
+        this.relationshipsArray = []
+        let titles = await this.getTitlesHash(pids)
+        Object.entries(val).forEach(([key, value]) => {
+          if (this.map[key]) {
+            for (let o of value) {
+              this.relationshipsArray.push({ relation: this.map[key].uri, object: o, title: titles[o] })
+            }
+          } else {
+            console.log('Error loading relationships: unknown relation: ' + key)
+          }
+        })
+        this.loading = false
+      },
+      deep: true
     },
     objectSearch: async function (val) {
       if (val && (val.length < 2)) {
