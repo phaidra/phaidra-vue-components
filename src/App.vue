@@ -350,7 +350,7 @@ export default {
   },
   data () {
     return {
-      window: 7,
+      window: 5,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -2143,11 +2143,11 @@ export default {
       members: [],
       pid: 'o:588288',
       piddoc: {},
-      collection: 'o:724719',
+      collection: 'o:459021',
       sampleCollection: 'o:541829',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
-      phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
-      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra',
+      phaidrabaseurl: 'phaidra.univie.ac.at',
+      apibaseurl: 'https://services.phaidra.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''
