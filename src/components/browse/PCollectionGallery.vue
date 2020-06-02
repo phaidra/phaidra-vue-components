@@ -28,15 +28,15 @@
       <v-divider vertical></v-divider>
       <v-col v-if="mode === 'single'">
         <v-carousel hide-delimiters height="100%">
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:459718/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:459716/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1083727'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039864/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039863/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039862/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039861/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039860/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039859/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459718/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459716/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1083727'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039864/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039863/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039862/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039861/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039860/'"></v-img></v-carousel-item>
+          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039859/'"></v-img></v-carousel-item>
         </v-carousel>
       </v-col>
       <v-col v-if="mode === 'gallery'">
@@ -44,7 +44,7 @@
           <v-row>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:459718/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459718/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -55,7 +55,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:459716/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459716/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -66,7 +66,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1083727/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1083727/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -77,7 +77,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039864/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039864/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -88,7 +88,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039863/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039863/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -99,7 +99,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039862/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039862/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -110,7 +110,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039861/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039861/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -121,7 +121,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039860/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039860/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -132,7 +132,7 @@
             </v-col>
             <v-col class="d-flex child-flex" cols="4">
               <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://phaidra.univie.ac.at/preview/o:1039859/'">
+                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039859/'">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -157,6 +157,11 @@ export default {
     collection: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    instanceconfig: function () {
+      return this.$root.$store.state.instanceconfig
     }
   },
   data () {
