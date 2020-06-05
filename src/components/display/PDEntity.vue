@@ -21,7 +21,7 @@
               {{ ' ' }}(<a :key="'af'+i" class="valuefield" :href="af['skos:exactMatch'][0]" target="_blank">{{ affiliation }}</a>)
             </template>
             <template v-else>
-              {{ ' ' }}(<template v-for="(afname) in af['schema:name']">{{ afname['@value'] }}</template>)
+              {{ ' ' }}(<template v-for="(afname, i) in af['schema:name']"><template v-if="i>0"> / </template>{{ afname['@value'] }}</template>)
             </template>
           </template>
         </template>
@@ -67,7 +67,9 @@ export default {
             if (af.hasOwnProperty('skos:exactMatch')) {
               for (let id of af['skos:exactMatch']) {
                 let affiliationPath = []
-                this.getOrgPath(this.getTerm('orgunits', id), this.vocabularies['orgunits'].tree, affiliationPath)
+                if (this.$store.state.vocabulary) { // does not work in old phaidra
+                  this.getOrgPath(this.getTerm('orgunits', id), this.vocabularies['orgunits'].tree, affiliationPath)
+                }
                 let pathLabels = []
                 for (let u of affiliationPath) {
                   // skip division "Faculties and Centers"

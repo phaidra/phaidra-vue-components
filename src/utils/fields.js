@@ -465,6 +465,7 @@ const fields = [
     title: '',
     titleLanguage: '',
     titleErrorMessages: [],
+    subtitle: '',
     roles: [
       {
         id: 'contained-in-role',

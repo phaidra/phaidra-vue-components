@@ -631,7 +631,7 @@ const state = {
     },
     'licenses': {
       terms: [
-        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': { 'eng': '© All rights reserved' }, 'img': 'cc-by.png' },
+        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': { 'eng': '© All rights reserved' } },
         { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': { 'eng': 'CC BY 4.0 International' }, 'img': 'cc-by.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC 4.0 International' }, 'img': 'cc-by-nc.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 4.0 International' }, 'img': 'cc-by-nc-nd.png' },
@@ -643,7 +643,8 @@ const state = {
     },
     'alllicenses': {
       terms: [
-        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': { 'eng': '© All rights reserved' }, 'img': 'cc-by.png' },
+        { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:prefLabel': { 'eng': '© All rights reserved' } },
+        { '@id': 'http://creativecommons.org/publicdomain/mark/1.0/', 'skos:prefLabel': { 'eng': 'Public Domain Mark 1.0' }, 'img': 'pdm.png' },
         { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:prefLabel': { 'eng': 'CC BY 4.0 International' }, 'img': 'cc-by.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC 4.0 International' }, 'img': 'cc-by-nc.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 4.0 International' }, 'img': 'cc-by-nc-nd.png' },
