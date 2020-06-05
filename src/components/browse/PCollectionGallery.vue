@@ -28,118 +28,38 @@
       <v-divider vertical></v-divider>
       <v-col v-if="mode === 'single'">
         <v-carousel hide-delimiters height="100%">
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459718/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459716/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1083727'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039864/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039863/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039862/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039861/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039860/'"></v-img></v-carousel-item>
-          <v-carousel-item><v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039859/'"></v-img></v-carousel-item>
+          <v-carousel-item v-for="doc in childrenOfActiveCollection">
+             <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <span v-on="on">
+                   <v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid"></v-img>
+                </span>
+              </template>
+              <span>{{doc.dc_title[0]}}</span>
+            </v-tooltip>
+          </v-carousel-item>
         </v-carousel>
       </v-col>
       <v-col v-if="mode === 'gallery'">
         <v-container>
           <v-row>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459718/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:459716/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1083727/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039864/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039863/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039862/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039861/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039860/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-            <v-col class="d-flex child-flex" cols="4">
-              <v-card flat tile class="d-flex">
-                <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/o:1039859/'">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
+            <v-col class="d-flex child-flex" cols="4" v-for="doc in childrenOfActiveCollection">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <span v-on="on">
+                    <v-card flat tile class="d-flex">
+                      <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid">
+                        <template v-slot:placeholder>
+                          <v-row class="fill-height ma-0" align="center" justify="center">
+                            <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                          </v-row>
+                        </template>
+                      </v-img>
+                    </v-card>
+                  </span>
+                </template>
+                <span>{{doc.dc_title[0]}}</span>
+              </v-tooltip>
             </v-col>
           </v-row>
         </v-container>
@@ -178,7 +98,8 @@ export default {
       mode: 'gallery',
       selectedImage: {
         src: ''
-      }
+      }, 
+      childrenOfActiveCollection: []
     }
   },
   methods: {
@@ -220,13 +141,15 @@ export default {
       }
     },
     getChildren: async function (arr) {
-      alert('load children of: '+JSON.stringify(arr))
+      
+      //alert('load children of: '+JSON.stringify(arr));
+      //alert('load children2 of: '+arr[0]);
       try {
         let params = {
           q: '*:*',
           defType: 'edismax',
           wt: 'json',
-          fq: 'ispartof:"' + item.id + '" AND -cmodel:"Collection"',
+          fq: 'ispartof:"' + arr[0] + '" AND -cmodel:"Collection"',  //ReferenceError: item is not defined
           start: 0,
           rows: 5000
         }
@@ -238,15 +161,20 @@ export default {
             'content-type': 'application/x-www-form-urlencoded'
           }
         })
-        let docs = response.data.response.docs
+        
         let total = response.data.response.numFound
         if (total < 1) {
-          console.log(item.id + ' has ' + total + ' members')
+          console.log(arr[0] + ' has ' + total + ' members')
           return
         }
-        for (let member of docs) {
-          
-        }
+        
+        
+        this.childrenOfActiveCollection = response.data.response.docs
+        
+        //for (let doc of this.childrenOfActiveCollection) {
+        //  alert('https://' + this.instanceconfig.baseurl + '/preview/' + doc.pid);
+        //}
+        
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
