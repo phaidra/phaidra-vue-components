@@ -74,7 +74,7 @@
                         </template>
                       </v-row>
                       <v-row :key="'sissn'+k">
-                        <template v-for="(issn, i) in series['identifiers:issn']">
+                        <template v-for="(issn, i) in series['ids:issn']">
                           <v-col md="3" cols="12" class="pdlabel primary--text" :key="'isl'+i">{{ $t('ISSN') }}</v-col>
                           <v-col md="9" cols="12" class="valuefield" :key="'is'+i">{{ issn }}</v-col>
                         </template>
