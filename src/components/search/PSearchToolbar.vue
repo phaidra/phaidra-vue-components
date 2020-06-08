@@ -78,7 +78,7 @@
 
 <script>
 export default {
-  name: 'search-toolbar',
+  name: 'p-search-toolbar',
   props: {
     setSort: {
       type: Function,

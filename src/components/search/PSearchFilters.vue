@@ -45,7 +45,7 @@
           </v-col>
         </v-row>
         <v-row no-gutters>
-          <autocomplete
+          <p-search-autocomplete
             class="mt-4"
             v-if="showOwnerFilter"
             searchaction="search"
@@ -56,7 +56,7 @@
             :customParams="{ token: 'dev' }"
             :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
             :onSelect="handleOwnerSelect"
-          ></autocomplete>
+          ></p-search-autocomplete>
         </v-row>
       </li>
       <li>
@@ -166,7 +166,7 @@
 </template>
 
 <script>
-import Autocomplete from './Autocomplete'
+import PSearchAutocomplete from './PSearchAutocomplete'
 import '@/compiled-icons/univie-stop2'
 import '@/compiled-icons/univie-checkbox-unchecked'
 import '@/compiled-icons/material-action-account-balance'
@@ -176,9 +176,9 @@ import { marcRoles } from './filters'
 import { toggleFacet, showFacet } from './facets'
 
 export default {
-  name: 'search-filters',
+  name: 'p-search-filters',
   components: {
-    Autocomplete
+    PSearchAutocomplete
   },
   props: {
     search: {

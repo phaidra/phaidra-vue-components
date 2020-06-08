@@ -106,7 +106,7 @@ import ListDialog from '../select/ListDialog'
 import CollectionDialog from '../select/CollectionDialog'
 
 export default {
-  name: 'search-results',
+  name: 'p-search-results',
   components: {
     PDLicense,
     PImg,

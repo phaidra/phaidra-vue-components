@@ -3,7 +3,7 @@
       <v-col md="9" cols="12" class="border-right pr-2" >
         <v-row align="start">
           <v-col md="6" cols="9">
-            <autocomplete
+            <p-search-autocomplete
               placeholder="Search..."
               name="autocomplete"
               :initValue="q"
@@ -13,11 +13,11 @@
               :onSelect="handleSelect"
               solo
               :messages="[ total + ' ' + $t('objects') ]"
-            ></autocomplete>
+            ></p-search-autocomplete>
           </v-col>
           <v-spacer></v-spacer>
           <v-col  md="6" cols="12">
-            <search-toolbar
+            <p-search-toolbar
               :setSort="setSort"
               :sortIsActive="sortIsActive"
               :link="link"
@@ -37,14 +37,14 @@
                 <v-icon @click="filterdialog = !filterdialog">mdi-close</v-icon>
               </v-card-title>
               <v-card-text>
-                <search-filters
+                <p-search-filters
                   :search="search"
                   :facetQueries="facetQueries"
                   :persAuthorsProp="persAuthors"
                   :corpAuthorsProp="corpAuthors"
                   :rolesProp="roles"
                   :ownerProp="owner"
-                ></search-filters>
+                ></p-search-filters>
               </v-card-text>
               <v-divider></v-divider>
             </v-card>
@@ -52,25 +52,25 @@
         </v-row>
         <v-row no-gutters>
           <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
-          <search-results
+          <p-search-results
             :docs="docs"
             :total="total"
             :selectioncheck="selectioncheck"
             :getallresults="getAllResults">
-          </search-results>
+          </p-search-results>
           <p-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
         </v-row>
       </v-col>
       <v-col cols="3" class="pa-2 hidden-sm-and-down">
         <h3 class="title font-weight-light primary--text border-bottom pa-2">Filters</h3>
-        <search-filters
+        <p-search-filters
           :search="search"
           :facetQueries="facetQueries"
           :persAuthorsProp="persAuthors"
           :corpAuthorsProp="corpAuthors"
           :rolesProp="roles"
           :ownerProp="owner"
-          ></search-filters>
+          ></p-search-filters>
       </v-col>
       <v-dialog v-model="limitdialog" width="500">
         <v-card>
@@ -92,10 +92,10 @@
 
 <script>
 import qs from 'qs'
-import Autocomplete from './Autocomplete'
-import SearchResults from './SearchResults'
-import SearchFilters from './SearchFilters'
-import SearchToolbar from './SearchToolbar'
+import PSearchAutocomplete from './PSearchAutocomplete'
+import PSearchResults from './PSearchResults'
+import PSearchFilters from './PSearchFilters'
+import PSearchToolbar from './PSearchToolbar'
 import PPagination from '../utils/PPagination'
 import '@/compiled-icons/fontello-sort-name-up'
 import '@/compiled-icons/fontello-sort-name-down'
@@ -111,10 +111,10 @@ import { setSearchParams } from './location'
 export default {
   name: 'p-search',
   components: {
-    Autocomplete,
-    SearchResults,
-    SearchFilters,
-    SearchToolbar,
+    PSearchAutocomplete,
+    PSearchResults,
+    PSearchFilters,
+    PSearchToolbar,
     PPagination
   },
   computed: {
