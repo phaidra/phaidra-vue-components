@@ -592,6 +592,8 @@ const state = {
         { '@id': 'application/octet-stream', 'skos:notation': [], 'skos:prefLabel': { 'eng': 'Data' } },
         { '@id': 'application/pdf', 'skos:notation': ['pdf'], 'skos:prefLabel': { 'eng': 'PDF' } },
         { '@id': 'text/plain', 'skos:notation': ['txt'], 'skos:prefLabel': { 'eng': '.txt' } },
+        { '@id': 'text/html', 'skos:notation': ['htm', 'html', 'shtml'], 'skos:prefLabel': { 'eng': 'HTML' } },
+        { '@id': 'application/epub+zip', 'skos:notation': ['.epub'], 'skos:prefLabel': { 'eng': 'EPUB' } },
         { '@id': 'application/msword', 'skos:notation': ['doc'], 'skos:prefLabel': { 'eng': '.doc' } },
         { '@id': 'application/vnd.ms-excel', 'skos:notation': ['xls'], 'skos:prefLabel': { 'eng': '.xls' } },
         { '@id': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'skos:notation': ['docx'], 'skos:prefLabel': { 'eng': '.docx' } },
