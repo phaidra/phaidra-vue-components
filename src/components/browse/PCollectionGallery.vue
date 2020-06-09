@@ -32,7 +32,7 @@
              <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <span v-on="on">
-                   <v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid"></v-img>
+                   <v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid" @click="showDetailDialog(doc)"></v-img>
                 </span>
               </template>
               <span>{{doc.dc_title[0]}}</span>
@@ -48,7 +48,8 @@
                 <template v-slot:activator="{ on }">
                   <span v-on="on">
                     <v-card flat tile class="d-flex">
-                      <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid">
+                      <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid" 
+                        @click="showDetailDialog(doc)">
                         <template v-slot:placeholder>
                           <v-row class="fill-height ma-0" align="center" justify="center">
                             <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -65,6 +66,23 @@
         </v-container>
       </v-col>
     </v-row>
+    <v-dialog v-model="detailDialog" max-width="500px" v-if="detailToShow">
+      <v-card>
+        <v-card-title class="title font-weight-light grey white--text">
+          {{ detailToShow.dc_title[0] }}
+        </v-card-title>
+        <v-card-text>
+          <v-img aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + detailToShow.pid"></v-img>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn dark @click="detailDialog = false" color="grey">Abbrechen</v-btn>
+          <v-btn @click="openDetails()" color="primary">Details</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    
+    
   </v-container>
 </template>
 
@@ -99,7 +117,9 @@ export default {
       selectedImage: {
         src: ''
       }, 
-      childrenOfActiveCollection: []
+      childrenOfActiveCollection: [], 
+      detailDialog: true, 
+      detailToShow: null
     }
   },
   methods: {
@@ -175,6 +195,23 @@ export default {
         //  alert('https://' + this.instanceconfig.baseurl + '/preview/' + doc.pid);
         //}
         
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      }
+    },  
+    showDetailDialog: async function (doc) {
+      try {
+        this.detailToShow = doc;
+        this.detailDialog = true;
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      }
+    }, 
+    openDetails: async function () {
+      try {
+        alert("open details for: " + this.detailToShow.dc_title[0]);
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
