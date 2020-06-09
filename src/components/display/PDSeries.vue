@@ -25,7 +25,7 @@
               </template>
             </v-row>
             <v-row>
-              <template v-for="(issn, i) in o['identifiers:issn']">
+              <template v-for="(issn, i) in o['ids:issn']">
                 <v-col :md="labelColMd" cols="12" class="pdlabel primary--text" :key="'isl'+i">{{ $t('ISSN') }}</v-col>
                 <v-col :md="valueColMd" cols="12" class="valuefield" :key="'is'+i">{{ issn }}</v-col>
               </template>

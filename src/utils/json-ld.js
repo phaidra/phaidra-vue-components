@@ -1078,6 +1078,7 @@ export default {
                   } else {
                     if (role['schema:name']) {
                       for (let name of role['schema:name']) {
+                        f.organizationType = 'other'
                         f.organizationText = name['@value']
                       }
                     }
@@ -2020,7 +2021,7 @@ export default {
           } else {
             // project
             if (f.type === 'foaf:Project') {
-              if (f.name || f.identifier || f.description || f.homepage) {
+              if (f.name || f.identifier || f.description || f.homepage || f.funderName || f.funderIdentifier) {
                 this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier ? [f.funderIdentifier] : null)))
               }
             }

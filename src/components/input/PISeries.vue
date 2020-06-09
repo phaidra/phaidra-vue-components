@@ -122,6 +122,7 @@
               <template v-if="issuedDatePicker">
                 <v-text-field
                   :value="issued"
+                  v-on:blur="$emit('input-issued',$event.target.value)"
                   :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
                   :rules="[validationrules.date]"
                   :filled="inputStyle==='filled'"
