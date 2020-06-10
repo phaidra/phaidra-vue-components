@@ -972,6 +972,24 @@ const state = {
       ],
       loaded: true
     },
+    'funders': {
+      terms: [
+        { '@id': ns + 'N3C4-ZVR0', 'skos:prefLabel': { 'eng': 'Austrian Science Fund (FWF)' } },
+        { '@id': ns + 'EYN2-KEW2', 'skos:prefLabel': { 'eng': 'Bundesministerium für Bildung, Wissenschaft und Forschung (BMBWF)' } },
+        { '@id': ns + '74ZM-RFR6', 'skos:prefLabel': { 'eng': 'European Science Foundation (ESF)' } },
+        { '@id': ns + 'RDY6-W6C3', 'skos:prefLabel': { 'eng': 'European Union (all programmes)' } },
+        { '@id': ns + 'APPY-SKP2', 'skos:prefLabel': { 'eng': 'Jubiläumsfonds der Österreichischen Nationalbank' } },
+        { '@id': ns + 'TF8A-AS8X', 'skos:prefLabel': { 'eng': 'Österreichische Akademie der Wissenschaften (ÖAW)' } },
+        { '@id': ns + 'RX5K-E2KX', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsförderungsgesellschaft mbH (FFG)' } },
+        { '@id': ns + 'RESE-5QGF', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsgemeinschaft (ÖFG)' } },
+        { '@id': ns + 'SN0W-4T4J', 'skos:prefLabel': { 'eng': 'Österreichischer Austauschdienst (OeAD)' } },
+        { '@id': ns + 'S9R7-X1M2', 'skos:prefLabel': { 'eng': 'Österreichischer Nationalfonds für Opfer des Nationalsozialismus' } },
+        { '@id': ns + 'X4EX-JK51', 'skos:prefLabel': { 'eng': 'University of Vienna' } },
+        { '@id': ns + 'XMYF-893X', 'skos:prefLabel': { 'eng': 'Vienna Science and Technology Fund (WWTF)' } },
+        { '@id': ns + '6HPQ-MTZV', 'skos:prefLabel': { 'eng': 'Zukunftsfonds der Republik Österreich' } }
+      ],
+      loaded: true
+    },
     'technique': {
       terms: [
         { '@id': ns + 'NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },

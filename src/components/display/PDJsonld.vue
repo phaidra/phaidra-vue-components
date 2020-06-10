@@ -420,7 +420,8 @@ export default {
     displayProperties: function () {
       return {
         labelColMd: this.labelColMd,
-        valueColMd: this.valueColMd
+        valueColMd: this.valueColMd,
+        showLang: this.showLang
       }
     },
     langKeywords: function () {

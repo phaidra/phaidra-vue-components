@@ -8,7 +8,7 @@
             <v-row>
               <template v-for="(title, j) in o['dce:title']">
                 <template v-for="(mt, i) in title['bf:mainTitle']">
-                  <v-col md="3" cols="12" class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-col>
+                  <v-col md="3" cols="12" class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="showLang && mt['@language']"> ({{ mt['@language'] }})</template></v-col>
                   <v-col md="9" cols="12" :key="'mtv'+i">
                     <v-row no-gutters class="valuefield">{{ mt['@value'] }}</v-row>
                     <template v-for="(st, i) in title['bf:subtitle']">
@@ -50,7 +50,7 @@
                       <v-row :key="'stit'+k">
                         <template v-for="(title, j) in series['dce:title']">
                           <template v-for="(mt, i) in title['bf:mainTitle']">
-                            <v-col md="3" cols="12" class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="mt['@language']"> ({{ mt['@language'] }})</template></v-col>
+                            <v-col md="3" cols="12" class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="showLang && mt['@language']"> ({{ mt['@language'] }})</template></v-col>
                             <v-col md="9" cols="12" :key="'mtv'+j+i" class="valuefield">{{ mt['@value'] }}</v-col>
                           </template>
                         </template>

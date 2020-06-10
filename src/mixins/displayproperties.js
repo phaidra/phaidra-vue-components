@@ -7,6 +7,10 @@ export const displayproperties = {
     valueColMd: {
       type: String,
       default: '10'
+    },
+    showLang: {
+      type: Boolean,
+      default: true
     }
   }
 }

@@ -1,29 +1,8 @@
 <template>
   <span>
-    <template v-for="(f, i) in o['frapo:hasFundingAgency']">
-      <v-row :key="'fnd'+i">
-        <template v-for="(l, i) in f['skos:prefLabel']">
-          <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'fpl'+i">{{ $t('Funder') }}<template v-if="l['@language']"> ({{ l['@language'] }})</template></v-col>
-          <v-col class="valuefield" :md="valueColMd" cols="12" :key="'fpv'+i" >
-            <template v-if="f['skos:exactMatch']">
-              <a :href="f['skos:exactMatch'][0]" target="_blank">{{ l['@value'] }}</a>
-            </template>
-            <template v-else>
-              {{ l['@value'] }}
-            </template>
-          </v-col>
-        </template>
-      </v-row>
-    </template>
     <v-row>
-      <template v-for="(l, i) in o['skos:prefLabel']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'pl'+i">{{ $t('Project') }} ({{ l['@language'] }})</v-col>
-        <v-col class="valuefield" :md="valueColMd" cols="12" :key="'pv'+i" >{{ l['@value'] }}</v-col>
-      </template>
-    </v-row>
-    <v-row>
-      <template v-for="(id, i) in o['skos:exactMatch']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'+i">{{ $t('Project Id') }}</v-col>
+      <template v-if="o['skos:exactMatch'] || o['skos:prefLabel'] || o['frapo:hasFundingAgency']">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'+i">{{ $t(p) }}</v-col>
         <v-col :md="valueColMd" cols="12" :key="'idv'+i">{{ id }}</v-col>
       </template>
     </v-row>
@@ -44,10 +23,11 @@
 
 <script>
 import { displayproperties } from '../../mixins/displayproperties'
+import { vocabulary } from '../../mixins/vocabulary'
 
 export default {
   name: 'p-d-project',
-  mixins: [displayproperties],
+  mixins: [ displayproperties, vocabulary ],
   props: {
     o: {
       type: Object,
@@ -55,6 +35,59 @@ export default {
     },
     p: {
       type: String
+    }
+  },
+  computed: {
+    fundersLabel: function () {
+      let labels = []
+      if (this.o['frapo:hasFundingAgency']) {
+        for (let f of this.o['frapo:hasFundingAgency']) {
+          if (f['skos:exactMatch']) {
+            for (let id of f['skos:exactMatch']) {
+              if (id.startsWith('https://pid.phaidra.org/')) {
+                labels.push(this.getLocalizedTermLabel('funders', id))
+              }
+            }
+          }
+          if (f['skos:prefLabel']) {
+            for (let l of f['skos:prefLabel']) {
+              labels.push(l['@value'])
+            }
+          }
+        }
+      }
+      return labels.join(', ')
+    },
+    projectLabel: function () {
+      let labels = []
+      if (this.o['skos:prefLabel']) {
+        for (let l of this.o['skos:prefLabel']) {
+          labels.push(l['@value'])
+        }
+      }
+      return labels.join(', ')
+    },
+    projectId: function () {
+      let ids = []
+      if (this.o['skos:exactMatch']) {
+        for (let id of this.o['skos:exactMatch']) {
+          ids.push(id)
+        }
+      }
+      return ids.join(', ')
+    },
+    id: function () {
+      let id = []
+      if (this.projectLabel !== '') {
+        id.push(this.projectLabel)
+      }
+      if (this.projectId !== '') {
+        id.push(this.projectId)
+      }
+      if (this.fundersLabel !== '') {
+        id.push(this.fundersLabel)
+      }
+      return id.join(' – ')
     }
   }
 }

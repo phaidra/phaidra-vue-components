@@ -622,6 +622,8 @@ export default {
 
   'phaidra:systemTag': 'System tag',
 
+  'Project Id': 'Projektnummer',
+
   'Metadata editor': 'Metadateneditor',
   'Metadata preview': 'Metadatenansicht',
   'Remove': 'Löschen',
