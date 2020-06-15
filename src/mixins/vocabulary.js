@@ -10,6 +10,11 @@ export const vocabulary = {
         return this.$store.getters.getLocalizedTermLabel(vocabulary, value, this.$i18n.locale)
       }
     },
+    getLocalizedTermLabelByNotation: function (vocabulary, notation) {
+      if (vocabulary && notation) {
+        return this.$store.getters.getLocalizedTermLabelByNotation(vocabulary, notation, this.$i18n.locale)
+      }
+    },
     getTerm: function (vocabulary, value) {
       if (vocabulary && value) {
         return this.$store.getters.getTerm(vocabulary, value)
