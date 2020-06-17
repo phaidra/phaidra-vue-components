@@ -2,7 +2,7 @@
   <span>
     <v-row>
       <template v-if="o['skos:exactMatch'] || o['skos:prefLabel'] || o['frapo:hasFundingAgency']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'">{{ $t(p) }}</v-col>
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'"><span v-show="!hideLabel && !o['rdfs:comment'] && !o['foaf:homepage']">{{ $t(p) }}</span></v-col>
         <v-col :md="valueColMd" cols="12" :key="'idv'">{{ id }}</v-col>
       </template>
     </v-row>
@@ -35,6 +35,10 @@ export default {
     },
     p: {
       type: String
+    },
+    hideLabel: {
+      type: Boolean,
+      defualt: false
     }
   },
   computed: {

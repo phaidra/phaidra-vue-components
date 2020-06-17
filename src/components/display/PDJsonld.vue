@@ -158,7 +158,7 @@
               <p-d-study-plan :p="p" :o="item" :key="componentid+'study-plan'+j" v-bind.sync="displayProperties"></p-d-study-plan>
             </template>
             <template v-else-if="item['@type']==='foaf:Project'">
-              <p-d-project :p="p" :o="item" :key="componentid+'project'+j" v-bind.sync="displayProperties"></p-d-project>
+              <p-d-project :p="p" :o="item" :hideLabel="j !== 0" :key="componentid+'project'+j" v-bind.sync="displayProperties"></p-d-project>
             </template>
           </template>
         </template>
