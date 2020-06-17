@@ -421,7 +421,8 @@ export default {
       return {
         labelColMd: this.labelColMd,
         valueColMd: this.valueColMd,
-        showLang: this.showLang
+        showLang: this.showLang,
+        listEntityIds: this.listEntityIds
       }
     },
     langKeywords: function () {

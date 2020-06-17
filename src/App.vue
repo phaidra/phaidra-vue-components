@@ -156,6 +156,7 @@
                       :pid="pid"
                       :labelColMd="'2'"
                       :valueColMd="'10'"
+                      :listEntityIds="true"
                     ></p-d-jsonld>
                   </v-card-text>
                 </v-card>
@@ -350,7 +351,7 @@ export default {
   },
   data () {
     return {
-      window: 5,
+      window: 0,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -2141,7 +2142,7 @@ export default {
         sections: []
       },
       members: [],
-      pid: 'o:588288',
+      pid: 'o:337723',
       piddoc: {},
       collection: 'o:459021',
       sampleCollection: 'o:541829',

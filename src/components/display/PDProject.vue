@@ -2,8 +2,8 @@
   <span>
     <v-row>
       <template v-if="o['skos:exactMatch'] || o['skos:prefLabel'] || o['frapo:hasFundingAgency']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'+i">{{ $t(p) }}</v-col>
-        <v-col :md="valueColMd" cols="12" :key="'idv'+i">{{ id }}</v-col>
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'">{{ $t(p) }}</v-col>
+        <v-col :md="valueColMd" cols="12" :key="'idv'">{{ id }}</v-col>
       </template>
     </v-row>
     <v-row>
@@ -42,16 +42,20 @@ export default {
       let labels = []
       if (this.o['frapo:hasFundingAgency']) {
         for (let f of this.o['frapo:hasFundingAgency']) {
+          let vocabValue = false
           if (f['skos:exactMatch']) {
             for (let id of f['skos:exactMatch']) {
               if (id.startsWith('https://pid.phaidra.org/')) {
+                vocabValue = true
                 labels.push(this.getLocalizedTermLabel('funders', id))
               }
             }
           }
-          if (f['skos:prefLabel']) {
-            for (let l of f['skos:prefLabel']) {
-              labels.push(l['@value'])
+          if (!vocabValue) {
+            if (f['skos:prefLabel']) {
+              for (let l of f['skos:prefLabel']) {
+                labels.push(l['@value'])
+              }
             }
           }
         }

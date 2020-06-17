@@ -3,7 +3,7 @@
     <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right"><span v-show="!hideLabel">{{ getLocalizedTermLabel(this.role) }}</span></v-col>
     <v-col :md="valueColMd" cols="12">
       <template v-if="entity['@type'] === 'schema:Person'">
-        <template v-if="entity['skos:exactMatch']">
+        <template v-if="entity['skos:exactMatch'] && !listEntityIds">
           <a class="valuefield" :href="getIDResolverURL(entity['skos:exactMatch'][0])" target="_blank">
             <template class="valuefield" v-for="(gn) in entity['schema:givenName']">{{ gn['@value'] }}</template>
             <template class="valuefield" v-for="(fn) in entity['schema:familyName']"> {{ fn['@value'] }}</template>
@@ -23,6 +23,11 @@
             <template v-else>
               {{ ' ' }}(<template v-for="(afname, i) in af['schema:name']"><template v-if="i>0"> / </template>{{ afname['@value'] }}</template>)
             </template>
+          </template>
+        </template>
+        <template v-if="entity['skos:exactMatch'] && listEntityIds">
+          <template v-for="(id, i) in entity['skos:exactMatch']">
+          <br/><div class="valuefield mt-1"><a :href="getIDResolverURL(id)" target="_blank"><img v-if="id['@type'] === 'ids:orcid'" class="mr-1" style="vertical-align: middle;" src="@/assets/orcid_16x16.gif" :alt="id['@value']" />{{ getIDResolverURL(id) }}</a></div>
           </template>
         </template>
       </template>
