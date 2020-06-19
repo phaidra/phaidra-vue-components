@@ -100,7 +100,7 @@
                   <v-col cols="12" md="4">
                     <v-text-field
                       v-show="identifierType === 'ids:orcid'"
-                      v-mask="'####-####-####-####'"
+                      v-mask="'####-####-####-###X'"
                       :value="identifierText"
                       :label="identifierLabel ? identifierLabel : $t('Identifier')"
                       v-on:blur="$emit('input-identifier', $event.target.value)"

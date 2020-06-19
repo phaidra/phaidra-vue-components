@@ -11,10 +11,6 @@ export const displayproperties = {
     showLang: {
       type: Boolean,
       default: true
-    },
-    listEntityIds: {
-      type: Boolean,
-      defualt: false
     }
   }
 }

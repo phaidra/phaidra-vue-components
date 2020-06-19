@@ -403,7 +403,6 @@
                           :value="publishingDate"
                           v-on:blur="$emit('input-publishing-date',$event.target.value)"
                           :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
-                          :required="required"
                           :rules="[validationrules.date]"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
@@ -619,6 +618,9 @@ export default {
     },
     publishingDateLabel: {
       type: String
+    },
+    publishingDateErrorMessages: {
+      type: Array
     },
     publishingPlaceLabel: {
       type: String

@@ -156,7 +156,6 @@
                       :pid="pid"
                       :labelColMd="'2'"
                       :valueColMd="'10'"
-                      :listEntityIds="true"
                     ></p-d-jsonld>
                   </v-card-text>
                 </v-card>
