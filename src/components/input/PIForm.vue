@@ -234,13 +234,7 @@
                       v-on:input-subtitle="f.subtitle=$event"
                       v-on:input-title-language="setSelected(f, 'titleLanguage', $event)"
                       v-on:input-role="containedInRoleInput(f, $event)"
-                      v-on:input-series-title="f.seriesTitle=$event"
-                      v-on:input-series-title-language="setSelected(f, 'seriesTitleLanguage', $event)"
-                      v-on:input-series-volume="f.seriesVolume=$event"
-                      v-on:input-series-issue="f.seriesIssue=$event"
-                      v-on:input-series-issued="f.seriesIssued=$event"
-                      v-on:input-series-issn="f.seriesIssn=$event"
-                      v-on:input-series-identifier="f.seriesIdentifier=$event"
+                      v-on:input-series="containedInSeriesInput(f, $event)"
                       v-on:input-page-start="f.pageStart=$event"
                       v-on:input-page-end="f.pageEnd=$event"
                       v-on:input-isbn="f.isbn=$event"
@@ -250,6 +244,9 @@
                       v-on:input-publisher-select="publisherSelectInput(f, $event)"
                       v-on:input-publishing-place="f.publishingPlace=$event"
                       v-on:input-publishing-date="f.publishingDate=$event"
+                      v-on:add-series="addContainedInSeries(f.series, $event)"
+                      v-on:add-clear-series="addClearContainedInSeries(f.series, $event)"
+                      v-on:remove-series="removeContainedInSeries(f.series, $event)"
                       v-on:add-role="addContainedInRole(f.roles, $event)"
                       v-on:remove-role="removeContainedInRole(f.roles, $event)"
                       v-on:up-role="sortContainedInRoleUp(f.roles, $event)"
@@ -1146,6 +1143,21 @@ export default {
         }
       }
     },
+    addSeriesClear: function (arr, f) {
+      var newField = arrays.duplicate(arr, f)
+      if (newField) {
+        newField.id = (new Date()).getTime()
+        newField.title = ''
+        newField.volume = ''
+        newField.issue = ''
+        newField.issued = ''
+        newField.issn = ''
+        newField.identifier = ''
+        newField.pageStart = ''
+        newField.pageEnd = ''
+        newField.removable = true
+      }
+    },
     addContainedInRole: function (arr, f) {
       var newField = arrays.duplicate(arr, f)
       if (newField) {
@@ -1154,6 +1166,31 @@ export default {
       }
     },
     removeContainedInRole: function (arr, f) {
+      if (arr.length > 1) {
+        arrays.remove(arr, f)
+      }
+    },
+    addContainedInSeries: function (arr, f) {
+      var newField = arrays.duplicate(arr, f)
+      if (newField) {
+        newField.id = (new Date()).getTime()
+        newField.removable = true
+      }
+    },
+    addClearContainedInSeries: function (arr, f) {
+      var newField = arrays.duplicate(arr, f)
+      if (newField) {
+        newField.id = (new Date()).getTime()
+        newField.seriesTitle = ''
+        newField.seriesVolume = ''
+        newField.seriesIssue = ''
+        newField.seriesIssued = ''
+        newField.seriesIssn = ''
+        newField.seriesIdentifier = ''
+        newField.removable = true
+      }
+    },
+    removeContainedInSeries: function (arr, f) {
       if (arr.length > 1) {
         arrays.remove(arr, f)
       }
@@ -1414,6 +1451,33 @@ export default {
           }
           if (event.lastname) {
             r.lastname = event.lastname
+          }
+        }
+      }
+    },
+    containedInSeriesInput: function (f, event) {
+      for (let s of f.series) {
+        if (s.id === event.series.id) {
+          if (event.seriesTitleLanguageTerm) {
+            s.seriesTitleLanguage = event.seriesTitleLanguageTerm['@id']
+          }
+          if (event.seriesTitle) {
+            s.seriesTitle = event.seriesTitle
+          }
+          if (event.seriesVolume) {
+            s.seriesVolume = event.seriesVolume
+          }
+          if (event.seriesIssue) {
+            s.seriesIssue = event.seriesIssue
+          }
+          if (event.seriesIssued) {
+            s.seriesIssued = event.seriesIssued
+          }
+          if (event.seriesIssn) {
+            s.seriesIssn = event.seriesIssn
+          }
+          if (event.seriesIdentifier) {
+            s.seriesIdentifier = event.seriesIdentifier
           }
         }
       }

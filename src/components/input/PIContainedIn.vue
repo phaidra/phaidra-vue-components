@@ -167,12 +167,21 @@
               </v-row>
             </v-col>
           </v-row>
-          <v-row>
+          <v-row v-for="(s,i) in series" :key="'series'+i">
             <v-col cols="12">
               <v-card class="mb-8">
                 <v-card-title class="title font-weight-light grey white--text">
                   <span>{{ $t(seriesLabel) }}</span>
                   <v-spacer></v-spacer>
+                  <v-btn v-if="s.multiplicable" icon dark @click="$emit('add-series', s)">
+                    <v-icon>mdi-content-duplicate</v-icon>
+                  </v-btn>
+                  <v-btn v-if="s.multiplicableCleared" icon dark @click="$emit('add-clear-series', s)">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                  <v-btn v-if="s.removable" icon dark @click="$emit('remove-series', s)">
+                    <v-icon>mdi-minus</v-icon>
+                  </v-btn>
                   <span>
                     <v-icon dark v-show="collapseSeriesModel" @click="collapseSeriesModel=!collapseSeriesModel">mdi-arrow-right-drop-circle</v-icon>
                     <v-icon dark v-show="!collapseSeriesModel" @click="collapseSeriesModel=!collapseSeriesModel">mdi-arrow-down-drop-circle</v-icon>
@@ -183,17 +192,17 @@
                     <v-row >
                       <v-col cols="12" :md="multilingual ? 10 : 12">
                         <v-text-field
-                          :value="seriesTitle"
+                          :value="s.seriesTitle"
                           :label="$t('Title')"
-                          v-on:blur="$emit('input-series-title',$event.target.value)"
+                          v-on:blur="$emit('input-series', { series: s, seriesTitle: $event.target.value })"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" md="2" v-if="multilingual">
                         <v-autocomplete
-                          :value="getTerm('lang', seriesTitleLanguage)"
-                          v-on:input="$emit('input-series-title-language', $event )"
+                          :value="getTerm('lang', s.seriesTitleLanguage)"
+                          v-on:input="$emit('input-series', { series: s, seriesTitleLanguageTerm: $event })"
                           :items="vocabularies['lang'].terms"
                           :item-value="'@id'"
                           :filter="autocompleteFilter"
@@ -222,31 +231,31 @@
 
                     <v-row >
 
-                      <v-col cols="4" v-if="!hideSeriesVolume">
+                      <v-col cols="12" :md="(hideSeriesIssue && hideSeriesIssued) ? 12 : (hideSeriesIssue || hideSeriesIssued) ? 6 : 4" v-if="!hideSeriesVolume">
                         <v-text-field
-                          :value="seriesVolume"
+                          :value="s.seriesVolume"
                           :label="$t('Volume')"
-                          v-on:blur="$emit('input-series-volume',$event.target.value)"
+                          v-on:blur="$emit('input-series', { series: s, seriesVolume: $event.target.value })"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
 
-                      <v-col cols="4" v-if="!hideSeriesIssue">
+                      <v-col cols="12" :md="(hideSeriesVolume && hideSeriesIssued) ? 12 : (hideSeriesVolume || hideSeriesIssued) ? 6:  4" v-if="!hideSeriesIssue">
                         <v-text-field
-                          :value="seriesIssue"
+                          :value="s.seriesIssue"
                           :label="$t('Issue')"
-                          v-on:blur="$emit('input-series-issue',$event.target.value)"
+                          v-on:blur="$emit('input-series', { series: s, seriesIssue: $event.target.value })"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
 
-                      <v-col cols="4" v-if="!hideSeriesIssued">
+                      <v-col cols="12" :md="(hideSeriesVolume && hideSeriesIssue) ? 12 : (hideSeriesVolume && hideSeriesIssue) ? 6 : 4" v-if="!hideSeriesIssued">
 
                         <v-text-field
-                          :value="seriesIssued"
-                          v-on:blur="$emit('input-series-issued',$event.target.value)"
+                          :value="s.seriesIssued"
+                          v-on:blur="$emit('input-series', { series: s, seriesIssued: $event.target.value })"
                           :label="$t(seriesIssuedDateLabel ? seriesIssuedDateLabel : 'Issued')"
                           :hint="'Format YYYY-MM-DD'"
                           :rules="[validationrules.date]"
@@ -262,9 +271,9 @@
 
                       <v-col cols="4" v-if="!hideSeriesIssn">
                         <v-text-field
-                          :value="seriesIssn"
+                          :value="s.seriesIssn"
                           :label="$t('ISSN')"
-                          v-on:blur="$emit('input-series-issn',$event.target.value)"
+                          v-on:blur="$emit('input-series', { series: s, seriesIssn: $event.target.value })"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
@@ -272,9 +281,9 @@
 
                       <v-col cols="4" v-if="!hideSeriesIdentifier">
                         <v-text-field
-                          :value="seriesIdentifier"
+                          :value="s.seriesIdentifier"
                           :label="$t('Identifier')"
-                          v-on:blur="$emit('input-series-identifier',$event.target.value)"
+                          v-on:blur="$emit('input-identifier', { series: s, seriesIdentifier: $event.target.value })"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
@@ -541,32 +550,20 @@ export default {
     isbnErrorMessages: {
       type: Array
     },
+    series: {
+      type: Array
+    },
     seriesLabel: {
-      type: String
-    },
-    seriesTitle: {
-      type: String
-    },
-    seriesTitleLanguage: {
       type: String
     },
     hideSeriesVolume: {
       type: Boolean
     },
-    seriesVolume: {
-      type: String
-    },
     hideSeriesIssue: {
       type: Boolean
     },
-    seriesIssue: {
-      type: String
-    },
     hideSeriesIssued: {
       type: Boolean
-    },
-    seriesIssued: {
-      type: String
     },
     seriesIssuedDateLabel: {
       type: String
@@ -574,15 +571,9 @@ export default {
     hideSeriesIssn: {
       type: Boolean
     },
-    seriesIssn: {
-      type: String
-    },
     hideSeriesIdentifier: {
       type: Boolean,
       default: true
-    },
-    seriesIdentifier: {
-      type: String
     },
     seriesCollapse: {
       type: Boolean,

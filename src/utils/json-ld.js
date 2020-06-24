@@ -331,45 +331,64 @@ export default {
                 }
               })
               if (obj['rdau:P60193']) {
-                for (let series of obj['rdau:P60193']) {
-                  if (series['dce:title']) {
-                    for (let t of series['dce:title']) {
-                      if (t['bf:mainTitle']) {
-                        for (let mt of t['bf:mainTitle']) {
-                          if (mt['@value']) {
-                            f.seriesTitle = mt['@value']
-                          }
-                          if (mt['@language']) {
-                            f.seriesTitleLanguage = mt['@language']
+                if (obj['rdau:P60193'].length > 0) {
+                  let serIdx = 0
+                  f.series = []
+                  for (let series of obj['rdau:P60193']) {
+                    serIdx++
+                    let s = {
+                      id: 'contained-in-series-' + serIdx,
+                      seriesTitle: '',
+                      seriesTitleLanguage: '',
+                      seriesVolume: '',
+                      seriesIssue: '',
+                      seriesIssued: '',
+                      seriesIssn: '',
+                      seriesIdentifier: '',
+                      multiplicable: false,
+                      multiplicableCleared: true,
+                      removable: serIdx > 0
+                    }
+                    if (series['dce:title']) {
+                      for (let t of series['dce:title']) {
+                        if (t['bf:mainTitle']) {
+                          for (let mt of t['bf:mainTitle']) {
+                            if (mt['@value']) {
+                              s.seriesTitle = mt['@value']
+                            }
+                            if (mt['@language']) {
+                              s.seriesTitleLanguage = mt['@language']
+                            }
                           }
                         }
                       }
                     }
-                  }
-                  if (series['bibo:volume']) {
-                    for (let v of series['bibo:volume']) {
-                      f.seriesVolume = v
+                    if (series['bibo:volume']) {
+                      for (let v of series['bibo:volume']) {
+                        s.seriesVolume = v
+                      }
                     }
-                  }
-                  if (series['bibo:issue']) {
-                    for (let v of series['bibo:issue']) {
-                      f.seriesIssue = v
+                    if (series['bibo:issue']) {
+                      for (let v of series['bibo:issue']) {
+                        s.seriesIssue = v
+                      }
                     }
-                  }
-                  if (series['dcterms:issued']) {
-                    for (let v of series['dcterms:issued']) {
-                      f.seriesIssued = v
+                    if (series['dcterms:issued']) {
+                      for (let v of series['dcterms:issued']) {
+                        s.seriesIssued = v
+                      }
                     }
-                  }
-                  if (series['ids:issn']) {
-                    for (let v of series['ids:issn']) {
-                      f.seriesIssn = v
+                    if (series['ids:issn']) {
+                      for (let v of series['ids:issn']) {
+                        s.seriesIssn = v
+                      }
                     }
-                  }
-                  if (series['skos:exactMatch']) {
-                    for (let v of series['skos:exactMatch']) {
-                      f.seriesIdentifier = v
+                    if (series['skos:exactMatch']) {
+                      for (let v of series['skos:exactMatch']) {
+                        s.seriesIdentifier = v
+                      }
                     }
+                    f.series.push(s)
                   }
                 }
               }
@@ -1564,40 +1583,47 @@ export default {
     if (f.isbn) {
       h['ids:isbn'] = [ f.isbn ]
     }
-    if (f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.seriesIdentifier) {
-      let series = {
-        '@type': f.seriesType
-      }
-      if (f.seriesTitle) {
-        let tit = {
-          '@type': 'bf:Title',
-          'bf:mainTitle': [
-            {
-              '@value': f.seriesTitle
+    if (f.series) {
+      if (f.series.length > 0) {
+        h['rdau:P60193'] = []
+        for (let s of f.series) {
+          if (s.seriesTitle || s.seriesVolume || s.seriesIssue || s.seriesIssued || s.seriesIssn || s.seriesIdentifier) {
+            let series = {
+              '@type': s.seriesType
             }
-          ]
+            if (s.seriesTitle) {
+              let tit = {
+                '@type': 'bf:Title',
+                'bf:mainTitle': [
+                  {
+                    '@value': s.seriesTitle
+                  }
+                ]
+              }
+              if (s.seriesTitleLanguage) {
+                tit['bf:mainTitle'][0]['@language'] = s.seriesTitleLanguage
+              }
+              series['dce:title'] = [ tit ]
+            }
+            if (s.seriesVolume) {
+              series['bibo:volume'] = [ s.seriesVolume ]
+            }
+            if (s.seriesIssue) {
+              series['bibo:issue'] = [ s.seriesIssue ]
+            }
+            if (s.seriesIssued) {
+              series['dcterms:issued'] = [ s.seriesIssued ]
+            }
+            if (s.seriesIssn) {
+              series['ids:issn'] = [ s.seriesIssn ]
+            }
+            if (s.seriesIdentifier) {
+              series['skos:exactMatch'] = [ s.seriesIdentifier ]
+            }
+            h['rdau:P60193'].push(series)
+          }
         }
-        if (f.seriesTitleLanguage) {
-          tit['bf:mainTitle'][0]['@language'] = f.seriesTitleLanguage
-        }
-        series['dce:title'] = [ tit ]
       }
-      if (f.seriesVolume) {
-        series['bibo:volume'] = [ f.seriesVolume ]
-      }
-      if (f.seriesIssue) {
-        series['bibo:issue'] = [ f.seriesIssue ]
-      }
-      if (f.seriesIssued) {
-        series['dcterms:issued'] = [ f.seriesIssued ]
-      }
-      if (f.seriesIssn) {
-        series['ids:issn'] = [ f.seriesIssn ]
-      }
-      if (f.seriesIdentifier) {
-        series['skos:exactMatch'] = [ f.seriesIdentifier ]
-      }
-      h['rdau:P60193'] = [ series ]
     }
     if (f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
       h['bf:provisionActivity'] = [ this.get_json_bf_publication(f) ]
@@ -1983,7 +2009,7 @@ export default {
           break
 
         case 'rdau:P60101':
-          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.isbn || f.seriesTitle || f.seriesVolume || f.seriesIssue || f.seriesIssued || f.seriesIssn || f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
+          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.isbn || f.series[0].seriesTitle || f.series[0].seriesVolume || f.series[0].seriesIssue || f.series[0].seriesIssued || f.series[0].seriesIssn || f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
             this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
           }
           if (f.pageStart) {

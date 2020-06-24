@@ -5,8 +5,8 @@
       <template v-if="entity['@type'] === 'schema:Person'">
         <template v-if="entity['skos:exactMatch']">
           <template v-if="entity['skos:exactMatch'].length === 1">
-            <img v-if="entity['skos:exactMatch'][0]['@type'] === 'ids:orcid'" class="mr-1 mb-1" style="vertical-align: middle;" src="@/assets/orcid_16x16.gif" :alt="entity['skos:exactMatch'][0]['@value']" />
             <a class="valuefield" :href="getIDResolverURL(entity['skos:exactMatch'][0])" target="_blank">
+              <img v-if="entity['skos:exactMatch'][0]['@type'] === 'ids:orcid'" class="mr-1 mb-1" style="vertical-align: middle;" src="@/assets/orcid_16x16.gif" :alt="entity['skos:exactMatch'][0]['@value']" />
               <template class="valuefield" v-for="(gn) in entity['schema:givenName']">{{ gn['@value'] }}</template>
               <template class="valuefield" v-for="(fn) in entity['schema:familyName']"> {{ fn['@value'] }}</template>
               <template class="valuefield" v-for="(n) in entity['schema:name']">{{ n['@value'] }}</template>
@@ -28,7 +28,7 @@
         </template>
         <template v-if="entity['schema:affiliation']" class="grey--text">
           <br/>
-          <div class="mt-1">
+          <div>
             <template v-for="(af, i) in entity['schema:affiliation']">
               <template v-if="af['skos:exactMatch'] && affiliation">
                 {{ ' ' }}<a :key="'af'+i" class="valuefield" :href="af['skos:exactMatch'][0]" target="_blank">{{ affiliation }}</a>

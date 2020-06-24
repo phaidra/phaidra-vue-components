@@ -4,20 +4,17 @@
     <v-col cols="12">
       <v-card >
         <v-card-title class="title font-weight-light grey white--text">
-            <span>{{ $t(label) }}</span>
-            <v-spacer></v-spacer>
-            <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <template v-slot:activator="{ on }">
-                <v-btn v-on="on" icon dark>
-                  <v-icon dark>mdi-dots-vertical</v-icon>
-                </v-btn>
-              </template>
-              <v-list>
-                <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-                  <v-list-item-title>{{ action.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
+          <span>{{ $t(label) }}</span>
+          <v-spacer></v-spacer>
+          <v-btn v-if="multiplicable" icon dark @click="$emit('add', $event)">
+            <v-icon>mdi-content-duplicate</v-icon>
+          </v-btn>
+          <v-btn v-if="multiplicableCleared" icon dark @click="$emit('add-clear', $event)">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          <v-btn v-if="removable" icon dark @click="$emit('remove', $event)">
+            <v-icon>mdi-minus</v-icon>
+          </v-btn>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
