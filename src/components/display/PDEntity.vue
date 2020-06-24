@@ -6,7 +6,7 @@
         <template v-if="entity['skos:exactMatch']">
           <template v-if="entity['skos:exactMatch'].length === 1">
             <a class="valuefield" :href="getIDResolverURL(entity['skos:exactMatch'][0])" target="_blank">
-              <img v-if="entity['skos:exactMatch'][0]['@type'] === 'ids:orcid'" class="mr-1 mb-1" style="vertical-align: middle;" src="@/assets/orcid_16x16.gif" :alt="entity['skos:exactMatch'][0]['@value']" />
+              <icon width="16px" height="16px" class="mr-1 mb-1" v-if="entity['skos:exactMatch'][0]['@type'] === 'ids:orcid'" name="orcid"></icon>
               <template class="valuefield" v-for="(gn) in entity['schema:givenName']">{{ gn['@value'] }}</template>
               <template class="valuefield" v-for="(fn) in entity['schema:familyName']"> {{ fn['@value'] }}</template>
               <template class="valuefield" v-for="(n) in entity['schema:name']">{{ n['@value'] }}</template>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import '@/compiled-icons/orcid'
 import { vocabulary } from '../../mixins/vocabulary'
 import { displayproperties } from '../../mixins/displayproperties'
 

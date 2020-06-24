@@ -777,7 +777,7 @@ const fields = [
   },
   {
     id: 'audience',
-    fieldname: 'Audience',
+    fieldname: 'Audience (text)',
     predicate: 'dcterms:audience',
     type: 'skos:Concept',
     component: 'p-text-field',
@@ -790,7 +790,7 @@ const fields = [
   },
   {
     id: 'audience-vocab',
-    fieldname: 'Audience',
+    fieldname: 'Audience (vocabulary)',
     predicate: 'dcterms:audience',
     type: 'skos:Concept',
     component: 'p-select',
