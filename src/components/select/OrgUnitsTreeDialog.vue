@@ -18,43 +18,30 @@
 </template>
 
 <script>
+import { vocabulary } from '../../mixins/vocabulary'
+
 export default {
   name: 'org-units-tree-dialog',
+  mixins: [ vocabulary ],
   computed: {
     instance: function () {
       return this.$store.state.instanceconfig
+    },
+    orgunits: function () {
+      return this.vocabularies['orgunits']['tree']
     }
   },
   data () {
     return {
       dialog: false,
-      loading: false,
-      orgunits: []
+      loading: false//,
+      //orgunits: []
     }
   },
   methods: {
     open: async function () {
       this.dialog = true
-      this.loading = true
-      try {
-        let response = await this.$http.request({
-          method: 'GET',
-          url: this.$store.state.instanceconfig.api + '/directory/org_get_units',
-          headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          }
-        })
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit('setAlerts', response.data.alerts)
-        }
-        this.orgunits = response.data.units
-        this.addNames(this.orgunits)
-      } catch (error) {
-        console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-      } finally {
-        this.loading = false
-      }
+      this.addNames(this.orgunits)
     },
     addNames: function (units) {
       for (let u of units) {

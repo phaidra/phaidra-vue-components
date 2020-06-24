@@ -1147,6 +1147,9 @@ const mutations = {
       state.vocabularies['orgunits']['terms'].sort(function (a, b) {
         return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
       })
+      for (let u of state.vocabularies['orgunits']['tree']) {
+        orgunits.sortOrgUnitsTree(u, locale)
+      }
       state.vocabularies['orgunits'].sorted = locale
     }
   },
@@ -1228,6 +1231,7 @@ const actions = {
     commit('setLangTerms', langterms)
   },
   async loadOrgUnits ({ commit, rootState, state }, locale) {
+    console.log('loadOrgUnits')
     if (state.vocabularies['orgunits']['loaded'] === false) {
       try {
         let response = await axios.request({
