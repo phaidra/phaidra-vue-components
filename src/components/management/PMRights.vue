@@ -127,7 +127,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row v-if="enableGroups">
           <v-col cols="12">
             <v-card>
               <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular groups') }}</v-card-title>
@@ -189,6 +189,10 @@ export default {
     },
     title: {
       type: String
+    },
+    enableGroups: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
