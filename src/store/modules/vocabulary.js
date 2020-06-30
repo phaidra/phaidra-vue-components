@@ -1228,12 +1228,13 @@ const mutations = {
 
 const actions = {
   loadLanguages ({ commit }, locale) {
-    let langterms = languages.get_lang()
-    langterms.sort((a, b) => a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale))
-    commit('setLangTerms', langterms)
+    if (state.vocabularies['lang']['terms'].length < 1) {
+      let langterms = languages.get_lang()
+      langterms.sort((a, b) => a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale))
+      commit('setLangTerms', langterms)
+    }
   },
   async loadOrgUnits ({ commit, rootState, state }, locale) {
-    console.log('loadOrgUnits')
     if (state.vocabularies['orgunits']['loaded'] === false) {
       try {
         let response = await axios.request({
