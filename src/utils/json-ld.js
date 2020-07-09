@@ -2150,7 +2150,6 @@ export default {
           }
           break
 
-        case 'spatial':
         case 'dcterms:spatial':
         case 'vra:placeOfCreation':
         case 'vra:placeOfRepository':

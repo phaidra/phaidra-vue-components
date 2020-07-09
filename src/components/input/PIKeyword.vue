@@ -21,6 +21,7 @@
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
         :error-messages="errorMessages"
+        :hint="hint"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
@@ -132,6 +133,9 @@ export default {
     disableSuggest: {
       type: Boolean,
       default: false
+    },
+    hint: {
+      type: String
     }
   },
   data () {

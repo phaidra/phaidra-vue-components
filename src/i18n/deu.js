@@ -647,5 +647,6 @@ export default {
   'e.g.: https://phaidra.org': 'z.B.: https://phaidra.org',
   'Subject (GND)': 'Schlagwort (GND)',
 
-  'OTHER_FEMININE': 'Andere'
+  'OTHER_FEMININE': 'Andere',
+  'Confirm each keyword by pressing enter': 'Jedes Stichwort ist durch Drücken der Eingabetaste zu bestätigen'
 }

@@ -383,6 +383,7 @@ const fields = [
     multiplicable: true,
     multilingual: true,
     label: 'Keywords',
+    hint: 'Confirm each keyword with enter',
     value: [],
     language: '',
     definition: 'The topic of the resource, represented using keywords.'
@@ -1279,7 +1280,6 @@ const predicateOrder = [
   'vra:placeOfCreation',
   'vra:placeOfRepository',
   'vra:placeOfSite',
-  'spatial',
 
   'rdau:P60550',
   'schema:numberOfPages',
