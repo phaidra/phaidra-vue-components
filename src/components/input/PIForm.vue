@@ -426,7 +426,10 @@
                   </template>
 
                   <template v-else-if="f.component === 'p-unknown'">
-                    <p-i-unknown v-bind.sync="f"></p-i-unknown>
+                    <p-i-unknown 
+                      v-bind.sync="f"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-unknown>
                   </template>
 
                   <template v-else-if="f.component === 'p-vocab-ext-readonly'">
