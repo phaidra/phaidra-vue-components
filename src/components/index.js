@@ -22,6 +22,7 @@ import PDTitle from './display/PDTitle.vue'
 import PDLabeledValue from './display/PDLabeledValue.vue'
 import PDUwmetadata from './display/PDUwmetadata.vue'
 import PDValue from './display/PDValue.vue'
+import PDUnknown from './display/PDUnknown.vue'
 import PIDimension from './input/PIDimension.vue'
 import PIDuration from './input/PIDuration.vue'
 import PIAlternateIdentifier from './input/PIAlternateIdentifier.vue'
@@ -49,7 +50,7 @@ import PITextField from './input/PITextField.vue'
 import PITextFieldSuggest from './input/PITextFieldSuggest.vue'
 import PITitle from './input/PITitle.vue'
 import PIFile from './input/PIFile'
-import PIUnknownReadonly from './input/PIUnknownReadonly.vue'
+import PIUnknown from './input/PIUnknown.vue'
 import PIVocabExtReadonly from './input/PIVocabExtReadonly.vue'
 import PISpatialReadonly from './input/PISpatialReadonly'
 import PILiteral from './input/PILiteral'
@@ -94,6 +95,7 @@ const Components = {
   PDLabeledValue,
   PDUwmetadata,
   PDValue,
+  PDUnknown,
   PIDimension,
   PIAlternateIdentifier,
   PIEntity,
@@ -120,7 +122,7 @@ const Components = {
   PITextField,
   PITextFieldSuggest,
   PITitle,
-  PIUnknownReadonly,
+  PIUnknown,
   PIVocabExtReadonly,
   PISpatialReadonly,
   PILiteral,

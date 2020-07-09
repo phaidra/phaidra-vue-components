@@ -1208,14 +1208,23 @@ const fields = [
     definition: 'Filename. Filename is also automatically provided when using the \'File\' field.'
   },
   {
-    id: 'readonly',
-    fieldname: 'Readonly',
+    id: 'unknown',
+    fieldname: 'Unknown (input)',
     predicate: '',
-    component: 'p-unknown-readonly',
+    component: 'p-unknown',
     label: '',
     jsonld: '',
-    readonly: true,
-    definition: 'Readonly.'
+    removable: true,
+    definition: 'Used to show unsupported data on input.'
+  },
+  {
+    id: 'display-unknown',
+    fieldname: 'Unknown',
+    predicate: '',
+    component: 'p-unknown',
+    label: '',
+    jsonld: '',
+    definition: 'Used to show unsupported data.'
   },
   {
     id: 'vocab-ext-readonly',

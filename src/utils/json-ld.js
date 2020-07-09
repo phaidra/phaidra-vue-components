@@ -1106,7 +1106,7 @@ export default {
                 components.push(f)
               } else {
                 // unknown predicate
-                f = fields.getField('readonly')
+                f = fields.getField('unknown')
                 f.jsonld = obj
                 f.predicate = key
                 f.label = key
@@ -1133,7 +1133,7 @@ export default {
       }
     }
     for (j = 0; j < components.length; j++) {
-      if (components[j].component === 'p-unknown-readonly') {
+      if (components[j].component === 'p-unknown') {
         ordered.push(components[j])
       }
     }

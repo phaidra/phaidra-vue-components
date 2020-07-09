@@ -326,7 +326,7 @@
         <template v-else slot="unknown-predicate">
           <v-container class="my-4" :key="p">
             <v-alert :type="'error'" :value="true" transition="fade-transition">Unknown predicate <b>{{p}}</b></v-alert>
-            <p-i-unknown-readonly :jsonld="o" :label="p" v-bind.sync="displayProperties"></p-i-unknown-readonly>
+            <p-d-unknown :jsonld="o" :label="p" v-bind.sync="displayProperties"></p-d-unknown>
           </v-container>
         </template>
 
@@ -360,7 +360,7 @@ import PDAdaptation from './PDAdaptation'
 import PDCitation from './PDCitation'
 import PDIdentifier from './PDIdentifier'
 import PDJsonldLayout from './PDJsonldLayout'
-import PIUnknownReadonly from '../input/PIUnknownReadonly'
+import PDUnknown from './PDUnknown'
 import { vocabulary } from '../../mixins/vocabulary'
 import { displayproperties } from '../../mixins/displayproperties'
 
@@ -408,7 +408,7 @@ export default {
     PDAdaptation,
     PDIdentifier,
     PDCitation,
-    PIUnknownReadonly
+    PDUnknown
   },
   computed: {
     instance: function () {

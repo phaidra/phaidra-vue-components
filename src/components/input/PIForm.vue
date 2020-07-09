@@ -425,8 +425,8 @@
                     <p-i-filename-readonly v-bind.sync="f"></p-i-filename-readonly>
                   </template>
 
-                  <template v-else-if="f.component === 'p-unknown-readonly'">
-                    <p-i-unknown-readonly v-bind.sync="f"></p-i-unknown-readonly>
+                  <template v-else-if="f.component === 'p-unknown'">
+                    <p-i-unknown v-bind.sync="f"></p-i-unknown>
                   </template>
 
                   <template v-else-if="f.component === 'p-vocab-ext-readonly'">
@@ -616,7 +616,7 @@ import PIFilename from './PIFilename'
 import PIFile from './PIFile'
 import PISpatialReadonly from './PISpatialReadonly'
 import PIVocabExtReadonly from './PIVocabExtReadonly'
-import PIUnknownReadonly from './PIUnknownReadonly'
+import PIUnknown from './PIUnknown'
 import PILiteral from './PILiteral'
 import PIStudyPlan from './PIStudyPlan'
 import PIKeyword from './PIKeyword'
@@ -663,7 +663,7 @@ export default {
     PIFile,
     PIVocabExtReadonly,
     PISpatialReadonly,
-    PIUnknownReadonly,
+    PIUnknown,
     PTemplates,
     ObjectFromSearch,
     PMRights,
