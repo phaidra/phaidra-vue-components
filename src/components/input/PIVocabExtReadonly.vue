@@ -60,8 +60,10 @@ export default {
       return prefLabel
     },
     notation: function () {
-      for (let n of this['skos:notation']) {
-        return n
+      if (this['skos:notation']) {
+        for (let n of this['skos:notation']) {
+          return n
+        }
       }
       return false
     },

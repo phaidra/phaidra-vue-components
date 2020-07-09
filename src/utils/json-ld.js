@@ -1152,9 +1152,9 @@ export default {
       var i
       if (key === 'dcterms:subject') {
         levels['subject'] = []
-        for (i = 0; i < value.length; i++) {
-          if (value['@type'] === 'phaidra:Subject') {
-            var subcomp = this.json2components(value, options)
+        for (let v of value) {
+          if (v['@type'] === 'phaidra:Subject') {
+            var subcomp = this.json2components(v, options)
             if (subcomp.length > 0) {
               levels.subject.push({ components: subcomp })
             }
@@ -1178,7 +1178,7 @@ export default {
     )
 
     if (levels['subject']) {
-      for (var i = 0; i < levels.subject.length; i++) {
+      for (let i = 0; i < levels.subject.length; i++) {
         var subjectFields = this.getOrderedComponents(levels.subject[i].components)
         form.sections.push(
           {

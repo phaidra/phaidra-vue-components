@@ -419,6 +419,21 @@ const fields = [
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {
+    id: 'sociocultural-category',
+    fieldname: 'Soziokulturelle Kategorie',
+    predicate: 'dcterms:subject',
+    type: 'skos:Concept',
+    component: 'p-select',
+    vocabulary: '60PM-DY5T',
+    multiplicable: true,
+    label: 'Soziokulturelle Kategorie',
+    value: '',
+    'skos:prefLabel': [],
+    showIds: true,
+    errorMessages: [],
+    definition: 'Subjects from terms collection https://vocab.phaidra.org/vocabulary/en/collections/60PM-DY5T.html'
+  },
+  {
     id: 'study-plan',
     fieldname: 'Study plan',
     predicate: 'frapo:isOutputOf',
