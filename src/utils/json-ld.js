@@ -124,6 +124,7 @@ export default {
                   f = fields.getField('digitization-note')
                   break
                 case 'arm:ConditionAssessment':
+                case 'phaidra:ConditionNote':
                   f = fields.getField('condition-note')
                   break
                 case 'phaidra:ReproductionNote':
