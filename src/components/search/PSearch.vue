@@ -51,7 +51,7 @@
           </v-bottom-sheet>
         </v-row>
         <v-row no-gutters>
-          <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} {{ inCollection }} <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
+          <v-col v-if="inCollection" class="title font-weight-light primary--text">{{ $t('Members of') }} <router-link :to="{ name: 'detail', params: { pid: inCollection } }">{{ inCollection }}</router-link> <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeCollectionFilter()"></icon></v-col>
           <p-search-results
             :docs="docs"
             :total="total"
