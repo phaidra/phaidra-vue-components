@@ -58,6 +58,7 @@ export default {
   'bf:provisionActivity': 'Provision activity: Publication',
   'cito:cites': 'Cites',
   'cito:isCitedBy': 'Is cited by',
+  'rdfs:seeAlso': 'See also',
 
   'dcterms:spatial': 'Depicted / Represented place',
   'vra:placeOfCreation': 'Place of creation',

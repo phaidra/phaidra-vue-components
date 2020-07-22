@@ -951,6 +951,20 @@ const fields = [
     definition: 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.'
   },
   {
+    id: 'see-also',
+    fieldname: 'See also',
+    predicate: 'rdfs:seeAlso',
+    component: 'p-see-also',
+    url: '',
+    urlLabel: 'URL',
+    title: '',
+    titleLabel: 'Title',
+    titleLanguage: '',
+    multiplicable: true,
+    multilingual: true,
+    definition: 'A URL linking to a related resource.'
+  },
+  {
     id: 'inscription',
     fieldname: 'Inscription/Stamp',
     predicate: 'vra:hasInscription',
@@ -1342,6 +1356,7 @@ const predicateOrder = [
   'frapo:isOutputOf',
   'rdax:P00009',
   'citation',
+  'rdfs:seeAlso',
 
   'phaidra:systemTag'
 ]

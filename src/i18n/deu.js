@@ -583,6 +583,7 @@ export default {
   'bf:provisionActivity': 'Provision activity: Publication',
   'cito:cites': 'Cites',
   'cito:isCitedBy': 'Is cited by',
+  'rdfs:seeAlso': 'Siehe auch',
 
   'dce:subject': 'Stichwort',
   'dcterms:subject': 'Subjekt',

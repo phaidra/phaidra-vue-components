@@ -346,6 +346,17 @@
                     ></p-i-dimension>
                   </template>
 
+                  <template v-else-if="f.component === 'p-see-also'">
+                    <p-i-see-also
+                      v-bind.sync="f"
+                      v-on:input-url="f.url=$event"
+                      v-on:input-title="f.title=$event"
+                      v-on:input-title-language="setSelected(f, 'titleLanguage', $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-see-also>
+                  </template>
+
                   <template v-else-if="(f.component === 'p-literal') && (f.predicate !== 'schema:pageStart') && (f.predicate !== 'schema:pageEnd')">
                     <p-i-literal
                       v-bind.sync="f"
@@ -623,6 +634,7 @@ import PIUnknown from './PIUnknown'
 import PILiteral from './PILiteral'
 import PIStudyPlan from './PIStudyPlan'
 import PIKeyword from './PIKeyword'
+import PISeeAlso from './PISeeAlso'
 import PTemplates from '../templates/PTemplates'
 import ObjectFromSearch from '../select/ObjectFromSearch'
 import PMRights from '../management/PMRights'
@@ -666,6 +678,7 @@ export default {
     PIFile,
     PIVocabExtReadonly,
     PISpatialReadonly,
+    PISeeAlso,
     PIUnknown,
     PTemplates,
     ObjectFromSearch,

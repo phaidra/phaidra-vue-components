@@ -2145,9 +2145,9 @@ export default {
       piddoc: {},
       collection: 'o:459021',
       sampleCollection: 'o:541829',
-      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra',
-      phaidrabaseurl: 'phaidra.univie.ac.at',
-      apibaseurl: 'https://services.phaidra.univie.ac.at/api',
+      solrbaseurl: 'https://app01.cc.univie.ac.at:8983/solr/phaidra_sandbox',
+      phaidrabaseurl: 'phaidra-sandbox.univie.ac.at',
+      apibaseurl: 'https://services.phaidra-sandbox.univie.ac.at/api',
       credentials: {
         username: '',
         password: ''
@@ -2515,6 +2515,7 @@ export default {
       // this.form.sections[0].fields.push(lang_vocab)
 
       this.form.sections[0].fields.push(fields.getField('keyword'))
+      this.form.sections[0].fields.push(fields.getField('see-also'))
       /* let containedIn = fields.getField('contained-in')
       containedIn.label = 'Book'
       containedIn.seriesLabel = 'Series'

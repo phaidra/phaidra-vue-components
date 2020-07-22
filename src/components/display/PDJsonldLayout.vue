@@ -70,6 +70,7 @@
     <slot name="schema:weight"></slot>
     <slot name="schema:duration"></slot>
     <slot name="bf:scale"></slot>
+    <slot name="rdfs:seeAlso"></slot>
 
     <slot name="dcterms:type"></slot>
     <slot name="pid"></slot>

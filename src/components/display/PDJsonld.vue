@@ -291,6 +291,10 @@
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'scale'+j" v-bind.sync="displayProperties"></p-d-skos-preflabel>
         </template>
 
+        <template v-else-if="p==='rdfs:seeAlso'" slot="rdfs:seeAlso">
+          <p-d-see-also :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'seealso'+j" v-bind.sync="displayProperties"></p-d-see-also>
+        </template>
+
         <template v-else-if="p==='edm:rights'" slot="edm:rights">
           <p-d-license :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'license'+j" v-bind.sync="displayProperties"></p-d-license>
         </template>
@@ -360,6 +364,7 @@ import PDAdaptation from './PDAdaptation'
 import PDCitation from './PDCitation'
 import PDIdentifier from './PDIdentifier'
 import PDJsonldLayout from './PDJsonldLayout'
+import PDSeeAlso from './PDSeeAlso'
 import PDUnknown from './PDUnknown'
 import { vocabulary } from '../../mixins/vocabulary'
 import { displayproperties } from '../../mixins/displayproperties'
@@ -408,6 +413,7 @@ export default {
     PDAdaptation,
     PDIdentifier,
     PDCitation,
+    PDSeeAlso,
     PDUnknown
   },
   computed: {

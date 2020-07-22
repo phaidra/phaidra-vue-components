@@ -871,6 +871,25 @@ export default {
               }
               break
 
+            // rdfs:seeAlso
+            case 'rdfs:seeAlso':
+              if (obj['@type'] === 'schema:URL') {
+                f = fields.getField('see-also')
+                if (obj['skos:prefLabel']) {
+                  for (let pl of obj['skos:prefLabel']) {
+                    f.title = pl['@value']
+                    f.titleLanguage = pl['@language'] ? pl['@language'] : 'eng'
+                  }
+                }
+                if (obj['schema:url']) {
+                  for (let url of obj['schema:url']) {
+                    f.url = url
+                  }
+                }
+                components.push(f)
+              }
+              break
+
             // vra:material
             case 'vra:material':
               if (obj['@type'] === 'vra:Material') {
@@ -1770,6 +1789,25 @@ export default {
     }
     return h
   },
+  get_json_see_also (url, title, titleLanguage) {
+    var h = {
+      '@type': 'schema:URL'
+    }
+    if (title) {
+      h['skos:prefLabel'] = [
+        {
+          '@value': title
+        }
+      ]
+      if (titleLanguage) {
+        h['skos:prefLabel'][0]['@language'] = titleLanguage
+      }
+    }
+    if (url) {
+      h['schema:url'] = [ url ]
+    }
+    return h
+  },
   get_json_identifier (type, value) {
     return {
       '@type': type,
@@ -2126,6 +2164,12 @@ export default {
         case 'phaidra:systemTag':
           if (f.value) {
             this.push_literal(jsonld, f.predicate, f.value)
+          }
+          break
+
+        case 'rdfs:seeAlso':
+          if (f.url || f.title) {
+            this.push_object(jsonld, f.predicate, this.get_json_see_also(f.url, f.title, f.titleLanguage))
           }
           break
 
