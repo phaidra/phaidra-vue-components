@@ -923,7 +923,7 @@ export default {
         })
       }
       if (this.previewMember) {
-        let rel = { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'container' }
+        let rel = { s: 'member_' + this.previewMember, p: 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', o: 'self' }
         if (md['metadata'].hasOwnProperty('relationships')) {
           if (Array.isArray(md['metadata']['relationships'])) {
             md['metadata']['relationships'].push(rel)
@@ -935,7 +935,7 @@ export default {
       if (this.owner) {
         md['metadata']['ownerid'] = this.owner
       }
-      if (this.rights) {
+      if (Object.keys(this.rights).length > 0) {
         md['metadata']['rights'] = this.rights
       }
       return md

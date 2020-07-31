@@ -1971,7 +1971,6 @@ export default {
           break
 
         case 'dcterms:type':
-        case 'edm:hasType':
         case 'schema:genre':
         case 'oaire:version':
         case 'dcterms:accessRights':

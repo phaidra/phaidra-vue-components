@@ -188,7 +188,7 @@
                     :required="required"
                     v-on:input="handleInput($event, 'organizationPath', 'input-organization-select')"
                     :rules="required ? [ v => !!v || 'Required'] : []"
-                    :items="vocabularies['orgunits'].terms"
+                    :items="orgunits"
                     :item-value="'@id'"
                     :loading="loading"
                     :filter="autocompleteFilterInfix"
@@ -243,7 +243,7 @@
                   :required="required"
                   v-on:input="handleInput($event, 'affiliationPath', 'input-affiliation-select')"
                   :rules="required ? [ v => !!v || 'Required'] : []"
-                  :items="vocabularies['orgunits'].terms"
+                  :items="orgunits"
                   :item-value="'@id'"
                   :loading="loading"
                   :filter="autocompleteFilterInfix"
@@ -441,6 +441,33 @@ export default {
         }
       }
       return ''
+    },
+    orgunits: function () {
+      let units = this.vocabularies['orgunits'].terms
+      let groups = []
+      for (let u of units) {
+        if (u['phaidra:orgGroupOrdinal']) {
+          if (!Array.isArray(groups[u['phaidra:orgGroupOrdinal']])) {
+            groups[u['phaidra:orgGroupOrdinal']] = []
+          }
+          groups[u['phaidra:orgGroupOrdinal']].push(u)
+        }
+      }
+      let groupedUnits = []
+      for (let g of groups) {
+        if (g) {
+          let i = 0
+          for (let u of g) {
+            if (i === 0) {
+              groupedUnits.push ({ divider: true })
+              groupedUnits.push ({ header: u['phaidra:orgGroup'] })
+            }
+            groupedUnits.push (u)
+            i++
+          }
+        }
+      }
+      return groupedUnits.length === 0 ? units : groupedUnits
     }
   },
   data () {

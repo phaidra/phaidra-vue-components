@@ -7,6 +7,7 @@
       <!--
         <v-img :src="'../../assets/' + getTermProperty('licenses', o, 'img')" :alt="o" class="license-icon"/>
       -->
+      <a v-if="copyrightLink" :href="copyrightLink" target="_blank" class="mr-2" :title="$t('Copyright')">({{$t('Copyright')}})</a>
     </v-col>
   </v-row>
 </template>
@@ -24,6 +25,9 @@ export default {
       required: true
     },
     p: {
+      type: String
+    },
+    copyrightLink: {
       type: String
     },
     hideLabel: Boolean

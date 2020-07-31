@@ -1146,12 +1146,44 @@ const state = {
 const mutations = {
   sortOrgUnits (state, locale) {
     if (state.vocabularies['orgunits'].sorted !== locale) {
-      state.vocabularies['orgunits']['terms'].sort(function (a, b) {
-        return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
-      })
-      for (let u of state.vocabularies['orgunits']['tree']) {
-        orgunits.sortOrgUnitsTree(u, locale)
+      if (state.vocabularies['orgunits']['terms']) {
+        if (state.vocabularies['orgunits']['terms'][0]) {
+          if (state.vocabularies['orgunits']['terms'][0]['phaidra:unitOrdinal']) {
+            if (state.vocabularies['orgunits']['terms'][0]['phaidra:groupOrdinal']) {
+              // if there are groups, sort groups first, then units within groups...
+              let groups = []
+              for (let u of state.vocabularies['orgunits']['terms']) {
+                if (u['phaidra:orgGroupOrdinal']) {
+                  if (!Array.isArray(groups[u['phaidra:orgGroupOrdinal']])) {
+                    groups[u['phaidra:orgGroupOrdinal']] = []
+                  }
+                  groups[u['phaidra:orgGroupOrdinal']].push(u)
+                }
+              }
+              let groupedUnits = []
+              for (let g of groups) {
+                if (g) {
+                  g.sort(function (a, b) {
+                    return a['phaidra:unitOrdinal'] - b['phaidra:unitOrdinal']
+                  })
+                  groupedUnits.push (u)
+                }
+              }
+              state.vocabularies['orgunits']['terms'] = groupedUnits
+            } else {
+              // ... otherwise sort units only
+              state.vocabularies['orgunits']['terms'].sort(function (a, b) {
+                return a['phaidra:unitOrdinal'] - b['phaidra:unitOrdinal']
+              })
+            }
+          } else {
+            state.vocabularies['orgunits']['terms'].sort(function (a, b) {
+              return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+            })
+          }
+        }
       }
+      orgunits.sortOrgUnitsTree(state.vocabularies['orgunits']['tree'], locale)
       state.vocabularies['orgunits'].sorted = locale
     }
   },

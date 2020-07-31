@@ -9,6 +9,15 @@
       </v-row>
     </template>
 
+    <template v-for="(role, i) of roles" slot="role">
+      <p-d-entity :role="role.p" :entity="e" :hideLabel="j !== 0" v-for="(e, j) in getEntities(role.p, role.o)" :key="componentid+'entity'+role.p+i" v-bind.sync="displayProperties"></p-d-entity>
+      <v-row v-if="entitiesLimited[role.p] && !showAllEntities[role.p]" :key="componentid+'entitymore'+role.p">
+        <v-col :md="valueColMd" :offset-md="labelColMd">
+          <span class="mx-2 primary--text" @click="setShowAllEntities(role.p)">... {{ $t('show all') }}</span>
+        </v-col>
+      </v-row>
+    </template>
+
     <template v-if="!predicatesToHide.includes('dce:subject')" slot="dce:subject">
       <p-d-keyword :p="'dce:subject'" :language="language === 'xxx' ? null : language" :keywords="keywords" v-for="(keywords, language) in langKeywords" :key="componentid+'kw'+language" v-bind.sync="displayProperties"></p-d-keyword>
     </template>
@@ -17,12 +26,11 @@
 
       <template v-if="!predicatesToHide.includes(p)">
 
-        <template v-if="p==='rdam:P30004'" slot="rdam:P30004">
-          <p-d-identifier :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'hasid'+j" v-bind.sync="displayProperties"></p-d-identifier>
-        </template>
+        <template v-if="p.startsWith('role:')"></template>
+        <template v-else-if="p==='dcterms:type'" slot="dcterms:type"></template>
 
-        <template v-else-if="p==='dcterms:type'" slot="dcterms:type">
-          <!--<p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'type'+j" ></p-d-skos-preflabel>-->
+        <template v-else-if="p==='rdam:P30004'" slot="rdam:P30004">
+          <p-d-identifier :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'hasid'+j" v-bind.sync="displayProperties"></p-d-identifier>
         </template>
 
         <template v-else-if="p==='edm:hasType'" slot="edm:hasType">
@@ -47,15 +55,6 @@
 
         <template v-else-if="p==='dce:title'" slot="dce:title">
           <p-d-title :o="t" v-for="(t, j) in o" :key="componentid+'title'+j" v-bind.sync="displayProperties"></p-d-title>
-        </template>
-
-        <template v-else-if="p.startsWith('role:')" slot="role">
-          <p-d-entity :role="p" :entity="e" :hideLabel="j !== 0" v-for="(e, j) in getEntities(p, o)" :key="componentid+'entity'+p+j" v-bind.sync="displayProperties"></p-d-entity>
-          <v-row v-if="entitiesLimited[p] && !showAllEntities[p]" :key="componentid+'entitymore'+p">
-            <v-col :md="valueColMd" :offset-md="labelColMd">
-              <span class="mx-2 primary--text" @click="setShowAllEntities(p)">... {{ $t('show all') }}</span>
-            </v-col>
-          </v-row>
         </template>
 
         <template v-else-if="p==='bf:note'" slot="bf:note">
@@ -296,7 +295,7 @@
         </template>
 
         <template v-else-if="p==='edm:rights'" slot="edm:rights">
-          <p-d-license :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'license'+j" v-bind.sync="displayProperties"></p-d-license>
+          <p-d-license :p="p" :o="item" :copyrightLink="copyrightLink" v-for="(item, j) in o" :key="componentid+'license'+j" v-bind.sync="displayProperties"></p-d-license>
         </template>
 
         <template v-else-if="p==='dce:rights'" slot="dce:rights">
@@ -342,6 +341,7 @@
 </template>
 
 <script>
+import order from '../../utils/order'
 import Vue from 'vue'
 import PDLicense from './PDLicense'
 import PDTitle from './PDTitle'
@@ -384,6 +384,9 @@ export default {
     showSystemFields: {
       type: Boolean,
       default: false
+    },
+    copyrightLink: {
+      type: String
     },
     predicatesToHide: {
       type: Array,
@@ -450,6 +453,20 @@ export default {
         })
       }
       return hash
+    },
+    roles: function () {
+      let roles = []
+      if (this.jsonld) {
+        Object.entries(this.jsonld).forEach(([p, o]) => {
+          if (p.startsWith('role:')) {
+            roles.push({p, o, ord: order.roles[p]})
+          }
+        })
+      }
+      roles.sort(function (a, b) {
+        return a.ord - b.ord
+      })
+      return roles
     }
   },
   data () {

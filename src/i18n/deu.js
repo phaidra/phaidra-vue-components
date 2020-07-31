@@ -649,5 +649,6 @@ export default {
   'Subject (GND)': 'Schlagwort (GND)',
 
   'OTHER_FEMININE': 'Andere',
-  'Confirm each keyword by pressing enter': 'Jedes Stichwort ist durch Drücken der Eingabetaste zu bestätigen'
+  'Confirm each keyword by pressing enter': 'Jedes Stichwort ist durch Drücken der Eingabetaste zu bestätigen',
+  'Copyright': 'Urheberrecht'
 }

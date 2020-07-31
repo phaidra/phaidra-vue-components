@@ -12,13 +12,23 @@ export default {
       }
     }
   },
-  sortOrgUnitsTree (u, locale) {
-    if (u['subunits']) {
-      u['subunits'].sort(function (a, b) {
-        return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
-      })
-      for (let unit of u['subunits']) {
-        this.sortOrgUnitsTree(unit, locale)
+  sortOrgUnitsTree (units, locale) {
+    if (Array.isArray(units)) {
+      if (units[0]) {
+        if (units[0]['phaidra:unitOrdinal']) {
+          units.sort(function (a, b) {
+            return a['phaidra:unitOrdinal'] - b['phaidra:unitOrdinal']
+          })
+        } else {
+          units.sort(function (a, b) {
+            return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+          })
+        }
+      }
+    }
+    for (let u of units) {
+      if (u['subunits']) {
+        this.sortOrgUnitsTree(u['subunits'], locale)
       }
     }
   }
