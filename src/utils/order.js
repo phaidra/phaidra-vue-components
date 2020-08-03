@@ -6,7 +6,7 @@ var roles = {
   'role:coadvisor': 3,
   'role:assessor': 4
 }
-let i = Object.keys(roles).length;
+let i = Object.keys(roles).length
 for (let r of vocabulary.state.vocabularies.rolepredicate.terms) {
   i++
   if (!roles[r['@id']]) {

@@ -4,8 +4,8 @@ import orgunits from '../../utils/orgunits'
 import axios from 'axios'
 
 const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
-  ret[lang3to2map[key]] = key;
-  return ret;
+  ret[lang3to2map[key]] = key
+  return ret
 }, {})
 
 const ns = 'https://pid.phaidra.org/vocabulary/'
@@ -824,7 +824,7 @@ const state = {
         { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
         { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
         { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
-        
+
       ],
       loaded: true
     },
@@ -892,7 +892,7 @@ const state = {
         { '@id': ns + 'QM0R-ZTAA', 'skos:prefLabel': { 'eng': 'wall chart', 'deu': 'Wandtafel' } },
         { '@id': ns + 'R1WF-V45Y', 'skos:prefLabel': { 'eng': 'website', 'deu': 'Website' } },
         { '@id': ns + '489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper', 'deu': 'Arbeitspapier' } },
-        { '@id': ns + 'HARH-6R3C', 'skos:prefLabel': { 'eng': 'yearbook', 'deu': 'Jahrbuch' } },
+        { '@id': ns + 'HARH-6R3C', 'skos:prefLabel': { 'eng': 'yearbook', 'deu': 'Jahrbuch' } }
       ],
       loaded: true
     },
@@ -1166,7 +1166,7 @@ const mutations = {
                   g.sort(function (a, b) {
                     return a['phaidra:unitOrdinal'] - b['phaidra:unitOrdinal']
                   })
-                  groupedUnits.push (u)
+                  groupedUnits.push(g)
                 }
               }
               state.vocabularies['orgunits']['terms'] = groupedUnits
@@ -1229,7 +1229,6 @@ const mutations = {
 
     let terms = []
 
-    let labHash
     for (let lab of data.results.bindings) {
       // TODO: remove replace once pid. is exported to triplestore instead of vocab.
       let id = lab.id.value.replace('vocab.phaidra.org', 'pid.phaidra.org')
@@ -1297,30 +1296,18 @@ const actions = {
       }
     }
     try {
-      var raw = 'PREFIX v: <' + rootState.appconfig.apis.vocserver.ns + '>\
-      PREFIX : <' + rootState.appconfig.apis.vocserver.ns + 'schema#>\
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\
-      SELECT ?id ?label ?exp\
-      WHERE {\
-        graph ?g {\
-          ?id :memberOf  v:' + vocabId + ' .\
-          ?id skos:prefLabel ?label .\
-            OPTIONAL {\
-              ?id :expires ?exp .\
-            }\
-        }\
-      }'
+      var raw = 'PREFIX v: <' + rootState.appconfig.apis.vocserver.ns + '> PREFIX : <' + rootState.appconfig.apis.vocserver.ns + 'schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?id ?label ?exp WHERE { graph ?g { ?id :memberOf  v:' + vocabId + ' . ?id skos:prefLabel ?label . OPTIONAL { ?id :expires ?exp . } } }'
       let response = await axios.request({
         method: 'POST',
         url: rootState.appconfig.apis.vocserver.url + rootState.appconfig.apis.vocserver.dataset + '/query',
-        headers: {'Content-Type': 'application/sparql-query'},
+        headers: { 'Content-Type': 'application/sparql-query' },
         data: raw
       })
       if (response.data && response.data.results && response.data.results.bindings) {
         commit('loadVocabulary', { id: vocabId, data: response.data })
       } else {
         console.log('Failed to fetch vocabulary ' + vocabId)
-        commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch vocabulary ' + vocabId + ': ' + error } ])
+        commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch vocabulary ' + vocabId } ])
       }
     } catch (error) {
       console.log(error)

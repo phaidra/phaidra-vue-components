@@ -341,10 +341,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import qs from 'qs'
 import PIDuration from '../input/PIDuration'
-import arrays from '../../utils/arrays'
 import lang3to2map from '../../utils/lang3to2map'
 import { validationrules } from '../../mixins/validationrules'
 
@@ -466,22 +464,22 @@ export default {
           if (termChildren.length > 0) {
             this.children.push(
               {
-                "labels": {
-                    "de": "Pfad",
-                    "en": "Path",
-                    "it": "Percorso",
-                    "sr": "putanja"
+                'labels': {
+                  'de': 'Pfad',
+                  'en': 'Path',
+                  'it': 'Percorso',
+                  'sr': 'putanja'
                 },
-                "datatype": "Taxon",
-                "field_order": 9999,
-                "input_type": "input_text",
-                "ordered": 1,
-                "data_order": nrPrevNodes, // source (cls node) is also counted, so no +1
-                "ui_value": "",
-                "value_lang": "",
-                "xmlname": "taxon",
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification",
-                "vocabularies": [
+                'datatype': 'Taxon',
+                'field_order': 9999,
+                'input_type': 'input_text',
+                'ordered': 1,
+                'data_order': nrPrevNodes, // source (cls node) is also counted, so no +1
+                'ui_value': '',
+                'value_lang': '',
+                'xmlname': 'taxon',
+                'xmlns': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification',
+                'vocabularies': [
                   {
                     'terms': termChildren
                   }
@@ -496,22 +494,22 @@ export default {
           if (termChildren.length > 0) {
             this.children.push(
               {
-                "labels": {
-                    "de": "Pfad",
-                    "en": "Path",
-                    "it": "Percorso",
-                    "sr": "putanja"
+                'labels': {
+                  'de': 'Pfad',
+                  'en': 'Path',
+                  'it': 'Percorso',
+                  'sr': 'putanja'
                 },
-                "datatype": "Taxon",
-                "field_order": 9999,
-                "input_type": "input_text",
-                "ordered": 1,
-                "data_order": 0,
-                "ui_value": "",
-                "value_lang": "",
-                "xmlname": "taxon",
-                "xmlns": "http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification",
-                "vocabularies": [
+                'datatype': 'Taxon',
+                'field_order': 9999,
+                'input_type': 'input_text',
+                'ordered': 1,
+                'data_order': 0,
+                'ui_value': '',
+                'value_lang': '',
+                'xmlname': 'taxon',
+                'xmlns': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification',
+                'vocabularies': [
                   {
                     'terms': termChildren
                   }
@@ -549,7 +547,7 @@ export default {
       return hashId
     },
     getStudyName: async function (node) {
-      let spl = '' 
+      let spl = ''
       let ids = []
       let hashId = ''
       for (let ch of node.children) {
@@ -689,21 +687,21 @@ export default {
               case 'upload_date':
                 return true
               default:
-                return false 
+                return false
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity':
             switch (node.xmlname) {
               case 'type':
                 return true
               default:
-                return false 
+                return false
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/entity':
             switch (node.xmlname) {
               case 'type':
                 return true
               default:
-                return false 
+                return false
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification':
             switch (node.xmlname) {
@@ -711,7 +709,7 @@ export default {
               case 'keyword':
                 return true
               default:
-                return false 
+                return false
             }
           default:
             return false
@@ -729,7 +727,7 @@ export default {
               case 'size':
                 return true
               default:
-                return false 
+                return false
             }
           default:
             return false

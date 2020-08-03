@@ -77,7 +77,7 @@ export default {
   computed: {
     affiliation: function () {
       if (this.entity['@type'] === 'schema:Person') {
-        if(this.entity.hasOwnProperty('schema:affiliation')) {
+        if (this.entity.hasOwnProperty('schema:affiliation')) {
           for (let af of this.entity['schema:affiliation']) {
             if (af.hasOwnProperty('skos:exactMatch')) {
               for (let id of af['skos:exactMatch']) {

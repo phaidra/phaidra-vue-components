@@ -7,7 +7,7 @@
       <!--
         <v-img :src="'../../assets/' + getTermProperty('licenses', o, 'img')" :alt="o" class="license-icon"/>
       -->
-      <a v-if="copyrightLink" :href="copyrightLink" target="_blank" class="mr-2" :title="$t('Copyright')">({{$t('Copyright')}})</a>
+      <span class="ml-2" v-if="copyrightLink && (o === 'http://rightsstatements.org/vocab/InC/1.0/')">(<a :href="copyrightLink" target="_blank" :title="$t('Copyright')">{{$t('Copyright')}}</a>)</span>
     </v-col>
   </v-row>
 </template>

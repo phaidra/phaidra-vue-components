@@ -52,7 +52,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn v-if="!sent" class="primary" :loading="loading" :disabled="loading" @click="send()">{{ $t('Send') }}</v-btn>
-      <v-btn v-if="sent":loading="loading" :disabled="loading" @click="newFeedback()">{{ $t('New feedback') }}</v-btn>
+      <v-btn v-if="sent" :loading="loading" :disabled="loading" @click="newFeedback()">{{ $t('New feedback') }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -85,7 +85,7 @@ export default {
       mail: this.email,
       emailRules: [
         v => !!v || this.$t('E-mail is required'),
-        v => /.+@.+/.test(v) || this.$t('E-mail must be valid'),
+        v => /.+@.+/.test(v) || this.$t('E-mail must be valid')
       ],
       feedback: '',
       feedbackRules: [
@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     send: async function () {
-      if(this.$refs.form.validate()) {
+      if (this.$refs.form.validate()) {
         this.loading = true
         var httpFormData = new FormData()
         httpFormData.append('context', this.context)
@@ -139,4 +139,3 @@ export default {
   }
 }
 </script>
-

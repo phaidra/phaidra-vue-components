@@ -459,10 +459,10 @@ export default {
           let i = 0
           for (let u of g) {
             if (i === 0) {
-              groupedUnits.push ({ divider: true })
-              groupedUnits.push ({ header: u['phaidra:orgGroup'] })
+              groupedUnits.push({ divider: true })
+              groupedUnits.push({ header: u['phaidra:orgGroup'] })
             }
-            groupedUnits.push (u)
+            groupedUnits.push(u)
             i++
           }
         }

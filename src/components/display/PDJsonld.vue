@@ -10,7 +10,7 @@
     </template>
 
     <template v-for="(role, i) of roles" slot="role">
-      <p-d-entity :role="role.p" :entity="e" :hideLabel="j !== 0" v-for="(e, j) in getEntities(role.p, role.o)" :key="componentid+'entity'+role.p+i" v-bind.sync="displayProperties"></p-d-entity>
+      <p-d-entity :role="role.p" :entity="e" :hideLabel="j !== 0" v-for="(e, j) in getEntities(role.p, role.o)" :key="componentid+'entity'+role.p+i+j" v-bind.sync="displayProperties"></p-d-entity>
       <v-row v-if="entitiesLimited[role.p] && !showAllEntities[role.p]" :key="componentid+'entitymore'+role.p">
         <v-col :md="valueColMd" :offset-md="labelColMd">
           <span class="mx-2 primary--text" @click="setShowAllEntities(role.p)">... {{ $t('show all') }}</span>
@@ -459,7 +459,7 @@ export default {
       if (this.jsonld) {
         Object.entries(this.jsonld).forEach(([p, o]) => {
           if (p.startsWith('role:')) {
-            roles.push({p, o, ord: order.roles[p]})
+            roles.push({ p, o, ord: order.roles[p] })
           }
         })
       }

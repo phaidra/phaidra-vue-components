@@ -215,7 +215,7 @@ export default {
       rightsArray: [],
       rightsHeaders: [
         { text: this.$t('Rule'), align: 'left', value: 'description', sortable: false },
-        { text:  this.$t('Expires'), align: 'left', value: 'expires', sortable: false },
+        { text: this.$t('Expires'), align: 'left', value: 'expires', sortable: false },
         { text: '', align: 'right', value: 'actions', sortable: false }
       ],
       dateModel: new Date().toISOString().substr(0, 10),
@@ -230,8 +230,8 @@ export default {
   watch: {
     rights: {
       handler: async function (val) {
-      this.rightsjson = val
-      this.rightsJsonToRightsArray()
+        this.rightsjson = val
+        this.rightsJsonToRightsArray()
       },
       deep: true
     },
@@ -253,7 +253,7 @@ export default {
           }
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
-          commit('setAlerts', response.data.alerts)
+          this.$store.commit('setAlerts', response.data.alerts)
         }
         this.userSearchItems = response.data.accounts ? response.data.accounts : []
       } catch (error) {
@@ -333,7 +333,7 @@ export default {
           }
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
-          commit('setAlerts', response.data.alerts)
+          this.$store.commit('setAlerts', response.data.alerts)
         }
         return response.data.name
       } catch (error) {
@@ -352,7 +352,7 @@ export default {
           }
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
-          commit('setAlerts', response.data.alerts)
+          this.$store.commit('setAlerts', response.data.alerts)
         }
         return response.data.group.name
       } catch (error) {
@@ -412,7 +412,7 @@ export default {
       this.rightsArray = []
       // 'username' => 1, 'department' => 1, 'faculty' => 1, 'gruppe' => 1, 'spl' => 1, 'kennzahl' => 1, 'perfunk' => 1
       if (this.rightsjson['username']) {
-        for ( let r of this.rightsjson['username']) {
+        for (let r of this.rightsjson['username']) {
           let notation = ''
           let name = ''
           let expires = ''
@@ -423,11 +423,11 @@ export default {
             notation = r
           }
           name = await this.getNameFromUsername(notation)
-          this.rightsArray.push( { type: 'username', notation: notation, description: name, expires: expires } )
+          this.rightsArray.push({ type: 'username', notation: notation, description: name, expires: expires })
         }
       }
       if (this.rightsjson['department']) {
-        for ( let r of this.rightsjson['department']) {
+        for (let r of this.rightsjson['department']) {
           let notation = ''
           let name = ''
           let expires = ''
@@ -445,11 +445,11 @@ export default {
               name = notation
             }
           }
-          this.rightsArray.push( { type: 'department', notation: notation, description: name, expires: expires } )
+          this.rightsArray.push({ type: 'department', notation: notation, description: name, expires: expires })
         }
       }
       if (this.rightsjson['faculty']) {
-        for ( let r of this.rightsjson['faculty']) {
+        for (let r of this.rightsjson['faculty']) {
           let notation = ''
           let name = ''
           let expires = ''
@@ -467,11 +467,11 @@ export default {
               name = notation
             }
           }
-          this.rightsArray.push( { type: 'faculty', notation: notation, description: name, expires: expires } )
+          this.rightsArray.push({ type: 'faculty', notation: notation, description: name, expires: expires })
         }
       }
       if (this.rightsjson['gruppe']) {
-        for ( let r of this.rightsjson['gruppe']) {
+        for (let r of this.rightsjson['gruppe']) {
           let notation = ''
           let name = ''
           let expires = ''
@@ -482,7 +482,7 @@ export default {
             notation = r
           }
           name = await this.getGroupName(notation)
-          this.rightsArray.push( { type: 'gruppe', notation: notation, description: name, expires: expires } )
+          this.rightsArray.push({ type: 'gruppe', notation: notation, description: name, expires: expires })
         }
       }
     },
@@ -511,7 +511,7 @@ export default {
       }
     }
   },
-  mounted: async function () {    
+  mounted: async function () {
     this.$nextTick(function () {
       if (!this.vocabularies['orgunits'].loaded) {
         this.$store.dispatch('loadOrgUnits', this.$i18n.locale)

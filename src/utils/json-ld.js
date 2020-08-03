@@ -154,7 +154,7 @@ export default {
               f = fields.getField('language')
               if (obj['skos:exactMatch']) {
                 f.vocabulary = 'lang_vocab'
-                for (let v of obj['skos:exactMatch']) { 
+                for (let v of obj['skos:exactMatch']) {
                   f.value = v
                 }
               } else {
@@ -251,12 +251,12 @@ export default {
               Object.entries(jsonld).forEach(([key1, value1]) => {
                 if (key1 === 'schema:pageStart') {
                   for (let ps of value1) {
-                    f.pageStart =  ps
+                    f.pageStart = ps
                   }
                 }
                 if (key1 === 'schema:pageEnd') {
                   for (let pe of value1) {
-                    f.pageEnd =  pe
+                    f.pageEnd = pe
                   }
                 }
               })
@@ -322,12 +322,12 @@ export default {
               Object.entries(jsonld).forEach(([key1, value1]) => {
                 if (key1 === 'schema:pageStart') {
                   for (let ps of value1) {
-                    f.pageStart =  ps
+                    f.pageStart = ps
                   }
                 }
                 if (key1 === 'schema:pageEnd') {
                   for (let pe of value1) {
-                    f.pageEnd =  pe
+                    f.pageEnd = pe
                   }
                 }
               })
@@ -483,7 +483,7 @@ export default {
                 if (((obj['@type'] === 'schema:Place') || (obj['@type'] === 'schema:AdministrativeArea')) && obj['skos:exactMatch']) {
                   f = fields.getField('spatial-readonly')
                   if (obj['skos:exactMatch']) {
-                    for (let v of  obj['skos:exactMatch']) {
+                    for (let v of obj['skos:exactMatch']) {
                       f.value = v
                     }
                   }
@@ -1169,7 +1169,6 @@ export default {
     levels.digital.components = this.json2components(jsonld, options)
 
     Object.entries(jsonld).forEach(([key, value]) => {
-      var i
       if (key === 'dcterms:subject') {
         levels['subject'] = []
         for (let v of value) {
@@ -1914,7 +1913,7 @@ export default {
         delete jsonlds[key]
       }
     })
-    jsonlds = JSON.parse(JSON.stringify(jsonlds).replace(/"\s+|\s+"/g,'"'))
+    jsonlds = JSON.parse(JSON.stringify(jsonlds).replace(/"\s+|\s+"/g, '"'))
     return jsonlds
   },
   fields2json (jsonld, formData) {

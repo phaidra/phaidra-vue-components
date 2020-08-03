@@ -34,8 +34,7 @@ export default {
   data () {
     return {
       dialog: false,
-      loading: false//,
-      //orgunits: []
+      loading: false
     }
   },
   methods: {

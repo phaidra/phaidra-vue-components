@@ -1,12 +1,12 @@
 <template>
   <v-row >
     <v-col :cols="!showMimetype ? (actions.length ? 10 : 12) : (actions.length ? 6 : 8)">
-      <v-file-input 
-        :error-messages="fileErrorMessages" 
+      <v-file-input
+        :error-messages="fileErrorMessages"
         :filled="inputStyle==='filled'"
-        :outlined="inputStyle==='outlined'" 
-        show-size 
-        @change="fileInput($event)" 
+        :outlined="inputStyle==='outlined'"
+        show-size
+        @change="fileInput($event)"
         :label="$t(label)"
         :prepend-icon="''"
         :append-icon="'mdi-paperclip'"

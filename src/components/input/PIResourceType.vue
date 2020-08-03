@@ -11,7 +11,7 @@
         <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-volume-high</v-icon><span class="ml-2">Audio</span></v-btn>
         <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-video</v-icon><span class="ml-2">Video</span></v-btn>
         <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-file-pdf</v-icon><span class="ml-2">Document</span></v-btn>
-        <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-file</v-icon><span>Data</span class="ml-2"></v-btn>
+        <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-file</v-icon><span class="ml-2">Data</span></v-btn>
         <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-folder-open</v-icon><span class="ml-2">Collection</span></v-btn>
         <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-link</v-icon><span class="ml-2">Resource</span></v-btn>
       </v-btn-toggle>
@@ -62,4 +62,3 @@ export default {
   }
 }
 </script>
-

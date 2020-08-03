@@ -112,14 +112,14 @@
                   </template>
 
                   <template v-else-if="f.component === 'p-resource-type-buttongroup'">
-                    <p-i-resource-type 
+                    <p-i-resource-type
                       v-bind.sync="f"
                       v-on:input="selectInput(f, $event)"
                     ></p-i-resource-type>
                   </template>
 
                   <template v-else-if="f.component === 'p-object-type-checkboxes'">
-                    <p-i-object-type 
+                    <p-i-object-type
                       v-bind.sync="f"
                       v-on:input="handleObjectTypeCheckboxesInput(f, $event)"
                     ></p-i-object-type>
@@ -437,7 +437,7 @@
                   </template>
 
                   <template v-else-if="f.component === 'p-unknown'">
-                    <p-i-unknown 
+                    <p-i-unknown
                       v-bind.sync="f"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-unknown>
@@ -686,6 +686,7 @@ export default {
     PDLicenseInfo,
     PIObjectType,
     PIResourceType,
+    PFeedback,
     PHelp
   },
   props: {
@@ -877,7 +878,7 @@ export default {
           let predicate
           for (let rel of this.vocabularies['relations'].terms) {
             for (let notation of rel['skos:notation']) {
-              if (notation.toLowerCase() === relation ) {
+              if (notation.toLowerCase() === relation) {
                 predicate = rel['@id']
               }
               break
@@ -888,7 +889,7 @@ export default {
               let rel = { s: pid, p: predicate, o: 'self' }
               if (md['metadata'].hasOwnProperty('relationships')) {
                 if (Array.isArray(md['metadata']['relationships'])) {
-                  md['metadata']['relationships'].push({rel})
+                  md['metadata']['relationships'].push({ rel })
                 }
               } else {
                 md['metadata']['relationships'] = [ rel ]
@@ -902,7 +903,7 @@ export default {
           let predicate
           for (let rel of this.vocabularies['relations'].terms) {
             for (let notation of rel['skos:notation']) {
-              if (notation.toLowerCase() === relation ) {
+              if (notation.toLowerCase() === relation) {
                 predicate = rel['@id']
               }
               break
@@ -913,7 +914,7 @@ export default {
               let rel = { s: 'self', p: predicate, o: pid }
               if (md['metadata'].hasOwnProperty('relationships')) {
                 if (Array.isArray(md['metadata']['relationships'])) {
-                  md['metadata']['relationships'].push({rel})
+                  md['metadata']['relationships'].push({ rel })
                 }
               } else {
                 md['metadata']['relationships'] = [ rel ]
@@ -1055,7 +1056,7 @@ export default {
           },
           data: httpFormData,
           onUploadProgress: function (progressEvent) {
-            self.uploadProgress = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            self.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total)
           }
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
@@ -1501,7 +1502,7 @@ export default {
     setFilename: function (f, event) {
       f.value = event.name
       f.file = event
-      this.setSelected(f, 'mimetype', {'@id': event.type})
+      this.setSelected(f, 'mimetype', { '@id': event.type })
       this.$emit('form-input-' + f.component, f)
     },
     addFieldAutocompleteFilter: function (item, queryText) {

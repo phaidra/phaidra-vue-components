@@ -94,7 +94,7 @@ export default {
       handler () {
         this.search()
       },
-      deep: true 
+      deep: true
     },
     ownerFilter: {
       handler () {

@@ -112,7 +112,7 @@ export default {
     relationshipSelect: function () {
       let arr = []
       for (let rel of this.vocabularies['relations'].terms) {
-        arr.push( { text: this.getLocalizedTermLabel('relations', rel['@id']), value: rel['@id'] } )
+        arr.push({ text: this.getLocalizedTermLabel('relations', rel['@id']), value: rel['@id'] })
       }
       return arr
     },
@@ -197,7 +197,7 @@ export default {
           }
         })
         for (let d of response.data.response.docs) {
-          this.objectSearchItems.push( { text: d['dc_title'][0], value: d.pid } )
+          this.objectSearchItems.push({ text: d['dc_title'][0], value: d.pid })
         }
       } catch (error) {
         console.log(error)

@@ -397,7 +397,7 @@
                     </template>
                   </v-row>
                   <v-row>
-                    <v-col v-if="publisherShowPlace" cols="12" :cols="publisherShowDate ? 8 : 12">
+                    <v-col v-if="publisherShowPlace" cols="12" :md="publisherShowDate ? 8 : 12">
                       <v-text-field
                         :value="publishingPlace"
                         v-on:blur="$emit('input-publishing-place',$event.target.value)"
@@ -406,7 +406,7 @@
                         :outlined="inputStyle==='outlined'"
                       ></v-text-field>
                     </v-col>
-                    <v-col v-if="publisherShowDate" cols="12" :cols="publisherShowPlace ? 4 : 12">
+                    <v-col v-if="publisherShowDate" cols="12" :md="publisherShowPlace ? 4 : 12">
                       <template v-if="publishingDatePicker">
                         <v-text-field
                           :value="publishingDate"

@@ -124,7 +124,7 @@
                 :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
-            <v-col v-if="showDate" cols="12":md="showPlace ? 4 : 12">
+            <v-col v-if="showDate" cols="12" :md="showPlace ? 4 : 12">
               <template v-if="publishingDatePicker">
                 <v-text-field
                   :value="publishingDate"

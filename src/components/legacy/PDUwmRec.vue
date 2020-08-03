@@ -139,9 +139,9 @@
           <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}</v-col>
           <v-col cols="12" md="10">
             <template v-for="(d, i) in ch.children">
-              <span v-if="d.xmlname === 'resource'"><span class="primary--text">{{ $t(nodePath(ch)+'_resource') }}</span>: {{ getLabel(d) }}</span>
-              <span v-else-if="d.xmlname === 'dimension_unit'"><span class="primary--text ml-4">{{ $t(nodePath(ch)+'_dimension_unit') }}</span>: {{ getLabel(d) }}</span>
-              <span v-else><span class="primary--text ml-4">{{ $t(nodePath(ch) + '_' + d.xmlname) }}</span>: {{ d.ui_value }}</span>
+              <span v-if="d.xmlname === 'resource'" :key="i+'dima'"><span class="primary--text">{{ $t(nodePath(ch)+'_resource') }}</span>: {{ getLabel(d) }}</span>
+              <span v-else-if="d.xmlname === 'dimension_unit'" :key="i+'dimb'"><span class="primary--text ml-4">{{ $t(nodePath(ch)+'_dimension_unit') }}</span>: {{ getLabel(d) }}</span>
+              <span v-else :key="i+'dimc'"><span class="primary--text ml-4">{{ $t(nodePath(ch) + '_' + d.xmlname) }}</span>: {{ d.ui_value }}</span>
             </template>
           </v-col>
         </template>
@@ -162,19 +162,12 @@
 
 <script>
 import uwmlangs from '../../utils/uwmlangs'
-import Vue from 'vue'
-import qs from 'qs'
-import PIDuration from '../input/PIDuration'
-import arrays from '../../utils/arrays'
 import lang3to2map from '../../utils/lang3to2map'
 import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-d-uwm-rec',
   mixins: [ validationrules ],
-  components: {
-    PIDuration
-  },
   props: {
     children: {
       type: Array
@@ -229,10 +222,8 @@ export default {
         case 'uwm_histkult':
         case 'uwm_digitalbook':
           return true
-          break
         default:
           return false
-          break
       }
     },
     getLangLabel: function (code) {
@@ -262,7 +253,7 @@ export default {
           if (ch.attributes) {
             for (let a of ch.attributes) {
               if (a.xmlname === 'data_order') {
-                ch.data_order = a.ui_value 
+                ch.data_order = a.ui_value
               }
             }
           }
@@ -287,7 +278,7 @@ export default {
           if (ch.attributes) {
             for (let a of ch.attributes) {
               if (a.xmlname === 'data_order') {
-                ch.data_order = a.ui_value 
+                ch.data_order = a.ui_value
               }
             }
           }
@@ -302,7 +293,7 @@ export default {
         kennzahlchain.push(k.ui_value)
       }
       if (kennzahlchain.length > 0) {
-        return ' > ' + kennzahlchain.join(' > ')  
+        return ' > ' + kennzahlchain.join(' > ')
       }
       return ''
     },
@@ -402,21 +393,21 @@ export default {
               case 'location':
                 return true
               default:
-                return false 
+                return false
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/entity':
             switch (node.xmlname) {
               case 'type':
                 return true
               default:
-                return false 
+                return false
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/provenience/V1.0/entity':
             switch (node.xmlname) {
               case 'type':
                 return true
               default:
-                return false 
+                return false
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/classification':
             switch (node.xmlname) {
@@ -424,14 +415,14 @@ export default {
               case 'keyword':
                 return true
               default:
-                return false 
+                return false
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/extended/V1.0':
             switch (node.xmlname) {
               case 'metadataqualitycheck':
                 return true
               default:
-                return false 
+                return false
             }
           default:
             return false

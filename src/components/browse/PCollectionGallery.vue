@@ -28,7 +28,7 @@
       <v-divider vertical></v-divider>
       <v-col v-if="mode === 'single'">
         <v-carousel hide-delimiters height="100%">
-          <v-carousel-item v-for="doc in childrenOfActiveCollection">
+          <v-carousel-item v-for="(doc, i) in childrenOfActiveCollection" :key="'cha1'+i">
              <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <span v-on="on">
@@ -43,12 +43,12 @@
       <v-col v-if="mode === 'gallery'">
         <v-container>
           <v-row>
-            <v-col class="d-flex child-flex" cols="4" v-for="doc in childrenOfActiveCollection">
+            <v-col class="d-flex child-flex" cols="4" v-for="(doc, i) in childrenOfActiveCollection" :key="'cha2'+i">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <span v-on="on">
                     <v-card flat tile class="d-flex">
-                      <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid" 
+                      <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid"
                         @click="showDetailDialog(doc)">
                         <template v-slot:placeholder>
                           <v-row class="fill-height ma-0" align="center" justify="center">
@@ -81,8 +81,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    
-    
+
   </v-container>
 </template>
 
@@ -116,9 +115,9 @@ export default {
       mode: 'gallery',
       selectedImage: {
         src: ''
-      }, 
-      childrenOfActiveCollection: [], 
-      detailDialog: true, 
+      },
+      childrenOfActiveCollection: [],
+      detailDialog: true,
       detailToShow: null
     }
   },
@@ -161,15 +160,14 @@ export default {
       }
     },
     getChildren: async function (arr) {
-      
-      //alert('load children of: '+JSON.stringify(arr));
-      //alert('load children2 of: '+arr[0]);
+      // alert('load children of: '+JSON.stringify(arr));
+      // alert('load children2 of: '+arr[0]);
       try {
         let params = {
           q: '*:*',
           defType: 'edismax',
           wt: 'json',
-          fq: 'ispartof:"' + arr[0] + '" AND -cmodel:"Collection"',  //ReferenceError: item is not defined
+          fq: 'ispartof:"' + arr[0] + '" AND -cmodel:"Collection"', // ReferenceError: item is not defined
           start: 0,
           rows: 5000
         }
@@ -181,37 +179,35 @@ export default {
             'content-type': 'application/x-www-form-urlencoded'
           }
         })
-        
+
         let total = response.data.response.numFound
         if (total < 1) {
           console.log(arr[0] + ' has ' + total + ' members')
           return
         }
-        
-        
+
         this.childrenOfActiveCollection = response.data.response.docs
-        
-        //for (let doc of this.childrenOfActiveCollection) {
+
+        // for (let doc of this.childrenOfActiveCollection) {
         //  alert('https://' + this.instanceconfig.baseurl + '/preview/' + doc.pid);
-        //}
-        
+        // }
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       }
-    },  
+    },
     showDetailDialog: async function (doc) {
       try {
-        this.detailToShow = doc;
-        this.detailDialog = true;
+        this.detailToShow = doc
+        this.detailDialog = true
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       }
-    }, 
+    },
     openDetails: async function () {
       try {
-        alert("open details for: " + this.detailToShow.dc_title[0]);
+        alert('open details for: ' + this.detailToShow.dc_title[0])
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
