@@ -67,6 +67,7 @@
     <slot name="schema:width"></slot>
     <slot name="schema:height"></slot>
     <slot name="schema:depth"></slot>
+    <slot name="vra:diameter"></slot>
     <slot name="schema:weight"></slot>
     <slot name="schema:duration"></slot>
     <slot name="bf:scale"></slot>

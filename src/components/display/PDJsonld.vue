@@ -250,6 +250,10 @@
           <p-d-dimension :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'depth'+j" v-bind.sync="displayProperties"></p-d-dimension>
         </template>
 
+        <template v-else-if="p==='vra:diameter'" slot="vra:diameter">
+          <p-d-dimension :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'depth'+j" v-bind.sync="displayProperties"></p-d-dimension>
+        </template>
+
         <template v-else-if="p==='schema:weight'" slot="schema:weight">
           <p-d-dimension :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'weight'+j" v-bind.sync="displayProperties"></p-d-dimension>
         </template>
