@@ -4,7 +4,7 @@
     <v-col :md="valueColMd" cols="12">
       <v-card flat>
         <v-card-text class="border-left">
-          <v-container>
+          <v-container fluid>
             <v-row>
               <template v-for="(title, j) in o['dce:title']">
                 <template v-for="(mt, i) in title['bf:mainTitle']">

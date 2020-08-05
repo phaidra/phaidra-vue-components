@@ -3,7 +3,7 @@
     <v-card-title v-if="title" class="title font-weight-light grey white--text">{{ title }}</v-card-title>
     <v-divider v-if="title"></v-divider>
     <v-card-text class="mt-4">
-      <v-container>
+      <v-container fluid>
         <v-row>
           <v-col cols="12">
             <v-card>
@@ -41,7 +41,7 @@
               <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to organisational units/subunits') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
-                <v-container>
+                <v-container fluid>
                   <v-row>
                     <v-col cols="8">
                       <v-autocomplete
@@ -89,7 +89,7 @@
               <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular persons') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
-                <v-container>
+                <v-container fluid>
                   <v-row>
                     <v-col cols="8">
                       <v-autocomplete

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <slot name="dce:title"></slot>
     <slot name="role"></slot>
     <slot name="bf:note"></slot>

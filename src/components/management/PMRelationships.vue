@@ -3,7 +3,7 @@
     <v-card-title v-if="title" class="title font-weight-light grey white--text">{{ title }}</v-card-title>
     <v-divider v-if="title"></v-divider>
     <v-card-text class="mt-4">
-      <v-container>
+      <v-container fluid>
         <v-row class="title font-weight-light">{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</v-row>
         <v-row>
           <v-col cols="12">
@@ -33,7 +33,7 @@
               <v-card-title class="title font-weight-light grey white--text">{{ $t('Add new relationship of object') + ' ' + pid }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
-                <v-container>
+                <v-container fluid>
                   <v-row>
                     <v-col cols="4">
                       <v-select

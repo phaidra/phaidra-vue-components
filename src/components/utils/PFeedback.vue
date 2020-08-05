@@ -4,7 +4,7 @@
     <v-divider></v-divider>
     <v-card-text class="mt-4">
       <v-form v-if="!sent" ref="form" v-model="valid">
-        <v-container>
+        <v-container fluid>
           <v-row>
             <v-col cols="12" md="4">
               <v-text-field

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <v-container>
+      <v-container fluid>
         <v-row justify="center" v-for="(alert, i) in alerts" :key="i">
           <v-col cols="10">
             <v-alert prominent dense :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition">

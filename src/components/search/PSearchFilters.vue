@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <ul class="main-ul">
       <li v-for="(f, i) in facetQueries" :key="i">
         <icon @click.native="showFacet(f)" v-if="f.show" name="univie-stop2" class="primary--text"></icon>

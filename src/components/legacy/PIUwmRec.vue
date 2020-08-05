@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row v-for="(ch, i) in children" :key="ch.xmlname+i">
       <template v-if="skip(ch)"></template>
       <template v-else-if="ch.input_type === 'static'">

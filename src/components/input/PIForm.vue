@@ -496,7 +496,7 @@
                       </v-card-text>
                       <v-divider :key="'divi'+s.id"></v-divider>
                       <v-card-actions>
-                        <v-container>
+                        <v-container fluid>
                           <v-row>
                             <v-col v-if="addfieldselection.length > 0">
                               <span v-t="'Selected fields:'" class="mr-2"></span> <v-chip class="mx-1" :key="index" v-for="(ch, index) in addfieldselection" close @click:close="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row>
       <v-toolbar>
         <v-toolbar-title>Toolbar</v-toolbar-title>
@@ -41,7 +41,7 @@
         </v-carousel>
       </v-col>
       <v-col v-if="mode === 'gallery'">
-        <v-container>
+        <v-container fluid>
           <v-row>
             <v-col class="d-flex child-flex" cols="4" v-for="(doc, i) in childrenOfActiveCollection" :key="'cha2'+i">
               <v-tooltip bottom>

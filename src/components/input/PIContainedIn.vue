@@ -188,7 +188,7 @@
                   </span>
                 </v-card-title>
                 <v-card-text class="mt-4" v-show="!collapseSeriesModel">
-                  <v-container>
+                  <v-container fluid>
                     <v-row >
                       <v-col cols="12" :md="multilingual ? 10 : 12">
                         <v-text-field

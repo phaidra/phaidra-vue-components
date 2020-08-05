@@ -79,7 +79,7 @@
             <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('SELECTION_LIMIT', { limit: appconfig.search.selectionlimit }) }}</p>
           </v-card-text>
           <v-card-actions>
-            <v-container>
+            <v-container fluid>
               <v-row justify="end" class="px-4">
                 <v-btn color="grey" dark @click="limitdialog = false">{{ $t('Ok') }}</v-btn>
               </v-row>

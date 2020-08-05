@@ -7,7 +7,7 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-container>
+        <v-container fluid>
           <v-row justify="end" class="px-4">
             <v-btn color="grey" dark @click="dialog = false">{{ $t('Cancel') }}</v-btn>
           </v-row>
