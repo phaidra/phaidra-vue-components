@@ -23,7 +23,7 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
-          <v-container>
+          <v-container fluid>
             <v-row>
               <v-col cols="8" v-if="!hideRole">
                 <v-autocomplete

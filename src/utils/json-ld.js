@@ -995,6 +995,20 @@ export default {
               }
               break
 
+            // vra:diameter
+            case 'vra:diameter':
+              if (obj['@type'] === 'schema:QuantitativeValue') {
+                f = fields.getField('diameter')
+                for (let c of obj['schema:unitCode']) {
+                  f.unit = c
+                }
+                for (let v of obj['schema:value']) {
+                  f.value = v
+                }
+                components.push(f)
+              }
+              break
+
             // dates
             case 'dcterms:date':
             case 'dcterms:created':
@@ -2153,6 +2167,7 @@ export default {
         case 'schema:height':
         case 'schema:depth':
         case 'schema:weight':
+        case 'vra:diameter':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_quantitativevalue(f.value, f.unit))
           }

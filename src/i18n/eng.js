@@ -85,6 +85,7 @@ export default {
   'schema:height': 'Height',
   'schema:depth': 'Depth',
   'schema:weight': 'Weight',
+  'vra:diameter': 'Diameter',
   'schema:duration': 'Duration',
   'bf:scale': 'Scale',
   'schema:genre': 'Genre',

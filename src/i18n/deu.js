@@ -612,6 +612,7 @@ export default {
   'schema:depth': 'Tiefe',
   'schema:weight': 'Gewicht',
   'schema:duration': 'Dauer',
+  'vra:diameter': 'Durchmesser',
   'schema:genre': 'Genre',
   'bf:scale': 'Maßstab',
   'dcterms:temporal': 'Zeitliche Abdeckung',

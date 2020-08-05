@@ -883,6 +883,17 @@ const fields = [
     definition: 'The substance of which a work or an image is composed.'
   },
   {
+    id: 'diameter',
+    fieldname: 'Diameter',
+    predicate: 'vra:diameter',
+    component: 'p-dimension',
+    label: 'Diameter',
+    unit: 'CMT',
+    vocabulary: 'uncefactsize',
+    value: '',
+    definition: 'The diameter of the item.'
+  },
+  {
     id: 'height',
     fieldname: 'Height',
     predicate: 'schema:height',
@@ -1342,6 +1353,7 @@ const predicateOrder = [
   'schema:width',
   'schema:height',
   'schema:depth',
+  'vra:diameter',
   'schema:weight',
   'schema:duration',
   'bf:scale',

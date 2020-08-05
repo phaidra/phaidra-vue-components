@@ -936,8 +936,10 @@ export default {
       if (this.owner) {
         md['metadata']['ownerid'] = this.owner
       }
-      if (Object.keys(this.rights).length > 0) {
-        md['metadata']['rights'] = this.rights
+      if (this.rights) {
+        if (Object.keys(this.rights).length > 0) {
+          md['metadata']['rights'] = this.rights
+        }
       }
       return md
     },
