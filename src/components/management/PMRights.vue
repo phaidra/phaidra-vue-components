@@ -297,8 +297,10 @@ export default {
       this.saveRights()
     },
     addUser: function () {
-      this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
-      this.saveRights()
+      if (this.userSearchModel) {
+        this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
+        this.saveRights()
+      }
     },
     addGroup: function (group) {
       this.rightsArray.push({ type: 'gruppe', notation: group.groupid, description: group.name, expires: null })
@@ -306,23 +308,25 @@ export default {
     },
     addOrgUnit: function () {
       let type = ''
-      // let's say if parent is faculty, this is a 'department' type rule
-      if (this.orgunit.parent) {
-        if (this.orgunit.parent['@type'] === 'aiiso:Faculty') {
-          type = 'department'
+      if (this.orgunit) {
+        // let's say if parent is faculty, this is a 'department' type rule
+        if (this.orgunit.parent) {
+          if (this.orgunit.parent['@type'] === 'aiiso:Faculty') {
+            type = 'department'
+          } else {
+            type = 'faculty'
+          }
         } else {
           type = 'faculty'
         }
-      } else {
-        type = 'faculty'
+        let notation = this.orgunit['skos:notation']
+        let description = this.getLocalizedTermLabel('orgunits', this.orgunit['@id'])
+        if (!description) {
+          description = notation
+        }
+        this.rightsArray.push({ type: type, notation: notation, description: description, expires: null })
+        this.saveRights()
       }
-      let notation = this.orgunit['skos:notation']
-      let description = this.getLocalizedTermLabel('orgunits', this.orgunit['@id'])
-      if (!description) {
-        description = notation
-      }
-      this.rightsArray.push({ type: type, notation: notation, description: description, expires: null })
-      this.saveRights()
     },
     getNameFromUsername: async function (username) {
       this.loading = true
