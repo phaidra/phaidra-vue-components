@@ -238,37 +238,39 @@ export default {
       return titles
     },
     addRelationship: async function () {
-      if (this.pid) {
-        this.loading = true
-        try {
-          var httpFormData = new FormData()
-          httpFormData.append('predicate', this.selectedRelationship)
-          httpFormData.append('object', 'info:fedora/' + this.objectSearchModel.value)
-          let response = await this.$http.request({
-            method: 'POST',
-            url: this.instance.api + '/object/' + this.pid + '/relationship/add',
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'X-XSRF-TOKEN': this.$store.state.user.token
-            },
-            data: httpFormData
-          })
-          if (response.status === 200) {
-            this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly added' }])
-          } else {
-            if (response.data.alerts && response.data.alerts.length > 0) {
-              this.$store.commit('setAlerts', response.data.alerts)
+      if (this.objectSearchModel) {
+        if (this.pid) {
+          this.loading = true
+          try {
+            var httpFormData = new FormData()
+            httpFormData.append('predicate', this.selectedRelationship)
+            httpFormData.append('object', 'info:fedora/' + this.objectSearchModel.value)
+            let response = await this.$http.request({
+              method: 'POST',
+              url: this.instance.api + '/object/' + this.pid + '/relationship/add',
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                'X-XSRF-TOKEN': this.$store.state.user.token
+              },
+              data: httpFormData
+            })
+            if (response.status === 200) {
+              this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly added' }])
+            } else {
+              if (response.data.alerts && response.data.alerts.length > 0) {
+                this.$store.commit('setAlerts', response.data.alerts)
+              }
             }
+          } catch (error) {
+            console.log(error)
+            this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+          } finally {
+            this.loading = false
+            this.$emit('load-relationships')
           }
-        } catch (error) {
-          console.log(error)
-          this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-        } finally {
-          this.loading = false
-          this.$emit('load-relationships')
+        } else {
+          this.$emit('add-relationship', { s: 'self', p: this.selectedRelationship, o: 'info:fedora/' + this.objectSearchModel.value })
         }
-      } else {
-        this.$emit('add-relationship', { s: 'self', p: this.selectedRelationship, o: 'info:fedora/' + this.objectSearchModel.value })
       }
     },
     removeRelationship: async function (item) {
