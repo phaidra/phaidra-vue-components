@@ -306,10 +306,10 @@
           <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'rights'+j" v-bind.sync="displayProperties"></p-d-lang-value>
         </template>
 
-        <template v-else-if="p==='dcterms:subject'" slot="dcterms:subject">
+        <template v-else-if="p==='dcterms:subject'">
 
           <template v-for="(subject, j) in o">
-            <v-card class="my-4" v-if="subject['@type']==='phaidra:Subject'" :key="componentid+'psubject'+j">
+            <v-card class="my-4" v-if="subject['@type']==='phaidra:Subject'" slot="phaidra:Subject" :key="componentid+'psubject'+j">
               <v-card-title class="title font-weight-light grey white--text">
                 <span>{{ $t('Subject') }}</span>
               </v-card-title>
@@ -317,7 +317,7 @@
                 <p-d-jsonld :jsonld="subject" v-bind.sync="displayProperties"></p-d-jsonld>
               </v-card-text>
             </v-card>
-            <p-d-skos-preflabel v-else :p="p" :o="subject" :key="componentid+'subject'+j" v-bind.sync="displayProperties"></p-d-skos-preflabel>
+            <p-d-skos-preflabel v-else slot="dcterms:subject" :p="p" :o="subject" :key="componentid+'subject'+j" v-bind.sync="displayProperties"></p-d-skos-preflabel>
           </template>
 
         </template>
@@ -434,7 +434,8 @@ export default {
       return {
         labelColMd: this.labelColMd,
         valueColMd: this.valueColMd,
-        showLang: this.showLang
+        showLang: this.showLang,
+        boldLabelFields: this.boldLabelFields
       }
     },
     langKeywords: function () {
@@ -519,5 +520,11 @@ export default {
 
 .theme--light.v-card > .v-card__text {
   color: black;
+}
+</style>
+
+<style scoped>
+.wiv {
+  font-weight: 400;
 }
 </style>

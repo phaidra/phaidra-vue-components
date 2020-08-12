@@ -11,6 +11,10 @@ export const displayproperties = {
     showLang: {
       type: Boolean,
       default: true
+    },
+    boldLabelFields: {
+      type: Array,
+      default: () => ([])
     }
   }
 }

@@ -304,6 +304,7 @@
 </template>
 
 <script>
+import qs from 'qs'
 import PIForm from '@/components/input/PIForm'
 import PDJsonld from '@/components/display/PDJsonld'
 import PMDelete from '@/components/management/PMDelete'
@@ -2294,7 +2295,10 @@ export default {
         let response = await this.$http.request({
           method: 'GET',
           url: this.instance.solr + '/select',
-          params: params
+          data: qs.stringify(params, { arrayFormat: 'repeat' }),
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+          }
         })
         if (response.data.response.numFound > 0) {
           this.piddoc = response.data.response.docs[0]

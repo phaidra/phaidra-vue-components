@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import qs from 'qs'
+
 export default {
   name: 'collection-dialog',
   computed: {
@@ -88,14 +90,15 @@ export default {
         start: 0,
         rows: 1000,
         sort: 'created desc',
-        fq: [ 'resourcetype:collection', 'owner:' + this.$store.state.user.username ]
+        fq: 'resourcetype:collection AND owner:' + this.$store.state.user.username
       }
       try {
         let response = await this.$http.request({
           method: 'POST',
           url: this.instance.solr + '/select',
+          data: qs.stringify(params, { arrayFormat: 'repeat' }),
           headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
+            'content-type': 'application/x-www-form-urlencoded'
           },
           params: params
         })

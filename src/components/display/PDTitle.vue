@@ -6,7 +6,7 @@
           {{ $t(o['@type']) }}<template v-if="showLang && mt['@language']"> ({{ mt['@language'] }})</template>
         </v-col>
         <v-col :md="valueColMd" cols="12">
-            <v-row no-gutters class="valuefield">{{ mt['@value'] }}</v-row>
+            <v-row no-gutters class="valuefield" :class="{ 'font-weight-regular': boldLabelFields.includes('dce:title') }">{{ mt['@value'] }}</v-row>
             <template v-for="(st, i) in o['bf:subtitle']">
               <v-row no-gutters class="valuefield" :key="'stv'+i">{{ st['@value'] }}</v-row>
             </template>
