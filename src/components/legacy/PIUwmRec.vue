@@ -158,13 +158,13 @@
         </v-col>
       </template>
       <template v-else-if="ch.input_type === 'select'">
-        <v-col :cols="((ch.cardinality !== 1) && (ch.xmlname === 'faculty') && (ch.xmlname === 'spl')) ? 10 : 12">
+        <v-col :cols="((ch.cardinality !== 1) || (ch.xmlname === 'faculty') || (ch.xmlname === 'spl')) ? 10 : 12">
           <v-row>
             <v-col cols="12">
               <v-select
                 :loading="(ch.xmlname === 'faculty') ? orgLoading : (ch.xmlname === 'spl') ? splLoading : false"
                 v-model="ch.ui_value"
-                :disabled="disabled"
+                :disabled="disabled || (ch.disabled === true) || (ch.disabled === '1') || (ch.disabled === 1)"
                 :items="ch.vocabularies[0].terms"
                 :item-value="'uri'"
                 :label="ch.labels[alpha2locale]"
@@ -182,7 +182,7 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col v-if="(ch.cardinality !== 1) && (ch.xmlname === 'faculty') && (ch.xmlname === 'spl')" cols="2">
+        <v-col v-if="(ch.cardinality !== 1) || (ch.xmlname === 'faculty') || (ch.xmlname === 'spl')" cols="2">
           <v-row>
             <v-col>
               <v-btn icon @click="$emit('add-field', ch)">

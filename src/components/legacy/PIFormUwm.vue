@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="form">
+  <v-container v-if="form && (form.length > 0)">
     <v-card :outlined="!title">
       <v-card-title v-if="title" class="font-weight-light grey white--text">{{ $t(title) }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
       <v-alert dismissible :type="'error'" :value="!valid" transition="fade-transition">
@@ -233,9 +233,7 @@ export default {
           this.$store.commit('setAlerts', response.data.alerts)
         }
         if (response.data.status === 200) {
-          if (response.data.pid) {
-            this.$emit('object-saved', this.targetpid)
-          }
+          this.$emit('object-saved', this.targetpid)
         }
       } catch (error) {
         console.log(error)

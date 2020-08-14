@@ -42,8 +42,10 @@
           <v-col cols="12" md="10">{{ getLangLabel(ch.ui_value) }}</v-col>
         </template>
         <template v-else-if="ch.xmlname === 'license'">
-          <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}</v-col>
-          <v-col cols="12" md="10" class="wiv">{{ ch.labels[alpha2locale] }}</v-col>
+          <template v-if="(cmodel !== 'Collection') && (cmodel !== 'Resource')">
+            <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}</v-col>
+            <v-col cols="12" md="10" class="wiv">{{ ch.labels[alpha2locale] }}</v-col>
+          </template>
         </template>
         <template v-else>
           <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}</v-col>
@@ -146,12 +148,12 @@
           </v-col>
         </template>
         <template v-else-if="hideNodeBorder(nodePath(ch))">
-          <p-d-uwm-rec v-if="ch.children" :children="ch.children" :path="nodePath(ch)"></p-d-uwm-rec>
+          <p-d-uwm-rec v-if="ch.children" :children="ch.children" :cmodel="cmodel" :path="nodePath(ch)"></p-d-uwm-rec>
         </template>
         <v-card v-else outlined class="ma-3" :width="'100%'">
           <v-card-text>
             <div class="overline mb-4">{{ $t(nodePath(ch)) }}</div>
-            <p-d-uwm-rec v-if="ch.children" :children="ch.children" :path="nodePath(ch)"></p-d-uwm-rec>
+            <p-d-uwm-rec v-if="ch.children" :children="ch.children" :cmodel="cmodel" :path="nodePath(ch)"></p-d-uwm-rec>
           </v-card-text>
         </v-card>
       </template>
@@ -175,6 +177,9 @@ export default {
     path: {
       type: String,
       default: 'uwm'
+    },
+    cmodel: {
+      type: String
     }
   },
   computed: {

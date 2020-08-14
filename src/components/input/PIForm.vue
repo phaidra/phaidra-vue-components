@@ -1102,9 +1102,7 @@ export default {
           this.$store.commit('setAlerts', response.data.alerts)
         }
         if (response.data.status === 200) {
-          if (response.data.pid) {
-            this.$emit('object-saved', this.targetpid)
-          }
+          this.$emit('object-saved', this.targetpid)
         }
       } catch (error) {
         console.log(error)

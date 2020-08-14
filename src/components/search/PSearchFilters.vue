@@ -45,18 +45,33 @@
           </v-col>
         </v-row>
         <v-row no-gutters>
-          <p-search-autocomplete
-            class="mt-4"
+          <v-autocomplete
+            class="mt-2"
             v-if="showOwnerFilter"
-            searchaction="search"
-            placeholder="Search..."
-            name="autocomplete"
-            :initValue="owner"
-            :suggester="'ownersuggester'"
-            :customParams="{ token: 'dev' }"
-            :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
-            :onSelect="handleOwnerSelect"
-          ></p-search-autocomplete>
+            v-model="userSearchModel"
+            :items="userSearchItems.length > 0 ? userSearchItems : []"
+            :loading="userSearchLoading"
+            :search-input.sync="userSearch"
+            :label="$t('User search')"
+            :placeholder="$t('Start typing to search')"
+            item-value="uid"
+            item-text="value"
+            prepend-icon="mdi-database-search"
+            hide-no-data
+            hide-selected
+            return-object
+            clearable
+            @click:clear="userSearchItems=[]"
+          >
+            <template slot="item" slot-scope="{ item }">
+              <template v-if="item">
+                <v-list-item-content two-line>
+                  <v-list-item-title>{{ item.value }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </template>
+            </template>
+          </v-autocomplete>
         </v-row>
       </li>
       <li>
@@ -206,6 +221,11 @@ export default {
       required: true
     }
   },
+  computed: {
+    instance: function () {
+      return this.$store.state.instanceconfig
+    }
+  },
   data () {
     return {
       showOwnerFilter: false,
@@ -217,7 +237,71 @@ export default {
       roles: [],
       persAuthors: {},
       corpAuthors: {},
-      owner: ''
+      owner: '',
+      userSearchLoading: false,
+      userSearch: null,
+      userSearchModel: null,
+      userSearchItems: []
+    }
+  },
+  watch: {
+    rolesProp: function (v) {
+      this.roles = v
+      if (v.length) {
+        this.showRoleFilter = true
+      }
+    },
+    ownerProp: function (v) {
+      this.owner = v
+      this.showOwnerFilter = v.length
+    },
+    persAuthorsProp: function (v) {
+      this.persAuthors = v
+      if (v.length) {
+        this.showAuthorFilter = true
+      }
+    },
+    corpAuthorsProp: function (v) {
+      this.corpAuthors = v
+      if (v.length) {
+        this.showAuthorFilter = true
+      }
+    },
+    userSearch: async function (val) {
+      if (val && (val.length < 4)) {
+        this.userSearchItems = []
+        return
+      }
+      if (this.userSearchItems.length > 0) return
+      if (this.userSearchLoading) return
+      this.userSearchLoading = true
+      try {
+        let response = await this.$http.get(this.instance.api + '/directory/user/search', {
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          params: {
+            q: val
+          }
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        this.userSearchItems = response.data.accounts ? response.data.accounts : []
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.userSearchLoading = false
+      }
+    },
+    userSearchModel: function (v) {
+      if (v) {
+        this.owner = v.uid
+      } else {
+        this.owner = ''
+      }
+      this.search({ owner: this.owner })
     }
   },
   methods: {
@@ -228,14 +312,6 @@ export default {
     toggleFacet: function (q, f) {
       toggleFacet(q, f)
       this.search({ page: 1, facetQueries: this.facetQueries })
-    },
-    handleOwnerSelect: function (query) {
-      if (query['payload']) {
-        this.owner = query.payload
-      } else {
-        this.owner = query.term
-      }
-      this.search({ owner: this.owner })
     },
     toggleOwnerFilter: function () {
       this.showOwnerFilter = !this.showOwnerFilter
@@ -294,30 +370,6 @@ export default {
     }
     this.persAuthors = this.persAuthorsProp
     this.corpAuthors = this.corpAuthorsProp
-  },
-  watch: {
-    rolesProp: function (v) {
-      this.roles = v
-      if (v.length) {
-        this.showRoleFilter = true
-      }
-    },
-    ownerProp: function (v) {
-      this.owner = v
-      this.showOwnerFilter = v.length
-    },
-    persAuthorsProp: function (v) {
-      this.persAuthors = v
-      if (v.length) {
-        this.showAuthorFilter = true
-      }
-    },
-    corpAuthorsProp: function (v) {
-      this.corpAuthors = v
-      if (v.length) {
-        this.showAuthorFilter = true
-      }
-    }
   }
 }
 </script>
