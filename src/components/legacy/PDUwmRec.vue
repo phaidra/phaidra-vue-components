@@ -373,6 +373,7 @@ export default {
           for (let ch of node.children) {
             if (ch.ui_value) {
               isEmpty = false
+              break
             } else {
               isEmpty = this.isEmpty(ch)
             }
