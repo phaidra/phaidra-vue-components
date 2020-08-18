@@ -6,38 +6,43 @@ export default {
   name: 'p-pagination',
   extends: VPagination,
   methods: {
-    genIcon: function genIcon (h, icon, disabled, fn) {
-      return h('button', this.setBackgroundColor('', {
-        staticClass: 'v-pagination__item v-btn--flat v-btn--text elevation-0',
+    genIcon: function genIcon(h, icon, disabled, fn, label) {
+      return h('li', [h('button', {
+        staticClass: 'v-pagination__navigation',
         class: {
           'v-pagination__navigation--disabled': disabled
         },
         attrs: {
-          type: 'button'
+          type: 'button',
+          'aria-label': label
         },
         on: disabled ? {} : {
           click: fn
         }
-      }), [icon.toString() === '$vuetify.icons.next' ? '>' : '<'])
+      }, [h(_VIcon.default, [icon])])]);
     },
-    genItem: function genItem (h, i) {
-      var _this2 = this
+    genItem: function genItem(h, i) {
+      var _this2 = this;
 
-      var color = i === this.value && (this.color || 'primary')
+      var color = i === this.value && (this.color || 'primary');
+      var isCurrentPage = i === this.value;
+      var ariaLabel = isCurrentPage ? this.currentPageAriaLabel : this.pageAriaLabel;
       return h('button', this.setBackgroundColor(color, {
-        staticClass: 'v-pagination__item v-btn--flat v-btn--text elevation-0',
+        staticClass: 'v-pagination__item',
         class: {
           'v-pagination__item--active': i === this.value
         },
         attrs: {
-          type: 'button'
+          type: 'button',
+          'aria-current': isCurrentPage,
+          'aria-label': this.$vuetify.lang.t(ariaLabel, i)
         },
         on: {
-          click: function click () {
-            return _this2.$emit('input', i)
+          click: function click() {
+            return _this2.$emit('input', i);
           }
         }
-      }), [i.toString()])
+      }), [i.toString()]);
     }
   }
 }
