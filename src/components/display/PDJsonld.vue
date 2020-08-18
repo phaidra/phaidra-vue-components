@@ -2,7 +2,7 @@
 
   <p-d-jsonld-layout v-if="jsonld">
 
-    <template v-if="pid" slot="pid">
+    <template v-if="pid && !predicatesToHide.includes('pid')" slot="pid">
       <v-row>
         <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t('Persistent identifier') }}</v-col>
         <v-col :md="valueColMd" cols="12">https://{{ instance.baseurl }}/{{ pid }}</v-col>
@@ -10,12 +10,14 @@
     </template>
 
     <template v-for="(role, i) of roles" slot="role">
-      <p-d-entity :role="role.p" :entity="e" :hideLabel="j !== 0" v-for="(e, j) in getEntities(role.p, role.o)" :key="componentid+'entity'+role.p+i+j" v-bind.sync="displayProperties"></p-d-entity>
-      <v-row v-if="entitiesLimited[role.p] && !showAllEntities[role.p]" :key="componentid+'entitymore'+role.p">
-        <v-col :md="valueColMd" :offset-md="labelColMd">
-          <span class="mx-2 primary--text" @click="setShowAllEntities(role.p)">... {{ $t('show all') }}</span>
-        </v-col>
-      </v-row>
+      <template v-if="!predicatesToHide.includes(role.p)">
+        <p-d-entity :role="role.p" :entity="e" :hideLabel="j !== 0" v-for="(e, j) in getEntities(role.p, role.o)" :key="componentid+'entity'+role.p+i+j" v-bind.sync="displayProperties"></p-d-entity>
+        <v-row v-if="entitiesLimited[role.p] && !showAllEntities[role.p]" :key="componentid+'entitymore'+role.p">
+          <v-col :md="valueColMd" :offset-md="labelColMd">
+            <span class="mx-2 primary--text" @click="setShowAllEntities(role.p)">... {{ $t('show all') }}</span>
+          </v-col>
+        </v-row>
+      </template>
     </template>
 
     <template v-if="!predicatesToHide.includes('dce:subject')" slot="dce:subject">
