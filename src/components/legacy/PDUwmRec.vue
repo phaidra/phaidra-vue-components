@@ -397,6 +397,7 @@ export default {
               case 'copyright':
               case 'purpose':
               case 'location':
+              case 'upload_date':
                 return true
               default:
                 return false
