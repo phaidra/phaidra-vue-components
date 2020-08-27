@@ -1,6 +1,6 @@
 <template>
 
-  <v-row >
+  <v-row v-if="!hidden">
     <v-col cols="12">
 
       <v-card >

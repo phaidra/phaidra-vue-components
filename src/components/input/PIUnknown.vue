@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row v-if="!hidden">
     <v-col cols="12" md="10">
       <v-col class="primary--text" cols="3">{{ label }}</v-col>
       {{jsonld}}

@@ -572,6 +572,12 @@ const state = {
       ],
       loaded: true
     },
+    'editoronlyrolepredicate': {
+      terms: [
+        { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Herausgeber*in', 'ita': 'Curatore' } }
+      ],
+      loaded: true
+    },
     'mimetypes': {
       terms: [
         { '@id': 'image/jpeg', 'skos:notation': ['jpeg', 'jpg'], 'skos:prefLabel': { 'eng': 'JPG/JPEG' } },
@@ -939,6 +945,15 @@ const state = {
         { '@id': ns + 'AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access' }, 'skos:definition': { 'eng': 'The resource cannot be accessed until a given date on which it will be released for open access. A copy can be requested via e-mail.' } },
         { '@id': ns + 'KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to persons or groups of persons affiliated with the University of Vienna that we can specify as per your instructions. Others may request a copy via e-mail.' } },
         { '@id': ns + 'QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to you.' } }
+      ],
+      loaded: true
+    },
+    'iraccessrighttranslated': {
+      terms: [
+        { '@id': ns + 'QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access', 'deu': 'offener Zugang'}, 'skos:definition': { 'eng': 'Access to the resource is offered without any restrictions.' } },
+        { '@id': ns + 'AVFC-ZZSZ', 'skos:prefLabel': { 'eng': 'embargoed access', 'deu': 'Zugang unterliegt Embargo' }, 'skos:definition': { 'eng': 'The resource cannot be accessed until a given date on which it will be released for open access. A copy can be requested via e-mail.' } },
+        { '@id': ns + 'KC3K-CCGM', 'skos:prefLabel': { 'eng': 'restricted access', 'deu': 'eingeschränkter Zugang' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to persons or groups of persons affiliated with the University of Vienna that we can specify as per your instructions. Others may request a copy via e-mail.' } },
+        { '@id': ns + 'QNGE-V02H', 'skos:prefLabel': { 'eng': 'metadata only access', 'deu': 'nur Metadaten' }, 'skos:definition': { 'eng': 'Access to full texts and materials is restricted to you.' } }
       ],
       loaded: true
     },
@@ -1321,7 +1336,7 @@ const getters = {
     let terms = state.vocabularies[voc].terms
     for (let i = 0; i < terms.length; i++) {
       if (terms[i]['@id'] === id) {
-        return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng']
+        return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng'] ? terms[i]['skos:prefLabel']['eng'] : terms[i]['skos:prefLabel']['deu']
       }
     }
   },
@@ -1331,12 +1346,12 @@ const getters = {
       if (Array.isArray(terms[i]['skos:notation'])) {
         for (let n of terms[i]['skos:notation']) {
           if (n === notation) {
-            return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng']
+            return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng'] ? terms[i]['skos:prefLabel']['eng'] : terms[i]['skos:prefLabel']['deu']
           }
         }
       } else {
         if (terms[i]['skos:notation'] === notation) {
-          return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng']
+          return terms[i]['skos:prefLabel'][lang] ? terms[i]['skos:prefLabel'][lang] : terms[i]['skos:prefLabel']['eng'] ? terms[i]['skos:prefLabel']['eng'] : terms[i]['skos:prefLabel']['deu']
         }
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <v-row >
+  <v-row v-if="!hidden">
     <v-col cols="12" md="5" v-if="showType">
       <v-autocomplete
         v-on:input="$emit('input-identifier-type', $event)"

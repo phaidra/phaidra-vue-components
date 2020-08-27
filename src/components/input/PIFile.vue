@@ -1,10 +1,11 @@
 <template>
-  <v-row >
+  <v-row v-if="!hidden">
     <v-col :cols="!showMimetype ? (actions.length ? 10 : 12) : (actions.length ? 6 : 8)">
       <v-file-input
         :error-messages="fileErrorMessages"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
+        :background-color="backgroundColor ? backgroundColor : undefined"
         show-size
         @change="fileInput($event)"
         :label="$t(label)"
@@ -17,6 +18,7 @@
       <v-autocomplete
         :value="getTerm('mimetypes', mimetype)"
         v-on:input="$emit('input-mimetype', $event)"
+        :background-color="backgroundColor ? backgroundColor : undefined"
         :items="vocabularies['mimetypes'].terms"
         :item-value="'@id'"
         :loading="loading"

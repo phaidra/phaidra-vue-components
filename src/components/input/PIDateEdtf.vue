@@ -1,5 +1,5 @@
 <template>
-  <v-row >
+  <v-row v-if="!hidden">
     <v-col cols="5" v-if="!hideType">
       <v-autocomplete
         v-on:input="$emit('input-date-type', $event)"
@@ -33,6 +33,7 @@
           :value="value"
           v-on:blur="$emit('input-date',$event.target.value)"
           :label="$t(dateLabel ? dateLabel : 'Date')"
+          :background-color="backgroundColor ? backgroundColor : undefined"
           :required="required"
           :rules="[validationrules.date]"
           :filled="inputStyle==='filled'"
@@ -70,6 +71,7 @@
         <v-text-field
           :value="value"
           v-on:blur="$emit('input-date',$event.target.value)"
+          :background-color="backgroundColor ? backgroundColor : undefined"
           :label="$t(dateLabel ? dateLabel : 'Date')"
           :required="required"
           :hint="'Format YYYY-MM-DD'"

@@ -1,5 +1,5 @@
 <template>
-  <v-row >
+  <v-row v-if="!hidden">
     <v-col cols="2">
       <v-autocomplete
         v-on:input="$emit('input-citation-type', $event)"

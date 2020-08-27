@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row v-if="!hidden">
     <v-col cols="12">
       <v-card >
         <v-card-title class="title font-weight-light grey white--text">
@@ -21,7 +21,7 @@
         <v-divider></v-divider>
         <v-card-text class="mt-4">
           <v-row>
-            <v-col cols="2">
+            <v-col cols="2" v-show="!hideType">
               <v-radio-group v-model="typeModel" class="mt-0" @change="$emit('change-type', $event)">
                 <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
                 <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
@@ -108,6 +108,7 @@
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
                   :error-messages="publisherNameErrorMessages"
+                  :background-color="publisherBackgroundColor ? publisherBackgroundColor : undefined"
                 ></v-text-field>
               </v-col>
             </template>
@@ -135,6 +136,7 @@
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
                   :error-messages="publishingDateErrorMessages"
+                  :background-color="publishingDateBackgroundColor ? publishingDateBackgroundColor : undefined"
                 >
                   <template v-slot:append>
                     <v-fade-transition leave-absolute>
@@ -173,6 +175,7 @@
                   :rules="[validationrules.date]"
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
+                  :background-color="publishingDateBackgroundColor ? publishingDateBackgroundColor : undefined"
                 ></v-text-field>
               </template>
             </v-col>
@@ -259,6 +262,18 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    hideType: {
+      type: Boolean,
+      default: false
+    },
+    publisherBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    publishingDateBackgroundColor: {
+      type: String,
+      default: undefined
     }
   },
   computed: {

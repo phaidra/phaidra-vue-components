@@ -1,6 +1,6 @@
 <template>
 
-  <v-row >
+  <v-row v-if="!hidden">
     <v-col cols="12">
       <v-card >
         <v-card-title class="title font-weight-light grey white--text">
@@ -60,8 +60,10 @@
                 v-on:blur="$emit('input-title',$event.target.value)"
                 :filled="inputStyle==='filled'"
                 :outlined="inputStyle==='outlined'"
+                :background-color="titleBackgroundColor ? titleBackgroundColor : undefined"
                 :error-messages="titleErrorMessages"
-              ></v-text-field>
+              >
+              </v-text-field>
             </v-col>
             <v-col cols="12" md="2" v-if="multilingual">
               <v-autocomplete
@@ -305,6 +307,10 @@ export default {
     multilingual: {
       type: Boolean,
       default: false
+    },
+    titleBackgroundColor: {
+      type: String,
+      default: undefined
     }
   },
   computed: {

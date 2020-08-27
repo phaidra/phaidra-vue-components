@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!hidden">
     <v-alert :value="errorMessages.length > 0" dismissible type="error" transition="slide-y-transition">
       <span v-for="(em, i) in errorMessages" :key="'em'+i">{{ em }}<br/></span>
     </v-alert>

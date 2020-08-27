@@ -1,6 +1,6 @@
 <template>
 
-  <v-row>
+  <v-row v-if="!hidden">
     <v-col cols="12">
       <v-card >
         <v-card-title class="title font-weight-light grey white--text">
@@ -19,6 +19,7 @@
                     :filled="inputStyle==='filled'"
                     :outlined="inputStyle==='outlined'"
                     :error-messages="titleErrorMessages"
+                    :background-color="titleBackgroundColor ? titleBackgroundColor : undefined"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" :md="multilingual ? 4 : 6">
@@ -309,7 +310,7 @@
                 <v-divider></v-divider>
                 <v-card-text class="mt-4" v-show="!collapsePublisherModel">
                   <v-row>
-                    <v-col cols="2">
+                    <v-col cols="2" v-show="!publisherHideType">
                       <v-radio-group v-model="publisherTypeModel" class="mt-0" @change="$emit('change-publisher-type', $event)">
                         <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
                         <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
@@ -332,6 +333,7 @@
                           clearable
                           :error-messages="publisherOrgUnitErrorMessages"
                           :messages="organizationPath"
+                          :background-color="publisherBackgroundColor ? publisherBackgroundColor : undefined"
                         >
                           <template slot="item" slot-scope="{ item }">
                             <v-list-item-content two-line>
@@ -392,6 +394,7 @@
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
                           :error-messages="publisherNameErrorMessages"
+                          :background-color="publisherBackgroundColor ? publisherBackgroundColor : undefined"
                         ></v-text-field>
                       </v-col>
                     </template>
@@ -633,6 +636,18 @@ export default {
     publisherCollapse: {
       type: Boolean,
       default: false
+    },
+    publisherHideType: {
+      type: Boolean,
+      default: false
+    },
+    titleBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    publisherBackgroundColor: {
+      type: String,
+      default: undefined
     }
   },
   computed: {

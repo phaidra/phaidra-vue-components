@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid v-if="form && form.sections">
+  <v-container fluid v-if="form && form.sections" >
     <v-tabs v-model="activetab" align-with-title>
       <v-tab class="title font-weight-light text-capitalize">{{ $t('Metadata') }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-tab>
       <v-tab v-if="debug" @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>

@@ -1,5 +1,5 @@
 <template>
-  <v-row >
+  <v-row v-if="!hidden">
     <v-col cols="3">
       <v-text-field
         :value="title"

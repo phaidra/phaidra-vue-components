@@ -22,6 +22,14 @@ export const fieldproperties = {
     inputStyle: {
       type: String,
       default: 'filled'
+    },
+    backgroundColor: {
+      type: String,
+      default: undefined
+    },
+    hidden: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

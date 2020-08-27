@@ -1,10 +1,11 @@
 <template>
-  <v-row>
+  <v-row v-if="!hidden">
     <v-col cols="12" :md="hideSubtitle ? ( multilingual ? 8 : (actions.length ? 10 : 12) ) : ( multilingual ? 4 : (actions.length ? 6 : 8) )">
       <v-text-field
         :value="title"
         :label="$t( titleLabel ? titleLabel : type )"
         v-on:blur="$emit('input-title',$event.target.value)"
+        :background-color="titleBackgroundColor ? titleBackgroundColor : undefined"
         :error-messages="titleErrorMessages"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
@@ -104,6 +105,10 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    titleBackgroundColor: {
+      type: String,
+      default: undefined
     }
   },
   data () {

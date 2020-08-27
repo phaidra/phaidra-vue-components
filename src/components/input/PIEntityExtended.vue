@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row v-if="!hidden">
     <v-col cols="12">
       <v-card width="100%">
         <v-card-title class="title font-weight-light grey white--text">
@@ -36,6 +36,7 @@
                   :filter="autocompleteFilter"
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
+                  :background-color="roleBackgroundColor ? roleBackgroundColor : undefined"
                   return-object
                   clearable
                   :error-messages="roleErrorMessages"
@@ -70,6 +71,7 @@
                       v-on:blur="$emit('input-name',$event.target.value)"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
+                      :background-color="nameBackgroundColor ? nameBackgroundColor : undefined"
                       :error-messages="nameErrorMessages"
                     ></v-text-field>
                   </v-col>
@@ -82,6 +84,7 @@
                       v-on:blur="$emit('input-firstname',$event.target.value)"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
+                      :background-color="firstnameBackgroundColor ? firstnameBackgroundColor : undefined"
                       :error-messages="firstnameErrorMessages"
                     ></v-text-field>
                   </v-col>
@@ -92,6 +95,7 @@
                       v-on:blur="$emit('input-lastname',$event.target.value)"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
+                      :background-color="lastnameBackgroundColor ? lastnameBackgroundColor : undefined"
                       :error-messages="lastnameErrorMessages"
                     ></v-text-field>
                   </v-col>
@@ -201,6 +205,7 @@
                     :disabled="disabled"
                     :messages="organizationPath"
                     :error-messages="organizationErrorMessages"
+                    :background-color="organizationBackgroundColor ? organizationBackgroundColor : undefined"
                   >
                     <template slot="item" slot-scope="{ item }">
                       <v-list-item-content two-line>
@@ -226,6 +231,7 @@
                     :filled="inputStyle==='filled'"
                     :outlined="inputStyle==='outlined'"
                     :error-messages="organizationTextErrorMessages"
+                    :background-color="organizationBackgroundColor ? organizationBackgroundColor : undefined"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -256,6 +262,7 @@
                   :disabled="disabled"
                   :messages="affiliationPath"
                   :error-messages="affiliationErrorMessages"
+                  :background-color="affiliationBackgroundColor ? affiliationBackgroundColor : undefined"
                 >
                   <template slot="item" slot-scope="{ item }">
                     <v-list-item-content two-line>
@@ -281,6 +288,7 @@
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
                   :error-messages="affiliationTextErrorMessages"
+                  :background-color="affiliationBackgroundColor ? affiliationBackgroundColor : undefined"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -425,6 +433,30 @@ export default {
     affiliationSelectLabel: {
       type: String,
       default: 'Please choose'
+    },
+    roleBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    nameBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    firstnameBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    lastnameBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    organizationBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    affiliationBackgroundColor: {
+      type: String,
+      default: undefined
     }
   },
   computed: {

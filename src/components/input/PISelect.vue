@@ -1,11 +1,11 @@
 <template>
-  <v-col cols="12">
+  <v-col cols="12" v-if="!hidden">
     <v-row>
       <v-col :cols="(actions.length ? 10 : 12)">
         <!---->
         <v-autocomplete
           :value="getTerm(vocabulary, value)"
-          :required="required"
+          :background-color="backgroundColor ? backgroundColor : undefined"
           v-on:input="$emit('input', $event)"
           :rules="required ? [ v => !!v || 'Required'] : []"
           :items="vocabularies[vocabulary].terms"
