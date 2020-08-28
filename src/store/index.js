@@ -37,9 +37,13 @@ export default new Vuex.Store({
     user: {
       token: ''
     },
-    alerts: []
+    alerts: [],
+    loading: false
   },
   mutations: {
+    setLoading (state, loading) {
+      state.loading = loading
+    },
     setAlerts (state, alerts) {
       state.alerts = alerts
     },

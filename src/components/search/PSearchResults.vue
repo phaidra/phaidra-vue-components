@@ -146,6 +146,7 @@ export default {
     },
     addToCollection: async function (collection) {
       try {
+        this.$store.commit('setLoading', true)
         var httpFormData = new FormData()
         httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.selection } }))
         let response = await this.$http.request({
@@ -169,11 +170,12 @@ export default {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        this.loading = false
+        this.$store.commit('setLoading', false)
       }
     },
     removeFromCollection: async function (collection) {
       try {
+        this.$store.commit('setLoading', true)
         var httpFormData = new FormData()
         httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.selection } }))
         let response = await this.$http.request({
@@ -197,11 +199,12 @@ export default {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        this.loading = false
+        this.$store.commit('setLoading', false)
       }
     },
     addToList: async function (list) {
       try {
+        this.$store.commit('setLoading', true)
         var httpFormData = new FormData()
         httpFormData.append('members', JSON.stringify({ members: this.selection }))
         let response = await this.$http.request({
@@ -224,11 +227,12 @@ export default {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        this.loading = false
+        this.$store.commit('setLoading', false)
       }
     },
     removeFromList: async function (list) {
       try {
+        this.$store.commit('setLoading', true)
         var httpFormData = new FormData()
         httpFormData.append('members', JSON.stringify({ members: this.selection }))
         let response = await this.$http.request({
@@ -251,7 +255,7 @@ export default {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        this.loading = false
+        this.$store.commit('setLoading', false)
       }
     },
     selectDoc: function (value, doc) {
