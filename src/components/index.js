@@ -68,6 +68,7 @@ import PMObjectMembers from './management/PMObjectMembers'
 import PMCollectionMembers from './management/PMCollectionMembers'
 import PTemplates from './templates/PTemplates'
 import PLists from './lists/PLists'
+import PGroups from './groups/PGroups'
 import PIFormUwm from './legacy/PIFormUwm'
 import PDUwmRec from './legacy/PDUwmRec'
 import PFeedback from './utils/PFeedback'
@@ -143,6 +144,7 @@ const Components = {
   PMCollectionMembers,
   PTemplates,
   PLists,
+  PGroups,
   PIFormUwm,
   PDUwmRec,
   PFeedback

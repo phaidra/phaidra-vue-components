@@ -58,7 +58,7 @@
             :selectioncheck="selectioncheck"
             :getallresults="getAllResults">
           </p-search-results>
-          <p-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
+          <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
         </v-row>
       </v-col>
       <v-col cols="3" class="pa-2 hidden-sm-and-down">
@@ -315,6 +315,11 @@ export default {
   },
   beforeRouteUpdate: async function (to, from, next) {
     this.resetSearchParams()
+    if (to.query.q) {
+      this.q = to.query.q
+    } else {
+      this.q = ''
+    }
     if (to.query.owner) {
       this.owner = to.query.owner
     } else {
@@ -331,6 +336,11 @@ export default {
   beforeRouteEnter: async function (to, from, next) {
     next(async vm => {
       vm.resetSearchParams()
+      if (to.query.q) {
+        vm.q = to.query.q
+      } else {
+        vm.q = ''
+      }
       if (to.query.owner) {
         vm.owner = to.query.owner
       } else {

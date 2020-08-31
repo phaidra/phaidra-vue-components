@@ -4,21 +4,21 @@
       <v-col cols="12">
         <v-card>
           <v-card-title class="title font-weight-light grey white--text">
-            {{ $t('Manage object lists') }}
+            {{ $t('Manage user groups') }}
           </v-card-title>
           <v-card-text>
             <v-data-table
               hide-default-header
-              :headers="listsHeaders"
-              :items="lists"
-              :search="listsSearch"
-              :loading="listsLoading"
-              :loading-text="$t('Loading object lists...')"
+              :headers="groupsHeaders"
+              :items="groups"
+              :search="groupsSearch"
+              :loading="groupsLoading"
+              :loading-text="$t('Loading groups...')"
             >
               <template v-slot:top>
                 <v-toolbar flat>
                   <v-text-field
-                    v-model="listsSearch"
+                    v-model="groupsSearch"
                     append-icon="mdi-magnify"
                     :label="$t('Search...')"
                     single-line
@@ -27,16 +27,16 @@
                   <v-spacer></v-spacer>
                   <v-dialog v-model="createDialog" max-width="500px">
                     <template v-slot:activator="{ on }">
-                      <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('New list') }}</v-btn>
+                      <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('New group') }}</v-btn>
                     </template>
                     <v-card>
                       <v-card-title class="title font-weight-light grey white--text">
-                        {{ $t('Create new object list') }}
+                        {{ $t('Create new group') }}
                       </v-card-title>
                       <v-card-text>
                         <v-text-field
-                          v-model="newListName"
-                          :label="$t('Enter object list name...')"
+                          v-model="newGroupName"
+                          :label="$t('Enter group name...')"
                           single-line
                           hide-details
                         ></v-text-field>
@@ -44,7 +44,7 @@
                       <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn dark @click="createDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
-                        <v-btn @click="createList()" color="primary">{{ $t('Create') }}</v-btn>
+                        <v-btn @click="createGroup()" color="primary">{{ $t('Create') }}</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
@@ -55,7 +55,7 @@
                   <template v-slot:activator="{ on }">
                     <span v-on="on">{{ item.name }}</span>
                   </template>
-                  <span>{{ item.listid }}</span>
+                  <span>{{ item.groupid }}</span>
                 </v-tooltip>
               </template>
               <template v-slot:item.created="{ item }">
@@ -65,19 +65,19 @@
                 {{ item.updated | unixtime }}
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon color="grey" class="mx-3" @click="loadedList = item">mdi-pencil</v-icon>
-                <v-icon color="grey" class="mx-3" @click="deleteListDialog(item)">mdi-delete</v-icon>
+                <v-icon color="grey" class="mx-3" @click="loadedGroup = item">mdi-pencil</v-icon>
+                <v-icon color="grey" class="mx-3" @click="deleteGroupDialog(item)">mdi-delete</v-icon>
               </template>
             </v-data-table>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <v-row no-gutters v-if="loadedList">
+    <v-row no-gutters v-if="loadedGroup">
       <v-col cols="12">
         <v-card>
           <v-card-title class="title font-weight-light grey white--text">
-            {{ loadedList.name }}
+            {{ loadedGroup.name }}
           </v-card-title>
           <v-card-text>
             <v-data-table
@@ -86,7 +86,7 @@
               :items="members"
               :search="membersSearch"
               :loading="membersLoading"
-              :loading-text="$t('Loading object list members...')"
+              :loading-text="$t('Loading group members...')"
             >
               <template v-slot:top>
                 <v-toolbar flat>
@@ -97,72 +97,97 @@
                     single-line
                     hide-details
                   ></v-text-field>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" dark class="mb-2"  @click="$refs.collectiondialog.open()">{{ $t('Add to collection') }}</v-btn>
                 </v-toolbar>
               </template>
               <template v-slot:item.pid="{ item }">
-                <router-link :to="{ name: 'detail', params: { pid: item.pid } }">{{ item.pid }}</router-link>
+                {{ item.name }}
               </template>
               <template v-slot:item.title="{ item }">
-                {{ item.title | truncate(100) }}
+                [{{ item.username }}]
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon color="grey" class="mx-3" @click="removeMember(item.pid)">mdi-delete</v-icon>
+                <v-icon color="grey" class="mx-3" @click="removeMember(item.username)">mdi-delete</v-icon>
               </template>
             </v-data-table>
+            <v-card-actions>
+              <v-autocomplete
+                v-model="userSearchModel"
+                :items="userSearchItems.length > 0 ? userSearchItems : []"
+                :loading="userSearchLoading"
+                :search-input.sync="userSearch"
+                :label="$t('User search')"
+                :placeholder="$t('Start typing to search')"
+                item-value="uid"
+                item-text="value"
+                prepend-icon="mdi-database-search"
+                hide-no-data
+                hide-selected
+                return-object
+                clearable
+                @click:clear="userSearchItems=[]"
+              >
+                <template slot="item" slot-scope="{ item }">
+                  <template v-if="item">
+                    <v-list-item-content two-line>
+                      <v-list-item-title>{{ item.value }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </template>
+                </template>
+              </v-autocomplete>
+              <v-btn class="primary ml-2" :disabled="userSearchLoading" @click="addMember()">{{ $t('Apply') }}</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <v-dialog v-model="deleteDialog" max-width="500px" v-if="listToDelete">
+    <v-dialog v-model="deleteDialog" max-width="500px" v-if="groupToDelete">
       <v-card>
         <v-card-title class="title font-weight-light grey white--text">
-          {{ $t('Delete object list') }}
+          {{ $t('Delete group') }}
         </v-card-title>
         <v-card-text>
-          <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('Delete object list') + listToDelete.name + '?' }}</p>
+          <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('Delete group') + groupToDelete.name + '?' }}</p>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn dark @click="createDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
-          <v-btn @click="deleteList()" color="primary">{{ $t('Delete') }}</v-btn>
+          <v-btn @click="deleteGroup()" color="primary">{{ $t('Delete') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <collection-dialog ref="collectiondialog" @collection-selected="addToCollection($event)"></collection-dialog>
   </v-container>
 </template>
 
 <script>
-import CollectionDialog from '../select/CollectionDialog'
 
 export default {
-  name: 'p-lists',
-  components: {
-    CollectionDialog
-  },
+  name: 'p-groups',
   computed: {
     instance: function () {
       return this.$store.state.instanceconfig
     }
   },
   watch: {
-    loadedList: {
+    loadedGroup: {
       handler: async function () {
-        if (this.loadedList) {
+        if (this.loadedGroup) {
           this.membersLoading = true
           try {
             let response = await this.$http.request({
               method: 'GET',
-              url: this.instance.api + '/list/' + this.loadedList.listid,
+              url: this.instance.api + '/group/' + this.loadedGroup.groupid,
               headers: {
                 'X-XSRF-TOKEN': this.$store.state.user.token
               }
             })
-            this.members = response.data.list.members
-            if (response.data.alerts && response.data.alerts.length > 0) {
-              this.$store.commit('setAlerts', response.data.alerts)
+            if (response.status === 200) {
+              this.members = response.data.group.members
+            } else {
+              if (response.data.alerts && response.data.alerts.length > 0) {
+                this.$store.commit('setAlerts', response.data.alerts)
+              }
             }
           } catch (error) {
             console.log(error)
@@ -172,99 +197,100 @@ export default {
         }
       },
       deep: true
+    },
+    userSearch: async function (val) {
+      if (val && (val.length < 4)) {
+        this.userSearchItems = []
+        return
+      }
+      if (this.userSearchItems.length > 0) return
+      if (this.userSearchLoading) return
+      this.userSearchLoading = true
+      try {
+        let response = await this.$http.get(this.instance.api + '/directory/user/search', {
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          params: {
+            q: val
+          }
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        this.userSearchItems = response.data.accounts ? response.data.accounts : []
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.userSearchLoading = false
+      }
     }
   },
   data () {
     return {
       createDialog: false,
       deleteDialog: false,
-      addToDialog: false,
-      listToDelete: null,
-      listToAddToCollection: null,
-      newListName: '',
-      listsLoading: false,
-      listsSearch: '',
-      deleteListConfirm: false,
-      listsHeaders: [
+      groupToDelete: null,
+      newGroupName: '',
+      groupsLoading: false,
+      groupsSearch: '',
+      deleteGroupConfirm: false,
+      groupsHeaders: [
         { text: 'Name', align: 'left', value: 'name' },
         { text: 'Created', align: 'right', value: 'created' },
         { text: 'Updated', align: 'right', value: 'updated' },
         { text: 'Actions', align: 'right', value: 'actions', sortable: false }
       ],
-      lists: [],
-      loadedList: null,
+      groups: [],
+      loadedGroup: null,
       membersLoading: false,
       membersSearch: '',
       deleteMembersConfirm: false,
       membersHeaders: [
-        { text: 'PID', align: 'left', value: 'pid' },
-        { text: 'Title', align: 'left', value: 'title' },
+        { text: 'Name', align: 'left', value: 'name' },
+        { text: 'Username', align: 'left', value: 'username' },
         { text: 'Actions', align: 'right', value: 'actions', sortable: false }
       ],
-      members: []
+      members: [],
+      userSearch: null,
+      userSearchModel: null,
+      userSearchItems: [],
+      userSearchLoading: false
     }
   },
   methods: {
-    addToCollection: async function (collection) {
-      try {
-        var httpFormData = new FormData()
-        httpFormData.append('metadata', JSON.stringify({ metadata: { members: this.members } }))
-        let response = await this.$http.request({
-          method: 'POST',
-          url: this.instance.api + '/collection/' + collection.pid + '/members/add',
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          },
-          data: httpFormData
-        })
-        this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
-        this.$router.push({ name: 'detail', params: { pid: collection.pid } })
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit('setAlerts', response.data.alerts)
-        }
-      } catch (error) {
-        console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
-      } finally {
-        this.loading = false
-      }
-    },
-    deleteListDialog: function (list) {
-      this.listToDelete = list
+    deleteGroupDialog: function (group) {
+      this.groupToDelete = group
       this.deleteDialog = true
     },
-    addToCollectionDialog: function (list) {
-      this.listToAddToCollection = list
-      this.addToDialog = true
-    },
-    createList: async function () {
+    createGroup: async function () {
       try {
         this.createDialog = false
-        this.listsLoading = true
+        this.groupsLoading = true
         var httpFormData = new FormData()
-        httpFormData.append('name', this.newListName)
+        httpFormData.append('name', this.newGroupName)
         let response = await this.$http.request({
           method: 'POST',
-          url: this.instance.api + '/list/add',
+          url: this.instance.api + '/group/add',
           headers: {
             'Content-Type': 'multipart/form-data',
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
           data: httpFormData
         })
-        this.newListName = ''
+        this.newGroupName = ''
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
         response = await this.$http.request({
           method: 'GET',
-          url: this.instance.api + '/lists',
+          url: this.instance.api + '/groups',
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        this.lists = response.data.lists
+        this.groups = response.data.groups
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
@@ -272,16 +298,16 @@ export default {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        this.listsLoading = false
+        this.groupsLoading = false
       }
     },
-    deleteList: async function () {
+    deleteGroup: async function () {
       this.deleteDialog = false
-      this.listsLoading = true
+      this.groupsLoading = true
       try {
         let response = await this.$http.request({
           method: 'POST',
-          url: this.instance.api + '/list/' + this.listToDelete.listid + '/remove',
+          url: this.instance.api + '/group/' + this.groupToDelete.groupid + '/remove',
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
@@ -291,21 +317,18 @@ export default {
         }
         response = await this.$http.request({
           method: 'GET',
-          url: this.instance.api + '/lists',
+          url: this.instance.api + '/groups',
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        this.lists = response.data.lists
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit('setAlerts', response.data.alerts)
-        }
+        this.groups = response.data.groups
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        this.listsLoading = false
-        this.listToDelete = null
+        this.groupsLoading = false
+        this.groupToDelete = null
       }
     },
     removeMember: async function (member) {
@@ -315,7 +338,7 @@ export default {
         httpFormData.append('members', JSON.stringify({ members: [ member ] }))
         let response = await this.$http.request({
           method: 'POST',
-          url: this.instance.api + '/list/' + this.loadedList.listid + '/members/remove',
+          url: this.instance.api + '/group/' + this.loadedGroup.groupid + '/members/remove',
           headers: {
             'Content-Type': 'multipart/form-data',
             'X-XSRF-TOKEN': this.$store.state.user.token
@@ -327,12 +350,47 @@ export default {
         }
         response = await this.$http.request({
           method: 'GET',
-          url: this.instance.api + '/list/' + this.loadedList.listid,
+          url: this.instance.api + '/group/' + this.loadedGroup.groupid,
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        this.members = response.data.list.members
+        this.members = response.data.group.members
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.membersLoading = false
+      }
+    },
+    addMember: async function () {
+      try {
+        this.membersLoading = true
+        var httpFormData = new FormData()
+        httpFormData.append('members', JSON.stringify({ members: [ this.userSearchModel.uid ] }))
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.api + '/group/' + this.loadedGroup.groupid + '/members/add',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          data: httpFormData
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        response = await this.$http.request({
+          method: 'GET',
+          url: this.instance.api + '/group/' + this.loadedGroup.groupid,
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
+        })
+        this.members = response.data.group.members
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
@@ -346,16 +404,16 @@ export default {
   },
   beforeRouteEnter: async function (to, from, next) {
     next(async vm => {
-      vm.listsLoading = true
+      vm.groupsLoading = true
       try {
         let response = await vm.$http.request({
           method: 'GET',
-          url: vm.instance.api + '/lists',
+          url: vm.instance.api + '/groups',
           headers: {
             'X-XSRF-TOKEN': vm.$store.state.user.token
           }
         })
-        vm.lists = response.data.lists
+        vm.groups = response.data.groups
         if (response.data.alerts && response.data.alerts.length > 0) {
           vm.$store.commit('setAlerts', response.data.alerts)
         }
@@ -363,7 +421,7 @@ export default {
         console.log(error)
         vm.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        vm.listsLoading = false
+        vm.groupsLoading = false
       }
     })
   }

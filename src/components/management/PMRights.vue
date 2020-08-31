@@ -119,7 +119,7 @@
                       </v-autocomplete>
                     </v-col>
                     <v-col cols="1" class="pt-6">
-                      <v-btn class="primary" :disabled="loading" @click="addUser()">{{ $t('Apply') }}</v-btn>
+                      <v-btn class="primary" :disabled="loading || userSearchLoading" @click="addUser()">{{ $t('Apply') }}</v-btn>
                     </v-col>
                   </v-row>
                 </v-container>
