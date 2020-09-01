@@ -274,6 +274,10 @@ export default {
     publishingDateBackgroundColor: {
       type: String,
       default: undefined
+    },
+    dateFormatHint: {
+      type: String,
+      default: 'Format YYYY-MM-DD'
     }
   },
   computed: {

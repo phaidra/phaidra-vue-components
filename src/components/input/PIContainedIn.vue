@@ -258,7 +258,7 @@
                           :value="s.seriesIssued"
                           v-on:blur="$emit('input-series', { series: s, seriesIssued: $event.target.value })"
                           :label="$t(seriesIssuedDateLabel ? seriesIssuedDateLabel : 'Issued')"
-                          :hint="'Format YYYY-MM-DD'"
+                          :hint="dateFormatHint"
                           :rules="[validationrules.date]"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
@@ -452,7 +452,7 @@
                           :value="publishingDate"
                           v-on:blur="$emit('input-publishing-date',$event.target.value)"
                           :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
-                          :hint="'Format YYYY-MM-DD'"
+                          :hint="dateFormatHint"
                           :rules="[validationrules.date]"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
@@ -648,6 +648,10 @@ export default {
     publisherBackgroundColor: {
       type: String,
       default: undefined
+    },
+    dateFormatHint: {
+      type: String,
+      default: 'Format YYYY-MM-DD'
     }
   },
   computed: {

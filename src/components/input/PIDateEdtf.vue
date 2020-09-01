@@ -74,7 +74,7 @@
           :background-color="backgroundColor ? backgroundColor : undefined"
           :label="$t(dateLabel ? dateLabel : 'Date')"
           :required="required"
-          :hint="'Format YYYY-MM-DD'"
+          :hint="dateFormatHint"
           :rules="[validationrules.date]"
           :filled="inputStyle==='filled'"
           :outlined="inputStyle==='outlined'"
@@ -135,6 +135,10 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    dateFormatHint: {
+      type: String,
+      default: 'Format YYYY-MM-DD'
     }
   },
   data () {

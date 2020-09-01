@@ -159,7 +159,7 @@
                   :value="issued"
                   v-on:blur="$emit('input-issued',$event.target.value)"
                   :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
-                  :hint="'Format YYYY-MM-DD'"
+                  :hint="dateFormatHint"
                   :rules="[validationrules.date]"
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
@@ -311,6 +311,10 @@ export default {
     titleBackgroundColor: {
       type: String,
       default: undefined
+    },
+    dateFormatHint: {
+      type: String,
+      default: 'Format YYYY-MM-DD'
     }
   },
   computed: {
