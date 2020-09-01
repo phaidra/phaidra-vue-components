@@ -314,42 +314,46 @@ export default {
     }
   },
   beforeRouteUpdate: async function (to, from, next) {
-    this.resetSearchParams()
-    if (to.query.q) {
-      this.q = to.query.q
-    } else {
-      this.q = ''
-    }
-    if (to.query.owner) {
-      this.owner = to.query.owner
-    } else {
-      this.owner = ''
-    }
-    if (to.query.collection) {
-      this.inCollection = to.query.collection
-    } else {
-      this.inCollection = ''
+    if (to.query.reset) {
+      this.resetSearchParams()
+      if (to.query.q) {
+        this.q = to.query.q
+      } else {
+        this.q = ''
+      }
+      if (to.query.owner) {
+        this.owner = to.query.owner
+      } else {
+        this.owner = ''
+      }
+      if (to.query.collection) {
+        this.inCollection = to.query.collection
+      } else {
+        this.inCollection = ''
+      }
     }
     await this.search()
     next()
   },
   beforeRouteEnter: async function (to, from, next) {
     next(async vm => {
-      vm.resetSearchParams()
-      if (to.query.q) {
-        vm.q = to.query.q
-      } else {
-        vm.q = ''
-      }
-      if (to.query.owner) {
-        vm.owner = to.query.owner
-      } else {
-        vm.owner = ''
-      }
-      if (to.query.collection) {
-        vm.inCollection = to.query.collection
-      } else {
-        vm.inCollection = ''
+      if (to.query.reset) {
+        vm.resetSearchParams()
+        if (to.query.q) {
+          vm.q = to.query.q
+        } else {
+          vm.q = ''
+        }
+        if (to.query.owner) {
+          vm.owner = to.query.owner
+        } else {
+          vm.owner = ''
+        }
+        if (to.query.collection) {
+          vm.inCollection = to.query.collection
+        } else {
+          vm.inCollection = ''
+        }
       }
       await vm.search()
     })
