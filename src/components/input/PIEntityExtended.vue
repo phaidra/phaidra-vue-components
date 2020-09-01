@@ -219,7 +219,7 @@
                       </v-list-item-content>
                     </template>
                     <template v-slot:append-outer>
-                      <v-icon @click="$refs.organizationstreedialog.open()">mdi-file-tree</v-icon>
+                      <v-icon v-if="enableOrgTree" @click="$refs.organizationstreedialog.open()">mdi-file-tree</v-icon>
                     </template>
                   </v-autocomplete>
                 </v-col>
@@ -276,7 +276,7 @@
                     </v-list-item-content>
                   </template>
                   <template v-slot:append-outer>
-                    <v-icon @click="$refs.affiliationstreedialog.open()">mdi-file-tree</v-icon>
+                    <v-icon v-if="enableAffTree" @click="$refs.affiliationstreedialog.open()">mdi-file-tree</v-icon>
                   </template>
                 </v-autocomplete>
               </v-col>
@@ -457,6 +457,14 @@ export default {
     affiliationBackgroundColor: {
       type: String,
       default: undefined
+    },
+    enableOrgTree: {
+      type: Boolean,
+      default: true
+    },
+    enableAffTree: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {

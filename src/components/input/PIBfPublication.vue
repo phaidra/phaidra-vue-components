@@ -59,7 +59,7 @@
                     </v-list-item-content>
                   </template>
                   <template v-slot:append-outer>
-                    <v-icon @click="$refs.organizationstreedialog.open()">mdi-file-tree</v-icon>
+                    <v-icon v-if="enableOrgTree" @click="$refs.organizationstreedialog.open()">mdi-file-tree</v-icon>
                   </template>
                 </v-autocomplete>
               </v-col>
@@ -171,7 +171,7 @@
                   v-on:blur="$emit('input-publishing-date',$event.target.value)"
                   :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
                   :required="required"
-                  :hint="'Format YYYY-MM-DD'"
+                  :hint="dateFormatHint"
                   :rules="[validationrules.date]"
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
@@ -278,6 +278,10 @@ export default {
     dateFormatHint: {
       type: String,
       default: 'Format YYYY-MM-DD'
+    },
+    enableOrgTree: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
