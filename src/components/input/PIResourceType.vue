@@ -21,10 +21,11 @@
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-resource-type',
-  mixins: [vocabulary],
+  mixins: [vocabulary, fieldproperties],
   props: {
     value: {
       type: String

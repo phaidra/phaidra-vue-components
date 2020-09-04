@@ -122,8 +122,10 @@ export function buildParams ({ q, page, pagesize, sortdef, lang, facetQueries },
   }
 
   if (q === '' || q === null) {
-    params.q = '*:*'
+    params.q = '-hassuccessor:* AND -ismemberof:[\"\" TO *]'
     params.sort = 'created desc'
+  } else {
+    params.q = params.q + ' AND -hassuccessor:* AND -ismemberof:[\"\" TO *]'
   }
 
   for (let i = 0; i < sortdef.length; i++) {

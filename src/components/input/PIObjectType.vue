@@ -14,10 +14,11 @@
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-object-type',
-  mixins: [vocabulary],
+  mixins: [vocabulary, fieldproperties],
   props: {
     label: {
       type: String,
