@@ -71,6 +71,7 @@ import PLists from './lists/PLists'
 import PGroups from './groups/PGroups'
 import PIFormUwm from './legacy/PIFormUwm'
 import PDUwmRec from './legacy/PDUwmRec'
+import PDModsRec from './legacy/PDModsRec'
 import PFeedback from './utils/PFeedback'
 
 const Components = {
@@ -147,6 +148,7 @@ const Components = {
   PGroups,
   PIFormUwm,
   PDUwmRec,
+  PDModsRec,
   PFeedback
 }
 
