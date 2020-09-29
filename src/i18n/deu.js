@@ -651,5 +651,6 @@ export default {
 
   'OTHER_FEMININE': 'Andere',
   'Confirm each keyword by pressing enter': 'Jedes Stichwort ist durch Drücken der Eingabetaste zu bestätigen',
-  'Copyright': 'Urheberrecht'
+  'Copyright': 'Urheberrecht',
+  'Login failed': 'Login fehlgeschlagen'
 }
