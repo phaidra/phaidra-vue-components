@@ -96,7 +96,6 @@ import PSearchAutocomplete from './PSearchAutocomplete'
 import PSearchResults from './PSearchResults'
 import PSearchFilters from './PSearchFilters'
 import PSearchToolbar from './PSearchToolbar'
-import PPagination from '../utils/PPagination'
 import '@/compiled-icons/fontello-sort-name-up'
 import '@/compiled-icons/fontello-sort-name-down'
 import '@/compiled-icons/fontello-sort-number-up'
@@ -114,8 +113,7 @@ export default {
     PSearchAutocomplete,
     PSearchResults,
     PSearchFilters,
-    PSearchToolbar,
-    PPagination
+    PSearchToolbar
   },
   computed: {
     page: {
