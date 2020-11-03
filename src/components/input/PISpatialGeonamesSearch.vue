@@ -91,7 +91,7 @@
                 </v-list-item-group>
               </v-list>
             </v-col>
-            <v-col cols="12" md="6" v-show="showMap">
+            <v-col cols="12" md="6" v-show="showMap && isbrowser">
               <div style="height: 400px; width: 100%" class="text-grey-10">
                 <l-map ref="map" :zoom="10" :center="center">
                   <l-tile-layer :url='"http://{s}.tile.osm.org/{z}/{x}/{y}.png"' :attribution='"© <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"' />
@@ -108,25 +108,30 @@
 
 <script>
 import 'leaflet/dist/leaflet.css'
-import { Icon } from 'leaflet'
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
-import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+let Vue2Leaflet = {}
+let OpenStreetMapProvider = {}
+let L = {}
 
-delete Icon.Default.prototype._getIconUrl
-Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-})
+if (process.browser) {
+  OpenStreetMapProvider = require('leaflet-geosearch')
+  Vue2Leaflet = require('vue2-leaflet')
+  L = require('leaflet')
+  delete L.Icon.Default.prototype._getIconUrl
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+  })
+}
 
 export default {
   name: 'p-i-spatial-geonames-search',
   components: {
-    LMap,
-    LTileLayer,
-    LMarker
+    LMap: Vue2Leaflet.LMap,
+    LTileLayer: Vue2Leaflet.LTileLayer,
+    LMarker: Vue2Leaflet.LMarker
   },
   mixins: [vocabulary, fieldproperties],
   props: {
@@ -181,8 +186,9 @@ export default {
       rdfslabel: '',
       resolved: '',
       geosearchOptions: {
-        provider: new OpenStreetMapProvider()
-      }
+        provider: {}
+      },
+      isbrowser: process.browser
     }
   },
   methods: {
@@ -253,6 +259,7 @@ export default {
     }
   },
   mounted: function () {
+    this.geosearchOptions.provider = new OpenStreetMapProvider.OpenStreetMapProvider()
     this.$nextTick(function () {
       this.loading = !this.vocabularies['placetype'].loaded
       // emit input to set skos:prefLabel in parent
