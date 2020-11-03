@@ -206,6 +206,7 @@
                   <v-card-text>
                     <p-i-form
                       :form="form"
+                      :debug="true"
                       :rights="submitRights"
                       :enablerights="true"
                       :validate="validate"
@@ -376,7 +377,7 @@ export default {
   },
   data () {
     return {
-      window: 8,
+      window: 2,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -4149,21 +4150,25 @@ export default {
       var rt = fields.getField('resource-type')
       rt.value = this.contentmodel
       this.form.sections[0].fields.push(rt)
+
+      this.form.sections[0].fields.push(fields.getField('spatial-geonames-search'))
+      this.form.sections[0].fields.push(fields.getField('spatial-geonames'))
+
       let t = fields.getField('title')
       t.hideSubtitle = true
       t.multilingual = false
       t.multiplicable = false
       this.form.sections[0].fields.push(t)
 
-      this.form.sections[0].fields.push(fields.getField('contained-in'))
+      // this.form.sections[0].fields.push(fields.getField('contained-in'))
 
-      this.form.sections[0].fields.push(fields.getField('language'))
+      // this.form.sections[0].fields.push(fields.getField('language'))
       // let lang_vocab = fields.getField('language')
       // lang_vocab.vocabulary = 'lang_vocab'
       // this.form.sections[0].fields.push(lang_vocab)
 
-      this.form.sections[0].fields.push(fields.getField('keyword'))
-      this.form.sections[0].fields.push(fields.getField('see-also'))
+      // this.form.sections[0].fields.push(fields.getField('keyword'))
+      // this.form.sections[0].fields.push(fields.getField('see-also'))
       /* let containedIn = fields.getField('contained-in')
       containedIn.label = 'Book'
       containedIn.seriesLabel = 'Series'
@@ -4171,7 +4176,7 @@ export default {
 
       this.form.sections[1].fields.push(fields.getField('file'))
       this.form.sections[1].fields.push(fields.getField('license'))
-      this.form.sections[1].fields.push(fields.getField('rights'))
+      // this.form.sections[1].fields.push(fields.getField('rights'))
 
       /*
       this.form.sections[0].fields.push(fields.getField('description'))
@@ -4286,6 +4291,7 @@ export default {
     this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
     this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
     this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
+    this.$store.commit('setSuggester', { suggester: 'geonames', url: 'https://ws.gbv.de/suggest/geonames/' })
     this.$store.commit('initStore')
   },
   mounted: function () {

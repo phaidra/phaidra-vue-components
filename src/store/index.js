@@ -30,6 +30,11 @@ export default new Vuex.Store({
         vocserver: {
           url: 'https://vocab.phaidra.org/fuseki/',
           dataset: 'vocab'
+        },
+        geonames: {
+          search: 'https://secure.geonames.org/searchJSON',
+          username: 'phaidra',
+          maxRows: 20
         }
       },
       suggesters: {}

@@ -498,7 +498,7 @@ export default {
                     f = fields.getField(fieldidprefix + '-getty')
                   }
                   if (f.value.startsWith('http://www.geonames.org')) {
-                    f = fields.getField(fieldidprefix + '-geonames')
+                    f = fields.getField(fieldidprefix + '-geonames-search')
                   }
                   f.predicate = key
                   f.type = obj['@type']
@@ -2212,7 +2212,7 @@ export default {
         case 'vra:placeOfCreation':
         case 'vra:placeOfRepository':
         case 'vra:placeOfSite':
-          if (((f.component === 'p-spatial-getty') || (f.component === 'p-spatial-geonames') || (f.component === 'p-spatial-readonly')) && f.value) {
+          if (((f.component === 'p-spatial-getty') || (f.component === 'p-spatial-geonames') || (f.component === 'p-spatial-geonames-search') || (f.component === 'p-spatial-readonly')) && f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_spatial(f['rdfs:label'], f['skos:prefLabel'], f.coordinates, f.type, [f.value]))
           } else {
             if (f.value) {

@@ -325,6 +325,17 @@
                     ></p-i-spatial-geonames>
                   </template>
 
+                  <template v-else-if="f.component === 'p-spatial-geonames-search'">
+                    <p-i-spatial-geonames-search
+                      v-bind.sync="f"
+                      v-on:input="f.value=$event"
+                      v-on:input-place-type="setSelected(f, 'type', $event)"
+                      v-on:resolve="updatePlace(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-spatial-geonames-search>
+                  </template>
+
                   <template v-else-if="f.component === 'p-spatial-text'">
                     <p-i-spatial-text
                       v-bind.sync="f"
@@ -614,6 +625,7 @@ import PISelectText from './PISelectText'
 import PISubjectGnd from './PISubjectGnd'
 import PISpatialGetty from './PISpatialGetty'
 import PISpatialGeonames from './PISpatialGeonames'
+import PISpatialGeonamesSearch from './PISpatialGeonamesSearch'
 import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
 import PIDuration from './PIDuration'
@@ -659,6 +671,7 @@ export default {
     PISubjectGnd,
     PISpatialGetty,
     PISpatialGeonames,
+    PISpatialGeonamesSearch,
     PISpatialText,
     PIDimension,
     PIDuration,
