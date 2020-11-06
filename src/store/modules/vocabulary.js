@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import languages from '../../utils/lang'
 import lang3to2map from '../../utils/lang3to2map'
 import orgunits from '../../utils/orgunits'
@@ -479,7 +480,7 @@ const state = {
         { '@id': 'role:pte', 'skos:prefLabel': { 'eng': 'Plaintiff-appellee', 'deu': 'Plaintiff-appellee', 'ita': 'Plaintiff-appellee' } },
         { '@id': 'role:plt', 'skos:prefLabel': { 'eng': 'Platemaker', 'deu': 'Platemaker', 'ita': 'Platemaker' } },
         { '@id': 'role:pra', 'skos:prefLabel': { 'eng': 'Praeses', 'deu': 'Präses', 'ita': 'Praeses' } },
-        { '@id': 'role:pre', 'skos:prefLabel': { 'eng': 'Presenter', 'deu': 'Presenter', 'ita': 'Presenter' } },
+        { '@id': 'role:pre', 'skos:prefLabel': { 'eng': 'Presenter', 'deu': 'Vortragende*r', 'ita': 'Presenter' } },
         { '@id': 'role:prt', 'skos:prefLabel': { 'eng': 'Printer', 'deu': 'Drucker*in', 'ita': 'Stampatore' } },
         { '@id': 'role:pop', 'skos:prefLabel': { 'eng': 'Printer of plates', 'deu': 'Plattendrucker*in', 'ita': 'Printer of plates' } },
         { '@id': 'role:prm', 'skos:prefLabel': { 'eng': 'Printmaker', 'deu': 'Drucker*in / Grafikkünstler*in', 'ita': 'Printmaker' } },
@@ -1248,18 +1249,18 @@ const mutations = {
         }
       }
       if (!found) {
-        terms.push({
+        let term = {
           '@id': id,
-          'skos:prefLabel': {
-            lang: lab.label.value
-          }
-        })
+          'skos:prefLabel': {}
+        }
+        term['skos:prefLabel'][lang] = lab.label.value
+        terms.push(term)
       }
     }
-    state.vocabularies[id] = {
+    Vue.set(state.vocabularies, id, {
       terms: terms,
       loaded: true
-    }
+    })
   }
 }
 
@@ -1302,7 +1303,7 @@ const actions = {
       }
     }
     try {
-      var raw = 'PREFIX v: <' + rootState.appconfig.apis.vocserver.ns + '> PREFIX : <' + rootState.appconfig.apis.vocserver.ns + 'schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?id ?label ?exp WHERE { graph ?g { ?id :memberOf  v:' + vocabId + ' . ?id skos:prefLabel ?label . OPTIONAL { ?id :expires ?exp . } } }'
+      var raw = 'PREFIX v: <' + rootState.appconfig.apis.vocserver.ns + '> PREFIX : <' + rootState.appconfig.apis.vocserver.ns + 'schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?id ?label ?exp WHERE { graph ?g { ?id v:memberOf  v:' + vocabId + ' . ?id skos:prefLabel ?label . OPTIONAL { ?id :expires ?exp . } } }'
       let response = await axios.request({
         method: 'POST',
         url: rootState.appconfig.apis.vocserver.url + rootState.appconfig.apis.vocserver.dataset + '/query',

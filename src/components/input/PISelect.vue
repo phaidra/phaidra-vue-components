@@ -8,7 +8,7 @@
           :background-color="backgroundColor ? backgroundColor : undefined"
           v-on:input="$emit('input', $event)"
           :rules="required ? [ v => !!v || 'Required'] : []"
-          :items="vocabularies[vocabulary].terms"
+          :items="loadedTerms"
           :item-value="'@id'"
           :loading="loading"
           :filter="autocompleteFilter"
@@ -109,19 +109,42 @@ export default {
       default: false
     }
   },
+  computed: {
+    loadedTerms: function () {
+      if (this.vocabularies[this.vocabulary]) {
+        return this.vocabularies[this.vocabulary].loaded ? this.vocabularies[this.vocabulary].terms : []
+      }
+      return []
+    }
+  },
   data () {
     return {
-      loading: false
+      loading: false,
+      terms: []
     }
   },
   mounted: function () {
-    this.$nextTick(function () {
+    this.$nextTick(async function () {
       if (this.vocabulary) {
-        // emit input to set skos:prefLabel in parent
-        if (this.value) {
-          for (let term of this.vocabularies[this.vocabulary].terms) {
-            if (term['@id'] === this.value) {
-              this.$emit('input', term)
+        if (this.vocabularies[vocabulary]) {
+          if (this.vocabularies[vocabulary].loaded) {
+            // emit input to set skos:prefLabel in parent
+            if (this.value) {
+              for (let term of this.vocabularies[this.vocabulary].terms) {
+                if (term['@id'] === this.value) {
+                  this.$emit('input', term)
+                }
+              }
+            }
+          }
+        } else {
+          await this.$store.dispatch('loadVocabulary', this.vocabulary)
+          // emit input to set skos:prefLabel in parent
+          if (this.value) {
+            for (let term of this.vocabularies[this.vocabulary].terms) {
+              if (term['@id'] === this.value) {
+                this.$emit('input', term)
+              }
             }
           }
         }
