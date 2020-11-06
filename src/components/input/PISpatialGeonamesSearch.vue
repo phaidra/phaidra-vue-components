@@ -207,7 +207,7 @@ export default {
             params: { uri }
           })
           // keep this next tick from showMap
-          this.map.invalidateSize()
+          this.$refs.map.mapObject.invalidateSize()
           this.preflabel = response.data[uri]['skos:prefLabel']
           this.rdfslabel = response.data[uri]['rdfs:label']
           for (var i = 0; i < this.rdfslabel.length; i++) {
@@ -266,7 +266,6 @@ export default {
       if (this.type) {
         this.$emit('input-place-type', this.getTerm('placetype', this.type))
       }
-      this.map = this.$refs.map.mapObject
     })
     if (this.initquery) {
       this.items = [{ value: this.value, text: this.initquery }]
