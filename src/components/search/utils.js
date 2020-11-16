@@ -111,6 +111,7 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
 export function buildParams ({ q, page, pagesize, sortdef, lang, facetQueries }, ands) {
   let params = {
     q,
+    'q.op': 'AND',
     defType: 'edismax',
     wt: 'json',
     qf: 'pid^5 dc_title^4 dc_title_eng^4 dc_title_deu^4 dc_title_ita^4 dc_creator^3 dc_subject^2 _text_',
