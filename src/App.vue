@@ -4,11 +4,19 @@
       <v-container fluid>
         <v-row justify="center" v-for="(alert, i) in alerts" :key="i">
           <v-col cols="10">
-            <v-alert prominent dense :type="(alert.type === 'danger' ? 'error' : alert.type)" :value="true" transition="slide-y-transition">
+            <v-alert
+              prominent
+              dense
+              :type="alert.type === 'danger' ? 'error' : alert.type"
+              :value="true"
+              transition="slide-y-transition"
+            >
               <v-row align="center">
-                <v-col class="grow">{{alert.msg}}</v-col>
+                <v-col class="grow">{{ alert.msg }}</v-col>
                 <v-col class="shrink">
-                  <v-btn icon @click.native="dismiss(alert)"><v-icon>mdi-close</v-icon></v-btn>
+                  <v-btn icon @click.native="dismiss(alert)"
+                    ><v-icon>mdi-close</v-icon></v-btn
+                  >
                 </v-col>
               </v-row>
             </v-alert>
@@ -20,20 +28,36 @@
             <v-text-field v-model="solrbaseurl" :label="'solr'"></v-text-field>
           </v-col>
           <v-col cols="2">
-            <v-text-field v-model="phaidrabaseurl" :label="'phaidra'"></v-text-field>
+            <v-text-field
+              v-model="phaidrabaseurl"
+              :label="'phaidra'"
+            ></v-text-field>
           </v-col>
           <v-col cols="2">
-            <v-text-field v-model="apibaseurl" :label="'phaidra-api'"></v-text-field>
+            <v-text-field
+              v-model="apibaseurl"
+              :label="'phaidra-api'"
+            ></v-text-field>
           </v-col>
           <template v-if="token">
             <v-col cols="4" class="body-2">{{ token }}</v-col>
             <v-col cols="1">
-              <v-btn dark raised single-line color="grey darken-3" @click="logout()">Logout</v-btn>
+              <v-btn
+                dark
+                raised
+                single-line
+                color="grey darken-3"
+                @click="logout()"
+                >Logout</v-btn
+              >
             </v-col>
           </template>
           <template v-else>
             <v-col cols="2">
-              <v-text-field v-model="credentials.username" :label="'username'" ></v-text-field>
+              <v-text-field
+                v-model="credentials.username"
+                :label="'username'"
+              ></v-text-field>
             </v-col>
             <v-col cols="2">
               <v-text-field
@@ -45,7 +69,14 @@
               ></v-text-field>
             </v-col>
             <v-col cols="1">
-              <v-btn dark raised single-line color="grey darken-3" @click="login()">Login</v-btn>
+              <v-btn
+                dark
+                raised
+                single-line
+                color="grey darken-3"
+                @click="login()"
+                >Login</v-btn
+              >
             </v-col>
           </template>
         </v-row>
@@ -56,18 +87,27 @@
               <v-toolbar flat>
                 <v-list>
                   <v-list-item>
-                    <v-list-item-title class="title">{{ $t('Examples') }}</v-list-item-title>
+                    <v-list-item-title class="title">{{
+                      $t("Examples")
+                    }}</v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-toolbar>
               <v-divider></v-divider>
               <v-list>
-                <v-item-group v-model="window" class="shrink mr-4" mandatory tag="v-flex">
+                <v-item-group
+                  v-model="window"
+                  class="shrink mr-4"
+                  mandatory
+                  tag="v-flex"
+                >
                   <v-item>
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Display') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Display")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -76,7 +116,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Edit') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Edit")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -85,7 +127,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Submit') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Submit")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -94,7 +138,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Search') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Search")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -103,7 +149,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Manage') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Manage")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -112,7 +160,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Browse') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Browse")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -121,7 +171,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Uwm editor') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Uwm editor")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -130,7 +182,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Uwm display') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Uwm display")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -139,7 +193,9 @@
                     <div slot-scope="{ active, toggle }">
                       <v-list-item @click="toggle">
                         <v-list-item-content>
-                          <v-list-item-title>{{ $t('Mods display') }}</v-list-item-title>
+                          <v-list-item-title>{{
+                            $t("Mods display")
+                          }}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </div>
@@ -154,10 +210,25 @@
               <v-window-item>
                 <v-card>
                   <v-toolbar dark color="grey">
-                    <v-toolbar-title>{{ $t('Display') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                    <v-toolbar-title>{{ $t("Display") }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      v-model="pid"
+                      :placeholder="'o:123456789'"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadDisplay()">Load</v-btn>
+                    <v-btn
+                      raised
+                      single-line
+                      class="float-right"
+                      color="grey darken-3"
+                      @click="loadDisplay()"
+                      >Load</v-btn
+                    >
                   </v-toolbar>
                   <v-card-text>
                     <p-d-jsonld
@@ -173,10 +244,25 @@
               <v-window-item>
                 <v-card>
                   <v-toolbar dark color="grey">
-                    <v-toolbar-title>{{ $t('Edit') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line v-model="pid" :placeholder="'o:123456789'"></v-text-field>
+                    <v-toolbar-title>{{ $t("Edit") }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      v-model="pid"
+                      :placeholder="'o:123456789'"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadEdit()">Load</v-btn>
+                    <v-btn
+                      raised
+                      single-line
+                      class="float-right"
+                      color="grey darken-3"
+                      @click="loadEdit()"
+                      >Load</v-btn
+                    >
                   </v-toolbar>
                   <v-card-text>
                     <p-i-form
@@ -192,13 +278,16 @@
               <v-window-item>
                 <v-card>
                   <v-toolbar class="grey" dark>
-                    <v-toolbar-title>{{ $t('Submit') }}</v-toolbar-title>
+                    <v-toolbar-title>{{ $t("Submit") }}</v-toolbar-title>
                     <v-select
                       class="mx-4"
                       :items="contentmodels"
                       v-model="contentmodel"
                       label="Object type"
-                      flat solo hide-details single-line
+                      flat
+                      solo
+                      hide-details
+                      single-line
                       v-on:change="resetForm($event)"
                     ></v-select>
                     <v-spacer></v-spacer>
@@ -213,7 +302,9 @@
                       v-on:object-created="objectCreated($event)"
                       v-on:load-form="form = $event"
                       v-on:form-input-p-select="handleSelect($event)"
-                      v-on:add-phaidrasubject-section="addPhaidrasubjectSection($event)"
+                      v-on:add-phaidrasubject-section="
+                        addPhaidrasubjectSection($event)
+                      "
                       v-on:input-rights="submitRights = $event"
                     ></p-i-form>
                   </v-card-text>
@@ -222,8 +313,16 @@
               <v-window-item>
                 <v-card>
                   <v-toolbar dark color="grey">
-                    <v-toolbar-title>{{ $t('Search') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
+                    <v-toolbar-title>{{ $t("Search") }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      :placeholder="'Collection, e.g. ' + sampleCollection"
+                      v-model="collection"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
                   </v-toolbar>
                   <v-card-text>
@@ -234,39 +333,95 @@
               <v-window-item>
                 <v-card>
                   <v-toolbar class="grey" dark>
-                    <v-toolbar-title>{{ $t('Manage') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'o:123456789'" v-model="pid"></v-text-field>
+                    <v-toolbar-title>{{ $t("Manage") }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      :placeholder="'o:123456789'"
+                      v-model="pid"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadManagement(pid)">Load</v-btn>
+                    <v-btn
+                      raised
+                      single-line
+                      class="float-right"
+                      color="grey darken-3"
+                      @click="loadManagement(pid)"
+                      >Load</v-btn
+                    >
                   </v-toolbar>
                   <v-card-text>
-                    <v-col>{{ $t('Manage') }} {{piddoc.cmodel}} {{ pid }}</v-col>
-                    <p-m-sort :pid="pid" :cmodel="loadedcmodel" :members="members" @input="members=$event" @order-saved="orderSaved($event)"></p-m-sort>
+                    <v-col
+                      >{{ $t("Manage") }} {{ piddoc.cmodel }} {{ pid }}</v-col
+                    >
+                    <p-m-sort
+                      :pid="pid"
+                      :cmodel="loadedcmodel"
+                      :members="members"
+                      @input="members = $event"
+                      @order-saved="orderSaved($event)"
+                    ></p-m-sort>
                     <p-m-rights :pid="pid"></p-m-rights>
                     <p-m-relationships :pid="pid"></p-m-relationships>
-                    <p-m-delete :pid="pid" :cmodel="loadedcmodel" :members="members"></p-m-delete>
+                    <p-m-delete
+                      :pid="pid"
+                      :cmodel="loadedcmodel"
+                      :members="members"
+                    ></p-m-delete>
                   </v-card-text>
                 </v-card>
               </v-window-item>
               <v-window-item>
                 <v-card>
                   <v-toolbar class="grey" dark>
-                    <v-toolbar-title>{{ $t('Collection gallery') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'Collection, e.g. ' + sampleCollection" v-model="collection"></v-text-field>
+                    <v-toolbar-title>{{
+                      $t("Collection gallery")
+                    }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      :placeholder="'Collection, e.g. ' + sampleCollection"
+                      v-model="collection"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
                   </v-toolbar>
                   <v-card-text>
-                    <p-collection-gallery :collection="collection"></p-collection-gallery>
+                    <p-collection-gallery
+                      :collection="collection"
+                    ></p-collection-gallery>
                   </v-card-text>
                 </v-card>
               </v-window-item>
               <v-window-item>
                 <v-card>
                   <v-toolbar class="grey" dark>
-                    <v-toolbar-title>{{ $t('Uwmetadata Editor') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'o:123456789'" v-model="pid"></v-text-field>
+                    <v-toolbar-title>{{
+                      $t("Uwmetadata Editor")
+                    }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      :placeholder="'o:123456789'"
+                      v-model="pid"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadUwmetadataEdit()">Load</v-btn>
+                    <v-btn
+                      raised
+                      single-line
+                      class="float-right"
+                      color="grey darken-3"
+                      @click="loadUwmetadataEdit()"
+                      >Load</v-btn
+                    >
                   </v-toolbar>
                   <v-card-text>
                     <p-i-form-uwm
@@ -281,10 +436,27 @@
               <v-window-item>
                 <v-card>
                   <v-toolbar class="grey" dark>
-                    <v-toolbar-title>{{ $t('Uwmetadata Display') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'o:123456789'" v-model="pid"></v-text-field>
+                    <v-toolbar-title>{{
+                      $t("Uwmetadata Display")
+                    }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      :placeholder="'o:123456789'"
+                      v-model="pid"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadUwmetadataDisplay()">Load</v-btn>
+                    <v-btn
+                      raised
+                      single-line
+                      class="float-right"
+                      color="grey darken-3"
+                      @click="loadUwmetadataDisplay()"
+                      >Load</v-btn
+                    >
                   </v-toolbar>
                   <v-card-text>
                     <p-d-uwm-rec :children="uwmetadatadisplay"></p-d-uwm-rec>
@@ -294,10 +466,25 @@
               <v-window-item>
                 <v-card>
                   <v-toolbar class="grey" dark>
-                    <v-toolbar-title>{{ $t('Mods Display') }}</v-toolbar-title>
-                    <v-text-field class="mx-4" flat solo hide-details single-line :placeholder="'o:123456789'" v-model="pid"></v-text-field>
+                    <v-toolbar-title>{{ $t("Mods Display") }}</v-toolbar-title>
+                    <v-text-field
+                      class="mx-4"
+                      flat
+                      solo
+                      hide-details
+                      single-line
+                      :placeholder="'o:123456789'"
+                      v-model="pid"
+                    ></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-btn raised single-line class="float-right" color="grey darken-3" @click="loadModsDisplay()">Load</v-btn>
+                    <v-btn
+                      raised
+                      single-line
+                      class="float-right"
+                      color="grey darken-3"
+                      @click="loadModsDisplay()"
+                      >Load</v-btn
+                    >
                   </v-toolbar>
                   <v-card-text>
                     <p-d-mods-rec :children="modsdisplay"></p-d-mods-rec>
@@ -314,12 +501,12 @@
               v-model="lang"
               :items="languages"
               :label="$t('Language')"
-              @change="$i18n.locale=$event"
+              @change="$i18n.locale = $event"
               prepend-icon="mdi-translate"
               single-line
             ></v-select>
           </v-col>
-          <v-col cols="1" class="mt-4">v {{version}}</v-col>
+          <v-col cols="1" class="mt-4">v {{ version }}</v-col>
         </v-row>
       </v-container>
     </v-app>
@@ -377,7 +564,7 @@ export default {
   },
   data () {
     return {
-      window: 2,
+      window: 1,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -2165,1629 +2352,1629 @@ export default {
         // }
       ],
       modsdisplay: [
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Link",
-                  "xmlname":"xlink:href"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Other type",
-                  "xmlname":"otherType"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Authority",
-                  "xmlname":"authority"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Authority URI",
-                  "xmlname":"authorityURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Value URI",
-                  "xmlname":"valueURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Supplied",
-                  "xmlname":"supplied"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Usage",
-                  "xmlname":"usage"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Name title group",
-                  "xmlname":"nameTitleGroup"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative format",
-                  "xmlname":"altFormat"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative content",
-                  "xmlname":"altContent"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     }
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Link',
+              xmlname: 'xlink:href'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'select',
+              label: 'Type',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Other type',
+              xmlname: 'otherType'
+            },
+            {
+              input_type: 'select',
+              label: 'Authority',
+              xmlname: 'authority'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Authority URI',
+              xmlname: 'authorityURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Value URI',
+              xmlname: 'valueURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'select',
+              label: 'Supplied',
+              xmlname: 'supplied'
+            },
+            {
+              input_type: 'select',
+              label: 'Usage',
+              xmlname: 'usage'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Name title group',
+              xmlname: 'nameTitleGroup'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative format',
+              xmlname: 'altFormat'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative content',
+              xmlname: 'altContent'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                }
+              ],
+              input_type: 'input_text',
+              label: 'Title',
+              mandatory: 1,
+              ui_value: 'Der große Flug. Erlösung',
+              xmlname: 'title'
+            }
+          ],
+          input_type: 'node',
+          label: 'Title info',
+          ui_value: '\n    \n  ',
+          xmlname: 'titleInfo'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'select',
+              label: 'Type',
+              ui_value: 'personal',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'select',
+              label: 'Authority',
+              xmlname: 'authority'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Authority URI',
+              xmlname: 'authorityURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Value URI',
+              xmlname: 'valueURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'select',
+              label: 'Usage',
+              xmlname: 'usage'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Name title group',
+              xmlname: 'nameTitleGroup'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Type',
+                  ui_value: 'family',
+                  xmlname: 'type'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Link',
+                  xmlname: 'xlink:href'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                }
+              ],
+              input_type: 'input_text',
+              label: 'Name part',
+              mandatory: 1,
+              ui_value: 'Heijermans',
+              xmlname: 'namePart'
+            },
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Type',
+                  ui_value: 'given',
+                  xmlname: 'type'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Link',
+                  xmlname: 'xlink:href'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                }
+              ],
+              input_type: 'input_text',
+              label: 'Name part',
+              mandatory: 1,
+              ui_value: 'Herman',
+              xmlname: 'namePart'
+            },
+            {
+              children: [
+                {
+                  attributes: [
+                    {
+                      input_type: 'select',
+                      label: 'Type',
+                      ui_value: 'code',
+                      xmlname: 'type'
+                    },
+                    {
+                      input_type: 'select',
+                      label: 'Authority',
+                      ui_value: 'marcrelator',
+                      xmlname: 'authority'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Authority URI',
+                      xmlname: 'authorityURI'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Value URI',
+                      xmlname: 'valueURI'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    }
                   ],
-                  "input_type":"input_text",
-                  "label":"Title",
-                  "mandatory":1,
-                  "ui_value":"Der große Flug. Erlösung",
-                  "xmlname":"title"
-               }
-            ],
-            "input_type":"node",
-            "label":"Title info",
-            "ui_value":"\n    \n  ",
-            "xmlname":"titleInfo"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "ui_value":"personal",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Authority",
-                  "xmlname":"authority"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Authority URI",
-                  "xmlname":"authorityURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Value URI",
-                  "xmlname":"valueURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Usage",
-                  "xmlname":"usage"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Name title group",
-                  "xmlname":"nameTitleGroup"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Type",
-                        "ui_value":"family",
-                        "xmlname":"type"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Link",
-                        "xmlname":"xlink:href"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     }
+                  input_type: 'input_text',
+                  label: 'Role term',
+                  mandatory: 1,
+                  ui_value: 'aut',
+                  xmlname: 'roleTerm'
+                },
+                {
+                  attributes: [
+                    {
+                      input_type: 'select',
+                      label: 'Type',
+                      ui_value: 'text',
+                      xmlname: 'type'
+                    },
+                    {
+                      input_type: 'select',
+                      label: 'Authority',
+                      ui_value: 'marcrelator',
+                      xmlname: 'authority'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Authority URI',
+                      xmlname: 'authorityURI'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Value URI',
+                      xmlname: 'valueURI'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    }
                   ],
-                  "input_type":"input_text",
-                  "label":"Name part",
-                  "mandatory":1,
-                  "ui_value":"Heijermans",
-                  "xmlname":"namePart"
-               },
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Type",
-                        "ui_value":"given",
-                        "xmlname":"type"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Link",
-                        "xmlname":"xlink:href"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     }
+                  input_type: 'input_text',
+                  label: 'Role term',
+                  mandatory: 1,
+                  ui_value: 'author',
+                  xmlname: 'roleTerm'
+                }
+              ],
+              input_type: 'node',
+              label: 'Role',
+              ui_value: '\n      \n      \n    ',
+              xmlname: 'role'
+            }
+          ],
+          input_type: 'node',
+          label: 'Name',
+          ui_value: '\n    \n    \n    \n  ',
+          xmlname: 'name'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            },
+            {
+              input_type: 'select',
+              label: 'Event type',
+              xmlname: 'eventType'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Encoding',
+                  xmlname: 'encoding'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Point',
+                  xmlname: 'point'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Key date',
+                  xmlname: 'keyDate'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Qualifier',
+                  xmlname: 'qualifier'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                }
+              ],
+              input_type: 'input_datetime',
+              label: 'Date created',
+              ui_value: '1909',
+              xmlname: 'dateCreated'
+            },
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Supplied',
+                  xmlname: 'supplied'
+                }
+              ],
+              children: [
+                {
+                  attributes: [
+                    {
+                      input_type: 'select',
+                      label: 'Type',
+                      ui_value: 'text',
+                      xmlname: 'type'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    },
+                    {
+                      input_type: 'select',
+                      label: 'Authority',
+                      xmlname: 'authority'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Authority URI',
+                      xmlname: 'authorityURI'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Value URI',
+                      xmlname: 'valueURI'
+                    }
                   ],
-                  "input_type":"input_text",
-                  "label":"Name part",
-                  "mandatory":1,
-                  "ui_value":"Herman",
-                  "xmlname":"namePart"
-               },
-               {
-                  "children":[
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"select",
-                              "label":"Type",
-                              "ui_value":"code",
-                              "xmlname":"type"
-                           },
-                           {
-                              "input_type":"select",
-                              "label":"Authority",
-                              "ui_value":"marcrelator",
-                              "xmlname":"authority"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Authority URI",
-                              "xmlname":"authorityURI"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Value URI",
-                              "xmlname":"valueURI"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           }
-                        ],
-                        "input_type":"input_text",
-                        "label":"Role term",
-                        "mandatory":1,
-                        "ui_value":"aut",
-                        "xmlname":"roleTerm"
-                     },
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"select",
-                              "label":"Type",
-                              "ui_value":"text",
-                              "xmlname":"type"
-                           },
-                           {
-                              "input_type":"select",
-                              "label":"Authority",
-                              "ui_value":"marcrelator",
-                              "xmlname":"authority"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Authority URI",
-                              "xmlname":"authorityURI"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Value URI",
-                              "xmlname":"valueURI"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           }
-                        ],
-                        "input_type":"input_text",
-                        "label":"Role term",
-                        "mandatory":1,
-                        "ui_value":"author",
-                        "xmlname":"roleTerm"
-                     }
+                  input_type: 'input_text',
+                  label: 'Place term',
+                  ui_value: 'Berlin',
+                  xmlname: 'placeTerm'
+                }
+              ],
+              input_type: 'node',
+              label: 'Place',
+              ui_value: '\n      \n    ',
+              xmlname: 'place'
+            }
+          ],
+          input_type: 'node',
+          label: 'Origin info',
+          ui_value: '\n    \n    \n  ',
+          xmlname: 'originInfo'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Type',
+              ui_value: 'DLBT',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'select',
+              label: 'Authority',
+              xmlname: 'authority'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Authority URI',
+              xmlname: 'authorityURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Value URI',
+              xmlname: 'valueURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'select',
+              label: 'Usage',
+              xmlname: 'usage'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          input_type: 'input_text',
+          label: 'Genre',
+          ui_value: 'book',
+          xmlname: 'genre'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'select',
+              label: 'Manuscript',
+              xmlname: 'manuscript'
+            },
+            {
+              input_type: 'select',
+              label: 'Collection',
+              xmlname: 'collection'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'select',
+              label: 'Usage',
+              xmlname: 'usage'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          input_type: 'select',
+          label: 'Type of resource',
+          ui_value: 'text',
+          xmlname: 'typeOfResource'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Object part',
+              xmlname: 'objectPart'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'select',
+              label: 'Usage',
+              xmlname: 'usage'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Type',
+                  ui_value: 'text',
+                  xmlname: 'type'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Authority',
+                  xmlname: 'authority'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Authority URI',
+                  xmlname: 'authorityURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Value URI',
+                  xmlname: 'valueURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                }
+              ],
+              input_type: 'input_text',
+              label: 'Language term',
+              ui_value: 'German',
+              xmlname: 'languageTerm'
+            }
+          ],
+          input_type: 'node',
+          label: 'Language',
+          ui_value: '\n    \n  ',
+          xmlname: 'language'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'select',
+              label: 'Type',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Unit',
+                  ui_value: 'page',
+                  xmlname: 'unit'
+                }
+              ],
+              input_type: 'node',
+              label: 'Extent',
+              sequence: 1,
+              ui_value: '188 p.',
+              xmlname: 'extent'
+            }
+          ],
+          input_type: 'node',
+          label: 'Part',
+          ordered: 1,
+          ui_value: '\n    \n  ',
+          xmlname: 'part'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Link',
+              xmlname: 'xlink:href'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'select',
+              label: 'Type',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Type URI',
+              xmlname: 'typeURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          input_type: 'input_text',
+          label: 'Note',
+          ui_value: 'Exported from DLBT, last modified on 2019-08-02',
+          xmlname: 'note'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Link',
+              xmlname: 'xlink:href'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'select',
+              label: 'Type',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Type URI',
+              xmlname: 'typeURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          input_type: 'input_text',
+          label: 'Note',
+          ui_value: '158008',
+          xmlname: 'note'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Link',
+              xmlname: 'xlink:href'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'select',
+              label: 'Authority',
+              xmlname: 'authority'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Authority URI',
+              xmlname: 'authorityURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Value URI',
+              xmlname: 'valueURI'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'select',
+              label: 'Usage',
+              xmlname: 'usage'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Authority',
+                  xmlname: 'authority'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Authority URI',
+                  xmlname: 'authorityURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Value URI',
+                  xmlname: 'valueURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                }
+              ],
+              input_type: 'input_text',
+              label: 'Topic',
+              ui_value: 'primary, FWF',
+              xmlname: 'topic'
+            }
+          ],
+          input_type: 'node',
+          label: 'Subject',
+          ui_value: '\n    \n  ',
+          xmlname: 'subject'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'select',
+              label: 'Invalid',
+              xmlname: 'invalid'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'input_text',
+                  label: 'Display label',
+                  ui_value: 'Element from Phaidra Collection',
+                  xmlname: 'displayLabel'
+                },
+                {
+                  input_type: 'input_datetime',
+                  label: 'Date last accessed',
+                  xmlname: 'dateLastAccessed'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Note',
+                  xmlname: 'note'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Access',
+                  xmlname: 'access'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Usage',
+                  xmlname: 'usage'
+                }
+              ],
+              input_type: 'input_text',
+              label: 'URL',
+              ui_value: 'https://phaidra.univie.ac.at/detail_object/o:753157',
+              xmlname: 'url'
+            }
+          ],
+          input_type: 'node',
+          label: 'Location',
+          ui_value: '\n    \n  ',
+          xmlname: 'location'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'select',
+              label: 'Type',
+              ui_value: 'use and reproduction',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Link',
+              xmlname: 'xlink:href'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Language',
+              xmlname: 'lang'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Script',
+              xmlname: 'script'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Transliteration',
+              xmlname: 'transliteration'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative representation group',
+              xmlname: 'altRepGroup'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative format',
+              xmlname: 'altFormat'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Alternative content',
+              xmlname: 'altContent'
+            }
+          ],
+          extensible: 1,
+          input_type: 'input_text',
+          label: 'Access condition',
+          ui_value: 'All rights reserved',
+          xmlname: 'accessCondition'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'select',
+              label: 'Type',
+              ui_value: 'otherVersion',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              ui_value: 'Translation of',
+              xmlname: 'displayLabel'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Link',
+              xmlname: 'xlink:href'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'input_text',
+                  label: 'Link',
+                  xmlname: 'xlink:href'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Type',
+                  xmlname: 'type'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Other type',
+                  xmlname: 'otherType'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Authority',
+                  xmlname: 'authority'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Authority URI',
+                  xmlname: 'authorityURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Value URI',
+                  xmlname: 'valueURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Display label',
+                  xmlname: 'displayLabel'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Supplied',
+                  xmlname: 'supplied'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Usage',
+                  xmlname: 'usage'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative representation group',
+                  xmlname: 'altRepGroup'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Name title group',
+                  xmlname: 'nameTitleGroup'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative format',
+                  xmlname: 'altFormat'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative content',
+                  xmlname: 'altContent'
+                }
+              ],
+              children: [
+                {
+                  attributes: [
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    }
                   ],
-                  "input_type":"node",
-                  "label":"Role",
-                  "ui_value":"\n      \n      \n    ",
-                  "xmlname":"role"
-               }
-            ],
-            "input_type":"node",
-            "label":"Name",
-            "ui_value":"\n    \n    \n    \n  ",
-            "xmlname":"name"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Event type",
-                  "xmlname":"eventType"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Encoding",
-                        "xmlname":"encoding"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Point",
-                        "xmlname":"point"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Key date",
-                        "xmlname":"keyDate"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Qualifier",
-                        "xmlname":"qualifier"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     }
+                  input_type: 'input_text',
+                  label: 'Title',
+                  mandatory: 1,
+                  ui_value: 'De groote vlucht, 1908; Uitkomst, 1909',
+                  xmlname: 'title'
+                }
+              ],
+              input_type: 'node',
+              label: 'Title info',
+              ui_value: '\n      \n    ',
+              xmlname: 'titleInfo'
+            },
+            {
+              attributes: [
+                {
+                  input_type: 'input_text',
+                  label: 'Object part',
+                  xmlname: 'objectPart'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Display label',
+                  xmlname: 'displayLabel'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Usage',
+                  xmlname: 'usage'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative representation group',
+                  xmlname: 'altRepGroup'
+                }
+              ],
+              children: [
+                {
+                  attributes: [
+                    {
+                      input_type: 'select',
+                      label: 'Type',
+                      ui_value: 'text',
+                      xmlname: 'type'
+                    },
+                    {
+                      input_type: 'select',
+                      label: 'Authority',
+                      xmlname: 'authority'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Authority URI',
+                      xmlname: 'authorityURI'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Value URI',
+                      xmlname: 'valueURI'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    }
                   ],
-                  "input_type":"input_datetime",
-                  "label":"Date created",
-                  "ui_value":"1909",
-                  "xmlname":"dateCreated"
-               },
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Supplied",
-                        "xmlname":"supplied"
-                     }
+                  input_type: 'input_text',
+                  label: 'Language term',
+                  ui_value: 'Dutch',
+                  xmlname: 'languageTerm'
+                }
+              ],
+              input_type: 'node',
+              label: 'Language',
+              ui_value: '\n      \n    ',
+              xmlname: 'language'
+            },
+            {
+              attributes: [
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Display label',
+                  xmlname: 'displayLabel'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative representation group',
+                  xmlname: 'altRepGroup'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Event type',
+                  xmlname: 'eventType'
+                }
+              ],
+              children: [
+                {
+                  attributes: [
+                    {
+                      input_type: 'select',
+                      label: 'Encoding',
+                      xmlname: 'encoding'
+                    },
+                    {
+                      input_type: 'select',
+                      label: 'Point',
+                      xmlname: 'point'
+                    },
+                    {
+                      input_type: 'select',
+                      label: 'Key date',
+                      xmlname: 'keyDate'
+                    },
+                    {
+                      input_type: 'select',
+                      label: 'Qualifier',
+                      xmlname: 'qualifier'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    }
                   ],
-                  "children":[
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"select",
-                              "label":"Type",
-                              "ui_value":"text",
-                              "xmlname":"type"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           },
-                           {
-                              "input_type":"select",
-                              "label":"Authority",
-                              "xmlname":"authority"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Authority URI",
-                              "xmlname":"authorityURI"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Value URI",
-                              "xmlname":"valueURI"
-                           }
-                        ],
-                        "input_type":"input_text",
-                        "label":"Place term",
-                        "ui_value":"Berlin",
-                        "xmlname":"placeTerm"
-                     }
+                  input_type: 'input_datetime',
+                  label: 'Date issued',
+                  xmlname: 'dateIssued'
+                }
+              ],
+              input_type: 'node',
+              label: 'Origin info',
+              ui_value: '\n      \n    ',
+              xmlname: 'originInfo'
+            }
+          ],
+          input_type: 'node',
+          label: 'Related item',
+          ui_value: '\n    \n    \n    \n  ',
+          xmlname: 'relatedItem'
+        },
+        {
+          attributes: [
+            {
+              input_type: 'select',
+              label: 'Type',
+              ui_value: 'series',
+              xmlname: 'type'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Link',
+              xmlname: 'xlink:href'
+            },
+            {
+              input_type: 'input_text',
+              label: 'Display label',
+              xmlname: 'displayLabel'
+            }
+          ],
+          children: [
+            {
+              attributes: [
+                {
+                  input_type: 'input_text',
+                  label: 'Link',
+                  xmlname: 'xlink:href'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Type',
+                  xmlname: 'type'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Other type',
+                  xmlname: 'otherType'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Authority',
+                  xmlname: 'authority'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Authority URI',
+                  xmlname: 'authorityURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Value URI',
+                  xmlname: 'valueURI'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Display label',
+                  xmlname: 'displayLabel'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Supplied',
+                  xmlname: 'supplied'
+                },
+                {
+                  input_type: 'select',
+                  label: 'Usage',
+                  xmlname: 'usage'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative representation group',
+                  xmlname: 'altRepGroup'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Name title group',
+                  xmlname: 'nameTitleGroup'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative format',
+                  xmlname: 'altFormat'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative content',
+                  xmlname: 'altContent'
+                }
+              ],
+              children: [
+                {
+                  attributes: [
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    }
                   ],
-                  "input_type":"node",
-                  "label":"Place",
-                  "ui_value":"\n      \n    ",
-                  "xmlname":"place"
-               }
-            ],
-            "input_type":"node",
-            "label":"Origin info",
-            "ui_value":"\n    \n    \n  ",
-            "xmlname":"originInfo"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Type",
-                  "ui_value":"DLBT",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Authority",
-                  "xmlname":"authority"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Authority URI",
-                  "xmlname":"authorityURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Value URI",
-                  "xmlname":"valueURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Usage",
-                  "xmlname":"usage"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "input_type":"input_text",
-            "label":"Genre",
-            "ui_value":"book",
-            "xmlname":"genre"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"select",
-                  "label":"Manuscript",
-                  "xmlname":"manuscript"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Collection",
-                  "xmlname":"collection"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Usage",
-                  "xmlname":"usage"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "input_type":"select",
-            "label":"Type of resource",
-            "ui_value":"text",
-            "xmlname":"typeOfResource"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Object part",
-                  "xmlname":"objectPart"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Usage",
-                  "xmlname":"usage"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Type",
-                        "ui_value":"text",
-                        "xmlname":"type"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Authority",
-                        "xmlname":"authority"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Authority URI",
-                        "xmlname":"authorityURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Value URI",
-                        "xmlname":"valueURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     }
+                  input_type: 'input_text',
+                  label: 'Title',
+                  mandatory: 1,
+                  ui_value: 'Schauspiele',
+                  xmlname: 'title'
+                }
+              ],
+              input_type: 'node',
+              label: 'Title info',
+              ui_value: '\n      \n    ',
+              xmlname: 'titleInfo'
+            },
+            {
+              attributes: [
+                {
+                  input_type: 'select',
+                  label: 'Type',
+                  xmlname: 'type'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Language',
+                  xmlname: 'lang'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Script',
+                  xmlname: 'script'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Transliteration',
+                  xmlname: 'transliteration'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Display label',
+                  xmlname: 'displayLabel'
+                },
+                {
+                  input_type: 'input_text',
+                  label: 'Alternative representation group',
+                  xmlname: 'altRepGroup'
+                }
+              ],
+              children: [
+                {
+                  attributes: [
+                    {
+                      input_type: 'select',
+                      label: 'Type',
+                      ui_value: 'volume',
+                      xmlname: 'type'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Level',
+                      xmlname: 'level'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Language',
+                      xmlname: 'lang'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Script',
+                      xmlname: 'script'
+                    },
+                    {
+                      input_type: 'input_text',
+                      label: 'Transliteration',
+                      xmlname: 'transliteration'
+                    }
                   ],
-                  "input_type":"input_text",
-                  "label":"Language term",
-                  "ui_value":"German",
-                  "xmlname":"languageTerm"
-               }
-            ],
-            "input_type":"node",
-            "label":"Language",
-            "ui_value":"\n    \n  ",
-            "xmlname":"language"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Unit",
-                        "ui_value":"page",
-                        "xmlname":"unit"
-                     }
+                  children: [
+                    {
+                      attributes: [
+                        {
+                          input_type: 'input_text',
+                          label: 'Language',
+                          xmlname: 'lang'
+                        },
+                        {
+                          input_type: 'input_text',
+                          label: 'Script',
+                          xmlname: 'script'
+                        },
+                        {
+                          input_type: 'input_text',
+                          label: 'Transliteration',
+                          xmlname: 'transliteration'
+                        }
+                      ],
+                      input_type: 'input_text',
+                      label: 'Number',
+                      ui_value: '\n2',
+                      xmlname: 'number'
+                    },
+                    {
+                      attributes: [
+                        {
+                          input_type: 'input_text',
+                          label: 'Language',
+                          xmlname: 'lang'
+                        },
+                        {
+                          input_type: 'input_text',
+                          label: 'Script',
+                          xmlname: 'script'
+                        },
+                        {
+                          input_type: 'input_text',
+                          label: 'Transliteration',
+                          xmlname: 'transliteration'
+                        }
+                      ],
+                      input_type: 'input_text',
+                      label: 'Caption',
+                      ui_value: 'no.',
+                      xmlname: 'caption'
+                    }
                   ],
-                  "input_type":"node",
-                  "label":"Extent",
-                  "sequence":1,
-                  "ui_value":"188 p.",
-                  "xmlname":"extent"
-               }
-            ],
-            "input_type":"node",
-            "label":"Part",
-            "ordered":1,
-            "ui_value":"\n    \n  ",
-            "xmlname":"part"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Link",
-                  "xmlname":"xlink:href"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Type URI",
-                  "xmlname":"typeURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "input_type":"input_text",
-            "label":"Note",
-            "ui_value":"Exported from DLBT, last modified on 2019-08-02",
-            "xmlname":"note"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Link",
-                  "xmlname":"xlink:href"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Type URI",
-                  "xmlname":"typeURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "input_type":"input_text",
-            "label":"Note",
-            "ui_value":"158008",
-            "xmlname":"note"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Link",
-                  "xmlname":"xlink:href"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Authority",
-                  "xmlname":"authority"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Authority URI",
-                  "xmlname":"authorityURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Value URI",
-                  "xmlname":"valueURI"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Usage",
-                  "xmlname":"usage"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Authority",
-                        "xmlname":"authority"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Authority URI",
-                        "xmlname":"authorityURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Value URI",
-                        "xmlname":"valueURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     }
-                  ],
-                  "input_type":"input_text",
-                  "label":"Topic",
-                  "ui_value":"primary, FWF",
-                  "xmlname":"topic"
-               }
-            ],
-            "input_type":"node",
-            "label":"Subject",
-            "ui_value":"\n    \n  ",
-            "xmlname":"subject"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"select",
-                  "label":"Invalid",
-                  "xmlname":"invalid"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"input_text",
-                        "label":"Display label",
-                        "ui_value":"Element from Phaidra Collection",
-                        "xmlname":"displayLabel"
-                     },
-                     {
-                        "input_type":"input_datetime",
-                        "label":"Date last accessed",
-                        "xmlname":"dateLastAccessed"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Note",
-                        "xmlname":"note"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Access",
-                        "xmlname":"access"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Usage",
-                        "xmlname":"usage"
-                     }
-                  ],
-                  "input_type":"input_text",
-                  "label":"URL",
-                  "ui_value":"https:\/\/phaidra.univie.ac.at\/detail_object\/o:753157",
-                  "xmlname":"url"
-               }
-            ],
-            "input_type":"node",
-            "label":"Location",
-            "ui_value":"\n    \n  ",
-            "xmlname":"location"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "ui_value":"use and reproduction",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Link",
-                  "xmlname":"xlink:href"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Language",
-                  "xmlname":"lang"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Script",
-                  "xmlname":"script"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Transliteration",
-                  "xmlname":"transliteration"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative representation group",
-                  "xmlname":"altRepGroup"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative format",
-                  "xmlname":"altFormat"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Alternative content",
-                  "xmlname":"altContent"
-               }
-            ],
-            "extensible":1,
-            "input_type":"input_text",
-            "label":"Access condition",
-            "ui_value":"All rights reserved",
-            "xmlname":"accessCondition"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "ui_value":"otherVersion",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "ui_value":"Translation of",
-                  "xmlname":"displayLabel"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Link",
-                  "xmlname":"xlink:href"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"input_text",
-                        "label":"Link",
-                        "xmlname":"xlink:href"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Type",
-                        "xmlname":"type"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Other type",
-                        "xmlname":"otherType"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Authority",
-                        "xmlname":"authority"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Authority URI",
-                        "xmlname":"authorityURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Value URI",
-                        "xmlname":"valueURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Display label",
-                        "xmlname":"displayLabel"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Supplied",
-                        "xmlname":"supplied"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Usage",
-                        "xmlname":"usage"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative representation group",
-                        "xmlname":"altRepGroup"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Name title group",
-                        "xmlname":"nameTitleGroup"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative format",
-                        "xmlname":"altFormat"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative content",
-                        "xmlname":"altContent"
-                     }
-                  ],
-                  "children":[
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           }
-                        ],
-                        "input_type":"input_text",
-                        "label":"Title",
-                        "mandatory":1,
-                        "ui_value":"De groote vlucht, 1908; Uitkomst, 1909",
-                        "xmlname":"title"
-                     }
-                  ],
-                  "input_type":"node",
-                  "label":"Title info",
-                  "ui_value":"\n      \n    ",
-                  "xmlname":"titleInfo"
-               },
-               {
-                  "attributes":[
-                     {
-                        "input_type":"input_text",
-                        "label":"Object part",
-                        "xmlname":"objectPart"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Display label",
-                        "xmlname":"displayLabel"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Usage",
-                        "xmlname":"usage"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative representation group",
-                        "xmlname":"altRepGroup"
-                     }
-                  ],
-                  "children":[
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"select",
-                              "label":"Type",
-                              "ui_value":"text",
-                              "xmlname":"type"
-                           },
-                           {
-                              "input_type":"select",
-                              "label":"Authority",
-                              "xmlname":"authority"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Authority URI",
-                              "xmlname":"authorityURI"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Value URI",
-                              "xmlname":"valueURI"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           }
-                        ],
-                        "input_type":"input_text",
-                        "label":"Language term",
-                        "ui_value":"Dutch",
-                        "xmlname":"languageTerm"
-                     }
-                  ],
-                  "input_type":"node",
-                  "label":"Language",
-                  "ui_value":"\n      \n    ",
-                  "xmlname":"language"
-               },
-               {
-                  "attributes":[
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Display label",
-                        "xmlname":"displayLabel"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative representation group",
-                        "xmlname":"altRepGroup"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Event type",
-                        "xmlname":"eventType"
-                     }
-                  ],
-                  "children":[
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"select",
-                              "label":"Encoding",
-                              "xmlname":"encoding"
-                           },
-                           {
-                              "input_type":"select",
-                              "label":"Point",
-                              "xmlname":"point"
-                           },
-                           {
-                              "input_type":"select",
-                              "label":"Key date",
-                              "xmlname":"keyDate"
-                           },
-                           {
-                              "input_type":"select",
-                              "label":"Qualifier",
-                              "xmlname":"qualifier"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           }
-                        ],
-                        "input_type":"input_datetime",
-                        "label":"Date issued",
-                        "xmlname":"dateIssued"
-                     }
-                  ],
-                  "input_type":"node",
-                  "label":"Origin info",
-                  "ui_value":"\n      \n    ",
-                  "xmlname":"originInfo"
-               }
-            ],
-            "input_type":"node",
-            "label":"Related item",
-            "ui_value":"\n    \n    \n    \n  ",
-            "xmlname":"relatedItem"
-         },
-         {
-            "attributes":[
-               {
-                  "input_type":"select",
-                  "label":"Type",
-                  "ui_value":"series",
-                  "xmlname":"type"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Link",
-                  "xmlname":"xlink:href"
-               },
-               {
-                  "input_type":"input_text",
-                  "label":"Display label",
-                  "xmlname":"displayLabel"
-               }
-            ],
-            "children":[
-               {
-                  "attributes":[
-                     {
-                        "input_type":"input_text",
-                        "label":"Link",
-                        "xmlname":"xlink:href"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Type",
-                        "xmlname":"type"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Other type",
-                        "xmlname":"otherType"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Authority",
-                        "xmlname":"authority"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Authority URI",
-                        "xmlname":"authorityURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Value URI",
-                        "xmlname":"valueURI"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Display label",
-                        "xmlname":"displayLabel"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Supplied",
-                        "xmlname":"supplied"
-                     },
-                     {
-                        "input_type":"select",
-                        "label":"Usage",
-                        "xmlname":"usage"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative representation group",
-                        "xmlname":"altRepGroup"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Name title group",
-                        "xmlname":"nameTitleGroup"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative format",
-                        "xmlname":"altFormat"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative content",
-                        "xmlname":"altContent"
-                     }
-                  ],
-                  "children":[
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           }
-                        ],
-                        "input_type":"input_text",
-                        "label":"Title",
-                        "mandatory":1,
-                        "ui_value":"Schauspiele",
-                        "xmlname":"title"
-                     }
-                  ],
-                  "input_type":"node",
-                  "label":"Title info",
-                  "ui_value":"\n      \n    ",
-                  "xmlname":"titleInfo"
-               },
-               {
-                  "attributes":[
-                     {
-                        "input_type":"select",
-                        "label":"Type",
-                        "xmlname":"type"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Language",
-                        "xmlname":"lang"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Script",
-                        "xmlname":"script"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Transliteration",
-                        "xmlname":"transliteration"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Display label",
-                        "xmlname":"displayLabel"
-                     },
-                     {
-                        "input_type":"input_text",
-                        "label":"Alternative representation group",
-                        "xmlname":"altRepGroup"
-                     }
-                  ],
-                  "children":[
-                     {
-                        "attributes":[
-                           {
-                              "input_type":"select",
-                              "label":"Type",
-                              "ui_value":"volume",
-                              "xmlname":"type"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Level",
-                              "xmlname":"level"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Language",
-                              "xmlname":"lang"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Script",
-                              "xmlname":"script"
-                           },
-                           {
-                              "input_type":"input_text",
-                              "label":"Transliteration",
-                              "xmlname":"transliteration"
-                           }
-                        ],
-                        "children":[
-                           {
-                              "attributes":[
-                                 {
-                                    "input_type":"input_text",
-                                    "label":"Language",
-                                    "xmlname":"lang"
-                                 },
-                                 {
-                                    "input_type":"input_text",
-                                    "label":"Script",
-                                    "xmlname":"script"
-                                 },
-                                 {
-                                    "input_type":"input_text",
-                                    "label":"Transliteration",
-                                    "xmlname":"transliteration"
-                                 }
-                              ],
-                              "input_type":"input_text",
-                              "label":"Number",
-                              "ui_value":"\n2",
-                              "xmlname":"number"
-                           },
-                           {
-                              "attributes":[
-                                 {
-                                    "input_type":"input_text",
-                                    "label":"Language",
-                                    "xmlname":"lang"
-                                 },
-                                 {
-                                    "input_type":"input_text",
-                                    "label":"Script",
-                                    "xmlname":"script"
-                                 },
-                                 {
-                                    "input_type":"input_text",
-                                    "label":"Transliteration",
-                                    "xmlname":"transliteration"
-                                 }
-                              ],
-                              "input_type":"input_text",
-                              "label":"Caption",
-                              "ui_value":"no.",
-                              "xmlname":"caption"
-                           }
-                        ],
-                        "input_type":"node",
-                        "label":"Detail",
-                        "ui_value":"\n        \n        \n      ",
-                        "xmlname":"detail"
-                     }
-                  ],
-                  "input_type":"node",
-                  "label":"Part",
-                  "ordered":1,
-                  "ui_value":"\n      \n    ",
-                  "xmlname":"part"
-               }
-            ],
-            "input_type":"node",
-            "label":"Related item",
-            "ui_value":"\n    \n    \n  ",
-            "xmlname":"relatedItem"
-         }
+                  input_type: 'node',
+                  label: 'Detail',
+                  ui_value: '\n        \n        \n      ',
+                  xmlname: 'detail'
+                }
+              ],
+              input_type: 'node',
+              label: 'Part',
+              ordered: 1,
+              ui_value: '\n      \n    ',
+              xmlname: 'part'
+            }
+          ],
+          input_type: 'node',
+          label: 'Related item',
+          ui_value: '\n    \n    \n  ',
+          xmlname: 'relatedItem'
+        }
       ],
       form: {
         sections: []
       },
       members: [],
-      pid: 'o:337723',
+      pid: 'o:753810',
       piddoc: {},
       collection: 'o:459021',
       sampleCollection: 'o:541829',
@@ -3845,18 +4032,18 @@ export default {
         case 'image/gif':
         case 'image/png':
         case 'image/x-ms-bmp':
-        // picture
+          // picture
           return 'https://pid.phaidra.org/vocabulary/44TN-P1S0'
 
         case 'audio/wav':
         case 'audio/mpeg':
         case 'audio/flac':
         case 'audio/ogg':
-        // audio
+          // audio
           return 'https://pid.phaidra.org/vocabulary/8YB5-1M0J'
 
         case 'application/pdf':
-        // document
+          // document
           return 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX'
 
         case 'video/mpeg':
@@ -3864,12 +4051,12 @@ export default {
         case 'video/mp4':
         case 'video/quicktime':
         case 'video/x-matroska':
-        // video
+          // video
           return 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8'
 
         // eg application/x-iso9660-image
         default:
-        // data
+          // data
           return 'https://pid.phaidra.org/vocabulary/7AVS-Y482'
       }
     },
@@ -3882,25 +4069,40 @@ export default {
           if (this.form.sections[i].fields) {
             var mime
             for (j = 0; j < this.form.sections[i].fields.length; j++) {
-              if (this.form.sections[i].fields[j].predicate === 'ebucore:hasMimeType') {
+              if (
+                this.form.sections[i].fields[j].predicate ===
+                'ebucore:hasMimeType'
+              ) {
                 mime = this.form.sections[i].fields[j].value
               }
             }
             if (mime) {
               var resourcetype = this.getResourceTypeFromMimeType(mime)
               for (j = 0; j < this.form.sections[i].fields.length; j++) {
-                if (this.form.sections[i].fields[j].predicate === 'dcterms:type') {
+                if (
+                  this.form.sections[i].fields[j].predicate === 'dcterms:type'
+                ) {
                   var rt = this.form.sections[i].fields[j]
                   rt.value = resourcetype
                   var preflabels
-                  for (k = 0; k < this.vocabularies['resourcetype'].terms.length; k++) {
-                    if (this.vocabularies['resourcetype'].terms[k]['@id'] === rt.value) {
+                  for (
+                    k = 0;
+                    k < this.vocabularies['resourcetype'].terms.length;
+                    k++
+                  ) {
+                    if (
+                      this.vocabularies['resourcetype'].terms[k]['@id'] ===
+                      rt.value
+                    ) {
                       preflabels = this.vocabularies['resourcetype'].terms[k]['skos:prefLabel']
                     }
                   }
                   rt['skos:prefLabel'] = []
                   Object.entries(preflabels).forEach(([key, value]) => {
-                    rt['skos:prefLabel'].push({ '@value': value, '@language': key })
+                    rt['skos:prefLabel'].push({
+                      '@value': value,
+                      '@language': key
+                    })
                   })
                 }
               }
@@ -3919,7 +4121,11 @@ export default {
         multiplicable: true,
         fields: []
       }
-      this.form.sections.splice(this.form.sections.indexOf(afterSection) + 1, 0, s)
+      this.form.sections.splice(
+        this.form.sections.indexOf(afterSection) + 1,
+        0,
+        s
+      )
     },
     loadManagement: function (pid) {
       this.loadMembers(pid)
@@ -3990,7 +4196,11 @@ export default {
       try {
         let response = await this.$http.request({
           method: 'GET',
-          url: this.$store.state.instanceconfig.api + '/object/' + pid + '/metadata',
+          url:
+            this.$store.state.instanceconfig.api +
+            '/object/' +
+            pid +
+            '/metadata',
           params: {
             mode: 'full'
           }
@@ -4013,7 +4223,11 @@ export default {
       try {
         let response = await this.$http.request({
           method: 'GET',
-          url: this.$store.state.instanceconfig.api + '/object/' + pid + '/metadata',
+          url:
+            this.$store.state.instanceconfig.api +
+            '/object/' +
+            pid +
+            '/metadata',
           params: {
             mode: 'resolved'
           }
@@ -4063,16 +4277,24 @@ export default {
       this.$store.dispatch('logout')
     },
     objectCreated: function (event) {
-      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object ' + event + ' created' }])
+      this.$store.commit('setAlerts', [
+        { type: 'success', msg: 'Object ' + event + ' created' }
+      ])
     },
     objectSaved: function (event) {
-      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Metadata for object ' + event + ' saved' }])
+      this.$store.commit('setAlerts', [
+        { type: 'success', msg: 'Metadata for object ' + event + ' saved' }
+      ])
     },
     orderSaved: function (event) {
-      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Order for object ' + event + ' saved' }])
+      this.$store.commit('setAlerts', [
+        { type: 'success', msg: 'Order for object ' + event + ' saved' }
+      ])
     },
     objectDeleted: function () {
-      this.$store.commit('setAlerts', [{ type: 'success', msg: 'Object was successfully deleted.' }])
+      this.$store.commit('setAlerts', [
+        { type: 'success', msg: 'Object was successfully deleted.' }
+      ])
     },
     toggleVisibility: function () {
       this.psvis = !this.psvis
@@ -4151,8 +4373,9 @@ export default {
       rt.value = this.contentmodel
       this.form.sections[0].fields.push(rt)
 
-      this.form.sections[0].fields.push(fields.getField('spatial-geonames-search'))
-      this.form.sections[0].fields.push(fields.getField('spatial-geonames'))
+      this.form.sections[0].fields.push(fields.getField('instance-of'))
+      this.form.sections[0].fields.push(fields.getField('project'))
+      this.form.sections[0].fields.push(fields.getField('event'))
 
       let t = fields.getField('title')
       t.hideSubtitle = true
@@ -4289,9 +4512,18 @@ export default {
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
     this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
-    this.$store.commit('setSuggester', { suggester: 'getty', url: 'https://ws.gbv.de/suggest/getty/' })
-    this.$store.commit('setSuggester', { suggester: 'gnd', url: 'https://ws.gbv.de/suggest/gnd/' })
-    this.$store.commit('setSuggester', { suggester: 'geonames', url: 'https://ws.gbv.de/suggest/geonames/' })
+    this.$store.commit('setSuggester', {
+      suggester: 'getty',
+      url: 'https://ws.gbv.de/suggest/getty/'
+    })
+    this.$store.commit('setSuggester', {
+      suggester: 'gnd',
+      url: 'https://ws.gbv.de/suggest/gnd/'
+    })
+    this.$store.commit('setSuggester', {
+      suggester: 'geonames',
+      url: 'https://ws.gbv.de/suggest/geonames/'
+    })
     this.$store.commit('initStore')
   },
   mounted: function () {
@@ -4373,5 +4605,5 @@ export default {
 </style>
 
 <style lang="sass">
-  @require './stylus/main'
+@require './stylus/main'
 </style>

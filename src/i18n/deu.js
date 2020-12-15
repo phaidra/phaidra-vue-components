@@ -571,12 +571,14 @@ export default {
   'rdau:P60101': 'Is contained in',
   'rdau:P60101_rdau:P60193': 'Reihe',
   'rdau:P60101_bf:provisionActivity': 'Verlag',
+  'bf:instanceOf': 'Instance of',
   'rdau:P60227': 'Is motion picture adaptation of',
 
   'dcterms:spatial': 'Depicted / Represented place',
   'vra:placeOfCreation': 'Place of creation',
   'vra:placeOfSite': 'Place of site',
 
+  'ebucore:hasRelatedEvent': 'Event',
   'frapo:isOutputOf': 'Projekt',
   'frapo:hasFundingAgency': 'Funding',
   'rdax:P00009': 'Zuordnung',

@@ -54,6 +54,7 @@ export default {
   'rdau:P60101': 'Is contained in',
   'rdau:P60101_rdau:P60193': 'Series',
   'rdau:P60101_bf:provisionActivity': 'Publisher',
+  'bf:instanceOf': 'Instance of',
   'rdau:P60227': 'Is motion picture adaptation of',
   'bf:provisionActivity': 'Provision activity: Publication',
   'cito:cites': 'Cites',
@@ -64,6 +65,7 @@ export default {
   'vra:placeOfCreation': 'Place of creation',
   'vra:placeOfSite': 'Place of site',
 
+  'ebucore:hasRelatedEvent': 'Event',
   'frapo:isOutputOf': 'Project',
   'frapo:hasFundingAgency': 'Funder',
   'rdax:P00009': 'Association',

@@ -11,11 +11,13 @@ import PDJsonldLayout from './display/PDJsonldLayout.vue'
 import PDLangValue from './display/PDLangValue.vue'
 import PDLicense from './display/PDLicense.vue'
 import PDProject from './display/PDProject.vue'
+import PDEvent from './display/PDEvent.vue'
 import PDSeries from './display/PDSeries.vue'
 import PDContainedIn from './display/PDContainedIn.vue'
 import PDBfPublication from './display/PDBfPublication.vue'
 import PDCitation from './display/PDCitation.vue'
 import PDAdaptation from './display/PDAdaptation.vue'
+import PDInstanceOf from './display/PDInstanceOf.vue'
 import PDSkosPreflabel from './display/PDSkosPreflabel.vue'
 import PDKeyword from './display/PDKeyword.vue'
 import PDTitle from './display/PDTitle.vue'
@@ -40,11 +42,13 @@ import PIContainedIn from './input/PIContainedIn.vue'
 import PIBfPublication from './input/PIBfPublication.vue'
 import PICitation from './input/PICitation.vue'
 import PIAdaptation from './input/PIAdaptation.vue'
+import PIInstanceOf from './input/PIInstanceOf.vue'
 import PISubjectGnd from './input/PISubjectGnd.vue'
 import PISpatialGetty from './input/PISpatialGetty.vue'
 import PISpatialGeonames from './input/PISpatialGeonames.vue'
 import PISpatialText from './input/PISpatialText.vue'
 import PIProject from './input/PIProject.vue'
+import PIEvent from './input/PIEvent.vue'
 import PISelect from './input/PISelect.vue'
 import PISelectText from './input/PISelectText.vue'
 import PITextField from './input/PITextField.vue'
@@ -92,7 +96,9 @@ const Components = {
   PDBfPublication,
   PDCitation,
   PDAdaptation,
+  PDInstanceOf,
   PDProject,
+  PDEvent,
   PDSkosPreflabel,
   PDKeyword,
   PDTitle,
@@ -116,12 +122,14 @@ const Components = {
   PIContainedIn,
   PIBfPublication,
   PICitation,
+  PIInstanceOf,
   PIAdaptation,
   PISubjectGnd,
   PISpatialGetty,
   PISpatialGeonames,
   PISpatialText,
   PIProject,
+  PIEvent,
   PISelect,
   PISelectText,
   PITextField,

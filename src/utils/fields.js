@@ -534,6 +534,22 @@ const fields = [
     definition: 'Relates a resource to a larger resource of which a part is a discrete component.'
   },
   {
+    id: 'instance-of',
+    fieldname: 'Is instance of',
+    predicate: 'bf:instanceOf',
+    type: 'bf:Work',
+    component: 'p-instance-of',
+    label: 'Is instance of',
+    title: '',
+    subtitle: '',
+    titleLanguage: '',
+    indentifierType: '',
+    identifier: '',
+    identifierLabel: null,
+    identifierTypePlaceholder: '',
+    definition: 'Work the Instance described instantiates or manifests. For use to connect Instances to Works.'
+  },
+  {
     id: 'movieadaptation',
     fieldname: 'Is motion picture adaptation of',
     predicate: 'rdau:P60227',
@@ -550,6 +566,24 @@ const fields = [
     definition: 'Relates a resource to a resource that is adapted as a motion picture.'
   },
   {
+    id: 'event',
+    fieldname: 'Event',
+    predicate: 'ebucore:hasRelatedEvent',
+    type: 'ebucore:Event',
+    component: 'p-event',
+    name: '',
+    nameLanguage: '',
+    place: '',
+    indentifierType: '',
+    identifier: '',
+    identifierLabel: null,
+    description: '',
+    descriptionLanguage: '',
+    dateFrom: '',
+    dateTo: '',
+    definition: 'Events, all real or fictional.'
+  },
+  {
     id: 'project',
     fieldname: 'Project',
     predicate: 'frapo:isOutputOf',
@@ -563,6 +597,8 @@ const fields = [
     homepage: '',
     funderName: '',
     funderIdentifier: '',
+    dateFrom: '',
+    dateTo: '',
     definition: 'An administrative entity that enabled an endeavour such as a research investigation.'
   },
   {
@@ -1378,6 +1414,8 @@ const predicateOrder = [
   'phaidra:dateAccessioned',
   'date',
 
+  'ebucore:hasRelatedEvent',
+
   'oaire:version',
   'dcterms:accessRights',
   'edm:rights',
@@ -1423,6 +1461,7 @@ const predicateOrder = [
   'rdau:P60101',
   'bf:provisionActivity',
   'rdau:P60227',
+  'bf:instanceOf',
   'frapo:hasFundingAgency',
   'frapo:isOutputOf',
   'rdax:P00009',

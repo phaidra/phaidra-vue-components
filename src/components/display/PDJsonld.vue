@@ -153,6 +153,10 @@
           <p-d-adaptation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'adaptation'+j" v-bind.sync="displayProperties"></p-d-adaptation>
         </template>
 
+        <template v-else-if="p==='bf:instanceOf'" slot="bf:instanceOf">
+          <p-d-instance-of :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'instanceof'+j" v-bind.sync="displayProperties"></p-d-instance-of>
+        </template>
+
         <template v-else-if="p==='frapo:isOutputOf'" slot="frapo:isOutputOf">
           <template v-for="(item, j) in o">
             <template v-if="item['@type']==='aaiso:Programme'">
@@ -166,6 +170,10 @@
 
         <template v-else-if="p==='frapo:hasFundingAgency'" slot="frapo:hasFundingAgency">
           <p-d-funder :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'funder'+j" v-bind.sync="displayProperties"></p-d-funder>
+        </template>
+
+        <template v-else-if="p==='ebucore:hasRelatedEvent'" slot="ebucore:hasRelatedEvent">
+          <p-d-event :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'event'+j" v-bind.sync="displayProperties"></p-d-event>
         </template>
 
         <template v-else-if="p==='rdax:P00009'" slot="rdax:P00009">
@@ -362,10 +370,12 @@ import PDEntity from './PDEntity'
 import PDLabeledValue from './PDLabeledValue'
 import PDFunder from './PDFunder'
 import PDProject from './PDProject'
+import PDEvent from './PDEvent'
 import PDBfPublication from './PDBfPublication'
 import PDStudyPlan from './PDStudyPlan'
 import PDSeries from './PDSeries'
 import PDContainedIn from './PDContainedIn'
+import PDInstanceOf from './PDInstanceOf'
 import PDAdaptation from './PDAdaptation'
 import PDCitation from './PDCitation'
 import PDIdentifier from './PDIdentifier'
@@ -415,11 +425,13 @@ export default {
     PDLabeledValue,
     PDFunder,
     PDProject,
+    PDEvent,
     PDBfPublication,
     PDStudyPlan,
     PDSeries,
     PDContainedIn,
     PDAdaptation,
+    PDInstanceOf,
     PDIdentifier,
     PDCitation,
     PDSeeAlso,

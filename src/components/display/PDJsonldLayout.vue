@@ -34,6 +34,7 @@
     <slot name="cito:cites"></slot>
     <slot name="cito:isCitedBy"></slot>
     <slot name="bf:provisionActivity"></slot>
+    <slot name="bf:instanceOf"></slot>
     <slot name="rdau:P60227"></slot><!-- adaptation of -->
     <slot name="oaire:version"></slot>
 
@@ -57,6 +58,9 @@
     <slot name="rdau:P60071"></slot><!-- date of production -->
     <slot name="phaidra:dateAccessioned"></slot>
     <slot name="dcterms:temporal"></slot>
+
+    <!-- events -->
+    <slot name="ebucore:hasRelatedEvent"></slot>
 
     <!-- places -->
     <slot name="dcterms:spatial"></slot>
@@ -109,4 +113,3 @@ export default {
   name: 'p-d-jsonld-layout'
 }
 </script>
-

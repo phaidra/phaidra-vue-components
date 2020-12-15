@@ -65,7 +65,7 @@
 
             </v-row>
 
-            <v-row >
+            <v-row>
               <v-col cols="8">
                 <v-text-field
                   :value="description"
@@ -102,17 +102,93 @@
                   </template>
                 </v-autocomplete>
               </v-col>
+            </v-row>
 
+            <v-row>
+                <v-col cols="12" :md="6">
+                  <template>
+                    <v-text-field
+                      :value="dateFrom"
+                      v-on:blur="$emit('input-date-from',$event.target.value)"
+                      :label="$t('Date from')"
+                      :rules="[validationrules.date]"
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
+                      :error-messages="dateFromErrorMessages"
+                    >
+                      <template v-slot:append>
+                        <v-fade-transition leave-absolute>
+                          <v-menu
+                            v-model="dateFromMenu"
+                            :close-on-content-click="false"
+                            transition="scale-transition"
+                            offset-y
+                            max-width="290px"
+                            min-width="290px"
+                          >
+                            <template v-slot:activator="{ on }">
+                              <v-icon v-on="on">mdi-calendar</v-icon>
+                            </template>
+                            <v-date-picker
+                              color="primary"
+                              :value="dateFrom"
+                              :show-current="false"
+                              v-model="pickerFromModel"
+                              :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                              v-on:input="dateFromMenu = false; $emit('input-date-from', $event)"
+                            ></v-date-picker>
+                          </v-menu>
+                        </v-fade-transition>
+                      </template>
+                    </v-text-field>
+                  </template>
+                </v-col>
+                <v-col cols="12" :md="6">
+                  <template>
+                    <v-text-field
+                      :value="dateTo"
+                      v-on:blur="$emit('input-date-to',$event.target.value)"
+                      :label="$t('Date to')"
+                      :rules="[validationrules.date]"
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
+                      :error-messages="dateToErrorMessages"
+                    >
+                      <template v-slot:append>
+                        <v-fade-transition leave-absolute>
+                          <v-menu
+                            v-model="dateToMenu"
+                            :close-on-content-click="false"
+                            transition="scale-transition"
+                            offset-y
+                            max-width="290px"
+                            min-width="290px"
+                          >
+                            <template v-slot:activator="{ on }">
+                              <v-icon v-on="on">mdi-calendar</v-icon>
+                            </template>
+                            <v-date-picker
+                              color="primary"
+                              :value="dateTo"
+                              :show-current="false"
+                              v-model="pickerToModel"
+                              :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                              v-on:input="dateToMenu = false; $emit('input-date-to', $event)"
+                            ></v-date-picker>
+                          </v-menu>
+                        </v-fade-transition>
+                      </template>
+                    </v-text-field>
+                  </template>
+                </v-col>
             </v-row>
 
             <v-row >
-
               <v-col cols="6">
                 <v-text-field
                   :value="identifier"
                   :label="$t('Identifier')"
                   v-on:blur="$emit('input-identifier',$event.target.value)"
-                  homepage
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
                 ></v-text-field>
@@ -130,7 +206,7 @@
             </v-row>
           </v-col>
         </v-row>
-        <v-row >
+        <v-row>
           <v-col cols="6">
             <v-text-field
               :value="funderName"
@@ -186,10 +262,11 @@
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-i-project',
-  mixins: [vocabulary, fieldproperties],
+  mixins: [vocabulary, fieldproperties, validationrules],
   props: {
     type: {
       type: String
@@ -224,6 +301,18 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    dateFrom: String,
+    dateTo: String,
+    dateFromErrorMessages: Array,
+    dateToErrorMessages: Array
+  },
+  data () {
+    return {
+      pickerFromModel: new Date().toISOString().substr(0, 10),
+      dateFromMenu: false,
+      pickerToModel: new Date().toISOString().substr(0, 10),
+      dateToMenu: false
     }
   }
 }

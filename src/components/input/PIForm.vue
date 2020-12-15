@@ -212,6 +212,19 @@
                     ></p-i-bf-publication>
                   </template>
 
+                  <template v-else-if="f.component === 'p-instance-of'">
+                    <p-i-instance-of
+                      v-bind.sync="f"
+                      v-on:input-title="f.title=$event"
+                      v-on:input-subtitle="f.subtitle=$event"
+                      v-on:input-title-language="setSelected(f, 'titleLanguage', $event)"
+                      v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
+                      v-on:input-identifier="f.identifierText = $event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-instance-of>
+                  </template>
+
                   <template v-else-if="f.component === 'p-adaptation'">
                     <p-i-adaptation
                       v-bind.sync="f"
@@ -399,6 +412,23 @@
                     ></p-i-study-plan>
                   </template>
 
+                  <template v-else-if="f.component === 'p-event'">
+                    <p-i-event
+                      v-bind.sync="f"
+                      v-on:input-name="f.name=$event"
+                      v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
+                      v-on:input-description="f.description=$event"
+                      v-on:input-description-language="setSelected(f, 'descriptionLanguage', $event)"
+                      v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
+                      v-on:input-identifier="f.identifierText = $event"
+                      v-on:input-date-from="f.dateFrom=$event"
+                      v-on:input-date-to="f.dateTo=$event"
+                      v-on:input-place="f.place=$event"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-event>
+                  </template>
+
                   <template v-else-if="f.component === 'p-project'">
                     <p-i-project
                       v-bind.sync="f"
@@ -411,6 +441,8 @@
                       v-on:input-identifier="f.identifier=$event"
                       v-on:input-funder-identifier="f.funderIdentifier=$event"
                       v-on:input-homepage="f.homepage=$event"
+                      v-on:input-date-from="f.dateFrom=$event"
+                      v-on:input-date-to="f.dateTo=$event"
                       v-on:add="addField(s.fields, f)"
                       v-on:remove="removeField(s.fields, f)"
                     ></p-i-project>
@@ -571,7 +603,7 @@
 
       </v-tab-item>
       <v-tab-item v-if="debug" class="pa-3">
-        <code>{{ metadatapreview }}</code>
+        <div style="white-space: pre;">{{ JSON.stringify(metadatapreview, null, 2) }}</div>
       </v-tab-item>
       <v-tab-item v-if="templating" class="ma-4">
         <p-templates ref="templates" v-on:load-template="loadTemplate($event)"></p-templates>
@@ -630,12 +662,14 @@ import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
 import PIDuration from './PIDuration'
 import PIProject from './PIProject'
+import PIEvent from './PIEvent'
 import PIFunder from './PIFunder'
 import PIAssociation from './PIAssociation'
 import PISeries from './PISeries'
 import PIContainedIn from './PIContainedIn'
 import PICitation from './PICitation'
 import PIBfPublication from './PIBfPublication'
+import PIInstanceOf from './PIInstanceOf'
 import PIAdaptation from './PIAdaptation'
 import PIFilenameReadonly from './PIFilenameReadonly'
 import PIFilename from './PIFilename'
@@ -677,12 +711,14 @@ export default {
     PIDuration,
     PIStudyPlan,
     PIProject,
+    PIEvent,
     PIFunder,
     PIAssociation,
     PISeries,
     PIContainedIn,
     PICitation,
     PIBfPublication,
+    PIInstanceOf,
     PIAdaptation,
     PILiteral,
     PIKeyword,

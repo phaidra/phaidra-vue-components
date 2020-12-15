@@ -604,6 +604,38 @@ export default {
               components.push(f)
               break
 
+            case 'bf:instanceOf':
+              f = fields.getField('instance-of')
+              if (obj['dce:title']) {
+                for (let t of obj['dce:title']) {
+                  if (t['bf:mainTitle']) {
+                    for (let mt of t['bf:mainTitle']) {
+                      if (mt['@value']) {
+                        f.title = mt['@value']
+                      }
+                      if (mt['@language']) {
+                        f.titleLanguage = mt['@language']
+                      }
+                    }
+                    if (t['bf:subtitle']) {
+                      for (let st of t['bf:subtitle']) {
+                        if (st['@value']) {
+                          f.subtitle = st['@value']
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              if (obj['skos:exactMatch']) {
+                for (let id of obj['skos:exactMatch']) {
+                  f.identifierType = id['@type']
+                  f.identifierText = id['@value']
+                }
+              }
+              components.push(f)
+              break
+
             // rdau:P60227
             case 'rdau:P60227':
               f = fields.getField('movieadaptation')
@@ -701,6 +733,16 @@ export default {
                     f.homepage = hp
                   }
                 }
+                if (obj['frapo:hasStartDate']) {
+                  for (let sd of obj['frapo:hasStartDate']) {
+                    f.dateFrom = sd
+                  }
+                }
+                if (obj['frapo:hasEndDate']) {
+                  for (let ed of obj['frapo:hasEndDate']) {
+                    f.dateTo = ed
+                  }
+                }
                 if (obj['frapo:hasFundingAgency']) {
                   for (let funder of obj['frapo:hasFundingAgency']) {
                     if (funder['skos:prefLabel']) {
@@ -733,6 +775,51 @@ export default {
                   }
                   components.push(f)
                 }
+              }
+              break
+
+            // ebucore:hasRelatedEvent'
+            case 'ebucore:hasRelatedEvent':
+              if (obj['@type'] === 'ebucore:Event') {
+                f = fields.getField('event')
+                if (obj['skos:prefLabel']) {
+                  for (let pl of obj['skos:prefLabel']) {
+                    f.name = pl['@value']
+                    f.nameLanguage = pl['@language'] ? pl['@language'] : 'eng'
+                  }
+                }
+                if (obj['rdfs:comment']) {
+                  for (let c of obj['rdfs:comment']) {
+                    f.description = c['@value']
+                    f.descriptionLanguage = c['@language'] ? c['@language'] : 'eng'
+                  }
+                }
+                if (obj['ebucore:eventStartDateTime']) {
+                  for (let sd of obj['ebucore:eventStartDateTime']) {
+                    f.dateFrom = sd
+                  }
+                }
+                if (obj['ebucore:eventEndDateTime']) {
+                  for (let ed of obj['ebucore:eventEndDateTime']) {
+                    f.dateTo = ed
+                  }
+                }
+                if (obj['ebucore:hasEventRelatedLocation']) {
+                  for (let pl of obj['ebucore:hasEventRelatedLocation']) {
+                    if (pl['skos:prefLabel']) {
+                      for (let pllab of pl['skos:prefLabel']) {
+                        f.place = pllab['@value']
+                      }
+                    }
+                  }
+                }
+                if (obj['skos:exactMatch']) {
+                  for (let id of obj['skos:exactMatch']) {
+                    f.identifierType = id['@type']
+                    f.identifierText = id['@value']
+                  }
+                }
+                components.push(f)
               }
               break
 
@@ -1115,12 +1202,23 @@ export default {
                 if (role['@type'] === 'schema:Organization') {
                   if (role['skos:exactMatch']) {
                     for (let id of role['skos:exactMatch']) {
-                      if (id.startsWith('https://pid.phaidra.org/')) {
-                        f.organizationType = 'select'
-                        f.organization = id
+                      if (typeof id !== 'object') {
+                        if (id.startsWith('https://pid.phaidra.org/')) {
+                          f.organizationType = 'select'
+                          f.organization = id
+                        } else {
+                          f.organizationType = 'other'
+                          f.identifierText = id
+                          if (role['schema:name']) {
+                            for (let name of role['schema:name']) {
+                              f.organizationText = name['@value']
+                            }
+                          }
+                        }
                       } else {
                         f.organizationType = 'other'
-                        f.identifierText = id
+                        f.identifierType = id['@type']
+                        f.identifierText = id['@value']
                         if (role['schema:name']) {
                           for (let name of role['schema:name']) {
                             f.organizationText = name['@value']
@@ -1465,13 +1563,68 @@ export default {
           ]
         }
         if (f.identifierText) {
-          h['skos:exactMatch'] = [ f.identifierText ]
+          if (f.identifierType) {
+            h['skos:exactMatch'] = [ { '@type': f.identifierType, '@value': f.identifierText } ]
+          } else {
+            h['skos:exactMatch'] = [ f.identifierText ]
+          }
         }
       }
     }
     return h
   },
-  get_json_project (name, nameLanguage, description, descriptionLanguage, identifiers, homepage, funderObject) {
+  get_json_event (e) {
+    var h = {
+      '@type': 'ebucore:Event'
+    }
+    if (e.name) {
+      h['skos:prefLabel'] = [
+        {
+          '@value': e.name
+        }
+      ]
+      if (e.nameLanguage) {
+        h['skos:prefLabel'][0]['@language'] = e.nameLanguage
+      }
+    }
+    if (e.description) {
+      h['rdfs:comment'] = [
+        {
+          '@value': e.description
+        }
+      ]
+      if (e.descriptionLanguage) {
+        h['rdfs:comment'][0]['@language'] = e.descriptionLanguage
+      }
+    }
+    if (e.dateFrom) {
+      h['ebucore:eventStartDateTime'] = [ e.dateFrom ]
+    }
+    if (e.dateTo) {
+      h['ebucore:eventEndDateTime'] = [ e.dateTo ]
+    }
+    if (e.place) {
+      h['ebucore:hasEventRelatedLocation'] = [
+        {
+          '@type': 'schema:Place',
+          'skos:prefLabel': [
+            {
+              '@value': e.place
+            }
+          ]
+        }
+      ]
+    }
+    if (e.identifierText) {
+      if (e.identifierType) {
+        h['skos:exactMatch'] = [ { '@type': e.identifierType, '@value': e.identifierText } ]
+      } else {
+        h['skos:exactMatch'] = [ e.identifierText ]
+      }
+    }
+    return h
+  },
+  get_json_project (name, nameLanguage, description, descriptionLanguage, identifiers, homepage, dateFrom, dateTo, funderObject) {
     var h = {
       '@type': 'foaf:Project'
     }
@@ -1499,6 +1652,12 @@ export default {
       if (identifiers.length > 0) {
         h['skos:exactMatch'] = identifiers
       }
+    }
+    if (dateFrom) {
+      h['frapo:hasStartDate'] = [ dateFrom ]
+    }
+    if (dateTo) {
+      h['frapo:hasEndDate'] = [ dateTo ]
     }
     if (homepage) {
       h['foaf:homepage'] = [
@@ -1660,6 +1819,43 @@ export default {
     }
     if (f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
       h['bf:provisionActivity'] = [ this.get_json_bf_publication(f) ]
+    }
+    return h
+  },
+  get_json_instance_of (i) {
+    var h = {
+      '@type': 'schema:CreativeWork'
+    }
+    if (i.title) {
+      let tit = {
+        '@type': 'bf:Title',
+        'bf:mainTitle': [
+          {
+            '@value': i.title
+          }
+        ]
+      }
+      if (i.titleLanguage) {
+        tit['bf:mainTitle'][0]['@language'] = i.titleLanguage
+      }
+      if (i.subtitle) {
+        tit['bf:subtitle'] = [
+          {
+            '@value': i.subtitle
+          }
+        ]
+        if (i.titleLanguage) {
+          tit['bf:subtitle'][0]['@language'] = i.titleLanguage
+        }
+      }
+      h['dce:title'] = [ tit ]
+    }
+    if (i.identifierText) {
+      if (i.identifierType) {
+        h['skos:exactMatch'] = [ { '@type': i.identifierType, '@value': i.identifierText } ]
+      } else {
+        h['skos:exactMatch'] = [ i.identifierText ]
+      }
     }
     return h
   },
@@ -2071,6 +2267,12 @@ export default {
           }
           break
 
+        case 'bf:instanceOf':
+          if (f.name || f.identifierText) {
+            this.push_object(jsonld, f.predicate, this.get_json_instance_of(f))
+          }
+          break
+
         case 'rdau:P60227':
           if (f.title || f.name || f.firstname || f.lastname) {
             this.push_object(jsonld, f.predicate, this.get_json_adaptation(f.type, f.title, f.subtitle, f.titleLanguage, f.role, f.name, f.firstname, f.lastname))
@@ -2089,6 +2291,12 @@ export default {
           }
           break
 
+        case 'ebucore:hasRelatedEvent':
+          if (f.name || f.identifierText) {
+            this.push_object(jsonld, f.predicate, this.get_json_event(f))
+          }
+          break
+
         case 'frapo:isOutputOf':
           if (f.type === 'aaiso:Programme') {
             // study plan
@@ -2099,7 +2307,7 @@ export default {
             // project
             if (f.type === 'foaf:Project') {
               if (f.name || f.identifier || f.description || f.homepage || f.funderName || f.funderIdentifier) {
-                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier ? [f.funderIdentifier] : null)))
+                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage, f.dateFrom, f.dateTo, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier ? [f.funderIdentifier] : null)))
               }
             }
           }

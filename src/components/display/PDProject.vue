@@ -13,6 +13,18 @@
       </template>
     </v-row>
     <v-row>
+      <template v-for="(sd, i) in o['frapo:hasStartDate']">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'dfl'+i">{{ $t('Start date') }}</v-col>
+        <v-col class="valuefield" :md="valueColMd" cols="12" :key="'dfv'+i">{{ sd }}</v-col>
+      </template>
+    </v-row>
+    <v-row>
+      <template v-for="(ed, i) in o['frapo:hasEndDate']">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'dtl'+i">{{ $t('End date') }}</v-col>
+        <v-col class="valuefield" :md="valueColMd" cols="12" :key="'dtv'+i">{{ ed }}</v-col>
+      </template>
+    </v-row>
+    <v-row>
       <template v-for="(hp, i) in o['foaf:homepage']">
         <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'hpl'+i">{{ $t('Project Homepage') }}</v-col>
         <v-col :md="valueColMd" cols="12" :key="'hpv'+i">{{ hp }}</v-col>
