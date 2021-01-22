@@ -94,7 +94,7 @@ export const facetQueries = [
     queries: [
       {
         id: 'less10',
-        query: 'tsize:[0 TO 10485760]',
+        query: 'tsize:[0 TO 10485760}',
         label: 'less 10MB'
       },
       {
@@ -104,27 +104,27 @@ export const facetQueries = [
       },
       {
         id: '50to100',
-        query: 'tsize:[52428800 TO 104857600]',
+        query: 'tsize:{52428800 TO 104857600]',
         label: '50MB - 100MB'
       },
       {
         id: '100to200',
-        query: 'tsize:[104857600 TO 209715200]',
+        query: 'tsize:{104857600 TO 209715200]',
         label: '100MB - 200MB'
       },
       {
         id: '200to500',
-        query: 'tsize:[209715200 TO 524288000]',
+        query: 'tsize:{209715200 TO 524288000]',
         label: '200MB - 500MB'
       },
       {
         id: '500to1000',
-        query: 'tsize:[524288000 TO 1073741824]',
+        query: 'tsize:{524288000 TO 1073741824]',
         label: '500MB - 1GB'
       },
       {
         id: 'more1000',
-        query: 'tsize:[1073741824 TO *]',
+        query: 'tsize:{1073741824 TO *]',
         label: 'more 1GB'
       }
     ]
