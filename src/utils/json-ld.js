@@ -1824,7 +1824,7 @@ export default {
   },
   get_json_instance_of (i) {
     var h = {
-      '@type': 'schema:CreativeWork'
+      '@type': i.type
     }
     if (i.title) {
       let tit = {
@@ -2123,8 +2123,14 @@ export default {
         delete jsonlds[key]
       }
     })
-    jsonlds = JSON.parse(JSON.stringify(jsonlds).replace(/"\s+|\s+"/g, '"'))
+    jsonlds = JSON.parse(JSON.stringify(jsonlds, this.trimStrings))
     return jsonlds
+  },
+  trimStrings (key, value) {
+    if (typeof value === 'string') {
+      return value.trim()
+    }
+    return value
   },
   fields2json (jsonld, formData) {
     for (var j = 0; j < formData.fields.length; j++) {
@@ -2268,7 +2274,7 @@ export default {
           break
 
         case 'bf:instanceOf':
-          if (f.name || f.identifierText) {
+          if (f.title || f.identifierText) {
             this.push_object(jsonld, f.predicate, this.get_json_instance_of(f))
           }
           break

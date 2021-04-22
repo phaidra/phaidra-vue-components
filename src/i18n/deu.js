@@ -588,7 +588,7 @@ export default {
   'rdfs:seeAlso': 'Siehe auch',
 
   'dce:subject': 'Stichwort',
-  'dcterms:subject': 'Subjekt',
+  'dcterms:subject': 'Schlagwort',
   'dcterms:language': 'Sprache',
   'schema:subtitleLanguage': 'Untertitel-Sprache',
   'dcterms:type': 'Resource Type',
