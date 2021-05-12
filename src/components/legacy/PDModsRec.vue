@@ -125,8 +125,8 @@ export default {
   },
   methods: {
     getLanguageLabel: function (ch) {
-      let lab = this.getLocalizedTermLabel('lang', ch.ui_value === 'ger' ? 'deu' : ch.ui_value )
-      return lab ? lab : ch.ui_value
+      let lab = this.getLocalizedTermLabel('lang', ch.ui_value === 'ger' ? 'deu' : ch.ui_value)
+      return lab || ch.ui_value
     },
     getNodeLabel: function (ch) {
       for (let attr of ch.attributes) {

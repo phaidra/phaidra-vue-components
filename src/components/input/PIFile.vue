@@ -1,7 +1,12 @@
 <template>
-  <v-row v-if="!hidden">
+  <v-row v-if="!hidden"
+    v-cloak
+    @drop.prevent="addDropFile"
+    @dragover.prevent
+  >
     <v-col :cols="!showMimetype ? (actions.length ? 10 : 12) : (actions.length ? 6 : 8)">
       <v-file-input
+        :value="value"
         :error-messages="fileErrorMessages"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
@@ -106,10 +111,15 @@ export default {
   },
   data () {
     return {
-      loading: false
+      loading: false,
+      value: null
     }
   },
   methods: {
+    addDropFile (e) {
+      this.value = e.dataTransfer.files[0]
+      this.fileInput(e.dataTransfer.files[0])
+    },
     fileInput (file) {
       this.$emit('input-file', file)
       if (this.autoMimetype) {

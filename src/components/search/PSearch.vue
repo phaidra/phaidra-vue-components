@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters>
       <v-col md="9" cols="12" class="border-right pr-2" >
-        <v-row align="start">
+        <v-row align="start" class="my-2">
           <v-col md="6" cols="9">
             <p-search-autocomplete
               placeholder="Search..."

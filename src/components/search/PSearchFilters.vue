@@ -181,7 +181,6 @@
 </template>
 
 <script>
-import PSearchAutocomplete from './PSearchAutocomplete'
 import '@/compiled-icons/univie-stop2'
 import '@/compiled-icons/univie-checkbox-unchecked'
 import '@/compiled-icons/material-action-account-balance'
@@ -192,9 +191,6 @@ import { toggleFacet, showFacet } from './facets'
 
 export default {
   name: 'p-search-filters',
-  components: {
-    PSearchAutocomplete
-  },
   props: {
     search: {
       type: Function,

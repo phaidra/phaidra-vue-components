@@ -186,6 +186,21 @@ const ot4rt = {
 
 const state = {
   vocabularies: {
+    'cmodels': {
+      terms: [
+        { '@id': 'Asset', 'skos:prefLabel': { 'eng': 'Asset' } },
+        { '@id': 'Audio', 'skos:prefLabel': { 'eng': 'Audio' } },
+        { '@id': 'Book', 'skos:prefLabel': { 'eng': 'Book' } },
+        { '@id': 'Collection', 'skos:prefLabel': { 'eng': 'Collection' } },
+        { '@id': 'Container', 'skos:prefLabel': { 'eng': 'Container' } },
+        { '@id': 'PDFDocument', 'skos:prefLabel': { 'eng': 'PDFDocument' } },
+        { '@id': 'Page', 'skos:prefLabel': { 'eng': 'Page' } },
+        { '@id': 'Picture', 'skos:prefLabel': { 'eng': 'Picture' } },
+        { '@id': 'Resource', 'skos:prefLabel': { 'eng': 'Resource' } },
+        { '@id': 'Video', 'skos:prefLabel': { 'eng': 'Video' } }
+      ],
+      loaded: true
+    },
     'relations': {
       terms: [
         { '@id': 'http://purl.org/dc/terms/references', 'skos:prefLabel': { 'eng': 'References' }, 'skos:notation': [ 'references' ] },
@@ -833,12 +848,45 @@ const state = {
         { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
         { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
         { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
-
+      ],
+      loaded: true
+    },
+    'objecttypeuwm': {
+      terms: [
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552257', 'skos:prefLabel': { 'eng': 'Book', 'deu': 'Buch' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556244', 'skos:prefLabel': { 'eng': 'Patent', 'deu': 'Patent' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556237', 'skos:prefLabel': { 'eng': 'Conference Object', 'deu': 'Conference Object' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552259', 'skos:prefLabel': { 'eng': 'Multimedia', 'deu': 'Multimedia' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552260', 'skos:prefLabel': { 'eng': 'other', 'deu': 'sonstige' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1742', 'skos:prefLabel': { 'eng': 'Dissertation', 'deu': 'Dissertation' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552261', 'skos:prefLabel': { 'eng': 'Lecture series (one person)', 'deu': 'Vortragsserie (eine Person)' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552253', 'skos:prefLabel': { 'eng': 'Article', 'deu': 'Artikel in Zeitschrift' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1743', 'skos:prefLabel': { 'eng': 'Professorial Dissertation', 'deu': 'Habilitationsschrift' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556239', 'skos:prefLabel': { 'eng': 'Working Paper', 'deu': 'Working Paper' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556236', 'skos:prefLabel': { 'eng': 'Review', 'deu': 'Review' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556242', 'skos:prefLabel': { 'eng': 'Annotation', 'deu': 'Annotation' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1557090', 'skos:prefLabel': { 'eng': 'Research Data', 'deu': 'Forschungsdaten' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1739', 'skos:prefLabel': { 'eng': 'Master\'s Dissertation', 'deu': 'Masterarbeit' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556235', 'skos:prefLabel': { 'eng': 'Book Part', 'deu': 'Book Part' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1740', 'skos:prefLabel': { 'eng': 'Diploma Dissertation', 'deu': 'Diplomarbeit' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556240', 'skos:prefLabel': { 'eng': 'Preprint', 'deu': 'Preprint' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552258', 'skos:prefLabel': { 'eng': 'Theses', 'deu': 'Hochschulschrift' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1741', 'skos:prefLabel': { 'eng': 'Master\'s (Austria) Dissertation', 'deu': 'Magisterarbeit' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1738', 'skos:prefLabel': { 'eng': 'Baccalaureate Dissertation', 'deu': 'Bakkalaureatsarbeit' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552262', 'skos:prefLabel': { 'eng': 'Lecture', 'deu': 'Vortrag' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556241', 'skos:prefLabel': { 'eng': 'Report', 'deu': 'Report' } },
+        { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552263', 'skos:prefLabel': { 'eng': 'Article in collected edition', 'deu': 'Beitrag im Sammelwerk' } }
       ],
       loaded: true
     },
     'objecttype': {
       terms: [
+        { '@id': ns + '9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
+        { '@id': ns + 'P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
+        { '@id': ns + '1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
+        { '@id': ns + 'ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
+        { '@id': ns + '9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
+        { '@id': ns + 'H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } },
         { '@id': ns + '985A-GCQJ', 'skos:prefLabel': { 'eng': 'album cover', 'deu': 'Albumcover' } },
         { '@id': ns + 'N35H-PDEE', 'skos:prefLabel': { 'eng': 'annotation', 'deu': 'Anmerkung' } },
         { '@id': ns + '8EBX-CA9X', 'skos:prefLabel': { 'eng': 'annual report', 'deu': 'Jahresbericht' } },

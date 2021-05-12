@@ -66,12 +66,13 @@
       <v-col>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-checkbox hide-details class="shrink mr-2 mt-1" color="primary" @click.stop="toggleSelection()" v-model="selectioncheck" v-on="on"></v-checkbox>
+            <div v-on="on" style="width:35px"><!-- div: vuetify tooltip vs checkbox fix -->
+              <v-checkbox hide-details class="mr-2 mt-1" color="primary" @click.stop="toggleSelection()" v-model="selectioncheck" v-on="on">            </v-checkbox>
+            </div>
           </template>
           <span>{{ $t('Select results')}}</span>
         </v-tooltip>
       </v-col>
-
     </v-row>
   </v-container>
 </template>

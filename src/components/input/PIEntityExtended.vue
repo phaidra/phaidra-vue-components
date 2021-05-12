@@ -29,7 +29,7 @@
                 <v-autocomplete
                   :disabled="disablerole"
                   v-on:input="$emit('input-role', $event)"
-                  :label="$t('Role')"
+                  :label="$t(roleLabel ? roleLabel : 'Role')"
                   :items="vocabularies[roleVocabulary].terms"
                   :item-value="'@id'"
                   :value="getTerm(roleVocabulary, role)"
@@ -67,7 +67,7 @@
                   <v-col cols="12" :md="(showIdentifier && !showIdentifierType) ? 8 : 12">
                     <v-text-field
                       :value="name"
-                      :label="$t('Name')"
+                      :label="$t(nameLabel ? nameLabel : 'Name')"
                       v-on:blur="$emit('input-name',$event.target.value)"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
@@ -80,7 +80,7 @@
                   <v-col cols="12" :md="(showIdentifier && !showIdentifierType) ? 4 : 6">
                     <v-text-field
                       :value="firstname"
-                      :label="$t('Firstname')"
+                      :label="$t(firstnameLabel ? firstnameLabel : 'Firstname')"
                       v-on:blur="$emit('input-firstname',$event.target.value)"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
@@ -91,7 +91,7 @@
                   <v-col cols="12" :md="(showIdentifier && !showIdentifierType) ? 4 : 6">
                     <v-text-field
                       :value="lastname"
-                      :label="$t('Lastname')"
+                      :label="$t(lastnameLabel ? lastnameLabel : 'Lastname')"
                       v-on:blur="$emit('input-lastname',$event.target.value)"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
@@ -328,6 +328,18 @@ export default {
       type: String
     },
     name: {
+      type: String
+    },
+    roleLabel: {
+      type: String
+    },
+    firstnameLabel: {
+      type: String
+    },
+    lastnameLabel: {
+      type: String
+    },
+    nameLabel: {
       type: String
     },
     affiliation: {
