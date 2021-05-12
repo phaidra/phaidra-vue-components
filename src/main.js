@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import store from './store'
 import VueRouter from 'vue-router'
-import VueI18n from 'vue-i18n'
 import SvgIcon from 'vue-svgicon'
-import eng from './i18n/eng'
-import deu from './i18n/deu'
-import ita from './i18n/ita'
+import i18n from './i18n/i18n'
 import App from './App.vue'
 import moment from 'moment'
 import vuetify from './plugins/vuetify'
@@ -14,7 +11,6 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-Vue.use(VueI18n)
 Vue.use(SvgIcon, {
   tagName: 'icon',
   defaultWidth: '1em',
@@ -70,15 +66,6 @@ Vue.filter('truncate', function (text, length, clamp) {
   tcText = tcText.slice(0, last)
 
   return tcText + clamp
-})
-
-const messages = { eng, deu, ita }
-const i18n = new VueI18n({
-  locale: 'deu',
-  fallbackLocale: 'eng',
-  silentTranslationWarn: true,
-  silentFallbackWarn: true,
-  messages: messages
 })
 
 const router = new VueRouter({
