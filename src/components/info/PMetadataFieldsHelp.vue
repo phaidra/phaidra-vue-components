@@ -57,6 +57,10 @@ export default {
       this.selectedField = field
     }
   },
+  mounted: function () {
+    this.selectedField = this.categories[0].fields[0]
+    this.categories[0].fields[0].open = true
+  },
   data () {
     return {
       drawer: null,
