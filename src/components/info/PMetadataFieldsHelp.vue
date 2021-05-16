@@ -28,9 +28,16 @@
             <template v-if="(section.content !== '') && (section.id !== 'obligation') && !(section.id === 'vocabulary' && section.content === 'None')">
               <div cols="12" class="font-weight-light headline mt-8 mb-4">{{ $t(section.title) }}</div>
               <template v-if="section.content.level1" class="mb-8">
+                <div class="font-weight-light subtitle-1 mt-6 mb-2" v-if="section.content.level2">{{ $t('Basic usage notes') }}</div>
                 <div v-html="$t(section.content.level1)"></div>
-                <div v-if="section.content.level2" v-html="$t(section.content.level2)"></div>
-                <div v-if="section.content.level3" v-html="$t(section.content.level3)"></div>
+                <template v-if="section.content.level2">
+                  <div class="font-weight-light subtitle-1 mt-6 mb-2">{{ $t('Improve your metadata quality') }}</div>
+                  <div v-html="$t(section.content.level2)"></div>
+                </template>
+                <template v-if="section.content.level3">
+                  <div class="font-weight-light subtitle-1 mt-6 mb-2">{{ $t('Fairify your data') }}</div>
+                  <div v-html="$t(section.content.level3)"></div>
+                </template>
               </template>
               <template v-else class="mb-8">
                 <div v-html="$t(section.content)"></div>
@@ -55,6 +62,7 @@ export default {
     selectField: function (field) {
       this.$store.commit('switchFieldsOverview', field.id)
       this.selectedField = field
+      this.$vuetify.goTo(1)
     }
   },
   mounted: function () {

@@ -4114,7 +4114,7 @@ export default {
     },
     addPhaidrasubjectSection: function (afterSection) {
       let s = {
-        title: 'Subject',
+        title: 'SUBJECT_SECTION',
         type: 'phaidra:Subject',
         id: this.form.sections.length + 1,
         removable: true,

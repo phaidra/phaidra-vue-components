@@ -110,6 +110,8 @@ export default {
 
   'OTHER_FEMININE': 'Other',
 
+  'SUBJECT_SECTION': 'Subject',
+
   uwm_etheses: 'E-Theses',
   uwm_etheses_note_2: 'Note 2',
   uwm_etheses_note_1: 'Note 1',

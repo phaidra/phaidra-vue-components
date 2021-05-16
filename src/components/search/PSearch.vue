@@ -4,7 +4,7 @@
         <v-row align="start" class="my-2">
           <v-col md="6" cols="9">
             <p-search-autocomplete
-              placeholder="Search..."
+              :placeholder="$t('SEARCH_PLACEHOLDER')"
               name="autocomplete"
               :initValue="q"
               :suggester="'titlesuggester'"

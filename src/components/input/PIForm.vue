@@ -5,7 +5,7 @@
       <v-tab v-if="debug" @click="metadatapreview = getMetadata()" class="title font-weight-light text-capitalize">{{ $t('JSON-LD') }}</v-tab>
       <v-tab v-if="templating" @click="loadTemplates()" class="title font-weight-light text-capitalize">{{ $t('Templates') }}</v-tab>
       <v-tab v-if="importing" class="title font-weight-light text-capitalize">{{ $t('Import') }}</v-tab>
-      <v-tab v-if="enablerights" class="title font-weight-light text-capitalize">{{ $t('Rights') }}</v-tab>
+      <v-tab v-if="enablerights" class="title font-weight-light text-capitalize">{{ $t('Access rights') }}</v-tab>
       <v-tab v-if="enablerelationships" class="title font-weight-light text-capitalize">{{ $t('Relationships') }}</v-tab>
       <v-tab v-if="help" class="title font-weight-light text-capitalize">{{ $t('Help') }}</v-tab>
       <v-tab v-if="feedback" class="title font-weight-light text-capitalize">{{ $t('Feedback') }}</v-tab>
@@ -23,7 +23,7 @@
             </v-card-title>
             <v-card-text class="mt-4">
               <v-text-field v-model="s.resourcelink"
-                :label="$t('Resource link')"
+                :label="$t('URL')"
                 :required="true"
                 :placeholder="$t('e.g.: https://phaidra.org')"
                 :rules="[ v => !!v || 'Required']"
@@ -517,7 +517,7 @@
                 <v-col>
                   <v-dialog v-if="addbutton" class="pb-4" v-model="s['adddialogue']" scrollable width="700px">
                     <template v-slot:activator="{ on }">
-                      <v-btn v-on="on" fab depressed small color="grey lighten-3">
+                      <v-btn v-on="on" fab depressed small color="grey lighten-3" class="my-4">
                         <v-icon color="grey darken-1">mdi-plus</v-icon>
                       </v-btn>
                     </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <v-row v-for="(ch, i) in children" :key="ch.xmlname+i">
+    <v-row v-for="(ch, i) in children" :key="ch.xmlname+i" class="my-1">
       <template v-if="skip(ch) || isEmpty(ch)"></template>
       <template v-else-if="ch.input_type === 'static'">
         <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}</v-col>

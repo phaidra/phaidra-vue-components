@@ -354,50 +354,6 @@ const state = {
           ]
         },
         {
-          title: 'Complex subject',
-          predicate: 'dcterms:subject',
-          open: false,
-          sections: [
-            {
-              id: 'description',
-              title: 'Description',
-              content:
-                'An RDF object describing a particular subject of the digital object.'
-            },
-            {
-              id: 'usagenotes',
-              title: 'Usage notes',
-              content: {
-                level1:
-                  'When describing your resource, you are aware that a digital representation is a different entity from the original object this representation refers to. This ontological differentation should be provided in metadata, too. Add the <i>Complex subject</i> field whenever you are going to provide details on the original object. This allows the relevant metadata properties to be associated appropriately and helps the user to have a better contextual overview of your resource.',
-                level2:
-                  'In order to give access in one place to millions of cultural heritage items, Europeana - Europe’s digital cultural platform - at its very core is modelled on a clear separation between the cultural heritage object and its digital representation. This should make you understand how relevant this concept is for data interoperability, sharing and discovery. If applicable, include this distinction when filling in metadata. ',
-                level3: ''
-              }
-            },
-            {
-              id: 'vocabulary',
-              title: 'Vocabulary',
-              content: 'None'
-            },
-            {
-              id: 'obligation',
-              title: 'Obligation',
-              content: ''
-            },
-            {
-              id: 'occurrence',
-              title: 'Occurrence',
-              content: ''
-            },
-            {
-              id: 'exampleHR',
-              title: 'Example',
-              content: ''
-            }
-          ]
-        },
-        {
           title: 'Condition',
           predicate: 'arm:ConditionAssessment',
           open: false,
