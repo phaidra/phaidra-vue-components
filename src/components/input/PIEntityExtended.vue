@@ -1,7 +1,7 @@
 <template>
   <v-row v-if="!hidden">
     <v-col cols="12">
-      <v-card width="100%">
+      <v-card class="mb-8" width="100%">
         <v-card-title class="title font-weight-light grey white--text">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
