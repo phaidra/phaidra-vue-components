@@ -60,7 +60,7 @@ const fields = [
     value: '',
     'skos:prefLabel': [],
     errorMessages: [],
-    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography, Railway bridge, Tribe'
+    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography'
   },
   {
     id: 'object-type-checkboxes',
@@ -73,7 +73,7 @@ const fields = [
     label: 'Object type',
     selectedTerms: [],
     errorMessages: [],
-    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography, Railway bridge, Tribe'
+    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography'
   },
   {
     id: 'genre',
@@ -408,6 +408,20 @@ const fields = [
     value: '',
     'skos:prefLabel': [],
     errorMessages: [],
+    definition: 'The topic of the resource, represented using a controlled vocabulary.'
+  },
+  {
+    id: 'bk-subject',
+    fieldname: 'Subject (BK)',
+    predicate: 'dcterms:subject',
+    type: 'skos:Concept',
+    component: 'p-subject-bk',
+    multiplicable: true,
+    label: 'Subject (BK)',
+    value: '',
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    loadedpreflabel: '',
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {

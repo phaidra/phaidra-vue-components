@@ -35,6 +35,11 @@ export default new Vuex.Store({
           search: 'https://secure.geonames.org/searchJSON',
           username: 'phaidra',
           maxRows: 20
+        },
+        dante: {
+          search: 'https://api.dante.gbv.de/search',
+          resolve: 'https://api.dante.gbv.de/data',
+          limit: 50
         }
       },
       suggesters: {}

@@ -564,7 +564,7 @@ export default {
   },
   data () {
     return {
-      window: 1,
+      window: 2,
       lang: 'deu',
       languages: [
         { text: 'english', value: 'eng' },
@@ -4373,9 +4373,7 @@ export default {
       rt.value = this.contentmodel
       this.form.sections[0].fields.push(rt)
 
-      this.form.sections[0].fields.push(fields.getField('instance-of'))
-      this.form.sections[0].fields.push(fields.getField('project'))
-      this.form.sections[0].fields.push(fields.getField('event'))
+      this.form.sections[0].fields.push(fields.getField('bk-subject'))
 
       let t = fields.getField('title')
       t.hideSubtitle = true

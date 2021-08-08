@@ -316,6 +316,16 @@
                     ></p-i-subject-gnd>
                   </template>
 
+                  <template v-else-if="f.component === 'p-subject-bk'">
+                    <p-i-subject-bk
+                      v-bind.sync="f"
+                      v-on:input="f.value=$event"
+                      v-on:resolve="updateSubject(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-subject-bk>
+                  </template>
+
                   <template v-else-if="f.component === 'p-spatial-getty'">
                     <p-i-spatial-getty
                       v-bind.sync="f"
@@ -655,6 +665,7 @@ import PIDateEdtf from './PIDateEdtf'
 import PISelect from './PISelect'
 import PISelectText from './PISelectText'
 import PISubjectGnd from './PISubjectGnd'
+import PISubjectBk from './PISubjectBk'
 import PISpatialGetty from './PISpatialGetty'
 import PISpatialGeonames from './PISpatialGeonames'
 import PISpatialGeonamesSearch from './PISpatialGeonamesSearch'
@@ -703,6 +714,7 @@ export default {
     PISelect,
     PISelectText,
     PISubjectGnd,
+    PISubjectBk,
     PISpatialGetty,
     PISpatialGeonames,
     PISpatialGeonamesSearch,
