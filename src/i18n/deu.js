@@ -641,7 +641,7 @@ export default {
   'Regional encoding': 'Regionale Codierung',
   'Is motion picture adaptation of': 'Filmadaption von',
   'Scale': 'Maßstab',
-  'Citation': 'Zitat',
+  'Citation': 'Referenz',
   'Funder': 'Fördergeber',
   'Audience': 'Zielgruppe',
   'Place of creation': 'Entstehungsort',

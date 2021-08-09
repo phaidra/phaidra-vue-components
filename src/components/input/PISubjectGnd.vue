@@ -17,7 +17,11 @@
         :outlined="inputStyle==='outlined'"
         clearable
         :messages="resolved"
-      ></v-autocomplete>
+      >
+      <template v-slot:message="{ key, message }">
+        <span v-html="`${message}`"></span>
+      </template>
+      </v-autocomplete>
     </v-col>
     <v-col cols="1" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
@@ -116,7 +120,7 @@ export default {
             for (var i = 0; i < this.rdfslabel.length; i++) {
               rdfslabelarr.push(this.rdfslabel[i]['@value'])
             }
-            this.resolved = 'Synonym: <a href="' + uri + '" target="_blank">' + rdfslabelarr.join(', ') + '</a>'
+            this.resolved = '<a href="' + uri + '" target="_blank">' + this.preflabel[0]['@value'] + '</a><br/>Synonym: ' + rdfslabelarr.join(', ')
           } else {
             this.resolved = ''
           }

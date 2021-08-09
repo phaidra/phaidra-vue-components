@@ -134,10 +134,10 @@ export default {
     resolve: async function (selectedItem) {
       if (selectedItem) {
         this.$emit('input', selectedItem.uri)
-        this.q = selectedItem.prefLabel.de
+        this.q = selectedItem.notation[0] + ' ' + selectedItem.prefLabel.de
         this.preflabel.push({ '@value': selectedItem.notation[0] + ' ' + selectedItem.prefLabel.de, '@language': 'deu' })
         let path = selectedItem.prefLabel.de
-        this.resolved = '<a href="' + selectedItem.uri + '" target="_blank">' + selectedItem.prefLabel.de + '</a>'
+        this.resolved = '<a href="' + selectedItem.uri + '" target="_blank">' + selectedItem.notation[0] + ' ' + selectedItem.prefLabel.de + '</a>'
         if (selectedItem.ancestors) {
           for (let anc of selectedItem.ancestors) {
             path = anc.prefLabel.de + ' -- ' + path
