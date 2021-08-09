@@ -688,5 +688,6 @@ export default {
   'Here you can sort members of this object (drag & drop).': 'Hier können Sie die Objekte innerhalb des Containers sortieren (drag & drop).',
   'PUBLISHER_VERLAG': 'Verlag',
   'e.g.: https://phaidra.org': 'z.B.: https://phaidra.org',
-  'Subject (GND)': 'Schlagwort (GND)'
+  'Subject (GND)': 'Schlagwort (GND)',
+  'Subject (BK)': 'Schlagwort (BK)'
 }

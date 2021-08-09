@@ -1055,6 +1055,9 @@ const state = {
       terms: [
         { '@id': ns + 'NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
         { '@id': ns + 'DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography' } },
+        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'diapositive' } },
+        { '@id': ns + 'VZ88-24TF', 'skos:prefLabel': { 'eng': 'black-and-white slide' } },
+        { '@id': ns + '96PV-FFAT', 'skos:prefLabel': { 'eng': 'color slide' } },
         { '@id': ns + 'AH0S-F3BV', 'skos:prefLabel': { 'eng': 'black-and-white film' } },
         { '@id': ns + 'K818-FSM5', 'skos:prefLabel': { 'eng': 'color film' } },
         { '@id': ns + '748F-SQW9', 'skos:prefLabel': { 'eng': 'silent film' } },
@@ -1064,8 +1067,7 @@ const state = {
     },
     'material': {
       terms: [
-        { '@id': ns + 'CRGV-097N', 'skos:prefLabel': { 'eng': 'black marble' } },
-        { '@id': ns + 'EXRJ-GCYG', 'skos:prefLabel': { 'eng': 'shampoo' } }
+        { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide' } }
       ],
       loaded: true
     },
