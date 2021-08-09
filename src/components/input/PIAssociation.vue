@@ -68,15 +68,17 @@ export default {
     handleInput: function (unit) {
       this.path = ''
       let pathArr = []
-      if (!unit.hasOwnProperty('@id')) {
-        unit = this.getTerm('orgunits', unit)
+      if (unit) {
+        if (!unit.hasOwnProperty('@id')) {
+          unit = this.getTerm('orgunits', unit)
+        }
+        this.getOrgPath(unit, this.vocabularies['orgunits'].tree, pathArr)
+        let pathLabels = []
+        for (let u of pathArr) {
+          pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
+        }
+        this.path = pathLabels.join(' > ')
       }
-      this.getOrgPath(unit, this.vocabularies['orgunits'].tree, pathArr)
-      let pathLabels = []
-      for (let u of pathArr) {
-        pathLabels.push(u['skos:prefLabel'][this.$i18n.locale])
-      }
-      this.path = pathLabels.join(' > ')
       this.$emit('input', unit)
     }
   },
