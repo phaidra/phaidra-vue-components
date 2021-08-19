@@ -326,6 +326,16 @@
                     ></p-i-subject-bk>
                   </template>
 
+                  <template v-else-if="f.component === 'p-subject-oefos'">
+                    <p-i-subject-oefos
+                      v-bind.sync="f"
+                      v-on:input="f.value=$event"
+                      v-on:resolve="updateVocSubject(f, $event)"
+                      v-on:add="addField(s.fields, f)"
+                      v-on:remove="removeField(s.fields, f)"
+                    ></p-i-subject-oefos>
+                  </template>
+
                   <template v-else-if="f.component === 'p-spatial-getty'">
                     <p-i-spatial-getty
                       v-bind.sync="f"
@@ -666,6 +676,7 @@ import PISelect from './PISelect'
 import PISelectText from './PISelectText'
 import PISubjectGnd from './PISubjectGnd'
 import PISubjectBk from './PISubjectBk'
+import PISubjectOefos from './PISubjectOefos'
 import PISpatialGetty from './PISpatialGetty'
 import PISpatialGeonames from './PISpatialGeonames'
 import PISpatialGeonamesSearch from './PISpatialGeonamesSearch'
@@ -715,6 +726,7 @@ export default {
     PISelectText,
     PISubjectGnd,
     PISubjectBk,
+    PISubjectOefos,
     PISpatialGetty,
     PISpatialGeonames,
     PISpatialGeonamesSearch,
@@ -1424,6 +1436,40 @@ export default {
         }
       }
       f['rdfs:label'] = event['rdfs:label']
+      this.$emit('form-input-' + f.component, f)
+    },
+    updateVocSubject: function (f, event) {
+      if (event) {
+        f.value = event['@id']
+        if (event['@type']) {
+          f.type = event['@type']
+        }
+        if (event['skos:prefLabel']) {
+          let preflabels = event['skos:prefLabel']
+          f['skos:prefLabel'] = []
+          Object.entries(preflabels).forEach(([key, value]) => {
+            f['skos:prefLabel'].push({ '@value': value, '@language': key })
+          })
+        }
+        if (event['rdfs:label']) {
+          let rdfslabels = event['rdfs:label']
+          if (rdfslabels) {
+            f['rdfs:label'] = []
+            Object.entries(rdfslabels).forEach(([key, value]) => {
+              f['rdfs:label'].push({ '@value': value, '@language': key })
+            })
+          }
+        }
+        if (event['skos:notation']) {
+          f['skos:notation'] = event['skos:notation']
+        }
+      } else {
+        f.value = ''
+        f['skos:prefLabel'] = []
+        f['rdfs:label'] = []
+        f['skos:notation'] = []
+      }
+
       this.$emit('form-input-' + f.component, f)
     },
     updatePlace: function (f, event) {

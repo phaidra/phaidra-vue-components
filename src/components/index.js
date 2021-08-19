@@ -45,6 +45,7 @@ import PIAdaptation from './input/PIAdaptation.vue'
 import PIInstanceOf from './input/PIInstanceOf.vue'
 import PISubjectGnd from './input/PISubjectGnd.vue'
 import PISubjectBk from './input/PISubjectBk.vue'
+import PISubjectOefos from './input/PISubjectOefos.vue'
 import PISpatialGetty from './input/PISpatialGetty.vue'
 import PISpatialGeonames from './input/PISpatialGeonames.vue'
 import PISpatialText from './input/PISpatialText.vue'
@@ -128,6 +129,7 @@ const Components = {
   PIAdaptation,
   PISubjectGnd,
   PISubjectBk,
+  PISubjectOefos,
   PISpatialGetty,
   PISpatialGeonames,
   PISpatialText,

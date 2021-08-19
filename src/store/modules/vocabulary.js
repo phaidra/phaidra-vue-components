@@ -2,6 +2,7 @@ import Vue from 'vue'
 import languages from '../../utils/lang'
 import lang3to2map from '../../utils/lang3to2map'
 import orgunits from '../../utils/orgunits'
+import oefos from '../../utils/oefos'
 import axios from 'axios'
 
 const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
@@ -1200,6 +1201,12 @@ const state = {
       loaded: false,
       linked: false,
       sorted: ''
+    },
+    'oefos': {
+      terms: [],
+      tree: [],
+      loaded: false,
+      sorted: ''
     }
   }
 }
@@ -1259,6 +1266,28 @@ const mutations = {
     state.vocabularies['rolepredicate']['terms'].sort(function (a, b) {
       return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
     })
+  },
+  setOefos (state, data) {
+    if (state.vocabularies['oefos']['loaded'] === false) {
+      state.vocabularies['oefos']['tree'] = data.tree
+      state.vocabularies['oefos']['terms'] = data.terms
+      state.vocabularies['oefos']['loaded'] = true
+    }
+  },
+  sortOefos (state, locale) {
+    if (state.vocabularies['oefos'].sorted !== locale) {
+      if (state.vocabularies['oefos']['terms']) {
+        if (state.vocabularies['oefos']['terms'][0]) {
+          state.vocabularies['oefos']['terms'].sort(function (a, b) {
+            return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+          })
+        }
+      }
+      if (state.vocabularies['oefos']['tree']) {
+        oefos.sortOefosTree(state.vocabularies['oefos']['tree'], locale)
+      }
+      state.vocabularies['oefos'].sorted = locale
+    }
   },
   setLangTerms (state, data) {
     if (state.vocabularies['lang']['loaded'] === false) {
@@ -1347,6 +1376,30 @@ const actions = {
     } else {
       if (state.vocabularies['orgunits']['locale'] !== locale) {
         commit('sortOrgUnits', locale)
+      }
+    }
+  },
+  async loadOefos ({ commit, rootState, state }, locale) {
+    if (state.vocabularies['oefos']['loaded'] === false) {
+      try {
+        let response = await axios.request({
+          method: 'GET',
+          url: rootState.instanceconfig.api + '/vocabulary?uri=oefos2012'
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          commit('setAlerts', response.data.alerts)
+        }
+        let terms = []
+        oefos.getOefosTerms(terms, response.data.vocabulary, null)
+        commit('setOefos', { tree: response.data.vocabulary, terms: terms, locale: locale })
+        // commit('sortOefos', locale)
+      } catch (error) {
+        console.log(error)
+        commit('setAlerts', [ { type: 'danger', msg: 'Failed to fetch oefos: ' + error } ])
+      }
+    } else {
+      if (state.vocabularies['oefos']['locale'] !== locale) {
+        commit('sortOefos', locale)
       }
     }
   },

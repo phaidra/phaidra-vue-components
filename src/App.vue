@@ -4373,7 +4373,7 @@ export default {
       rt.value = this.contentmodel
       this.form.sections[0].fields.push(rt)
 
-      this.form.sections[0].fields.push(fields.getField('bk-subject'))
+      this.form.sections[0].fields.push(fields.getField('oefos-subject'))
 
       let t = fields.getField('title')
       t.hideSubtitle = true

@@ -441,6 +441,20 @@ const fields = [
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {
+    id: 'oefos-subject',
+    fieldname: 'Subject (ÖFOS)',
+    predicate: 'dcterms:subject',
+    type: 'skos:Concept',
+    component: 'p-subject-oefos',
+    multiplicable: true,
+    label: 'Subject (ÖFOS)',
+    value: '',
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    loadedpreflabel: '',
+    definition: 'The topic of the resource, represented using a controlled vocabulary.'
+  },
+  {
     id: 'sociocultural-category',
     fieldname: 'Soziokulturelle Kategorie',
     predicate: 'dcterms:subject',

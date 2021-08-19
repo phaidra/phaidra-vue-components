@@ -1,7 +1,9 @@
 export default {
   getOrgUnitsTerms (orgunits, units, parent) {
     for (let u of units) {
-      orgunits.push(u)
+      let clone = JSON.parse(JSON.stringify(u))
+      clone['subunits'] = null
+      orgunits.push(clone)
       // can't do this with SSR
       // TypeError: Converting circular structure to JSON at JSON.stringify (<anonymous>)
       // u.parent = parent
