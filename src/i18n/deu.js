@@ -689,5 +689,9 @@ export default {
   'PUBLISHER_VERLAG': 'Verlag',
   'e.g.: https://phaidra.org': 'z.B.: https://phaidra.org',
   'Subject (GND)': 'Schlagwort (GND)',
-  'Subject (BK)': 'Schlagwort (BK)'
+  'Subject (BK)': 'Schlagwort (BK)',
+  'Subject (ÖFOS)': 'Schlagwort (ÖFOS)',
+  'Extend': 'Erweitern',
+  'Classification': 'Klassifikation',
+  'Physical object': 'Physisches Objekt'
 }

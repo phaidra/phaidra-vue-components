@@ -23,52 +23,16 @@ const ot4rt = {
     ns + '7WYH-AZ8C',
     // wall chart
     ns + 'QM0R-ZTAA',
-    // score
-    ns + 'XTVH-3MG3',
-    // arrangement (music)
-    ns + '2WRQ-GSE9',
-    // musical notation
-    ns + '8A6X-FKB1',
-    // cartographic material
-    ns + '62RJ-SFV2',
-    // atlas
-    ns + '9J46-2X9E',
     // map
     ns + 'A52A-CWMM',
-    // newspaper
-    ns + 'DCHD-W3GM',
-    // newspaper article
-    ns + 'CJJG-VKRQ',
-    // magazine
-    ns + 'EHPQ-XYA3',
     // photograph
     ns + '7CAB-P987',
-    // negative
-    ns + '9W35-5Q94',
     // postcard
     ns + 'Q4Q5-3554',
     // poster
     ns + '6EFK-BRQD',
-    // letter
-    ns + 'GBWA-JJP8',
-    // manuscript
-    ns + 'KMRH-NFR9',
-    // cultural artifact
-    ns + 'CPVB-YXG6',
     // slide (Diapositiv)
     ns + '431H-5YSA',
-    // learning object
-    ns + 'YA8R-1M0D',
-    // diary
-    ns + 'A9K1-3WQA',
-    // cover
-    ns + 'CEET-8C4S',
-    // album cover
-    ns + '985A-GCQJ',
-    // sculpture
-    ns + '21HZ-XP29',
-    // yearbook
-    ns + 'HARH-6R3C',
     // other
     ns + 'PYRE-RAWJ'
   ],
@@ -76,62 +40,24 @@ const ot4rt = {
   'https://pid.phaidra.org/vocabulary/69ZZ-2KGX': [
     // print
     ns + '7WYH-AZ8C',
-    // interview
-    ns + '8KGA-CH97',
-    // score
-    ns + 'XTVH-3MG3',
     // musical notation
     ns + '8A6X-FKB1',
     // periodical
     ns + 'GY3Z-50FT',
     // newspaper
     ns + 'DCHD-W3GM',
-    // newspaper article
-    ns + 'CJJG-VKRQ',
     // magazine
     ns + 'EHPQ-XYA3',
-    // postcard
-    ns + 'Q4Q5-3554',
-    // poster
-    ns + '6EFK-BRQD',
     // letter (correspondence)
     ns + 'GBWA-JJP8',
-    // slide
-    ns + '431H-5YSA',
-    // report part
-    ns + 'PHQ7-BGFA',
-    // internal report
-    ns + 'QXRQ-Z2PJ',
-    // other type of report
-    ns + '6QRG-9GN2',
-    // policy report
-    ns + 'XWWK-533P',
+    // report
+    ns + 'JMAV-7F3R',
     // project deliverable
     ns + 'T8PK-GADB',
     // data management plan
     ns + 'W2Z3-3YA6',
-    // report to funding agency
-    ns + 'APV5-CJSF',
-    // research report
-    ns + '7J0J-HC61',
-    // research software
-    ns + 'VM3E-HXE6',
-    // memorandum
-    ns + 'MCN9-1NSA',
-    // book review
-    ns + 'VP4W-DQ1P',
     // lecture
     ns + 'F4JN-ZST0',
-    // annual report
-    ns + '8EBX-CA9X',
-    // questionnaire
-    ns + 'MZ2Q-R099',
-    // learning object
-    ns + 'YA8R-1M0D',
-    // diary
-    ns + 'A9K1-3WQA',
-    // conference object
-    ns + 'QKDF-E5HA',
     // yearbook
     ns + 'HARH-6R3C',
     // other
@@ -143,10 +69,6 @@ const ot4rt = {
     ns + '8KGA-CH97',
     // lecture
     ns + 'F4JN-ZST0',
-    // learning object
-    ns + 'YA8R-1M0D',
-    // podcast
-    ns + 'JF85-NYRJ',
     // other
     ns + 'PYRE-RAWJ'
   ],
@@ -163,23 +85,12 @@ const ot4rt = {
   'https://pid.phaidra.org/vocabulary/8YB5-1M0J': [
     // interview
     ns + '8KGA-CH97',
-    // music album
-    ns + 'M789-K5E0',
-    // music album
-    ns + 'EWZ9-3MPH',
     // lecture
     ns + 'F4JN-ZST0',
-    // learning object
-    ns + 'YA8R-1M0D',
     // podcast
     ns + 'JF85-NYRJ',
-    // other
-    ns + 'PYRE-RAWJ'
-  ],
-  // resource
-  'https://pid.phaidra.org/vocabulary/T8GH-F4V8': [
-    // learning object
-    ns + 'YA8R-1M0D',
+    // musical composition
+    ns + 'EWZ9-3MPH',
     // other
     ns + 'PYRE-RAWJ'
   ]

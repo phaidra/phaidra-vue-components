@@ -85,6 +85,9 @@
           <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
             <v-list-item-title>{{ action.title }}</v-list-item-title>
           </v-list-item>
+          <v-list-item @click="$emit('extend', $event)">
+            <v-list-item-title>{{ $t('Extend') }}</v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
     </v-col>

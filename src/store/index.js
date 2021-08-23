@@ -40,9 +40,6 @@ export default new Vuex.Store({
           search: 'https://api.dante.gbv.de/search',
           resolve: 'https://api.dante.gbv.de/data',
           limit: 50
-        },
-        forschungsinfrastruktur: {
-          oefos: 'https://forschungsinfrastruktur.bmbwf.gv.at/api/v1/oefos/'
         }
       },
       suggesters: {}
