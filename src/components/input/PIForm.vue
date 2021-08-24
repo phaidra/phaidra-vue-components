@@ -33,8 +33,8 @@
             </v-card-text>
           </v-card>
 
-          <v-card :outlined="s.outlined" :flat="(!s.title || (s.type === 'expansion' && s.collapsed) || s.flat)" v-else-if="(s.type !== 'accessrights')" width="100%">
-            <v-card-title v-if="s.title" class="title font-weight-light" :class="{ 'grey white--text': (s.type !== 'expansion' || !s.collapsed) }">
+          <v-card :outlined="s.outlined" :flat="(!s.title || (s.mode === 'expansion' && s.collapsed) || s.flat)" v-else-if="(s.type !== 'accessrights')" width="100%">
+            <v-card-title v-if="s.title" class="title font-weight-light" :class="{ 'grey white--text': (s.mode !== 'expansion' || !s.collapsed) }">
               <span v-t="s.title"></span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>

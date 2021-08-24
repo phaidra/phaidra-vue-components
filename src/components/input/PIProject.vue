@@ -246,7 +246,7 @@
           <v-col cols="4">
             <v-text-field
               :value="funderIdentifier"
-              :label="'Funder identifier'"
+              :label="$t('Funder identifier')"
               v-on:blur="$emit('input-funder-identifier',$event.target.value)"
               :filled="inputStyle==='filled'"
               :outlined="inputStyle==='outlined'"

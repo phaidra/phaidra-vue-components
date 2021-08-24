@@ -643,6 +643,8 @@ export default {
   'Scale': 'Maßstab',
   'Citation': 'Referenz',
   'Funder': 'Fördergeber',
+  'Funder name': 'Fördergeber',
+  'Funder identifier': 'Fördergeber Identifikator',
   'Audience': 'Zielgruppe',
   'Place of creation': 'Entstehungsort',
   'Place of site': 'Standort',
@@ -693,5 +695,16 @@ export default {
   'Subject (ÖFOS)': 'Schlagwort (ÖFOS)',
   'Extend': 'Erweitern',
   'Classification': 'Klassifikation',
-  'Physical object': 'Physisches Objekt'
+  'Physical object': 'Physisches Objekt',
+  'Production company': 'Produktionsunternehmen',
+  'Production place': 'Produktionsort',
+  'Date from': 'Von',
+  'Date to': 'Bis',
+  'Preview': 'Vorschau',
+  'Object list': 'Objektliste',
+  'Object lists': 'Objektlisten',
+  'Manage object lists': 'Objektliste verwalten',
+  'New list': 'Neue Objektliste',
+  'Groups': 'Gruppen',
+  'Close': 'Schliessen'
 }
