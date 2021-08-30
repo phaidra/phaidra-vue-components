@@ -295,12 +295,12 @@ export function updateFacetQueries (facetQueriesSolr, facetQueries) {
 }
 
 export function toggleFacet (q, f) {
-  q.active = !q.active
+  Vue.set(q, 'active', !q.active)
 
   if (f.exclusive) {
     for (let i = 0; i < f.queries.length; i++) {
       if (f.queries[i] !== q) {
-        f.queries[i].active = 0
+        Vue.set(f.queries[i], 'active', false)
       }
     }
   }
@@ -308,15 +308,15 @@ export function toggleFacet (q, f) {
 
 export function deactivateFacetQueries (f) {
   for (var i = 0; i < f.queries.length; i++) {
-    f.queries[i].active = false
+    Vue.set(f.queries[i], 'active', false)
     if (f.queries[i].childFacet) {
       var lvl1 = f.queries[i].childFacet
       for (var j = 0; j < lvl1.queries.length; j++) {
-        lvl1.queries[j].active = false
+        Vue.set(lvl1.queries[j], 'active', false)
         if (lvl1.queries[j].childFacet) {
           var lvl2 = lvl1.queries[j].childFacet
           for (var k = 0; k < lvl2.queries.length; k++) {
-            lvl2.queries[k].active = false
+            Vue.set(lvl2.queries[k], 'active', false)
           }
         }
       }
@@ -325,7 +325,7 @@ export function deactivateFacetQueries (f) {
 }
 
 export function showFacet (f) {
-  f.show = !f.show
+  Vue.set(f, 'show', !f.show)
 
   if (!f.show) {
     // when hiding facet, remove it's filters

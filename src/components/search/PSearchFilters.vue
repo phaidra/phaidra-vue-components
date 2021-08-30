@@ -1,186 +1,196 @@
 <template>
   <v-container fluid>
-    <ul class="main-ul">
-      <li v-for="(f, i) in facetQueries" :key="i">
-        <icon @click.native="showFacet(f)" v-if="f.show" name="univie-stop2" class="primary--text"></icon>
-        <icon @click.native="showFacet(f)" v-if="!f.show" name="univie-checkbox-unchecked" class="primary--text"></icon>
-        <span @click="showFacet(f)" class="facet-label primary--text" :class="{ active: f.show }">{{ $t(f.label) }}</span>
-        <ul v-if="f.show">
-          <li v-for="(q, j) in f.queries" :key="j">
-            <span @click="toggleFacet(q,f)">
-              <icon v-if="q.active" name="univie-stop2" class="primary--text"></icon>
-              <icon v-if="!q.active" name="univie-checkbox-unchecked" class="primary--text"></icon>
-              <span :class="{ active: q.active }" class="facet-label primary--text">{{ $t(q.label) }}</span>
-              <span class="facet-count grey--text" v-if="q.count > 0">({{q.count}})</span>
-            </span>
-            <ul v-if="q.active && q.childFacet" >
-              <li v-for="(q1, k) in q.childFacet.queries" :key="k">
-                <span @click="toggleFacet(q1,q.childFacet)">
-                  <icon v-if="q1.active" name="univie-stop2" class="primary--text"></icon>
-                  <icon v-if="!q1.active" name="univie-checkbox-unchecked" class="primary--text"></icon>
-                  <span :class="{ active: q1.active }" class="facet-label primary--text">{{ $t(q1.label) }}</span>
-                  <span class="facet-count grey--text" v-if="q1.count > 0">({{q1.count}})</span>
+    <v-row v-if="filtersActive">
+      <v-col cols="12">
+        <v-btn class="my-1" dark color="grey" @click.native="resetFilters()">{{ $t('Remove filters') }}</v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <ul class="main-ul">
+          <li v-for="(f, i) in facetQueries" :key="i">
+            <icon @click.native="showFacet(f)" v-if="f.show" name="univie-stop2" class="primary--text"></icon>
+            <icon @click.native="showFacet(f)" v-if="!f.show" name="univie-checkbox-unchecked" class="primary--text"></icon>
+            <span @click="showFacet(f)" class="facet-label primary--text" :class="{ active: f.show }">{{ $t(f.label) }}</span>
+            <ul v-if="f.show">
+              <li v-for="(q, j) in f.queries" :key="j">
+                <span @click="toggleFacet(q,f)">
+                  <icon v-if="q.active" name="univie-stop2" class="primary--text"></icon>
+                  <icon v-if="!q.active" name="univie-checkbox-unchecked" class="primary--text"></icon>
+                  <span :class="{ active: q.active }" class="facet-label primary--text">{{ $t(q.label) }}</span>
+                  <span class="facet-count grey--text" v-if="q.count > 0">({{q.count}})</span>
                 </span>
-                <ul v-if="q1.active && q1.childFacet" >
-                  <li v-for="(q2, l) in q1.childFacet.queries" :key="l">
-                    <span @click="toggleFacet(q2,q1.childFacet)">
-                      <icon v-if="q2.active" name="univie-stop2" class="primary--text"></icon>
-                      <icon v-if="!q2.active" name="univie-checkbox-unchecked" class="primary--text"></icon>
-                      <span :class="{ active: q2.active }" class="facet-label primary--text">{{ $t(q2.label) }}</span>
-                      <span class="facet-count grey--text" v-if="q2.count>0">({{q2.count}})</span>
+                <ul v-if="q.active && q.childFacet" >
+                  <li v-for="(q1, k) in q.childFacet.queries" :key="k">
+                    <span @click="toggleFacet(q1,q.childFacet)">
+                      <icon v-if="q1.active" name="univie-stop2" class="primary--text"></icon>
+                      <icon v-if="!q1.active" name="univie-checkbox-unchecked" class="primary--text"></icon>
+                      <span :class="{ active: q1.active }" class="facet-label primary--text">{{ $t(q1.label) }}</span>
+                      <span class="facet-count grey--text" v-if="q1.count > 0">({{q1.count}})</span>
                     </span>
+                    <ul v-if="q1.active && q1.childFacet" >
+                      <li v-for="(q2, l) in q1.childFacet.queries" :key="l">
+                        <span @click="toggleFacet(q2,q1.childFacet)">
+                          <icon v-if="q2.active" name="univie-stop2" class="primary--text"></icon>
+                          <icon v-if="!q2.active" name="univie-checkbox-unchecked" class="primary--text"></icon>
+                          <span :class="{ active: q2.active }" class="facet-label primary--text">{{ $t(q2.label) }}</span>
+                          <span class="facet-count grey--text" v-if="q2.count>0">({{q2.count}})</span>
+                        </span>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </li>
             </ul>
           </li>
-        </ul>
-      </li>
-      <li>
-        <v-row no-gutters>
-          <v-col>
-            <icon @click.native="toggleOwnerFilter()" v-if="showOwnerFilter" name="univie-stop2" class="primary--text"></icon>
-            <icon @click.native="toggleOwnerFilter()" v-if="!showOwnerFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
-            <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">{{ $t('Owner') }}</span>
-          </v-col>
-        </v-row>
-        <v-row no-gutters>
-          <v-autocomplete
-            class="mt-2"
-            v-if="showOwnerFilter"
-            v-model="userSearchModel"
-            :items="userSearchItems.length > 0 ? userSearchItems : []"
-            :loading="userSearchLoading"
-            :search-input.sync="userSearch"
-            :label="$t('User search')"
-            :placeholder="$t('Start typing to search')"
-            item-value="uid"
-            item-text="value"
-            prepend-icon="mdi-database-search"
-            hide-no-data
-            hide-selected
-            return-object
-            clearable
-            @click:clear="userSearchItems=[]"
-          >
-            <template slot="item" slot-scope="{ item }">
-              <template v-if="item">
-                <v-list-item-content two-line>
-                  <v-list-item-title>{{ item.value }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
-                </v-list-item-content>
-              </template>
-            </template>
-          </v-autocomplete>
-        </v-row>
-      </li>
-      <li>
-        <v-row no-gutters>
-          <v-col>
-            <icon @click.native="toggleAuthorFilter()" v-if="showAuthorFilter" name="univie-stop2" class="primary--text"></icon>
-            <icon @click.native="toggleAuthorFilter()" v-if="!showAuthorFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
-            <span @click="toggleAuthorFilter()" class="facet-label primary--text" :class="{ active: showAuthorFilter }">{{ $t('Authors') }}</span>
-          </v-col>
-        </v-row>
-        <v-row no-gutters v-if="showAuthorFilter">
-          <v-col cols="12">
-            <v-combobox
-              class="mt-4"
-              :placeholder="$t('ADD_PREFIX') + ' '  + $t('Author') + ' ' + $t('ADD_SUFFIX') + '...'"
-              :hint="$t('Personal')"
-              persistent-hint
-              chips
-              clearable
-              deletable-chips
-              multiple
-              filled
-              single-line
-              v-model="persAuthors.values"
-              @input="setPersAuthors()"/>
-          </v-col>
-        </v-row>
-        <v-row no-gutters v-if="showAuthorFilter">
-          <v-col cols="12">
-            <v-combobox
-              class="mt-4"
-              :placeholder="$t('ADD_PREFIX') + ' '  + $t('Author') + ' ' + $t('ADD_SUFFIX') + '...'"
-              :hint="$t('Corporate')"
-              persistent-hint
-              chips
-              clearable
-              deletable-chips
-              multiple
-              filled
-              single-line
-              v-model="corpAuthors.values"
-              @input="setCorpAuthors()"/>
-          </v-col>
-        </v-row>
-      </li>
-      <li>
-        <v-row no-gutters>
-          <v-col>
-            <icon @click.native="toggleRoleFilter()" v-if="showRoleFilter" name="univie-stop2" class="primary--text"></icon>
-            <icon @click.native="toggleRoleFilter()" v-if="!showRoleFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
-            <span @click="toggleRoleFilter()" class="facet-label primary--text" :class="{ active: showRoleFilter }">{{ $t('Roles') }}</span>
-          </v-col>
-        </v-row>
-        <v-row no-gutters v-if="showRoleFilter">
-          <v-select
-            class="mt-4"
-            :placeholder="$t('Add role') + '...'"
-            :hint="$t('Personal')"
-            :items="marcRolesArray"
-            v-model="selectedRole.pers"
-            @input="addRoleFilter('pers')"
-            :menu-props="{maxHeight:'400'}"
-            persistent-hint
-            filled
-            single-line
-          ></v-select>
-          <v-select
-            class="mt-4"
-            :placeholder="$t('Add role') + '...'"
-            :hint="$t('Corporate')"
-            :items="marcRolesArray"
-            v-model="selectedRole.corp"
-            @input="addRoleFilter('corp')"
-            :menu-props="{maxHeight:'400'}"
-            persistent-hint
-            filled
-            single-line
-          ></v-select>
-          <div v-for="(role, i) in roles" :key="i" v-if="roles.length > 0" >
+          <li>
             <v-row no-gutters>
-              <v-col cols="10">
+              <v-col>
+                <icon @click.native="toggleOwnerFilter()" v-if="showOwnerFilter" name="univie-stop2" class="primary--text"></icon>
+                <icon @click.native="toggleOwnerFilter()" v-if="!showOwnerFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
+                <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">{{ $t('Owner') }}</span>
+              </v-col>
+            </v-row>
+            <v-row no-gutters>
+              <v-autocomplete
+                class="mt-2"
+                v-if="showOwnerFilter"
+                v-model="userSearchModel"
+                :items="userSearchItems.length > 0 ? userSearchItems : []"
+                :loading="userSearchLoading"
+                :search-input.sync="userSearch"
+                :label="$t('User search')"
+                :placeholder="$t('Start typing to search')"
+                item-value="uid"
+                item-text="value"
+                prepend-icon="mdi-database-search"
+                hide-no-data
+                hide-selected
+                return-object
+                clearable
+                @click:clear="userSearchItems=[]"
+              >
+                <template slot="item" slot-scope="{ item }">
+                  <template v-if="item">
+                    <v-list-item-content two-line>
+                      <v-list-item-title>{{ item.value }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </template>
+                </template>
+              </v-autocomplete>
+            </v-row>
+          </li>
+          <li>
+            <v-row no-gutters>
+              <v-col>
+                <icon @click.native="toggleAuthorFilter()" v-if="showAuthorFilter" name="univie-stop2" class="primary--text"></icon>
+                <icon @click.native="toggleAuthorFilter()" v-if="!showAuthorFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
+                <span @click="toggleAuthorFilter()" class="facet-label primary--text" :class="{ active: showAuthorFilter }">{{ $t('Authors') }}</span>
+              </v-col>
+            </v-row>
+            <v-row no-gutters v-if="showAuthorFilter">
+              <v-col cols="12">
                 <v-combobox
-                  :hint="role.type === 'pers' ? $t('Personal') : $t('Corporate')"
-                  persistent-hint
                   class="mt-4"
-                  :placeholder="$t('ADD_PREFIX') + ' '  + $t(role.label) + ' ' + $t('ADD_SUFFIX') + '...'"
+                  :placeholder="$t('ADD_PREFIX') + ' '  + $t('Author') + ' ' + $t('ADD_SUFFIX') + '...'"
+                  :hint="$t('Personal')"
+                  persistent-hint
                   chips
                   clearable
                   deletable-chips
                   multiple
                   filled
                   single-line
-                  :items="role.values"
-                  v-model="role.values"
-                  @input="setRoleFilterValues(role)"
-                />
-              </v-col>
-              <v-col cols="2">
-                <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeRoleFilter(role)"></icon>
+                  v-model="persAuthors.values"
+                  @input="setPersAuthors()"/>
               </v-col>
             </v-row>
-          </div>
-        </v-row>
-      </li>
-    </ul>
+            <v-row no-gutters v-if="showAuthorFilter">
+              <v-col cols="12">
+                <v-combobox
+                  class="mt-4"
+                  :placeholder="$t('ADD_PREFIX') + ' '  + $t('Author') + ' ' + $t('ADD_SUFFIX') + '...'"
+                  :hint="$t('Corporate')"
+                  persistent-hint
+                  chips
+                  clearable
+                  deletable-chips
+                  multiple
+                  filled
+                  single-line
+                  v-model="corpAuthors.values"
+                  @input="setCorpAuthors()"/>
+              </v-col>
+            </v-row>
+          </li>
+          <li>
+            <v-row no-gutters>
+              <v-col>
+                <icon @click.native="toggleRoleFilter()" v-if="showRoleFilter" name="univie-stop2" class="primary--text"></icon>
+                <icon @click.native="toggleRoleFilter()" v-if="!showRoleFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
+                <span @click="toggleRoleFilter()" class="facet-label primary--text" :class="{ active: showRoleFilter }">{{ $t('Roles') }}</span>
+              </v-col>
+            </v-row>
+            <v-row no-gutters v-if="showRoleFilter">
+              <v-select
+                class="mt-4"
+                :placeholder="$t('Add role') + '...'"
+                :hint="$t('Personal')"
+                :items="marcRolesArray"
+                v-model="selectedRole.pers"
+                @input="addRoleFilter('pers')"
+                :menu-props="{maxHeight:'400'}"
+                persistent-hint
+                filled
+                single-line
+              ></v-select>
+              <v-select
+                class="mt-4"
+                :placeholder="$t('Add role') + '...'"
+                :hint="$t('Corporate')"
+                :items="marcRolesArray"
+                v-model="selectedRole.corp"
+                @input="addRoleFilter('corp')"
+                :menu-props="{maxHeight:'400'}"
+                persistent-hint
+                filled
+                single-line
+              ></v-select>
+              <div v-for="(role, i) in roles" :key="i" v-if="roles.length > 0" >
+                <v-row no-gutters>
+                  <v-col cols="10">
+                    <v-combobox
+                      :hint="role.type === 'pers' ? $t('Personal') : $t('Corporate')"
+                      persistent-hint
+                      class="mt-4"
+                      :placeholder="$t('ADD_PREFIX') + ' '  + $t(role.label) + ' ' + $t('ADD_SUFFIX') + '...'"
+                      chips
+                      clearable
+                      deletable-chips
+                      multiple
+                      filled
+                      single-line
+                      :items="role.values"
+                      v-model="role.values"
+                      @input="setRoleFilterValues(role)"
+                    />
+                  </v-col>
+                  <v-col cols="2">
+                    <icon name="material-navigation-close" class="primary--text" height="100%" @click.native="removeRoleFilter(role)"></icon>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-row>
+          </li>
+        </ul>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import Vue from 'vue'
 import '@/compiled-icons/univie-stop2'
 import '@/compiled-icons/univie-checkbox-unchecked'
 import '@/compiled-icons/material-action-account-balance'
@@ -220,6 +230,19 @@ export default {
   computed: {
     instance: function () {
       return this.$store.state.instanceconfig
+    },
+    filtersActive () {
+      for (let fq of this.facetQueries) {
+        if (fq.resetable) {
+          for (let q of fq.queries) {
+            console.log(q.id + ': ' + q.active)
+            if (q.active) {
+              return true
+            }
+          }
+        }
+      }
+      return false
     }
   },
   data () {
@@ -358,6 +381,16 @@ export default {
     },
     setCorpAuthors: function () {
       this.search({ corpAuthors: this.corpAuthors })
+    },
+    resetFilters: function () {
+      for (const fq of this.facetQueries) {
+        if (fq.resetable) {
+          for (const q of fq.queries) {
+            Vue.set(q, 'active', false)
+          }
+        }
+      }
+      this.search({ page: 1, facetQueries: this.facetQueries })
     }
   },
   mounted () {
