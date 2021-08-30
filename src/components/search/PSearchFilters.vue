@@ -235,7 +235,6 @@ export default {
       for (let fq of this.facetQueries) {
         if (fq.resetable) {
           for (let q of fq.queries) {
-            console.log(q.id + ': ' + q.active)
             if (q.active) {
               return true
             }
