@@ -706,6 +706,5 @@ export default {
   'Manage object lists': 'Objektliste verwalten',
   'New list': 'Neue Objektliste',
   'Groups': 'Gruppen',
-  'Close': 'Schliessen',
-  'This object has a later version': 'Dieses Objekt hat eine spätere Version'
+  'Close': 'Schliessen'
 }

@@ -649,7 +649,8 @@ const state = {
         { '@id': ns + 'A3BG-65F5', 'skos:prefLabel': { 'eng': 'CD' } },
         { '@id': ns + '4CQF-7HHF', 'skos:prefLabel': { 'eng': 'DAT' } },
         { '@id': ns + 'HXSS-NBZ4', 'skos:prefLabel': { 'eng': 'audiocassette' } },
-        { '@id': ns + 'X627-FCV9', 'skos:prefLabel': { 'eng': 'tape' } }
+        { '@id': ns + 'X627-FCV9', 'skos:prefLabel': { 'eng': 'tape' } },
+        { '@id': ns + '2H45-DET2', 'skos:prefLabel': { 'eng': 'Glasplattendia', 'deu': 'Glasplattendia' } }
       ],
       loaded: true
     },
@@ -863,7 +864,8 @@ const state = {
         { '@id': ns + 'QM0R-ZTAA', 'skos:prefLabel': { 'eng': 'wall chart', 'deu': 'Wandtafel' } },
         { '@id': ns + 'R1WF-V45Y', 'skos:prefLabel': { 'eng': 'website', 'deu': 'Website' } },
         { '@id': ns + '489N-Y6VX', 'skos:prefLabel': { 'eng': 'working paper', 'deu': 'Arbeitspapier' } },
-        { '@id': ns + 'HARH-6R3C', 'skos:prefLabel': { 'eng': 'yearbook', 'deu': 'Jahrbuch' } }
+        { '@id': ns + 'HARH-6R3C', 'skos:prefLabel': { 'eng': 'yearbook', 'deu': 'Jahrbuch' } },
+        { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide', 'deu': 'Glasplattendia' } }
       ],
       loaded: true
     },
@@ -967,8 +969,8 @@ const state = {
       terms: [
         { '@id': ns + 'NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
         { '@id': ns + 'DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography' } },
-        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'diapositive' } },
-        { '@id': ns + 'VZ88-24TF', 'skos:prefLabel': { 'eng': 'black-and-white slide' } },
+        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'diapositive', 'deu': 'Diapositiv' } },
+        { '@id': ns + 'VZ88-24TF', 'skos:prefLabel': { 'eng': 'black-and-white slide', 'deu': 'Schwarzweiß-Dia' } },
         { '@id': ns + '96PV-FFAT', 'skos:prefLabel': { 'eng': 'color slide' } },
         { '@id': ns + 'AH0S-F3BV', 'skos:prefLabel': { 'eng': 'black-and-white film' } },
         { '@id': ns + 'K818-FSM5', 'skos:prefLabel': { 'eng': 'color film' } },
@@ -979,7 +981,17 @@ const state = {
     },
     'material': {
       terms: [
-        { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide' } }
+        { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide', 'deu': 'Glasplattendia' } },
+        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'diapositive', 'deu': 'Diapositiv' } },
+        { '@id': ns + '6KMM-SD3M', 'skos:prefLabel': { 'eng': 'dianegative', 'deu': 'Dianegativ' } },
+        { '@id': ns + 'NWNQ-GW5N', 'skos:prefLabel': { 'deu': 'Dianegativ mit Deckglas' } },
+        { '@id': ns + '5418-GWAY', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas' } },
+        { '@id': ns + 'HV4N-RC72', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas, dazwischen Folie' } },
+        { '@id': ns + 'NQF1-2T8V', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas, Zeichnung auf Papier' } },
+        { '@id': ns + '45E3-JTA6', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas, Zeichnung auf Glas' } },
+        { '@id': ns + '440Z-1BPF', 'skos:prefLabel': { 'deu': 'Diapositiv mit Zeichnung auf Glas' } },
+        { '@id': ns + '2ESS-0GPG', 'skos:prefLabel': { 'deu': 'Diapositiv mit Folie' } },
+        { '@id': ns + '7AS5-4Q5Q', 'skos:prefLabel': { 'deu': 'Diapositiv mit Zeichnung auf Papier' } }
       ],
       loaded: true
     },
