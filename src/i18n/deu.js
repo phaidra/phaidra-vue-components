@@ -584,7 +584,7 @@ export default {
   'frapo:hasFundingAgency': 'Funding',
   'rdax:P00009': 'Zuordnung',
   'bf:provisionActivity': 'Provision activity: Publication',
-  'cito:cites': 'Cites',
+  'cito:cites': 'Referenz',
   'cito:isCitedBy': 'Is cited by',
   'rdfs:seeAlso': 'Siehe auch',
 

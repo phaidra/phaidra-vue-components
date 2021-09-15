@@ -2349,7 +2349,7 @@ export default {
 
         case 'vra:material':
           if (f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, 'vra:Material'))
+            this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'vra:Material', [f.value]))
           }
           break
 
