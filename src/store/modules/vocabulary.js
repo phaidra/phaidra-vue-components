@@ -984,14 +984,14 @@ const state = {
         { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide', 'deu': 'Glasplattendia' } },
         { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'diapositive', 'deu': 'Diapositiv' } },
         { '@id': ns + '6KMM-SD3M', 'skos:prefLabel': { 'eng': 'dianegative', 'deu': 'Dianegativ' } },
-        { '@id': ns + 'NWNQ-GW5N', 'skos:prefLabel': { 'deu': 'Dianegativ mit Deckglas' } },
-        { '@id': ns + '5418-GWAY', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas' } },
-        { '@id': ns + 'HV4N-RC72', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas, dazwischen Folie' } },
-        { '@id': ns + 'NQF1-2T8V', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas, Zeichnung auf Papier' } },
-        { '@id': ns + '45E3-JTA6', 'skos:prefLabel': { 'deu': 'Diapositiv mit Deckglas, Zeichnung auf Glas' } },
-        { '@id': ns + '440Z-1BPF', 'skos:prefLabel': { 'deu': 'Diapositiv mit Zeichnung auf Glas' } },
-        { '@id': ns + '2ESS-0GPG', 'skos:prefLabel': { 'deu': 'Diapositiv mit Folie' } },
-        { '@id': ns + '7AS5-4Q5Q', 'skos:prefLabel': { 'deu': 'Diapositiv mit Zeichnung auf Papier' } }
+        { '@id': ns + 'NWNQ-GW5N', 'skos:prefLabel': { 'eng': 'Dianegativ mit Deckglas', 'deu': 'Dianegativ mit Deckglas' } },
+        { '@id': ns + '5418-GWAY', 'skos:prefLabel': { 'eng': 'Diapositiv mit Deckglas', 'deu': 'Diapositiv mit Deckglas' } },
+        { '@id': ns + 'HV4N-RC72', 'skos:prefLabel': { 'eng': 'Diapositiv mit Deckglas, dazwischen Folie', 'deu': 'Diapositiv mit Deckglas, dazwischen Folie' } },
+        { '@id': ns + 'NQF1-2T8V', 'skos:prefLabel': { 'eng': 'Diapositiv mit Deckglas, Zeichnung auf Papier', 'deu': 'Diapositiv mit Deckglas, Zeichnung auf Papier' } },
+        { '@id': ns + '45E3-JTA6', 'skos:prefLabel': { 'eng': 'Diapositiv mit Deckglas, Zeichnung auf Glas', 'deu': 'Diapositiv mit Deckglas, Zeichnung auf Glas' } },
+        { '@id': ns + '440Z-1BPF', 'skos:prefLabel': { 'eng': 'Diapositiv mit Zeichnung auf Glas', 'deu': 'Diapositiv mit Zeichnung auf Glas' } },
+        { '@id': ns + '2ESS-0GPG', 'skos:prefLabel': { 'eng': 'Diapositiv mit Folie', 'deu': 'Diapositiv mit Folie' } },
+        { '@id': ns + '7AS5-4Q5Q', 'skos:prefLabel': { 'eng': 'Diapositiv mit Zeichnung auf Papier', 'deu': 'Diapositiv mit Zeichnung auf Papier' } }
       ],
       loaded: true
     },
