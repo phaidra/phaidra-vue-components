@@ -1051,8 +1051,7 @@ const fields = [
     id: 'inscription',
     fieldname: 'Inscription/Stamp',
     predicate: 'vra:hasInscription',
-    component: 'p-text-field-suggest',
-    suggester: 'inscriptionsuggester',
+    component: 'p-text-field',
     multiplicable: true,
     multilingual: true,
     label: 'Inscription/Stamp',
@@ -1449,6 +1448,7 @@ const predicateOrder = [
   'rdau:P60071',
   'phaidra:dateAccessioned',
   'date',
+  'dcterms:temporal',
 
   'ebucore:hasRelatedEvent',
 

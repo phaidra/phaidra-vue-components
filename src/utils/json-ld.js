@@ -979,7 +979,7 @@ export default {
 
             // vra:material
             case 'vra:material':
-              if (obj['@type'] === 'vra:Material') {
+              if (obj['@type'] === 'vra:Material' && !(obj['skos:exactMatch'])) {
                 f = fields.getField('material-text')
                 for (let pl of obj['skos:prefLabel']) {
                   f.value = pl['@value']
@@ -988,7 +988,7 @@ export default {
                 components.push(f)
               } else {
                 // vra:material - vocab
-                if (obj['@type'] === 'vra:material' && (obj['skos:exactMatch'])) {
+                if (obj['@type'] === 'vra:Material' && (obj['skos:exactMatch'])) {
                   f = fields.getField('material-vocab')
                   for (let em of obj['skos:exactMatch']) {
                     f.value = em
