@@ -650,7 +650,7 @@ const state = {
         { '@id': ns + '4CQF-7HHF', 'skos:prefLabel': { 'eng': 'DAT' } },
         { '@id': ns + 'HXSS-NBZ4', 'skos:prefLabel': { 'eng': 'audiocassette' } },
         { '@id': ns + 'X627-FCV9', 'skos:prefLabel': { 'eng': 'tape' } },
-        { '@id': ns + '2H45-DET2', 'skos:prefLabel': { 'eng': 'Glasplattendia', 'deu': 'Glasplattendia' } }
+        { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide', 'deu': 'Glasplattendia' } }
       ],
       loaded: true
     },
