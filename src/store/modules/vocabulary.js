@@ -858,6 +858,7 @@ const state = {
         { '@id': ns + 'XTVH-3MG3', 'skos:prefLabel': { 'eng': 'score', 'deu': 'Partitur' } },
         { '@id': ns + '21HZ-XP29', 'skos:prefLabel': { 'eng': 'sculpture', 'deu': 'Skulptur' } },
         { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'slide', 'deu': 'Diapositiv' } },
+        { '@id': ns + '6KMM-SD3M', 'skos:prefLabel': { 'eng': 'dianegative', 'deu': 'Dianegativ' } },
         { '@id': ns + '622D-CM27', 'skos:prefLabel': { 'eng': 'software', 'deu': 'Software' } },
         { '@id': ns + 'DF69-TVE8', 'skos:prefLabel': { 'eng': 'technical report', 'deu': 'technischer Bericht' } },
         { '@id': ns + '6FG3-514E', 'skos:prefLabel': { 'eng': 'transcript', 'deu': 'Transkript' } },
@@ -969,7 +970,7 @@ const state = {
       terms: [
         { '@id': ns + 'NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
         { '@id': ns + 'DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography' } },
-        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'diapositive', 'deu': 'Diapositiv' } },
+        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'slide', 'deu': 'Diapositiv' } },
         { '@id': ns + 'VZ88-24TF', 'skos:prefLabel': { 'eng': 'black-and-white slide', 'deu': 'Schwarzweiß-Dia' } },
         { '@id': ns + '96PV-FFAT', 'skos:prefLabel': { 'eng': 'color slide' } },
         { '@id': ns + 'AH0S-F3BV', 'skos:prefLabel': { 'eng': 'black-and-white film' } },
@@ -982,7 +983,7 @@ const state = {
     'material': {
       terms: [
         { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide', 'deu': 'Glasplattendia' } },
-        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'diapositive', 'deu': 'Diapositiv' } },
+        { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'slide', 'deu': 'Diapositiv' } },
         { '@id': ns + '6KMM-SD3M', 'skos:prefLabel': { 'eng': 'dianegative', 'deu': 'Dianegativ' } },
         { '@id': ns + 'NWNQ-GW5N', 'skos:prefLabel': { 'eng': 'Dianegativ mit Deckglas', 'deu': 'Dianegativ mit Deckglas' } },
         { '@id': ns + '5418-GWAY', 'skos:prefLabel': { 'eng': 'Diapositiv mit Deckglas', 'deu': 'Diapositiv mit Deckglas' } },
