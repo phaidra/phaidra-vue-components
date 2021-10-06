@@ -137,7 +137,7 @@ const state = {
     'datepredicate': {
       terms: [
         { '@id': 'dcterms:date', 'skos:prefLabel': { 'eng': 'Date', 'deu': 'Datum' } },
-        { '@id': 'dcterms:created', 'skos:prefLabel': { 'eng': 'Date created', 'deu': 'Date created' } },
+        { '@id': 'dcterms:created', 'skos:prefLabel': { 'eng': 'Date created', 'deu': 'Erstellungsdatum' } },
         { '@id': 'dcterms:modified', 'skos:prefLabel': { 'eng': 'Date modified', 'deu': 'Date modified' } },
         { '@id': 'dcterms:available', 'skos:prefLabel': { 'eng': 'Date available', 'deu': 'Date available' } },
         { '@id': 'dcterms:issued', 'skos:prefLabel': { 'eng': 'Date issued', 'deu': 'Date issued' } },
@@ -584,13 +584,13 @@ const state = {
     'alllicenses': {
       terms: [
         { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:notation': ['1'], 'skos:prefLabel': { 'eng': 'All rights reserved', 'deu': 'Alle Rechte vorbehalten' } },
-        { '@id': 'http://creativecommons.org/publicdomain/mark/1.0/', 'skos:notation': ['9'], 'skos:prefLabel': { 'eng': 'Public Domain Mark 1.0' }, 'img': 'pdm.png' },
         { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:notation': ['16'], 'skos:prefLabel': { 'eng': 'CC BY 4.0 International' }, 'img': 'cc-by.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:notation': ['17'], 'skos:prefLabel': { 'eng': 'CC BY-NC 4.0 International' }, 'img': 'cc-by-nc.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:notation': ['18'], 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 4.0 International' }, 'img': 'cc-by-nc-nd.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:notation': ['19'], 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 4.0 International' }, 'img': 'cc-by-nc-sa.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:notation': ['20'], 'skos:prefLabel': { 'eng': 'CC BY-ND 4.0 International' }, 'img': 'cc-by-nd.png' },
         { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:notation': ['21'], 'skos:prefLabel': { 'eng': 'CC BY-SA 4.0 International' }, 'img': 'cc-by-sa.png' },
+        { '@id': 'http://creativecommons.org/publicdomain/mark/1.0/', 'skos:notation': ['9'], 'skos:prefLabel': { 'eng': 'Public Domain Mark 1.0' }, 'img': 'pdm.png' },
         { '@id': 'http://creativecommons.org/licenses/by/3.0/', 'skos:notation': ['28'], 'skos:prefLabel': { 'eng': 'CC BY 3.0 Unported' }, 'img': 'cc-by.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc/3.0/', 'skos:notation': ['30'], 'skos:prefLabel': { 'eng': 'CC BY-NC 3.0 Unported' }, 'img': 'cc-by-nc.png' },
         { '@id': 'http://creativecommons.org/licenses/by-nc-nd/3.0/', 'skos:notation': ['33'], 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 3.0 Unported' }, 'img': 'cc-by-nc-nd.png' },
@@ -1170,7 +1170,10 @@ const mutations = {
             }
           } else {
             state.vocabularies['orgunits']['terms'].sort(function (a, b) {
-              return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+              if ((a['skos:prefLabel'][locale]) && (b['skos:prefLabel'][locale])) {
+                return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+              }
+              return 0
             })
           }
         }

@@ -1096,6 +1096,7 @@ const fields = [
     multiplicable: true,
     label: 'Depicted/Represented place',
     searchlabel: 'Wien, Großvenediger, Donau Kanal, ...',
+    hint: 'Press Enter to initiate search',
     value: '',
     type: 'schema:Place',
     disabletype: false,

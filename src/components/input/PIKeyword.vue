@@ -21,7 +21,7 @@
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
         :error-messages="errorMessages"
-        :hint="hint"
+        :hint="$t(hint)"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>

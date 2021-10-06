@@ -21,7 +21,7 @@
         <v-divider></v-divider>
         <v-card-text class="mt-4">
           <v-row>
-            <v-col cols="4">
+            <v-col cols="4" v-if="showtype">
               <v-autocomplete
                 v-on:input="$emit('input-place-type', $event)"
                 :label="$t('Type of place')"
@@ -48,7 +48,7 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <v-col cols="6">
+            <v-col :cols="showtype ? 6 : 12">
               <v-text-field
                 v-model="q"
                 :loading="loading"
@@ -57,6 +57,8 @@
                 :outlined="inputStyle==='outlined'"
                 clearable
                 :messages="resolved"
+                :hint="$t(hint)"
+                autocomplete="off"
                 append-icon="mdi-magnify"
                 @click:append="search()"
                 @keyup.enter="search()"
@@ -150,6 +152,10 @@ export default {
       type: String,
       default: 'Wien, Großvenediger, Donau Kanal, ...'
     },
+    hint: {
+      type: String,
+      default: 'Press Enter to initiate search'
+    },
     initquery: {
       type: String
     },
@@ -158,6 +164,10 @@ export default {
     },
     disabletype: {
       type: Boolean
+    },
+    showtype: {
+      type: Boolean,
+      required: true
     },
     showIds: {
       type: Boolean,

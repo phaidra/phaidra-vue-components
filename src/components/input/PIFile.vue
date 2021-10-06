@@ -12,11 +12,14 @@
         :outlined="inputStyle==='outlined'"
         :background-color="backgroundColor ? backgroundColor : undefined"
         show-size
+        :hint="'You can use drag & drop'"
+        persistent-hint
         @change="fileInput($event)"
         :label="$t(label)"
         :prepend-icon="''"
         :append-icon="'mdi-paperclip'"
         :disabled="disabled"
+        :class="fileInputClass"
       ></v-file-input>
     </v-col>
     <v-col v-if="showMimetype" cols="4">
@@ -64,6 +67,16 @@
         </v-list>
       </v-menu>
     </v-col>
+    <v-dialog v-model="dialog" width="500">
+      <v-card>
+        <v-card-text class="pa-4">{{ $t('Please select only one file.') }}</v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="dialog = false" >Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-row>
 </template>
 
@@ -107,28 +120,39 @@ export default {
     },
     disabled: {
       type: Boolean
+    },
+    fileInputClass: {
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
+      dialog: false,
       loading: false,
       value: null
     }
   },
   methods: {
     addDropFile (e) {
+      if (e.dataTransfer.files.length > 1) {
+        this.dialog = true
+        return
+      }
       this.value = e.dataTransfer.files[0]
       this.fileInput(e.dataTransfer.files[0])
     },
     fileInput (file) {
-      this.$emit('input-file', file)
-      if (this.autoMimetype) {
-        if (file.name) {
-          let ext = file.name.split('.').pop()
-          for (let mt of this.vocabularies['mimetypes'].terms) {
-            for (let notation of mt['skos:notation']) {
-              if (ext === notation) {
-                this.$emit('input-mimetype', mt)
+      if (file) {
+        this.$emit('input-file', file)
+        if (this.autoMimetype) {
+          if (file.name) {
+            let ext = file.name.split('.').pop()
+            for (let mt of this.vocabularies['mimetypes'].terms) {
+              for (let notation of mt['skos:notation']) {
+                if (ext === notation) {
+                  this.$emit('input-mimetype', mt)
+                }
               }
             }
           }

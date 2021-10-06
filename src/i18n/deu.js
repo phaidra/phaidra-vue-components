@@ -33,6 +33,7 @@ export default {
   'Access': 'Zugang',
   'Roles': 'Rollen',
   'Image': 'Bild',
+  'Picture': 'Bild',
   'Book': 'Buch',
   'Article': 'Artikel',
   'Text': 'Text',
@@ -40,6 +41,8 @@ export default {
   'Video': 'Video',
   'Other': 'Anderes',
   'Data': 'Daten',
+  'PDF Document': 'PDF Dokument',
+  'Other documents / Data': 'Sonstige Dokumente / Daten',
   'Dataset': 'Dataset',
   'Container': 'Container',
   'Map': 'Karte',
@@ -706,5 +709,12 @@ export default {
   'Manage object lists': 'Objektliste verwalten',
   'New list': 'Neue Objektliste',
   'Groups': 'Gruppen',
-  'Close': 'Schliessen'
+  'Close': 'Schliessen',
+  'Confirm each keyword with enter': 'Bestätigen Sie jedes Stichwort mit der Enter-Taste',
+  'Press Enter to initiate search': 'Bestätigen Sie die Suchanfrage mit der Enter-Taste',
+  'Metadata fields overview': 'Übersicht Metadatenfelder',
+  'You can use drag & drop': 'Drag & drop möglich',
+  'Please select only one file.': 'Bitt wählen Sie nur eine Datei aus.',
+  'Recommended formats': 'Empfohlene Formate',
+  'Other supported formats': 'Weitere mögliche Formate'
 }

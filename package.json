@@ -17,6 +17,7 @@
     "*.js"
   ],
   "dependencies": {
+    "autolinker": "^3.14.3",
     "axios": "^0.21.1",
     "base-64": "^0.1.0",
     "leaflet-geosearch": "^3.0.6",

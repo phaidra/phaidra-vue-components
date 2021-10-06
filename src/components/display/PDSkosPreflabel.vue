@@ -7,12 +7,13 @@
         <span v-if="o['skos:exactMatch'][0].startsWith('oefos2012:')">ÖFOS 2012 -- {{ o['skos:notation'][0] }} -- {{ l['@value'] }}</span>
         <a v-else class="valuefield" :href="o['skos:exactMatch'][0]" target="_blank">{{ l['@value'] }}</a>
       </v-col>
-      <v-col class="valuefield" :md="valueColMd" cols="12" v-else>{{ l['@value'] }}</v-col>
+      <v-col class="valuefield" :md="valueColMd" cols="12" v-else ref="desc">{{ l['@value'] }}</v-col>
     </v-row>
   </span>
 </template>
 
 <script>
+import Autolinker from 'autolinker'
 import { displayproperties } from '../../mixins/displayproperties'
 
 export default {
@@ -39,6 +40,25 @@ export default {
       }
       return lang || somelang
     }
+  },
+  methods: {
+    link: function (v) {
+      if (typeof v === 'string') {
+        return Autolinker.link(v)
+      } else {
+        return v
+      }
+    }
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      this.$refs.desc[0].innerHTML = Autolinker.link(this.$refs.desc[0].innerHTML)
+    })
+  },
+  updated: function () {
+    this.$nextTick(function () {
+      this.$refs.desc[0].innerHTML = Autolinker.link(this.$refs.desc[0].innerHTML)
+    })
   }
 }
 </script>
