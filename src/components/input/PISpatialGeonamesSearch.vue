@@ -96,7 +96,7 @@
             <v-col cols="12" md="6" v-show="showMap && isbrowser">
               <div style="height: 400px; width: 100%" class="text-grey-10">
                 <l-map ref="map" :zoom="10" :center="center">
-                  <l-tile-layer :url='"http://{s}.tile.osm.org/{z}/{x}/{y}.png"' :attribution='"© <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"' />
+                  <l-tile-layer :url='"https://{s}.tile.osm.org/{z}/{x}/{y}.png"' :attribution='"© <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"' />
                   <l-marker v-if="locationMarker" :lat-lng="locationMarker"/>
                 </l-map>
               </div>
@@ -208,7 +208,7 @@ export default {
         this.center = this.locationMarker
         this.loading = true
         this.showMap = true
-        let uri = 'http://www.geonames.org/' + this.items[this.selected].geonameId
+        let uri = 'https://www.geonames.org/' + this.items[this.selected].geonameId
         this.$emit('input', uri)
         try {
           let response = await this.$http.request({
