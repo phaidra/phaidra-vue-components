@@ -5,9 +5,9 @@
         :disabled="disablerole"
         v-on:input="$emit('input-role', $event)"
         :label="$t(roleLabel ? roleLabel : 'Role')"
-        :items="vocabularies['rolepredicate'].terms"
+        :items="vocabularies[roleVocabulary].terms"
         :item-value="'@id'"
-        :value="getTerm('rolepredicate', role)"
+        :value="getTerm(roleVocabulary, role)"
         :filter="autocompleteFilter"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
@@ -17,13 +17,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
-            <v-list-item-title  v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel(roleVocabulary, item['@id'])}`"></v-list-item-title>
             <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-item-content>
-            <v-list-item-title v-html="`${getLocalizedTermLabel('rolepredicate', item['@id'])}`"></v-list-item-title>
+            <v-list-item-title v-html="`${getLocalizedTermLabel(roleVocabulary, item['@id'])}`"></v-list-item-title>
           </v-list-item-content>
         </template>
       </v-autocomplete>
@@ -149,6 +149,10 @@ export default {
       type: Boolean,
       default: false
     },
+    roleVocabulary: {
+      type: String,
+      default: 'rolepredicate'
+    },
     showIds: {
       type: Boolean,
       default: false
@@ -169,17 +173,12 @@ export default {
       type: Array
     }
   },
-  data () {
-    return {
-      vocabulary: 'rolepredicate'
-    }
-  },
   mounted: function () {
     this.$nextTick(function () {
-      this.loading = !this.vocabularies[this.vocabulary].loaded
+      this.loading = !this.vocabularies[this.roleVocabulary].loaded
       // emit input to set skos:prefLabel in parent
       if (this.role) {
-        this.$emit('input', this.getTerm('rolepredicate', this.role))
+        this.$emit('input', this.getTerm(this.roleVocabulary, this.role))
       }
     })
   }
