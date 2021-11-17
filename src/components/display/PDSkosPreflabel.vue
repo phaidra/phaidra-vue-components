@@ -52,12 +52,16 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-      this.$refs.desc[0].innerHTML = Autolinker.link(this.$refs.desc[0].innerHTML)
+      if (this.$refs && this.$refs.desc && this.$refs.desc.length) {
+        this.$refs.desc[0].innerHTML = Autolinker.link(this.$refs.desc[0].innerHTML)
+      }
     })
   },
   updated: function () {
     this.$nextTick(function () {
-      this.$refs.desc[0].innerHTML = Autolinker.link(this.$refs.desc[0].innerHTML)
+      if (this.$refs && this.$refs.desc && this.$refs.desc.length) {
+        this.$refs.desc[0].innerHTML = Autolinker.link(this.$refs.desc[0].innerHTML)
+      }
     })
   }
 }

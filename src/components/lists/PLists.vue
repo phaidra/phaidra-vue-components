@@ -342,8 +342,33 @@ export default {
       } finally {
         this.membersLoading = false
       }
-    }
+    },
+    getLists: async function() {
+      this.listsLoading = true;
+      try {
+        let response = await this.$http.request({
+          method: "GET",
+          url: this.instance.api + "/lists",
+          headers: {
+            "X-XSRF-TOKEN": this.$store.state.user.token,
+          },
+        });
+        this.lists = response.data.lists;
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit("setAlerts", response.data.alerts);
+        }
+      } catch (error) {
+        console.log(error);
+        this.$store.commit("setAlerts", [{ type: "danger", msg: error }]);
+      } finally {
+        this.listsLoading = false;
+      }
+    },
   },
+  mounted() {
+    this.getLists()
+  },
+  // The below method is not working in nuxt js
   beforeRouteEnter: async function (to, from, next) {
     next(async vm => {
       vm.listsLoading = true
