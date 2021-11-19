@@ -400,8 +400,34 @@ export default {
       } finally {
         this.membersLoading = false
       }
+    },
+    getGroups: async function() {
+       this.groupsLoading = true
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.instance.api + '/groups',
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
+        })
+        this.groups = response.data.groups
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.groupsLoading = false
+      }
     }
   },
+  created: function () {
+    console.log('lgroups mounted');
+    this.getGroups()
+  },
+  // The below method is not working in nuxt js
   beforeRouteEnter: async function (to, from, next) {
     next(async vm => {
       vm.groupsLoading = true

@@ -50,7 +50,7 @@
               <v-row no-gutters class="mb-4">
                 <v-col cols="10">
                   <h3 class="title font-weight-light primary--text" @click.stop v-if="doc.dc_title">
-                    <router-link :to="{ name: 'detail', params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</router-link>
+                    <router-link :to="{ path: `detail/${doc.pid}`, params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</router-link>
                   </h3>
                 </v-col>
                 <v-spacer></v-spacer>
@@ -160,7 +160,7 @@ export default {
         })
         if (response.data.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
-          this.$router.push({ name: 'detail', params: { pid: collection.pid } })
+          this.$router.push({ path: `detail/${collection.pid}`, params: { pid: collection.pid } })
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
             this.$store.commit('setAlerts', response.data.alerts)
@@ -189,7 +189,7 @@ export default {
         })
         if (response.data.status === 200) {
           this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
-          this.$router.push({ name: 'detail', params: { pid: collection.pid } })
+          this.$router.push({ path: `detail/${collection.pid}`, params: { pid: collection.pid } })
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
             this.$store.commit('setAlerts', response.data.alerts)
