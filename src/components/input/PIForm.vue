@@ -1589,8 +1589,10 @@ export default {
       this.$emit('form-input-' + f.component, f)
     },
     roleInput: function (f, event) {
-      f.role = event['@id']
-      this.$emit('form-input-' + f.component, f)
+      if(event) {
+        f.role = event['@id']
+        this.$emit('form-input-' + f.component, f)
+      }
     },
     containedInRoleInput: function (f, event) {
       for (let r of f.roles) {

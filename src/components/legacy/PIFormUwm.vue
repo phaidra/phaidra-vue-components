@@ -102,8 +102,11 @@ export default {
       }
     },
     addField: function (node) {
-      let f = arrays.duplicate(this.parents[node.id].children, node)
-      f.removable = true
+      let f;
+      if(this.parents[node.id] && this.parents[node.id].children) {
+        f = arrays.duplicate(this.parents[node.id].children, node)
+        f.removable = true
+      }
       this.assignIdsAndParentsRec(this.form, 'root', { id: 'root', children: this.form })
       this.$emit('load-form', this.form)
     },

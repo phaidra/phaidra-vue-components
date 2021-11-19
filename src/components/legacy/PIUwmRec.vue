@@ -461,7 +461,7 @@ export default {
         if (prevNode) {
           this.children.length = nrPrevNodes + 1
           let termChildren = await this._getTermChildren(node.ui_value)
-          if (termChildren.length > 0) {
+          if (termChildren && termChildren.length && termChildren.length > 0) {
             this.children.push(
               {
                 'labels': {
@@ -491,7 +491,7 @@ export default {
         } else {
           this.children.length = 1
           let termChildren = await this._getTermChildren(node.ui_value)
-          if (termChildren.length > 0) {
+          if (termChildren && termChildren.length && termChildren.length > 0) {
             this.children.push(
               {
                 'labels': {
@@ -660,7 +660,7 @@ export default {
             return qs.stringify(params, { arrayFormat: 'repeat' })
           }
         })
-        if (response.data.terms.length > 0) {
+        if (response.data.terms && response.data.terms.length && response.data.terms.length > 0) {
           nodeClone.ui_value = ''
           nodeClone.data_order = parseInt(nodeClone.data_order) + 1
           nodeClone.vocabularies[0].terms = response.data.terms
