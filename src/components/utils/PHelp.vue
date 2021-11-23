@@ -7,7 +7,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="primary" :to="{ name: 'metadatafieldshelp' }" target="_blank">{{ $t('Metadata fields overview') }}</v-btn>
+      <v-btn color="primary" :to="'/metadata-fields-help'" target="_blank">{{ $t('Metadata fields overview') }}</v-btn>
       <v-btn color="grey" dark :href="url + '.pdf'" target="_blank">{{ $t('Guidelines - PDF version') }}</v-btn>
     </v-card-actions>
   </v-card>

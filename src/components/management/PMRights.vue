@@ -269,7 +269,7 @@ export default {
       this.orgunit = unit
       this.path = ''
       let pathArr = []
-      if (!unit.hasOwnProperty('@id')) {
+      if (unit && !unit.hasOwnProperty('@id')) {
         unit = this.getTerm('orgunits', unit)
       }
       this.getOrgPath(unit, this.vocabularies['orgunits'].tree, pathArr)
