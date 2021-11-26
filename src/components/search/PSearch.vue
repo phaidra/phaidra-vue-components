@@ -115,6 +115,11 @@ export default {
     PSearchFilters,
     PSearchToolbar
   },
+  data() {
+    return {
+      loading: false
+    }
+  },
   computed: {
     page: {
       get () {
@@ -170,6 +175,7 @@ export default {
       }
 
       try {
+        this.$store.commit('setLoading', true)
         let response = await this.$http.request({
           method: 'POST',
           url: this.instance.solr + '/select',
@@ -178,11 +184,13 @@ export default {
             'content-type': 'application/x-www-form-urlencoded'
           }
         })
+        this.$store.commit('setLoading', false)
         this.docs = response.data.response.docs
         this.total = response.data.response.numFound
         this.facet_counts = response.data.facet_counts
         updateFacetQueries(response.data.facet_counts.facet_queries, facetQueries)
       } catch (error) {
+        this.$store.commit('setLoading', false)
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       }
@@ -204,6 +212,7 @@ export default {
         params.rows = this.total
         params.fl = [ 'pid', 'dc_title' ]
         try {
+          this.$store.commit('setLoading', true)
           let response = await this.$http.request({
             method: 'POST',
             url: this.instance.solr + '/select',
@@ -212,10 +221,12 @@ export default {
               'content-type': 'application/x-www-form-urlencoded'
             }
           })
+          this.$store.commit('setLoading', false)
           return response.data.response.docs
         } catch (error) {
           console.log(error)
           this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+          this.$store.commit('setLoading', false)
         }
       }
     },
