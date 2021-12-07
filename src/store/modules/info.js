@@ -1,6 +1,6 @@
 import i18n from '../../i18n/i18n'
 
-const state = {
+export const state = () => ({
   metadataFieldsOverview: [
     {
       title: 'Descriptive metadata',
@@ -2753,10 +2753,10 @@ const state = {
       ]
     }
   ]
-}
+})
 
 const mutations = {
-  sortFieldsOverview (state, locale) {
+  sortFieldsOverview(state, locale) {
     for (let section of state.metadataFieldsOverview) {
       if (locale !== 'eng') {
         section.fields.sort((a, b) => i18n.t(a.title).localeCompare(i18n.t(b.title), locale))
@@ -2765,10 +2765,10 @@ const mutations = {
       }
     }
   },
-  initFieldsOverview (state) {
+  initFieldsOverview(state) {
     state.metadataFieldsOverview[0].fields[0].open = true
   },
-  switchFieldsOverview (state, id) {
+  switchFieldsOverview(state, id) {
     for (let cat of state.metadataFieldsOverview) {
       for (let f of cat.fields) {
         if (f.id === id) {
@@ -2782,7 +2782,7 @@ const mutations = {
 }
 
 const actions = {
-  localeChange ({ commit, state }, locale) {
+  localeChange({ commit, state }, locale) {
     commit('sortFieldsOverview', locale)
   }
 }

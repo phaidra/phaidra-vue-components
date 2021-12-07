@@ -248,7 +248,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.dispatch('loadLanguages', this.$i18n.locale)
+    this.$store.dispatch('vocabulary/loadLanguages', this.$i18n.locale)
   }
 }
 </script>

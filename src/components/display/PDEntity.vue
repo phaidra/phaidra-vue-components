@@ -105,12 +105,12 @@ export default {
   },
   methods: {
     getLocalizedTermLabel: function (role) {
-      return this.$store.getters.getLocalizedTermLabel('rolepredicate', role, this.$i18n.locale)
+      return this.$store.getters['vocabulary/getLocalizedTermLabel']('rolepredicate', role, this.$i18n.locale)
     }
   },
   mounted: function () {
     this.$nextTick(function () {
-      this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
+      this.$store.dispatch('vocabulary/loadOrgUnits', this.$i18n.locale)
     })
   }
 }

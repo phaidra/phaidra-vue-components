@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     terms: function () {
-      return this.resourceType ? this.$store.getters.getObjectTypeForResourceType(this.resourceType) : this.vocabularies[this.vocabulary].terms
+      return this.resourceType ? this.$store.getters['vocabulary/getObjectTypeForResourceType'](this.resourceType) : this.vocabularies[this.vocabulary].terms
     }
   },
   data () {
@@ -58,7 +58,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.getters.getObjectTypeForResourceType(this.resourceType)
+    this.$store.getters['vocabulary/getObjectTypeForResourceType'](this.resourceType)
   }
 }
 </script>

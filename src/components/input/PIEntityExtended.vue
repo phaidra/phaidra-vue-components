@@ -555,7 +555,7 @@ export default {
   },
   mounted: async function () {
     this.$nextTick(async function () {
-      await this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
+      await this.$store.dispatch('vocabulary/loadOrgUnits', this.$i18n.locale)
       this.loading = !this.vocabularies[this.roleVocabulary].loaded
       // emit input to set skos:prefLabel in parent
       if (this.role) {

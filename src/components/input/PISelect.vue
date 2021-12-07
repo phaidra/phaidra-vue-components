@@ -138,7 +138,7 @@ export default {
             }
           }
         } else {
-          await this.$store.dispatch('loadVocabulary', this.vocabulary)
+          await this.$store.dispatch('vocabulary/loadVocabulary', this.vocabulary)
           // emit input to set skos:prefLabel in parent
           if (this.value) {
             for (let term of this.vocabularies[this.vocabulary].terms) {

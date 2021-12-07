@@ -231,7 +231,7 @@ export default {
     }
   },
   mounted: async function () {
-    await this.$store.dispatch('loadLanguages', this.$i18n.locale)
+    await this.$store.dispatch('vocabulary/loadLanguages', this.$i18n.locale)
   }
 }
 </script>

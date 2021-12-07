@@ -1,4 +1,4 @@
-import vocabulary from '../store/modules/vocabulary'
+import { state } from '../store/modules/vocabulary'
 
 var roles = {
   'role:aut': 1,
@@ -7,7 +7,8 @@ var roles = {
   'role:assessor': 4
 }
 let i = Object.keys(roles).length
-for (let r of vocabulary.state.vocabularies.rolepredicate.terms) {
+let stateX = state()
+for (let r of stateX.vocabularies.rolepredicate.terms) {
   i++
   if (!roles[r['@id']]) {
     roles[r['@id']] = i

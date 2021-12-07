@@ -7,22 +7,22 @@ export const vocabulary = {
   methods: {
     getLocalizedTermLabel: function (vocabulary, value) {
       if (vocabulary && value) {
-        return this.$store.getters.getLocalizedTermLabel(vocabulary, value, this.$i18n.locale)
+        return this.$store.getters['vocabulary/getLocalizedTermLabel'](vocabulary, value, this.$i18n.locale)
       }
     },
     getLocalizedTermLabelByNotation: function (vocabulary, notation) {
       if (vocabulary && notation) {
-        return this.$store.getters.getLocalizedTermLabelByNotation(vocabulary, notation, this.$i18n.locale)
+        return this.$store.getters['vocabulary/getLocalizedTermLabelByNotation'](vocabulary, notation, this.$i18n.locale)
       }
     },
     getTerm: function (vocabulary, value) {
       if (vocabulary && value) {
-        return this.$store.getters.getTerm(vocabulary, value)
+        return this.$store.getters['vocabulary/getTerm'](vocabulary, value)
       }
     },
     getTermProperty: function (vocabulary, id, property) {
       if (vocabulary && id && property) {
-        return this.$store.getters.getTermProperty(vocabulary, id, property)
+        return this.$store.getters['vocabulary/getTermProperty'](vocabulary, id, property)
       }
     },
     autocompleteFilter: function (item, queryText) {
@@ -52,7 +52,7 @@ export const vocabulary = {
     },
     getLocalizedDefinition: function (vocabulary, value) {
       if (vocabulary && value) {
-        let item = this.$store.getters.getTerm(vocabulary, value)
+        let item = this.$store.getters['vocabulary/getTerm'](vocabulary, value)
         if (item['skos:definition']) {
           return item['skos:definition'][this.$i18n.locale] ? item['skos:definition'][this.$i18n.locale] : item['skos:definition']['eng']
         } else {

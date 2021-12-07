@@ -111,7 +111,7 @@ export default {
   mounted: function () {
     this.$nextTick(function () {
       if (!this.vocabularies['orgunits'].loaded) {
-        this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
+        this.$store.dispatch('vocabulary/loadOrgUnits', this.$i18n.locale)
       }
       // emit input to set skos:prefLabel in parent
       if (this.value) {

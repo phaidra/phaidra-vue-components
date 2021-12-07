@@ -1520,7 +1520,7 @@ export default {
       f.selectedTerms = []
       if (Array.isArray(event)) {
         for (let ot of event) {
-          let term = this.$store.getters.getTerm('objecttype', ot)
+          let term = this.$store.getters['vocabulary/getTerm']('objecttype', ot)
           let field = {
             value: term['@id']
           }
@@ -1589,7 +1589,7 @@ export default {
       this.$emit('form-input-' + f.component, f)
     },
     roleInput: function (f, event) {
-      if(event) {
+      if (event) {
         f.role = event['@id']
         this.$emit('form-input-' + f.component, f)
       }
@@ -1665,7 +1665,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.dispatch('loadLanguages', this.$i18n.locale)
+    this.$store.dispatch('vocabulary/loadLanguages', this.$i18n.locale)
   }
 }
 </script>

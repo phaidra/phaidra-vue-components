@@ -444,7 +444,7 @@ export default {
           if (notation === 'A-1') {
             name = this.$t('Whole University')
           } else {
-            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation, this.$i18n.locale)
+            name = this.$store.getters['vocabulary/getLocalizedTermLabelByNotation']('orgunits', notation, this.$i18n.locale)
             if (!name) {
               name = notation
             }
@@ -466,7 +466,7 @@ export default {
           if (notation === 'A-1') {
             name = this.$t('Whole University')
           } else {
-            name = this.$store.getters.getLocalizedTermLabelByNotation('orgunits', notation, this.$i18n.locale)
+            name = this.$store.getters['vocabulary/getLocalizedTermLabelByNotation']('orgunits', notation, this.$i18n.locale)
             if (!name) {
               name = notation
             }
@@ -518,7 +518,7 @@ export default {
   mounted: async function () {
     this.$nextTick(function () {
       if (!this.vocabularies['orgunits'].loaded) {
-        this.$store.dispatch('loadOrgUnits', this.$i18n.locale)
+        this.$store.dispatch('vocabulary/loadOrgUnits', this.$i18n.locale)
       }
       this.loadGroups()
     })
