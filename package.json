@@ -20,6 +20,7 @@
     "autolinker": "^3.14.3",
     "axios": "^0.21.2",
     "base-64": "^0.1.0",
+    "file-saver": "^2.0.5",
     "leaflet-geosearch": "^3.0.6",
     "moment": "^2.27.0",
     "ms": "^2.1.3",

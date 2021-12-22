@@ -24,6 +24,16 @@
               :toggleSelection="toggleSelection"
               :selectioncheck="selectioncheck" />
           </v-col>
+            <v-col cols="12" md="1">
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" @click.native="csvExport()">
+                  <span>Export</span>
+                </v-btn>
+              </template>
+              <span>{{ $t('Download search results as a CSV file') }}</span>
+            </v-tooltip>
+          </v-col>
         </v-row>
         <v-row class="hidden-md-and-up">
           <v-bottom-sheet v-model="filterdialog" scrollable>
@@ -106,6 +116,7 @@ import '@/compiled-icons/material-toggle-check-box-outline-blank'
 import { facetQueries, updateFacetQueries, persAuthors, corpAuthors, deactivateFacetQueries } from './facets'
 import { buildParams, buildSearchDef, sortdef } from './utils'
 import { setSearchParams } from './location'
+import { saveAs } from 'file-saver'
 
 export default {
   name: 'p-search',
@@ -246,6 +257,32 @@ export default {
           return this.sortdef[i].active
         }
       }
+    },
+    csvExport: function () {
+      const solrParams = {}
+      solrParams.indent = 'on'
+      solrParams.q = '*:*'
+      solrParams.rows = this.total
+      solrParams.wt = 'csv'
+      solrParams.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
+      // if (this.$i18n.locale === 'deu') {
+      // solrParams.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
+      // } else {
+      // solrParams.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
+      // }
+      solrParams['fl.alias'] = ''
+      const csvquery = qs.stringify(solrParams, { encodeValuesOnly: true, indices: false })
+      fetch(this.instance.solr + '/select?' + csvquery, {
+      method: 'GET',
+      mode: 'cors'
+      })
+      .then(function (response) { return response.text() })
+      .then(function (text) {
+      var blob = new Blob([text], {
+      type: 'text/csv;charset=utf-8'
+      })
+      saveAs(blob, 'search-results.csv')
+      })
     },
     removeCollectionFilter: function () {
       this.inCollection = ''
