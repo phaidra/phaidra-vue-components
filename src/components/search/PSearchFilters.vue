@@ -243,15 +243,15 @@ export default {
       }
       return false
     },
-    marcRolesArray() {
+    marcRolesArray () {
       this.$store.dispatch('vocabulary/sortRoles', this.$i18n.locale)
       let arr = []
       let roles = this.$store.state.vocabulary.vocabularies.rolepredicate['terms']
       let lang = this.$i18n.locale
       for (let role of roles) {
-        arr.push({ value: role['@id'].replace("role:", ""), text: role['skos:prefLabel'][lang] })
+        arr.push({ value: role['@id'].replace('role:', ''), text: role['skos:prefLabel'][lang] })
       }
-      let otherRole = arr.find(elem => elem.value == 'oth')
+      let otherRole = arr.find(elem => elem.value === 'oth')
       let filteredRoles = arr.filter(elem => elem.value !== 'oth')
       arr = filteredRoles
       arr.unshift(otherRole)
@@ -406,6 +406,9 @@ export default {
     }
   },
   mounted () {
+    if (this.$router.currentRoute.query.collection) {
+      this.resetFilters()
+    }
     // for (let role in this.marcRoles) {
     //   this.marcRolesArray.push({ value: role, text: this.$t(this.marcRoles[role]) })
     // }

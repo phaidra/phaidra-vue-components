@@ -179,7 +179,10 @@ export default {
 
       let { searchdefarr, ands } = buildSearchDef(this)
       let params = buildParams(this, ands)
-
+      if (this.inCollection) {
+        const pid = this.inCollection.replace(/[o:]/g, '')
+        params.sort = `pos_in_o_${pid} asc`
+      }
       if (process.browser) {
         this.link = location.protocol + '//' + location.host + '/search?' + searchdefarr.join('&')
         window.history.replaceState(null, this.$t('Search results'), this.link)
