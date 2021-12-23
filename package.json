@@ -3,9 +3,9 @@
   "version": "0.8.0",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "node init && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-bundle": "vue-cli-service build --target lib --name phaidra-vue-components ./src/components/index.js",
+    "build-bundle": "node init && vue-cli-service build --target lib --name phaidra-vue-components ./src/components/index.js",
     "svg": "vsvg -s ./src/svg-icons -t ./src/compiled-icons"
   },
   "main": "./dist/phaidra-vue-components.common.js",
@@ -20,6 +20,7 @@
     "autolinker": "^3.14.3",
     "axios": "^0.21.2",
     "base-64": "^0.1.0",
+    "file-saver": "^2.0.5",
     "leaflet-geosearch": "^3.0.6",
     "moment": "^2.27.0",
     "ms": "^2.1.3",
