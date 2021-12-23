@@ -41,6 +41,7 @@ const state = {
     },
     'rolepredicate': {
       terms: [
+        { '@id': 'role:oth', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere', 'ita': 'Altro' } },
         { '@id': 'role:abr', 'skos:prefLabel': { 'eng': 'Abridger', 'deu': 'Abridger', 'ita': 'Abridger' } },
         { '@id': 'role:act', 'skos:prefLabel': { 'eng': 'Actor', 'deu': 'SchauspielerIn', 'ita': 'Attore' } },
         { '@id': 'role:adp', 'skos:prefLabel': { 'eng': 'Adapter', 'deu': 'BearbeiterIn', 'ita': 'Adattatore' } },
@@ -224,7 +225,6 @@ const state = {
         { '@id': 'role:opn', 'skos:prefLabel': { 'eng': 'Opponent', 'deu': 'WidersacherIn', 'ita': 'Controrelatore' } },
         { '@id': 'role:orm', 'skos:prefLabel': { 'eng': 'Organizer', 'deu': 'VeranstalterIn', 'ita': 'Organizer' } },
         { '@id': 'role:org', 'skos:prefLabel': { 'eng': 'Originator', 'deu': 'ErzeugerIn', 'ita': 'Originator' } },
-        { '@id': 'role:oth', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere', 'ita': 'Altro' } },
         { '@id': 'role:own', 'skos:prefLabel': { 'eng': 'Owner', 'deu': 'EigentümerIn', 'ita': 'Proprietario' } },
         { '@id': 'role:pan', 'skos:prefLabel': { 'eng': 'Panelist', 'deu': 'DiskussionsteilnehmerIn', 'ita': 'Panelist' } },
         { '@id': 'role:ppm', 'skos:prefLabel': { 'eng': 'Papermaker', 'deu': 'PapiermacherIn / PapierherstellerIn', 'ita': 'Papermaker' } },
