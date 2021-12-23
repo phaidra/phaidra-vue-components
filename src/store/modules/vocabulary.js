@@ -1299,6 +1299,9 @@ const mutations = {
 }
 
 const actions = {
+  sortRoles ({ commit }, locale) {
+    commit('sortRoles', locale)
+  },
   loadLanguages ({ commit, state }, locale) {
     if (state.vocabularies['lang']['terms'].length < 1) {
       let langterms = languages.get_lang()
