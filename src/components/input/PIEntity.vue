@@ -1,20 +1,20 @@
 <template>
   <v-row v-if="!hidden">
     <v-col cols="4" v-if="!hideRole">
-      <v-autocomplete
-        :disabled="disablerole"
-        v-on:input="$emit('input-role', $event)"
-        :label="$t(roleLabel ? roleLabel : 'Role')"
-        :items="vocabularies[roleVocabulary].terms"
-        :item-value="'@id'"
-        :value="getTerm(roleVocabulary, role)"
-        :filter="autocompleteFilter"
-        :filled="inputStyle==='filled'"
-        :outlined="inputStyle==='outlined'"
-        return-object
-        clearable
-        :error-messages="roleErrorMessages"
-      >
+        <v-autocomplete
+          :disabled="disablerole"
+          v-on:input="$emit('input-role', $event)"
+          :label="$t(roleLabel ? roleLabel : 'Role')"
+          :items="rolesArray"
+          :item-value="'@id'"
+          :value="getTerm(roleVocabulary, role)"
+          :filter="autocompleteFilter"
+          :filled="inputStyle==='filled'"
+          :outlined="inputStyle==='outlined'"
+          return-object
+          clearable
+          :error-messages="roleErrorMessages"
+        >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
             <v-list-item-title  v-html="`${getLocalizedTermLabel(roleVocabulary, item['@id'])}`"></v-list-item-title>
@@ -171,6 +171,17 @@ export default {
     },
     organizationErrorMessages: {
       type: Array
+    }
+  },
+  computed: {
+    rolesArray () {
+      this.$store.dispatch('vocabulary/sortRoles', this.$i18n.locale)
+      let arr = this.vocabularies[this.roleVocabulary].terms
+      let otherRole = arr.find(elem => elem['@id'] === 'role:oth')
+      let filteredRoles = arr.filter(elem => elem['@id'] !== 'role:oth')
+      arr = filteredRoles
+      arr.unshift(otherRole)
+      return arr
     }
   },
   mounted: function () {

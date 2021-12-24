@@ -209,6 +209,7 @@ const vocabularies = {
   },
   'rolepredicate': {
     terms: [
+      { '@id': 'role:oth', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere', 'ita': 'Altro' } },
       { '@id': 'role:abr', 'skos:prefLabel': { 'eng': 'Abridger', 'deu': 'Autor*in von Kurzfassungen', 'ita': 'Abridger' } },
       { '@id': 'role:act', 'skos:prefLabel': { 'eng': 'Actor', 'deu': 'Schauspieler*in', 'ita': 'Attore' } },
       { '@id': 'role:adp', 'skos:prefLabel': { 'eng': 'Adapter', 'deu': 'Bearbeiter*in', 'ita': 'Adattatore' } },
@@ -368,7 +369,6 @@ const vocabularies = {
       { '@id': 'role:opn', 'skos:prefLabel': { 'eng': 'Opponent', 'deu': 'Opponent*in bei akademischen Prüfungen', 'ita': 'Controrelatore' } },
       { '@id': 'role:orm', 'skos:prefLabel': { 'eng': 'Organizer', 'deu': 'Veranstalter*in', 'ita': 'Organizer' } },
       { '@id': 'role:org', 'skos:prefLabel': { 'eng': 'Originator', 'deu': 'Schöpfer*in / Urheber*in ', 'ita': 'Originator' } },
-      { '@id': 'role:oth', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere', 'ita': 'Altro' } },
       { '@id': 'role:own', 'skos:prefLabel': { 'eng': 'Owner', 'deu': 'Eigentümer*in', 'ita': 'Proprietario' } },
       { '@id': 'role:pan', 'skos:prefLabel': { 'eng': 'Panelist', 'deu': 'Diskussionsteilnehmer*in', 'ita': 'Panelist' } },
       { '@id': 'role:ppm', 'skos:prefLabel': { 'eng': 'Papermaker', 'deu': 'Papiermacher*in', 'ita': 'Papermaker' } },
@@ -482,6 +482,7 @@ const vocabularies = {
   },
   'submitrolepredicate': {
     terms: [
+      { '@id': 'role:oth', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere', 'ita': 'Altro' } },
       { '@id': 'role:adp', 'skos:prefLabel': { 'eng': 'Adapter', 'deu': 'Bearbeiter*in', 'ita': 'Adattatore' } },
       { '@id': 'role:arc', 'skos:prefLabel': { 'eng': 'Architect', 'deu': 'Architekt*in', 'ita': 'Architetto' } },
       { '@id': 'role:art', 'skos:prefLabel': { 'eng': 'Artist', 'deu': 'Künstler*in', 'ita': 'Artista' } },
@@ -515,7 +516,6 @@ const vocabularies = {
       { '@id': 'role:mfr', 'skos:prefLabel': { 'eng': 'Manufacturer', 'deu': 'Hersteller*in', 'ita': 'Manufacturer' } },
       { '@id': 'role:emt', 'skos:prefLabel': { 'eng': 'Metal-engraver', 'deu': 'Metallstecher*in', 'ita': 'Calcografo' } },
       { '@id': 'role:nrt', 'skos:prefLabel': { 'eng': 'Narrator', 'deu': 'Erzähler*in', 'ita': 'Narrator' } },
-      { '@id': 'role:oth', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere', 'ita': 'Altro' } },
       { '@id': 'role:pedagogicexpert', 'skos:prefLabel': { 'eng': 'Pedagogic Expert', 'deu': 'Pädagogische/r Expert*in', 'ita': 'Esperto pedagogico' } },
       { '@id': 'role:pht', 'skos:prefLabel': { 'eng': 'Photographer', 'deu': 'Fotograf*in', 'ita': 'Fotografo' } },
       { '@id': 'role:pro', 'skos:prefLabel': { 'eng': 'Producer', 'deu': 'Produzent*in', 'ita': 'Produttore' } },
@@ -1215,6 +1215,9 @@ const mutations = {
   },
   sortRoles (state, locale) {
     state.vocabularies['rolepredicate']['terms'].sort(function (a, b) {
+      return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+    })
+    state.vocabularies['submitrolepredicate']['terms'].sort(function (a, b) {
       return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
     })
   },
