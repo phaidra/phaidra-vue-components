@@ -97,7 +97,7 @@ const ot4rt = {
   ],
   // data
   'https://pid.phaidra.org/vocabulary/7AVS-Y482': [
-    // dataset <-- FIXME
+    ns + 'KW6N-2VTP',
     // still image
     ns + '7CAB-P987',
     // still image of physical object
@@ -1290,6 +1290,11 @@ const mutations = {
       return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
     })
   },
+  sortObjectTypes (state, locale) {
+    state.vocabularies['objecttype']['terms'].sort(function (a, b) {
+      return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+    })
+  },
   setOefos (state, data) {
     if (state.vocabularies['oefos']['loaded'] === false) {
       state.vocabularies['oefos']['tree'] = data.tree
@@ -1373,6 +1378,9 @@ const mutations = {
 const actions = {
   sortRoles ({ commit }, locale) {
     commit('sortRoles', locale)
+  },
+  sortObjectTypes ({ commit }, locale) {
+    commit('sortObjectTypes', locale)
   },
   loadLanguages ({ commit, state }, locale) {
     if (state.vocabularies['lang']['terms'].length < 1) {
