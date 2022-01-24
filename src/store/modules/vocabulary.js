@@ -15,82 +15,151 @@ const ns = 'https://pid.phaidra.org/vocabulary/'
 const ot4rt = {
   // image
   'https://pid.phaidra.org/vocabulary/44TN-P1S0': [
-    // drawing
-    ns + '85QM-7TZ3',
-    // painting
-    ns + 'WWS3-0ACP',
-    // print
-    ns + '7WYH-AZ8C',
-    // wall chart
-    ns + 'QM0R-ZTAA',
-    // map
-    ns + 'A52A-CWMM',
-    // photograph
+    // still image
     ns + '7CAB-P987',
-    // postcard
-    ns + 'Q4Q5-3554',
-    // poster
-    ns + '6EFK-BRQD',
+    // still image of physical object
+    ns + '4YS3-8T2K',
     // slide (Diapositiv)
     ns + '431H-5YSA',
-    // other
-    ns + 'PYRE-RAWJ'
-  ],
-  // text
-  'https://pid.phaidra.org/vocabulary/69ZZ-2KGX': [
-    // print
-    ns + '7WYH-AZ8C',
-    // musical notation
-    ns + '8A6X-FKB1',
-    // periodical
-    ns + 'GY3Z-50FT',
-    // newspaper
-    ns + 'DCHD-W3GM',
-    // magazine
-    ns + 'EHPQ-XYA3',
-    // letter (correspondence)
-    ns + 'GBWA-JJP8',
-    // report
-    ns + 'JMAV-7F3R',
-    // project deliverable
-    ns + 'T8PK-GADB',
-    // data management plan
-    ns + 'W2Z3-3YA6',
-    // lecture
-    ns + 'F4JN-ZST0',
-    // yearbook
-    ns + 'HARH-6R3C',
-    // other
-    ns + 'PYRE-RAWJ'
-  ],
-  // video
-  'https://pid.phaidra.org/vocabulary/B0Y6-GYT8': [
-    // interview
-    ns + '8KGA-CH97',
-    // lecture
-    ns + 'F4JN-ZST0',
-    // other
-    ns + 'PYRE-RAWJ'
-  ],
-  // data
-  'https://pid.phaidra.org/vocabulary/7AVS-Y482': [
-    // questionnaire
-    ns + 'MZ2Q-R099',
-    // learning object
-    ns + 'YA8R-1M0D',
+    // painting
+    ns + 'WWS3-0ACP',
+    // wall chart
+    ns + 'QM0R-ZTAA',
+    // conference poster
+    ns + '7HBP-P9S3',
+    // map
+    ns + 'A52A-CWMM',
     // other
     ns + 'PYRE-RAWJ'
   ],
   // sound
   'https://pid.phaidra.org/vocabulary/8YB5-1M0J': [
-    // interview
-    ns + '8KGA-CH97',
     // lecture
     ns + 'F4JN-ZST0',
-    // podcast
-    ns + 'JF85-NYRJ',
+    // interview
+    ns + '8KGA-CH97',
     // musical composition
     ns + 'EWZ9-3MPH',
+    // other
+    ns + 'PYRE-RAWJ'
+  ],
+  // video
+  'https://pid.phaidra.org/vocabulary/B0Y6-GYT8': [
+    // film
+    ns + 'Y8CC-HY82',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // interview
+    ns + '8KGA-CH97',
+    // other
+    ns + 'PYRE-RAWJ'
+  ],
+  // text
+  'https://pid.phaidra.org/vocabulary/69ZZ-2KGX': [
+    // text
+    ns + '69ZZ-2KGX',
+    // book
+    ns + '47QB-8QF1',
+    // book part
+    ns + 'XA52-09WA',
+    // conference object
+    ns + 'QKDF-E5HA',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // letter (correspondence)
+    ns + 'GBWA-JJP8',
+    // journal article
+    ns + 'VKA6-9XTY',
+    // newspaper
+    ns + 'DCHD-W3GM',
+    // magazine
+    ns + 'EHPQ-XYA3',
+    // preprint
+    ns + 'T023-BGTD',
+    // report
+    ns + 'JMAV-7F3R',
+    // data management plan
+    ns + 'W2Z3-3YA6',
+    // research report
+    ns + '7J0J-HC61',
+    // technical report
+    ns + 'DF69-TVE8',
+    // review
+    ns + 'JJKV-B1CG',
+    // working paper
+    ns + '489N-Y6VX',
+    // musical notation
+    ns + '8A6X-FKB1',
+    // project deliverable
+    ns + 'T8PK-GADB',
+    // other
+    ns + 'PYRE-RAWJ'
+  ],
+  // data
+  'https://pid.phaidra.org/vocabulary/7AVS-Y482': [
+    // dataset <-- FIXME
+    // still image
+    ns + '7CAB-P987',
+    // still image of physical object
+    ns + '4YS3-8T2K',
+    // slide (Diapositiv)
+    ns + '431H-5YSA',
+    // painting
+    ns + 'WWS3-0ACP',
+    // wall chart
+    ns + 'QM0R-ZTAA',
+    // conference poster
+    ns + '7HBP-P9S3',
+    // map
+    ns + 'A52A-CWMM',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // interview
+    ns + '8KGA-CH97',
+    // musical composition
+    ns + 'EWZ9-3MPH',
+    // moving image
+    ns + 'Y8CC-HY82',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // interview
+    ns + '8KGA-CH97',
+    // text
+    ns + '69ZZ-2KGX',
+    // book
+    ns + '47QB-8QF1',
+    // book part
+    ns + 'XA52-09WA',
+    // conference object
+    ns + 'QKDF-E5HA',
+    // lecture
+    ns + 'F4JN-ZST0',
+    // letter (correspondence)
+    ns + 'GBWA-JJP8',
+    // journal article
+    ns + 'VKA6-9XTY',
+    // newspaper
+    ns + 'DCHD-W3GM',
+    // magazine
+    ns + 'EHPQ-XYA3',
+    // preprint
+    ns + 'T023-BGTD',
+    // report
+    ns + 'JMAV-7F3R',
+    // data management plan
+    ns + 'W2Z3-3YA6',
+    // research report
+    ns + '7J0J-HC61',
+    // technical report
+    ns + 'DF69-TVE8',
+    // review
+    ns + 'JJKV-B1CG',
+    // working paper
+    ns + '489N-Y6VX',
+    // musical notation
+    ns + '8A6X-FKB1',
+    // project deliverable
+    ns + 'T8PK-GADB',
     // other
     ns + 'PYRE-RAWJ'
   ]
