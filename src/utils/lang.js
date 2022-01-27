@@ -2,6 +2,14 @@ export default {
   get_lang () {
     return [
       {
+        '@id': 'asq',
+        'skos:prefLabel': {
+          'eng': 'Austrian Sign Language',
+          'deu': 'Österreichische Gebärdensprache',
+          'fra': 'Langue des signes autrichienne'
+        }
+      },
+      {
         '@id': 'tai',
         'skos:prefLabel': {
           'eng': 'Tai languages',
