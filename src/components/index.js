@@ -79,6 +79,7 @@ import PIFormUwm from './legacy/PIFormUwm'
 import PDUwmRec from './legacy/PDUwmRec'
 import PDModsRec from './legacy/PDModsRec'
 import PFeedback from './utils/PFeedback'
+import PExpandText from './utils/PExpandText'
 import PMetadataFieldsHelp from './info/PMetadataFieldsHelp'
 
 const Components = {
@@ -163,7 +164,8 @@ const Components = {
   PDUwmRec,
   PDModsRec,
   PFeedback,
-  PMetadataFieldsHelp
+  PMetadataFieldsHelp,
+  PExpandText
 }
 
 export default {
