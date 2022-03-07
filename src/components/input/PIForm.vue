@@ -460,6 +460,7 @@
                         <p-i-project
                           v-bind.sync="f"
                           v-on:input-name="f.name=$event"
+                          v-on:input-acronym="f.acronym=$event"
                           v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                           v-on:input-funder-name="f.funderName=$event"
                           v-on:input-funder-name-language="setSelected(f, 'funderNameLanguage', $event)"

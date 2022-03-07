@@ -717,6 +717,11 @@ export default {
                     f.nameLanguage = pl['@language'] ? pl['@language'] : 'eng'
                   }
                 }
+                if (obj['frapo:hasAcronym']) {
+                  for (let ac of obj['frapo:hasAcronym']) {
+                    f.acronym = ac
+                  }
+                }
                 if (obj['rdfs:comment']) {
                   for (let c of obj['rdfs:comment']) {
                     f.description = c['@value']
@@ -1624,7 +1629,7 @@ export default {
     }
     return h
   },
-  get_json_project (name, nameLanguage, description, descriptionLanguage, identifiers, homepage, dateFrom, dateTo, funderObject) {
+  get_json_project (name, acronym, nameLanguage, description, descriptionLanguage, identifiers, homepage, dateFrom, dateTo, funderObject) {
     var h = {
       '@type': 'foaf:Project'
     }
@@ -1658,6 +1663,11 @@ export default {
     }
     if (dateTo) {
       h['frapo:hasEndDate'] = [ dateTo ]
+    }
+    if (acronym) {
+      h['frapo:hasAcronym'] = [
+        acronym
+      ]
     }
     if (homepage) {
       h['foaf:homepage'] = [
@@ -2312,8 +2322,8 @@ export default {
           } else {
             // project
             if (f.type === 'foaf:Project') {
-              if (f.name || f.identifier || f.description || f.homepage || f.funderName || f.funderIdentifier) {
-                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage, f.dateFrom, f.dateTo, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier ? [f.funderIdentifier] : null)))
+              if (f.name || f.acronym || f.identifier || f.description || f.homepage || f.funderName || f.funderIdentifier) {
+                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.acronym, f.nameLanguage, f.description, f.descriptionLanguage, f.identifier ? [f.identifier] : null, f.homepage, f.dateFrom, f.dateTo, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier ? [f.funderIdentifier] : null)))
               }
             }
           }

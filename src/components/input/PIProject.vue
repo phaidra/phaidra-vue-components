@@ -184,7 +184,16 @@
             </v-row>
 
             <v-row >
-              <v-col cols="6">
+              <v-col cols="4">
+                <v-text-field
+                  :value="acronym"
+                  :label="$t('Acronym')"
+                  v-on:blur="$emit('input-acronym',$event.target.value)"
+                  :filled="inputStyle==='filled'"
+                  :outlined="inputStyle==='outlined'"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="4">
                 <v-text-field
                   :value="identifier"
                   :label="$t('Identifier')"
@@ -193,8 +202,7 @@
                   :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </v-col>
-
-              <v-col cols="6">
+              <v-col cols="4">
                 <v-text-field
                   :value="homepage"
                   :label="$t('Homepage')"
@@ -272,6 +280,9 @@ export default {
       type: String
     },
     name: {
+      type: String
+    },
+    acronym: {
       type: String
     },
     nameLanguage: {

@@ -630,6 +630,7 @@ const fields = [
     component: 'p-project',
     name: '',
     nameLanguage: '',
+    acronym: '',
     description: '',
     descriptionLanguage: '',
     identifier: '',

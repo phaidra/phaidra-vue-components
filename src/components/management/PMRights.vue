@@ -252,10 +252,12 @@ export default {
             q: val
           }
         })
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit('setAlerts', response.data.alerts)
+        if (response.data) {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
+          }
+          this.userSearchItems = response.data.accounts ? response.data.accounts : []
         }
-        this.userSearchItems = response.data.accounts ? response.data.accounts : []
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])

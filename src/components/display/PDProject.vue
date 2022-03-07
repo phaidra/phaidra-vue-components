@@ -7,6 +7,12 @@
       </template>
     </v-row>
     <v-row>
+      <template v-for="(ac, i) in o['frapo:hasAcronym']">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'ac'+i">{{ $t('Acronym') }}</v-col>
+        <v-col :md="valueColMd" cols="12" :key="'ac'+i">{{ ac }}</v-col>
+      </template>
+    </v-row>
+    <v-row>
       <template v-for="(d, i) in o['rdfs:comment']">
         <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'dl'+i">{{ $t('Project Description') }} ({{ d['@language'] }})</v-col>
         <v-col class="valuefield" :md="valueColMd" cols="12" :key="'dv'+i">{{ d['@value'] }}</v-col>

@@ -73,6 +73,16 @@
           <span>{{ $t('Select results')}}</span>
         </v-tooltip>
       </v-col>
+      <v-col>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn icon :color="'grey darken-1'" v-on="on" @click.native="csvExport()">
+              <v-icon>mdi-download</v-icon>
+            </v-btn>
+          </template>
+          <span>{{ $t('Download search results as a CSV file') }}</span>
+        </v-tooltip>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -96,7 +106,13 @@ export default {
       type: Function,
       required: true
     },
-    selectioncheck: Boolean
+    selectioncheck: Boolean,
+    csvExport: Function
+  },
+  computed: {
+    instance: function () {
+      return this.$root.$store.state.instanceconfig
+    }
   },
   data () {
     return {

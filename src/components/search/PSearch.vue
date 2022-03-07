@@ -22,17 +22,8 @@
               :sortIsActive="sortIsActive"
               :link="link"
               :toggleSelection="toggleSelection"
-              :selectioncheck="selectioncheck" />
-          </v-col>
-            <v-col cols="12" md="1">
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
-                <v-btn v-on="on" @click.native="csvExport()">
-                  <span>Export</span>
-                </v-btn>
-              </template>
-              <span>{{ $t('Download search results as a CSV file') }}</span>
-            </v-tooltip>
+              :selectioncheck="selectioncheck"
+              :csvExport="csvExport" />
           </v-col>
         </v-row>
         <v-row class="hidden-md-and-up">
@@ -126,7 +117,7 @@ export default {
     PSearchFilters,
     PSearchToolbar
   },
-  data() {
+  data () {
     return {
       loading: false
     }
@@ -162,6 +153,50 @@ export default {
     }
   },
   methods: {
+    csvExport: async function () {
+      let { searchdefarr, ands } = buildSearchDef(this)
+      let params = buildParams(this, ands)
+      if (this.inCollection) {
+        const pid = this.inCollection.replace(/[o:]/g, '')
+        params.sort = `pos_in_o_${pid} asc`
+      }
+      // we only need count now
+      params.rows = 0
+
+      try {
+        this.$store.commit('setLoading', true)
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.solr + '/select',
+          data: qs.stringify(params, { arrayFormat: 'repeat' }),
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+          }
+        })
+        params.rows = response.data.response.numFound
+        params.indent = 'on'
+        params.wt = 'csv'
+        params.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
+        params['fl.alias'] = ''
+        const csvquery = qs.stringify(params, { encodeValuesOnly: true, indices: false })
+        fetch(this.instance.solr + '/select?' + csvquery, {
+          method: 'GET',
+          mode: 'cors'
+        })
+          .then(function (response) { return response.text() })
+          .then(function (text) {
+            var blob = new Blob([text], {
+              type: 'text/csv;charset=utf-8'
+            })
+            saveAs(blob, 'search-results.csv')
+          })
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.$store.commit('setLoading', false)
+      }
+    },
     search: async function (options) {
       // `options` are combined into the PSearch component. The later are sent
       // over from child components: e.g. SearchFilters.
@@ -260,32 +295,6 @@ export default {
           return this.sortdef[i].active
         }
       }
-    },
-    csvExport: function () {
-      const solrParams = {}
-      solrParams.indent = 'on'
-      solrParams.q = '*:*'
-      solrParams.rows = this.total
-      solrParams.wt = 'csv'
-      solrParams.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
-      // if (this.$i18n.locale === 'deu') {
-      // solrParams.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
-      // } else {
-      // solrParams.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
-      // }
-      solrParams['fl.alias'] = ''
-      const csvquery = qs.stringify(solrParams, { encodeValuesOnly: true, indices: false })
-      fetch(this.instance.solr + '/select?' + csvquery, {
-      method: 'GET',
-      mode: 'cors'
-      })
-      .then(function (response) { return response.text() })
-      .then(function (text) {
-      var blob = new Blob([text], {
-      type: 'text/csv;charset=utf-8'
-      })
-      saveAs(blob, 'search-results.csv')
-      })
     },
     removeCollectionFilter: function () {
       this.inCollection = ''

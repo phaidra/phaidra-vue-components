@@ -1579,7 +1579,7 @@ export const state = () => ({
               title: 'Usage notes',
               content: {
                 level1:
-                  'This field gathers information about the project which your resource is related to. <br>It consists of:<br> <br><ul><li> Project name: <br> Name of the project.</li> <br><li>Project description: <br> Brief description of the project.</li> <br> <li>Project identifier: <br>The project identification number.</li> <br> <li>Project homepage: <br> The main link to the project.</li> <br> <li> Funder name: <br> The name of the project funder, providing its identifier where available.</li></ul>',
+                  'This field gathers information about the project which your resource is related to. <br>It consists of:<br> <br><ul><li> Project name: <br> Name of the project.</li> <br><li> Project acronym: <br> Acronym used to identify the project, based on its full name or title. For example, the ontology "Funding, Research Administration and Projects Ontology" has the acronym "FRAPO"</li> <br><li>Project description: <br> Brief description of the project.</li> <br> <li>Project identifier: <br>The project identification number.</li> <br> <li>Project homepage: <br> The main link to the project.</li> <br> <li> Funder name: <br> The name of the project funder, providing its identifier where available.</li></ul>',
                 level2:
                   'Explicit EC or national funding information adheres to Open Access policies and meets the requirements of the <i>OpenAIRE</i> infrastructure. Where applicable, fill in the field to improve discoverability of your resource in the <i>OpenAIRE</i> portal.',
                 level3:
@@ -2756,7 +2756,7 @@ export const state = () => ({
 })
 
 const mutations = {
-  sortFieldsOverview(state, locale) {
+  sortFieldsOverview (state, locale) {
     for (let section of state.metadataFieldsOverview) {
       if (locale !== 'eng') {
         section.fields.sort((a, b) => i18n.t(a.title).localeCompare(i18n.t(b.title), locale))
@@ -2765,10 +2765,10 @@ const mutations = {
       }
     }
   },
-  initFieldsOverview(state) {
+  initFieldsOverview (state) {
     state.metadataFieldsOverview[0].fields[0].open = true
   },
-  switchFieldsOverview(state, id) {
+  switchFieldsOverview (state, id) {
     for (let cat of state.metadataFieldsOverview) {
       for (let f of cat.fields) {
         if (f.id === id) {
@@ -2782,7 +2782,7 @@ const mutations = {
 }
 
 const actions = {
-  localeChange({ commit, state }, locale) {
+  localeChange ({ commit, state }, locale) {
     commit('sortFieldsOverview', locale)
   }
 }
