@@ -1397,7 +1397,7 @@ const actions = {
           url: rootState.instanceconfig.api + '/directory/org_get_units'
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
-          commit('setAlerts', response.data.alerts)
+          commit('setAlerts', response.data.alerts, {root: true})
         }
         let terms = []
         orgunits.getOrgUnitsTerms(terms, response.data.units, null)
@@ -1405,7 +1405,7 @@ const actions = {
         commit('sortOrgUnits', locale)
       } catch (error) {
         console.log(error)
-        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch org units: ' + error }])
+        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch org units: ' + error }], {root: true})
       }
     } else {
       if (state.vocabularies['orgunits']['locale'] !== locale) {
