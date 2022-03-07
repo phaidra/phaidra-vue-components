@@ -3,17 +3,19 @@
     <v-row v-if="!hidden">
       <v-col cols="12">
         <v-btn-toggle
+          background-color='grey darken-1 white-text'
+          active-class='primary white--text'
           v-model="toggleResourcetypeModel"
           mandatory
           @change="$emit('input', getTerm('resourcetype', toggleResourcetypeModelArr[$event]))"
         >
-          <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-image</v-icon><span class="ml-2">{{ $t('Picture') }}</span></v-btn>
-          <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-volume-high</v-icon><span class="ml-2">{{ $t('Audio') }}</span></v-btn>
-          <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-video</v-icon><span class="ml-2">{{ $t('Video') }}</span></v-btn>
-          <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-file-pdf</v-icon><span class="ml-2">{{ $t('PDF Document') }}</span></v-btn>
-          <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-file</v-icon><span class="ml-2">{{ $t('Other documents / Data') }}</span></v-btn>
-          <v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-folder-open</v-icon><span class="ml-2">{{ $t('Collection') }}</span></v-btn>
-          <!--<v-btn :active-class="'primary white--text'" class="grey white--text"><v-icon color="white">mdi-link</v-icon><span class="ml-2">{{ $t('Resource') }}</span></v-btn>-->
+          <v-btn><v-icon :color="value === 'https://pid.phaidra.org/vocabulary/44TN-P1S0' ? 'white' : 'grey darken-1'">mdi-image</v-icon><span class="ml-2">{{ $t('Picture') }}</span></v-btn>
+          <v-btn><v-icon :color="value === 'https://pid.phaidra.org/vocabulary/8YB5-1M0J' ? 'white' : 'grey darken-1'">mdi-volume-high</v-icon><span class="ml-2">{{ $t('Audio') }}</span></v-btn>
+          <v-btn><v-icon :color="value === 'https://pid.phaidra.org/vocabulary/B0Y6-GYT8' ? 'white' : 'grey darken-1'">mdi-video</v-icon><span class="ml-2">{{ $t('Video') }}</span></v-btn>
+          <v-btn><v-icon :color="value === 'https://pid.phaidra.org/vocabulary/69ZZ-2KGX' ? 'white' : 'grey darken-1'">mdi-file-document</v-icon><span class="ml-2">{{ $t('PDF Document') }}</span></v-btn>
+          <v-btn><v-icon :color="value === 'https://pid.phaidra.org/vocabulary/7AVS-Y482' ? 'white' : 'grey darken-1'">mdi-file</v-icon><span class="ml-2">{{ $t('Other documents / Data') }}</span></v-btn>
+          <v-btn><v-icon :color="value === 'https://pid.phaidra.org/vocabulary/GXS7-ENXJ' ? 'white' : 'grey darken-1'">mdi-folder-open</v-icon><span class="ml-2">{{ $t('Collection') }}</span></v-btn>
+          <!--<v-btn><v-icon color="white">mdi-link</v-icon><span class="ml-2">{{ $t('Resource') }}</span></v-btn>-->
         </v-btn-toggle>
       </v-col>
     </v-row>
