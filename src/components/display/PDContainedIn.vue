@@ -44,7 +44,7 @@
             <v-row v-for="(series, k) in o['rdau:P60193']" :key="'series'+k">
               <v-col md="3" cols="12" class="pdlabel primary--text">{{ $t('rdau:P60101_rdau:P60193') }}</v-col>
               <v-col md="9" cols="12">
-                <v-card flat>
+                <v-card tile elevation="0">
                   <v-card-text class="border-left">
                     <v-container>
                       <v-row :key="'stit'+k">

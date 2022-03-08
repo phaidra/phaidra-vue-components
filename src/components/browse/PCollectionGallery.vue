@@ -47,7 +47,7 @@
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <span v-on="on">
-                    <v-card flat tile class="d-flex">
+                    <v-card tile elevation="0" class="d-flex">
                       <v-img class="grey lighten-2" aspect-ratio="1" :src="'https://' + instanceconfig.baseurl + '/preview/' + doc.pid"
                         @click="showDetailDialog(doc)">
                         <template v-slot:placeholder>
