@@ -162,10 +162,17 @@
             <template v-if="item['@type']==='aaiso:Programme'">
               <p-d-study-plan :p="p" :o="item" :key="componentid+'study-plan'+j" v-bind.sync="displayProperties"></p-d-study-plan>
             </template>
-            <template v-else-if="item['@type']==='foaf:Project'">
+          </template>
+          <template v-for="(item, j) in projectIds">
+            <template v-if="item && item['@type']==='foaf:Project'">
               <p-d-project :p="p" :o="item" :hideLabel="j !== 0" :key="componentid+'project'+j" v-bind.sync="displayProperties"></p-d-project>
             </template>
-          </template>
+            </template>
+            <v-row v-if="!shownAllProjectIds">
+                <v-col cols="6" offset="3">
+                      <span @click="showAllProjectIds()" class="mx-1 primary--text">... {{ $t('show all') }}</span>
+                </v-col>
+            </v-row>
         </template>
 
         <template v-else-if="p==='frapo:hasFundingAgency'" slot="frapo:hasFundingAgency">
@@ -492,10 +499,41 @@ export default {
     return {
       nrRoles: 0,
       showAllEntities: {},
-      entitiesLimited: {}
+      entitiesLimited: {},
+      projectIds: [],
+      shownAllProjectIds: true
     }
   },
   methods: {
+    getProjectIds: function () {
+      if (this.jsonld) {
+        const projectIds = []
+        Object.entries(this.jsonld).forEach(([p, o]) => {
+          if (p === 'frapo:isOutputOf') {
+            o.forEach((item, j) => {
+              if (j >= 4) return
+              projectIds.push(item)
+            })
+            if (o.length > 4) this.shownAllProjectIds = false
+          }
+        })
+        this.projectIds = projectIds
+      }
+    },
+    showAllProjectIds: function () {
+      if (this.jsonld) {
+        this.shownAllProjectIds = true
+        const projectIds = []
+        Object.entries(this.jsonld).forEach(([p, o]) => {
+          if (p === 'frapo:isOutputOf') {
+            o.forEach((item, j) => {
+              projectIds.push(item)
+            })
+          }
+        })
+        this.projectIds = projectIds
+      }
+    },
     getEntities: function (p, o) {
       if ((this.limitRoles === 0) || this.showAllEntities[p]) {
         return o
@@ -519,6 +557,7 @@ export default {
   },
   mounted: function () {
     this.$store.dispatch('vocabulary/loadLanguages', this.$i18n.locale)
+    this.getProjectIds()
   }
 }
 </script>
