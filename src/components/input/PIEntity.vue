@@ -42,7 +42,7 @@
         </v-col>
       </template>
       <template v-else>
-        <v-col cols="3">
+        <v-col :cols="showIdentifier ? '2' : '3'">
           <v-text-field
             :value="firstname"
             :label="$t(firstnameLabel ? firstnameLabel : 'Firstname')"
@@ -52,7 +52,7 @@
             :error-messages="firstnameErrorMessages"
           ></v-text-field>
         </v-col>
-        <v-col cols="3">
+        <v-col :cols="showIdentifier ? '2' : '3'">
           <v-text-field
             :value="lastname"
             :label="$t(lastnameLabel ? lastnameLabel : 'Lastname')"
@@ -61,6 +61,29 @@
             :outlined="inputStyle==='outlined'"
             :error-messages="lastnameErrorMessages"
           ></v-text-field>
+        </v-col>
+        <v-col v-if="showIdentifier" :cols="showIdentifier ? '2' : '3'">
+          <v-text-field
+              v-show="identifierType === 'ids:orcid'"
+              v-mask="'####-####-####-####'"
+              :value="identifierText"
+              :label="identifierLabel ? identifierLabel : $t('ORCID')"
+              v-on:blur="$emit('input-identifier', $event.target.value)"
+              :placeholder="identifierTypePlaceholder"
+              :rules="identifierType ? [validationrules['orcid']] : [validationrules['noop']]"
+              :filled="inputStyle==='filled'"
+              :outlined="inputStyle==='outlined'"
+            ></v-text-field>
+            <v-text-field
+              v-show="identifierType !== 'ids:orcid'"
+              :value="identifierText"
+              :label="identifierLabel ? identifierLabel : $t('Identifier')"
+              v-on:blur="$emit('input-identifier', $event.target.value)"
+              :placeholder="identifierTypePlaceholder"
+              :rules="identifierType ? [validationrules[getIdentifierRuleName(identifierType)]] : [validationrules['noop']]"
+              :filled="inputStyle==='filled'"
+              :outlined="inputStyle==='outlined'"
+            ></v-text-field>
         </v-col>
       </template>
     </template>
@@ -95,12 +118,17 @@
 </template>
 
 <script>
+import { mask } from 'vue-the-mask'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-i-entity',
-  mixins: [vocabulary, fieldproperties],
+  mixins: [vocabulary, fieldproperties, validationrules],
+  directives: {
+    mask
+  },
   props: {
     firstname: {
       type: String
@@ -171,6 +199,23 @@ export default {
     },
     organizationErrorMessages: {
       type: Array
+    },
+    showIdentifier: {
+      type: Boolean,
+      default: false
+    },
+    identifierVocabulary: {
+      type: String,
+      default: 'entityidentifiertype'
+    },
+    identifierText: {
+      type: String
+    },
+    identifierType: {
+      type: String
+    },
+    identifierLabel: {
+      type: String
     }
   },
   computed: {
@@ -182,6 +227,14 @@ export default {
       arr = filteredRoles
       arr.unshift(otherRole)
       return arr
+    },
+    identifierTypePlaceholder: function () {
+      for (let i of this.vocabularies[this.identifierVocabulary].terms) {
+        if (i['@id'] === this.identifierType) {
+          return i['skos:example']
+        }
+      }
+      return ''
     }
   },
   mounted: function () {

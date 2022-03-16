@@ -50,6 +50,7 @@
                         :search-input.sync="objectSearch"
                         :label="$t('Object search')"
                         :placeholder="$t('Start typing to search')"
+                        :filter="customFilter"
                         prepend-inner-icon="mdi-magnify"
                         hide-no-data
                         hide-selected
@@ -181,8 +182,9 @@ export default {
       this.objectSearchLoading = true
       try {
         let params = {
-          q: val,
+          q: val + ' OR pid:"' + val + '"',
           defType: 'edismax',
+          fq: 'dc_title:*',
           wt: 'json',
           fl: 'pid,dc_title',
           start: 0,
@@ -208,6 +210,14 @@ export default {
     }
   },
   methods: {
+    customFilter (item, queryText) {
+      const text = item.text.toLowerCase()
+      const value = item.value.toLowerCase()
+      const searchText = queryText.toLowerCase()
+      console.log(searchText + ' found in [' + text + ']:' + (text.indexOf(searchText) > -1) + ' or [' + value + ']:' + (value.indexOf(searchText) > -1))
+      return text.indexOf(searchText) > -1 ||
+        value.indexOf(searchText) > -1
+    },
     getTitlesHash: async function (pids) {
       let titles = {}
       try {
@@ -216,6 +226,7 @@ export default {
           defType: 'edismax',
           wt: 'json',
           fl: 'pid,dc_title',
+          qf: 'pid,dc_title',
           start: 0,
           rows: 5000
         }

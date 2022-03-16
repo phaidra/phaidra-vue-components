@@ -73,7 +73,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row no-gutters v-if="loadedList">
+    <v-row v-if="loadedList">
       <v-col cols="12">
         <v-card>
           <v-card-title class="title font-weight-light grey white--text">
@@ -97,6 +97,11 @@
                     single-line
                     hide-details
                   ></v-text-field>
+                  <v-spacer></v-spacer>
+                  <template v-if="token && token.length > 0">Share link: <a class="pl-2" target="_blank" :href="'/list/' + token">{{ 'https://' + instance.baseurl + '/list/' + token }}</a></template>
+                  <v-spacer></v-spacer>
+                  <v-btn v-if="token && token.length > 0" color="primary" dark class="mb-2"  @click="deleteToken(loadedList.listid)">{{ $t('Remove share link') }}</v-btn>
+                  <v-btn v-else color="primary" dark class="mb-2"  @click="createToken(loadedList.listid)">{{ $t('Create share link') }}</v-btn>
                   <v-spacer></v-spacer>
                   <v-btn color="primary" dark class="mb-2"  @click="$refs.collectiondialog.open()">{{ $t('Add to collection') }}</v-btn>
                 </v-toolbar>
@@ -151,24 +156,7 @@ export default {
     loadedList: {
       handler: async function () {
         if (this.loadedList) {
-          this.membersLoading = true
-          try {
-            let response = await this.$http.request({
-              method: 'GET',
-              url: this.instance.api + '/list/' + this.loadedList.listid,
-              headers: {
-                'X-XSRF-TOKEN': this.$store.state.user.token
-              }
-            })
-            this.members = response.data.list.members
-            if (response.data.alerts && response.data.alerts.length > 0) {
-              this.$store.commit('setAlerts', response.data.alerts)
-            }
-          } catch (error) {
-            console.log(error)
-          } finally {
-            this.membersLoading = false
-          }
+          await this.refreshLoadedList()
         }
       },
       deep: true
@@ -201,10 +189,78 @@ export default {
         { text: 'Title', align: 'left', value: 'title' },
         { text: 'Actions', align: 'right', value: 'actions', sortable: false }
       ],
-      members: []
+      members: [],
+      token: null
     }
   },
   methods: {
+    refreshLoadedList: async function () {
+      this.membersLoading = true
+      try {
+        let response = await this.$http.request({
+          method: 'GET',
+          url: this.instance.api + '/list/' + this.loadedList.listid,
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
+        })
+        this.members = response.data.list.members
+        this.token = response.data.list.token
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.membersLoading = false
+      }
+    },
+    createToken: async function (lid) {
+      try {
+        this.loading = true
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.api + '/list/' + lid + '/token/create',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
+        })
+        this.$store.commit('setAlerts', [ { msg: this.$t('Share link successfuly created'), type: 'success' } ])
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        this.refreshLoadedList()
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
+      }
+    },
+    deleteToken: async function (lid) {
+      try {
+        this.loading = true
+        let response = await this.$http.request({
+          method: 'POST',
+          url: this.instance.api + '/list/' + lid + '/token/delete',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          }
+        })
+        this.$store.commit('setAlerts', [ { msg: this.$t('Share link successfuly deleted'), type: 'success' } ])
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        this.refreshLoadedList()
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.loading = false
+      }
+    },
     addToCollection: async function (collection) {
       try {
         var httpFormData = new FormData()
@@ -257,17 +313,7 @@ export default {
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
-        response = await this.$http.request({
-          method: 'GET',
-          url: this.instance.api + '/lists',
-          headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          }
-        })
-        this.lists = response.data.lists
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit('setAlerts', response.data.alerts)
-        }
+        this.getLists()
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
@@ -289,17 +335,7 @@ export default {
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
-        response = await this.$http.request({
-          method: 'GET',
-          url: this.instance.api + '/lists',
-          headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          }
-        })
-        this.lists = response.data.lists
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit('setAlerts', response.data.alerts)
-        }
+        this.getLists()
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
@@ -325,17 +361,7 @@ export default {
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
-        response = await this.$http.request({
-          method: 'GET',
-          url: this.instance.api + '/list/' + this.loadedList.listid,
-          headers: {
-            'X-XSRF-TOKEN': this.$store.state.user.token
-          }
-        })
-        this.members = response.data.list.members
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit('setAlerts', response.data.alerts)
-        }
+        this.refreshLoadedList()
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
@@ -343,54 +369,30 @@ export default {
         this.membersLoading = false
       }
     },
-    getLists: async function() {
-      this.listsLoading = true;
+    getLists: async function () {
+      this.listsLoading = true
       try {
         let response = await this.$http.request({
-          method: "GET",
-          url: this.instance.api + "/lists",
-          headers: {
-            "X-XSRF-TOKEN": this.$store.state.user.token,
-          },
-        });
-        this.lists = response.data.lists;
-        if (response.data.alerts && response.data.alerts.length > 0) {
-          this.$store.commit("setAlerts", response.data.alerts);
-        }
-      } catch (error) {
-        console.log(error);
-        this.$store.commit("setAlerts", [{ type: "danger", msg: error }]);
-      } finally {
-        this.listsLoading = false;
-      }
-    },
-  },
-  mounted() {
-    this.getLists()
-  },
-  // The below method is not working in nuxt js
-  beforeRouteEnter: async function (to, from, next) {
-    next(async vm => {
-      vm.listsLoading = true
-      try {
-        let response = await vm.$http.request({
           method: 'GET',
-          url: vm.instance.api + '/lists',
+          url: this.instance.api + '/lists',
           headers: {
-            'X-XSRF-TOKEN': vm.$store.state.user.token
+            'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        vm.lists = response.data.lists
+        this.lists = response.data.lists
         if (response.data.alerts && response.data.alerts.length > 0) {
-          vm.$store.commit('setAlerts', response.data.alerts)
+          this.$store.commit('setAlerts', response.data.alerts)
         }
       } catch (error) {
         console.log(error)
-        vm.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        vm.listsLoading = false
+        this.listsLoading = false
       }
-    })
+    }
+  },
+  mounted () {
+    this.getLists()
   }
 }
 </script>

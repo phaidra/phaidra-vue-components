@@ -1,4 +1,4 @@
-export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corpAuthors, persAuthors, roles, owner, inCollection: collection }) {
+export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corpAuthors, persAuthors, roles, owner, inCollection: collection, baseAnds }) {
   let searchdefarr = []
 
   for (let i = 0; i < sortdef.length; i++) {
@@ -105,6 +105,10 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
     searchdefarr.push('collection=' + collection)
   }
 
+  if (baseAnds?.length > 0) {
+    ands = ands.concat(baseAnds)
+  }
+
   return { searchdefarr, ands }
 }
 
@@ -123,10 +127,8 @@ export function buildParams ({ q, page, pagesize, sortdef, lang, facetQueries },
   }
 
   if (q === '' || q === null) {
-    params.q = '-hassuccessor:* AND -ismemberof:["" TO *]'
+    params.q = '*:*'
     params.sort = 'created desc'
-  } else {
-    params.q = params.q + ' AND -hassuccessor:* AND -ismemberof:["" TO *]'
   }
 
   for (let i = 0; i < sortdef.length; i++) {
@@ -163,9 +165,14 @@ export function buildParams ({ q, page, pagesize, sortdef, lang, facetQueries },
     }
   }
 
-  if (ands.length > 0) {
-    params['fq'] = ands.join(' AND ')
+  if (!Array.isArray(ands)) {
+    ands = []
   }
+
+  ands.push('-hassuccessor:*')
+  ands.push('-ismemberof:["" TO *]')
+
+  params['fq'] = ands.join(' AND ')
 
   return params
 }

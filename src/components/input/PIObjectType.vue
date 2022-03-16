@@ -4,12 +4,12 @@
       <span v-for="(em, i) in errorMessages" :key="'em'+i">{{ em }}<br/></span>
     </v-alert>
     <v-card outlined class="mt-4 mb-8">
-      <v-card-title class="title font-weight-light ">
+      <v-card-title v-if="showLabel" class="title font-weight-light ">
       {{ $t('edm:hasType') }}&nbsp;*
       </v-card-title>
       <v-card-text class="mt-4">
         <v-row no-gutters>
-          <v-col cols="12" md="6" v-for="(term, i) in terms" :key="'ot'+i">
+          <v-col cols="12" :md="terms.length <= 6 ? 12 : 6" v-for="(term, i) in terms" :key="'ot'+i">
             <v-checkbox class="mt-0 check" v-model="selected" @click.capture="$emit('input', selected)" :label="getLocalizedTermLabel(vocabulary, term['@id'])" :value="term['@id']"></v-checkbox>
             <v-spacer></v-spacer>
           </v-col>
@@ -31,6 +31,10 @@ export default {
       type: String,
       required: true
     },
+    showLabel: {
+      type: Boolean,
+      default: true
+    },
     vocabulary: {
       type: String,
       required: true
@@ -49,7 +53,7 @@ export default {
   },
   computed: {
     terms: function () {
-      return this.resourceType ? this.$store.getters['vocabulary/getObjectTypeForResourceType'](this.resourceType) : this.vocabularies[this.vocabulary].terms
+      return this.resourceType ? this.$store.getters['vocabulary/getObjectTypeForResourceType'](this.resourceType, this.$i18n.locale) : this.vocabularies[this.vocabulary].terms
     }
   },
   data () {
@@ -58,7 +62,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.getters['vocabulary/getObjectTypeForResourceType'](this.resourceType)
+    this.$store.getters['vocabulary/getObjectTypeForResourceType'](this.resourceType, this.$i18n.locale)
   }
 }
 </script>

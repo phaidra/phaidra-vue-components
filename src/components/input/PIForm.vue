@@ -279,6 +279,7 @@
                           v-on:input-firstname="f.firstname=$event"
                           v-on:input-lastname="f.lastname=$event"
                           v-on:input-name="f.name=$event"
+                          v-on:input-identifier="f.identifierText = $event"
                           v-on:input-organization="f.organizationText=$event"
                           v-on:input-role="roleInput(f, $event)"
                           v-on:add="addField(s.fields, f)"

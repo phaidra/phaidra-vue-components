@@ -212,6 +212,10 @@ export default {
 
       Object.assign(this, options)
 
+      if (this.instance.search?.baseands) {
+        this['baseAnds'] = this.instance.search.baseands
+      }
+
       let { searchdefarr, ands } = buildSearchDef(this)
       let params = buildParams(this, ands)
       if (this.inCollection) {

@@ -18,6 +18,7 @@
         clearable
         :disabled="disabled"
         :messages="path"
+        :error-messages="errorMessages"
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
@@ -89,6 +90,9 @@ export default {
     label: {
       type: String,
       required: true
+    },
+    errorMessages: {
+      type: Array
     },
     required: {
       type: Boolean

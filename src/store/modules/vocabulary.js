@@ -21,12 +21,12 @@ const ot4rt = {
     ns + '4YS3-8T2K',
     // slide (Diapositiv)
     ns + '431H-5YSA',
-    // painting
-    ns + 'WWS3-0ACP',
     // wall chart
     ns + 'QM0R-ZTAA',
     // conference poster
     ns + '7HBP-P9S3',
+    // learning object
+    ns + 'YA8R-1M0D',
     // map
     ns + 'A52A-CWMM',
     // other
@@ -40,6 +40,8 @@ const ot4rt = {
     ns + '8KGA-CH97',
     // musical composition
     ns + 'EWZ9-3MPH',
+    // learning object
+    ns + 'YA8R-1M0D',
     // other
     ns + 'PYRE-RAWJ'
   ],
@@ -51,6 +53,8 @@ const ot4rt = {
     ns + 'F4JN-ZST0',
     // interview
     ns + '8KGA-CH97',
+    // learning object
+    ns + 'YA8R-1M0D',
     // other
     ns + 'PYRE-RAWJ'
   ],
@@ -66,6 +70,8 @@ const ot4rt = {
     ns + 'QKDF-E5HA',
     // lecture
     ns + 'F4JN-ZST0',
+    // learning object
+    ns + 'YA8R-1M0D',
     // letter (correspondence)
     ns + 'GBWA-JJP8',
     // journal article
@@ -97,15 +103,16 @@ const ot4rt = {
   ],
   // data
   'https://pid.phaidra.org/vocabulary/7AVS-Y482': [
+    // dataset
     ns + 'KW6N-2VTP',
+    // learning object
+    ns + 'YA8R-1M0D',
     // still image
     ns + '7CAB-P987',
     // still image of physical object
     ns + '4YS3-8T2K',
     // slide (Diapositiv)
     ns + '431H-5YSA',
-    // painting
-    ns + 'WWS3-0ACP',
     // wall chart
     ns + 'QM0R-ZTAA',
     // conference poster
@@ -1292,7 +1299,7 @@ const mutations = {
   },
   sortObjectTypes (state, locale) {
     state.vocabularies['objecttype']['terms'].sort(function (a, b) {
-      return a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale)
+      return a['skos:prefLabel'][locale] ? a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale) : 1
     })
   },
   setOefos (state, data) {
@@ -1397,7 +1404,7 @@ const actions = {
           url: rootState.instanceconfig.api + '/directory/org_get_units'
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
-          commit('setAlerts', response.data.alerts, {root: true})
+          commit('setAlerts', response.data.alerts, { root: true })
         }
         let terms = []
         orgunits.getOrgUnitsTerms(terms, response.data.units, null)
@@ -1405,7 +1412,7 @@ const actions = {
         commit('sortOrgUnits', locale)
       } catch (error) {
         console.log(error)
-        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch org units: ' + error }], {root: true})
+        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch org units: ' + error }], { root: true })
       }
     } else {
       if (state.vocabularies['orgunits']['locale'] !== locale) {
@@ -1505,16 +1512,27 @@ const getters = {
       }
     }
   },
-  getObjectTypeForResourceType: (state) => (rtId) => {
+  getObjectTypeForResourceType: (state) => (rtId, locale) => {
     let arr = []
+    let other = null
     if (rtId !== ns + 'GXS7-ENXJ') {
       for (let otId of ot4rt[rtId]) {
         for (let term of state.vocabularies['objecttype'].terms) {
           if (term['@id'] === otId) {
-            arr.push(term)
+            if (term['@id'] === ns + 'PYRE-RAWJ') {
+              other = term
+            } else {
+              arr.push(term)
+            }
           }
         }
       }
+    }
+    arr.sort(function (a, b) {
+      return a['skos:prefLabel'][locale] ? a['skos:prefLabel'][locale].localeCompare(b['skos:prefLabel'][locale], locale) : 1
+    })
+    if (other) {
+      arr.push(other)
     }
     return arr
   }
