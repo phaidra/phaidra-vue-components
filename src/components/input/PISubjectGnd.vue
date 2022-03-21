@@ -5,6 +5,7 @@
         v-model="model"
         v-on:input="$emit('input', $event)"
         :items="items"
+        :filter="customFilter"
         :loading="loading"
         :search-input.sync="search"
         cache-items
@@ -98,6 +99,14 @@ export default {
     }
   },
   methods: {
+    customFilter (item, queryText) {
+      const text = item.text.toLowerCase()
+      const value = item.value.toLowerCase()
+      const searchText = queryText.toLowerCase()
+      console.log(searchText + ' found in [' + text + ']:' + (text.indexOf(searchText) > -1) + ' or [' + value + ']:' + (value.indexOf(searchText) > -1))
+      return text.indexOf(searchText) > -1 ||
+        value.indexOf(searchText) > -1
+    },
     resolve: async function (uri) {
       if (uri) {
         this.loading = true

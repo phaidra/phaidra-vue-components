@@ -199,7 +199,22 @@ export default {
                 f.predicate = key
                 f.label = 'Classification'
                 components.push(f)
-                // TODO: add classification
+                if (obj['skos:exactMatch']) {
+                  for (let v of obj['skos:exactMatch']) {
+                    if (v.startsWith('oefos2012')) {
+                      f = fields.getField('oefos-subject')
+                      components.push(f)
+                    }
+                    if (v.startsWith('http://d-nb.info/gnd')) {
+                      f = fields.getField('gnd-subject')
+                      components.push(f)
+                    }
+                    if (v.startsWith('http://uri.gbv.de/terminology/bk')) {
+                      f = fields.getField('bk-subject')
+                      components.push(f)
+                    }
+                  }
+                }
               } else {
                 if (obj['@type'] === 'phaidra:Subject') {
                   // ignore, handled elsewhere
