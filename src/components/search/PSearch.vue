@@ -343,6 +343,28 @@ export default {
     ownerProp: function (owner) {
       this.owner = owner
       this.search()
+    },
+    '$route.params': async function () {
+      if (this.$route.query.reset) {
+        console.log('reseting search')
+        this.resetSearchParams()
+        if (this.$route.query.q) {
+          this.q = this.$route.query.q
+        } else {
+          this.q = ''
+        }
+        if (this.$route.query.owner) {
+          this.owner = this.$route.query.owner
+        } else {
+          this.owner = ''
+        }
+        if (this.$route.query.collection) {
+          this.inCollection = this.$route.query.collection
+        } else {
+          this.inCollection = ''
+        }
+        await this.search()
+      }
     }
   },
   data () {
