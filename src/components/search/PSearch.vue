@@ -117,11 +117,6 @@ export default {
     PSearchFilters,
     PSearchToolbar
   },
-  data () {
-    return {
-      loading: false
-    }
-  },
   computed: {
     page: {
       get () {
@@ -377,6 +372,7 @@ export default {
   },
   beforeRouteUpdate: async function (to, from, next) {
     if (to.query.reset) {
+      console.log('beforeRouteUpdate reseting search')
       this.resetSearchParams()
       if (to.query.q) {
         this.q = to.query.q
@@ -400,6 +396,7 @@ export default {
   beforeRouteEnter: async function (to, from, next) {
     next(async vm => {
       if (to.query.reset) {
+        console.log('beforeRouteEnter reseting search')
         vm.resetSearchParams()
         if (to.query.q) {
           vm.q = to.query.q

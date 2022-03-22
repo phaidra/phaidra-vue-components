@@ -272,7 +272,8 @@ export default {
       userSearchLoading: false,
       userSearch: null,
       userSearchModel: null,
-      userSearchItems: []
+      userSearchItems: [],
+      init: true
     }
   },
   watch: {
@@ -282,9 +283,12 @@ export default {
         this.showRoleFilter = true
       }
     },
-    ownerProp: function (v) {
+    ownerProp: async function (v) {
       this.owner = v
       this.showOwnerFilter = v.length
+      if (v.length) {
+        this.userSearch = v
+      }
     },
     persAuthorsProp: function (v) {
       this.persAuthors = v
@@ -319,6 +323,10 @@ export default {
           this.$store.commit('setAlerts', response.data.alerts)
         }
         this.userSearchItems = response.data.accounts ? response.data.accounts : []
+        if (this.init) {
+          this.userSearchModel = this.userSearchItems[0]
+          this.init = false
+        }
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
