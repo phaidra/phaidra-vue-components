@@ -511,10 +511,10 @@ export default {
         Object.entries(this.jsonld).forEach(([p, o]) => {
           if (p === 'frapo:isOutputOf') {
             o.forEach((item, j) => {
-              if (j >= 4) return
+              if (j >= 3) return
               projectIds.push(item)
             })
-            if (o.length > 4) this.shownAllProjectIds = false
+            if (o.length > 3) this.shownAllProjectIds = false
           }
         })
         this.projectIds = projectIds

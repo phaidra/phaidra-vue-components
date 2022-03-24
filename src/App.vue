@@ -4565,7 +4565,7 @@ export default {
   font-weight: 300;
 }
 
-.border-left {
+.jsonld-border-left {
   border-left: 1px solid;
   border-color: rgba(0, 0, 0, 0.12);
 }

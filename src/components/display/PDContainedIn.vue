@@ -3,7 +3,7 @@
     <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t(p) }}</v-col>
     <v-col :md="valueColMd" cols="12">
       <v-card tile>
-        <v-card-text class="border-left">
+        <v-card-text class="jsonld-border-left">
           <v-container fluid>
             <v-row>
               <template v-for="(title, j) in o['dce:title']">
@@ -45,7 +45,7 @@
               <v-col md="3" cols="12" class="pdlabel primary--text">{{ $t('rdau:P60101_rdau:P60193') }}</v-col>
               <v-col md="9" cols="12">
                 <v-card tile elevation="0">
-                  <v-card-text class="border-left">
+                  <v-card-text class="jsonld-border-left">
                     <v-container>
                       <v-row :key="'stit'+k">
                         <template v-for="(title, j) in series['dce:title']">
