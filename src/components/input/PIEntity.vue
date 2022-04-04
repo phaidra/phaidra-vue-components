@@ -220,7 +220,6 @@ export default {
   },
   computed: {
     rolesArray () {
-      this.$store.dispatch('vocabulary/sortRoles', this.$i18n.locale)
       let arr = this.vocabularies[this.roleVocabulary].terms
       let otherRole = arr.find(elem => elem['@id'] === 'role:oth')
       let filteredRoles = arr.filter(elem => elem['@id'] !== 'role:oth')
@@ -240,6 +239,7 @@ export default {
   mounted: function () {
     this.$nextTick(function () {
       this.loading = !this.vocabularies[this.roleVocabulary].loaded
+      this.$store.dispatch('vocabulary/sortRoles', this.$i18n.locale)
       // emit input to set skos:prefLabel in parent
       if (this.role) {
         this.$emit('input', this.getTerm(this.roleVocabulary, this.role))
