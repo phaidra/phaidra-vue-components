@@ -105,8 +105,10 @@ export function buildSearchDef ({ sortdef, q, page, pagesize, facetQueries, corp
     searchdefarr.push('collection=' + collection)
   }
 
-  if (baseAnds?.length > 0) {
-    ands = ands.concat(baseAnds)
+  if (baseAnds) {
+    if (baseAnds.length > 0) {
+      ands = ands.concat(baseAnds)
+    }
   }
 
   return { searchdefarr, ands }
