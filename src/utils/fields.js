@@ -415,12 +415,12 @@ const fields = [
   },
   {
     id: 'bk-subject',
-    fieldname: 'Subject (BK)',
+    fieldname: 'Basisklassifikation',
     predicate: 'dcterms:subject',
     type: 'skos:Concept',
     component: 'p-subject-bk',
     multiplicable: true,
-    label: 'Subject (BK)',
+    label: 'Basisklassifikation',
     value: '',
     'rdfs:label': [],
     'skos:prefLabel': [],
@@ -435,12 +435,8 @@ const fields = [
     component: 'p-subject-gnd',
     multiplicable: true,
     label: 'Subject (GND)',
-    value: '',
-    voc: 'SubjectHeading',
-    exactvoc: '',
     'rdfs:label': [],
     'skos:prefLabel': [],
-    loadedpreflabel: '',
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {
@@ -536,6 +532,8 @@ const fields = [
     isbn: '',
     isbnLabel: 'ISBN',
     isbnErrorMessages: [],
+    identifier: '',
+    identifierType: '',
     series: [
       {
         id: 'contained-in-series',
@@ -546,6 +544,7 @@ const fields = [
         seriesIssued: '',
         seriesIssn: '',
         seriesIdentifier: '',
+        seriesIdentifierType: '',
         multiplicable: false,
         multiplicableCleared: false,
         removable: false
@@ -664,11 +663,11 @@ const fields = [
   },
   {
     id: 'bf-publication',
-    fieldname: 'Provision activity: Publication',
+    fieldname: 'Publisher',
     predicate: 'bf:provisionActivity',
     component: 'p-bf-publication',
     multiplicable: true,
-    label: 'Provision activity: Publication',
+    label: 'Publisher',
     showPlace: true,
     showDate: true,
     publisherType: 'other',
@@ -829,7 +828,7 @@ const fields = [
   },
   {
     id: 'dce-format-vocab',
-    fieldname: 'DC Format',
+    fieldname: 'Format',
     predicate: 'dce:format',
     component: 'p-select',
     vocabulary: 'dceformat',
@@ -1064,21 +1063,6 @@ const fields = [
     definition: 'All marks or written words added to the object at the time of production or in its subsequent history, including signatures, dates, dedications, texts, and colophons, as well as marks, such as the stamps of silversmiths, publishers, or printers.'
   },
   {
-    id: 'spatial-getty',
-    fieldname: 'Depicted/Represented place (Getty TGN)',
-    predicate: 'dcterms:spatial',
-    component: 'p-spatial-getty',
-    multiplicable: true,
-    voc: 'tgn',
-    label: 'Depicted/Represented place',
-    value: '',
-    type: 'schema:Place',
-    disabletype: false,
-    'rdfs:label': [],
-    'skos:prefLabel': [],
-    definition: 'Depicted/Represented place.'
-  },
-  {
     id: 'spatial-geonames',
     fieldname: 'Depicted/Represented place (Geonames-Suggest)',
     predicate: 'dcterms:spatial',
@@ -1121,21 +1105,6 @@ const fields = [
     disabletype: false,
     language: '',
     definition: 'Depicted/Represented place.'
-  },
-  {
-    id: 'place-of-creation-getty',
-    fieldname: 'Place of creation (Getty TGN)',
-    predicate: 'vra:placeOfCreation',
-    component: 'p-spatial-getty',
-    multiplicable: true,
-    voc: 'tgn',
-    label: 'Place of creation',
-    value: '',
-    type: 'schema:Place',
-    disabletype: false,
-    'rdfs:label': [],
-    'skos:prefLabel': [],
-    definition: 'Place of creation.'
   },
   {
     id: 'place-of-creation-geonames',
@@ -1182,21 +1151,6 @@ const fields = [
     definition: 'Place of creation.'
   },
   {
-    id: 'place-of-repository-getty',
-    fieldname: 'Place of repository (Getty TGN)',
-    predicate: 'vra:placeOfRepository',
-    component: 'p-spatial-getty',
-    multiplicable: true,
-    voc: 'tgn',
-    label: 'Place of repository',
-    value: '',
-    type: 'schema:Place',
-    disabletype: false,
-    'rdfs:label': [],
-    'skos:prefLabel': [],
-    definition: 'Place of repository.'
-  },
-  {
     id: 'place-of-repository-geonames',
     fieldname: 'Place of repository (Geonames)',
     predicate: 'vra:placeOfRepository',
@@ -1239,21 +1193,6 @@ const fields = [
     disabletype: false,
     language: '',
     definition: 'Place of repository.'
-  },
-  {
-    id: 'place-of-site-getty',
-    fieldname: 'Place of site (Getty TGN)',
-    predicate: 'vra:placeOfSite',
-    component: 'p-spatial-getty',
-    multiplicable: true,
-    voc: 'tgn',
-    label: 'Place of site',
-    value: '',
-    type: 'schema:Place',
-    disabletype: false,
-    'rdfs:label': [],
-    'skos:prefLabel': [],
-    definition: 'Place of site.'
   },
   {
     id: 'place-of-site-geonames',
@@ -1356,6 +1295,7 @@ const fields = [
     component: 'p-filename-readonly',
     label: '',
     value: '',
+    readonly: true,
     definition: 'Filename readonly.'
   },
   {
@@ -1375,6 +1315,7 @@ const fields = [
     label: '',
     jsonld: '',
     removable: true,
+    readonly: true,
     definition: 'Used to show unsupported data on input.'
   },
   {
@@ -1384,6 +1325,7 @@ const fields = [
     component: 'p-unknown',
     label: '',
     jsonld: '',
+    readonly: true,
     definition: 'Used to show unsupported data.'
   },
   {
@@ -1516,7 +1458,7 @@ export default {
   getFields: function () {
     return fields
   },
-  getEditableFields: function () {
+  getEditableFields: function (locale) {
     var editable = fields.filter(item => !(item.readonly))
     // hack: some bug in vuetify autocomplete can't handle the value property
     var newarr = []
@@ -1525,6 +1467,7 @@ export default {
       delete field['value']
       newarr.push(field)
     }
+    newarr.sort((a, b) => a.fieldname.localeCompare(b.fieldname, locale))
     return newarr
   },
   getField: function (id, ordergroup) {

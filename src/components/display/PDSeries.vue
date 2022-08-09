@@ -39,7 +39,7 @@
             <v-row>
               <template v-for="(id, i) in o['skos:exactMatch']">
                 <v-col :md="labelColMd" cols="12" class="pdlabel primary--text" :key="'idatel'+i">{{ $t('Identifier') }}</v-col>
-                <v-col :md="valueColMd" cols="12" :key="'id'+i">{{ id }}</v-col>
+                <v-col :md="valueColMd" cols="12" :key="'id'+i"><a :href="getIDResolverURL(id)" target="_blank">{{ id['@value'] }}</a></v-col>
               </template>
             </v-row>
         </v-card-text>
@@ -50,11 +50,12 @@
 </template>
 
 <script>
+import { vocabulary } from '../../mixins/vocabulary'
 import { displayproperties } from '../../mixins/displayproperties'
 
 export default {
   name: 'p-d-series',
-  mixins: [displayproperties],
+  mixins: [displayproperties, vocabulary],
   props: {
     o: {
       type: Object,

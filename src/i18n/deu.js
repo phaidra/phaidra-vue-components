@@ -508,7 +508,7 @@ export default {
   'Call number': 'Signatur',
   'Filename': 'Dateiname',
   'Temporal coverage': 'Zeitliche Abdeckung',
-  'Provenance': 'Provenienz',
+  'Provenance': 'Provenienzvermerk',
   'Physical location': 'Aufbewahrungsort',
   'Accession number': 'Aktenvermerk',
   'Place': 'Ort',
@@ -599,7 +599,7 @@ export default {
   'edm:hasType': 'Typ',
   'bf:physicalLocation': 'Standort',
   'bf:shelfMark': 'Signatur',
-  'dcterms:provenance': 'Provenienz',
+  'dcterms:provenance': 'Provenienzvermerk',
 
   'rdau:P60550': 'Umfang',
   'schema:numberOfPages': 'Seitenanzahl',
@@ -716,5 +716,6 @@ export default {
   'You can use drag & drop': 'Drag & drop möglich',
   'Please select only one file.': 'Bitt wählen Sie nur eine Datei aus.',
   'Recommended formats': 'Empfohlene Formate',
-  'Other supported formats': 'Weitere mögliche Formate'
+  'Other supported formats': 'Weitere mögliche Formate',
+  'Add metadatafield': 'Metadatenfeld hinzufügen'
 }

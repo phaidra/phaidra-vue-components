@@ -119,18 +119,12 @@ const ot4rt = {
     ns + '7HBP-P9S3',
     // map
     ns + 'A52A-CWMM',
-    // lecture
-    ns + 'F4JN-ZST0',
     // interview
     ns + '8KGA-CH97',
     // musical composition
     ns + 'EWZ9-3MPH',
     // moving image
     ns + 'Y8CC-HY82',
-    // lecture
-    ns + 'F4JN-ZST0',
-    // interview
-    ns + '8KGA-CH97',
     // text
     ns + '69ZZ-2KGX',
     // book
@@ -778,12 +772,6 @@ const vocabularies = {
   },
   'genre': {
     terms: [
-      { '@id': ns + '9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
-      { '@id': ns + 'P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
-      { '@id': ns + '1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
-      { '@id': ns + 'ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
-      { '@id': ns + '9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
-      { '@id': ns + 'H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } },
       { '@id': ns + 'QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
       { '@id': ns + '31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
       { '@id': ns + 'DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
@@ -814,17 +802,6 @@ const vocabularies = {
       { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
       { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
       { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
-    ],
-    loaded: true
-  },
-  'thesisgenre': {
-    terms: [
-      { '@id': ns + '9E94-E3F8', 'skos:prefLabel': { 'eng': 'Diplomarbeit' } },
-      { '@id': ns + 'P2YP-BMND', 'skos:prefLabel': { 'eng': 'Masterarbeit' } },
-      { '@id': ns + '1PHE-7VMS', 'skos:prefLabel': { 'eng': 'Dissertation' } },
-      { '@id': ns + 'ST05-F6SP', 'skos:prefLabel': { 'eng': 'Magisterarbeit' } },
-      { '@id': ns + '9ZSV-CVJH', 'skos:prefLabel': { 'eng': 'Habilitation' } },
-      { '@id': ns + 'H1TF-SDX1', 'skos:prefLabel': { 'eng': 'Master-Thesis (ULG)' } }
     ],
     loaded: true
   },
@@ -1433,7 +1410,7 @@ const actions = {
         let terms = []
         oefos.getOefosTerms(terms, response.data.vocabulary, null)
         commit('setOefos', { tree: response.data.vocabulary, terms: terms, locale: locale })
-        // commit('sortOefos', locale)
+        commit('sortOefos', locale)
       } catch (error) {
         console.log(error)
         commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch oefos: ' + error }])

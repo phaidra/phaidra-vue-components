@@ -302,7 +302,20 @@ export default {
                 }
               }
               if (obj['ids:isbn']) {
-                f.isbn = obj['ids:isbn']
+                for (let v of obj['ids:isbn']) {
+                  f.isbn = v
+                }
+              }
+              if (obj['skos:exactMatch']) {
+                for (let v of obj['skos:exactMatch']) {
+                  if (v['@type']) {
+                    f.identifierType = v['@type']
+                    f.identifier = v['@value']
+                    f.hideIdentifier = false
+                  } else {
+                    f.identifier = v
+                  }
+                }
               }
               f.roles = []
               Object.entries(obj).forEach(([key, value]) => {
@@ -361,6 +374,7 @@ export default {
                       seriesIssued: '',
                       seriesIssn: '',
                       seriesIdentifier: '',
+                      seriesIdentifierType: '',
                       multiplicable: false,
                       multiplicableCleared: true,
                       removable: serIdx > 0
@@ -401,7 +415,13 @@ export default {
                     }
                     if (series['skos:exactMatch']) {
                       for (let v of series['skos:exactMatch']) {
-                        s.seriesIdentifier = v
+                        if (v['@value']) {
+                          s.seriesIdentifierType = v['@type']
+                          s.seriesIdentifier = v['@value']
+                          f.hideSeriesIdentifier = false
+                        } else {
+                          s.seriesIdentifier = v
+                        }
                       }
                     }
                     f.series.push(s)
@@ -509,9 +529,6 @@ export default {
                   f.type = obj['@type']
                   f.label = key
                   components.push(f)
-                  if (f.value.startsWith('http://vocab.getty.edu')) {
-                    f = fields.getField(fieldidprefix + '-getty')
-                  }
                   if (f.value.startsWith('http://www.geonames.org')) {
                     f = fields.getField(fieldidprefix + '-geonames-search')
                   }
@@ -1223,7 +1240,7 @@ export default {
                   if (role['skos:exactMatch']) {
                     for (let id of role['skos:exactMatch']) {
                       if (typeof id !== 'object') {
-                        if (id.startsWith('https://pid.phaidra.org/')) {
+                        if (id.startsWith('https://')) {
                           f.organizationType = 'select'
                           f.organization = id
                         } else {
@@ -1696,7 +1713,7 @@ export default {
     }
     return h
   },
-  get_json_series (type, title, titleLanguage, volume, issue, issued, issn, identifiers) {
+  get_json_series (type, title, titleLanguage, volume, issue, issued, issn, identifier, idnetifierType) {
     var h = {
       '@type': type
     }
@@ -1726,10 +1743,13 @@ export default {
     if (issn) {
       h['ids:issn'] = [ issn ]
     }
-    if (identifiers) {
-      if (identifiers.length > 0) {
-        h['skos:exactMatch'] = identifiers
-      }
+    if (identifier) {
+      h['skos:exactMatch'] = [
+        {
+          '@type': idnetifierType,
+          '@value': identifier
+        }
+      ]
     }
     return h
   },
@@ -1800,6 +1820,13 @@ export default {
     if (f.isbn) {
       h['ids:isbn'] = [ f.isbn ]
     }
+    if (f.identifier) {
+      if (f.identifierType) {
+        h['skos:exactMatch'] = [ { '@type': f.identifierType, '@value': f.identifier } ]
+      } else {
+        h['skos:exactMatch'] = [ f.identifier ]
+      }
+    }
     if (f.series) {
       if (f.series.length > 0) {
         h['rdau:P60193'] = []
@@ -1835,7 +1862,12 @@ export default {
               series['ids:issn'] = [ s.seriesIssn ]
             }
             if (s.seriesIdentifier) {
-              series['skos:exactMatch'] = [ s.seriesIdentifier ]
+              series['skos:exactMatch'] = [
+                {
+                  '@type': s.seriesIdentifierType,
+                  '@value': s.seriesIdentifier
+                }
+              ]
             }
             h['rdau:P60193'].push(series)
           }
@@ -2276,7 +2308,7 @@ export default {
 
         case 'rdau:P60193':
           if (f.title || f.volume || f.issue || f.issued || f.issn || f.identifier) {
-            this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier ? [f.identifier] : null))
+            this.push_object(jsonld, f.predicate, this.get_json_series(f.type, f.title, f.titleLanguage, f.volume, f.issue, f.issued, f.issn, f.identifier, f.identifierType))
           }
           if (f.pageStart) {
             this.push_literal(jsonld, 'schema:pageStart', f.pageStart)
@@ -2451,7 +2483,7 @@ export default {
         case 'vra:placeOfCreation':
         case 'vra:placeOfRepository':
         case 'vra:placeOfSite':
-          if (((f.component === 'p-spatial-getty') || (f.component === 'p-spatial-geonames') || (f.component === 'p-spatial-geonames-search') || (f.component === 'p-spatial-readonly')) && f.value) {
+          if (((f.component === 'p-spatial-geonames') || (f.component === 'p-spatial-geonames-search') || (f.component === 'p-spatial-readonly')) && f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_spatial(f['rdfs:label'], f['skos:prefLabel'], f.coordinates, f.type, [f.value]))
           } else {
             if (f.value) {

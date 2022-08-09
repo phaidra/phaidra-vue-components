@@ -10,7 +10,7 @@
       <v-card-text class="mt-4">
         <v-row no-gutters>
           <v-col cols="12" :md="terms.length <= 6 ? 12 : 6" v-for="(term, i) in terms" :key="'ot'+i">
-            <v-checkbox class="mt-0 check" v-model="selected" @click.capture="$emit('input', selected)" :label="getLocalizedTermLabel(vocabulary, term['@id'])" :value="term['@id']"></v-checkbox>
+            <v-checkbox class="mt-0 check" v-model="checkboxes[term['@id']]" @click.capture="$emit('input', checkboxes)" :label="getLocalizedTermLabel(vocabulary, term['@id'])" :true-value="term['@id']"></v-checkbox>
             <v-spacer></v-spacer>
           </v-col>
         </v-row>
@@ -48,7 +48,7 @@ export default {
   },
   watch: {
     resourceType (val) {
-      this.selected = []
+      this.checkboxes = {}
     }
   },
   computed: {
@@ -58,7 +58,7 @@ export default {
   },
   data () {
     return {
-      selected: []
+      checkboxes: {}
     }
   },
   mounted: function () {

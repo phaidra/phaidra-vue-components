@@ -4375,6 +4375,8 @@ export default {
 
       this.form.sections[0].fields.push(fields.getField('oefos-subject'))
 
+      this.form.sections[0].fields.push(fields.getField('contained-in'))
+
       let t = fields.getField('title')
       t.hideSubtitle = true
       t.multilingual = false
@@ -4444,7 +4446,6 @@ export default {
       this.form.sections[1].fields.push(fields.getField('height'))
       this.form.sections[1].fields.push(fields.getField('width'))
       this.form.sections[1].fields.push(fields.getField('inscription'))
-      this.form.sections[1].fields.push(fields.getField('spatial-getty'))
       var localname = fields.getField('spatial-text')
       localname.type = 'dcterms:spatial'
       localname.disabletype = true
@@ -4510,10 +4511,6 @@ export default {
     this.$store.commit('setInstanceApi', this.apibaseurl)
     this.$store.commit('setInstanceSolr', this.solrbaseurl)
     this.$store.commit('setInstancePhaidra', this.phaidrabaseurl)
-    this.$store.commit('setSuggester', {
-      suggester: 'getty',
-      url: 'https://ws.gbv.de/suggest/getty/'
-    })
     this.$store.commit('setSuggester', {
       suggester: 'gnd',
       url: 'https://ws.gbv.de/suggest/gnd/'

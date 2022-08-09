@@ -62,9 +62,9 @@
                     <span v-for="(aut,i) in doc.bib_roles_pers_aut" :key="'pers'+i">
                       {{aut}}<span v-if="(i+1) < doc.bib_roles_pers_aut.length">; </span>
                     </span>
-                    <span v-for="(aut,i) in doc.bib_roles_corp_aut" :key="'corp'+i">
+                    <!-- <span v-for="(aut,i) in doc.bib_roles_corp_aut" :key="'corp'+i">
                       {{aut}}<span v-if="(i+1) < doc.bib_roles_corp_aut.length">; </span>
-                    </span>
+                    </span> -->
                   </span>
                 </v-col>
               </v-row>

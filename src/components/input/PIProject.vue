@@ -26,16 +26,16 @@
         <v-row>
           <v-col>
             <v-row >
-              <v-col cols="8">
+              <v-col :cols="multilingual ? 8 : 12">
                 <v-text-field
                   :value="name"
-                  :label="$t('Name')"
+                  :label="$t('Title')"
                   v-on:blur="$emit('input-name',$event.target.value)"
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </v-col>
-              <v-col cols="3">
+              <v-col cols="3" v-if="multilingual">
                 <v-autocomplete
                   :value="getTerm('lang', nameLanguage)"
                   v-on:input="$emit('input-name-language', $event )"
@@ -66,7 +66,7 @@
             </v-row>
 
             <v-row>
-              <v-col cols="8">
+              <v-col :cols="multilingual ? 8 : 12">
                 <v-text-field
                   :value="description"
                   :label="$t('Description')"
@@ -75,7 +75,7 @@
                   :outlined="inputStyle==='outlined'"
                 ></v-text-field>
               </v-col>
-              <v-col cols="3">
+              <v-col cols="3" v-if="multilingual">
                 <v-autocomplete
                   :value="getTerm('lang', descriptionLanguage)"
                   v-on:input="$emit('input-description-language', $event )"
@@ -224,7 +224,7 @@
               :outlined="inputStyle==='outlined'"
             ></v-text-field>
           </v-col>
-          <v-col cols="2">
+          <v-col cols="2" v-if="multilingual">
             <v-autocomplete
               :value="getTerm('lang', funderNameLanguage)"
               v-on:input="$emit('input-funder-name-language', $event )"
@@ -251,7 +251,7 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col cols="4">
+          <v-col :cols="multilingual ? 4 : 6">
             <v-text-field
               :value="funderIdentifier"
               :label="$t('Funder identifier')"
@@ -312,6 +312,10 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    multilingual: {
+      type: Boolean,
+      default: true
     },
     dateFrom: String,
     dateTo: String,

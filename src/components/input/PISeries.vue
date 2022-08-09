@@ -202,7 +202,33 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="6" v-if="!hideIdentifier">
+            <v-col :cols="3" v-if="showIdentifierType && !hideIdentifier">
+              <v-autocomplete
+                v-on:input="$emit('input-identifier-type', $event)"
+                :label="$t('Type of identifier')"
+                :items="vocabularies[identifierVocabulary].terms"
+                :item-value="'@id'"
+                :value="getTerm(identifierVocabulary, type)"
+                :filter="autocompleteFilter"
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
+                return-object
+                clearable
+              >
+                <template slot="item" slot-scope="{ item }">
+                  <v-list-item-content two-line>
+                    <v-list-item-title  v-html="`${getLocalizedTermLabel(identifierVocabulary, item['@id'])}`"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+                <template slot="selection" slot-scope="{ item }">
+                  <v-list-item-content>
+                    <v-list-item-title v-html="`${getLocalizedTermLabel(identifierVocabulary, item['@id'])}`"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+              </v-autocomplete>
+            </v-col>
+
+            <v-col :cols="showIdentifierType ? 3 : 6" v-if="!hideIdentifier">
               <v-text-field
                 :value="identifier"
                 :label="$t('Identifier')"
@@ -280,6 +306,14 @@ export default {
     },
     identifier: {
       type: String
+    },
+    showIdentifierType: {
+      type: Boolean,
+      default: true
+    },
+    identifierVocabulary: {
+      type: String,
+      default: 'objectidentifiertype'
     },
     journalSuggest: {
       type: Boolean,

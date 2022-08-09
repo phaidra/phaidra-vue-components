@@ -510,7 +510,7 @@ export const state = () => ({
               id: 'vocabulary',
               title: 'Vocabulary',
               content:
-                '<a href="http://vocab.getty.edu/tgn/"> Thesaurus of Geographic Names </a> <br> <a href="https://www.geonames.org/"> GeoNames </a>'
+                '<a href="https://www.geonames.org/"> GeoNames </a>'
             },
             {
               id: 'obligation',
@@ -1459,7 +1459,7 @@ export const state = () => ({
               id: 'vocabulary',
               title: 'Vocabulary',
               content:
-                '<a href="http://vocab.getty.edu/tgn/"> Thesaurus of Geographic Names </a> <br> <a href="https://www.geonames.org/"> GeoNames </a> '
+                '<a href="https://www.geonames.org/"> GeoNames </a> '
             },
             {
               id: 'obligation',
@@ -1503,7 +1503,7 @@ export const state = () => ({
               id: 'vocabulary',
               title: 'Vocabulary',
               content:
-                '<a href="http://vocab.getty.edu/tgn/"> Thesaurus of Geographic Names </a> <br> <a href="https://www.geonames.org/"> GeoNames </a>'
+                '<a href="https://www.geonames.org/"> GeoNames </a>'
             },
             {
               id: 'obligation',
@@ -1652,7 +1652,7 @@ export const state = () => ({
           ]
         },
         {
-          title: 'Publisher',
+          title: 'PUBLISHER_VERLAG',
           predicate: 'bf:provisionActivity',
           open: false,
           sections: [
@@ -2042,7 +2042,7 @@ export const state = () => ({
           ]
         },
         {
-          title: 'Supplementary material',
+          title: 'Supplementary content',
           predicate: 'bf:supplementaryContent',
           open: false,
           sections: [

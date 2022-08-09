@@ -9,11 +9,9 @@
               <template v-for="(title, j) in o['dce:title']">
                 <template v-for="(mt, i) in title['bf:mainTitle']">
                   <v-col md="3" cols="12" class="pdlabel primary--text" :key="'mt'+j+i">{{ $t(title['@type']) }}<template v-if="showLang && mt['@language']"> ({{ mt['@language'] }})</template></v-col>
-                  <v-col md="9" cols="12" :key="'mtv'+i">
+                  <v-col md="9" cols="12" :key="'mtv'+j+i">
                     <v-row no-gutters class="valuefield">{{ mt['@value'] }}</v-row>
-                    <template v-for="(st, i) in title['bf:subtitle']">
-                      <v-row no-gutters class="valuefield" :key="'stv'+i">{{ st['@value'] }}</v-row>
-                    </template>
+                    <v-row v-for="(st, k) in title['bf:subtitle']" no-gutters class="valuefield" :key="'stv'+k">{{ st['@value'] }}</v-row>
                   </v-col>
                 </template>
               </template>
@@ -24,6 +22,10 @@
                 <v-col md="9" cols="12" class="valuefield">{{ isbn }}</v-col>
               </v-row>
             </template>
+            <v-row v-for="(id, i) in o['skos:exactMatch']" :key="'identifier'+i">
+              <v-col md="3" cols="12" class="pdlabel primary--text">{{ getLocalizedTermLabel('objectidentifiertype', id['@type']) }}</v-col>
+              <v-col md="9" cols="12" v-if="getIDResolverURL(id)"><a :href="getIDResolverURL(id)" target="_blank">{{ id['@value'] }}</a></v-col>
+            </v-row>
             <v-row v-for="(obj, pred, i) in o" :key="'role' + i">
               <template v-if="pred.startsWith('role')">
                 <v-col md="3" cols="12" class="pdlabel primary--text ">{{ getLocalizedTermLabel('rolepredicate', pred) }}</v-col>
@@ -79,11 +81,9 @@
                           <v-col md="9" cols="12" class="valuefield" :key="'is'+i">{{ issn }}</v-col>
                         </template>
                       </v-row>
-                      <v-row :key="'sid'+k">
-                        <template v-for="(id, i) in series['skos:exactMatch']">
-                          <v-col md="3" cols="12" class="pdlabel primary--text" :key="'idatel'+i">{{ $t('Identifier') }}</v-col>
-                          <v-col md="9" cols="12" :key="'id'+i">{{ id }}</v-col>
-                        </template>
+                      <v-row v-for="(id, i) in series['skos:exactMatch']" :key="'sid'+i">
+                        <v-col md="3" cols="12" class="pdlabel primary--text">{{ getLocalizedTermLabel('objectidentifiertype', id['@type']) }}</v-col>
+                        <v-col md="9" cols="12" v-if="getIDResolverURL(id)"><a :href="getIDResolverURL(id)" target="_blank">{{ id['@value'] }}</a></v-col>
                       </v-row>
                     </v-container>
                   </v-card-text>

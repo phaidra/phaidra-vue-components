@@ -49,14 +49,29 @@
               :loading="loading"
               @click:row="select"
             >
-            <template v-slot:item.variantName="{ item }">
-              <template v-if="item.variantName">
-                <div v-for="(v, i) of item.variantName" :key="'vn' + i">{{ v }}</div>
+            <template v-slot:item.acronyms="{ item }">
+              <template v-if="item.acronyms">
+                <div v-for="(v, i) of item.acronyms" :key="'vn' + i">{{ v }}</div>
               </template>
             </template>
-            <template v-slot:item.type="{ item }">
-              <template v-if="item.type">
-                <div v-for="(v, i) of item.type" :key="'vt' + i">{{ v }}</div>
+            <template v-slot:item.aliases="{ item }">
+              <template v-if="item.aliases">
+                <div v-for="(v, i) of item.aliases" :key="'va' + i">{{ v }}</div>
+              </template>
+            </template>
+            <template v-slot:item.types="{ item }">
+              <template v-if="item.types">
+                <div v-for="(v, i) of item.types" :key="'vt' + i">{{ v }}</div>
+              </template>
+            </template>
+            <template v-slot:item.addresses="{ item }">
+              <template v-if="item.addresses">
+                <div v-for="(v, i) of item.addresses" :key="'vad' + i">{{ v.city }}</div>
+              </template>
+            </template>
+            <template v-slot:item.country="{ item }">
+              <template v-if="item.country">
+                {{ item.country.country_name }}
               </template>
             </template>
             </v-data-table>
@@ -72,32 +87,19 @@ import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
-  name: 'p-i-subject-gnd',
+  name: 'ror-search',
   mixins: [vocabulary, fieldproperties],
   props: {
     value: {
       type: String
     },
-    type: {
-      type: String
-    },
     label: {
       type: String,
-      required: true
+      default: 'ROR Search'
     },
     searchlabel: {
       type: String,
       default: ''
-    },
-    required: {
-      type: Boolean
-    },
-    disabletype: {
-      type: Boolean
-    },
-    showIds: {
-      type: Boolean,
-      default: false
     }
   },
   watch: {
@@ -118,20 +120,19 @@ export default {
       loading: false,
       q: null,
       selected: null,
-      preflabel: [],
-      rdfslabel: [],
       resolved: '',
       options: {
-        itemsPerPage: 10,
         page: 1
       },
       total: 0,
       headers: [
-        { text: 'ID', value: 'gndIdentifier' },
-        { text: 'Preferred name', value: 'preferredName' },
-        { text: 'Variant name', value: 'variantName' },
-        { text: 'Type', value: 'type' },
-        { text: 'Description', value: 'biographicalOrHistoricalInformation' }
+        { text: 'ID', value: 'id' },
+        { text: 'Name', value: 'name' },
+        { text: 'Acronyms', value: 'acronyms' },
+        { text: 'Aliases', value: 'aliases' },
+        { text: 'Types', value: 'types' },
+        { text: 'City', value: 'addresses' },
+        { text: 'Country', value: 'country' }
       ]
     }
   },
@@ -139,17 +140,41 @@ export default {
     resolve: async function (item) {
       if (item) {
         this.$emit('input', item.id)
-        this.preflabel = [
+        let names = [
           {
-            '@value': item.preferredName
+            '@value': item.name
           }
         ]
-        for (const vn of item.variantName) {
-          this.rdfslabel.push({ '@value': vn })
+        for (const n of item.labels) {
+          let lang
+          switch (n.iso639) {
+            case 'en':
+              lang = 'eng'
+              break
+            case 'de':
+              lang = 'deu'
+              break
+            case 'it':
+              lang = 'ita'
+              break
+          }
+          if (lang) {
+            names.push(
+              {
+                '@value': n.label,
+                '@language': lang
+              }
+            )
+          }
         }
-        this.resolved = '<a href="' + item.id + '" target="_blank">' + item.preferredName + '</a>'
-        this.$emit('resolve', { 'skos:prefLabel': this.preflabel, 'rdfs:label': this.rdfslabel })
-        this.q = item.preferredName
+        this.resolved = '<a href="' + item.id + '" target="_blank">' + item.name + '</a>'
+        this.$emit('resolve', {
+          '@type': 'schema:Organization',
+          'skos:exactMatch': [ item.id ],
+          'schema:name': names
+        }
+        )
+        this.q = item.name
         this.showItems = false
       }
     },
@@ -159,20 +184,19 @@ export default {
       this.selected = null
 
       var params = {
-        size: this.options.itemsPerPage,
-        from: ((this.options.page - 1) * this.options.itemsPerPage),
-        q: 'preferredName:' + this.q + ' OR gndIdentifier:' + this.q,
+        page: this.options.page,
+        query: this.q,
         format: 'json'
       }
 
       try {
         let response = await this.$http.request({
           method: 'GET',
-          url: 'https://' + this.$store.state.appconfig.apis.lobid.baseurl + '/gnd/search',
+          url: 'https://' + this.$store.state.appconfig.apis.ror.baseurl + '/organizations',
           params: params
         })
-        this.items = response.data.member
-        this.total = response.data.totalItems
+        this.items = response.data.items
+        this.total = response.data.number_of_results
         this.showItems = true
       } catch (error) {
         console.log(error)
@@ -186,9 +210,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.v-btn {
-  margin: 0;
-}
-</style>

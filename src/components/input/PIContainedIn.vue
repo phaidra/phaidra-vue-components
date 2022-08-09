@@ -154,7 +154,7 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="12">
+                <v-col :cols="!hideIdentifier ? 6 : 12">
                   <v-text-field
                     :value="isbn"
                     :label="$t(isbnLabel)"
@@ -163,6 +163,40 @@
                     :outlined="inputStyle==='outlined'"
                     :placeholder="isbnPlaceholder"
                     :error-messages="isbnErrorMessages"
+                  ></v-text-field>
+                </v-col>
+                <v-col :cols="3" v-if="showIdentifierType && !hideIdentifier">
+                  <v-autocomplete
+                    v-on:input="$emit('input-identifier-type', $event)"
+                    :label="$t('Type of identifier')"
+                    :items="vocabularies[identifierVocabulary].terms"
+                    :item-value="'@id'"
+                    :value="getTerm(identifierVocabulary, identifierType)"
+                    :filter="autocompleteFilter"
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
+                    return-object
+                    clearable
+                  >
+                    <template slot="item" slot-scope="{ item }">
+                      <v-list-item-content two-line>
+                        <v-list-item-title  v-html="`${getLocalizedTermLabel(identifierVocabulary, item['@id'])}`"></v-list-item-title>
+                      </v-list-item-content>
+                    </template>
+                    <template slot="selection" slot-scope="{ item }">
+                      <v-list-item-content>
+                        <v-list-item-title v-html="`${getLocalizedTermLabel(identifierVocabulary, item['@id'])}`"></v-list-item-title>
+                      </v-list-item-content>
+                    </template>
+                  </v-autocomplete>
+                </v-col>
+                <v-col :cols="showIdentifierType ? 3 : 6" v-if="!hideIdentifier">
+                  <v-text-field
+                    :value="identifier"
+                    :label="$t('Identifier')"
+                    v-on:blur="$emit('input-identifier', $event.target.value)"
+                    :filled="inputStyle==='filled'"
+                    :outlined="inputStyle==='outlined'"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -280,11 +314,37 @@
                         ></v-text-field>
                       </v-col>
 
-                      <v-col cols="4" v-if="!hideSeriesIdentifier">
+                      <v-col :cols="4" v-if="showSeriesIdentifierType && !hideSeriesIdentifier">
+                        <v-autocomplete
+                          v-on:input="$emit('input-series', { series: s, seriesIdentifierType: $event['@id'] })"
+                          :label="$t('Type of identifier')"
+                          :items="vocabularies[seriesIdentifierVocabulary].terms"
+                          :item-value="'@id'"
+                          :value="getTerm(seriesIdentifierVocabulary, s.seriesIdentifierType)"
+                          :filter="autocompleteFilter"
+                          :filled="inputStyle==='filled'"
+                          :outlined="inputStyle==='outlined'"
+                          return-object
+                          clearable
+                        >
+                          <template slot="item" slot-scope="{ item }">
+                            <v-list-item-content two-line>
+                              <v-list-item-title  v-html="`${getLocalizedTermLabel(seriesIdentifierVocabulary, item['@id'])}`"></v-list-item-title>
+                            </v-list-item-content>
+                          </template>
+                          <template slot="selection" slot-scope="{ item }">
+                            <v-list-item-content>
+                              <v-list-item-title v-html="`${getLocalizedTermLabel(seriesIdentifierVocabulary, item['@id'])}`"></v-list-item-title>
+                            </v-list-item-content>
+                          </template>
+                        </v-autocomplete>
+                      </v-col>
+
+                      <v-col :cols="showSeriesIdentifierType ? 4 : 8" v-if="!hideSeriesIdentifier">
                         <v-text-field
                           :value="s.seriesIdentifier"
                           :label="$t('Identifier')"
-                          v-on:blur="$emit('input-identifier', { series: s, seriesIdentifier: $event.target.value })"
+                          v-on:blur="$emit('input-series', { series: s, seriesIdentifier: $event.target.value })"
                           :filled="inputStyle==='filled'"
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
@@ -541,7 +601,7 @@ export default {
       type: String
     },
     isbn: {
-      type: String
+      type: Array
     },
     isbnLabel: {
       type: String
@@ -552,6 +612,24 @@ export default {
     },
     isbnErrorMessages: {
       type: Array
+    },
+    identifier: {
+      type: String
+    },
+    identifierType: {
+      type: String
+    },
+    hideIdentifier: {
+      type: Boolean,
+      default: true
+    },
+    showIdentifierType: {
+      type: Boolean,
+      default: true
+    },
+    identifierVocabulary: {
+      type: String,
+      default: 'objectidentifiertype'
     },
     series: {
       type: Array
@@ -577,6 +655,14 @@ export default {
     hideSeriesIdentifier: {
       type: Boolean,
       default: true
+    },
+    showSeriesIdentifierType: {
+      type: Boolean,
+      default: true
+    },
+    seriesIdentifierVocabulary: {
+      type: String,
+      default: 'objectidentifiertype'
     },
     seriesCollapse: {
       type: Boolean,

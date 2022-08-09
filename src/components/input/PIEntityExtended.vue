@@ -183,6 +183,7 @@
                 <v-col cols="2">
                   <v-radio-group v-model="organizationRadio" class="mt-0" @change="$emit('change-organization-type', $event)">
                     <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
+                    <v-radio color="primary" :label="'ROR'" :value="'ror'"></v-radio>
                     <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
                   </v-radio-group>
                 </v-col>
@@ -223,7 +224,10 @@
                     </template>
                   </v-autocomplete>
                 </v-col>
-                <v-col cols="12" md="10" v-else>
+                <v-col cols="12" md="10" v-if="organizationRadio === 'ror'">
+                  <ror-search v-on:resolve="$emit('input-organization-ror',$event)"></ror-search>
+                </v-col>
+                <v-col cols="12" md="10" v-if="organizationRadio === 'other'">
                   <v-text-field
                     :value="organizationText"
                     :label="$t('Organization')"
@@ -240,6 +244,7 @@
               <v-col cols="2">
                 <v-radio-group v-model="affiliationRadio" class="mt-0" @change="$emit('change-affiliation-type', $event)">
                   <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
+                  <v-radio color="primary" :label="'ROR'" :value="'ror'"></v-radio>
                   <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
                 </v-radio-group>
               </v-col>
@@ -280,7 +285,10 @@
                   </template>
                 </v-autocomplete>
               </v-col>
-              <v-col cols="12" md="10" v-else>
+              <v-col cols="12" md="10" v-if="affiliationRadio === 'ror'">
+                <ror-search v-on:resolve="$emit('input-affiliation-ror', $event)"></ror-search>
+              </v-col>
+              <v-col cols="12" md="10" v-if="affiliationRadio === 'other'">
                 <v-text-field
                   :value="affiliationText"
                   :label="$t('Affiliation')"
@@ -307,12 +315,14 @@ import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 import { validationrules } from '../../mixins/validationrules'
 import OrgUnitsTreeDialog from '../select/OrgUnitsTreeDialog'
+import RorSearch from '../select/RorSearch'
 
 export default {
   name: 'p-i-entity-extended',
   mixins: [ vocabulary, fieldproperties, validationrules ],
   components: {
-    OrgUnitsTreeDialog
+    OrgUnitsTreeDialog,
+    RorSearch
   },
   directives: {
     mask
