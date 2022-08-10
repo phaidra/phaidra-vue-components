@@ -9,7 +9,7 @@
         :items="vocabularies['orgunits'].terms"
         :item-value="'@id'"
         :loading="loading"
-        :filter="autocompleteFilter"
+        :filter="autocompleteFilterInfix"
         hide-no-data
         :label="$t(label)"
         :filled="inputStyle==='filled'"

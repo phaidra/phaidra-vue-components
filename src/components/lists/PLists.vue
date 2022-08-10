@@ -77,7 +77,9 @@
       <v-col cols="12">
         <v-card>
           <v-card-title class="title font-weight-light grey white--text">
-            {{ loadedList.name }}
+            <span>{{ loadedList.name }}</span>
+            <v-spacer></v-spacer>
+            <template v-if="token && token.length > 0"><a class="pl-2 white--text" target="_blank" :href="'/list/' + token">{{ 'https://' + instance.baseurl + '/list/' + token }}</a></template>
           </v-card-title>
           <v-card-text>
             <v-data-table
@@ -98,12 +100,10 @@
                     hide-details
                   ></v-text-field>
                   <v-spacer></v-spacer>
-                  <template v-if="token && token.length > 0">Share link: <a class="pl-2" target="_blank" :href="'/list/' + token">{{ 'https://' + instance.baseurl + '/list/' + token }}</a></template>
+                  <v-btn v-if="token && token.length > 0" color="primary" dark class="mb-2"  @click="deleteToken(loadedList.listid)">{{ $t('Remove public link') }}</v-btn>
+                  <v-btn v-else color="primary" dark class="mb-2"  @click="createToken(loadedList.listid)">{{ $t('Create public link') }}</v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn v-if="token && token.length > 0" color="primary" dark class="mb-2"  @click="deleteToken(loadedList.listid)">{{ $t('Remove share link') }}</v-btn>
-                  <v-btn v-else color="primary" dark class="mb-2"  @click="createToken(loadedList.listid)">{{ $t('Create share link') }}</v-btn>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" dark class="mb-2"  @click="$refs.collectiondialog.open()">{{ $t('Add to collection') }}</v-btn>
+                  <v-btn color="primary" dark class="mb-2"  @click="$refs.collectiondialog.open()">{{ $t('Add objects to collection') }}</v-btn>
                 </v-toolbar>
               </template>
               <template v-slot:item.pid="{ item }">

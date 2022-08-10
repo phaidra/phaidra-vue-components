@@ -426,6 +426,7 @@ export default {
             }
           case 'http://phaidra.univie.ac.at/XML/metadata/extended/V1.0':
             switch (node.xmlname) {
+              case 'peer_reviewed':
               case 'metadataqualitycheck':
                 return true
               default:
