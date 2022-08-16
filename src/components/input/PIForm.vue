@@ -556,8 +556,8 @@
                               <template v-for="field in filteredMetadatafields">
                                 <v-list-item :key="field.id" @click="addfieldselection.push(field)">
                                   <v-list-item-content>
-                                    <v-list-item-title>{{field.fieldname}}</v-list-item-title>
-                                    <v-list-item-subtitle>{{field.definition}}</v-list-item-subtitle>
+                                    <v-list-item-title>{{ $t(field.fieldname) }}</v-list-item-title>
+                                    <v-list-item-subtitle>{{ $t(field.definition) }}</v-list-item-subtitle>
                                   </v-list-item-content>
                                 </v-list-item>
                                 <v-divider :key="'divi'+field.id"></v-divider>

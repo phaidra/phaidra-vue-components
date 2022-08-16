@@ -373,7 +373,7 @@
                     <v-col cols="2" v-show="!publisherHideType">
                       <v-radio-group v-model="publisherTypeModel" class="mt-0" @change="$emit('change-publisher-type', $event)">
                         <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
-                        <v-radio color="primary" :label="$t('OTHER_FEMININE')" :value="'other'"></v-radio>
+                        <v-radio color="primary" :label="$t('PUBLISHER_VERLAG')" :value="'other'"></v-radio>
                       </v-radio-group>
                     </v-col>
                     <template v-if="publisherTypeModel === 'select'">

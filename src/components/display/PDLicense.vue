@@ -1,5 +1,8 @@
 <template>
-  <a v-if="hideLabel" :href="o" target="_blank" :class="{ 'font-weight-regular': boldLabelFields.includes('edm:rights') }">{{ getLocalizedTermLabel('alllicenses', o) }}</a>
+  <span v-if="hideLabel" :class="{ 'font-weight-regular': boldLabelFields.includes('edm:rights') }">
+    <template v-if="o.startsWith('http')">{{ getLocalizedTermLabel('alllicenses', o) }}</template>
+    <template v-else>{{ $t(o) }}</template>
+  </span>
   <v-row v-else>
     <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t(p) }}</v-col>
     <v-col :md="valueColMd" cols="12" :class="{ 'font-weight-regular': boldLabelFields.includes('edm:rights') }">

@@ -81,7 +81,7 @@
               <v-row no-gutters>
                 <span>https://{{ instance.baseurl }}/{{ doc.pid }}</span>
                 <v-spacer></v-spacer>
-                <p-d-license v-if="doc.dc_license" :hideLabel="true" :o="doc.dc_license[0]"></p-d-license>
+                <p-d-license v-if="doc.dc_rights" :hideLabel="true" :o="doc.dc_rights[0]"></p-d-license>
               </v-row>
             </v-col>
           </v-row>

@@ -169,37 +169,37 @@ const ot4rt = {
 const vocabularies = {
   'cmodels': {
     terms: [
-      { '@id': 'Asset', 'skos:prefLabel': { 'eng': 'Asset' } },
-      { '@id': 'Audio', 'skos:prefLabel': { 'eng': 'Audio' } },
-      { '@id': 'Book', 'skos:prefLabel': { 'eng': 'Book' } },
-      { '@id': 'Collection', 'skos:prefLabel': { 'eng': 'Collection' } },
-      { '@id': 'Container', 'skos:prefLabel': { 'eng': 'Container' } },
-      { '@id': 'PDFDocument', 'skos:prefLabel': { 'eng': 'PDFDocument' } },
-      { '@id': 'Page', 'skos:prefLabel': { 'eng': 'Page' } },
-      { '@id': 'Picture', 'skos:prefLabel': { 'eng': 'Picture' } },
-      { '@id': 'Resource', 'skos:prefLabel': { 'eng': 'Resource' } },
-      { '@id': 'Video', 'skos:prefLabel': { 'eng': 'Video' } }
+      { '@id': 'Asset', 'skos:prefLabel': { 'eng': 'Asset', 'deu': '' } },
+      { '@id': 'Audio', 'skos:prefLabel': { 'eng': 'Audio', 'deu': '' } },
+      { '@id': 'Book', 'skos:prefLabel': { 'eng': 'Book', 'deu': '' } },
+      { '@id': 'Collection', 'skos:prefLabel': { 'eng': 'Collection', 'deu': '' } },
+      { '@id': 'Container', 'skos:prefLabel': { 'eng': 'Container', 'deu': '' } },
+      { '@id': 'PDFDocument', 'skos:prefLabel': { 'eng': 'PDF Document', 'deu': '' } },
+      { '@id': 'Page', 'skos:prefLabel': { 'eng': 'Page', 'deu': '' } },
+      { '@id': 'Picture', 'skos:prefLabel': { 'eng': 'Picture', 'deu': '' } },
+      { '@id': 'Resource', 'skos:prefLabel': { 'eng': 'Resource', 'deu': '' } },
+      { '@id': 'Video', 'skos:prefLabel': { 'eng': 'Video', 'deu': '' } }
     ],
     loaded: true
   },
   'relations': {
     terms: [
-      { '@id': 'http://purl.org/dc/terms/references', 'skos:prefLabel': { 'eng': 'References' }, 'skos:notation': ['references'] },
-      { '@id': 'http://phaidra.org/XML/V1.0/relations#isBackSideOf', 'skos:prefLabel': { 'eng': 'Is back side of' }, 'skos:notation': ['isBackSideOf'] },
-      { '@id': 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', 'skos:prefLabel': { 'eng': 'Is thumbnail for' }, 'skos:notation': ['isThumbnailFor'] },
-      { '@id': 'http://phaidra.univie.ac.at/XML/V1.0/relations#hasSuccessor', 'skos:prefLabel': { 'eng': 'Is older version of' }, 'skos:notation': ['hasSuccessor'] },
-      { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeFormatOf', 'skos:prefLabel': { 'eng': 'Is alternative format of' }, 'skos:notation': ['isAlternativeFormatOf'] },
-      { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeVersionOf', 'skos:prefLabel': { 'eng': 'Is alternative version of' }, 'skos:notation': ['isAlternativeVersionOf'] },
-      { '@id': 'info:fedora/fedora-system:def/relations-external#hasCollectionMember', 'skos:prefLabel': { 'eng': 'Has part' }, 'skos:notation': ['hasCollectionMember'] },
-      { '@id': 'http://pcdm.org/models#hasMember', 'skos:prefLabel': { 'eng': 'Has member' }, 'skos:notation': ['hasMember'] }
+      { '@id': 'http://purl.org/dc/terms/references', 'skos:prefLabel': { 'eng': 'References', 'deu': 'bezieht sich auf' }, 'skos:notation': ['references'] },
+      { '@id': 'http://phaidra.org/XML/V1.0/relations#isBackSideOf', 'skos:prefLabel': { 'eng': 'Is back side of', 'deu': 'ist Rückseite von' }, 'skos:notation': ['isBackSideOf'] },
+      { '@id': 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', 'skos:prefLabel': { 'eng': 'Is thumbnail for', 'deu': 'ist Vorschaubild von' }, 'skos:notation': ['isThumbnailFor'] },
+      { '@id': 'http://phaidra.univie.ac.at/XML/V1.0/relations#hasSuccessor', 'skos:prefLabel': { 'eng': 'Is older version of', 'deu': 'ist ältere Version von' }, 'skos:notation': ['hasSuccessor'] },
+      { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeFormatOf', 'skos:prefLabel': { 'eng': 'Is alternative format of', 'deu': 'ist alternatives Format von' }, 'skos:notation': ['isAlternativeFormatOf'] },
+      { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeVersionOf', 'skos:prefLabel': { 'eng': 'Is alternative version of', 'deu': 'ist alternative Version von' }, 'skos:notation': ['isAlternativeVersionOf'] },
+      { '@id': 'info:fedora/fedora-system:def/relations-external#hasCollectionMember', 'skos:prefLabel': { 'eng': 'Has part', 'deu': 'hat Collection Mitglieder' }, 'skos:notation': ['hasCollectionMember'] },
+      { '@id': 'http://pcdm.org/models#hasMember', 'skos:prefLabel': { 'eng': 'Has member', 'deu': 'hat Mitglieder' }, 'skos:notation': ['hasMember'] }
     ],
     loaded: true
   },
   'pool': {
     terms: [
-      { '@id': 'Bibliothek', 'skos:prefLabel': { 'eng': 'Bibliothek' } },
-      { '@id': 'Institut für Romanistik', 'skos:prefLabel': { 'eng': 'Institut für Romanistik' } },
-      { '@id': 'privat', 'skos:prefLabel': { 'eng': 'privat' } }
+      { '@id': 'Bibliothek', 'skos:prefLabel': { 'eng': 'Library', 'deu': 'Bibliothek' } },
+      { '@id': 'Institut für Romanistik', 'skos:prefLabel': { 'eng': 'Institute for Romance Studies', 'deu': 'Institut für Romanistik' } },
+      { '@id': 'privat', 'skos:prefLabel': { 'eng': 'private', 'deu': 'privat' } }
     ],
     loaded: true
   },
@@ -207,13 +207,13 @@ const vocabularies = {
     terms: [
       { '@id': 'dcterms:date', 'skos:prefLabel': { 'eng': 'Date', 'deu': 'Datum' } },
       { '@id': 'dcterms:created', 'skos:prefLabel': { 'eng': 'Date created', 'deu': 'Erstellungsdatum' } },
-      { '@id': 'dcterms:modified', 'skos:prefLabel': { 'eng': 'Date modified', 'deu': 'Date modified' } },
-      { '@id': 'dcterms:available', 'skos:prefLabel': { 'eng': 'Date available', 'deu': 'Date available' } },
-      { '@id': 'dcterms:issued', 'skos:prefLabel': { 'eng': 'Date issued', 'deu': 'Date issued' } },
-      { '@id': 'dcterms:valid', 'skos:prefLabel': { 'eng': 'Date valid', 'deu': 'Date valid' } },
-      { '@id': 'dcterms:dateAccepted', 'skos:prefLabel': { 'eng': 'Date accepted', 'deu': 'Date accepted' } },
-      { '@id': 'dcterms:dateCopyrighted', 'skos:prefLabel': { 'eng': 'Date copyrighted', 'deu': 'Date copyrighted' } },
-      { '@id': 'dcterms:dateSubmitted', 'skos:prefLabel': { 'eng': 'Date submitted', 'deu': 'Date submitted' } },
+      { '@id': 'dcterms:modified', 'skos:prefLabel': { 'eng': 'Date modified', 'deu': 'Änderungsdatum' } },
+      { '@id': 'dcterms:available', 'skos:prefLabel': { 'eng': 'Date available', 'deu': 'Verfügbarkeitsdatum' } },
+      { '@id': 'dcterms:issued', 'skos:prefLabel': { 'eng': 'Date issued', 'deu': 'Erscheinungsdatum' } },
+      { '@id': 'dcterms:valid', 'skos:prefLabel': { 'eng': 'Date valid', 'deu': 'Gültigkeitsdatum' } },
+      { '@id': 'dcterms:dateAccepted', 'skos:prefLabel': { 'eng': 'Date accepted', 'deu': 'Annahmedatum' } },
+      { '@id': 'dcterms:dateCopyrighted', 'skos:prefLabel': { 'eng': 'Date copyrighted', 'deu': 'Copyright Datum' } },
+      { '@id': 'dcterms:dateSubmitted', 'skos:prefLabel': { 'eng': 'Date submitted', 'deu': 'Datum der Einreichung' } },
       { '@id': 'rdau:P60071', 'skos:prefLabel': { 'eng': 'Date of production', 'deu': 'Produktionsdatum' } },
       { '@id': 'phaidra:dateAccessioned', 'skos:prefLabel': { 'eng': 'Date accessioned', 'deu': 'Eingangsdatum' } },
       { '@id': 'dcterms:temporal', 'skos:prefLabel': { 'eng': 'Temporal coverage', 'deu': 'Zeitliche Abdeckung' } }
@@ -222,8 +222,8 @@ const vocabularies = {
   },
   'placetype': {
     terms: [
-      { '@id': 'schema:Place', 'skos:prefLabel': { 'eng': 'Place' } },
-      { '@id': 'schema:AdministrativeArea', 'skos:prefLabel': { 'eng': 'AdministrativeArea' } }
+      { '@id': 'schema:Place', 'skos:prefLabel': { 'eng': 'Place', 'deu': 'Ort' } },
+      { '@id': 'schema:AdministrativeArea', 'skos:prefLabel': { 'eng': 'AdministrativeArea', 'deu': 'Verwaltungseinheit' } }
     ],
     loaded: true
   },
@@ -235,7 +235,7 @@ const vocabularies = {
       { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI' }, 'skos:example': 'https://example.com/path/resource.txt' },
       { '@id': 'ids:isbn', 'skos:prefLabel': { 'eng': 'ISBN' }, 'skos:example': '978-3-16-148410-0' },
       { '@id': 'ids:gnd', 'skos:prefLabel': { 'eng': 'GND' }, 'skos:example': '118635808' },
-      { '@id': 'phaidra:acnumber', 'skos:prefLabel': { 'eng': 'AC number' }, 'skos:example': 'AC13399179' }
+      { '@id': 'phaidra:acnumber', 'skos:prefLabel': { 'eng': 'AC number', 'deu': 'AC Nummer' }, 'skos:example': 'AC13399179' }
     ],
     loaded: true
   },
@@ -272,8 +272,8 @@ const vocabularies = {
   },
   'citationpredicate': {
     terms: [
-      { '@id': 'cito:cites', 'skos:prefLabel': { 'eng': 'Cites' } },
-      { '@id': 'cito:isCitedBy', 'skos:prefLabel': { 'eng': 'Is cited by' } }
+      { '@id': 'cito:cites', 'skos:prefLabel': { 'eng': 'Cites', 'deu': 'Verweist auf' } },
+      { '@id': 'cito:isCitedBy', 'skos:prefLabel': { 'eng': 'Is cited by', 'deu': 'Zitiert von' } }
     ],
     loaded: true
   },
@@ -739,104 +739,104 @@ const vocabularies = {
       { '@id': ns + '2FTX-ZPZV', 'skos:prefLabel': { 'eng': 'ADAT' } },
       { '@id': ns + 'A3BG-65F5', 'skos:prefLabel': { 'eng': 'CD' } },
       { '@id': ns + '4CQF-7HHF', 'skos:prefLabel': { 'eng': 'DAT' } },
-      { '@id': ns + 'HXSS-NBZ4', 'skos:prefLabel': { 'eng': 'audiocassette' } },
-      { '@id': ns + 'X627-FCV9', 'skos:prefLabel': { 'eng': 'tape' } },
+      { '@id': ns + 'HXSS-NBZ4', 'skos:prefLabel': { 'eng': 'audiocassette', 'deu': 'Audiokassette' } },
+      { '@id': ns + 'X627-FCV9', 'skos:prefLabel': { 'eng': 'tape', 'deu': 'Magnetband' } },
       { '@id': ns + 'C36Q-N42M', 'skos:prefLabel': { 'eng': 'lantern slide', 'deu': 'Glasplattendia' } }
     ],
     loaded: true
   },
   'resourcetype': {
     terms: [
-      { '@id': ns + '44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
-      { '@id': ns + '69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
-      { '@id': ns + 'GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
-      { '@id': ns + 'B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
-      { '@id': ns + '7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
-      { '@id': ns + '8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
-      { '@id': ns + '8MY0-BQDQ', 'skos:prefLabel': { 'eng': 'container' } },
-      { '@id': ns + 'T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
+      { '@id': ns + '44TN-P1S0', 'skos:prefLabel': { 'eng': 'Image', 'deu': 'Bild' } },
+      { '@id': ns + '69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'Text', 'deu': 'Text' } },
+      { '@id': ns + 'GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'Collection', 'deu': 'Collection' } },
+      { '@id': ns + 'B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'Video', 'deu': 'Video' } },
+      { '@id': ns + '7AVS-Y482', 'skos:prefLabel': { 'eng': 'Data', 'deu': 'Daten' } },
+      { '@id': ns + '8YB5-1M0J', 'skos:prefLabel': { 'eng': 'Sound', 'deu': 'Audio' } },
+      { '@id': ns + '8MY0-BQDQ', 'skos:prefLabel': { 'eng': 'Container', 'deu': 'Container' } },
+      { '@id': ns + 'T8GH-F4V8', 'skos:prefLabel': { 'eng': 'Link', 'deu': 'Link' } }
     ],
     loaded: true
   },
   'resourcetypenocontainer': {
     terms: [
-      { '@id': ns + '44TN-P1S0', 'skos:prefLabel': { 'eng': 'image' } },
-      { '@id': ns + '69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'text' } },
-      { '@id': ns + 'GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'collection' } },
-      { '@id': ns + 'B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'video' } },
-      { '@id': ns + '7AVS-Y482', 'skos:prefLabel': { 'eng': 'data' } },
-      { '@id': ns + '8YB5-1M0J', 'skos:prefLabel': { 'eng': 'sound' } },
-      { '@id': ns + 'T8GH-F4V8', 'skos:prefLabel': { 'eng': 'resource' } }
+      { '@id': ns + '44TN-P1S0', 'skos:prefLabel': { 'eng': 'Image', 'deu': 'Bild' } },
+      { '@id': ns + '69ZZ-2KGX', 'skos:prefLabel': { 'eng': 'Text', 'deu': 'Text' } },
+      { '@id': ns + 'GXS7-ENXJ', 'skos:prefLabel': { 'eng': 'Collection', 'deu': 'Collection' } },
+      { '@id': ns + 'B0Y6-GYT8', 'skos:prefLabel': { 'eng': 'Video', 'deu': 'Video' } },
+      { '@id': ns + '7AVS-Y482', 'skos:prefLabel': { 'eng': 'Data', 'deu': 'Daten' } },
+      { '@id': ns + '8YB5-1M0J', 'skos:prefLabel': { 'eng': 'Sound', 'deu': 'Audio' } },
+      { '@id': ns + 'T8GH-F4V8', 'skos:prefLabel': { 'eng': 'Link', 'deu': 'Link' } }
     ],
     loaded: true
   },
   'genre': {
     terms: [
-      { '@id': ns + 'QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
-      { '@id': ns + '31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
-      { '@id': ns + 'DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
-      { '@id': ns + 'MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion' } },
-      { '@id': ns + 'WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film' } },
-      { '@id': ns + 'XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama' } },
-      { '@id': ns + 'GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy' } },
-      { '@id': ns + 'KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film' } },
-      { '@id': ns + 'MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film' } },
-      { '@id': ns + 'G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror' } },
-      { '@id': ns + 'GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy' } },
-      { '@id': ns + 'NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime' } },
-      { '@id': ns + 'BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film' } },
-      { '@id': ns + 'AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film' } },
-      { '@id': ns + '7RZF-5216', 'skos:prefLabel': { 'eng': 'musical' } },
-      { '@id': ns + 'A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast' } },
-      { '@id': ns + '8QDK-T11S', 'skos:prefLabel': { 'eng': 'opera' } },
-      { '@id': ns + 'B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance' } },
-      { '@id': ns + 'XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire' } },
-      { '@id': ns + 'YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction' } },
-      { '@id': ns + 'A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
-      { '@id': ns + '1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
-      { '@id': ns + 'PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
-      { '@id': ns + '2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
-      { '@id': ns + 'G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
-      { '@id': ns + 'W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
-      { '@id': ns + 'QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
-      { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
-      { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
-      { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
+      { '@id': ns + 'QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action', 'deu': 'Actionfilm' } },
+      { '@id': ns + '31DA-295K', 'skos:prefLabel': { 'eng': 'anime', 'deu': 'Anime' } },
+      { '@id': ns + 'DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biographical film', 'deu': 'Anime' } },
+      { '@id': ns + 'MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion', 'deu': 'Diskussion' } },
+      { '@id': ns + 'WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film', 'deu': 'Diskussion' } },
+      { '@id': ns + 'XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama', 'deu': 'Drama' } },
+      { '@id': ns + 'GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy film', 'deu': 'Fantasyfilm' } },
+      { '@id': ns + 'KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film', 'deu': 'Fernsehfilm' } },
+      { '@id': ns + 'MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film', 'deu': 'Historienfilm' } },
+      { '@id': ns + 'G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror film', 'deu': 'Horrorfilm' } },
+      { '@id': ns + 'GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy film', 'deu': 'Komödie' } },
+      { '@id': ns + 'NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime film', 'deu': 'Kriminalfilm' } },
+      { '@id': ns + 'BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film', 'deu': 'Kurzfilm' } },
+      { '@id': ns + 'AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film', 'deu': 'Liebesfilm' } },
+      { '@id': ns + '7RZF-5216', 'skos:prefLabel': { 'eng': 'music film', 'deu': 'Musikfilm' } },
+      { '@id': ns + 'A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast', 'deu': 'Nachrichtensendung' } },
+      { '@id': ns + '8QDK-T11S', 'skos:prefLabel': { 'eng': 'opera', 'deu': 'Oper' } },
+      { '@id': ns + 'B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance', 'deu': 'romance' } },
+      { '@id': ns + 'XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire', 'deu': 'Satire' } },
+      { '@id': ns + 'YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction film', 'deu': 'Science-Fiction-Film' } },
+      { '@id': ns + 'A8HT-N1QB', 'skos:prefLabel': { 'eng': 'television series', 'deu': 'Fernsehserie' } },
+      { '@id': ns + '1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller film', 'deu': 'Thriller' } },
+      { '@id': ns + 'PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy', 'deu': 'Tragikomödie' } },
+      { '@id': ns + '2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment', 'deu': 'Unterhaltung' } },
+      { '@id': ns + 'G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure film', 'deu': 'Abenteuerfilm' } },
+      { '@id': ns + 'W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation film', 'deu': 'Animationsfilm' } },
+      { '@id': ns + 'QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family film', 'deu': 'Familienfilm' } },
+      { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery film', 'deu': 'Mysteryfilm' } },
+      { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war film', 'deu': 'Kriegsfilm' } },
+      { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western', 'deu': 'Western' } }
     ],
     loaded: true
   },
   'moviegenre': {
     terms: [
-      { '@id': ns + 'QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action' } },
-      { '@id': ns + '31DA-295K', 'skos:prefLabel': { 'eng': 'anime' } },
-      { '@id': ns + 'DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biopic' } },
-      { '@id': ns + 'MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion' } },
-      { '@id': ns + 'WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film' } },
-      { '@id': ns + 'XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama' } },
-      { '@id': ns + 'GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy' } },
-      { '@id': ns + 'KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film' } },
-      { '@id': ns + 'MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film' } },
-      { '@id': ns + 'G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror' } },
-      { '@id': ns + 'GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy' } },
-      { '@id': ns + 'NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime' } },
-      { '@id': ns + 'BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film' } },
-      { '@id': ns + 'AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film' } },
-      { '@id': ns + '7RZF-5216', 'skos:prefLabel': { 'eng': 'musical' } },
-      { '@id': ns + 'A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast' } },
-      { '@id': ns + '8QDK-T11S', 'skos:prefLabel': { 'eng': 'opera' } },
-      { '@id': ns + 'B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance' } },
-      { '@id': ns + 'XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire' } },
-      { '@id': ns + 'YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction' } },
-      { '@id': ns + 'A8HT-N1QB', 'skos:prefLabel': { 'eng': 'series' } },
-      { '@id': ns + '1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller' } },
-      { '@id': ns + 'PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy' } },
-      { '@id': ns + '2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment' } },
-      { '@id': ns + 'G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure' } },
-      { '@id': ns + 'W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation' } },
-      { '@id': ns + 'QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family' } },
-      { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery' } },
-      { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war' } },
-      { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western' } }
+      { '@id': ns + 'QNV1-N1EC', 'skos:prefLabel': { 'eng': 'action', 'deu': 'Actionfilm' } },
+      { '@id': ns + '31DA-295K', 'skos:prefLabel': { 'eng': 'anime', 'deu': 'Anime' } },
+      { '@id': ns + 'DB5C-1Y4H', 'skos:prefLabel': { 'eng': 'biographical film', 'deu': 'Anime' } },
+      { '@id': ns + 'MKKZ-BH2Q', 'skos:prefLabel': { 'eng': 'discussion', 'deu': 'Diskussion' } },
+      { '@id': ns + 'WVGH-KT47', 'skos:prefLabel': { 'eng': 'documentary film', 'deu': 'Diskussion' } },
+      { '@id': ns + 'XFDY-E13E', 'skos:prefLabel': { 'eng': 'drama', 'deu': 'Drama' } },
+      { '@id': ns + 'GZQE-YK3K', 'skos:prefLabel': { 'eng': 'fantasy film', 'deu': 'Fantasyfilm' } },
+      { '@id': ns + 'KM7A-FYPP', 'skos:prefLabel': { 'eng': 'television film', 'deu': 'Fernsehfilm' } },
+      { '@id': ns + 'MN1Y-YFCF', 'skos:prefLabel': { 'eng': 'historical film', 'deu': 'Historienfilm' } },
+      { '@id': ns + 'G2VQ-GEEK', 'skos:prefLabel': { 'eng': 'horror film', 'deu': 'Horrorfilm' } },
+      { '@id': ns + 'GFM4-2J48', 'skos:prefLabel': { 'eng': 'comedy film', 'deu': 'Komödie' } },
+      { '@id': ns + 'NQVM-6B2Y', 'skos:prefLabel': { 'eng': 'crime film', 'deu': 'Kriminalfilm' } },
+      { '@id': ns + 'BPAJ-NQ8N', 'skos:prefLabel': { 'eng': 'short film', 'deu': 'Kurzfilm' } },
+      { '@id': ns + 'AHWA-YKFH', 'skos:prefLabel': { 'eng': 'romance film', 'deu': 'Liebesfilm' } },
+      { '@id': ns + '7RZF-5216', 'skos:prefLabel': { 'eng': 'music film', 'deu': 'Musikfilm' } },
+      { '@id': ns + 'A1B4-K5MK', 'skos:prefLabel': { 'eng': 'newscast', 'deu': 'Nachrichtensendung' } },
+      { '@id': ns + '8QDK-T11S', 'skos:prefLabel': { 'eng': 'opera', 'deu': 'Oper' } },
+      { '@id': ns + 'B4R8-Z419', 'skos:prefLabel': { 'eng': 'romance', 'deu': 'romance' } },
+      { '@id': ns + 'XZ5S-JEJ5', 'skos:prefLabel': { 'eng': 'satire', 'deu': 'Satire' } },
+      { '@id': ns + 'YV6T-SWAF', 'skos:prefLabel': { 'eng': 'science fiction film', 'deu': 'Science-Fiction-Film' } },
+      { '@id': ns + 'A8HT-N1QB', 'skos:prefLabel': { 'eng': 'television series', 'deu': 'Fernsehserie' } },
+      { '@id': ns + '1VZT-KE1S', 'skos:prefLabel': { 'eng': 'thriller film', 'deu': 'Thriller' } },
+      { '@id': ns + 'PCK6-NYPG', 'skos:prefLabel': { 'eng': 'tragicomedy', 'deu': 'Tragikomödie' } },
+      { '@id': ns + '2PV5-5V2H', 'skos:prefLabel': { 'eng': 'entertainment', 'deu': 'Unterhaltung' } },
+      { '@id': ns + 'G7EY-YXQR', 'skos:prefLabel': { 'eng': 'adventure film', 'deu': 'Abenteuerfilm' } },
+      { '@id': ns + 'W2SK-Q08A', 'skos:prefLabel': { 'eng': 'animation film', 'deu': 'Animationsfilm' } },
+      { '@id': ns + 'QHJ1-PVEB', 'skos:prefLabel': { 'eng': 'family film', 'deu': 'Familienfilm' } },
+      { '@id': ns + 'D8B5-D0YT', 'skos:prefLabel': { 'eng': 'mystery film', 'deu': 'Mysteryfilm' } },
+      { '@id': ns + 'R8VJ-TMTB', 'skos:prefLabel': { 'eng': 'war film', 'deu': 'Kriegsfilm' } },
+      { '@id': ns + 'WZMQ-2NG6', 'skos:prefLabel': { 'eng': 'western', 'deu': 'Western' } }
     ],
     loaded: true
   },
@@ -844,7 +844,7 @@ const vocabularies = {
     terms: [
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552257', 'skos:prefLabel': { 'eng': 'Book', 'deu': 'Buch' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556244', 'skos:prefLabel': { 'eng': 'Patent', 'deu': 'Patent' } },
-      { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556237', 'skos:prefLabel': { 'eng': 'Conference Object', 'deu': 'Conference Object' } },
+      { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556237', 'skos:prefLabel': { 'eng': 'Conference Object', 'deu': 'Konferenzveröffentlichung' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552259', 'skos:prefLabel': { 'eng': 'Multimedia', 'deu': 'Multimedia' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552260', 'skos:prefLabel': { 'eng': 'other', 'deu': 'sonstige' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1742', 'skos:prefLabel': { 'eng': 'Dissertation', 'deu': 'Dissertation' } },
@@ -852,11 +852,11 @@ const vocabularies = {
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552253', 'skos:prefLabel': { 'eng': 'Article', 'deu': 'Artikel in Zeitschrift' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1743', 'skos:prefLabel': { 'eng': 'Professorial Dissertation', 'deu': 'Habilitationsschrift' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556239', 'skos:prefLabel': { 'eng': 'Working Paper', 'deu': 'Working Paper' } },
-      { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556236', 'skos:prefLabel': { 'eng': 'Review', 'deu': 'Review' } },
+      { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556236', 'skos:prefLabel': { 'eng': 'Review', 'deu': 'Rezension' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556242', 'skos:prefLabel': { 'eng': 'Annotation', 'deu': 'Annotation' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1557090', 'skos:prefLabel': { 'eng': 'Research Data', 'deu': 'Forschungsdaten' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1739', 'skos:prefLabel': { 'eng': 'Master\'s Dissertation', 'deu': 'Masterarbeit' } },
-      { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556235', 'skos:prefLabel': { 'eng': 'Book Part', 'deu': 'Book Part' } },
+      { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556235', 'skos:prefLabel': { 'eng': 'Book Part', 'deu': 'Buchkapitel' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1740', 'skos:prefLabel': { 'eng': 'Diploma Dissertation', 'deu': 'Diplomarbeit' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1556240', 'skos:prefLabel': { 'eng': 'Preprint', 'deu': 'Preprint' } },
       { '@id': 'http://phaidra.univie.ac.at/XML/metadata/lom/V1.0/organization/voc_17/1552258', 'skos:prefLabel': { 'eng': 'Theses', 'deu': 'Hochschulschrift' } },
@@ -899,7 +899,7 @@ const vocabularies = {
       { '@id': ns + 'YA8R-1M0D', 'skos:prefLabel': { 'eng': 'learning object', 'deu': 'Lernobjekt' } },
       { '@id': ns + 'F4JN-ZST0', 'skos:prefLabel': { 'eng': 'lecture', 'deu': 'Vortrag' } },
       { '@id': ns + 'GBWA-JJP8', 'skos:prefLabel': { 'eng': 'letter (correspondence)', 'deu': 'Brief' } },
-      { '@id': ns + 'EHPQ-XYA3', 'skos:prefLabel': { 'eng': 'magazine', 'deu': 'Informationszeitschrift' } },
+      { '@id': ns + 'EHPQ-XYA3', 'skos:prefLabel': { 'eng': 'magazine', 'deu': 'Magazin (Zeitschrift)' } },
       { '@id': ns + 'KMRH-NFR9', 'skos:prefLabel': { 'eng': 'manuscript', 'deu': 'Manuskript' } },
       { '@id': ns + 'A52A-CWMM', 'skos:prefLabel': { 'eng': 'map', 'deu': 'Karte' } },
       { '@id': ns + 'MCN9-1NSA', 'skos:prefLabel': { 'eng': 'memorandum', 'deu': 'Memorandum' } },
@@ -925,7 +925,7 @@ const vocabularies = {
       { '@id': ns + 'MZ2Q-R099', 'skos:prefLabel': { 'eng': 'questionnaire', 'deu': 'Fragebogen' } },
       { '@id': ns + 'JMAV-7F3R', 'skos:prefLabel': { 'eng': 'report', 'deu': 'Bericht' } },
       { '@id': ns + 'PHQ7-BGFA', 'skos:prefLabel': { 'eng': 'report part', 'deu': 'Teilbericht' } },
-      { '@id': ns + 'APV5-CJSF', 'skos:prefLabel': { 'eng': 'report to funding agency', 'deu': 'Bericht an Förderorganisation' } },
+      { '@id': ns + 'APV5-CJSF', 'skos:prefLabel': { 'eng': 'report to funding agency', 'deu': 'Bericht an Fördergeber' } },
       { '@id': ns + '7J0J-HC61', 'skos:prefLabel': { 'eng': 'research report', 'deu': 'Forschungsbericht' } },
       { '@id': ns + 'VM3E-HXE6', 'skos:prefLabel': { 'eng': 'research software', 'deu': 'Forschungssoftware' } },
       { '@id': ns + 'JJKV-B1CG', 'skos:prefLabel': { 'eng': 'review', 'deu': 'Rezension' } },
@@ -1005,20 +1005,20 @@ const vocabularies = {
   },
   'irfunders': {
     terms: [
-      { '@id': ns + 'N3C4-ZVR0', 'skos:prefLabel': { 'eng': 'Austrian Science Fund (FWF)' } },
-      { '@id': ns + 'EYN2-KEW2', 'skos:prefLabel': { 'eng': 'Bundesministerium für Bildung, Wissenschaft und Forschung (BMBWF)' } },
-      { '@id': ns + '74ZM-RFR6', 'skos:prefLabel': { 'eng': 'European Science Foundation (ESF)' } },
-      { '@id': ns + 'RDY6-W6C3', 'skos:prefLabel': { 'eng': 'European Union (all programmes)' } },
-      { '@id': ns + 'APPY-SKP2', 'skos:prefLabel': { 'eng': 'Jubiläumsfonds der Österreichischen Nationalbank' } },
-      { '@id': ns + 'TF8A-AS8X', 'skos:prefLabel': { 'eng': 'Österreichische Akademie der Wissenschaften (ÖAW)' } },
-      { '@id': ns + 'RX5K-E2KX', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsförderungsgesellschaft mbH (FFG)' } },
-      { '@id': ns + 'RESE-5QGF', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsgemeinschaft (ÖFG)' } },
-      { '@id': ns + 'SN0W-4T4J', 'skos:prefLabel': { 'eng': 'Österreichischer Austauschdienst (OeAD)' } },
-      { '@id': ns + 'S9R7-X1M2', 'skos:prefLabel': { 'eng': 'Österreichischer Nationalfonds für Opfer des Nationalsozialismus' } },
-      { '@id': ns + 'X4EX-JK51', 'skos:prefLabel': { 'eng': 'University of Vienna' } },
-      { '@id': ns + 'XMYF-893X', 'skos:prefLabel': { 'eng': 'Vienna Science and Technology Fund (WWTF)' } },
-      { '@id': ns + '6HPQ-MTZV', 'skos:prefLabel': { 'eng': 'Zukunftsfonds der Republik Österreich' } },
-      { '@id': 'other', 'skos:prefLabel': { 'eng': 'Other' } }
+      { '@id': ns + 'N3C4-ZVR0', 'skos:prefLabel': { 'eng': 'Austrian Science Fund (FWF)', 'deu': 'Fonds zur Förderung der wissenschaftlichen Forschung (FWF)' } },
+      { '@id': ns + 'EYN2-KEW2', 'skos:prefLabel': { 'eng': 'Ministry of Education, Science and Research (BMBWF)', 'deu': 'Bundesministerium für Bildung, Wissenschaft und Forschung (BMBWF)' } },
+      { '@id': ns + '74ZM-RFR6', 'skos:prefLabel': { 'eng': 'European Science Foundation (ESF)', 'deu': 'Europäische Wissenschaftsstiftung (ESF)' } },
+      { '@id': ns + 'RDY6-W6C3', 'skos:prefLabel': { 'eng': 'European Union (all programmes)', 'deu': 'Europäische Union (alle Programme)' } },
+      { '@id': ns + 'APPY-SKP2', 'skos:prefLabel': { 'eng': 'Jubiläumsfonds der Österreichischen Nationalbank', 'deu': 'Jubiläumsfonds der Österreichischen Nationalbank' } },
+      { '@id': ns + 'TF8A-AS8X', 'skos:prefLabel': { 'eng': 'Austrian Academy of Sciences (ÖAW)', 'deu': 'Österreichische Akademie der Wissenschaften (ÖAW)' } },
+      { '@id': ns + 'RX5K-E2KX', 'skos:prefLabel': { 'eng': 'Austrian Research Promotion Agency (FFG)', 'deu': 'Österreichische Forschungsförderungsgesellschaft mbH (FFG)' } },
+      { '@id': ns + 'RESE-5QGF', 'skos:prefLabel': { 'eng': 'Österreichische Forschungsgemeinschaft (ÖFG)', 'deu': 'Österreichische Forschungsgemeinschaft (ÖFG)' } },
+      { '@id': ns + 'SN0W-4T4J', 'skos:prefLabel': { 'eng': 'Agency for Education and Internationalisation (OeAD)', 'deu': 'Österreichischer Austauschdienst (OeAD)' } },
+      { '@id': ns + 'S9R7-X1M2', 'skos:prefLabel': { 'eng': 'National Fund of the Republic of Austria for Victims of National Socialism', 'deu': 'Österreichischer Nationalfonds für Opfer des Nationalsozialismus' } },
+      { '@id': ns + 'X4EX-JK51', 'skos:prefLabel': { 'eng': 'University of Vienna', 'deu': 'Universität Wien' } },
+      { '@id': ns + 'XMYF-893X', 'skos:prefLabel': { 'eng': 'Vienna Science and Technology Fund (WWTF)', 'deu': 'Wiener Wissenschafts-, Forschungs- und Technologiefonds (WWTF)' } },
+      { '@id': ns + '6HPQ-MTZV', 'skos:prefLabel': { 'eng': 'Zukunftsfonds der Republik Österreich', 'deu': 'Zukunftsfonds der Republik Österreich' } },
+      { '@id': 'other', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere' } }
     ],
     loaded: true
   },
@@ -1042,15 +1042,15 @@ const vocabularies = {
   },
   'technique': {
     terms: [
-      { '@id': ns + 'NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography' } },
-      { '@id': ns + 'DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography' } },
+      { '@id': ns + 'NZ42-TTZT', 'skos:prefLabel': { 'eng': 'black-and-white photography', 'deu': 'Schwarz-Weiß-Fotografie' } },
+      { '@id': ns + 'DC1W-JWNP', 'skos:prefLabel': { 'eng': 'color photography', 'deu': 'Farb-Fotografie' } },
       { '@id': ns + '431H-5YSA', 'skos:prefLabel': { 'eng': 'slide', 'deu': 'Diapositiv' } },
-      { '@id': ns + 'VZ88-24TF', 'skos:prefLabel': { 'eng': 'black-and-white slide', 'deu': 'Schwarzweiß-Dia' } },
-      { '@id': ns + '96PV-FFAT', 'skos:prefLabel': { 'eng': 'color slide' } },
-      { '@id': ns + 'AH0S-F3BV', 'skos:prefLabel': { 'eng': 'black-and-white film' } },
-      { '@id': ns + 'K818-FSM5', 'skos:prefLabel': { 'eng': 'color film' } },
-      { '@id': ns + '748F-SQW9', 'skos:prefLabel': { 'eng': 'silent film' } },
-      { '@id': ns + '1K09-VXQ4', 'skos:prefLabel': { 'eng': 'sound film' } }
+      { '@id': ns + 'VZ88-24TF', 'skos:prefLabel': { 'eng': 'black-and-white slide', 'deu': 'Schwarz-Weiß-Dia' } },
+      { '@id': ns + '96PV-FFAT', 'skos:prefLabel': { 'eng': 'color slide', 'deu': 'Farb-Dia' } },
+      { '@id': ns + 'AH0S-F3BV', 'skos:prefLabel': { 'eng': 'black-and-white film', 'deu': 'Schwarz-Weiß-Film' } },
+      { '@id': ns + 'K818-FSM5', 'skos:prefLabel': { 'eng': 'color film', 'deu': 'Farb-Film' } },
+      { '@id': ns + '748F-SQW9', 'skos:prefLabel': { 'eng': 'silent film', 'deu': 'Stummfilm' } },
+      { '@id': ns + '1K09-VXQ4', 'skos:prefLabel': { 'eng': 'sound film', 'deu': 'Tonfilm' } }
     ],
     loaded: true
   },
@@ -1072,8 +1072,8 @@ const vocabularies = {
   },
   'reproduction': {
     terms: [
-      { '@id': ns + 'AYRE-RQAS', 'skos:prefLabel': { 'eng': 'original' } },
-      { '@id': ns + 'BD33-7WA2', 'skos:prefLabel': { 'eng': 'copy' } }
+      { '@id': ns + 'AYRE-RQAS', 'skos:prefLabel': { 'eng': 'original', 'deu': 'Original' } },
+      { '@id': ns + 'BD33-7WA2', 'skos:prefLabel': { 'eng': 'copy', 'deu': 'Kopie' } }
     ],
     loaded: true
   },

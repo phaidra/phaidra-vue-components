@@ -1198,7 +1198,7 @@ export const state = () => ({
               title: 'Usage notes',
               content: {
                 level1:
-                  'Use this field when the the object you are describing is a motion picture that has been adapted from another resource. <br> In this field you can give information about the original resource:<ul><br><li>Title</li> <br> <li>Role: <br>Choose the type of role from the suggester and add the name and surname of the person related to the role you previously selected.</li></ul> ',
+                  'Use this field when the the object you are describing is a motion picture that has been adapted from another resource. <br> In this field you can give information about the original resource:<ul><br><li>Title: <br> Title of the work. </li> <li>Role: <br>Choose the type of role from the suggester and add the name and surname of the person related to the role you previously selected.</li></ul>',
                 level2: '',
                 level3: ''
               }
@@ -1652,7 +1652,7 @@ export const state = () => ({
           ]
         },
         {
-          title: 'PUBLISHER_VERLAG',
+          title: 'bf:provisionActivity',
           predicate: 'bf:provisionActivity',
           open: false,
           sections: [
