@@ -553,15 +553,15 @@
                           <v-card-text>
                             <v-list three-line >
                               <v-text-field clearable label="Search..." append-icon="mdi-magnify" v-model="searchfieldsinput"></v-text-field>
-                              <template v-for="field in filteredMetadatafields">
-                                <v-list-item :key="field.id" @click="addfieldselection.push(field)">
+                              <div v-for="field in filteredMetadatafields" :key="field.id">
+                                <v-list-item @click="addfieldselection.push(field)">
                                   <v-list-item-content>
                                     <v-list-item-title>{{ $t(field.fieldname) }}</v-list-item-title>
                                     <v-list-item-subtitle>{{ $t(field.definition) }}</v-list-item-subtitle>
                                   </v-list-item-content>
                                 </v-list-item>
                                 <v-divider :key="'divi'+field.id"></v-divider>
-                              </template>
+                              </div>
                             </v-list>
                           </v-card-text>
                           <v-divider :key="'divi'+s.id"></v-divider>
@@ -881,11 +881,10 @@ export default {
       return this.getSubmitType(resourcetype)
     },
     filteredMetadatafields () {
-      let list = fields.getEditableFields(this.$i18n.locale)
       if (this.searchfieldsinput) {
-        return list.filter(f => (f.fieldname.toLowerCase().includes(this.searchfieldsinput.toLowerCase()) || (f.definition.toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
+        return this.$store.state.vocabulary.fields.filter(f => (this.$t(f.fieldname).toLowerCase().includes(this.searchfieldsinput.toLowerCase()) || (this.$t(f.definition).toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
       } else {
-        return list
+        return this.$store.state.vocabulary.fields
       }
     }
   },
@@ -1715,6 +1714,7 @@ export default {
   },
   mounted: function () {
     this.$store.dispatch('vocabulary/loadLanguages', this.$i18n.locale)
+    this.$store.dispatch('vocabulary/sortFields', this.$i18n.locale)
   }
 }
 </script>

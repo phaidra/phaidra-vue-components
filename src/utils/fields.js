@@ -1467,7 +1467,6 @@ export default {
       delete field['value']
       newarr.push(field)
     }
-    newarr.sort((a, b) => a.fieldname.localeCompare(b.fieldname, locale))
     return newarr
   },
   getField: function (id, ordergroup) {

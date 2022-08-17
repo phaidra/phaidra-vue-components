@@ -2,8 +2,10 @@ import Vue from 'vue'
 import languages from '../../utils/lang'
 import lang3to2map from '../../utils/lang3to2map'
 import orgunits from '../../utils/orgunits'
+import fieldsLib from '../../utils/fields'
 import oefos from '../../utils/oefos'
 import axios from 'axios'
+import i18n from '../../i18n/i18n'
 
 const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
   ret[lang3to2map[key]] = key
@@ -1209,7 +1211,8 @@ const vocabularies = {
 }
 
 export const state = () => ({
-  vocabularies: vocabularies
+  vocabularies: vocabularies,
+  fields: fieldsLib.getEditableFields()
 })
 
 const mutations = {
@@ -1301,6 +1304,14 @@ const mutations = {
       state.vocabularies['oefos'].sorted = locale
     }
   },
+  sortFields (state, locale) {
+    i18n.locale = locale
+    if (state.fields) {
+      state.fields.sort(function (a, b) {
+        return i18n.t(a.fieldname).localeCompare(i18n.t(b.fieldname), locale)
+      })
+    }
+  },
   setLangTerms (state, data) {
     if (state.vocabularies['lang']['loaded'] === false) {
       state.vocabularies['lang']['terms'] = data
@@ -1360,6 +1371,9 @@ const mutations = {
 }
 
 const actions = {
+  sortFields ({ commit }, locale) {
+    commit('sortFields', locale)
+  },
   sortRoles ({ commit }, locale) {
     commit('sortRoles', locale)
   },

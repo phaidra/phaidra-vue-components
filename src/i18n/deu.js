@@ -510,7 +510,7 @@ export default {
   'Temporal coverage': 'Zeitliche Abdeckung',
   'Provenance': 'Provenienzvermerk',
   'Physical location': 'Aufbewahrungsort',
-  'Accession number': 'Aktenvermerk',
+  'Accession number': 'Eingangsnummer',
   'Place': 'Ort',
   'Place (native name)': 'Ort einheimisch',
   'Coordinates': 'Koordinaten',
@@ -612,7 +612,7 @@ export default {
   'ebucore:filename': 'Dateiname',
   'ebucore:hasMimeType': 'MIME Typ',
 
-  'opaque:cco_accessionNumber': 'Aktenvermerk',
+  'opaque:cco_accessionNumber': 'Eingangsnummer',
   'schema:width': 'Breite',
   'schema:height': 'Höhe',
   'schema:depth': 'Tiefe',
