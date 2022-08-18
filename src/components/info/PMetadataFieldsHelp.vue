@@ -67,8 +67,8 @@ export default {
   },
   mounted: function () {
     this.selectedField = this.categories[0].fields[0]
-    this.$store.commit('sortFieldsOverview', this.$i18n.locale)
     this.$store.commit('initFieldsOverview')
+    this.$store.dispatch('info/sortFieldsOverview', this.$i18n.locale)
   },
   data () {
     return {

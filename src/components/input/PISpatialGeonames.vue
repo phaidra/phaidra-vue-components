@@ -1,79 +1,140 @@
 <template>
   <v-row v-if="!hidden">
-    <v-col cols="4">
-      <v-autocomplete
-        v-on:input="$emit('input-place-type', $event)"
-        :label="$t('Type of place')"
-        :items="vocabularies['placetype'].terms"
-        :item-value="'@id'"
-        :value="getTerm('placetype', type)"
-        :filter="autocompleteFilter"
-        :disabled="disabletype"
-        :filled="inputStyle==='filled'"
-        :outlined="inputStyle==='outlined'"
-        return-object
-        clearable
-      >
-        <template slot="item" slot-scope="{ item }">
-          <v-list-item-content two-line>
-            <v-list-item-title  v-html="`${getLocalizedTermLabel('placetype', item['@id'])}`"></v-list-item-title>
-            <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
-          </v-list-item-content>
-        </template>
-        <template slot="selection" slot-scope="{ item }">
-          <v-list-item-content>
-            <v-list-item-title v-html="`${getLocalizedTermLabel('placetype', item['@id'])}`"></v-list-item-title>
-          </v-list-item-content>
-        </template>
-      </v-autocomplete>
-    </v-col>
-    <v-col cols="6">
-      <v-autocomplete
-        v-model="model"
-        v-on:input="$emit('input', $event)"
-        :items="items"
-        :loading="loading"
-        :search-input.sync="search"
-        cache-items
-        hide-no-data
-        hide-selected
-        item-text="text"
-        item-value="value"
-        :label="$t(label)"
-        :filled="inputStyle==='filled'"
-        :outlined="inputStyle==='outlined'"
-        clearable
-        :messages="resolved"
-        autocomplete="off"
-      >
-        <template v-slot:message="{ key, message }">
-          <span v-html="`${message}`"></span>
-        </template>
-      </v-autocomplete>
-    </v-col>
-    <v-col cols="1" v-if="actions.length">
-      <v-menu open-on-hover bottom offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on" icon>
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
-            <v-list-item-title>{{ action.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+    <v-col cols="12">
+      <v-card class="mb-8">
+        <v-card-title class="title font-weight-light grey white--text">
+          <span>{{ $t(label) }}</span>
+          <v-spacer></v-spacer>
+          <v-menu open-on-hover bottom offset-y v-if="actions.length">
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on" icon dark>
+                <v-icon dark>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item v-for="(action, i) in actions" :key="i" @click="$emit(action.event, $event)">
+                <v-list-item-title>{{ action.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text class="mt-4">
+          <v-row>
+            <v-col cols="4" v-if="showtype">
+              <v-autocomplete
+                v-on:input="$emit('input-place-type', $event)"
+                :label="$t('Type of place')"
+                :items="vocabularies['placetype'].terms"
+                :item-value="'@id'"
+                :value="getTerm('placetype', type)"
+                :filter="autocompleteFilter"
+                :disabled="disabletype"
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
+                return-object
+                clearable
+              >
+                <template slot="item" slot-scope="{ item }">
+                  <v-list-item-content two-line>
+                    <v-list-item-title  v-html="`${getLocalizedTermLabel('placetype', item['@id'])}`"></v-list-item-title>
+                    <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
+                  </v-list-item-content>
+                </template>
+                <template slot="selection" slot-scope="{ item }">
+                  <v-list-item-content>
+                    <v-list-item-title v-html="`${getLocalizedTermLabel('placetype', item['@id'])}`"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+              </v-autocomplete>
+            </v-col>
+            <v-col :cols="showtype ? 6 : 12">
+              <v-text-field
+                v-model="q"
+                :loading="loading"
+                :label="$t(label)"
+                :filled="inputStyle==='filled'"
+                :outlined="inputStyle==='outlined'"
+                clearable
+                :messages="resolved"
+                :hint="$t(hint)"
+                autocomplete="off"
+                append-icon="mdi-magnify"
+                @click:append="search()"
+                @keyup.enter="search()"
+              >
+              <template v-slot:message="{ key, message }">
+                <span v-html="`${message}`"></span>
+              </template>
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" md="6" v-show="showItems">
+              <v-list two-line style="max-height: 400px" class="overflow-y-auto">
+                <v-list-item-group v-model="selected" active-class="text--primary">
+                  <template v-for="(item, index) in items">
+                    <v-list-item :key="item.geonameId">
+                      <template v-slot:default="{ active }">
+                        <v-list-item-content>
+                          <v-list-item-title v-text="item.name"></v-list-item-title>
+                          <v-list-item-subtitle class="text--primary" v-text="item.countryName"></v-list-item-subtitle>
+                          <v-list-item-subtitle v-text="item.fcodeName"></v-list-item-subtitle>
+                        </v-list-item-content>
+                        <v-list-item-action>
+                          <v-list-item-action-text v-text="item.action"></v-list-item-action-text>
+                          <v-icon v-if="!active" color="grey lighten-1">mdi-map-marker</v-icon>
+                          <v-icon v-else color="yellow darken-3">mdi-map-marker</v-icon>
+                        </v-list-item-action>
+                      </template>
+                    </v-list-item>
+                    <v-divider v-if="index < items.length - 1" :key="index"></v-divider>
+                  </template>
+                </v-list-item-group>
+              </v-list>
+            </v-col>
+            <v-col cols="12" md="6" v-show="showMap && isbrowser">
+              <div style="height: 400px; width: 100%" class="text-grey-10">
+                <l-map ref="map" :zoom="10" :center="center">
+                  <l-tile-layer :url='"https://{s}.tile.osm.org/{z}/{x}/{y}.png"' :attribution='"© <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"' />
+                  <l-marker v-if="locationMarker" :lat-lng="locationMarker"/>
+                </l-map>
+              </div>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import 'leaflet/dist/leaflet.css'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+let Vue2Leaflet = {}
+let OpenStreetMapProvider = {}
+let L = {}
+
+if (process.browser) {
+  OpenStreetMapProvider = require('leaflet-geosearch')
+  Vue2Leaflet = require('vue2-leaflet')
+  L = require('leaflet')
+  delete L.Icon.Default.prototype._getIconUrl
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+  })
+}
 
 export default {
   name: 'p-i-spatial-geonames',
+  components: {
+    LMap: Vue2Leaflet.LMap,
+    LTileLayer: Vue2Leaflet.LTileLayer,
+    LMarker: Vue2Leaflet.LMarker
+  },
   mixins: [vocabulary, fieldproperties],
   props: {
     value: {
@@ -87,18 +148,26 @@ export default {
       type: String,
       required: true
     },
+    searchlabel: {
+      type: String,
+      default: 'Wien, Großvenediger, Donau Kanal, ...'
+    },
+    hint: {
+      type: String,
+      default: 'Press Enter to initiate search'
+    },
     initquery: {
       type: String
     },
     required: {
       type: Boolean
     },
-    debounce: {
-      type: Number,
-      default: 500
-    },
     disabletype: {
       type: Boolean
+    },
+    showtype: {
+      type: Boolean,
+      required: true
     },
     showIds: {
       type: Boolean,
@@ -106,42 +175,49 @@ export default {
     }
   },
   watch: {
-    search (val) {
-      val && this.querySuggestionsDebounce(val)
-    },
     value (val) {
-      val && this.resolve(val)
+      (val !== null) && this.resolve(val)
+    },
+    selected (val) {
+      (val !== null) && this.resolve(val)
     }
   },
   data () {
     return {
+      center: ['48.20849', '16.37208'],
+      locationMarker: null,
+      showMap: false,
+      showItems: false,
       items: [],
       loading: false,
-      model: null,
-      search: null,
-      debounceTask: undefined,
+      q: null,
+      selected: null,
       preflabel: '',
       rdfslabel: '',
-      coordinates: [],
-      resolved: ''
+      resolved: '',
+      geosearchOptions: {
+        provider: {}
+      },
+      isbrowser: process.browser
     }
   },
   methods: {
-    resolve: async function (uri) {
-      if (uri) {
+    resolve: async function () {
+      if (this.selected !== null) {
+        this.locationMarker = [this.items[this.selected].lat, this.items[this.selected].lng]
+        this.center = this.locationMarker
         this.loading = true
-
-        var params = {
-          uri: uri
-        }
-
+        this.showMap = true
+        let uri = 'https://www.geonames.org/' + this.items[this.selected].geonameId
+        this.$emit('input', uri)
         try {
           let response = await this.$http.request({
             method: 'GET',
             url: this.$store.state.instanceconfig.api + '/resolve',
-            params: params
+            params: { uri }
           })
-
+          // keep this next tick from showMap
+          this.$refs.map.mapObject.invalidateSize()
           this.preflabel = response.data[uri]['skos:prefLabel']
           this.rdfslabel = response.data[uri]['rdfs:label']
           for (var i = 0; i < this.rdfslabel.length; i++) {
@@ -168,36 +244,23 @@ export default {
         }
       }
     },
-    querySuggestionsDebounce (q) {
-      if (this.debounce) {
-        if (this.debounceTask !== undefined) clearTimeout(this.debounceTask)
-        this.debounceTask = setTimeout(() => {
-          return this.querySuggestions(q)
-        }, this.debounce)
-      } else {
-        return this.querySuggestions(q)
-      }
-    },
-    querySuggestions: async function (q) {
-      var self = this
-
-      self.loading = true
-
+    search: async function () {
+      this.loading = true
+      this.items = []
+      this.selected = null
       var params = {
-        count: 30,
-        searchterm: q
+        maxRows: this.$store.state.appconfig.apis.geonames.maxRows,
+        username: this.$store.state.appconfig.apis.geonames.username,
+        q: this.q
       }
-
       try {
         let response = await this.$http.request({
           method: 'GET',
-          url: this.$store.state.appconfig.suggesters.geonames,
+          url: this.$store.state.appconfig.apis.geonames.search,
           params: params
         })
-        this.items = []
-        for (var i = 0; i < response.data[1].length; i++) {
-          this.items.push({ text: response.data[1][i], value: response.data[3][i] })
-        }
+        this.items = response.data.geonames
+        this.showItems = true
       } catch (error) {
         console.log(error)
       } finally {
@@ -206,6 +269,7 @@ export default {
     }
   },
   mounted: function () {
+    this.geosearchOptions.provider = new OpenStreetMapProvider.OpenStreetMapProvider()
     this.$nextTick(function () {
       this.loading = !this.vocabularies['placetype'].loaded
       // emit input to set skos:prefLabel in parent

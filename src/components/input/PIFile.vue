@@ -12,7 +12,7 @@
         :outlined="inputStyle==='outlined'"
         :background-color="backgroundColor ? backgroundColor : undefined"
         show-size
-        :hint="'You can use drag & drop'"
+        :hint="$t('You can use drag & drop')"
         persistent-hint
         @change="fileInput($event)"
         :label="$t(label)"

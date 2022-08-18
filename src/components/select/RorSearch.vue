@@ -48,6 +48,13 @@
               :server-items-length="total"
               :loading="loading"
               @click:row="select"
+              :no-data-text="$t('No data available')"
+              :footer-props="{
+                pageText: $t('Page'),
+                itemsPerPageText: $t('Rows per page'),
+                itemsPerPageAllText: $t('All')
+              }"
+              :no-results-text="$t('There were no search results')"
             >
             <template v-slot:item.acronyms="{ item }">
               <template v-if="item.acronyms">

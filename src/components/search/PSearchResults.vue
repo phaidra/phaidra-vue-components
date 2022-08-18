@@ -26,9 +26,9 @@
         </v-menu>
       </v-row>
     </v-slide-y-transition>
-    <v-divider v-if="selectioncheck"></v-divider>
-    <template v-for="(doc, i) in this.docs">
-      <v-row :key="'doc'+i">
+    <v-divider v-if="selectioncheck" class="mb-4"></v-divider>
+    <div v-for="(doc, i) in this.docs" :key="'doc'+i">
+      <v-row>
         <v-slide-x-transition hide-on-leave>
           <v-col cols="1" v-if="selectioncheck" align-self="center">
             <v-checkbox color="primary" @change="selectDoc($event, doc)" :value="selectionIncludes(doc)"></v-checkbox>
@@ -87,8 +87,8 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-divider :key="'div'+doc.pid" class="my-4 mr-2"></v-divider>
-    </template>
+      <v-divider :key="'div'+doc.pid" class="mt-6 mb-4 mr-2"></v-divider>
+    </div>
 
     <list-dialog ref="addlistdialog" @list-selected="addToList($event)"></list-dialog>
     <list-dialog ref="removelistdialog" @list-selected="removeFromList($event)"></list-dialog>

@@ -14,6 +14,13 @@
               :search="groupsSearch"
               :loading="groupsLoading"
               :loading-text="$t('Loading groups...')"
+              :no-data-text="$t('No data available')"
+              :footer-props="{
+                pageText: $t('Page'),
+                itemsPerPageText: $t('Rows per page'),
+                itemsPerPageAllText: $t('All')
+              }"
+              :no-results-text="$t('There were no search results')"
             >
               <template v-slot:top>
                 <v-toolbar flat>
@@ -73,7 +80,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row no-gutters v-if="loadedGroup">
+    <v-row v-if="loadedGroup">
       <v-col cols="12">
         <v-card>
           <v-card-title class="title font-weight-light grey white--text">
@@ -87,6 +94,13 @@
               :search="membersSearch"
               :loading="membersLoading"
               :loading-text="$t('Loading group members...')"
+              :no-data-text="$t('No data available')"
+              :footer-props="{
+                pageText: $t('Page'),
+                itemsPerPageText: $t('Rows per page'),
+                itemsPerPageAllText: $t('All')
+              }"
+              :no-results-text="$t('There were no search results')"
             >
               <template v-slot:top>
                 <v-toolbar flat>
@@ -401,8 +415,8 @@ export default {
         this.membersLoading = false
       }
     },
-    getGroups: async function() {
-       this.groupsLoading = true
+    getGroups: async function () {
+      this.groupsLoading = true
       try {
         let response = await this.$http.request({
           method: 'GET',
@@ -424,7 +438,7 @@ export default {
     }
   },
   created: function () {
-    console.log('lgroups mounted');
+    console.log('lgroups mounted')
     this.getGroups()
   },
   // The below method is not working in nuxt js

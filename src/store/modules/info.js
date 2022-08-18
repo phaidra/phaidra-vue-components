@@ -3,7 +3,7 @@ import i18n from '../../i18n/i18n'
 export const state = () => ({
   metadataFieldsOverview: [
     {
-      title: 'Descriptive metadata',
+      title: 'Metadata fields',
       open: true,
       fields: [
         {
@@ -161,6 +161,94 @@ export const state = () => ({
               title: 'Vocabulary',
               content:
                 '<a href="http://id.loc.gov/vocabulary/languages"> MARC List for Languages </a> <br> <a href="https://vocab.phaidra.org/vocabulary/WKFZ-VG0C"> Language Phaidra Vocabulary </a>'
+            },
+            {
+              id: 'obligation',
+              title: 'Obligation',
+              content: ''
+            },
+            {
+              id: 'occurrence',
+              title: 'Occurrence',
+              content: ''
+            },
+            {
+              id: 'exampleHR',
+              title: 'Example',
+              content: ''
+            }
+          ]
+        },
+        {
+          title: 'Event',
+          predicate: 'ebucore:hasRelatedEvent',
+          open: false,
+          sections: [
+            {
+              id: 'description',
+              title: 'Description',
+              content:
+                'Events, all real or fictional.'
+            },
+            {
+              id: 'usagenotes',
+              title: 'Usage notes',
+              content: {
+                level1:
+                  '',
+                level2: '',
+                level3: ''
+              }
+            },
+            {
+              id: 'vocabulary',
+              title: 'Vocabulary',
+              content:
+                ''
+            },
+            {
+              id: 'obligation',
+              title: 'Obligation',
+              content: ''
+            },
+            {
+              id: 'occurrence',
+              title: 'Occurrence',
+              content: ''
+            },
+            {
+              id: 'exampleHR',
+              title: 'Example',
+              content: ''
+            }
+          ]
+        },
+        {
+          title: 'Sound characteristic',
+          predicate: 'bf:soundCharacteristic',
+          open: false,
+          sections: [
+            {
+              id: 'description',
+              title: 'Description',
+              content:
+                'Technical specification relating to the encoding of sound in a resource.'
+            },
+            {
+              id: 'usagenotes',
+              title: 'Usage notes',
+              content: {
+                level1:
+                  '',
+                level2: '',
+                level3: ''
+              }
+            },
+            {
+              id: 'vocabulary',
+              title: 'Vocabulary',
+              content:
+                ''
             },
             {
               id: 'obligation',
@@ -2343,13 +2431,7 @@ export const state = () => ({
               content: ''
             }
           ]
-        }
-      ]
-    },
-    {
-      title: 'Technical metadata',
-      open: true,
-      fields: [
+        },
         {
           title: 'Alternate identifier',
           predicate: 'rdam:P30004',
@@ -2609,13 +2691,7 @@ export const state = () => ({
               content: ''
             }
           ]
-        }
-      ]
-    },
-    {
-      title: 'Rights metadata',
-      open: true,
-      fields: [
+        },
         {
           title: 'Access rights',
           predicate: 'dcterms:accessRights',
@@ -2757,12 +2833,9 @@ export const state = () => ({
 
 const mutations = {
   sortFieldsOverview (state, locale) {
+    i18n.locale = locale
     for (let section of state.metadataFieldsOverview) {
-      if (locale !== 'eng') {
-        section.fields.sort((a, b) => i18n.t(a.title).localeCompare(i18n.t(b.title), locale))
-      } else {
-        section.fields.sort((a, b) => a.title.localeCompare(b.title, locale))
-      }
+      section.fields.sort((a, b) => i18n.t(a.title).localeCompare(i18n.t(b.title), locale))
     }
   },
   initFieldsOverview (state) {
@@ -2782,7 +2855,7 @@ const mutations = {
 }
 
 const actions = {
-  localeChange ({ commit, state }, locale) {
+  sortFieldsOverview ({ commit, state }, locale) {
     commit('sortFieldsOverview', locale)
   }
 }

@@ -6,6 +6,13 @@
     :loading="loading"
     :items-per-page="itemsPerPage"
     class="elevation-1"
+    :no-data-text="$t('No data available')"
+    :footer-props="{
+      pageText: $t('Page'),
+      itemsPerPageText: $t('Rows per page'),
+      itemsPerPageAllText: $t('All')
+    }"
+    :no-results-text="$t('There were no search results')"
   >
     <template v-slot:item.name="{ item }">
       <v-tooltip bottom>

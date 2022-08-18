@@ -28,7 +28,14 @@
         :loading-text="$t('Loading...')"
         :options.sync="options"
         :server-items-length="totalObjects"
-        :footer-props="{ itemsPerPageOptions: [10, 50, 100] }"
+        :no-data-text="$t('No data available')"
+        :footer-props="{
+          itemsPerPageOptions: [10, 50, 100],
+          pageText: $t('Page'),
+          itemsPerPageText: $t('Rows per page'),
+          itemsPerPageAllText: $t('All')
+        }"
+        :no-results-text="$t('There were no search results')"
       >
         <template v-slot:item.title="{ item }">
           <span v-if="item.dc_title">{{ item.dc_title[0] | truncate(50) }}</span>

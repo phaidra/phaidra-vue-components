@@ -14,6 +14,13 @@
               :search="membersSearch"
               :loading="membersLoading"
               :loading-text="$t('Loading object list members...')"
+              :no-data-text="$t('No data available')"
+              :footer-props="{
+                pageText: $t('Page'),
+                itemsPerPageText: $t('Rows per page'),
+                itemsPerPageAllText: $t('All')
+              }"
+              :no-results-text="$t('There were no search results')"
             >
               <template v-slot:top>
                 <v-toolbar flat>

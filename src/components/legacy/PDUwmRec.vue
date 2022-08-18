@@ -350,11 +350,13 @@ export default {
       }
     },
     getLangAttr: function (ch) {
-      if (ch.attributes) {
-        if (ch.attributes.length > 0) {
-          for (let a of ch.attributes) {
-            if (a.xmlname === 'lang') {
-              return a.ui_value
+      if (ch) {
+        if (ch.attributes) {
+          if (ch.attributes.length > 0) {
+            for (let a of ch.attributes) {
+              if (a.xmlname === 'lang') {
+                return a.ui_value
+              }
             }
           }
         }

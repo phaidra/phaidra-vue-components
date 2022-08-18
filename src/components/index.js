@@ -81,6 +81,7 @@ import PDModsRec from './legacy/PDModsRec'
 import PFeedback from './utils/PFeedback'
 import PExpandText from './utils/PExpandText'
 import PMetadataFieldsHelp from './info/PMetadataFieldsHelp'
+import PHelp from './info/PHelp'
 
 const Components = {
   PImg,
@@ -164,6 +165,7 @@ const Components = {
   PDUwmRec,
   PDModsRec,
   PFeedback,
+  PHelp,
   PMetadataFieldsHelp,
   PExpandText
 }

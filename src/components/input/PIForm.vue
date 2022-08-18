@@ -361,17 +361,6 @@
                             ></p-i-spatial-geonames>
                           </template>
 
-                          <template v-else-if="f.component === 'p-spatial-geonames-search'">
-                            <p-i-spatial-geonames-search
-                              v-bind.sync="f"
-                              v-on:input="f.value=$event"
-                              v-on:input-place-type="setSelected(f, 'type', $event)"
-                              v-on:resolve="updatePlace(f, $event)"
-                              v-on:add="addField(s.fields, f)"
-                              v-on:remove="removeField(s.fields, f)"
-                            ></p-i-spatial-geonames-search>
-                          </template>
-
                           <template v-else-if="f.component === 'p-spatial-text'">
                             <p-i-spatial-text
                               v-bind.sync="f"
@@ -552,7 +541,7 @@
                           <v-card-title class="grey white--text"><span v-t="'Add metadata fields'"></span><v-spacer></v-spacer><v-btn target='_blank' :to="'/metadata-fields-help'">{{ $t('Help') }}</v-btn></v-card-title>
                           <v-card-text>
                             <v-list three-line >
-                              <v-text-field clearable label="Search..." append-icon="mdi-magnify" v-model="searchfieldsinput"></v-text-field>
+                              <v-text-field clearable :label="$t('Search...')" append-icon="mdi-magnify" v-model="searchfieldsinput"></v-text-field>
                               <div v-for="field in filteredMetadatafields" :key="field.id">
                                 <v-list-item @click="addfieldselection.push(field)">
                                   <v-list-item-content>
@@ -661,7 +650,7 @@
         <p-d-jsonld :jsonld="jsonld"></p-d-jsonld>
       </v-tab-item>
       <v-tab-item v-if="help" class="pa-3">
-        <p-help :url="guidelinesUrl"></p-help>
+        <p-help></p-help>
       </v-tab-item>
       <v-tab-item v-if="feedback" class="pa-3">
         <p-feedback :firstname="feedbackUser.firstname" :lastname="feedbackUser.lastname" :email="feedbackUser.email" :context="feedbackContext"></p-feedback>
@@ -689,7 +678,6 @@ import PISubjectGnd from './PISubjectGnd'
 import PISubjectBk from './PISubjectBk'
 import PISubjectOefos from './PISubjectOefos'
 import PISpatialGeonames from './PISpatialGeonames'
-import PISpatialGeonamesSearch from './PISpatialGeonamesSearch'
 import PISpatialText from './PISpatialText'
 import PIDimension from './PIDimension'
 import PIDuration from './PIDuration'
@@ -720,7 +708,7 @@ import PDLicenseInfo from '../utils/PDLicenseInfo'
 import PIObjectType from './PIObjectType'
 import PIResourceType from './PIResourceType'
 import PFeedback from '../utils/PFeedback'
-import PHelp from '../utils/PHelp'
+import PHelp from '../info/PHelp'
 
 export default {
   name: 'p-i-form',
@@ -738,7 +726,6 @@ export default {
     PISubjectBk,
     PISubjectOefos,
     PISpatialGeonames,
-    PISpatialGeonamesSearch,
     PISpatialText,
     PIDimension,
     PIDuration,
