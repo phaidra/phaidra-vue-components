@@ -2302,7 +2302,7 @@ export default {
 
         case 'dcterms:subject':
           if ((f.type === 'skos:Concept') && f.value) {
-            this.push_object(jsonld, f.predicate, this.get_json_concept(f['skos:prefLabel'], f['rdfs:label'], 'skos:Concept', [f.value], f['skos:notation'] ? [f['skos:notation']] : null))
+            this.push_object(jsonld, f.predicate, this.get_json_concept(f['skos:prefLabel'], f['rdfs:label'], 'skos:Concept', [f.value], f['skos:notation'] ? f['skos:notation'] : null))
           }
           break
 
