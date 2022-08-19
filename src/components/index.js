@@ -67,6 +67,7 @@ import PISeeAlso from './input/PISeeAlso.vue'
 import PSearch from './search/PSearch'
 import PMDelete from './management/PMDelete'
 import PMSort from './management/PMSort'
+import PMSortTextinput from './management/PMSortTextinput'
 import PMRights from './management/PMRights'
 import PMRelationships from './management/PMRelationships'
 import PMObjectMembers from './management/PMObjectMembers'
@@ -153,6 +154,7 @@ const Components = {
   PSearch,
   PMDelete,
   PMSort,
+  PMSortTextinput,
   PMRights,
   PMRelationships,
   PMObjectMembers,

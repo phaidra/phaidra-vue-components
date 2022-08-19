@@ -60,14 +60,14 @@ export default {
   },
   methods: {
     selectField: function (field) {
-      this.$store.commit('switchFieldsOverview', field.id)
+      this.$store.commit('info/switchFieldsOverview', field.id)
       this.selectedField = field
       this.$vuetify.goTo(1)
     }
   },
   mounted: function () {
     this.selectedField = this.categories[0].fields[0]
-    this.$store.commit('initFieldsOverview')
+    this.$store.commit('info/initFieldsOverview')
     this.$store.dispatch('info/sortFieldsOverview', this.$i18n.locale)
   },
   data () {
