@@ -531,10 +531,10 @@ export default {
                   components.push(f)
                   if (f.value.startsWith('http://www.geonames.org')) {
                     f = fields.getField(fieldidprefix + '-geonames-search')
+                    f.predicate = key
+                    f.type = obj['@type']
+                    components.push(f)
                   }
-                  f.predicate = key
-                  f.type = obj['@type']
-                  components.push(f)
                 }
               }
               break
