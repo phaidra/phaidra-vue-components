@@ -85,7 +85,7 @@ export default {
         this.path = pathLabels.join(' -- ')
       }
       this.$emit('input', term['@id'])
-      this.$emit('resolve', { '@id': term['@id'], 'skos:prefLabel': term['skos:prefLabel'], 'rdfs:label': { 'deu': pathLabelsDeu.join(' -- '), 'eng': pathLabelsEng.join(' -- ') }, 'skos:notation': term['skos:notation'][0] })
+      this.$emit('resolve', { '@id': term['@id'], 'skos:prefLabel': term['skos:prefLabel'], 'rdfs:label': { 'deu': pathLabelsDeu.join(' -- '), 'eng': pathLabelsEng.join(' -- ') }, 'skos:notation': term['skos:notation'] })
     }
   },
   props: {
