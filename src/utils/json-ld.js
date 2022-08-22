@@ -1217,10 +1217,18 @@ export default {
                             f.affiliationType = 'select'
                             f.affiliation = id
                           } else {
-                            f.affiliationType = 'other'
-                            if (af['schema:name']) {
+                            if (id.startsWith('https://ror.org/')) {
+                              f.affiliationType = 'ror'
+                              f.affiliation = id
                               for (let name of af['schema:name']) {
-                                f.affiliationText = name['@value']
+                                f.affiliationRorName = name['@value']
+                              }
+                            } else {
+                              f.affiliationType = 'other'
+                              if (af['schema:name']) {
+                                for (let name of af['schema:name']) {
+                                  f.affiliationText = name['@value']
+                                }
                               }
                             }
                           }
@@ -1240,15 +1248,23 @@ export default {
                   if (role['skos:exactMatch']) {
                     for (let id of role['skos:exactMatch']) {
                       if (typeof id !== 'object') {
-                        if (id.startsWith('https://')) {
+                        if (id.startsWith('https://pid.phaidra.org/')) {
                           f.organizationType = 'select'
                           f.organization = id
                         } else {
-                          f.organizationType = 'other'
-                          f.identifierText = id
-                          if (role['schema:name']) {
+                          if (id.startsWith('https://ror.org/')) {
+                            f.organizationType = 'ror'
+                            f.organization = id
                             for (let name of role['schema:name']) {
-                              f.organizationText = name['@value']
+                              f.organizationRorName = name['@value']
+                            }
+                          } else {
+                            f.organizationType = 'other'
+                            f.identifierText = id
+                            if (role['schema:name']) {
+                              for (let name of role['schema:name']) {
+                                f.organizationText = name['@value']
+                              }
                             }
                           }
                         }
@@ -1572,6 +1588,10 @@ export default {
           a['schema:name'] = f.affiliationSelectedName
           a['skos:exactMatch'] = [ f.affiliation ]
         }
+        if (f.affiliationType === 'ror') {
+          a['schema:name'] = f.affiliationSelectedName
+          a['skos:exactMatch'] = [ f.affiliation ]
+        }
         if (f.affiliationType === 'other') {
           a['schema:name'] = [
             {
@@ -1581,6 +1601,7 @@ export default {
         }
         if (
           (f.affiliationType === 'select' && f.affiliationSelectedName) ||
+          (f.affiliationType === 'ror' && f.affiliationSelectedName) ||
           (f.affiliationType === 'other' && f.affiliationText)
         ) {
           h['schema:affiliation'] = [ a ]
@@ -1592,18 +1613,23 @@ export default {
         h['schema:name'] = f.organizationSelectedName
         h['skos:exactMatch'] = [ f.organization ]
       } else {
-        if (f.organizationText) {
-          h['schema:name'] = [
-            {
-              '@value': f.organizationText
+        if (f.organizationType === 'ror') {
+          h['schema:name'] = f.organizationSelectedName
+          h['skos:exactMatch'] = [ f.organization ]
+        } else {
+          if (f.organizationText) {
+            h['schema:name'] = [
+              {
+                '@value': f.organizationText
+              }
+            ]
+          }
+          if (f.identifierText) {
+            if (f.identifierType) {
+              h['skos:exactMatch'] = [ { '@type': f.identifierType, '@value': f.identifierText } ]
+            } else {
+              h['skos:exactMatch'] = [ f.identifierText ]
             }
-          ]
-        }
-        if (f.identifierText) {
-          if (f.identifierType) {
-            h['skos:exactMatch'] = [ { '@type': f.identifierType, '@value': f.identifierText } ]
-          } else {
-            h['skos:exactMatch'] = [ f.identifierText ]
           }
         }
       }
@@ -2272,7 +2298,7 @@ export default {
           break
 
         case 'role':
-          if (f.role && (f.firstname || f.lastname || f.name || f.organizationSelectedName || f.organizationText || f.identifierText)) {
+          if (f.role && (f.firstname || f.lastname || f.name || f.organizationSelectedName || f.organization || f.organizationText || f.identifierText)) {
             this.push_object(jsonld, f.role, this.get_json_role(f))
           }
           break

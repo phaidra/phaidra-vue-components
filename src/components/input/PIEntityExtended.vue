@@ -225,7 +225,7 @@
                   </v-autocomplete>
                 </v-col>
                 <v-col cols="12" md="10" v-if="organizationRadio === 'ror'">
-                  <ror-search v-on:resolve="$emit('input-organization-ror',$event)"></ror-search>
+                  <ror-search v-on:resolve="$emit('input-organization-ror',$event)" :value="organization" :text="organizationRorName"></ror-search>
                 </v-col>
                 <v-col cols="12" md="10" v-if="organizationRadio === 'other'">
                   <v-text-field
@@ -286,7 +286,7 @@
                 </v-autocomplete>
               </v-col>
               <v-col cols="12" md="10" v-if="affiliationRadio === 'ror'">
-                <ror-search v-on:resolve="$emit('input-affiliation-ror', $event)"></ror-search>
+                <ror-search v-on:resolve="$emit('input-affiliation-ror', $event)" :value="affiliation" :text="affiliationRorName"></ror-search>
               </v-col>
               <v-col cols="12" md="10" v-if="affiliationRadio === 'other'">
                 <v-text-field
@@ -358,6 +358,9 @@ export default {
     affiliationText: {
       type: String
     },
+    affiliationRorName: {
+      type: String
+    },
     affiliationType: {
       type: String
     },
@@ -365,6 +368,9 @@ export default {
       type: String
     },
     organizationText: {
+      type: String
+    },
+    organizationRorName: {
       type: String
     },
     organizationType: {
@@ -571,10 +577,10 @@ export default {
       if (this.role) {
         this.$emit('input', this.getTerm(this.roleVocabulary, this.role))
       }
-      if (this.organization) {
+      if (this.organization && this.organization.startsWith('https://pid.phaidra.org/')) {
         this.handleInput(this.getTerm('orgunits', this.organization), 'organizationPath', 'input-organization-select')
       }
-      if (this.affiliation) {
+      if (this.affiliation && this.affiliation.startsWith('https://pid.phaidra.org/')) {
         this.handleInput(this.getTerm('orgunits', this.affiliation), 'affiliationPath', 'input-affiliation-select')
       }
     })

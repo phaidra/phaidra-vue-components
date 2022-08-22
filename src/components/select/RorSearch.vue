@@ -100,6 +100,9 @@ export default {
     value: {
       type: String
     },
+    text: {
+      type: String
+    },
     label: {
       type: String,
       default: 'ROR Search'
@@ -118,7 +121,16 @@ export default {
     },
     selected (item) {
       (item !== null) && this.resolve(item)
-    }
+    }//,
+    // text: {
+    //   handler () {
+    //     const item = {
+    //       id: this.value,
+    //       name: this.text
+    //     }
+    //     this.resolve(item)
+    //   }
+    // }
   },
   data () {
     return {
@@ -147,38 +159,11 @@ export default {
     resolve: async function (item) {
       if (item) {
         this.$emit('input', item.id)
-        let names = [
-          {
-            '@value': item.name
-          }
-        ]
-        for (const n of item.labels) {
-          let lang
-          switch (n.iso639) {
-            case 'en':
-              lang = 'eng'
-              break
-            case 'de':
-              lang = 'deu'
-              break
-            case 'it':
-              lang = 'ita'
-              break
-          }
-          if (lang) {
-            names.push(
-              {
-                '@value': n.label,
-                '@language': lang
-              }
-            )
-          }
-        }
         this.resolved = '<a href="' + item.id + '" target="_blank">' + item.name + '</a>'
         this.$emit('resolve', {
           '@type': 'schema:Organization',
           'skos:exactMatch': [ item.id ],
-          'schema:name': names
+          'schema:name': [ { '@value': item.name } ]
         }
         )
         this.q = item.name
@@ -213,6 +198,15 @@ export default {
     },
     select (item) {
       this.selected = item
+    }
+  },
+  mounted: async function () {
+    if (this.value) {
+      const item = {
+        id: this.value,
+        name: this.text
+      }
+      this.resolve(item)
     }
   }
 }
