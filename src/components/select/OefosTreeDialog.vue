@@ -3,7 +3,9 @@
     <v-card :loading="loading">
       <v-card-title class="grey white--text">{{ $t('Select a term') }}</v-card-title>
       <v-card-text>
-        <v-treeview item-key="@id" :items="items" hoverable activatable @update:active="selectTerm($event)"></v-treeview>
+        <v-treeview item-key="name" :items="items" hoverable activatable @update:active="selectTerm($event)">
+          <template v-slot:label="{ item }">{{ item['skos:notation'][0] + '. ' + item['skos:prefLabel'][$i18n.locale] }}</template>
+        </v-treeview>
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
@@ -34,25 +36,13 @@ export default {
   data () {
     return {
       dialog: false,
-      loading: false
+      loading: false,
+      renderComponent: true
     }
   },
   methods: {
     open: async function () {
       this.dialog = true
-      this.addNames(this.items)
-    },
-    addNames: function (terms) {
-      for (let t of terms) {
-        if (t['skos:prefLabel']) {
-          t['name'] = t['skos:notation'][0] + '. ' + t['skos:prefLabel'][this.$i18n.locale]
-        }
-        if (t['children']) {
-          if (t.children.length > 0) {
-            this.addNames(t.children)
-          }
-        }
-      }
     },
     selectTerm: function (term) {
       this.$emit('term-selected', term[0])

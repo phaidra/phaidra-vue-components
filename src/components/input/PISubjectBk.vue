@@ -25,7 +25,7 @@
               <v-text-field
                 v-model="q"
                 :loading="loading"
-                :label="$t(label)"
+                :label="$t(searchlabel)"
                 :filled="inputStyle==='filled'"
                 :outlined="inputStyle==='outlined'"
                 clearable

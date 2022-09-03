@@ -23,7 +23,7 @@
               :no-results-text="$t('There were no search results')"
             >
               <template v-slot:top>
-                <v-toolbar flat>
+                <!-- <v-toolbar flat>
                   <v-text-field
                     v-model="membersSearch"
                     append-icon="mdi-magnify"
@@ -31,7 +31,7 @@
                     single-line
                     hide-details
                   ></v-text-field>
-                </v-toolbar>
+                </v-toolbar> -->
               </template>
               <template v-slot:item.pid="{ item }">
                 <router-link :to="{ name: 'detail', params: { pid: item.pid } }">{{ item.pid }}</router-link>

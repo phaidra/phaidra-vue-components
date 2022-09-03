@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" width="700px">
     <v-card :loading="loading">
-      <v-card-title class="grey white--text">{{ $t('Select a subject') }}</v-card-title>
+      <v-card-title class="grey white--text">{{ $t('Select a term') }}</v-card-title>
       <v-card-text>
         <v-treeview
           :active.sync="active"

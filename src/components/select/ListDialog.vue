@@ -3,14 +3,14 @@
     <v-card>
       <v-card-title class="grey white--text">{{ $t('Select a list') }}</v-card-title>
       <v-card-text>
-        <v-text-field
+        <!-- <v-text-field
           v-model="listsSearch"
           append-icon="mdi-magnify"
           :label="$t('Search...')"
           single-line
           hide-details
           class="mb-4"
-        ></v-text-field>
+        ></v-text-field> -->
         <v-data-table
           hide-default-header
           :headers="listsHeaders"

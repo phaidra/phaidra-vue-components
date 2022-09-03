@@ -24,13 +24,13 @@
             >
               <template v-slot:top>
                 <v-toolbar flat>
-                  <v-text-field
+                  <!-- <v-text-field
                     v-model="listsSearch"
                     append-icon="mdi-magnify"
                     :label="$t('Search...')"
                     single-line
                     hide-details
-                  ></v-text-field>
+                  ></v-text-field> -->
                   <v-spacer></v-spacer>
                   <v-dialog v-model="createDialog" max-width="500px">
                     <template v-slot:activator="{ on }">
@@ -106,18 +106,17 @@
             >
               <template v-slot:top>
                 <v-toolbar flat>
-                  <v-text-field
+                  <v-spacer></v-spacer>
+                  <!-- <v-text-field
                     v-model="membersSearch"
                     append-icon="mdi-magnify"
                     :label="$t('Search...')"
                     single-line
                     hide-details
-                  ></v-text-field>
-                  <v-spacer></v-spacer>
-                  <v-btn v-if="token && token.length > 0" color="primary" dark class="mb-2"  @click="deleteToken(loadedList.listid)">{{ $t('Remove public link') }}</v-btn>
-                  <v-btn v-else color="primary" dark class="mb-2"  @click="createToken(loadedList.listid)">{{ $t('Create public link') }}</v-btn>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" dark class="mb-2"  @click="$refs.collectiondialog.open()">{{ $t('Add objects to collection') }}</v-btn>
+                  ></v-text-field> -->
+                  <v-btn v-if="token && token.length > 0" color="primary" dark class="mb-2 ml-2"  @click="deleteToken(loadedList.listid)">{{ $t('Remove public link') }}</v-btn>
+                  <v-btn v-else color="primary" dark class="mb-2 ml-2"  @click="createToken(loadedList.listid)">{{ $t('Create public link') }}</v-btn>
+                  <v-btn color="primary" dark class="mb-2 ml-2"  @click="$refs.collectiondialog.open()">{{ $t('Add objects to collection') }}</v-btn>
                 </v-toolbar>
               </template>
               <template v-slot:item.pid="{ item }">

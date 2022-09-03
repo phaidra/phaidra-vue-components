@@ -52,7 +52,7 @@
               <v-text-field
                 v-model="q"
                 :loading="loading"
-                :label="$t(label)"
+                :label="$t(searchlabel)"
                 :filled="inputStyle==='filled'"
                 :outlined="inputStyle==='outlined'"
                 clearable
@@ -150,7 +150,7 @@ export default {
     },
     searchlabel: {
       type: String,
-      default: 'Wien, Großvenediger, Donau Kanal, ...'
+      default: 'Search...'
     },
     hint: {
       type: String,
