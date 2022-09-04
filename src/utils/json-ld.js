@@ -197,21 +197,27 @@ export default {
                   }
                 }
                 f.predicate = key
-                f.label = 'Classification'
                 components.push(f)
                 if (obj['skos:exactMatch']) {
                   for (let v of obj['skos:exactMatch']) {
+                    let newField
                     if (v.startsWith('oefos2012')) {
-                      f = fields.getField('oefos-subject')
-                      components.push(f)
+                      f.label = 'Subject (ÖFOS)'
+                      newField = fields.getField('oefos-subject')
+                      newField.label = 'Subject (ÖFOS)'
+                      components.push(newField)
                     }
                     if (v.startsWith('http://d-nb.info/gnd')) {
-                      f = fields.getField('gnd-subject')
-                      components.push(f)
+                      f.label = 'Subject (GND)'
+                      newField = fields.getField('gnd-subject')
+                      newField.label = 'Subject (GND)'
+                      components.push(newField)
                     }
                     if (v.startsWith('http://uri.gbv.de/terminology/bk')) {
-                      f = fields.getField('bk-subject')
-                      components.push(f)
+                      f.label = 'Basisklassifikation'
+                      newField = fields.getField('bk-subject')
+                      newField.label = 'Basisklassifikation'
+                      components.push(newField)
                     }
                   }
                 }

@@ -49,15 +49,22 @@ export default {
       return arr
     },
     prefLabel: function () {
-      var i
-      var prefLabel = ''
-      // just return any now
       if (this['skos:prefLabel']) {
-        for (i = 0; i < this['skos:prefLabel'].length; i++) {
-          return this['skos:prefLabel'][i]['@value']
+        for (let lab of this['skos:prefLabel']) {
+          if (lab['@language'] === this.$i18n.locale) {
+            return lab['@value']
+          }
         }
+        return this['skos:prefLabel'][0]['@value']
       }
-      return prefLabel
+      return ''
+    },
+    anchor: function () {
+      if (this['skos:exactMatch'][0].startsWith('http')) {
+        return '<a href="' + this['skos:exactMatch'][0] + '" target="_blank">' + this.prefLabel + '</a>'
+      } else {
+        return this.prefLabel
+      }
     },
     notation: function () {
       if (this['skos:notation']) {
@@ -70,7 +77,7 @@ export default {
     messages: function () {
       let ret
       if (this['skos:exactMatch']) {
-        ret = '<a href="' + this['skos:exactMatch'][0] + '" target="_blank">' + this['skos:exactMatch'][0] + '</a>' + (this.notation ? ' Notation: ' + this.notation : '')
+        ret = (this.notation ? ' Notation: ' + this.notation + '  - ' : '') + this.anchor
       }
       return ret
     }

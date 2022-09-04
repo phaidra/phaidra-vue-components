@@ -64,7 +64,7 @@
                 @keyup.enter="search()"
               >
               <template v-slot:message="{ key, message }">
-                <span v-html="`${message}`"></span>
+                <div class="my-1" v-html="`${message}`"></div>
               </template>
               </v-text-field>
             </v-col>
@@ -73,8 +73,8 @@
             <v-col cols="12" md="6" v-show="showItems">
               <v-list two-line style="max-height: 400px" class="overflow-y-auto">
                 <v-list-item-group v-model="selected" active-class="text--primary">
-                  <template v-for="(item, index) in items">
-                    <v-list-item :key="item.geonameId">
+                  <div v-for="(item, index) in items" :key="item.geonameId">
+                    <v-list-item>
                       <template v-slot:default="{ active }">
                         <v-list-item-content>
                           <v-list-item-title v-text="item.name"></v-list-item-title>
@@ -89,7 +89,7 @@
                       </template>
                     </v-list-item>
                     <v-divider v-if="index < items.length - 1" :key="index"></v-divider>
-                  </template>
+                  </div>
                 </v-list-item-group>
               </v-list>
             </v-col>
@@ -182,6 +182,16 @@ export default {
       (val !== null) && this.resolve(val)
     }
   },
+  computed: {
+    alpha2locale: function () {
+      switch (this.$i18n.locale) {
+        case 'eng': return 'en'
+        case 'deu': return 'de'
+        case 'ita': return 'it'
+        default: return 'en'
+      }
+    }
+  },
   data () {
     return {
       center: ['48.20849', '16.37208'],
@@ -204,6 +214,7 @@ export default {
   methods: {
     resolve: async function () {
       if (this.selected !== null) {
+        this.q = this.items[this.selected].name
         this.locationMarker = [this.items[this.selected].lat, this.items[this.selected].lng]
         this.center = this.locationMarker
         this.loading = true
@@ -214,7 +225,7 @@ export default {
           let response = await this.$http.request({
             method: 'GET',
             url: this.$store.state.instanceconfig.api + '/resolve',
-            params: { uri }
+            params: { uri, lang: this.alpha2locale }
           })
           // keep this next tick from showMap
           this.$refs.map.mapObject.invalidateSize()
@@ -251,7 +262,8 @@ export default {
       var params = {
         maxRows: this.$store.state.appconfig.apis.geonames.maxRows,
         username: this.$store.state.appconfig.apis.geonames.username,
-        q: this.q
+        q: this.q,
+        lang: this.alpha2locale
       }
       try {
         let response = await this.$http.request({

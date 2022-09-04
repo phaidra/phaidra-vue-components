@@ -158,6 +158,8 @@ export default {
         this.$emit('resolve', { 'skos:prefLabel': this.preflabel, 'rdfs:label': this.rdfslabel })
         this.q = item.preferredName
         this.showItems = false
+      } else {
+        this.$emit('input', null)
       }
     },
     search: async function () {

@@ -67,25 +67,29 @@ export default {
   },
   methods: {
     handleInput: function (term) {
-      this.path = ''
-      let pathArr = []
-      let pathLabels = []
-      let pathLabelsDeu = []
-      let pathLabelsEng = []
       if (term) {
-        if (!term.hasOwnProperty('@id')) {
-          term = this.getTerm('oefos', term)
+        this.path = ''
+        let pathArr = []
+        let pathLabels = []
+        let pathLabelsDeu = []
+        let pathLabelsEng = []
+        if (term) {
+          if (!term.hasOwnProperty('@id')) {
+            term = this.getTerm('oefos', term)
+          }
+          this.getOefosPath(term, this.vocabularies['oefos'].tree, pathArr)
+          for (let i = pathArr.length; i--; i === 0) {
+            pathLabels.push(pathArr[i]['skos:notation'][0] + '. ' + pathArr[i]['skos:prefLabel'][this.$i18n.locale])
+            pathLabelsDeu.push(pathArr[i]['skos:prefLabel']['deu'])
+            pathLabelsEng.push(pathArr[i]['skos:prefLabel']['eng'])
+          }
+          this.path = pathLabels.join(' -- ')
         }
-        this.getOefosPath(term, this.vocabularies['oefos'].tree, pathArr)
-        for (let i = pathArr.length; i--; i === 0) {
-          pathLabels.push(pathArr[i]['skos:notation'][0] + '. ' + pathArr[i]['skos:prefLabel'][this.$i18n.locale])
-          pathLabelsDeu.push(pathArr[i]['skos:prefLabel']['deu'])
-          pathLabelsEng.push(pathArr[i]['skos:prefLabel']['eng'])
-        }
-        this.path = pathLabels.join(' -- ')
+        this.$emit('input', term['@id'])
+        this.$emit('resolve', { '@id': term['@id'], 'skos:prefLabel': term['skos:prefLabel'], 'rdfs:label': { 'deu': pathLabelsDeu.join(' -- '), 'eng': pathLabelsEng.join(' -- ') }, 'skos:notation': term['skos:notation'] })
+      } else {
+        this.$emit('input', null)
       }
-      this.$emit('input', term['@id'])
-      this.$emit('resolve', { '@id': term['@id'], 'skos:prefLabel': term['skos:prefLabel'], 'rdfs:label': { 'deu': pathLabelsDeu.join(' -- '), 'eng': pathLabelsEng.join(' -- ') }, 'skos:notation': term['skos:notation'] })
     }
   },
   props: {

@@ -123,7 +123,7 @@ const fields = [
     multiplicable: true,
     multilingual: true,
     ordergroup: 'title',
-    titleLabel: '',
+    titleLabel: 'Title',
     title: '',
     titleErrorMessages: [],
     subtitle: '',
@@ -1399,6 +1399,17 @@ const predicateOrder = [
 
 export default {
   getFields: function () {
+    let fields = []
+    for (let f of fields) {
+      switch (f.id) {
+        case 'sociocultural-category':
+        case 'physical-location-select-text-pool':
+          break
+        default:
+          fields.push(f)
+          break
+      }
+    }
     return fields
   },
   getEditableFields: function (locale) {

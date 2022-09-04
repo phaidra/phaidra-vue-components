@@ -147,6 +147,8 @@ export default {
         this.rdfslabel.push({ '@value': path, '@language': 'deu' })
         this.$emit('resolve', { 'skos:prefLabel': this.preflabel, 'rdfs:label': this.rdfslabel, 'skos:notation': selectedItem.notation[0] })
         this.showItems = false
+      } else {
+        this.$emit('input', null)
       }
     },
     search: async function () {
