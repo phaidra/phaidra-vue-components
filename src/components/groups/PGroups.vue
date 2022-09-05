@@ -102,7 +102,7 @@
               }"
               :no-results-text="$t('There were no search results')"
             >
-              <template v-slot:top>
+              <!-- <template v-slot:top>
                 <v-toolbar flat>
                   <v-text-field
                     v-model="membersSearch"
@@ -112,7 +112,7 @@
                     hide-details
                   ></v-text-field>
                 </v-toolbar>
-              </template>
+              </template> -->
               <template v-slot:item.pid="{ item }">
                 {{ item.name }}
               </template>

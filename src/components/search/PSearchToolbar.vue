@@ -44,13 +44,14 @@
       <v-col>
         <v-dialog v-model="linkdialog" max-width="800px">
           <v-card>
-            <v-card-title>
-              <h3 class="title font-weight-light primary--text">{{ $t('Link to search results') }}</h3>
+            <v-card-title class="title font-weight-light grey white--text mb-6">
+              {{ $t('Link to search results') }}
             </v-card-title>
-            <v-card-text>{{ link }}</v-card-text>
+            <v-card-text>{{ link }} <v-btn class="ml-4" icon @click="copyToClipboard()"><v-icon>mdi-content-copy</v-icon></v-btn></v-card-text>
+            <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click.stop="linkdialog=false">Close</v-btn>
+              <v-btn @click.stop="linkdialog=false">Close</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -117,6 +118,11 @@ export default {
   data () {
     return {
       linkdialog: false
+    }
+  },
+  methods: {
+    copyToClipboard: function () {
+      navigator.clipboard.writeText(this.link)
     }
   }
 }
