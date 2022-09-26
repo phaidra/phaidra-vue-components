@@ -304,7 +304,7 @@
 
                     <v-row >
 
-                      <v-col cols="4" v-if="!hideSeriesIssn">
+                      <v-col cols="6" v-if="!hideSeriesIssn">
                         <v-text-field
                           :value="s.seriesIssn"
                           :label="$t('ISSN')"
@@ -313,8 +313,9 @@
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
-
-                      <v-col :cols="4" v-if="showSeriesIdentifierType && !hideSeriesIdentifier">
+                    </v-row>
+                    <v-row>
+                      <v-col :cols="6" v-if="showSeriesIdentifierType && !hideSeriesIdentifier">
                         <v-autocomplete
                           v-on:input="$emit('input-series', { series: s, seriesIdentifierType: $event['@id'] })"
                           :label="$t('Type of identifier')"
@@ -340,7 +341,7 @@
                         </v-autocomplete>
                       </v-col>
 
-                      <v-col :cols="showSeriesIdentifierType ? 4 : 8" v-if="!hideSeriesIdentifier">
+                      <v-col :cols="showSeriesIdentifierType ? 6 : 12" v-if="!hideSeriesIdentifier">
                         <v-text-field
                           :value="s.seriesIdentifier"
                           :label="$t('Identifier')"

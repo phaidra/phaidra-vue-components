@@ -536,7 +536,7 @@ export default {
                   f.label = key
                   components.push(f)
                   if (f.value.startsWith('http://www.geonames.org')) {
-                    f = fields.getField(fieldidprefix + '-geonames-search')
+                    f = fields.getField(fieldidprefix + '-geonames')
                     f.predicate = key
                     f.type = obj['@type']
                     components.push(f)

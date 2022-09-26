@@ -1095,10 +1095,10 @@ const fields = [
     definition: 'Depicted/Represented place.'
   },
   {
-    id: 'place-of-creation-geonames-search',
+    id: 'place-of-creation-geonames',
     fieldname: 'Place of creation (Geonames)',
     predicate: 'vra:placeOfCreation',
-    component: 'p-spatial-geonames-search',
+    component: 'p-spatial-geonames',
     multiplicable: true,
     label: 'Place of creation',
     searchlabel: 'Wien, Großvenediger, Donau Kanal, ...',
@@ -1124,10 +1124,10 @@ const fields = [
     definition: 'Place of creation.'
   },
   {
-    id: 'place-of-repository-geonames-search',
+    id: 'place-of-repository-geonames',
     fieldname: 'Place of repository (Geonames)',
     predicate: 'vra:placeOfRepository',
-    component: 'p-spatial-geonames-search',
+    component: 'p-spatial-geonames',
     multiplicable: true,
     label: 'Place of repository',
     searchlabel: 'Wien, Großvenediger, Donau Kanal, ...',
@@ -1153,10 +1153,10 @@ const fields = [
     definition: 'Place of repository.'
   },
   {
-    id: 'place-of-site-geonames-search',
+    id: 'place-of-site-geonames',
     fieldname: 'Place of site (Geonames)',
     predicate: 'vra:placeOfSite',
-    component: 'p-spatial-geonames-search',
+    component: 'p-spatial-geonames',
     multiplicable: true,
     label: 'Place of site',
     searchlabel: 'Wien, Großvenediger, Donau Kanal, ...',

@@ -192,7 +192,7 @@
 
           <v-row >
 
-            <v-col cols="6" v-if="!hideIssn">
+            <v-col cols="12" v-if="!hideIssn">
               <v-text-field
                 :value="issn"
                 :label="$t('ISSN')"
@@ -201,8 +201,9 @@
                 :outlined="inputStyle==='outlined'"
               ></v-text-field>
             </v-col>
-
-            <v-col :cols="3" v-if="showIdentifierType && !hideIdentifier">
+          </v-row>
+          <v-row>
+            <v-col :cols="6" v-if="showIdentifierType && !hideIdentifier">
               <v-autocomplete
                 v-on:input="$emit('input-identifier-type', $event)"
                 :label="$t('Type of identifier')"
@@ -228,7 +229,7 @@
               </v-autocomplete>
             </v-col>
 
-            <v-col :cols="showIdentifierType ? 3 : 6" v-if="!hideIdentifier">
+            <v-col :cols="showIdentifierType ? 6 : 12" v-if="!hideIdentifier">
               <v-text-field
                 :value="identifier"
                 :label="$t('Identifier')"
