@@ -172,7 +172,9 @@ export default {
               this.relationshipsArray.push({ relation: this.map[key].uri, object: o, title: titles[o] })
             }
           } else {
-            console.log('Error loading relationships: unknown relation: ' + key)
+            if (key !== 'haspart') {
+              console.log('Error loading relationships: unknown relation: ' + key)
+            }
           }
         })
         this.loading = false
@@ -233,7 +235,6 @@ export default {
           defType: 'edismax',
           wt: 'json',
           fl: 'pid,dc_title',
-          qf: 'pid,dc_title',
           start: 0,
           rows: 5000
         }
