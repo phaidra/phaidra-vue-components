@@ -344,6 +344,9 @@ export default {
     }
   },
   methods: {
+    resetInit: function () {
+      this.init = true
+    },
     showFacet: function (f) {
       showFacet(f)
       this.search({ facetQueries: this.facetQueries })

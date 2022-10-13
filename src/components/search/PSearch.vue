@@ -65,6 +65,7 @@
       <v-col cols="3" class="pa-2 hidden-sm-and-down">
         <h3 class="title font-weight-light primary--text border-bottom pa-2">Filters</h3>
         <p-search-filters
+          ref="searchFilters"
           :search="search"
           :facetQueries="facetQueries"
           :persAuthorsProp="persAuthors"
@@ -357,6 +358,7 @@ export default {
         }
         if (this.$route.query.owner) {
           this.owner = this.$route.query.owner
+          this.$refs.searchFilters.resetInit()
         } else {
           this.owner = ''
         }

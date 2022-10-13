@@ -21,7 +21,14 @@
     </v-row>
     <v-row v-if="!hidden && formatsInfo && formats" class="ml-1">
       <span v-if="formats.recommended">{{ $t('Recommended formats') }}: <a v-for="(f, i) in formats.recommended" :key="'fr' + i" :href="f.url" target="_blank">{{f.label}}<span v-if="i < (formats.recommended.length -1)">, </span></a></span>
-      <span class="ml-4" v-if="formats.supported">{{ $t('Other supported formats') }}: <a v-for="(f, i) in formats.supported" :key="'fs' + i" :href="f.url" target="_blank">{{f.label}}<span v-if="i < (formats.supported.length - 1)">, </span></a></span>
+      <span class="ml-4" v-else-if="formats.supported">{{ $t('Other supported formats') }}: <a v-for="(f, i) in formats.supported" :key="'fs' + i" :href="f.url" target="_blank">{{f.label}}<span v-if="i < (formats.supported.length - 1)">, </span></a></span>
+      <template v-else-if="formats.info">
+      <v-col cols="10" class="pa-0">
+        <v-alert dense outlined color="grey darken-2" type="info" icon="mdi-information-outline">
+
+      {{ $t(formats.info) }}</v-alert>
+    </v-col>
+      </template>
     </v-row>
   </div>
 </template>
@@ -77,6 +84,10 @@ export default {
             supported: [
               { label: 'MP4', url: 'https://datamanagement.univie.ac.at/ueber-phaidra-services/formate/formate/mp4/' }
             ]
+          },
+          // collection
+          'https://pid.phaidra.org/vocabulary/GXS7-ENXJ': {
+            info: 'ADD_COLLECTION_MEMBERS_HELP'
           }
         }
       }
