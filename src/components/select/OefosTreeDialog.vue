@@ -3,8 +3,8 @@
     <v-card :loading="loading">
       <v-card-title class="grey white--text">{{ $t('Select a term') }}</v-card-title>
       <v-card-text>
-        <v-treeview item-key="name" :items="items" hoverable activatable @update:active="selectTerm($event)">
-          <template v-slot:label="{ item }">{{ item['skos:notation'][0] + '. ' + item['skos:prefLabel'][$i18n.locale] }}</template>
+        <v-treeview item-key="name" :items="items" hoverable>
+          <template v-slot:label="{ item }"><div @click="selectTerm(item)">{{ item['skos:notation'][0] + '. ' + item['skos:prefLabel'][$i18n.locale] }}</div></template>
         </v-treeview>
       </v-card-text>
       <v-divider></v-divider>
@@ -45,7 +45,7 @@ export default {
       this.dialog = true
     },
     selectTerm: function (term) {
-      this.$emit('term-selected', term[0])
+      this.$emit('term-selected', term)
       this.dialog = false
     }
   }

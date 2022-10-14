@@ -50,7 +50,7 @@
         </v-list>
       </v-menu>
     </v-col>
-    <oefos-tree-dialog ref="oefostreedialog" @term-selected="handleInput(getTerm('oefos', $event))"></oefos-tree-dialog>
+    <oefos-tree-dialog ref="oefostreedialog" @term-selected="handleInput($event)"></oefos-tree-dialog>
   </v-row>
 </template>
 
