@@ -816,6 +816,11 @@ export default {
                       f.notation = n
                     }
                   }
+                  if (obj['skos:exactMatch']) {
+                    for (let n of obj['skos:exactMatch']) {
+                      f.identifier = n
+                    }
+                  }
                   components.push(f)
                 }
               }
@@ -2047,7 +2052,7 @@ export default {
 
     return h
   },
-  get_json_study_plan (name, nameLanguage, notations) {
+  get_json_study_plan (name, nameLanguage, notations, identifiers) {
     var h = {
       '@type': 'aaiso:Programme'
     }
@@ -2063,6 +2068,11 @@ export default {
     }
     if (notations) {
       h['skos:notation'] = notations
+    }
+    if (identifiers) {
+      if (identifiers.length > 0) {
+        h['skos:exactMatch'] = identifiers
+      }
     }
     return h
   },
@@ -2396,7 +2406,7 @@ export default {
           if (f.type === 'aaiso:Programme') {
             // study plan
             if (f.name || f.notation) {
-              this.push_object(jsonld, f.predicate, this.get_json_study_plan(f.name, f.nameLanguage, [f.notation]))
+              this.push_object(jsonld, f.predicate, this.get_json_study_plan(f.name, f.nameLanguage, [f.notation], [f.identifier]))
             }
           } else {
             // project

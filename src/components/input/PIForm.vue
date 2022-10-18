@@ -416,6 +416,7 @@
                           <template v-else-if="f.component === 'p-study-plan'">
                             <p-i-study-plan
                               v-bind.sync="f"
+                              v-on:input-identifier="f.identifier=$event"
                               v-on:input-name="f.name=$event"
                               v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                               v-on:input-notation="f.notation=$event"

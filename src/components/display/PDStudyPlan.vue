@@ -1,15 +1,16 @@
 <template>
-  <v-row>
-    <template v-for="(l, i) in o['skos:prefLabel']">
-      <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'pl'+i">{{ $t('Study plan') }}</v-col>
-      <v-col :md="valueColMd" cols="12" :key="'spl'+i">
-        <v-row no-gutters class="valuefield" >{{ l['@value'] }}</v-row>
+  <span>
+    <v-row v-for="(l, i) in o['skos:prefLabel']" :key="'pl'+i">
+      <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Study plan') }}</v-col>
+      <v-col :md="valueColMd" cols="12">
+        <a v-if="o['skos:exactMatch']" :href="o['skos:exactMatch'][0]" target="_blank"><v-row no-gutters class="valuefield" >{{ l['@value'] }}</v-row></a>
+        <v-row v-else no-gutters class="valuefield" >{{ l['@value'] }}</v-row>
         <template v-for="(id, i) in o['skos:notation']">
           <v-row v-if="id" no-gutters class="grey--text cols"  :key="'notation'+i">[{{ id }}]</v-row>
         </template>
       </v-col>
-    </template>
-  </v-row>
+    </v-row>
+  </span>
 </template>
 
 <script>

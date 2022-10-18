@@ -479,6 +479,7 @@ const fields = [
     multiplicable: true,
     multilingual: true,
     notation: '',
+    identifier: '',
     name: '',
     nameLanguage: '',
     definition: 'Study plan.'
