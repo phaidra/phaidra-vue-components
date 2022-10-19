@@ -478,6 +478,7 @@ const fields = [
     component: 'p-study-plan',
     multiplicable: true,
     multilingual: true,
+    'skos:prefLabel': [],
     notation: '',
     identifier: '',
     name: '',

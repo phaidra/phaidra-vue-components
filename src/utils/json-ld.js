@@ -2052,7 +2052,7 @@ export default {
 
     return h
   },
-  get_json_study_plan (name, nameLanguage, notations, identifiers) {
+  get_json_study_plan (name, nameLanguage, prefLabels, notations, identifiers) {
     var h = {
       '@type': 'aaiso:Programme'
     }
@@ -2064,6 +2064,15 @@ export default {
       ]
       if (nameLanguage) {
         h['skos:prefLabel'][0]['@language'] = nameLanguage
+      }
+    } else {
+      if (prefLabels) {
+        if (prefLabels.length > 0) {
+          h['skos:prefLabel'] = []
+          for (var i = 0; i < prefLabels.length; i++) {
+            h['skos:prefLabel'].push(prefLabels[i])
+          }
+        }
       }
     }
     if (notations) {
@@ -2405,8 +2414,8 @@ export default {
         case 'frapo:isOutputOf':
           if (f.type === 'aaiso:Programme') {
             // study plan
-            if (f.name || f.notation) {
-              this.push_object(jsonld, f.predicate, this.get_json_study_plan(f.name, f.nameLanguage, [f.notation], [f.identifier]))
+            if (f.name || f.notation || f['skos:prefLabel']) {
+              this.push_object(jsonld, f.predicate, this.get_json_study_plan(f.name, f.nameLanguage, f['skos:prefLabel'], [f.notation], [f.identifier]))
             }
           } else {
             // project
