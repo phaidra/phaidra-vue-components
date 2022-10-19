@@ -2076,7 +2076,9 @@ export default {
       }
     }
     if (notations) {
-      h['skos:notation'] = notations
+      if (h['skos:notation'].length > 0) {
+        h['skos:notation'] = notations
+      }
     }
     if (identifiers) {
       if (identifiers.length > 0) {
