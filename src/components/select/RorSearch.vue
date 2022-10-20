@@ -30,6 +30,7 @@
                 :outlined="inputStyle==='outlined'"
                 clearable
                 :messages="resolved"
+                :error-messages="errorMessages"
                 append-icon="mdi-magnify"
                 @click:append="search()"
                 @keyup.enter="search()"
@@ -110,6 +111,9 @@ export default {
     searchlabel: {
       type: String,
       default: ''
+    },
+    errorMessages: {
+      type: Array
     }
   },
   watch: {
@@ -121,7 +125,7 @@ export default {
     },
     selected (item) {
       (item !== null) && this.resolve(item)
-    }//,
+    }//, 
     // text: {
     //   handler () {
     //     const item = {

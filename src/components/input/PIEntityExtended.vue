@@ -225,7 +225,7 @@
                   </v-autocomplete>
                 </v-col>
                 <v-col cols="12" md="10" v-if="organizationRadio === 'ror'">
-                  <ror-search v-on:resolve="$emit('input-organization-ror',$event)" :value="organization" :text="organizationRorName"></ror-search>
+                  <ror-search v-on:resolve="$emit('input-organization-ror',$event)" :value="organization" :text="organizationRorName" :errorMessages="organizationErrorMessages"></ror-search>
                 </v-col>
                 <v-col cols="12" md="10" v-if="organizationRadio === 'other'">
                   <v-text-field
@@ -286,7 +286,7 @@
                 </v-autocomplete>
               </v-col>
               <v-col cols="12" md="10" v-if="affiliationRadio === 'ror'">
-                <ror-search v-on:resolve="$emit('input-affiliation-ror', $event)" :value="affiliation" :text="affiliationRorName"></ror-search>
+                <ror-search v-on:resolve="$emit('input-affiliation-ror', $event)" :value="affiliation" :text="affiliationRorName" :errorMessages="affiliationErrorMessages"></ror-search>
               </v-col>
               <v-col cols="12" md="10" v-if="affiliationRadio === 'other'">
                 <v-text-field
