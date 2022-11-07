@@ -71,7 +71,7 @@ export const vocabulary = {
         case 'phaidra:acnumber':
           return 'https://ubdata.univie.ac.at/' + value
         case 'ids:urn':
-          return 'https://resolver.obvsg.at/resolver?identifier=' + value
+          return 'https://nbn-resolving.org/' + value
         case 'ids:orcid':
           return 'https://orcid.org/' + value
         case 'ids:gnd':
