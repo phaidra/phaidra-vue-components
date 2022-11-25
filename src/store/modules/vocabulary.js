@@ -675,38 +675,450 @@ const vocabularies = {
   },
   'alllicenses': {
     terms: [
-      { '@id': 'http://rightsstatements.org/vocab/InC/1.0/', 'skos:notation': ['1'], 'skos:prefLabel': { 'eng': 'All rights reserved', 'deu': 'Alle Rechte vorbehalten' } },
-      { '@id': 'http://creativecommons.org/licenses/by/4.0/', 'skos:notation': ['16'], 'skos:prefLabel': { 'eng': 'CC BY 4.0 International' }, 'img': 'cc-by.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc/4.0/', 'skos:notation': ['17'], 'skos:prefLabel': { 'eng': 'CC BY-NC 4.0 International' }, 'img': 'cc-by-nc.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/', 'skos:notation': ['18'], 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 4.0 International' }, 'img': 'cc-by-nc-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/', 'skos:notation': ['19'], 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 4.0 International' }, 'img': 'cc-by-nc-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nd/4.0/', 'skos:notation': ['20'], 'skos:prefLabel': { 'eng': 'CC BY-ND 4.0 International' }, 'img': 'cc-by-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-sa/4.0/', 'skos:notation': ['21'], 'skos:prefLabel': { 'eng': 'CC BY-SA 4.0 International' }, 'img': 'cc-by-sa.png' },
-      { '@id': 'http://creativecommons.org/publicdomain/mark/1.0/', 'skos:notation': ['9'], 'skos:prefLabel': { 'eng': 'Public Domain Mark 1.0' }, 'img': 'pdm.png' },
-      { '@id': 'http://creativecommons.org/licenses/by/3.0/', 'skos:notation': ['28'], 'skos:prefLabel': { 'eng': 'CC BY 3.0 Unported' }, 'img': 'cc-by.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc/3.0/', 'skos:notation': ['30'], 'skos:prefLabel': { 'eng': 'CC BY-NC 3.0 Unported' }, 'img': 'cc-by-nc.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-nd/3.0/', 'skos:notation': ['33'], 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 3.0 Unported' }, 'img': 'cc-by-nc-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-sa/3.0/', 'skos:notation': ['32'], 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 3.0 Unported' }, 'img': 'cc-by-nc-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nd/3.0/', 'skos:notation': ['31'], 'skos:prefLabel': { 'eng': 'CC BY-ND 3.0 Unported' }, 'img': 'cc-by-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-sa/3.0/', 'skos:notation': ['29'], 'skos:prefLabel': { 'eng': 'CC BY-SA 3.0 Unported' }, 'img': 'cc-by-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by/3.0/at/', 'skos:notation': ['10'], 'skos:prefLabel': { 'eng': 'CC BY 3.0 Austria' }, 'img': 'cc-by.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc/3.0/at/', 'skos:notation': ['11'], 'skos:prefLabel': { 'eng': 'CC BY-NC 3.0 Austria' }, 'img': 'cc-by-nc.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-nd/3.0/at/', 'skos:notation': ['12'], 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 3.0 Austria' }, 'img': 'cc-by-nc-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-sa/3.0/at/', 'skos:notation': ['13'], 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 3.0 Austria' }, 'img': 'cc-by-nc-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nd/3.0/at/', 'skos:notation': ['14'], 'skos:prefLabel': { 'eng': 'CC BY-ND 3.0 Austria' }, 'img': 'cc-by-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-sa/3.0/at/', 'skos:notation': ['15'], 'skos:prefLabel': { 'eng': 'CC BY-SA 3.0 Austria' }, 'img': 'cc-by-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by/2.0/', 'skos:notation': ['22'], 'skos:prefLabel': { 'eng': 'CC BY 2.0 Generic' }, 'img': 'cc-by.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc/2.0/', 'skos:notation': ['24'], 'skos:prefLabel': { 'eng': 'CC BY-NC 2.0 Generic' }, 'img': 'cc-by-nc.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-nd/2.0/', 'skos:notation': ['27'], 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 2.0 Generic' }, 'img': 'cc-by-nc-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-sa/2.0/', 'skos:notation': ['26'], 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 2.0 Generic' }, 'img': 'cc-by-nc-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nd/2.0/', 'skos:notation': ['25'], 'skos:prefLabel': { 'eng': 'CC BY-ND 2.0 Generic' }, 'img': 'cc-by-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-sa/2.0/', 'skos:notation': ['23'], 'skos:prefLabel': { 'eng': 'CC BY-SA 2.0 Generic' }, 'img': 'cc-by-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by/2.0/at/', 'skos:notation': ['2'], 'skos:prefLabel': { 'eng': 'CC BY 2.0 Austria' }, 'img': 'cc-by.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc/2.0/at/', 'skos:notation': ['3'], 'skos:prefLabel': { 'eng': 'CC BY-NC 2.0 Austria' }, 'img': 'cc-by-nc.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-nd/2.0/at/', 'skos:notation': ['4'], 'skos:prefLabel': { 'eng': 'CC BY-NC-ND 2.0 Austria' }, 'img': 'cc-by-nc-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nc-sa/2.0/at/', 'skos:notation': ['5'], 'skos:prefLabel': { 'eng': 'CC BY-NC-SA 2.0 Austria' }, 'img': 'cc-by-nc-sa.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-nd/2.0/at/', 'skos:notation': ['6'], 'skos:prefLabel': { 'eng': 'CC BY-ND 2.0 Austria' }, 'img': 'cc-by-nd.png' },
-      { '@id': 'http://creativecommons.org/licenses/by-sa/2.0/at/', 'skos:notation': ['7'], 'skos:prefLabel': { 'eng': 'CC BY-SA 2.0 Austria' }, 'img': 'cc-by-sa.png' }
+      {
+        '@id': 'http://rightsstatements.org/vocab/InC/1.0/',
+        'skos:notation': [
+          '1'
+        ],
+        'skos:prefLabel': {
+          'eng': 'All rights reserved',
+          'deu': 'Alle Rechte vorbehalten'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by/4.0/',
+        'skos:notation': [
+          '16'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY 4.0 International'
+        },
+        'img': 'cc-by.png',
+        'skos:definition': {
+          'eng': 'Attribution 4.0 International (CC BY 4.0)\n<br />\n<br />If you license your content under the terms of this license, you allow every licensee to copy and to redistribute the material in any medium or format, to remix, to transform, and build upon the material for any purpose, even commercially.\n<br />\n<br />You cannot revoke these freedoms as long as the licensee follows the license terms.\n<br />\n<br />The licensee must give appropriate credit, provide a link to the license, and indicate if changes were made. The licensee may do so in any reasonable manner, but not in any way that suggests the licensor endorses the licensee or his use.\n<br />\n<br />The licensee may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target="_blank" href="http://creativecommons.org/licenses/by/4.0/legalcode">Long version</a>',
+          'deu': 'Namensnennung 4.0 International\n<br />\n<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in jedwedem Format oder Medium zu vervielfältigen und weiterzuverbreiten. Der Lizenznehmer darf ihren Schutzgegenstand remixen, verändern und darauf aufbauen und zwar für beliebige Zwecke, sogar kommerziell.\n<br />\n<br />Die hier eingeräumten Freiheiten dürfen nicht widerrufen werden, solange sich der Lizenznehmer an die Lizenzbedingungen hält.\n<br />\n<br />Der Lizenznehmer muss angemessene Urheber- und Rechteangaben machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade den Lizenznehmer oder seine Nutzung besonders.\n<br />\n<br />Der Lizenznehmer darf keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by/4.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc/4.0/',
+        'skos:notation': [
+          '17'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC 4.0 International'
+        },
+        'img': 'cc-by-nc.png',
+        'skos:definition': {
+          'eng': 'Attribution-NonCommercial 4.0 International (CC BY-NC 4.0 AT)\n<br />\n<br />If you license your content under the terms of this license, you allow every licensee to copy and to redistribute the material in any medium or format, to remix, to transform, and build upon the material.\n<br />\n<br />You cannot revoke these freedoms as long as the licensee follows the license terms.\n<br />\n<br />The licensee must give appropriate credit, provide a link to the license, and indicate if changes were made. The licensee may do so in any reasonable manner, but not in any way that suggests the licensor endorses the licensee or his use.\n<br />\n<br />The licensee may not use the material for commercial purposes.\n<br />\n<br />The licensee may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/legalcode">Long version</a>',
+          'deu': 'Namensnennung - Nicht-kommerziell 4.0 International\n<br />\n<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in jedwedem Format oder Medium zu vervielfältigen und weiterzuverbreiten. Der Lizenznehmer darf ihren Schutzgegenstand remixen, verändern und darauf aufbauen.\n<br />\n<br />Die hier eingeräumten Freiheiten dürfen nicht widerrufen werden, solange sich der Lizenznehmer an die Lizenzbedingungen hält.\n<br />\n<br />Der Lizenznehmer muss angemessene Urheber- und Rechteangaben machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade den Lizenznehmer oder seine Nutzung besonders.\n<br />\n<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht für kommerzielle Zwecke nutzen.\n<br />\n<br />Der Lizenznehmer darf keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-nd/4.0/',
+        'skos:notation': [
+          '18'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-ND 4.0 International'
+        },
+        'img': 'cc-by-nc-nd.png',
+        'skos:definition': {
+          'eng': 'Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)\n<br />\n<br />If you license your content under the terms of this license, you allow every licensee to copy and to redistribute the material in any medium or format. You cannot revoke these freedoms as long as the licensee follows the license terms.\n<br />\n<br />The licensee must give appropriate credit, provide a link to the license, and indicate if changes were made. The licensee may do so in any reasonable manner, but not in any way that suggests the licensor endorses the licensee or his use.\n<br />\n<br />The licensee may not use the material for commercial purposes.\n<br />\n<br />If the licensee remixes, transforms, or builds upon the material, he may not distribute the modified material.\n<br />\n<br />The licensee may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">Long version</a>',
+          'deu': 'Namensnennung - Nicht-kommerziell - Keine Bearbeitungen 4.0 International (CC BY-NC-ND 4.0)\n<br />\n<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in jedwedem Format oder Medium zu vervielfältigen und weiterzuverbreiten.\n<br />\n<br />Die hier eingeräumten Freiheiten dürfen nicht widerrufen werden, solange sich der Lizenznehmer an die Lizenzbedingungen hält.\n<br />\n<br />Der Lizenznehmer muss angemessene Urheber- und Rechteangaben machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade den Lizenznehmer oder seine Nutzung besonders.\n<br />\n<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht für kommerzielle Zwecke nutzen.\n<br />\n<br />Wenn der Lizenznehmer Ihren Schutzgegenstand remixt, verändert oder darauf anderweitig direkt aufbaut, darf er die bearbeitete Fassung Ihres Schutzgegenstandes nicht verbreiten.\n<br />\n<br />Der Lizenznehmer darf keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-sa/4.0/',
+        'skos:notation': [
+          '19'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-SA 4.0 International'
+        },
+        'img': 'cc-by-nc-sa.png',
+        'skos:definition': {
+          'eng': 'Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)\n<br />\n<br />If you license your content under the terms of this license, you allow every licensee to copy and to redistribute the material in any medium or format, to remix, to transform, and build upon the material.\n<br />\n<br />You cannot revoke these freedoms as long as the licensee follows the license terms.\n<br />\n<br />The licensee must give appropriate credit, provide a link to the license, and indicate if changes were made. The licensee may do so in any reasonable manner, but not in any way that suggests the licensor endorses the licensee or his use.\n<br />\n<br />The licensee may not use the material for commercial purposes.\n<br />\n<br />If the licensee remixes, transforms, or builds upon the material, he must distribute your contributions under the same license as the original.\n<br />\n<br />The licensee may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode">Long version</a>',
+          'deu': 'Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International (CC BY-NC-SA 4.0)\n<br />\n<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in jedwedem Format oder Medium zu vervielfältigen und weiterzuverbreiten. Der Lizenznehmer darf ihren Schutzgegenstand remixen, verändern und darauf aufbauen.\n<br />\n<br />Die hier eingeräumten Freiheiten dürfen nicht widerrufen werden, solange sich der Lizenznehmer an die Lizenzbedingungen hält.\n<br />\n<br />Der Lizenznehmer muss angemessene Urheber- und Rechteangaben machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade den Lizenznehmer oder seine Nutzung besonders.\n<br />\n<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht für kommerzielle Zwecke nutzen.\n<br />\n<br />Wenn der Lizenznehmer Ihren Schutzgegenstand remixt, verändert oder darauf anderweitig direkt aufbaut, darf Ihre Beiträge nur unter derselben Lizenz wie das Original verbreiten.\n<br />\n<br />Der Lizenznehmer darf keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nd/4.0/',
+        'skos:notation': [
+          '20'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-ND 4.0 International'
+        },
+        'img': 'cc-by-nd.png',
+        'skos:definition': {
+          'eng': 'Attribution-No Derivatives 4.0 International (CC BY-ND 4.0)\n<br />\n<br />If you license your content under the terms of this license, you allow every licensee to copy and to redistribute the material in any medium or format, even commercially.\n<br />\n<br />You cannot revoke these freedoms as long as the licensee follows the license terms.\n<br />\n<br />The licensee must give appropriate credit, provide a link to the license, and indicate if changes were made. The licensee may do so in any reasonable manner, but not in any way that suggests the licensor endorses the licensee or his use.\n<br />\n<br />If the licensee remixes, transforms, or builds upon the material, he may not distribute the modified material.\n<br />\n<br />The licensee may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nd/4.0/legalcode">Long version</a>',
+          'deu': 'Namensnennung-Keine Bearbeitung 4.0 International (CC BY-ND 4.0)\n<br />\n<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in jedwedem Format oder Medium zu vervielfältigen und weiterzuverbreiten und zwar für beliebige Zwecke, sogar kommerziell.\n<br />\n<br />Die hier eingeräumten Freiheiten dürfen nicht widerrufen werden, solange sich der Lizenznehmer an die Lizenzbedingungen hält.\n<br />\n<br />Der Lizenznehmer muss angemessene Urheber- und Rechteangaben machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade den Lizenznehmer oder seine Nutzung besonders.\n<br />\n<br />Wenn der Lizenznehmer Ihren Schutzgegenstand remixt, verändert oder darauf anderweitig direkt aufbaut, darf er die bearbeitete Fassung Ihres Schutzgegenstandes nicht verbreiten.\n<br />\n<br />Der Lizenznehmer darf keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nd/4.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-sa/4.0/',
+        'skos:notation': [
+          '21'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-SA 4.0 International'
+        },
+        'img': 'cc-by-sa.png',
+        'skos:definition': {
+          'eng': 'Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)\n<br />\n<br />If you license your content under the terms of this license, you allow every licensee to copy and to redistribute the material in any medium or format, to remix, to transform, and build upon the material for any purpose, even commercially.\n<br />\n<br />You cannot revoke these freedoms as long as the licensee follows the license terms.\n<br />\n<br />The licensee must give appropriate credit, provide a link to the license, and indicate if changes were made. The licensee may do so in any reasonable manner, but not in any way that suggests the licensor endorses the licensee or his use.\n<br />\n<br />If the the licensee remixes, transforms, or builds upon the material, he must distribute your contributions under the same license as the original.\n<br />\n<br />The licensee may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Long version</a>',
+          'deu': 'Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 International (CC BY-SA 4.0)\n<br />\n<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in jedwedem Format oder Medium zu vervielfältigen und weiterzuverbreiten. Der Lizenznehmer darf ihren Schutzgegenstand remixen, verändern und darauf aufbauen und zwar für beliebige Zwecke, sogar kommerziell.\n<br />\n<br />Die hier eingeräumten Freiheiten dürfen nicht widerrufen werden, solange sich der Lizenznehmer an die Lizenzbedingungen hält.\n<br />\n<br />Der Lizenznehmer muss angemessene Urheber- und Rechteangaben machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade den Lizenznehmer oder seine Nutzung besonders.\n<br />\n<br />Wenn der Lizenznehmer Ihren Schutzgegenstand remixt, verändert oder darauf anderweitig direkt aufbaut, darf Ihre Beiträge nur unter derselben Lizenz wie das Original verbreiten.\n<br />\n<br />Der Lizenznehmer darf keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/publicdomain/mark/1.0/',
+        'skos:notation': [
+          '9'
+        ],
+        'skos:prefLabel': {
+          'eng': 'Public Domain Mark 1.0'
+        },
+        'img': 'pdm.png',
+        'skos:definition': {
+          'eng': "The Public Domain brand serves as a unified symbol for goods and services of public domain. Public domain in the context of creative goods exists when a creative good is not subject to any copyright restrictions. This is the case when a creative good does not fulfill the requirements that bind the copyright to a copyrightable work, perhaps because it is not sufficiently personalized or that it can be placed in any copyright work category. Public domain also exists when the term of protection of a work has expired. This usually takes place 70 years after the author's death.<br/>Public domain books can be recycled and used as desired without having to obtain permission from the copyright holder. Therefore, a creative good is marked by a significant responsibility over a public domain. We therefore ask you before you tag a digital good with the public domain brand to first consider very carefully whether the work in question is not actually copyrighted.<br/>The public domain brand is conceived for creative goods for which there are no more rights anywhere in the world over a period of time or for creative goods which have previously been expressly released by their owners in the public domain worldwide. They should not be used if the relevant creative good only bears public domain under a few legal systems, but in others is still protected. Creative Commons does not currently recommend using the public domain brand for creative goods worldwide with varying legal copyright status. If in doubt, you should obtain legal advice if you are unsure whether you want to use the public domain for a specific creative good.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/publicdomain/mark/1.0/\">Long version</a>",
+          'deu': 'Die Public Domain Marke dient als einheitliches Symbol zur Kennzeichnung von gemeinfreien Gütern bzw. Leistungen. Gemeinfreiheit im Kontext kreativer Güter liegt dann vor, wenn ein Kreativgut keinerlei urheberrechtlichen Restriktionen unterliegt. Das ist dann der Fall, wenn ein Kreativgut den Anforderungen, die das Urheberrecht an ein schutzfähiges Werk knüpft, nicht genügt, etwa weil es nicht hinreichend individuell ist oder in keine urheberrechtliche Werkkategorie eingeordnet werden kann. Gemeinfreiheit liegt ferner dann vor, wenn die Schutzfrist eines Werks abgelaufen ist. Das erfolgt im Urheberrecht in der Regel 70 Jahre nach dem Tod des Autors.<br/>Gemeinfreie Werke dürfen beliebig verwertet und genutzt werden ohne, dass dazu die Erlaubnis des Rechteinhabers eingeholt werden muss. Daher geht mit der Kennzeichnung eines Kreativgutes als gemeinfrei eine erhebliche Verantwortung einher. Wir bitten Sie daher bevor Sie ein Digitalgut mit der Public Domain Marke versehen, mit äußerster Sorgfalt zu prüfen, ob das betreffende Werk tatsächlich nicht urheberrechtlich geschützt ist.<br/>Die Public Domain Marke ist gedacht für Kreativgüter, für die durch Zeitablauf nirgendwo auf der Welt mehr Schutzrechte bestehen oder die zuvor von ihrem Rechteinhaber ausdrücklich in die weltweite Public Domain entlassen worden sind. Sie sollte nicht verwendet werden, wenn das betreffende Kreativgut nur unter manchen Rechtsordnungen zur Public Domain gehört, also gemeinfrei ist, in anderen dagegen noch geschützt ist. Derzeit empfiehlt Creative Commons es nicht, die Public Domain Marke für Kreativgüter mit weltweit unterschiedlichem urheberrechtlichem Status zu verwenden. Im Zweifel sollten Sie sich Rechtsberatung besorgen, wenn Sie unsicher sind, ob Sie die Public Domain für ein bestimmtes Kreativgut verwenden wollen.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/publicdomain/mark/1.0/">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by/3.0/',
+        'skos:notation': [
+          '28'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY 3.0 Unported'
+        },
+        'img': 'cc-by.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br  /><br />Under the following conditions:<br />Attribution. You must give the original author credit.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by/3.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung 3.0 Unported<br /><br />Attribution 3.0 Unported (CC BY 3.0 Unported)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by/3.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc/3.0/',
+        'skos:notation': [
+          '30'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC 3.0 Unported'
+        },
+        'img': 'cc-by-nc.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc/3.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine kommerzielle Nutzung 3.0 Unported<br /><br />Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0 Unported)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen. <br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc/3.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-nd/3.0/',
+        'skos:notation': [
+          '33'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-ND 3.0 Unported'
+        },
+        'img': 'cc-by-nc-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br  />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine kommerzielle Nutzung - Keine Bearbeitungen 3.0 Unported<br /><br />Attribution-NonCommercial-NoDerivs 3.0 Unported (CC BY-NC-ND 3.0 Unported)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-sa/3.0/',
+        'skos:notation': [
+          '32'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-SA 3.0 Unported'
+        },
+        'img': 'cc-by-nc-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine kommerzielle Nutzung - Weitergabe unter gleichen Bedingungen 3.0 Unported<br /><br />Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0 Unported)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihr Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nd/3.0/',
+        'skos:notation': [
+          '31'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-ND 3.0 Unported'
+        },
+        'img': 'cc-by-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nd/3.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine Bearbeitungen 3.0 Unported<br /><br />Attribution-NoDerivs 3.0 Unported (CC BY-ND 3.0 Unported)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br>- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br><br>Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br>Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br><br>Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br>Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br>Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nd/3.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-sa/3.0/',
+        'skos:notation': [
+          '29'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-SA 3.0 Unported'
+        },
+        'img': 'cc-by-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-sa/3.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Weitergabe unter gleichen Bedingungen 3.0 Unported<br /><br />Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0 Unported)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher  Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-sa/3.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by/3.0/at/',
+        'skos:notation': [
+          '10'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY 3.0 Austria'
+        },
+        'img': 'cc-by.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br  /><br />Under the following conditions:<br />Attribution. You must give the original author credit.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by/3.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung 3.0 Österreich<br /><br />Attribution 3.0 Austria (CC BY 3.0 AT)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by/3.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc/3.0/at/',
+        'skos:notation': [
+          '11'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC 3.0 Austria'
+        },
+        'img': 'cc-by-nc.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc/3.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine kommerzielle Nutzung 3.0 Österreich<br /><br />Attribution-NonCommercial 3.0 Austria (CC BY-NC 3.0 AT)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen. <br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc/3.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-nd/3.0/at/',
+        'skos:notation': [
+          '12'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-ND 3.0 Austria'
+        },
+        'img': 'cc-by-nc-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br  />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine kommerzielle Nutzung - Keine Bearbeitungen 3.0 Österreich<br /><br />Attribution-NonCommercial-NoDerivs 3.0 Austria (CC BY-NC-ND 3.0 AT)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/3.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-sa/3.0/at/',
+        'skos:notation': [
+          '13'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-SA 3.0 Austria'
+        },
+        'img': 'cc-by-nc-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine kommerzielle Nutzung - Weitergabe unter gleichen Bedingungen 3.0 Österreich<br /><br />Attribution-NonCommercial-ShareAlike 3.0 Austria (CC BY-NC-SA 3.0 AT)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihr Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nd/3.0/at/',
+        'skos:notation': [
+          '14'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-ND 3.0 Austria'
+        },
+        'img': 'cc-by-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nd/3.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Keine Bearbeitungen 3.0 Österreich<br /><br />Attribution-NoDerivs 3.0 Austria (CC BY-ND 3.0 AT)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br>- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br><br>Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br>Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br><br>Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br>Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br>Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nd/3.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-sa/3.0/at/',
+        'skos:notation': [
+          '15'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-SA 3.0 Austria'
+        },
+        'img': 'cc-by-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-sa/3.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung - Weitergabe unter gleichen Bedingungen 3.0 Österreich<br /><br />Attribution-ShareAlike 3.0 Austria (CC BY-SA 3.0 AT)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher  Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-sa/3.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by/2.0/',
+        'skos:notation': [
+          '22'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY 2.0 Generic'
+        },
+        'img': 'cc-by.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br  /><br />Under the following conditions:<br />Attribution. You must give the original author credit.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by/2.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung 2.0 Generic<br /><br />Attribution 2.0 Generic (by)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by/2.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc/2.0/',
+        'skos:notation': [
+          '24'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC 2.0 Generic'
+        },
+        'img': 'cc-by-nc.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc/2.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine kommerzielle Nutzung 2.0 Generic<br /><br />Attribution-Noncommercial 2.0 Generic (by-nc)<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen. <br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc/2.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-nd/2.0/',
+        'skos:notation': [
+          '27'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-ND 2.0 Generic'
+        },
+        'img': 'cc-by-nc-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br  />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-nd/2.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine kommerzielle Nutzung-Keine Bearbeitung 2.0 Generic<br /><br />Attribuation-Non commercial-No Derivative Works 2.0 Generic (by-nc-nd) <br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/2.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-sa/2.0/',
+        'skos:notation': [
+          '26'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-SA 2.0 Generic'
+        },
+        'img': 'cc-by-nc-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine kommerzielle Nutzung-Weitergabe unter gleichen Bedingungen 2.0 Generic<br /><br />Attribution-Noncommercial-Share Alike 2.0 Generic (by-nc-sa)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihr Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nd/2.0/',
+        'skos:notation': [
+          '25'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-ND 2.0 Generic'
+        },
+        'img': 'cc-by-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nd/2.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine Bearbeitung 2.0 Generic<br><br>Attribuation-No Derivative Works 2.0 Generic (by-nd)<br><br>Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br>- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br><br>Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br>Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br><br>Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br>Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br>Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nd/2.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-sa/2.0/',
+        'skos:notation': [
+          '23'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-SA 2.0 Generic'
+        },
+        'img': 'cc-by-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-sa/2.0/legalcode\">Long version</a>",
+          'deu': 'Namensnennung- -Weitergabe unter gleichen Bedingungen 2.0 Generic<br /><br />Attribution-Share Alike 2.0 Generic (by-sa)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher  Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by/2.0/at/',
+        'skos:notation': [
+          '2'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY 2.0 Austria'
+        },
+        'img': 'cc-by.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br  /><br />Under the following conditions:<br />Attribution. You must give the original author credit.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights.<br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by/2.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung 2.0 Österreich<br /><br />Attribution 2.0 Austria (by)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by/2.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc/2.0/at/',
+        'skos:notation': [
+          '3'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC 2.0 Austria'
+        },
+        'img': 'cc-by-nc.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights. <br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc/2.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine kommerzielle Nutzung 2.0 Österreich<br /><br />Attribution-Noncommercial 2.0 Austria (by-nc)<br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen. <br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc/2.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-nd/2.0/at/',
+        'skos:notation': [
+          '4'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-ND 2.0 Austria'
+        },
+        'img': 'cc-by-nc-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br  />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights. <br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-nd/2.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine kommerzielle Nutzung-Keine Bearbeitung 2.0 Österreich<br /><br />Attribuation-Non commercial-No Derivative Works 2.0 Austria (by-nc-nd) <br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung  dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/2.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nc-sa/2.0/at/',
+        'skos:notation': [
+          '5'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-NC-SA 2.0 Austria'
+        },
+        'img': 'cc-by-nc-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Non-Commercial</b>. You may not use this work for commercial purposes.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights. <br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nc-sa/2.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine kommerzielle Nutzung-Weitergabe unter gleichen Bedingungen 2.0 Österreich<br /><br />Attribution-Noncommercial-Share Alike 2.0 Austria (by-nc-sa)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihr Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Der Lizenznehmer darf Ihren Schutzgegenstand nicht zu kommerziellen Zwecken verwerten.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber Ihre Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/2.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-nd/2.0/at/',
+        'skos:notation': [
+          '6'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-ND 2.0 Austria'
+        },
+        'img': 'cc-by-nd.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>No Derivative Works</b>. You may not alter, transform, or build upon this work.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights. <br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-nd/2.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung-Keine Bearbeitung 2.0 Österreich<br><br>Attribuation-No Derivative Works 2.0 Austria (by-nd)<br><br>Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher Form zu verwerten, insbesondere<br>- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen.<br><br>Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br>Der Lizenznehmer darf Ihren Schutzgegenstand nicht bearbeiten oder auf andere Weise verändern.<br><br>Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br>Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br>Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-nd/2.0/at/legalcode">Langversion</a>'
+        }
+      },
+      {
+        '@id': 'http://creativecommons.org/licenses/by-sa/2.0/at/',
+        'skos:notation': [
+          '7'
+        ],
+        'skos:prefLabel': {
+          'eng': 'CC BY-SA 2.0 Austria'
+        },
+        'img': 'cc-by-sa.png',
+        'skos:definition': {
+          'eng': "You are free:<br />to copy, distribute, display, and perform the work<br />to make derivative works<br /><br />Under the following conditions:<br /><b>Attribution</b>. You must give the original author credit.<br /><b>Share Alike</b>. If you alter, transform, or build upon this work, you may distribute the resulting work only under a licence identical to this one.<br /><br />- For any reuse or distribution, you must make clear to others the licence terms of this work.<br />- Any of these conditions can be waived if you get permission from the copyright holder.<br />- Nothing in this licence impairs or restricts the author's moral rights. <br/><br/>This is a human-readable summary of (and not a substitute for) the licence.<br/>The legal binding text of the licence is available here:<br/><a target=\"_blank\" href=\"http://creativecommons.org/licenses/by-sa/2.0/at/legalcode\">Long version</a>",
+          'deu': 'Namensnennung- -Weitergabe unter gleichen Bedingungen 2.0 Österreich<br /><br />Attribution-Share Alike 2.0 Austria(by-sa)<br /><br />Wenn Sie Ihren Schutzgegenstand unter den Bedingungen dieser Lizenz anbieten, gestatten Sie jedem Lizenznehmer, Ihren Schutzgegenstand in körperlicher oder unkörperlicher  Form zu verwerten, insbesondere<br />- zu vervielfältigen, zu verbreiten, vorzuführen, zu senden und der Öffentlichkeit zur Verfügung zu stellen;<br />- zu bearbeiten und die Bearbeitungen zu verwerten.<br /><br />Der Lizenznehmer muss Ihren Namen in Verbindung mit Ihrem Schutzgegenstand stets in der von Ihnen festgelegten Weise nennen.<br />Wenn der Lizenznehmer Ihren Schutzgegenstand bearbeitet oder in anderer Weise umgestaltet, verändert oder als Grundlage für ein anderes Werk verwendet, darf er das neu entstandene Werk nur unter Verwendung von Lizenzbedingungen weitergeben, die mit denen dieses Lizenzvertrages identisch oder vergleichbar sind.<br /><br />Im Falle einer Verbreitung muss der Lizenznehmer anderen die Lizenzbedingungen, unter welche dieser Schutzgegenstand fällt, mitteilen.<br />Jede der vorgenannten Bedingungen kann aufgehoben werden, sofern Sie als Rechteinhaber die Einwilligung dazu erteilen.<br />Diese Lizenz lässt die Urheberpersönlichkeitsrechte unberührt.<br/><br/>Dieser Text ist nicht der Text des Lizenzvertrages sondern nur eine unverbindliche Kurzfassung dessen.<br/>Die verbindliche Fassung der ausgewählten Lizenz finden Sie hier:<br/><a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/at/legalcode">Langversion</a>'
+        }
+      }
     ],
     loaded: true
   },

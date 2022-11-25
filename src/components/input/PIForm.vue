@@ -534,8 +534,8 @@
                     <v-col>
                       <v-dialog v-if="addbutton && (s.addbutton != false)" class="pb-4" v-model="s['adddialogue']" scrollable width="700px">
                         <template v-slot:activator="{ on }">
-                          <v-btn v-on="on" color="grey" dark class="mb-4">
-                            {{ $t('Add metadatafield') }}<v-icon color="white" right dark>mdi-plus</v-icon>
+                          <v-btn v-on="on" color="grey" dark large elevation="4" class="mb-4 font-weight-black">
+                            {{ $t('Add metadatafield') }}<v-icon class="ml-4" color="white" size="24" right dark>mdi-plus-circle</v-icon>
                           </v-btn>
                         </template>
                         <v-card>
