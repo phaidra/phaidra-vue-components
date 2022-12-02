@@ -526,7 +526,7 @@
 
                         </v-row>
                       </template>
-                      <span>{{ $t(f.definition)}}</span>
+                      <span>{{ $t(f.helptext ? f.helptext : f.definition)}}</span>
                     </v-tooltip>
                   </div>
 
@@ -547,7 +547,7 @@
                                 <v-list-item @click="addfieldselection.push(field)">
                                   <v-list-item-content>
                                     <v-list-item-title>{{ $t(field.fieldname) }}</v-list-item-title>
-                                    <v-list-item-subtitle>{{ $t(field.definition) }}</v-list-item-subtitle>
+                                    <v-list-item-subtitle>{{ $t(field.helptext ? field.helptext : field.definition) }}</v-list-item-subtitle>
                                   </v-list-item-content>
                                 </v-list-item>
                                 <v-divider :key="'divi'+field.id"></v-divider>

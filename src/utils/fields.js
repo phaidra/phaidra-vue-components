@@ -31,6 +31,7 @@ const fields = [
     'skos:prefLabel': [],
     errorMessages: [],
     definition: 'The nature of the resource. Example: Image, Text, Sound'
+
   },
   {
     id: 'resource-type-buttongroup',
@@ -60,7 +61,8 @@ const fields = [
     value: '',
     'skos:prefLabel': [],
     errorMessages: [],
-    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography'
+    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography',
+    helptext: 'An object type represents real-world entity. For example, an object type can represent a photography, an interview, a lecture or a letter.'
   },
   {
     id: 'object-type-checkboxes',
@@ -73,7 +75,8 @@ const fields = [
     label: 'Object type',
     selectedTerms: [],
     errorMessages: [],
-    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography'
+    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography',
+    helptext: 'An object type represents real-world entity. For example, an object type can represent a photography, an interview, a lecture or a letter.'
   },
   {
     id: 'genre',
@@ -86,6 +89,7 @@ const fields = [
     'skos:prefLabel': [],
     errorMessages: [],
     definition: 'Genre of the creative work, broadcast channel or group. Example: Master thesis, Comedy, Late Renaissance'
+
   },
   {
     id: 'version-type',
