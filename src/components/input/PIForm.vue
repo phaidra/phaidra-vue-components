@@ -406,7 +406,7 @@
                             <p-i-alternate-identifier
                               v-bind.sync="f"
                               v-on:input-identifier="f.value=$event"
-                              v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
+                              v-on:input-identifier-type="setSelected(f, 'type', $event)"
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               class="my-2"

@@ -154,7 +154,7 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col :cols="!hideIdentifier ? 6 : 12">
+                <v-col :cols="12">
                   <v-text-field
                     :value="isbn"
                     :label="$t(isbnLabel)"
@@ -165,7 +165,9 @@
                     :error-messages="isbnErrorMessages"
                   ></v-text-field>
                 </v-col>
-                <v-col :cols="3" v-if="showIdentifierType && !hideIdentifier">
+              </v-row>
+              <v-row>
+                <v-col :cols="6" v-if="showIdentifierType && !hideIdentifier">
                   <v-autocomplete
                     v-on:input="$emit('input-identifier-type', $event)"
                     :label="$t('Type of identifier')"
@@ -190,7 +192,7 @@
                     </template>
                   </v-autocomplete>
                 </v-col>
-                <v-col :cols="showIdentifierType ? 3 : 6" v-if="!hideIdentifier">
+                <v-col :cols="showIdentifierType ? 6 : 12" v-if="!hideIdentifier">
                   <v-text-field
                     :value="identifier"
                     :label="$t('Identifier')"
@@ -602,7 +604,7 @@ export default {
       type: String
     },
     isbn: {
-      type: Array
+      type: String
     },
     isbnLabel: {
       type: String
@@ -622,7 +624,7 @@ export default {
     },
     hideIdentifier: {
       type: Boolean,
-      default: true
+      default: false
     },
     showIdentifierType: {
       type: Boolean,
@@ -655,7 +657,7 @@ export default {
     },
     hideSeriesIdentifier: {
       type: Boolean,
-      default: true
+      default: false
     },
     showSeriesIdentifierType: {
       type: Boolean,

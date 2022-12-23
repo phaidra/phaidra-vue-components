@@ -288,7 +288,7 @@ export default {
           data: httpFormData
         })
         this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
-        this.$router.push({ name: 'detail', params: { pid: collection.pid } })
+        this.$router.push({ path: `detail/${collection.pid}` })
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }

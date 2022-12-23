@@ -209,7 +209,7 @@
                 :label="$t('Type of identifier')"
                 :items="vocabularies[identifierVocabulary].terms"
                 :item-value="'@id'"
-                :value="getTerm(identifierVocabulary, type)"
+                :value="getTerm(identifierVocabulary, identifierType)"
                 :filter="autocompleteFilter"
                 :filled="inputStyle==='filled'"
                 :outlined="inputStyle==='outlined'"
@@ -259,9 +259,6 @@ export default {
   name: 'p-i-series',
   mixins: [vocabulary, fieldproperties, validationrules],
   props: {
-    type: {
-      type: String
-    },
     label: {
       type: String
     },
@@ -304,6 +301,9 @@ export default {
     },
     hideIdentifier: {
       type: Boolean
+    },
+    identifierType: {
+      type: String
     },
     identifier: {
       type: String

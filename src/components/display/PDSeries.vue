@@ -38,8 +38,10 @@
             </v-row>
             <v-row>
               <template v-for="(id, i) in o['skos:exactMatch']">
-                <v-col :md="labelColMd" cols="12" class="pdlabel primary--text" :key="'idatel'+i">{{ $t('Identifier') }}</v-col>
-                <v-col :md="valueColMd" cols="12" :key="'id'+i"><a :href="getIDResolverURL(id)" target="_blank">{{ id['@value'] }}</a></v-col>
+                <v-col :md="labelColMd" cols="12" class="pdlabel primary--text" :key="'idserl'+i">{{ getLocalizedTermLabel('objectidentifiertype', id['@type']) }}</v-col>
+                <v-col :md="valueColMd" cols="12" v-if="getIDResolverURL(id)" :key="'idser'+i"><a :href="getIDResolverURL(id)" target="_blank">{{ id['@value'] }}</a></v-col>
+                <!-- <v-col :md="labelColMd" cols="12" class="pdlabel primary--text">{{ $t('Identifier') }}</v-col>
+                <v-col :md="valueColMd" cols="12" ><a :href="getIDResolverURL(id)" target="_blank">{{ id['@value'] }}</a></v-col> -->
               </template>
             </v-row>
         </v-card-text>

@@ -266,7 +266,12 @@ export default {
               }
               if (obj['skos:exactMatch']) {
                 for (let v of obj['skos:exactMatch']) {
-                  f.identifier = v
+                  if (v['@type']) {
+                    f.identifierType = v['@type']
+                    f.identifier = v['@value']
+                  } else {
+                    f.identifier = v
+                  }
                 }
               }
               Object.entries(jsonld).forEach(([key1, value1]) => {
@@ -2372,7 +2377,7 @@ export default {
           break
 
         case 'rdau:P60101':
-          if (f.title || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.isbn || f.series[0].seriesTitle || f.series[0].seriesVolume || f.series[0].seriesIssue || f.series[0].seriesIssued || f.series[0].seriesIssn || f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
+          if (f.title || f.identifier || f.volume || ((f.roles.length > 0) && (f.roles[0].firstname || f.roles[0].lastname || f.roles[0].name || f.roles[0].organizationSelectedName || f.roles[0].identifierText)) || f.isbn || f.series[0].seriesTitle || f.series[0].seriesIdentifier || f.series[0].seriesVolume || f.series[0].seriesIssue || f.series[0].seriesIssued || f.series[0].seriesIssn || f.publisherName || f.publishingPlace || f.publishingDate || f.publisherOrgUnit) {
             this.push_object(jsonld, f.predicate, this.get_json_contained_in(f))
           }
           if (f.pageStart) {

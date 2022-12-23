@@ -69,7 +69,7 @@ export const vocabulary = {
         case 'ids:handle':
           return 'https://hdl.handle.net/' + value
         case 'phaidra:acnumber':
-          return 'https://ubdata.univie.ac.at/' + value
+          return 'https://permalink.obvsg.at/' + value
         case 'ids:urn':
           return 'https://nbn-resolving.org/' + value
         case 'ids:orcid':

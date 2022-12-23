@@ -504,6 +504,7 @@ const fields = [
     issuedDateLabel: 'Issued',
     issuedDatePicker: true,
     issn: '',
+    idnetifierType: '',
     identifier: '',
     hidePages: true,
     pageStart: '',
