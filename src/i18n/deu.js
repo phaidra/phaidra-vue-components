@@ -840,7 +840,7 @@ export default {
   'Material': 'Material',
   'Material (vocabulary)': 'Material (Vokabular)',
   'Place of repository': 'Aufbewahrungsort',
-  'SUBJECT_SECTION': 'Subject',
+  'SUBJECT_SECTION': 'Repräsentiertes Objekt',
   'Represented/depicted place': 'Abgebildeter Ort',
   'Association': 'Organisationseinheit',
   'System fields': 'Systemhinweis',

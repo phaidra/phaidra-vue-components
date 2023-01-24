@@ -22,13 +22,13 @@
       >
         <template slot="item" slot-scope="{ item }">
           <v-list-item-content two-line>
-            <v-list-item-title  v-html="`${getLocalizedTermLabel('oefos', item['@id']) + ' <span color="grey lighten-5">[' + item['skos:notation'][0] + ']</span>'}`"></v-list-item-title>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel('oefos', item['@id']) + ' - ' + item['skos:notation'][0]}`"></v-list-item-title>
             <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
         <template slot="selection" slot-scope="{ item }">
           <v-list-item-content>
-            <v-list-item-title v-html="`${getLocalizedTermLabel('oefos', item['@id']) + ' <span color="grey lighten-5">[' + item['skos:notation'][0] + ']</span>'}`"></v-list-item-title>
+            <v-list-item-title v-html="`${getLocalizedTermLabel('oefos', item['@id']) + ' - ' + item['skos:notation'][0]}`"></v-list-item-title>
           </v-list-item-content>
         </template>
         <template v-slot:append-outer>

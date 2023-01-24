@@ -193,7 +193,8 @@ const vocabularies = {
       { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeFormatOf', 'skos:prefLabel': { 'eng': 'Is alternative format of', 'deu': 'ist alternatives Format von' }, 'skos:notation': ['isAlternativeFormatOf'] },
       { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeVersionOf', 'skos:prefLabel': { 'eng': 'Is alternative version of', 'deu': 'ist alternative Version von' }, 'skos:notation': ['isAlternativeVersionOf'] },
       { '@id': 'info:fedora/fedora-system:def/relations-external#hasCollectionMember', 'skos:prefLabel': { 'eng': 'Has part', 'deu': 'hat Collection Mitglieder' }, 'skos:notation': ['hasCollectionMember'] },
-      { '@id': 'http://pcdm.org/models#hasMember', 'skos:prefLabel': { 'eng': 'Has member', 'deu': 'hat Mitglieder' }, 'skos:notation': ['hasMember'] }
+      { '@id': 'http://pcdm.org/models#hasMember', 'skos:prefLabel': { 'eng': 'Has member', 'deu': 'hat Mitglieder' }, 'skos:notation': ['hasMember'] },
+      { '@id': 'http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasTrack', 'skos:prefLabel': { 'eng': 'Has track', 'deu': 'hat Track (zb. Untertitel)' }, 'skos:notation': ['hasTrack'] }
     ],
     loaded: true
   },
