@@ -221,7 +221,7 @@ export default {
         params.sort = `pos_in_o_${pid} asc`
       }
       if (process.browser) {
-        this.link = location.protocol + '//' + location.host + location.pathname + '/?' + searchdefarr.join('&')
+        this.link = location.protocol + '//' + location.host + location.pathname + '?' + searchdefarr.join('&')
         window.history.replaceState(null, this.$t('Search results'), this.link)
       }
 
