@@ -38,11 +38,11 @@ export const facetQueries = [
         query: 'resourcetype:book',
         label: 'Book'
       },
-      {
-        id: 'article',
-        query: 'resourcetype:journalarticle',
-        label: 'Article'
-      },
+      // {
+      //   id: 'article',
+      //   query: 'resourcetype:journalarticle',
+      //   label: 'Article'
+      // },
       {
         id: 'text',
         query: 'resourcetype:text',
