@@ -33,7 +33,7 @@
         </template>
         <template v-else>
           <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}<template v-if="getLangAttr(ch)"> ({{getLangAttr(ch)}})</template></v-col>
-          <v-col cols="12" md="10">{{ ch.ui_value }}</v-col>
+          <v-col cols="12" md="10" class="valuefield">{{ ch.ui_value }}</v-col>
         </template>
       </template>
       <template v-else-if="ch.input_type === 'select'">
@@ -62,11 +62,19 @@
           <v-col cols="12" md="10">
             <v-row no-gutters v-for="(entity, i) in getEntities(ch)" :key="'en'+i">
               <v-col :cols="getChildValue(entity, 'date') ? 10 : 12">
-                <span v-if="getChildValue(entity, 'firstname')" class="wiv">{{ getChildValue(entity, 'firstname') }}</span>
-                <span v-if="getChildValue(entity, 'lastname')" class="wiv"><template v-if="getChildValue(entity, 'firstname')">&nbsp;</template>{{ getChildValue(entity, 'lastname') }}</span>
+                <span v-if="getChildValue(entity, 'orcid')">
+                  <a :href="'https://orcid.org/' + getChildValue(entity, 'orcid').replace('https://orcid.org/','')" target="_blank">
+                    <icon width="16px" height="16px" class="mr-1 mb-1" name="orcid"></icon>
+                    <span v-if="getChildValue(entity, 'firstname')" class="wiv">{{ getChildValue(entity, 'firstname') }}</span>
+                    <span v-if="getChildValue(entity, 'lastname')" class="wiv"><template v-if="getChildValue(entity, 'firstname')">&nbsp;</template>{{ getChildValue(entity, 'lastname') }}</span>
+                  </a>
+                </span>
+                <span v-else>
+                  <span v-if="getChildValue(entity, 'firstname')" class="wiv">{{ getChildValue(entity, 'firstname') }}</span>
+                  <span v-if="getChildValue(entity, 'lastname')" class="wiv"><template v-if="getChildValue(entity, 'firstname')">&nbsp;</template>{{ getChildValue(entity, 'lastname') }}</span>
+                </span>
                 <span v-if="getChildValue(entity, 'institution') && (getChildValue(entity, 'firstname') || getChildValue(entity, 'lastname'))" class="grey--text text--darken-3">&nbsp;({{ getChildValue(entity, 'institution') }})</span>
                 <span v-else-if="getChildValue(entity, 'institution')">{{ getChildValue(entity, 'institution') }}</span>
-                <span v-if="getChildValue(entity, 'orcid')"> ORCID: <a :href="'https://orcid.org/' + getChildValue(entity, 'orcid')" target="_blank">{{ getChildValue(entity, 'orcid') }}</a></span>
                 <span v-if="getChildValue(entity, 'viaf')"> VIAF: <a :href="'https://viaf.org/viaf/' + getChildValue(entity, 'viaf')" target="_blank">{{ getChildValue(entity, 'viaf') }}</a></span>
                 <span v-if="getChildValue(entity, 'wdq')"> Wikidata: <a :href="'https://www.wikidata.org/wiki/' + getChildValue(entity, 'wdq')" target="_blank">{{ getChildValue(entity, 'wdq') }}</a></span>
                 <span v-if="getChildValue(entity, 'gnd')"> GND: <a :href="'https://d-nb.info/gnd/' + getChildValue(entity, 'gnd')" target="_blank">{{ getChildValue(entity, 'gnd') }}</a></span>
@@ -163,6 +171,7 @@
 </template>
 
 <script>
+import '@/compiled-icons/orcid'
 import uwmlangs from '../../utils/uwmlangs'
 import lang3to2map from '../../utils/lang3to2map'
 import { validationrules } from '../../mixins/validationrules'
@@ -444,6 +453,10 @@ export default {
 </script>
 
 <style scoped>
+.valuefield {
+  white-space: pre-wrap;
+}
+
 .wrapper {
   width: 100%;
 }

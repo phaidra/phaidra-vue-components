@@ -1406,27 +1406,36 @@ const predicateOrder = [
 
 export default {
   getFields: function () {
-    let fields = []
+    let fieldsNew = []
     for (let f of fields) {
       switch (f.id) {
         case 'sociocultural-category':
         case 'physical-location-select-text-pool':
+        case 'subject':
           break
         default:
-          fields.push(f)
+          fieldsNew.push(f)
           break
       }
     }
-    return fields
+    return fieldsNew
   },
   getEditableFields: function (locale) {
     var editable = fields.filter(item => !(item.readonly))
     // hack: some bug in vuetify autocomplete can't handle the value property
     var newarr = []
     for (var i = 0; i < editable.length; i++) {
-      var field = JSON.parse(JSON.stringify(editable[i]))
-      delete field['value']
-      newarr.push(field)
+      switch (editable[i].id) {
+        case 'sociocultural-category':
+        case 'physical-location-select-text-pool':
+        case 'subject':
+          break
+        default:
+          var field = JSON.parse(JSON.stringify(editable[i]))
+          delete field['value']
+          newarr.push(field)
+          break
+      }
     }
     return newarr
   },

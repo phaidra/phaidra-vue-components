@@ -73,8 +73,8 @@
                 <template slot="item" slot-scope="{ item }">
                   <template v-if="item">
                     <v-list-item-content two-line>
-                      <v-list-item-title>{{ item.value }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
+                      <v-list-item-title>{{ item.uid }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.value }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </template>
                 </template>
@@ -303,7 +303,7 @@ export default {
       }
     },
     userSearch: async function (val) {
-      if (val && (val.length < 4)) {
+      if (val && (val.length < 2)) {
         this.userSearchItems = []
         return
       }
@@ -316,7 +316,8 @@ export default {
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
           params: {
-            q: val
+            q: val,
+            exact: 1
           }
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
