@@ -540,7 +540,7 @@ export default {
                   f.type = obj['@type']
                   f.label = key
                   components.push(f)
-                  if (f.value.startsWith('http://www.geonames.org')) {
+                  if (f.value.startsWith('http://www.geonames.org') || f.value.startsWith('https://www.geonames.org')) {
                     f = fields.getField(fieldidprefix + '-geonames')
                     f.predicate = key
                     f.type = obj['@type']

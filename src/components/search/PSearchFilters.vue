@@ -43,13 +43,44 @@
               </li>
             </ul>
           </li>
-          <li>
+          <li v-if="$store.state.user.token">
             <v-row no-gutters>
               <v-col>
                 <icon @click.native="toggleOwnerFilter()" v-if="showOwnerFilter" name="univie-stop2" class="primary--text"></icon>
                 <icon @click.native="toggleOwnerFilter()" v-if="!showOwnerFilter" name="univie-checkbox-unchecked" class="primary--text"></icon>
                 <span @click="toggleOwnerFilter()" class="facet-label primary--text" :class="{ active: showOwnerFilter }">{{ $t('Owner') }}</span>
               </v-col>
+            </v-row>
+            <v-row no-gutters>
+            <v-btn dark v-if="owner" class="mb-8 mt-4 grey">{{ owner }}<v-icon right @click.native="removeOwnerFilter()">mdi-close</v-icon></v-btn>
+            </v-row>
+            <v-row no-gutters>
+              <v-autocomplete
+                class="mt-2"
+                v-if="showOwnerFilter"
+                v-model="usernameSearchModel"
+                :items="usernameSearchItems.length > 0 ? usernameSearchItems : []"
+                :loading="usernameSearchLoading"
+                :search-input.sync="usernameSearch"
+                :label="$t('Username search')"
+                :placeholder="$t('Start typing to search')"
+                item-value="uid"
+                item-text="uid"
+                prepend-icon="mdi-database-search"
+                hide-no-data
+                return-object
+                clearable
+                @click:clear="usernameSearchItems=[]"
+              >
+                <template slot="item" slot-scope="{ item }">
+                  <template v-if="item">
+                    <v-list-item-content two-line>
+                      <v-list-item-title>{{ item.uid }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.value }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </template>
+                </template>
+              </v-autocomplete>
             </v-row>
             <v-row no-gutters>
               <v-autocomplete
@@ -65,7 +96,6 @@
                 item-text="value"
                 prepend-icon="mdi-database-search"
                 hide-no-data
-                hide-selected
                 return-object
                 clearable
                 @click:clear="userSearchItems=[]"
@@ -73,8 +103,8 @@
                 <template slot="item" slot-scope="{ item }">
                   <template v-if="item">
                     <v-list-item-content two-line>
-                      <v-list-item-title>{{ item.uid }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ item.value }}</v-list-item-subtitle>
+                      <v-list-item-title>{{ item.value }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </template>
                 </template>
@@ -273,6 +303,10 @@ export default {
       userSearch: null,
       userSearchModel: null,
       userSearchItems: [],
+      usernameSearchLoading: false,
+      usernameSearch: null,
+      usernameSearchModel: null,
+      usernameSearchItems: [],
       init: true
     }
   },
@@ -287,7 +321,7 @@ export default {
       this.owner = v
       this.showOwnerFilter = v.length
       if (v.length) {
-        this.userSearch = v
+        this.usernameSearch = v
       }
     },
     persAuthorsProp: function (v) {
@@ -303,13 +337,43 @@ export default {
       }
     },
     userSearch: async function (val) {
-      if (val && (val.length < 2)) {
+      if ((val && (val.length < 2)) || !val) {
         this.userSearchItems = []
         return
       }
-      if (this.userSearchItems.length > 0) return
       if (this.userSearchLoading) return
       this.userSearchLoading = true
+      try {
+        let response = await this.$http.get(this.instance.api + '/directory/user/search', {
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          params: {
+            q: val
+          }
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          this.$store.commit('setAlerts', response.data.alerts)
+        }
+        this.userSearchItems = response.data.accounts ? response.data.accounts : []
+        if (this.init && this.owner) {
+          this.userSearchModel = this.userSearchItems[0]
+          this.init = false
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.userSearchLoading = false
+      }
+    },
+    usernameSearch: async function (val) {
+      if ((val && (val.length < 2)) || !val) {
+        this.usernameSearchItems = []
+        return
+      }
+      if (this.usernameSearchLoading) return
+      this.usernameSearchLoading = true
       try {
         let response = await this.$http.get(this.instance.api + '/directory/user/search', {
           headers: {
@@ -323,19 +387,27 @@ export default {
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
-        this.userSearchItems = response.data.accounts ? response.data.accounts : []
-        if (this.init) {
-          this.userSearchModel = this.userSearchItems[0]
+        this.usernameSearchItems = response.data.accounts ? response.data.accounts : []
+        if (this.init && this.owner) {
+          this.usernameSearchModel = this.usernameSearchItems[0]
           this.init = false
         }
       } catch (error) {
         console.log(error)
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
-        this.userSearchLoading = false
+        this.usernameSearchLoading = false
       }
     },
     userSearchModel: function (v) {
+      if (v) {
+        this.owner = v.uid
+      } else {
+        this.owner = ''
+      }
+      this.search({ owner: this.owner })
+    },
+    usernameSearchModel: function (v) {
       if (v) {
         this.owner = v.uid
       } else {
@@ -359,7 +431,7 @@ export default {
     toggleOwnerFilter: function () {
       this.showOwnerFilter = !this.showOwnerFilter
       if (!this.showOwnerFilter) {
-        this.owner = '' // TODO change '' to null whereever it's used
+        this.owner = ''
         this.search({ owner: this.owner })
       }
     },
@@ -391,6 +463,10 @@ export default {
     removeRoleFilter: function (role) {
       this.roles.splice(this.roles.indexOf(role), 1)
       this.search({ roles: this.roles })
+    },
+    removeOwnerFilter: function (role) {
+      this.owner = ''
+      this.search({ owner: this.owner })
     },
     setRoleFilterValues: function (role) {
       this.roles[this.roles.indexOf(role)].values = role.values
