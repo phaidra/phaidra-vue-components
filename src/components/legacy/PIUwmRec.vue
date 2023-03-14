@@ -379,10 +379,12 @@ export default {
       let arr = []
       for (let term of this.$store.state.vocabulary.vocabularies['lang'].terms) {
         if (lang3to2map[term['@id']]) {
-          arr.push({
-            text: term['skos:prefLabel'][this.$i18n.locale],
-            value: lang3to2map[term['@id']]
-          })
+           if (term['skos:prefLabel'][this.$i18n.locale]) {
+            arr.push({
+              text: term['skos:prefLabel'][this.$i18n.locale],
+              value: lang3to2map[term['@id']]
+            })
+          }
         }
       }
       return arr
