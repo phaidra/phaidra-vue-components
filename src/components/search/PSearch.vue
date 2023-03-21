@@ -127,6 +127,7 @@ export default {
       set (value) {
         this.currentPage = value
         this.search()
+        window.scrollTo(0, 0)
       }
     },
     totalPages: function () {

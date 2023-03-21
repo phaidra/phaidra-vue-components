@@ -187,7 +187,27 @@ export default {
         this.valid = false
         this.validationErrors.push(this.$t('Missing license'))
       }
+
+      if (this.foundUndefinedLanguageRec(this.form)) {
+        this.valid = false
+        this.validationErrors.push(this.$t('Used text fields must define language'))
+      }
       return this.valid
+    },
+    
+    foundUndefinedLanguageRec: function (children) {
+      for (let n of children) {
+        if ((n.input_type === 'input_text_lang') || (n.input_type === 'input_textarea_lang')) {
+          if (n.ui_value && !n.value_lang) {
+            return true
+          }
+        }
+        if (n.children) {
+          if (n.children.length > 0) {
+            return this.foundUndefinedLanguageRec(n.children)
+          }
+        }
+      }
     },
     findNodeRec: function (pathToFind, currPath, children) {
       let ret = null
@@ -213,6 +233,7 @@ export default {
     save: async function () {
       this.validate()
       if (!this.valid) {
+        window.scrollTo(0, 0)
         return
       }
       this.loading = true
