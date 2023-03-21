@@ -331,6 +331,9 @@ export default {
           } else {
             type = 'faculty'
           }
+          if (this.orgunit.parent['@id'] === 'https://pid.phaidra.org/univie-org/V2XH-NPJ9') {
+            type = 'department'
+          }
         } else {
           type = 'faculty'
         }
