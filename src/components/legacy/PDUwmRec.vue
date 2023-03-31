@@ -31,6 +31,10 @@
           <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}</v-col>
           <v-col cols="12" md="10">{{ ch.ui_value | datetime }}</v-col>
         </template>
+        <template v-else-if="ch.xmlname === 'description'">
+          <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}<template v-if="getLangAttr(ch)"> ({{getLangAttr(ch)}})</template></v-col>
+          <v-col cols="12" md="10" class="valuefield" ref="autolink">{{ ch.ui_value }}</v-col>
+        </template>
         <template v-else>
           <v-col cols="12" md="2" class="pdlabel primary--text text-md-right">{{ $t(nodePath(ch)) }}<template v-if="getLangAttr(ch)"> ({{getLangAttr(ch)}})</template></v-col>
           <v-col cols="12" md="10" class="valuefield">{{ ch.ui_value }}</v-col>
@@ -171,6 +175,7 @@
 </template>
 
 <script>
+import Autolinker from 'autolinker'
 import '@/compiled-icons/orcid'
 import uwmlangs from '../../utils/uwmlangs'
 import lang3to2map from '../../utils/lang3to2map'
@@ -223,6 +228,13 @@ export default {
     }
   },
   methods: {
+    link: function (v) {
+      if (typeof v === 'string') {
+        return Autolinker.link(v)
+      } else {
+        return v
+      }
+    },
     hideNodeBorder: function (nodePath) {
       switch (nodePath) {
         case 'uwm_general':
@@ -448,6 +460,20 @@ export default {
         }
       }
     }
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      if (this.$refs && this.$refs.autolink && this.$refs.autolink.length) {
+        this.$refs.autolink[0].innerHTML = Autolinker.link(this.$refs.autolink[0].innerHTML)
+      }
+    })
+  },
+  updated: function () {
+    this.$nextTick(function () {
+      if (this.$refs && this.$refs.autolink && this.$refs.autolink.length) {
+        this.$refs.autolink[0].innerHTML = Autolinker.link(this.$refs.autolink[0].innerHTML)
+      }
+    })
   }
 }
 </script>
