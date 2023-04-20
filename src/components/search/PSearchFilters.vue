@@ -320,7 +320,7 @@ export default {
     ownerProp: async function (v) {
       this.owner = v
       this.showOwnerFilter = v.length
-      if (v.length) {
+      if (v.length && this.$store.state.user.token) {
         this.usernameSearch = v
       }
     },

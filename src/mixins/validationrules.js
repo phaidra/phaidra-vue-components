@@ -55,6 +55,16 @@ export const validationrules = {
           return 'noop'
       }
     },
+    generateOrcidCheckDigit: function (baseDigits) {
+      let total = 0
+      for (let i = 0; i < baseDigits.length; i++) {
+        const digit = parseInt(baseDigits.charAt(i), 10)
+        total = (total + digit) * 2
+      }
+      const remainder = total % 11
+      const result = (12 - remainder) % 11
+      return result === 10 ? 'X' : result
+    },
     isValidHandle: function (str) {
       return true
     },
@@ -65,8 +75,16 @@ export const validationrules = {
       return true
     },
     isValidORCID: function (str) {
-      var regexORCID = /^0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX]$/
-      return regexORCID.test(str)
+      var regexORCID = /^(\d{4})-(\d{4})-(\d{4})-(\d{3}[0-9X])$/
+      console.log('orcid format: ' + (regexORCID.test(str) ? 'ok' : 'wrong'))
+      const lastDigit = str.slice(-1)
+      const baseDigits = str.slice(0, -1).replace(/\D/g, '')
+      if (baseDigits.length !== 15) {
+        return false
+      }
+      const generatedCheckDigit = this.generateOrcidCheckDigit(baseDigits).toString()
+      console.log('orcid check digit: ' + (generatedCheckDigit === lastDigit ? 'ok' : 'wrong'))
+      return regexORCID.test(str) && (generatedCheckDigit === lastDigit)
     },
     isValidGND: function (str) {
       return true
