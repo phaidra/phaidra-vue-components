@@ -577,7 +577,7 @@ const vocabularies = {
       { '@id': 'role:edt', 'skos:prefLabel': { 'eng': 'Editor', 'deu': 'Herausgeber*in', 'ita': 'Curatore' } },
       { '@id': 'role:fmd', 'skos:prefLabel': { 'eng': 'Film director', 'deu': 'Filmregisseur*in', 'ita': 'Film director' } },
       { '@id': 'role:founder', 'skos:prefLabel': { 'eng': 'Founder', 'deu': 'Gründer*in', 'ita': 'Founder' } },
-      { '@id': 'role:fnd', 'skos:prefLabel': { 'eng': 'Funder', 'deu': 'Geldgäber*in', 'ita': 'Funder' } },
+      { '@id': 'role:fnd', 'skos:prefLabel': { 'eng': 'Funder', 'deu': 'Geldgeber*in', 'ita': 'Funder' } },
       { '@id': 'role:graphicdesigner', 'skos:prefLabel': { 'eng': 'Graphic Designer', 'deu': 'Grafikdesigner*in', 'ita': 'Grafico' } },
       { '@id': 'role:initiator', 'skos:prefLabel': { 'eng': 'Initiator', 'deu': 'Initiator*in', 'ita': 'Iniziatore' } },
       { '@id': 'role:interpreter', 'skos:prefLabel': { 'eng': 'Interpreter', 'deu': 'Dolmetscher*in', 'ita': 'Interprete' } },
