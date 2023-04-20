@@ -395,7 +395,7 @@ const vocabularies = {
       { '@id': 'role:frg', 'skos:prefLabel': { 'eng': 'Forger', 'deu': 'Fälscher*in', 'ita': 'Forger' } },
       { '@id': 'role:fmo', 'skos:prefLabel': { 'eng': 'Former owner', 'deu': 'Ehemalige/r Eigentümer*in', 'ita': 'Precedente proprietario' } },
       { '@id': 'role:founder', 'skos:prefLabel': { 'eng': 'Founder', 'deu': 'Gründer*in', 'ita': 'Founder' } },
-      { '@id': 'role:fnd', 'skos:prefLabel': { 'eng': 'Funder', 'deu': 'Geldgäber*in', 'ita': 'Funder' } },
+      { '@id': 'role:fnd', 'skos:prefLabel': { 'eng': 'Funder', 'deu': 'Geldgeber*in', 'ita': 'Funder' } },
       { '@id': 'role:gis', 'skos:prefLabel': { 'eng': 'Geographic information specialist', 'deu': 'Spezialist*in für geografische Informationen', 'ita': 'Field director' } },
       { '@id': 'role:graphicdesigner', 'skos:prefLabel': { 'eng': 'Graphic Designer', 'deu': 'Grafikdesigner*in', 'ita': 'Grafico' } },
       { '@id': 'role:hnr', 'skos:prefLabel': { 'eng': 'Honoree', 'deu': 'Geehrte/r, Jubilar*in', 'ita': 'Onorato' } },
