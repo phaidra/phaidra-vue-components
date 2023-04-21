@@ -80,13 +80,13 @@ export default {
           this.getOefosPath(term, this.vocabularies['oefos'].tree, pathArr)
           for (let i = pathArr.length; i--; i === 0) {
             pathLabels.push(pathArr[i]['skos:notation'][0] + '. ' + pathArr[i]['skos:prefLabel'][this.$i18n.locale])
-            pathLabelsDeu.push(pathArr[i]['skos:prefLabel']['deu'])
-            pathLabelsEng.push(pathArr[i]['skos:prefLabel']['eng'])
+            pathLabelsDeu.push(pathArr[i]['skos:prefLabel']['deu'] + '(' + pathArr[i]['skos:notation'][0] + ')')
+            pathLabelsEng.push(pathArr[i]['skos:prefLabel']['eng'] + '(' + pathArr[i]['skos:notation'][0] + ')')
           }
           this.path = pathLabels.join(' -- ')
         }
         this.$emit('input', term['@id'])
-        this.$emit('resolve', { '@id': term['@id'], 'skos:prefLabel': term['skos:prefLabel'], 'rdfs:label': { 'deu': pathLabelsDeu.join(' -- '), 'eng': pathLabelsEng.join(' -- ') }, 'skos:notation': term['skos:notation'] })
+        this.$emit('resolve', { '@id': term['@id'], 'skos:prefLabel': term['skos:prefLabel'], 'rdfs:label': { 'deu': 'ÖFOS 2012 -- ' + pathLabelsDeu.join(' -- '), 'eng': 'ÖFOS 2012 -- ' + pathLabelsEng.join(' -- ') }, 'skos:notation': term['skos:notation'] })
       } else {
         this.$emit('input', null)
       }
