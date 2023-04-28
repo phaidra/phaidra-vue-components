@@ -83,6 +83,7 @@ import PFeedback from './utils/PFeedback'
 import PExpandText from './utils/PExpandText'
 import PMetadataFieldsHelp from './info/PMetadataFieldsHelp'
 import PHelp from './info/PHelp'
+import CollectionDialog from './select/CollectionDialog'
 
 const Components = {
   PImg,
@@ -169,7 +170,8 @@ const Components = {
   PFeedback,
   PHelp,
   PMetadataFieldsHelp,
-  PExpandText
+  PExpandText,
+  CollectionDialog
 }
 
 export default {
