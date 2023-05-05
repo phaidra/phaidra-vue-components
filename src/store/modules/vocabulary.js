@@ -502,7 +502,7 @@ const vocabularies = {
       { '@id': 'role:sgn', 'skos:prefLabel': { 'eng': 'Signer', 'deu': 'Unterzeichner*in', 'ita': 'Signer' } },
       { '@id': 'role:sng', 'skos:prefLabel': { 'eng': 'Singer', 'deu': 'Sänger*in', 'ita': 'Cantante' } },
       { '@id': 'role:sds', 'skos:prefLabel': { 'eng': 'Sound designer', 'deu': 'Sounddesigner*in', 'ita': 'Progettista del suono' } },
-      { '@id': 'role:spk', 'skos:prefLabel': { 'eng': 'Speaker', 'deu': 'Sprecher*in', 'ita': 'Speaker' } },
+      { '@id': 'role:spk', 'skos:prefLabel': { 'eng': 'Speaker / Lecturer', 'deu': 'Sprecher*in / Vortragende/r', 'ita': 'Speaker' } },
       { '@id': 'role:spn', 'skos:prefLabel': { 'eng': 'Sponsor', 'deu': 'Sponsor', 'ita': 'Sponsor' } },
       { '@id': 'role:sgd', 'skos:prefLabel': { 'eng': 'Stage director', 'deu': 'Theaterregisseur*in', 'ita': 'Stage director' } },
       { '@id': 'role:stm', 'skos:prefLabel': { 'eng': 'Stage manager', 'deu': 'Inspizient*in / Bühnenmeister*in', 'ita': 'Stage manager' } },
