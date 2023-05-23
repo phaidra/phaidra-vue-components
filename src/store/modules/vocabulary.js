@@ -568,7 +568,6 @@ const vocabularies = {
       { '@id': 'role:con', 'skos:prefLabel': { 'eng': 'Conservator', 'deu': 'Konservator*in', 'ita': 'Conservator' } },
       { '@id': 'role:dnc', 'skos:prefLabel': { 'eng': 'Dancer', 'deu': 'Tänzer*in', 'ita': 'Dancer' } },
       { '@id': 'role:dtc', 'skos:prefLabel': { 'eng': 'Data contributor', 'deu': 'Datenlieferant*in', 'ita': 'Data contributor' } },
-      { '@id': 'role:datasupplier', 'skos:prefLabel': { 'eng': 'Data Supplier', 'deu': 'Datenlieferant*in', 'ita': 'Fornitore dei dati' } },
       { '@id': 'role:dgg', 'skos:prefLabel': { 'eng': 'Degree granting institution', 'deu': 'Verleihende Institution des akademischen Abschlusses', 'ita': 'Istituzione che rilascia il titolo accademico' } },
       { '@id': 'role:dgs', 'skos:prefLabel': { 'eng': 'Degree supervisor', 'deu': 'Betreuer*in der Hochschulschrift', 'ita': 'Degree supervisor' } },
       { '@id': 'role:dsr', 'skos:prefLabel': { 'eng': 'Designer', 'deu': 'Designer*in', 'ita': 'Designer' } },
