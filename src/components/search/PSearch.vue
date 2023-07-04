@@ -7,7 +7,6 @@
               :placeholder="$t('SEARCH_PLACEHOLDER')"
               name="autocomplete"
               :initValue="q"
-              :suggester="'titlesuggester'"
               :customParams="{ token: 'dev' }"
               :classes="{ input: 'form-control', wrapper: 'input-wrapper'}"
               :onSelect="handleSelect"
