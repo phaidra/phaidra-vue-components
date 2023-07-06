@@ -133,6 +133,49 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-card>
+              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular u:account') }}</v-card-title>
+              <v-divider></v-divider>
+              <v-card-text class="mt-4">
+                <v-container fluid>
+                  <v-row>
+                    <v-col cols="8">
+                      <v-autocomplete
+                        v-model="userSearchExactModel"
+                        :items="userSearchExactItems.length > 0 ? userSearchExactItems : []"
+                        :loading="userSearchExactLoading"
+                        :search-input.sync="userSearchExact"
+                        :label="$t('Username search')"
+                        :placeholder="$t('Start typing to search')"
+                        item-value="uid"
+                        item-text="uid"
+                        prepend-icon="mdi-database-search"
+                        hide-no-data
+                        hide-selected
+                        return-object
+                        clearable
+                        @click:clear="userSearchExactItems=[]"
+                      >
+                        <template slot="item" slot-scope="{ item }">
+                          <template v-if="item">
+                            <v-list-item-content two-line>
+                              <v-list-item-title>{{ item.uid }}</v-list-item-title>
+                            </v-list-item-content>
+                          </template>
+                        </template>
+                      </v-autocomplete>
+                    </v-col>
+                    <v-col cols="1" class="pt-6">
+                      <v-btn class="primary" :disabled="loading || userSearchExactLoading" @click="addUserExact()">{{ $t('Apply') }}</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
         <v-row v-if="enableGroups">
           <v-col cols="12">
             <v-card>
@@ -217,6 +260,7 @@ export default {
     return {
       loading: false,
       userSearchLoading: false,
+      userSearchExactLoading: false,
       groupsLoading: false,
       groupsHeaders: [
         { text: 'Name', align: 'left', value: 'description', sortable: false },
@@ -237,7 +281,10 @@ export default {
       orgunit: null,
       userSearch: null,
       userSearchModel: null,
-      userSearchItems: []
+      userSearchItems: [],
+      userSearchExact: null,
+      userSearchExactModel: null,
+      userSearchExactItems: []
     }
   },
   watch: {
@@ -253,7 +300,6 @@ export default {
         this.userSearchItems = []
         return
       }
-      if (this.userSearchItems.length > 0) return
       if (this.userSearchLoading) return
       this.userSearchLoading = true
       try {
@@ -276,6 +322,36 @@ export default {
         this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
       } finally {
         this.userSearchLoading = false
+      }
+    },
+    userSearchExact: async function (val) {
+      if (val && (val.length < 2)) {
+        this.userSearchExactItems = []
+        return
+      }
+      if (this.userSearchExactLoading) return
+      this.userSearchExactLoading = true
+      try {
+        let response = await this.$http.get(this.instance.api + '/directory/user/search', {
+          headers: {
+            'X-XSRF-TOKEN': this.$store.state.user.token
+          },
+          params: {
+            q: val,
+            exact: 1
+          }
+        })
+        if (response.data) {
+          if (response.data.alerts && response.data.alerts.length > 0) {
+            this.$store.commit('setAlerts', response.data.alerts)
+          }
+          this.userSearchExactItems = response.data.accounts ? response.data.accounts : []
+        }
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+      } finally {
+        this.userSearchExactLoading = false
       }
     }
   },
@@ -314,6 +390,12 @@ export default {
     addUser: function () {
       if (this.userSearchModel) {
         this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
+        this.saveRights()
+      }
+    },
+    addUserExact: function () {
+      if (this.userSearchExactModel) {
+        this.rightsArray.push({ type: 'username', notation: this.userSearchExactModel.uid, description: this.userSearchExactModel.value, expires: null })
         this.saveRights()
       }
     },
