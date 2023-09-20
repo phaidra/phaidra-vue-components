@@ -303,7 +303,7 @@ export default {
       if (this.userSearchLoading) return
       this.userSearchLoading = true
       try {
-        let response = await this.$http.get(this.instance.api + '/directory/user/search', {
+        let response = await this.$axios.get('/directory/user/search', {
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
@@ -332,7 +332,7 @@ export default {
       if (this.userSearchExactLoading) return
       this.userSearchExactLoading = true
       try {
-        let response = await this.$http.get(this.instance.api + '/directory/user/search', {
+        let response = await this.$axios.get('/directory/user/search', {
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           },
@@ -431,7 +431,7 @@ export default {
     getNameFromUsername: async function (username) {
       this.loading = true
       try {
-        let response = await this.$http.get(this.instance.api + '/directory/user/' + username + '/name', {
+        let response = await this.$axios.get('/directory/user/' + username + '/name', {
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
@@ -450,7 +450,7 @@ export default {
     getGroupName: async function (groupid) {
       this.loading = true
       try {
-        let response = await this.$http.get(this.instance.api + '/group/' + groupid, {
+        let response = await this.$axios.get('/group/' + groupid, {
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
@@ -485,9 +485,9 @@ export default {
         this.rightsArray = []
         this.rightsjson = {}
         try {
-          let response = await this.$http.request({
+          let response = await this.$axios.request({
             method: 'POST',
-            url: this.instance.api + '/object/' + this.pid + '/rights',
+            url: '/object/' + this.pid + '/rights',
             data: httpFormData,
             headers: {
               'X-XSRF-TOKEN': this.$store.state.user.token,
@@ -593,9 +593,9 @@ export default {
     loadGroups: async function () {
       this.groupsLoading = true
       try {
-        let response = await this.$http.request({
+        let response = await this.$axios.request({
           method: 'GET',
-          url: this.instance.api + '/groups',
+          url: '/groups',
           headers: {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 import vocabulary from './modules/vocabulary'
 
 Vue.use(Vuex)
@@ -51,22 +50,22 @@ export default new Vuex.Store({
     loading: false
   },
   mutations: {
-    setLoading (state, loading) {
+    setLoading(state, loading) {
       state.loading = loading
     },
-    setAlerts (state, alerts) {
+    setAlerts(state, alerts) {
       state.alerts = alerts
     },
-    clearAlert (state, alert) {
+    clearAlert(state, alert) {
       state.alerts = state.alerts.filter(e => e !== alert)
     },
-    clearUser (state) {
+    clearUser(state) {
       Vue.set(state.user, 'token', '')
     },
-    setToken (state, token) {
+    setToken(state, token) {
       Vue.set(state.user, 'token', token)
     },
-    setLoginData (state, logindata) {
+    setLoginData(state, logindata) {
       Vue.set(state.user, 'username', logindata.username)
       Vue.set(state.user, 'firstname', logindata.firstname)
       Vue.set(state.user, 'lastname', logindata.lastname)
@@ -74,34 +73,34 @@ export default new Vuex.Store({
       Vue.set(state.user, 'org_units_l1', logindata.org_units_l1)
       Vue.set(state.user, 'org_units_l2', logindata.org_units_l2)
     },
-    initStore (state) {
+    initStore(state) {
       Vue.set(state.user, 'token', '')
       state.alerts = []
     },
-    setInstanceApi (state, api) {
+    setInstanceApi(state, api) {
       Vue.set(state.instanceconfig, 'api', api)
     },
-    setVocServer (state, vocserver) {
+    setVocServer(state, vocserver) {
       Vue.set(state.appconfig.apis, 'vocserver', vocserver)
     },
-    setInstanceSolr (state, solr) {
+    setInstanceSolr(state, solr) {
       Vue.set(state.instanceconfig, 'solr', solr)
     },
-    setInstancePhaidra (state, baseurl) {
+    setInstancePhaidra(state, baseurl) {
       Vue.set(state.instanceconfig, 'baseurl', baseurl)
     },
-    setSuggester (state, data) {
+    setSuggester(state, data) {
       Vue.set(state.appconfig.suggesters, data.suggester, data.url)
     }
   },
   actions: {
 
-    async login ({ commit, state }, credentials) {
+    async login({ commit, state }, credentials) {
       commit('initStore')
       try {
-        let response = await axios.request({
+        let response = await this.$axios.request({
           method: 'GET',
-          url: state.instanceconfig.api + '/signin',
+          url: '/signin',
           headers: {
             'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password)
           }
@@ -118,11 +117,11 @@ export default new Vuex.Store({
         commit('setAlerts', [{ type: 'danger', msg: error }])
       }
     },
-    async logout ({ commit, state }) {
+    async logout({ commit, state }) {
       try {
-        let response = await axios.request({
+        let response = await this.$axios.request({
           method: 'GET',
-          url: state.instanceconfig.api + '/signout',
+          url: '/signout',
           headers: {
             'X-XSRF-TOKEN': state.token
           }
@@ -138,9 +137,9 @@ export default new Vuex.Store({
         commit('initStore')
       }
     },
-    async getLoginData ({ commit, dispatch, state }) {
+    async getLoginData({ commit, dispatch, state }) {
       try {
-        let response = await axios.get(state.instanceconfig.api + '/directory/user/data', {
+        let response = await this.$axios.get('/directory/user/data', {
           headers: {
             'X-XSRF-TOKEN': state.user.token
           }
