@@ -106,11 +106,11 @@ const fields = [
   },
   {
     id: 'access-right',
-    fieldname: 'Access rights',
+    fieldname: 'Access',
     predicate: 'dcterms:accessRights',
     component: 'p-select',
     vocabulary: 'accessright',
-    label: 'Access right',
+    label: 'Access',
     showValueDefinition: false,
     value: '',
     'skos:prefLabel': [],
