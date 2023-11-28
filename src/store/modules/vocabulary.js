@@ -1866,7 +1866,8 @@ const actions = {
       var raw = 'PREFIX v: <' + rootState.appconfig.apis.vocserver.ns + '> PREFIX : <' + rootState.appconfig.apis.vocserver.ns + 'schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?id ?label ?exp WHERE { graph ?g { ?id v:memberOf  v:' + vocabId + ' . ?id skos:prefLabel ?label . OPTIONAL { ?id :expires ?exp . } } }'
       let response = await this.$axios.request({
         method: 'POST',
-        url: rootState.appconfig.apis.vocserver.url + rootState.appconfig.apis.vocserver.dataset + '/query',
+        baseURL: rootState.appconfig.apis.vocserver.url + rootState.appconfig.apis.vocserver.dataset,
+        url: '/query',
         headers: { 'Content-Type': 'application/sparql-query' },
         data: raw
       })
