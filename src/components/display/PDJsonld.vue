@@ -94,11 +94,11 @@
         </template>
 
         <template v-else-if="p==='dcterms:available'" slot="dcterms:available">
-          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'available'+j" v-bind.sync="displayProperties"></p-d-value>
+          <p-d-date :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'available'+j" v-bind.sync="displayProperties"></p-d-date>
         </template>
 
         <template v-else-if="p==='dcterms:issued'" slot="dcterms:issued">
-          <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'issued'+j" v-bind.sync="displayProperties"></p-d-value>
+          <p-d-date :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'issued'+j" v-bind.sync="displayProperties"></p-d-date>
         </template>
 
         <template v-else-if="p==='dcterms:valid'" slot="dcterms:valid">
@@ -370,6 +370,7 @@ import PDSkosPreflabel from './PDSkosPreflabel'
 import PDKeyword from './PDKeyword'
 import PDLangValue from './PDLangValue'
 import PDValue from './PDValue'
+import PDDate from './PDDate'
 import PDDimension from './PDDimension'
 import PDDuration from './PDDuration'
 import PDGeoreference from './PDGeoreference'
@@ -426,6 +427,7 @@ export default {
     PDLangValue,
     PDLicense,
     PDValue,
+    PDDate,
     PDDimension,
     PDDuration,
     PDGeoreference,
