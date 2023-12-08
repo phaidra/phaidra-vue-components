@@ -350,6 +350,16 @@
                             ></p-i-subject-oefos>
                           </template>
 
+                          <template v-else-if="f.component === 'p-subject-thema'">
+                            <p-i-subject-thema
+                              v-bind.sync="f"
+                              v-on:input="f.value=$event"
+                              v-on:resolve="updateVocSubject(f, $event)"
+                              v-on:add="addField(s.fields, f)"
+                              v-on:remove="removeField(s.fields, f)"
+                            ></p-i-subject-thema>
+                          </template>
+
                           <template v-else-if="f.component === 'p-spatial-geonames'">
                             <p-i-spatial-geonames
                               v-bind.sync="f"

@@ -4,6 +4,7 @@ import lang3to2map from '../../utils/lang3to2map'
 import orgunits from '../../utils/orgunits'
 import fieldsLib from '../../utils/fields'
 import oefos from '../../utils/oefos'
+import thema from '../../utils/thema'
 import i18n from '../../i18n/i18n'
 
 const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
@@ -235,7 +236,7 @@ const vocabularies = {
       { '@id': 'ids:hdl', 'skos:prefLabel': { 'eng': 'Handle' }, 'skos:example': '11353/10.761200' },
       { '@id': 'ids:urn', 'skos:prefLabel': { 'eng': 'URN' }, 'skos:example': 'urn:nbn:at:at-ubw-21405.98566.193074-2' },
       { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI' }, 'skos:example': 'https://example.com/path/resource.txt' },
-      // { '@id': 'ids:isbn', 'skos:prefLabel': { 'eng': 'ISBN' }, 'skos:example': '978-3-16-148410-0' },
+      { '@id': 'ids:isbn', 'skos:prefLabel': { 'eng': 'ISBN' }, 'skos:example': '978-3-16-148410-0' },
       { '@id': 'ids:gnd', 'skos:prefLabel': { 'eng': 'GND' }, 'skos:example': '118635808' },
       { '@id': 'phaidra:acnumber', 'skos:prefLabel': { 'eng': 'AC number', 'deu': 'AC Nummer' }, 'skos:example': 'AC13399179' }
     ],
@@ -1628,6 +1629,12 @@ const vocabularies = {
     tree: [],
     loaded: false,
     sorted: ''
+  },
+  'thema': {
+    terms: [],
+    tree: [],
+    loaded: false,
+    sorted: ''
   }
 }
 
@@ -1723,6 +1730,13 @@ const mutations = {
         oefos.sortOefosTree(state.vocabularies['oefos']['tree'], locale)
       }
       state.vocabularies['oefos'].sorted = locale
+    }
+  },
+  setThema(state, data) {
+    if (state.vocabularies['thema']['loaded'] === false) {
+      state.vocabularies['thema']['tree'] = data.tree
+      state.vocabularies['thema']['terms'] = data.terms
+      state.vocabularies['thema']['loaded'] = true
     }
   },
   sortFields(state, locale) {
@@ -1856,6 +1870,30 @@ const actions = {
       }
     }
   },
+  async loadThema({ commit, rootState, state }, locale) {
+    if (state.vocabularies['thema']['loaded'] === false) {
+      try {
+        let response = await this.$axios.request({
+          method: 'GET',
+          url: '/vocabulary?uri=thema'
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          commit('setAlerts', response.data.alerts)
+        }
+        let terms = []
+        thema.getThemaTerms(terms, response.data.vocabulary, null)
+        commit('setThema', { tree: response.data.vocabulary, terms: terms, locale: locale })
+        console.log(terms)
+      } catch (error) {
+        console.log(error)
+        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch thema: ' + error }])
+      }
+    } else {
+      if (state.vocabularies['thma']['locale'] !== locale) {
+        commit('sortThema', locale)
+      }
+    }
+  },
   async loadVocabulary({ commit, state, rootState }, vocabId) {
     if (state.vocabularies[vocabId]) {
       if (state.vocabularies[vocabId].loaded) {
@@ -1866,8 +1904,7 @@ const actions = {
       var raw = 'PREFIX v: <' + rootState.appconfig.apis.vocserver.ns + '> PREFIX : <' + rootState.appconfig.apis.vocserver.ns + 'schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?id ?label ?exp WHERE { graph ?g { ?id v:memberOf  v:' + vocabId + ' . ?id skos:prefLabel ?label . OPTIONAL { ?id :expires ?exp . } } }'
       let response = await this.$axios.request({
         method: 'POST',
-        baseURL: rootState.appconfig.apis.vocserver.url + rootState.appconfig.apis.vocserver.dataset,
-        url: '/query',
+        url: rootState.appconfig.apis.vocserver.url + rootState.appconfig.apis.vocserver.dataset + '/query',
         headers: { 'Content-Type': 'application/sparql-query' },
         data: raw
       })

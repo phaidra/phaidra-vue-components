@@ -207,6 +207,12 @@ export default {
                       newField.label = 'Subject (ÖFOS)'
                       components.push(newField)
                     }
+                    if (v.startsWith('thema')) {
+                      f.label = 'Subject (Thema)'
+                      newField = fields.getField('thema-subject')
+                      newField.label = 'Subject (Thema)'
+                      components.push(newField)
+                    }
                     if (v.startsWith('http://d-nb.info/gnd')) {
                       f.label = 'Subject (GND)'
                       newField = fields.getField('gnd-subject')
