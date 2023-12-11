@@ -20,6 +20,10 @@ export default {
       if (isNaN(timestamp)) {
         return val
       }
+      if(val.length <= 7){
+        // Return the existing value for the format YYYY or YYYY-MM
+        return val
+      }
       if(that.$i18n.locale === 'eng') {
         val = moment(new Date(val)).format('YYYY-MM-DD')
       } else {

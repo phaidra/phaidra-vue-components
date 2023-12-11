@@ -496,6 +496,9 @@ export default {
     }
   },
   mounted () {
+    if (this.$router.currentRoute.query.collection) {
+      this.resetFilters()
+    }
     // for (let role in this.marcRoles) {
     //   this.marcRolesArray.push({ value: role, text: this.$t(this.marcRoles[role]) })
     // }
