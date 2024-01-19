@@ -360,6 +360,16 @@
                             ></p-i-subject-thema>
                           </template>
 
+                          <template v-else-if="f.component === 'p-subject-bic'">
+                            <p-i-subject-bic
+                              v-bind.sync="f"
+                              v-on:input="f.value=$event"
+                              v-on:resolve="updateVocSubject(f, $event)"
+                              v-on:add="addField(s.fields, f)"
+                              v-on:remove="removeField(s.fields, f)"
+                            ></p-i-subject-bic>
+                          </template>
+
                           <template v-else-if="f.component === 'p-spatial-geonames'">
                             <p-i-spatial-geonames
                               v-bind.sync="f"

@@ -474,6 +474,20 @@ const fields = [
     definition: 'The topic of the resource, represented using a controlled vocabulary.'
   },
   {
+    id: 'bic-subject',
+    fieldname: 'Subject (BIC)',
+    predicate: 'dcterms:subject',
+    type: 'skos:Concept',
+    component: 'p-subject-bic',
+    multiplicable: true,
+    label: 'Subject (BIC)',
+    value: '',
+    'rdfs:label': [],
+    'skos:prefLabel': [],
+    loadedpreflabel: '',
+    definition: 'The topic of the resource, represented using a controlled vocabulary.'
+  },
+  {
     id: 'sociocultural-category',
     fieldname: 'Soziokulturelle Kategorie',
     predicate: 'dcterms:subject',

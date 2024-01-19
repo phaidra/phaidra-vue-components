@@ -47,6 +47,7 @@ import PISubjectGnd from './input/PISubjectGnd.vue'
 import PISubjectBk from './input/PISubjectBk.vue'
 import PISubjectOefos from './input/PISubjectOefos.vue'
 import PISubjectThema from './input/PISubjectThema.vue'
+import PISubjectBic from './input/PISubjectBic.vue'
 import PISpatialGeonames from './input/PISpatialGeonames.vue'
 import PISpatialText from './input/PISpatialText.vue'
 import PIProject from './input/PIProject.vue'
@@ -136,6 +137,7 @@ const Components = {
   PISubjectBk,
   PISubjectOefos,
   PISubjectThema,
+  PISubjectBic,
   PISpatialGeonames,
   PISpatialText,
   PIProject,

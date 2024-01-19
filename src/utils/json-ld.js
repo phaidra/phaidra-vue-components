@@ -213,6 +213,12 @@ export default {
                       newField.label = 'Subject (Thema)'
                       components.push(newField)
                     }
+                    if (v.startsWith('bic')) {
+                      f.label = 'Subject (BIC)'
+                      newField = fields.getField('bic-subject')
+                      newField.label = 'Subject (BIC)'
+                      components.push(newField)
+                    }
                     if (v.startsWith('http://d-nb.info/gnd')) {
                       f.label = 'Subject (GND)'
                       newField = fields.getField('gnd-subject')

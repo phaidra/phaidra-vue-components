@@ -5,6 +5,7 @@ import orgunits from '../../utils/orgunits'
 import fieldsLib from '../../utils/fields'
 import oefos from '../../utils/oefos'
 import thema from '../../utils/thema'
+import bic from '../../utils/bic'
 import i18n from '../../i18n/i18n'
 
 const lang2to3map = Object.keys(lang3to2map).reduce((ret, key) => {
@@ -1635,6 +1636,12 @@ const vocabularies = {
     tree: [],
     loaded: false,
     sorted: ''
+  },
+  'bic': {
+    terms: [],
+    tree: [],
+    loaded: false,
+    sorted: ''
   }
 }
 
@@ -1737,6 +1744,13 @@ const mutations = {
       state.vocabularies['thema']['tree'] = data.tree
       state.vocabularies['thema']['terms'] = data.terms
       state.vocabularies['thema']['loaded'] = true
+    }
+  },
+  setBic(state, data) {
+    if (state.vocabularies['bic']['loaded'] === false) {
+      state.vocabularies['bic']['tree'] = data.tree
+      state.vocabularies['bic']['terms'] = data.terms
+      state.vocabularies['bic']['loaded'] = true
     }
   },
   sortFields(state, locale) {
@@ -1888,9 +1902,25 @@ const actions = {
         console.log(error)
         commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch thema: ' + error }])
       }
-    } else {
-      if (state.vocabularies['thma']['locale'] !== locale) {
-        commit('sortThema', locale)
+    }
+  },
+  async loadBic({ commit, rootState, state }, locale) {
+    if (state.vocabularies['bic']['loaded'] === false) {
+      try {
+        let response = await this.$axios.request({
+          method: 'GET',
+          url: '/vocabulary?uri=bic'
+        })
+        if (response.data.alerts && response.data.alerts.length > 0) {
+          commit('setAlerts', response.data.alerts)
+        }
+        let terms = []
+        bic.getBicTerms(terms, response.data.vocabulary, null)
+        commit('setBic', { tree: response.data.vocabulary, terms: terms, locale: locale })
+        console.log(terms)
+      } catch (error) {
+        console.log(error)
+        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch BIC: ' + error }])
       }
     }
   },

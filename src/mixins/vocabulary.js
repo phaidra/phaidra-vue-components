@@ -148,6 +148,27 @@ export const vocabulary = {
           }
         }
       }
+    },
+    getBicPath: function (term, children, path) {
+      if (term) {
+        for (let t of children) {
+          if (t['@id'] === term['@id']) {
+            path.push(t)
+            return true
+          } else {
+            if (t.hasOwnProperty('children')) {
+              if (Array.isArray(t.children)) {
+                if (t.children.length > 0) {
+                  if (this.getBicPath(term, t.children, path)) {
+                    path.push(t)
+                    return true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
