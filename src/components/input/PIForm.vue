@@ -1654,16 +1654,16 @@ export default {
     containedInRoleInput: function (f, event) {
       for (let r of f.roles) {
         if (r.id === event.role.id) {
-          if (event.roleTerm) {
+          if (event.hasOwnProperty('roleTerm')) {
             r.role = event.roleTerm['@id']
           }
-          if (event.name) {
+          if (event.hasOwnProperty('name')) {
             r.name = event.name
           }
-          if (event.firstname) {
+          if (event.hasOwnProperty('firstname')) {
             r.firstname = event.firstname
           }
-          if (event.lastname) {
+          if (event.hasOwnProperty('lastname')) {
             r.lastname = event.lastname
           }
         }
@@ -1672,28 +1672,28 @@ export default {
     containedInSeriesInput: function (f, event) {
       for (let s of f.series) {
         if (s.id === event.series.id) {
-          if (event.seriesTitleLanguageTerm) {
+          if (event.hasOwnProperty('seriesTitleLanguageTerm')) {
             s.seriesTitleLanguage = event.seriesTitleLanguageTerm['@id']
           }
-          if (event.seriesTitle) {
+          if (event.hasOwnProperty('seriesTitle')) {
             s.seriesTitle = event.seriesTitle
           }
-          if (event.seriesVolume) {
+          if (event.hasOwnProperty('seriesVolume')) {
             s.seriesVolume = event.seriesVolume
           }
-          if (event.seriesIssue) {
+          if (event.hasOwnProperty('seriesIssue')) {
             s.seriesIssue = event.seriesIssue
           }
-          if (event.seriesIssued) {
+          if (event.hasOwnProperty('seriesIssued')) {
             s.seriesIssued = event.seriesIssued
           }
-          if (event.seriesIssn) {
+          if (event.hasOwnProperty('seriesIssn')) {
             s.seriesIssn = event.seriesIssn
           }
-          if (event.seriesIdentifier) {
+          if (event.hasOwnProperty('seriesIdentifier')) {
             s.seriesIdentifier = event.seriesIdentifier
           }
-          if (event.seriesIdentifierType) {
+          if (event.hasOwnProperty('seriesIdentifierType')) {
             s.seriesIdentifierType = event.seriesIdentifierType
           }
         }
