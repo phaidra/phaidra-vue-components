@@ -780,9 +780,9 @@ export default {
   'frapo:hasFundingAgency': 'Funding',
   'rdax:P00009': 'Zuordnung',
   'bf:provisionActivity': 'Veröffentlichung',
-  'cito:cites': 'Referenz',
-  'cito:citesAsDataSource': 'Dataset Referenz',
-  'cito:isCitedBy': 'Is cited by',
+  'cito:cites': 'Verweist auf',
+  'cito:citesAsDataSource': 'Verweist auf Dataset',
+  'cito:isCitedBy': 'Zitiert von',
   'rdfs:seeAlso': 'Siehe auch',
 
   'dce:subject': 'Stichwort',
