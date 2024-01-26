@@ -277,6 +277,7 @@ const vocabularies = {
   'citationpredicate': {
     terms: [
       { '@id': 'cito:cites', 'skos:prefLabel': { 'eng': 'Cites', 'deu': 'Verweist auf' } },
+      { '@id': 'cito:citesAsDataSource ', 'skos:prefLabel': { 'eng': 'Cites as data source', 'deu': 'Verweist auf Dataset' } },
       { '@id': 'cito:isCitedBy', 'skos:prefLabel': { 'eng': 'Is cited by', 'deu': 'Zitiert von' } }
     ],
     loaded: true

@@ -399,7 +399,7 @@ export const state = () => ({
         },
         {
           title: 'Citation',
-          predicate: 'cito:cites cito:isCitedBy', // there are 2 predicates here. I didn't know how to encode them
+          predicate: 'cito:cites cito:isCitedBy cito:citesAsDataSource', // there are 3 predicates here. I didn't know how to encode them
           open: false,
           sections: [
             {

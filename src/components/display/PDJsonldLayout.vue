@@ -32,6 +32,7 @@
     <slot name="schema:pageStart"></slot>
     <slot name="schema:pageEnd"></slot>
     <slot name="cito:cites"></slot>
+    <slot name="cito:citesAsDataSource"></slot>
     <slot name="cito:isCitedBy"></slot>
     <slot name="bf:provisionActivity"></slot>
     <slot name="bf:instanceOf"></slot>

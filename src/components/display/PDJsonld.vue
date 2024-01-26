@@ -145,6 +145,10 @@
           <p-d-citation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'cites'+j" v-bind.sync="displayProperties"></p-d-citation>
         </template>
 
+        <template v-else-if="p==='cito:citesAsDataSource'" slot="cito:citesAsDataSource">
+          <p-d-citation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'citesAsDataSource'+j" v-bind.sync="displayProperties"></p-d-citation>
+        </template>
+
         <template v-else-if="p==='cito:isCitedBy'" slot="cito:isCitedBy">
           <p-d-citation :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'citedby'+j" v-bind.sync="displayProperties"></p-d-citation>
         </template>

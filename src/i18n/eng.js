@@ -58,6 +58,7 @@ export default {
   'rdau:P60227': 'Is motion picture adaptation of',
   'bf:provisionActivity': 'Publication',
   'cito:cites': 'Cites',
+  'cito:citesAsDataSource': 'Cites as data source',
   'cito:isCitedBy': 'Is cited by',
   'rdfs:seeAlso': 'See also',
 

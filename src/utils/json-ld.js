@@ -647,6 +647,7 @@ export default {
             // citation
             case 'cito:cites':
             case 'cito:isCitedBy':
+            case 'cito:citesAsDataSource':
               f = fields.getField('citation')
               f.type = key
               for (let prefLabel of obj['skos:prefLabel']) {

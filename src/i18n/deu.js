@@ -781,6 +781,7 @@ export default {
   'rdax:P00009': 'Zuordnung',
   'bf:provisionActivity': 'Veröffentlichung',
   'cito:cites': 'Referenz',
+  'cito:citesAsDataSource': 'Dataset Referenz',
   'cito:isCitedBy': 'Is cited by',
   'rdfs:seeAlso': 'Siehe auch',
 
