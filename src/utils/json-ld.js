@@ -580,6 +580,15 @@ export default {
               components.push(f)
               break
 
+            // phaidra:levelOfDescription
+            case 'phaidra:levelOfDescription':
+              f = fields.getField('level-of-description')
+              for (let em of obj['skos:exactMatch']) {
+                f.value = em
+              }
+              components.push(f)
+              break
+
             // edm:rights
             case 'edm:rights':
               f = fields.getField('license')
@@ -2319,6 +2328,7 @@ export default {
         case 'dcterms:accessRights':
         case 'rdau:P60059':
         case 'rdau:P60048':
+        case 'phaidra:levelOfDescription':
           if (f.value) {
             this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, 'skos:Concept', [f.value]))
           }

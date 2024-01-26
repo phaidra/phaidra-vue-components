@@ -1150,6 +1150,13 @@ const vocabularies = {
     ],
     loaded: true
   },
+  'levelofdescription': {
+    terms: [
+      { '@id': ns + 'XXXX-XXX1', 'skos:prefLabel': { 'eng': 'Digitized object', 'deu': 'Digitalisiertes Objekt' } },
+      { '@id': ns + 'XXXX-XXX2', 'skos:prefLabel': { 'eng': 'Represented object', 'deu': 'Repräsentiertes Objekt' } }
+    ],
+    loaded: true
+  },
   'carriertype': {
     terms: [
       { '@id': ns + '2FTX-ZPZV', 'skos:prefLabel': { 'eng': 'ADAT' } },

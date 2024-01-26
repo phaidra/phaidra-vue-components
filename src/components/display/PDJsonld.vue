@@ -255,6 +255,10 @@
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'carriertype'+j" v-bind.sync="displayProperties"></p-d-skos-preflabel>
         </template>
 
+        <template v-else-if="p==='phaidra:levelOfDescription'" slot="phaidra:levelOfDescription">
+          <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'lvlofdesc'+j" v-bind.sync="displayProperties"></p-d-skos-preflabel>
+        </template>
+
         <template v-else-if="p==='rdau:P60059'" slot="rdau:P60059">
           <p-d-skos-preflabel :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'regenc'+j" v-bind.sync="displayProperties"></p-d-skos-preflabel>
         </template>

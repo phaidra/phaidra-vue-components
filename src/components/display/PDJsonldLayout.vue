@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <slot name="phaidra:levelOfDescription"></slot>
     <!-- basics -->
     <slot name="dce:title"></slot>
     <slot name="role"></slot>

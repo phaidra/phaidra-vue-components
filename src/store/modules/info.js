@@ -398,6 +398,49 @@ export const state = () => ({
           ]
         },
         {
+          title: 'Level of description',
+          predicate: 'phaidra:levelOfDescription',
+          open: false,
+          sections: [
+            {
+              id: 'description',
+              title: 'Description',
+              content: 'Can be used inside "Complex subject" to specify what the subject metadata are describing.'
+            },
+            {
+              id: 'usagenotes',
+              title: 'Usage notes',
+              content: {
+                level1:
+                  'Important in cases where the same metadata fields have to be used on different description levels (ie dimensions - of the photography vs dimensions of the instrument depicted on the photography -, creation date, etc).',
+                level2: '',
+                level3: ''
+              }
+            },
+            {
+              id: 'vocabulary',
+              title: 'Vocabulary',
+              content:
+                '<a href="https://vocab.phaidra.org/vocabulary/XXXX-XXX3 (TBD)"> Level of description vocabulary (TBD)</a>'
+            },
+            {
+              id: 'obligation',
+              title: 'Obligation',
+              content: ''
+            },
+            {
+              id: 'occurrence',
+              title: 'Occurrence',
+              content: ''
+            },
+            {
+              id: 'exampleHR',
+              title: 'Example',
+              content: ''
+            }
+          ]
+        },
+        {
           title: 'Citation',
           predicate: 'cito:cites cito:isCitedBy cito:citesAsDataSource', // there are 3 predicates here. I didn't know how to encode them
           open: false,

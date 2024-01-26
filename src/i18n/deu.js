@@ -733,6 +733,7 @@ export default {
   'minutes': 'Minuten',
   'seconds': 'Sekunden',
 
+  'phaidra:levelOfDescription': 'Verzeichnungsstufe',
   'rdam:P30004': 'Alternativer Identifikator',
 
   'bf:Title': 'Titel',
