@@ -291,6 +291,14 @@
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'numberOfPages'+j" v-bind.sync="displayProperties"></p-d-value>
         </template>
 
+        <template v-else-if="p==='bibo:issue'" slot="bibo:issue">
+          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'issue'+j" v-bind.sync="displayProperties"></p-d-lang-value>
+        </template>
+
+        <template v-else-if="p==='bibo:volume'" slot="bibo:volume">
+          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'volume'+j" v-bind.sync="displayProperties"></p-d-lang-value>
+        </template>
+
         <template v-else-if="p==='bf:soundCharacteristic'" slot="bf:soundCharacteristic">
           <p-d-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'soundCharacteristic'+j" v-bind.sync="displayProperties"></p-d-value>
         </template>

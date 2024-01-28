@@ -29,6 +29,8 @@
     <slot name="rdau:P60101"></slot><!-- is contained in -->
     <slot name="rdau:P60193"></slot><!-- is in series -->
     <slot name="rdau:P60550"></slot><!-- extent -->
+    <slot name="bibo:issue"></slot>
+    <slot name="bibo:volume"></slot>
     <slot name="schema:numberOfPages"></slot>
     <slot name="schema:pageStart"></slot>
     <slot name="schema:pageEnd"></slot>

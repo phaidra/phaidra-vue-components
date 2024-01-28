@@ -848,6 +848,24 @@ const fields = [
     definition: 'Use for identification number assigned to a particular donation or acquisition.'
   },
   {
+    id: 'volume',
+    fieldname: 'Volume',
+    predicate: 'bibo:volume',
+    component: 'p-text-field',
+    label: 'Volume',
+    value: '',
+    definition: 'A volume number.'
+  },
+  {
+    id: 'issue',
+    fieldname: 'Issue',
+    predicate: 'bibo:issue',
+    component: 'p-text-field',
+    label: 'Issue',
+    value: '',
+    definition: 'An issue number.'
+  },
+  {
     id: 'extent',
     fieldname: 'Extent',
     predicate: 'rdau:P60550',
@@ -1102,12 +1120,12 @@ const fields = [
   },
   {
     id: 'inscription',
-    fieldname: 'Inscription/Stamp',
+    fieldname: 'Inscription',
     predicate: 'vra:hasInscription',
     component: 'p-text-field',
     multiplicable: true,
     multilingual: true,
-    label: 'Inscription/Stamp',
+    label: 'Inscription',
     value: '',
     language: '',
     definition: 'All marks or written words added to the object at the time of production or in its subsequent history, including signatures, dates, dedications, texts, and colophons, as well as marks, such as the stamps of silversmiths, publishers, or printers.'
@@ -1403,6 +1421,8 @@ const predicateOrder = [
   'vra:placeOfSite',
 
   'rdau:P60550',
+  'bibo:issue',
+  'bibo:volume',
   'schema:numberOfPages',
   'bf:soundCharacteristic',
   'bf:supplementaryContent',

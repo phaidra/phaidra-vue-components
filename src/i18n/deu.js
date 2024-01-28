@@ -719,7 +719,7 @@ export default {
   'Dimensions': 'Abmessungen',
   'Unit': 'Masseinheit',
   'Format': 'Format',
-  'Inscription/Stamp': 'Inschrift/Stempel',
+  'Inscription': 'Inschrift',
   'Production information': 'Entstehungsinformation',
   'Material description': 'Materialbeschreibung',
   'Digitizing information': 'Digitalisierungsinformation',
@@ -797,6 +797,8 @@ export default {
   'dcterms:provenance': 'Provenienzvermerk',
 
   'rdau:P60550': 'Umfang',
+  'bibo:issue': 'Ausgabe',
+  'bibo:volume': 'Band',
   'schema:numberOfPages': 'Seitenanzahl',
   'bf:soundCharacteristic': 'Sound characteristic',
   'bf:supplementaryContent': 'Supplementary content',

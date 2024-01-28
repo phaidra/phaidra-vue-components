@@ -1398,6 +1398,88 @@ export const state = () => ({
           ]
         },
         {
+          title: 'Issue',
+          predicate: 'bibo:issue',
+          open: false,
+          sections: [
+            {
+              id: 'description',
+              title: 'Description',
+              content: 'An issue number.'
+            },
+            {
+              id: 'usagenotes',
+              title: 'Usage notes',
+              content: {
+                level1: 'Enter the issue number (e.g. of a journal).',
+                level2: '',
+                level3: ''
+              }
+            },
+            {
+              id: 'vocabulary',
+              title: 'Vocabulary',
+              content: 'None'
+            },
+            {
+              id: 'obligation',
+              title: 'Obligation',
+              content: ''
+            },
+            {
+              id: 'occurrence',
+              title: 'Occurrence',
+              content: ''
+            },
+            {
+              id: 'exampleHR',
+              title: 'Example',
+              content: ''
+            }
+          ]
+        },
+        {
+          title: 'Volume',
+          predicate: 'bibo:volume',
+          open: false,
+          sections: [
+            {
+              id: 'description',
+              title: 'Description',
+              content: 'A volume number.'
+            },
+            {
+              id: 'usagenotes',
+              title: 'Usage notes',
+              content: {
+                level1: 'Enter the volume number (e.g. of a journal).',
+                level2: '',
+                level3: ''
+              }
+            },
+            {
+              id: 'vocabulary',
+              title: 'Vocabulary',
+              content: 'None'
+            },
+            {
+              id: 'obligation',
+              title: 'Obligation',
+              content: ''
+            },
+            {
+              id: 'occurrence',
+              title: 'Occurrence',
+              content: ''
+            },
+            {
+              id: 'exampleHR',
+              title: 'Example',
+              content: ''
+            }
+          ]
+        },
+        {
           title: 'Object type',
           predicate: 'edm:hasType',
           open: false,

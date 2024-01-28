@@ -1010,6 +1010,20 @@ export default {
               components.push(f)
               break
 
+            // bibo:issue
+            case 'bibo:issue':
+              f = fields.getField('issue')
+              f.value = obj['@value']
+              components.push(f)
+              break
+
+            // bibo:volume
+            case 'bibo:volume':
+              f = fields.getField('volume')
+              f.value = obj['@value']
+              components.push(f)
+              break
+
             // vra:hasInscription
             case 'vra:hasInscription':
               if (obj['@type'] === 'vra:Inscription') {
@@ -1404,7 +1418,7 @@ export default {
         var subjectFields = this.getOrderedComponents(levels.subject[i].components)
         form.sections.push(
           {
-            title: 'Subject',
+            title: 'SUBJECT_SECTION',
             type: 'phaidra:Subject',
             id: 'subject-' + i,
             fields: subjectFields
@@ -2367,6 +2381,8 @@ export default {
         case 'dce:rights':
         case 'dcterms:temporal':
         case 'rdau:P60550':
+        case 'bibo:issue':
+        case 'bibo:volume':
         case 'bf:physicalLocation':
           if (f.value) {
             this.push_value(jsonld, f.predicate, this.get_json_valueobject(f.value, f.language))
