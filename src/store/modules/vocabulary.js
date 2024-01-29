@@ -1153,8 +1153,8 @@ const vocabularies = {
   },
   'levelofdescription': {
     terms: [
-      { '@id': ns + 'XXXX-XXX1', 'skos:prefLabel': { 'eng': 'Digitized object', 'deu': 'Digitalisiertes Objekt' } },
-      { '@id': ns + 'XXXX-XXX2', 'skos:prefLabel': { 'eng': 'Represented object', 'deu': 'Repräsentiertes Objekt' } }
+      { '@id': ns + 'HQ7N-3Q2W', 'skos:prefLabel': { 'eng': 'Digitized object', 'deu': 'Digitalisiertes Objekt' } },
+      { '@id': ns + 'TG30-5EM3', 'skos:prefLabel': { 'eng': 'Represented object', 'deu': 'Repräsentiertes Objekt' } }
     ],
     loaded: true
   },

@@ -848,6 +848,7 @@ export default {
   'Represented/depicted place': 'Abgebildeter Ort',
   'Association': 'Organisationseinheit',
   'System fields': 'Systemhinweis',
+  'Level of description': 'Verzeichnungsstufe',
 
   'Project Id': 'Projektnummer',
 

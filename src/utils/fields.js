@@ -31,7 +31,6 @@ const fields = [
     'skos:prefLabel': [],
     errorMessages: [],
     definition: 'The nature of the resource. Example: Image, Text, Sound'
-
   },
   {
     id: 'resource-type-buttongroup',
@@ -734,19 +733,19 @@ const fields = [
     errorMessages: [],
     definition: 'Relates a resource to a categorization reflecting a format of a storage medium and housing of a carrier in combination with a type of intermediation device required to view, play, run, etc., the content of a resource.'
   },
-  // {
-  //   id: 'level-of-description',
-  //   fieldname: 'Level of description',
-  //   predicate: 'phaidra:levelOfDescription',
-  //   component: 'p-select',
-  //   vocabulary: 'levelofdescription',
-  //   multiplicable: false,
-  //   label: 'Level of description',
-  //   value: '',
-  //   'skos:prefLabel': [],
-  //   errorMessages: [],
-  //   definition: 'Can be used inside "Complex subject" to specify what the subject metadata are describing.'
-  // },
+  {
+    id: 'level-of-description',
+    fieldname: 'Level of description',
+    predicate: 'phaidra:levelOfDescription',
+    component: 'p-select',
+    vocabulary: 'levelofdescription',
+    multiplicable: false,
+    label: 'Level of description',
+    value: '',
+    'skos:prefLabel': [],
+    errorMessages: [],
+    definition: 'Can be used inside "Complex subject" to specify what the subject metadata are describing.'
+  },
   {
     id: 'citation',
     fieldname: 'Citation',

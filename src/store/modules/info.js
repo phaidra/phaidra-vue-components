@@ -421,7 +421,7 @@ export const state = () => ({
               id: 'vocabulary',
               title: 'Vocabulary',
               content:
-                '<a href="https://vocab.phaidra.org/vocabulary/XXXX-XXX3 (TBD)"> Level of description vocabulary (TBD)</a>'
+                '<a href="https://vocab.phaidra.org/vocabulary/W2ZN-QEF6">Level of description</a>. Current values: <a href="https://vocab.phaidra.org/vocabulary/HQ7N-3Q2W">Digitized object</a> or <a href="https://vocab.phaidra.org/vocabulary/TG30-5EM3">Represented object</a>'
             },
             {
               id: 'obligation',
