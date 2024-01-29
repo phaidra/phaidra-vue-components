@@ -9,7 +9,7 @@
         :items="vocabularies['bic'].terms"
         :item-value="'@id'"
         :loading="loading"
-        :filter="autocompleteFilter"
+        :filter="autocompleteFilterWithNotation"
         hide-no-data
         :label="$t(label)"
         :filled="inputStyle==='filled'"

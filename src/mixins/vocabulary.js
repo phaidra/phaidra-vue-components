@@ -30,6 +30,12 @@ export const vocabulary = {
       const query = queryText.toLowerCase()
       return lab.startsWith(query)
     },
+    autocompleteFilterWithNotation: function (item, queryText) {
+      const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
+      const notation = item['skos:notation'] ? item['skos:notation'][0] : null
+      const query = queryText.toLowerCase()
+      return notation ? lab.startsWith(query) || notation.startsWith(query) : lab.startsWith(query)
+    },
     autocompleteFilterInfix: function (item, queryText) {
       const lab = item['skos:prefLabel'][this.$i18n.locale] ? item['skos:prefLabel'][this.$i18n.locale].toLowerCase() : item['skos:prefLabel']['eng'].toLowerCase()
       const query = queryText.toLowerCase()
