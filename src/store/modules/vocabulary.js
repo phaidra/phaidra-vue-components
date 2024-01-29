@@ -1406,6 +1406,37 @@ const vocabularies = {
     ],
     loaded: true
   },
+  'oerobjecttype': {
+    terms: [
+      { '@id': 'https://w3id.org/kim/hcrt/application', 'skos:prefLabel': { 'eng': 'Software Application', 'deu': 'Softwareanwendung' } },
+      { '@id': 'https://w3id.org/kim/hcrt/assessment', 'skos:prefLabel': { 'eng': 'Assessment', 'deu': 'Lernkontrolle' } },
+      { '@id': 'https://w3id.org/kim/hcrt/audio', 'skos:prefLabel': { 'eng': 'Audio Recording', 'deu': 'Audio' } },
+      { '@id': 'https://w3id.org/kim/hcrt/case_study', 'skos:prefLabel': { 'eng': 'Case Study', 'deu': 'Fallstudie' } },
+      { '@id': 'https://w3id.org/kim/hcrt/course', 'skos:prefLabel': { 'eng': 'Course', 'deu': 'Kurs' } },
+      { '@id': 'https://w3id.org/kim/hcrt/data', 'skos:prefLabel': { 'eng': 'Data', 'deu': 'Daten' } },
+      { '@id': 'https://w3id.org/kim/hcrt/diagram', 'skos:prefLabel': { 'eng': 'Diagram', 'deu': 'Grafik' } },
+      { '@id': 'https://w3id.org/kim/hcrt/drill_and_practice', 'skos:prefLabel': { 'eng': 'Drill and Practice', 'deu': 'Übung' } },
+      { '@id': 'https://w3id.org/kim/hcrt/educational_game', 'skos:prefLabel': { 'eng': 'Game', 'deu': 'Lernspiel' } },
+      { '@id': 'https://w3id.org/kim/hcrt/experiment', 'skos:prefLabel': { 'eng': 'Experiment', 'deu': 'Experiment' } },
+      { '@id': 'https://w3id.org/kim/hcrt/image', 'skos:prefLabel': { 'eng': 'Image', 'deu': 'Abbildung' } },
+      { '@id': 'https://w3id.org/kim/hcrt/index', 'skos:prefLabel': { 'eng': 'Reference Work', 'deu': 'Nachschlagewerk' } },
+      { '@id': 'https://w3id.org/kim/hcrt/lesson_plan', 'skos:prefLabel': { 'eng': 'Lesson Plan', 'deu': 'Unterrichtsplanung' } },
+      { '@id': 'https://w3id.org/kim/hcrt/map', 'skos:prefLabel': { 'eng': 'Map', 'deu': 'Karte' } },
+      { '@id': 'https://w3id.org/kim/hcrt/portal', 'skos:prefLabel': { 'eng': 'Web Portal', 'deu': 'Portal' } },
+      { '@id': 'https://w3id.org/kim/hcrt/questionnaire', 'skos:prefLabel': { 'eng': 'Questionnaire', 'deu': 'Fragebogen' } },
+      { '@id': 'https://w3id.org/kim/hcrt/script', 'skos:prefLabel': { 'eng': 'Script', 'deu': 'Skript' } },
+      { '@id': 'https://w3id.org/kim/hcrt/sheet_music', 'skos:prefLabel': { 'eng': 'Sheet Music', 'deu': 'Musiknoten' } },
+      { '@id': 'https://w3id.org/kim/hcrt/simulation', 'skos:prefLabel': { 'eng': 'Simulation', 'deu': 'Simulation' } },
+      { '@id': 'https://w3id.org/kim/hcrt/slide', 'skos:prefLabel': { 'eng': 'Presentation', 'deu': 'Präsentation' } },
+      { '@id': 'https://w3id.org/kim/hcrt/text', 'skos:prefLabel': { 'eng': 'Text', 'deu': 'Textdokument' } },
+      { '@id': 'https://w3id.org/kim/hcrt/textbook', 'skos:prefLabel': { 'eng': 'Textbook', 'deu': 'Lehrbuch' } },
+      { '@id': 'https://w3id.org/kim/hcrt/video', 'skos:prefLabel': { 'eng': 'Video', 'deu': 'Video' } },
+      { '@id': 'https://w3id.org/kim/hcrt/web_page', 'skos:prefLabel': { 'eng': 'Web Page', 'deu': 'Webseite' } },
+      { '@id': 'https://w3id.org/kim/hcrt/worksheet', 'skos:prefLabel': { 'eng': 'Worksheet', 'deu': 'Arbeitsmaterial' } },
+      { '@id': 'https://w3id.org/kim/hcrt/other', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Sonstiges' } },
+    ],
+    loaded: true
+  },
   'accessright': {
     terms: [
       { '@id': ns + 'QW5R-NG4J', 'skos:prefLabel': { 'eng': 'open access' }, 'skos:definition': { 'eng': 'Open access refers to a resource that is immediately and permanently online, and free for all on the Web, without financial and technical barriers.The resource is either stored in the repository or referenced to an external journal or trustworthy archive.' } },
