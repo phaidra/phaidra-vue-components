@@ -215,6 +215,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :showYarmBtn="showYarm"
                             ></p-i-citation>
                           </template>
 
@@ -928,6 +929,9 @@ export default {
     },
     guidelinesUrl: {
       type: String
+    },
+    showYarm: {
+      type: Boolean
     }
   },
   watch: {

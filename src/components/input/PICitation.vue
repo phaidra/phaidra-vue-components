@@ -36,6 +36,8 @@
         :rules="required ? [ v => !!v || 'Required'] : []"
         :filled="inputStyle==='filled'"
         :outlined="inputStyle==='outlined'"
+        append-outer-icon="mdi-magnify"
+        @click:append-outer="onYarmClick"
       ></v-text-field>
     </v-col>
     <v-col cols="2">
@@ -90,6 +92,105 @@
         </v-list>
       </v-menu>
     </v-col>
+    <v-dialog class="pb-4" v-model="showYarmDialog" scrollable width="1000px">
+      <v-card>
+        <v-card-title class="grey white--text"><span v-t="'Yarm Data'"></span><v-spacer></v-spacer></v-card-title>
+        <v-card-text v-if="yarmToken">
+          <v-text-field clearable :label="$t('Search...')" append-icon="mdi-magnify" v-model="searchInput"></v-text-field>
+          <v-data-table
+            :headers="headers"
+            :items="yarmData"
+            :items-per-page="10"
+            class="elevation-1"
+            :options.sync="options"
+            :server-items-length="totalData"
+            :loading="yarmDataLoading"
+          >
+          <template v-slot:item.action="{ item }">
+            <v-btn
+              @click="onYarmConfirm(item)"
+              color="primary"
+            >
+              Select
+            </v-btn>
+          </template>
+        </v-data-table>
+        </v-card-text>
+        <v-card-text v-else>
+          <div class="login-btn-container">
+            <v-btn
+              @click="yarmLoginDialog = true"
+              color="primary"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
+              Login to YARM
+            </v-btn>
+          </div>
+          <v-dialog
+            v-model="yarmLoginDialog"
+            persistent
+            max-width="600px"
+          >
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">User Profile</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field
+                        label="Email*"
+                        v-model="yarmEmail"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        label="Password*"
+                        type="password"
+                        v-model="yarmPassword"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                <small>*indicates required field</small>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="yarmLoginDialog = false"
+                >
+                  Close
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="yarmLogin()"
+                >
+                  Login
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-card-text>
+
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-container fluid>
+            <v-row justify="end">
+              <v-btn class="mx-1" color="grey" dark @click="closeYarmSelect()"><span v-t="'Cancel'"></span></v-btn>
+            </v-row>
+          </v-container>
+        </v-card-actions>
+      </v-card>
+
+    </v-dialog>
   </v-row>
 </template>
 
@@ -99,6 +200,40 @@ import { fieldproperties } from '../../mixins/fieldproperties'
 
 export default {
   name: 'p-i-citation',
+  data() {
+    return {
+      searchInput: '',
+      yarmLoginDialog: false,
+      showYarmDialog: false,
+      yarmEmail: '',
+      yarmPassword: '',
+      yarmToken: null,
+      headers: [
+        { text: 'Title', value: 'title' },
+        { text: 'Identifier', value: 'identifier' },
+        { text: 'Action', value: 'action' },
+      ],
+      yarmData: [],
+      yarmApiBase: 'https://yarm.phaidra.org/api',
+      totalData: 0,
+      yarmDataLoading: false,
+      options: {},
+    }
+  },
+  watch: {
+    searchInput(val) {
+      this.options = {
+        ...this.options,
+        page: 1
+      }
+    },
+    options: {
+      handler () {
+        this.searchForRecordInYarm()
+      },
+      deep: true,
+    },
+  },
   mixins: [vocabulary, fieldproperties],
   props: {
     citation: {
@@ -130,9 +265,91 @@ export default {
     showIds: {
       type: Boolean,
       default: false
+    },
+    showYarmBtn: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    searchForRecordInYarm: async function() {
+      const { sortBy, sortDesc, page, itemsPerPage } = this.options
+      this.yarmDataLoading = true
+      let response = await this.$axios.request({
+        method: 'GET',
+        url: `${this.yarmApiBase}/search?search[0][field]=title&search[0][criterium]=like&search[0][term]=${this.searchInput}&offset=${0}&limit=${itemsPerPage}&pagination=${true}&page=${page}`,
+        headers: {
+          'Authorization': `Bearer ${this.yarmToken}`
+        }
+      })
+      this.yarmDataLoading = false
+      if(response && response.data && response.data.data){
+        this.totalData = response.data.message.dataTotal
+        this.yarmData = response.data.data
+        this.yarmData.forEach(data => {
+          if(data.relIdentifiers && data.relIdentifiers.length) {
+            data.identifier = data.relIdentifiers[0].value
+          }
+        })
+      }
+    },
+    onYarmConfirm: function (item) {
+      let citationText = item.title
+      if(item.relNames && item.relNames.editor && item.relNames.editor.length){
+        item.relNames.editor.forEach(editorRec => {
+          citationText += ` Ed.: ${editorRec.name}, ${editorRec.first_name} - ${item.place} : ${item.publisher}, (${item.year}) - p. ${item.pages}`
+        })
+      }
+      if(item.comments_on_publication) {
+        citationText += ` [${item.comments_on_publication}]`
+      }
+      this.$emit('input-citation', citationText)
+      this.$emit('input-identifier', item.identifier)
+      this.$emit('input-citation-type', this.getTerm('citationpredicate', item.type))
+      this.closeYarmSelect()
+    },
+    closeYarmSelect: function () {
+      this.showYarmDialog = false
+    },
+    onYarmClick: function () {
+      this.showYarmDialog = true
+      this.checkYarmAccess()
+    },
+    checkYarmAccess: async function() {
+      const yarmTokenExpirationTime = localStorage.getItem('yarmTokenExpirationTime')
+      const yarmSavedToken = localStorage.getItem('yarmSavedToken')
+      if(yarmTokenExpirationTime && yarmTokenExpirationTime > new Date().getTime() && yarmSavedToken){
+        this.yarmToken = yarmSavedToken
+      } else {
+        this.yarmToken = null
+      }
+    },
+    yarmLogin: async function() {
+      try {
+        let basicToken = btoa(this.yarmEmail + ":" + this.yarmPassword)
+        let response = await this.$axios.request({
+          method: 'post',
+          url: `${this.yarmApiBase}/createToken`,
+          headers: {
+            'Authorization': `Basic ${basicToken}`
+          }
+        })
+        if(response.data){
+          const yarmTokenExpirationTime = new Date(response.data['expiration date'] + 'z').getTime()
+          const yarmSavedToken = response.data.token
+          this.yarmToken = yarmSavedToken          
+          localStorage.setItem('yarmTokenExpirationTime', yarmTokenExpirationTime)
+          localStorage.setItem('yarmSavedToken', yarmSavedToken)
+          this.yarmLoginDialog = false
+        }
+        
+      } catch (error) {
+        console.log('error', error)
+      }
     }
   },
   mounted: function () {
+    this.checkYarmAccess()
     this.$nextTick(function () {
       this.loading = !this.vocabularies['citationpredicate'].loaded
       // emit input to set skos:prefLabel in parent
@@ -147,5 +364,10 @@ export default {
 <style scoped>
 .v-btn {
   margin: 0;
+}
+.login-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 </style>
