@@ -1,40 +1,40 @@
 <template>
   <span>
     <v-row>
-      <template v-if="o['skos:exactMatch'] || o['skos:prefLabel'] || o['frapo:hasFundingAgency']">
+      <div v-if="o['skos:exactMatch'] || o['skos:prefLabel'] || o['frapo:hasFundingAgency']">
         <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'"><span v-show="!hideLabel && !o['rdfs:comment'] && !o['foaf:homepage']">{{ $t(p) }}</span></v-col>
         <v-col :md="valueColMd" cols="12" :key="'idv'"><template v-if="projectLabel !== ''">{{ projectLabel }} – </template><template v-if="projectId !== ''"><template v-if="projectId.startsWith('http')"><a target="_blank" :href="projectId">{{ projectId }}</a></template><template v-else>{{ projectId }}</template></template><template v-if="fundersLabel !== ''"> – {{ fundersLabel }}</template></v-col>
-      </template>
+      </div>
     </v-row>
     <v-row>
-      <template v-for="(ac, i) in o['frapo:hasAcronym']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'ac'+i">{{ $t('Acronym') }}</v-col>
-        <v-col :md="valueColMd" cols="12" :key="'ac'+i">{{ ac }}</v-col>
-      </template>
+      <div v-for="(ac, i) in o['frapo:hasAcronym']" :key="'ac'+i">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Acronym') }}</v-col>
+        <v-col :md="valueColMd" cols="12">{{ ac }}</v-col>
+      </div>
     </v-row>
     <v-row>
-      <template v-for="(d, i) in o['rdfs:comment']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'dl'+i">{{ $t('Project Description') }} ({{ d['@language'] }})</v-col>
-        <v-col class="valuefield" :md="valueColMd" cols="12" :key="'dv'+i">{{ d['@value'] }}</v-col>
-      </template>
+      <div v-for="(d, i) in o['rdfs:comment']" :key="'dl'+i">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Project Description') }} ({{ d['@language'] }})</v-col>
+        <v-col class="valuefield" :md="valueColMd" cols="12">{{ d['@value'] }}</v-col>
+      </div>
     </v-row>
     <v-row>
-      <template v-for="(sd, i) in o['frapo:hasStartDate']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'dfl'+i">{{ $t('Start date') }}</v-col>
-        <v-col class="valuefield" :md="valueColMd" cols="12" :key="'dfv'+i">{{ sd }}</v-col>
-      </template>
+      <div v-for="(sd, i) in o['frapo:hasStartDate']" :key="'dfl'+i">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Start date') }}</v-col>
+        <v-col class="valuefield" :md="valueColMd" cols="12">{{ sd }}</v-col>
+      </div>
     </v-row>
     <v-row>
-      <template v-for="(ed, i) in o['frapo:hasEndDate']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'dtl'+i">{{ $t('End date') }}</v-col>
-        <v-col class="valuefield" :md="valueColMd" cols="12" :key="'dtv'+i">{{ ed }}</v-col>
-      </template>
+      <div v-for="(ed, i) in o['frapo:hasEndDate']" :key="'dtl'+i">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('End date') }}</v-col>
+        <v-col class="valuefield" :md="valueColMd" cols="12">{{ ed }}</v-col>
+      </div>
     </v-row>
     <v-row>
-      <template v-for="(hp, i) in o['foaf:homepage']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'hpl'+i">{{ $t('Project Homepage') }}</v-col>
-        <v-col :md="valueColMd" cols="12" :key="'hpv'+i">{{ hp }}</v-col>
-      </template>
+      <div v-for="(hp, i) in o['foaf:homepage']" :key="'hpl'+i">
+        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Project Homepage') }}</v-col>
+        <v-col :md="valueColMd" cols="12">{{ hp }}</v-col>
+      </div>
     </v-row>
   </span>
 </template>
