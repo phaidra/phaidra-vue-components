@@ -825,10 +825,12 @@ export default {
   'vra:material': 'Material',
   'vra:hasInscription': 'Inschrift',
 
+  'schema:AdministrativeArea': 'Verwaltungseinheit',
+  
   'phaidra:systemTag': 'System tag',
   Event: 'Ereignis',
-  'Subtitle bf:subtitle': 'Untertitel',
-  'Note phaidra:Remark': 'Notiz',
+  'bf:subtitle': 'Untertitel',
+  'phaidra:Remark': 'Notiz',
   'Condition note': 'Notiz zum Zustand',
   'Supplementary material': 'Ergänzendes Material',
   'Is motion picture adaptation of': 'Filmadaption von',
@@ -857,6 +859,7 @@ export default {
   'Remove': 'Löschen',
   'Duplicate': 'Duplizieren',
   'Save as new template': 'Als neue Vorlage speichern',
+  'Save template': 'Vorlage speichern',
   'File to upload': 'Datei zum Hochladen',
 
   'SELECTION_LIMIT': 'Cannot select more than {limit} results.',
@@ -972,5 +975,6 @@ export default {
   'Thema Subject Codes': 'Thema Klassifizierung',
   'Template saved': 'Vorlage gespeichert',
   'Select': 'Auswählen',
-  'Configure': 'Konfigurieren'
+  'Configure': 'Konfigurieren',
+  'Some required fields are not complete': 'Manche Pflichtfelder sind nicht vollständig'
 }
