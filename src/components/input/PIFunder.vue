@@ -11,31 +11,12 @@
       ></v-text-field>
     </v-col>
     <v-col cols="2">
-      <v-autocomplete
-        :value="getTerm('lang', nameLanguage)"
-        v-on:input="$emit('input-name-language', $event )"
-        :items="vocabularies['lang'].terms"
-        :item-value="'@id'"
-        :filter="autocompleteFilter"
-        hide-no-data
-        :label="$t('Language')"
-        :filled="inputStyle==='filled'"
-        :outlined="inputStyle==='outlined'"
-        return-object
-        clearable
-      >
-        <template slot="item" slot-scope="{ item }">
-          <v-list-item-content two-line>
-            <v-list-item-title  v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
-            <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
-          </v-list-item-content>
-        </template>
-        <template slot="selection" slot-scope="{ item }">
-          <v-list-item-content>
-            <v-list-item-title v-html="`${getLocalizedTermLabel('lang', item['@id'])}`"></v-list-item-title>
-          </v-list-item-content>
-        </template>
-      </v-autocomplete>
+      <v-btn text @click="$refs.langdialog.open()">
+        <span class="grey--text text--darken-1">
+          ({{ nameLanguage }})
+        </span>
+      </v-btn>
+      <select-language ref="langdialog" @language-selected="$emit('input-name-language', $event)"></select-language>
     </v-col>
     <v-col cols="4">
       <v-text-field
@@ -67,10 +48,14 @@
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
+import SelectLanguage from '../select/SelectLanguage'
 
 export default {
   name: 'p-i-funder',
   mixins: [vocabulary, fieldproperties],
+  components: {
+    SelectLanguage
+  },
   props: {
     name: {
       type: String

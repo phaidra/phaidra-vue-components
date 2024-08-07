@@ -258,6 +258,28 @@ const fields = [
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
+    id: 'note-checkbox',
+    fieldname: 'Note (checkbox)',
+    predicate: 'bf:note',
+    type: 'phaidra:Remark',
+    component: 'p-note-checkbox',
+    label: 'Note',
+    value: '',
+    language: '',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
+  },
+  {
+    id: 'note-checkbox-with-link',
+    fieldname: 'Note (checkbox with link)',
+    predicate: 'bf:note',
+    type: 'phaidra:Remark',
+    component: 'p-note-checkbox-with-link',
+    label: 'Note',
+    value: '',
+    language: '',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
+  },
+  {
     id: 'language',
     fieldname: 'Language',
     predicate: 'dcterms:language',
@@ -299,6 +321,23 @@ const fields = [
     role: '',
     roleLabel: 'Role',
     hideRole: false,
+    definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
+  },
+  {
+    id: 'fixedrole-person',
+    fieldname: 'Role',
+    predicate: 'role',
+    type: 'schema:Person',
+    component: 'p-entity-fixedrole-person',
+    roleVocabulary: 'rolepredicate',
+    multiplicable: true,
+    ordered: true,
+    firstname: '',
+    firstnameLabel: 'Firstname',
+    lastname: '',
+    lastnameLabel: 'Lastname',
+    role: '',
+    roleLabel: 'Role',
     definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
   },
   {
@@ -666,6 +705,7 @@ const fields = [
     identifier: '',
     homepage: '',
     funderName: '',
+    funderNameLanguage: '',
     funderIdentifier: '',
     dateFrom: '',
     dateTo: '',
@@ -1365,6 +1405,18 @@ const fields = [
     label: 'System tag',
     value: '',
     definition: 'A tag for the purpose of identification or to give other information'
+  },
+  {
+    id: 'alert',
+    fieldname: 'Alert',
+    predicate: '',
+    component: 'p-alert',
+    contentperlocale: {
+      eng: '',
+      deu: '',
+      ita: ''
+    },
+    definition: 'Shows additional information in the submitform'
   }
 ]
 

@@ -1,42 +1,33 @@
 <template>
-  <span>
+  
     <v-row>
-      <div v-if="o['skos:exactMatch'] || o['skos:prefLabel'] || o['frapo:hasFundingAgency']">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" :key="'idl'"><span v-show="!hideLabel && !o['rdfs:comment'] && !o['foaf:homepage']">{{ $t(p) }}</span></v-col>
-        <v-col :md="valueColMd" cols="12" :key="'idv'"><template v-if="projectLabel !== ''">{{ projectLabel }} – </template><template v-if="projectId !== ''"><template v-if="projectId.startsWith('http')"><a target="_blank" :href="projectId">{{ projectId }}</a></template><template v-else>{{ projectId }}</template></template><template v-if="fundersLabel !== ''"> – {{ fundersLabel }}</template></v-col>
-      </div>
+      <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t('Project') }}</v-col>
+      <v-col :md="valueColMd" cols="12">
+        <v-row>
+          <v-col v-if="o['skos:exactMatch'] || o['skos:prefLabel'] || o['frapo:hasFundingAgency']" cols="12" :key="'idv'"><template v-if="projectLabel !== ''">{{ projectLabel }}</template><template v-if="projectId !== ''"> – <template v-if="projectId.startsWith('http')"><a target="_blank" :href="projectId">{{ projectId }}</a></template><template v-else>{{ projectId }}</template></template><template v-if="fundersLabel !== ''"> – {{ fundersLabel }}</template></v-col>
+        </v-row>
+        <v-row v-for="(ac, i) in o['frapo:hasAcronym']" :key="'ac'+i">
+          <v-col :md="3" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Acronym') }}</v-col>
+          <v-col :md="9" cols="12">{{ ac }}</v-col>
+        </v-row>
+        <v-row v-for="(d, i) in o['rdfs:comment']" :key="'dl'+i">
+          <v-col :md="3" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Project Description') }}<template v-if="d['@language']"> ({{ d['@language'] }})</template></v-col>
+          <v-col class="valuefield" :md="9" cols="12">{{ d['@value'] }}</v-col>
+        </v-row>
+        <v-row v-for="(sd, i) in o['frapo:hasStartDate']" :key="'dfl'+i">
+          <v-col :md="3" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Start date') }}</v-col>
+          <v-col class="valuefield" :md="9" cols="12">{{ sd }}</v-col>
+        </v-row>
+        <v-row v-for="(ed, i) in o['frapo:hasEndDate']" :key="'dtl'+i">
+          <v-col :md="3" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('End date') }}</v-col>
+          <v-col class="valuefield" :md="9" cols="12">{{ ed }}</v-col>
+        </v-row>
+        <v-row v-for="(hp, i) in o['foaf:homepage']" :key="'hpl'+i">
+          <v-col :md="3" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Project Homepage') }}</v-col>
+          <v-col :md="9" cols="12"><a :href="hp">{{ hp }}</a></v-col>
+        </v-row>
+      </v-col>
     </v-row>
-    <v-row>
-      <div v-for="(ac, i) in o['frapo:hasAcronym']" :key="'ac'+i">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Acronym') }}</v-col>
-        <v-col :md="valueColMd" cols="12">{{ ac }}</v-col>
-      </div>
-    </v-row>
-    <v-row>
-      <div v-for="(d, i) in o['rdfs:comment']" :key="'dl'+i">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Project Description') }} ({{ d['@language'] }})</v-col>
-        <v-col class="valuefield" :md="valueColMd" cols="12">{{ d['@value'] }}</v-col>
-      </div>
-    </v-row>
-    <v-row>
-      <div v-for="(sd, i) in o['frapo:hasStartDate']" :key="'dfl'+i">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Start date') }}</v-col>
-        <v-col class="valuefield" :md="valueColMd" cols="12">{{ sd }}</v-col>
-      </div>
-    </v-row>
-    <v-row>
-      <div v-for="(ed, i) in o['frapo:hasEndDate']" :key="'dtl'+i">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('End date') }}</v-col>
-        <v-col class="valuefield" :md="valueColMd" cols="12">{{ ed }}</v-col>
-      </div>
-    </v-row>
-    <v-row>
-      <div v-for="(hp, i) in o['foaf:homepage']" :key="'hpl'+i">
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right" >{{ $t('Project Homepage') }}</v-col>
-        <v-col :md="valueColMd" cols="12">{{ hp }}</v-col>
-      </div>
-    </v-row>
-  </span>
 </template>
 
 <script>

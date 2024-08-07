@@ -36,6 +36,13 @@ export const fieldproperties = {
       default: true
     }
   },
+  data () {
+    return {
+      showMenuModel: false,
+      menux: 0,
+      menuy: 0
+    }
+  },
   computed: {
     actions: function () {
       var arr = []
@@ -64,6 +71,17 @@ export const fieldproperties = {
         }
       }
       return arr
+    }
+  },
+  methods: {
+    showMenu (e) {
+      e.preventDefault()
+      this.showMenuModel = false
+      this.menux = e.clientX
+      this.menuy = e.clientY
+      this.$nextTick(() => {
+        this.showMenuModel = true
+      })
     }
   }
 }
