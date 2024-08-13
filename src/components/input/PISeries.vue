@@ -65,10 +65,10 @@
               >
               </v-text-field>
             </v-col>
-            <v-col cols="12" md="1" v-if="multilingual">
+            <v-col cols="12" md="2" v-if="multilingual">
               <v-btn text @click="$refs.langdialog.open()">
                 <span class="grey--text text--darken-1">
-                  ({{ titleLanguage }})
+                  ({{ titleLanguage ? titleLanguage : '--' }})
                 </span>
               </v-btn>
               <select-language ref="langdialog" @language-selected="$emit('input-title-language', $event)"></select-language>

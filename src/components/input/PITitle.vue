@@ -1,6 +1,8 @@
 <template>
+  
+
   <v-row v-if="!hidden">
-    <v-col cols="12" :md="hideSubtitle ? ( multilingual ? 8 : (actions.length ? 10 : 12) ) : ( multilingual ? 4 : (actions.length ? 6 : 8) )">
+    <v-col cols="12" :md="hideSubtitle ? ( (multilingual || actions.length) ? 8 : 12 ) : ( (multilingual || actions.length) ? 4 : 8 )">
       <v-text-field
         :value="title"
         :label="$t( titleLabel ? titleLabel : type )"
@@ -21,17 +23,17 @@
       ></v-text-field>
     </v-col>
  
-    <v-col cols="1" v-if="actions.length">
+    <v-col cols="2" v-if="multilingual || actions.length">
      
       <v-row>
         <v-col v-if="multilingual" cols="6">
           <v-btn text @click="$refs.langdialog.open()">
             <span class="grey--text text--darken-1">
-              ({{ language }})
+              ({{ language ? language : '--' }})
             </span>
           </v-btn>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="6" v-if="actions.length">
           <v-btn icon @click="showMenu">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>

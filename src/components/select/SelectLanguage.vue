@@ -5,7 +5,7 @@
         <v-container fluid>
           <v-row justify="start">
             <v-col cols="3">{{ $t('Quick select') }}:</v-col>
-            <v-col><v-btn v-for="lang in instanceconfig.languages.split(',')" :key="lang" class="mx-1" color="grey" dark @click="selectLang(lang)">{{ getLocalizedTermLabel('lang', lang) }}</v-btn></v-col>
+            <v-col><v-btn v-for="lang in this.$i18n.localeCodes" :key="lang" class="mx-1" color="grey" dark @click="selectLang(lang)">{{ getLocalizedTermLabel('lang', lang) }}</v-btn></v-col>
           </v-row>
         </v-container>
       </v-card-actions>
@@ -41,9 +41,6 @@ export default {
   name: 'select-language',
   mixins: [vocabulary],
   computed: {
-    instanceconfig: function () {
-      return this.$root.$store.state.instanceconfig
-    },
     languagesTable () {
       let tab = []
       for (let l of this.vocabularies['lang'].terms) {

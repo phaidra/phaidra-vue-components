@@ -32,17 +32,17 @@
         </template>
       </v-combobox>
     </v-col>
-    <v-col cols="1" v-if="actions.length">
+    <v-col cols="1" v-if="multilingual || actions.length">
      
      <v-row>
        <v-col v-if="multilingual" cols="6">
          <v-btn text @click="$refs.langdialog.open()">
            <span class="grey--text text--darken-1">
-             ({{ language }})
+             ({{ language ? language : '--' }})
            </span>
          </v-btn>
        </v-col>
-       <v-col cols="6">
+       <v-col cols="6" v-if="actions.length">
          <v-btn icon @click="showMenu">
            <v-icon>mdi-dots-vertical</v-icon>
          </v-btn>

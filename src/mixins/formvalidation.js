@@ -208,7 +208,8 @@ export const formvalidation = {
               if (f.selectedTerms.length > 0) {
                 this.mandatoryFieldsValidated['Object type'] = true
               }
-            } else if (f.value.length > 0) {
+            } 
+            if (f.value?.length > 0) {
               this.mandatoryFieldsValidated['Object type'] = true
             }
           }
@@ -392,7 +393,8 @@ export const formvalidation = {
               if (f.selectedTerms.length > 0) {
                 this.mandatoryFieldsValidated['Object type'] = true
               }
-            } else if (f.value.length > 0) {
+            } 
+            if (f.value?.length > 0) {
               this.mandatoryFieldsValidated['Object type'] = true
             }
           }
@@ -573,10 +575,10 @@ export const formvalidation = {
             this.mandatoryFieldsFound['Object type'] = true
             if (Object.prototype.hasOwnProperty.call(f, 'selectedTerms')) {
               if (f.selectedTerms.length > 0) {
-                console.log(f.selectedTerms)
                 this.mandatoryFieldsValidated['Object type'] = true
               }
-            } else if (f.value.length > 0) {
+            } 
+            if (f.value.length > 0) {
               this.mandatoryFieldsValidated['Object type'] = true
             }
           }

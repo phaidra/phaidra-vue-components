@@ -34,7 +34,7 @@
                 <v-col cols="1" v-if="multilingual">
                   <v-btn text @click="$refs.langdialogtitle.open()">
                     <span class="grey--text text--darken-1">
-                      ({{ titleLanguage }})
+                      ({{ titleLanguage ? titleLanguage : '--' }})
                     </span>
                   </v-btn>
                   <select-language ref="langdialogtitle" @language-selected="$emit('input-title-language', $event)"></select-language>
@@ -217,10 +217,10 @@
                           :outlined="inputStyle==='outlined'"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" md="1" v-if="multilingual">
+                      <v-col cols="12" md="2" v-if="multilingual">
                         <v-btn text @click="$refs['langdialogtitleseries' + s.id].open()">
                           <span class="grey--text text--darken-1">
-                            ({{ s.seriesTitleLanguage }})
+                            ({{ s.seriesTitleLanguage ? s.seriesTitleLanguage : '--' }})
                           </span>
                         </v-btn>
                         <select-language :ref="'langdialogtitleseries' + s.id" @language-selected="$emit('input-series', { series: s, seriesTitleLanguageTerm: $event })""></select-language>

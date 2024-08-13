@@ -33,7 +33,7 @@ export const fieldproperties = {
     },
     configurable: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data () {
