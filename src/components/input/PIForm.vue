@@ -106,6 +106,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-text-field>
                           </template>
 
@@ -117,6 +118,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-text-field-suggest>
                           </template>
 
@@ -128,6 +130,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-keyword>
                           </template>
 
@@ -140,6 +143,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                               v-on:up="sortFieldUp(s.fields, f)"
                               v-on:down="sortFieldDown(s.fields, f)"
                             ></p-i-title>
@@ -148,6 +152,7 @@
                           <template v-else-if="f.component === 'p-resource-type-buttongroup'">
                             <p-i-resource-type
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                               v-bind.sync="f"
                               v-on:input="selectInput(f, $event)"
                             ></p-i-resource-type>
@@ -156,6 +161,7 @@
                           <template v-else-if="f.component === 'p-object-type-checkboxes'">
                             <p-i-object-type
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                               v-bind.sync="f"
                               v-on:input="handleObjectTypeCheckboxesInput(f, $event)"
                             ></p-i-object-type>
@@ -168,6 +174,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-select>
                             <v-col cols="12" v-if="(f.predicate === 'edm:rights') && f.showValueDefinition && license">
                               <p-d-license-info :license="license"></p-d-license-info>
@@ -184,6 +191,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-select-text>
                           </template>
 
@@ -195,7 +203,23 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-date-edtf>
+                          </template>
+
+                          <template v-else-if="f.component === 'p-date-edmtimespan'">
+                            <p-i-date-edmtimespan
+                              v-bind.sync="f"
+                              v-on:input-date="f.value=$event"
+                              v-on:input-date-type="setSelected(f, 'type', $event)"
+                              v-on:input-language="setSelected(f, 'language', $event)"
+                              v-on:input-identifier="f.identifier=$event"
+                              v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
+                              v-on:add="addField(s.fields, f)"
+                              v-on:remove="removeField(s.fields, f)"
+                              v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
+                            ></p-i-date-edmtimespan>
                           </template>
 
                           <template v-else-if="f.component === 'p-duration'">
@@ -205,6 +229,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-duration>
                           </template>
 
@@ -225,6 +250,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-series>
                           </template>
 
@@ -238,6 +264,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-citation>
                           </template>
 
@@ -253,6 +280,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-bf-publication>
                           </template>
 
@@ -267,6 +295,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-instance-of>
                           </template>
 
@@ -283,6 +312,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-adaptation>
                           </template>
 
@@ -312,6 +342,8 @@
                               v-on:remove-role="removeContainedInRole(f.roles, $event)"
                               v-on:up-role="sortContainedInRoleUp(f.roles, $event)"
                               v-on:down-role="sortContainedInRoleDown(f.roles, $event)"
+                              v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-contained-in>
                           </template>
 
@@ -327,6 +359,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                               v-on:up="sortFieldUp(s.fields, f)"
                               v-on:down="sortFieldDown(s.fields, f)"
                               v-on:extend="extendEntity(s.fields, f)"
@@ -355,9 +388,25 @@
                               v-on:add-clear="addEntityClear(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                               v-on:up="sortFieldUp(s.fields, f)"
                               v-on:down="sortFieldDown(s.fields, f)"
                             ></p-i-entity-extended>
+                          </template>
+
+                          <template v-else-if="f.component === 'p-entity-fixedrole-person'">
+                            <p-i-entity-fixedrole-person
+                              v-bind.sync="f"
+                              v-on:input-firstname="f.firstname=$event"
+                              v-on:input-lastname="f.lastname=$event"
+                              v-on:input-identifier="f.identifierText = $event"
+                              v-on:add="addField(s.fields, f)"
+                              v-on:remove="removeField(s.fields, f)"
+                              v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
+                              v-on:up="sortFieldUp(s.fields, f)"
+                              v-on:down="sortFieldDown(s.fields, f)"
+                            ></p-i-entity-fixedrole-person>
                           </template>
 
                           <template v-else-if="f.component === 'p-subject-gnd'">
@@ -368,6 +417,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-subject-gnd>
                           </template>
 
@@ -379,6 +429,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-subject-bk>
                           </template>
 
@@ -390,6 +441,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-subject-oefos>
                           </template>
 
@@ -401,6 +453,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-subject-thema>
                           </template>
 
@@ -411,6 +464,8 @@
                               v-on:resolve="updateVocSubject(f, $event)"
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
+                              v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-subject-bic>
                           </template>
 
@@ -423,6 +478,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-spatial-geonames>
                           </template>
 
@@ -435,6 +491,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-spatial-text>
                           </template>
 
@@ -446,6 +503,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-dimension>
                           </template>
 
@@ -458,6 +516,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-see-also>
                           </template>
 
@@ -468,6 +527,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-literal>
                           </template>
 
@@ -479,6 +539,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                               class="my-2"
                             ></p-i-alternate-identifier>
                           </template>
@@ -493,6 +554,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-study-plan>
                           </template>
 
@@ -511,6 +573,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-event>
                           </template>
 
@@ -524,14 +587,18 @@
                               v-on:input-funder-name-language="setSelected(f, 'funderNameLanguage', $event)"
                               v-on:input-description="f.description=$event"
                               v-on:input-description-language="setSelected(f, 'descriptionLanguage', $event)"
+                              v-on:input-code="f.code=$event"
                               v-on:input-identifier="f.identifier=$event"
+                              v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
                               v-on:input-funder-identifier="f.funderIdentifier=$event"
+                              v-on:input-funder-identifier-type="setSelected(f, 'funderIdentifierType', $event)"
                               v-on:input-homepage="f.homepage=$event"
                               v-on:input-date-from="f.dateFrom=$event"
                               v-on:input-date-to="f.dateTo=$event"
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-project>
                           </template>
 
@@ -541,9 +608,11 @@
                               v-on:input-name="f.name=$event"
                               v-on:input-name-language="setSelected(f, 'nameLanguage', $event)"
                               v-on:input-identifier="f.identifier=$event"
+                              v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-funder>
                           </template>
 
@@ -554,6 +623,7 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-association>
                           </template>
 
@@ -562,11 +632,12 @@
                               v-bind.sync="f"
                               v-on:input-value="f.value=$event"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-filename>
                           </template>
 
                           <template v-else-if="f.component === 'p-filename-readonly'">
-                            <p-i-filename-readonly v-bind.sync="f" v-on:configure="editFieldProps(f)"></p-i-filename-readonly>
+                            <p-i-filename-readonly v-bind.sync="f" v-on:configure="editFieldProps(f)" :configurable="enablefieldconfig || f.configurable"></p-i-filename-readonly>
                           </template>
 
                           <template v-else-if="f.component === 'p-unknown'">
@@ -574,6 +645,7 @@
                               v-bind.sync="f"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-unknown>
                           </template>
 
@@ -582,6 +654,7 @@
                               v-bind.sync="f"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-vocab-ext-readonly>
                           </template>
 
@@ -590,6 +663,7 @@
                               v-bind.sync="f"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-spatial-readonly>
                           </template>
 
@@ -601,7 +675,32 @@
                               v-on:add="addField(s.fields, f)"
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
                             ></p-i-file>
+                          </template>
+
+                          <template v-if="f.component === 'p-note-checkbox'">
+                            <p-i-note-checkbox
+                              v-bind.sync="f"
+                              v-on:input="f.value=$event"
+                              v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
+                            ></p-i-note-checkbox>
+                          </template>
+
+                          <template v-if="f.component === 'p-note-checkbox-with-link'">
+                            <p-i-note-checkbox-with-link
+                              v-bind.sync="f"
+                              v-on:input="f.value=$event"
+                              v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
+                            ></p-i-note-checkbox-with-link>
+                          </template>
+
+                          <template v-if="f.component === 'p-alert'">
+                            <p-i-alert
+                              v-bind.sync="f"
+                            ></p-i-alert>
                           </template>
 
                         </v-row>
@@ -690,7 +789,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-            <v-btn v-if="templating" class="mr-3 float-left" v-on="on" dark raised :loading="loading" :disabled="loading" color="grey" @click="saveTemplate()"><span v-t="'Save template'"></span></v-btn>
+            <v-btn v-if="templating && $route.params.templateid" class="mr-3 float-left" v-on="on" dark raised :loading="loading" :disabled="loading" color="grey" @click="saveTemplate()"><span v-t="'Save template'"></span></v-btn>
             <v-spacer></v-spacer>
             <template v-if="!disablesave">
               <v-btn fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
@@ -817,6 +916,7 @@ import PMRights from '../management/PMRights'
 import PDLicenseInfo from '../utils/PDLicenseInfo'
 import PIObjectType from './PIObjectType'
 import PIResourceType from './PIResourceType'
+import PIAlert from './PIAlert'
 import PFeedback from '../utils/PFeedback'
 import PHelp from '../info/PHelp'
 
@@ -860,6 +960,7 @@ export default {
     PISeeAlso,
     PIUnknown,
     PTemplates,
+    PIAlert,
     ObjectFromSearch,
     PMRights,
     PDLicenseInfo,
@@ -922,6 +1023,10 @@ export default {
       default: false
     },
     enablepreview: {
+      type: Boolean,
+      default: false
+    },
+    enablefieldconfig: {
       type: Boolean,
       default: false
     },
@@ -1213,7 +1318,7 @@ export default {
       var httpFormData = new FormData()
       this.loading = true
       httpFormData.append('name', this.templatename)
-      httpFormData.append('form', JSON.stringify(this.template))
+      httpFormData.append('form', JSON.stringify(template))
       try {
         let response = await this.$axios.request({
           method: 'POST',

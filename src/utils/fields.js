@@ -86,7 +86,6 @@ const fields = [
     'skos:prefLabel': [],
     errorMessages: [],
     definition: 'Genre of the creative work, broadcast channel or group. Example: Master thesis, Comedy, Late Renaissance'
-
   },
   {
     id: 'version-type',
@@ -209,6 +208,28 @@ const fields = [
     definition: 'A point or period of time associated with an event in the lifecycle of the resource.'
   },
   {
+    id: 'date-edmtimespan',
+    fieldname: 'Date (text/concept)',
+    predicate: 'date',
+    component: 'p-date-edmtimespan',
+    multiplicable: true,
+    label: 'Date',
+    value: '',
+    dateLabel: '',
+    multilingual: true,
+    language: '',
+    type: 'dcterms:created',
+    idnetifierType: '',
+    identifier: '',
+    identifierVocabulary: 'identifiertype',
+    hideIdentifier: false,
+    hideIdentifierType: false,
+    hideType: false,
+    valueErrorMessages: [],
+    typeErrorMessages: [],
+    definition: 'A point or period of time associated with an event in the lifecycle of the resource.'
+  },
+  {
     id: 'note',
     fieldname: 'Note',
     predicate: 'bf:note',
@@ -258,6 +279,28 @@ const fields = [
     definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
   },
   {
+    id: 'note-checkbox',
+    fieldname: 'Note (checkbox)',
+    predicate: 'bf:note',
+    type: 'phaidra:Remark',
+    component: 'p-note-checkbox',
+    label: 'Note',
+    value: '',
+    language: '',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
+  },
+  {
+    id: 'note-checkbox-with-link',
+    fieldname: 'Note (checkbox with link)',
+    predicate: 'bf:note',
+    type: 'phaidra:Remark',
+    component: 'p-note-checkbox-with-link',
+    label: 'Note',
+    value: '',
+    language: '',
+    definition: 'Information, usually in textual form, on attributes of a resource or some aspect of a resource.'
+  },
+  {
     id: 'language',
     fieldname: 'Language',
     predicate: 'dcterms:language',
@@ -299,6 +342,23 @@ const fields = [
     role: '',
     roleLabel: 'Role',
     hideRole: false,
+    definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
+  },
+  {
+    id: 'fixedrole-person',
+    fieldname: 'Role',
+    predicate: 'role',
+    type: 'schema:Person',
+    component: 'p-entity-fixedrole-person',
+    roleVocabulary: 'rolepredicate',
+    multiplicable: true,
+    ordered: true,
+    firstname: '',
+    firstnameLabel: 'Firstname',
+    lastname: '',
+    lastnameLabel: 'Lastname',
+    role: '',
+    roleLabel: 'Role',
     definition: 'Function played or provided by a contributor, e.g., author, illustrator, etc.'
   },
   {
@@ -360,9 +420,9 @@ const fields = [
     disableIdentifierType: false,
     identifierVocabulary: 'entityidentifiertype',
     firstname: '',
-    firstnameLabel: '',
+    firstnameLabel: 'Firstname',
     lastname: '',
-    lastnameLabel: '',
+    lastnameLabel: 'Lastname',
     name: '',
     nameLabel: 'Name',
     role: '',
@@ -666,6 +726,7 @@ const fields = [
     identifier: '',
     homepage: '',
     funderName: '',
+    funderNameLanguage: '',
     funderIdentifier: '',
     dateFrom: '',
     dateTo: '',
@@ -1358,6 +1419,54 @@ const fields = [
     definition: 'Readonly spatial object.'
   },
   {
+    id: 'accessibility-control',
+    fieldname: 'Accessibility control',
+    predicate: 'schema:accessibilityControl',
+    component: 'p-select',
+    vocabulary: 'accessibilityControl',
+    label: 'Accessibility control',
+    value: '',
+    'skos:prefLabel': [],
+    errorMessages: [],
+    definition: 'Identifies input methods that are sufficient to fully control the described resource. Values should be drawn from the approved vocabulary.'
+  },
+  {
+    id: 'accessibility-feature',
+    fieldname: 'Accessibility feature',
+    predicate: 'schema:accessibilityFeature',
+    component: 'p-select',
+    vocabulary: 'accessibilityFeature',
+    label: 'Accessibility feature',
+    value: '',
+    'skos:prefLabel': [],
+    errorMessages: [],
+    definition: 'Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility. Values should be drawn from the approved vocabulary.'
+  },
+  {
+    id: 'accessibility-hazard',
+    fieldname: 'Accessibility hazard',
+    predicate: 'schema:accessibilityHazard',
+    component: 'p-select',
+    vocabulary: 'accessibilityHazard',
+    label: 'Accessibility hazard',
+    value: '',
+    'skos:prefLabel': [],
+    errorMessages: [],
+    definition: 'A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the approved vocabulary.'
+  },
+  {
+    id: 'access-mode',
+    fieldname: 'Access mode',
+    predicate: 'schema:accessMode',
+    component: 'p-select',
+    vocabulary: 'accessMode',
+    label: 'Access mode',
+    value: '',
+    'skos:prefLabel': [],
+    errorMessages: [],
+    definition: 'The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Values should be drawn from the approved vocabulary.'
+  },
+  {
     id: 'system-tag',
     fieldname: 'System tag',
     predicate: 'phaidra:systemTag',
@@ -1365,6 +1474,18 @@ const fields = [
     label: 'System tag',
     value: '',
     definition: 'A tag for the purpose of identification or to give other information'
+  },
+  {
+    id: 'alert',
+    fieldname: 'Alert',
+    predicate: '',
+    component: 'p-alert',
+    contentperlocale: {
+      eng: '',
+      deu: '',
+      ita: ''
+    },
+    definition: 'Shows additional information in the submitform'
   }
 ]
 
@@ -1400,6 +1521,11 @@ const predicateOrder = [
   'phaidra:dateAccessioned',
   'date',
   'dcterms:temporal',
+
+  'schema:accessibilityControl',
+  'schema:accessMode',
+  'schema:accessibilityHazard',
+  'schema:accessibilityFeature',
 
   'ebucore:hasRelatedEvent',
 

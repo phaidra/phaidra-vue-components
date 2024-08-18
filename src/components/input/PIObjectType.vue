@@ -5,11 +5,11 @@
     </v-alert>
     <v-card outlined class="mt-4 mb-8">
       <v-card-title v-if="showLabel" class="title font-weight-light ">
-      {{ $t('edm:hasType') }}&nbsp;*
+      {{ label }}
       </v-card-title>
       <v-card-text class="mt-4">
         <v-row no-gutters>
-          <v-col cols="12" :md="terms.length <= 6 ? 12 : 6" v-for="(term, i) in terms" :key="'ot'+i">
+          <v-col cols="12" :class="'order-' + (i+1)" :md="terms.length <= 6 ? 12 : 6" v-for="(term, i) in terms" :key="'ot'+i">
             <v-checkbox class="mt-0 check" v-model="checkboxes[term['@id']]" @click.capture="$emit('input', checkboxes)" :label="getLocalizedTermLabel(vocabulary, term['@id'])" :key="'chot'+i"></v-checkbox>
             <v-spacer></v-spacer>
           </v-col>
@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     terms: function () {
-      if (this.vocabulary === 'uniakobjecttypetheses') {
+      if (this.vocabulary === 'uniakobjecttypetheses' || this.vocabulary === 'oerobjecttype') {
         return this.vocabularies[this.vocabulary].terms
       } else {
         return this.resourceType ? this.$store.getters['vocabulary/getObjectTypeForResourceType'](this.resourceType, this.$i18n.locale) : this.vocabularies[this.vocabulary].terms
