@@ -183,14 +183,13 @@ export default {
       var params = {
         size: this.options.itemsPerPage,
         from: ((this.options.page - 1) * this.options.itemsPerPage),
-        q: 'preferredName:' + this.q + ' OR gndIdentifier:' + this.q,
-        format: 'json'
+        q: 'preferredName:' + this.q + ' OR gndIdentifier:' + this.q
       }
 
       try {
         let response = await this.$axios.request({
           method: 'GET',
-          url: 'https://' + this.$store.state.appconfig.apis.lobid.baseurl + '/gnd/search',
+          url: '/gnd/search',
           params: params
         })
         this.items = response.data.member
