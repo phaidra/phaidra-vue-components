@@ -64,7 +64,7 @@
       </v-row>
     </v-slide-y-transition>
     <v-slide-y-transition hide-on-leave>
-      <v-row no-gutters v-show="isCCLicense" :class=" hint ? 'mt-2 mb-6' : 'mb-6'">
+      <v-row no-gutters v-show="showDisclaimer && isCCLicense" :class=" hint ? 'mt-2 mb-6' : 'mb-6'">
         <v-col cols="10">
           <v-row class="px-4">
             <p v-html="$t('LICENSE_DISCLAIMER', { institution: $t($store.state.instanceconfig.institution) })"></p>
@@ -115,6 +115,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showDisclaimer: {
+      type: Boolean,
+      default: true
+    },
     readonly: {
       type: Boolean,
       default: false
@@ -128,7 +132,7 @@ export default {
       return []
     },
     isCCLicense: function () {
-      return this.value.startsWith('http://creativecommons.org/licenses')
+      return this.value?.startsWith('http://creativecommons.org/licenses')
     }
   },
   data () {
