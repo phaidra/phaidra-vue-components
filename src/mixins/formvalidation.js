@@ -48,7 +48,7 @@ export const formvalidation = {
   },
   methods: {
     addAsterixIfNotPresent(value) {
-      return value.includes('*') ? value : value + ' *'
+      return value ? (value.includes('*') ? value : value + ' *') : value 
     },
     markMandatoryWithOefosAndAssoc() {
       for (const s of this.form.sections) {
