@@ -268,7 +268,7 @@ export const formvalidation = {
             }
           }
           if ((f.component === 'p-entity') || (f.component === 'p-entity-extended') || (f.component === 'p-entity-fixedrole-person')) {
-            console.log('found role r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + ']')
+            console.log('checking p[' + f.predicate + '] c[' + f.component + '] r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + '] n[' + f.name + '] org[' + f.organization + '] orgtext[' + f.organizationText + ']')
             if (f.role.length > 0) {
               this.mandatoryFieldsFound['Role'] = true
             }
@@ -277,6 +277,17 @@ export const formvalidation = {
                 this.mandatoryFieldsValidated['Role'] = true
               }
               if (f.lastname.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.name.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+            }
+            if (f.type === 'schema:Organization') {
+              if (f.organization.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.organizationText.length > 0) {
                 this.mandatoryFieldsValidated['Role'] = true
               }
             }
@@ -452,7 +463,7 @@ export const formvalidation = {
             }
           }
           if ((f.component === 'p-entity') || (f.component === 'p-entity-extended') || (f.component === 'p-entity-fixedrole-person')) {
-            console.log('found role r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + ']')
+            console.log('checking p[' + f.predicate + '] c[' + f.component + '] r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + '] n[' + f.name + '] org[' + f.organization + '] orgtext[' + f.organizationText + ']')
             if (f.role.length > 0) {
               this.mandatoryFieldsFound['Role'] = true
             }
@@ -461,6 +472,17 @@ export const formvalidation = {
                 this.mandatoryFieldsValidated['Role'] = true
               }
               if (f.lastname.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.name.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+            }
+            if (f.type === 'schema:Organization') {
+              if (f.organization.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.organizationText.length > 0) {
                 this.mandatoryFieldsValidated['Role'] = true
               }
             }
@@ -627,8 +649,8 @@ export const formvalidation = {
               this.mandatoryFieldsValidated['Description'] = true
             }
           }
-          if ((f.component === 'p-entity') || (f.component === 'p-entity-extended')) {
-            console.log('checking p[' + f.predicate + '] c[' + f.component + '] r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + ']')
+          if ((f.component === 'p-entity') || (f.component === 'p-entity-extended') || (f.component === 'p-entity-fixedrole-person')) {
+            console.log('checking p[' + f.predicate + '] c[' + f.component + '] r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + '] n[' + f.name + '] org[' + f.organization + '] orgtext[' + f.organizationText + ']')
             if (f.role.length > 0) {
               this.mandatoryFieldsFound['Role'] = true
             }
@@ -637,6 +659,17 @@ export const formvalidation = {
                 this.mandatoryFieldsValidated['Role'] = true
               }
               if (f.lastname.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.name.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+            }
+            if (f.type === 'schema:Organization') {
+              if (f.organization.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.organizationText.length > 0) {
                 this.mandatoryFieldsValidated['Role'] = true
               }
             }
@@ -794,8 +827,8 @@ export const formvalidation = {
               this.mandatoryFieldsValidated['Keyword'] = true
             }
           }
-          if ((f.component === 'p-entity') || (f.component === 'p-entity-extended')) {
-            console.log('checking p[' + f.predicate + '] c[' + f.component + '] r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + ']')
+          if ((f.component === 'p-entity') || (f.component === 'p-entity-extended') || (f.component === 'p-entity-fixedrole-person')) {
+            console.log('checking p[' + f.predicate + '] c[' + f.component + '] r[' + f.role + '] fn[' + f.firstname + '] ln[' + f.lastname + '] n[' + f.name + '] org[' + f.organization + '] orgtext[' + f.organizationText + ']')
             if (f.role.length > 0) {
               this.mandatoryFieldsFound['Role'] = true
             }
@@ -804,6 +837,17 @@ export const formvalidation = {
                 this.mandatoryFieldsValidated['Role'] = true
               }
               if (f.lastname.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.name.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+            }
+            if (f.type === 'schema:Organization') {
+              if (f.organization.length > 0) {
+                this.mandatoryFieldsValidated['Role'] = true
+              }
+              if (f.organizationText.length > 0) {
                 this.mandatoryFieldsValidated['Role'] = true
               }
             }
