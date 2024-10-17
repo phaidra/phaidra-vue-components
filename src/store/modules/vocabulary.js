@@ -285,6 +285,13 @@ const vocabularies = {
     ],
     loaded: true
   },
+  'irprojectid': {
+    terms: [
+      { '@id': 'ids:doi', 'skos:prefLabel': { 'eng': 'DOI' }, 'skos:example': '10.1629/uksg.419' },
+      { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI/URL' }, 'skos:example': 'https://example.com/path/resource.txt' }
+    ],
+    loaded: true
+  },
   'entityidentifiertype': {
     terms: [
       { '@id': 'ids:orcid', 'skos:prefLabel': { 'eng': 'ORCID' }, 'skos:example': '0000-0002-1825-0097' },
