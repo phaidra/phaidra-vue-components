@@ -284,11 +284,15 @@ export const formvalidation = {
               }
             }
             if (f.type === 'schema:Organization') {
-              if (f.organization.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organization) {
+                if (f.organization.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
-              if (f.organizationText.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organizationText) {
+                if (f.organizationText.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
             }
           }
@@ -479,11 +483,15 @@ export const formvalidation = {
               }
             }
             if (f.type === 'schema:Organization') {
-              if (f.organization.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organization) {
+                if (f.organization.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
-              if (f.organizationText.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organizationText) {
+                if (f.organizationText.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
             }
           }
@@ -666,11 +674,15 @@ export const formvalidation = {
               }
             }
             if (f.type === 'schema:Organization') {
-              if (f.organization.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organization) {
+                if (f.organization.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
-              if (f.organizationText.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organizationText) {
+                if (f.organizationText.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
             }
           }
@@ -844,11 +856,15 @@ export const formvalidation = {
               }
             }
             if (f.type === 'schema:Organization') {
-              if (f.organization.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organization) {
+                if (f.organization.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
-              if (f.organizationText.length > 0) {
-                this.mandatoryFieldsValidated['Role'] = true
+              if (f.organizationText) {
+                if (f.organizationText.length > 0) {
+                  this.mandatoryFieldsValidated['Role'] = true
+                }
               }
             }
           }
