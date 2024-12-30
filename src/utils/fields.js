@@ -644,6 +644,7 @@ const fields = [
     series: [
       {
         id: 'contained-in-series',
+        seriesType: 'schema:CreativeWork',
         seriesTitle: '',
         seriesTitleLanguage: '',
         seriesVolume: '',
@@ -657,7 +658,6 @@ const fields = [
         removable: false
       }
     ],
-    seriesType: 'schema:CreativeWork',
     seriesLabel: 'rdau:P60101_rdau:P60193',
     seriesCollapse: false,
     publisherLabel: 'Publisher',

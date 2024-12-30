@@ -1348,7 +1348,7 @@ export default {
         }
       } catch (error) {
         console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        this.$store.commit('setAlerts', [{ type: 'error', msg: error }])
       } finally {
         this.loading = false
         this.templatedialog = false
@@ -1377,7 +1377,7 @@ export default {
         }
       } catch (error) {
         console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        this.$store.commit('setAlerts', [{ type: 'error', msg: error }])
       } finally {
         this.loading = false
         this.templatedialog = false
@@ -1491,7 +1491,7 @@ export default {
         }
       } catch (error) {
         console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        this.$store.commit('setAlerts', [{ type: 'error', msg: error }])
       } finally {
         this.$vuetify.goTo(0)
         this.loading = false
@@ -1518,7 +1518,7 @@ export default {
         })
         if (response.data.alerts && response.data.alerts.length > 0) {
           if (response.data.status === 401) {
-            response.data.alerts.push({ type: 'danger', msg: 'Please log in' })
+            response.data.alerts.push({ type: 'error', msg: 'Please log in' })
           }
           this.$store.commit('setAlerts', response.data.alerts)
         }
@@ -1527,7 +1527,7 @@ export default {
         }
       } catch (error) {
         console.log(error)
-        this.$store.commit('setAlerts', [{ type: 'danger', msg: error }])
+        this.$store.commit('setAlerts', [{ type: 'error', msg: error }])
       } finally {
         this.$vuetify.goTo(0)
         this.loading = false
