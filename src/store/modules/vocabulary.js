@@ -585,6 +585,12 @@ const vocabularies = {
     ],
     loaded: true
   },
+  'authoronlyrolepredicate': {
+    terms: [
+      { '@id': 'role:aut', 'skos:prefLabel': { 'eng': 'Author', 'deu': 'Autor*in', 'ita': 'Author' } }
+    ],
+    loaded: true
+  },
   'submitrolepredicate': {
     terms: [
       { '@id': 'role:oth', 'skos:prefLabel': { 'eng': 'Other', 'deu': 'Andere', 'ita': 'Altro' }, 'skos:definition': { 'eng': 'A role that has no equivalent in the MARC list.', 'deu': 'Eine Rolle, die keine Entsprechung in der MARC-Liste hat.' } },
@@ -1564,9 +1570,9 @@ const vocabularies = {
   'uniakobjecttypetheses': {
     terms: [
       { '@id': 'http://base.uni-ak.ac.at/vocabulary/diploma', 'skos:prefLabel': { 'eng': 'Diploma', 'deu': 'Diplomarbeit' } },
-      { '@id': 'http://base.uni-ak.ac.at/vocabulary/master', 'skos:prefLabel': { 'eng': 'Master', 'deu': 'Masterarbeit' } },
-      { '@id': 'http://base.uni-ak.ac.at/vocabulary/bachelor', 'skos:prefLabel': { 'eng': 'Bachelor', 'deu': 'Bachelorarbeit' } },
-      { '@id': 'http://base.uni-ak.ac.at/vocabulary/doctoral_programmes', 'skos:prefLabel': { 'eng': 'Doctoral programmes' } },
+      { '@id': 'http://base.uni-ak.ac.at/vocabulary/master', 'skos:prefLabel': { 'eng': 'Master thesis', 'deu': 'Masterarbeit' } },
+      { '@id': 'http://base.uni-ak.ac.at/vocabulary/bachelor', 'skos:prefLabel': { 'eng': 'Bachelor thesis', 'deu': 'Bachelorarbeit' } },
+      { '@id': 'http://base.uni-ak.ac.at/vocabulary/doctoral_programmes', 'skos:prefLabel': { 'eng': 'Dissertation', 'deu': 'Dissertation' } },
       { '@id': 'http://base.uni-ak.ac.at/vocabulary/written_component_of_artistic_thesis', 'skos:prefLabel': { 'eng': 'Written component of artistic Thesis', 'deu': 'Schriftlicher Teil der künstlerischen Abschlussarbeit' } }
     ],
     loaded: true
@@ -2133,7 +2139,7 @@ const actions = {
         let terms = []
         thema.getThemaTerms(terms, response.data.vocabulary, null)
         commit('setThema', { tree: response.data.vocabulary, terms: terms, locale: locale })
-        console.log(terms)
+        // console.log(terms)
       } catch (error) {
         console.log(error)
         commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch thema: ' + error }])
@@ -2153,7 +2159,7 @@ const actions = {
         let terms = []
         bic.getBicTerms(terms, response.data.vocabulary, null)
         commit('setBic', { tree: response.data.vocabulary, terms: terms, locale: locale })
-        console.log(terms)
+        // console.log(terms)
       } catch (error) {
         console.log(error)
         commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch BIC: ' + error }])
