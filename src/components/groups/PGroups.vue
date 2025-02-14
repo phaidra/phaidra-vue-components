@@ -34,11 +34,11 @@
                   <v-spacer></v-spacer>
                   <v-dialog v-model="createDialog" max-width="500px">
                     <template v-slot:activator="{ on }">
-                      <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('New group') }}</v-btn>
+                      <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('Create new group') }}</v-btn>
                     </template>
                     <v-card>
                       <v-card-title class="title font-weight-light grey white--text">
-                        {{ $t('Create new group') }}
+                        {{ $t('New group') }}
                       </v-card-title>
                       <v-card-text>
                         <v-text-field
@@ -124,32 +124,15 @@
               </template>
             </v-data-table>
             <v-card-actions>
-              <v-autocomplete
-                v-model="userSearchModel"
-                :items="userSearchItems.length > 0 ? userSearchItems : []"
-                :loading="userSearchLoading"
-                :search-input.sync="userSearch"
-                :label="$t('User search')"
-                :placeholder="$t('Start typing to search')"
-                item-value="uid"
-                item-text="value"
-                prepend-icon="mdi-database-search"
-                hide-no-data
-                hide-selected
-                return-object
-                clearable
-                @click:clear="userSearchItems=[]"
-              >
-                <template slot="item" slot-scope="{ item }">
-                  <template v-if="item">
-                    <v-list-item-content two-line>
-                      <v-list-item-title>{{ item.value }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ item.uid }}</v-list-item-subtitle>
-                    </v-list-item-content>
-                  </template>
-                </template>
-              </v-autocomplete>
-              <v-btn class="primary ml-2" :disabled="userSearchLoading" @click="addMember()">{{ $t('Apply') }}</v-btn>
+              <v-btn class="mb-4 mt-4 primary" @click="$refs.userSearchdialog.open()">
+                Search Users
+                <v-icon
+                  right
+                  dark
+                >
+                  mdi-database-search
+                </v-icon>
+              </v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card-text>
@@ -162,22 +145,27 @@
           {{ $t('Delete group') }}
         </v-card-title>
         <v-card-text>
-          <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('Delete group') + groupToDelete.name + '?' }}</p>
+          <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('Delete group') + ' ' + groupToDelete.name + '?' }}</p>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn dark @click="createDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
+          <v-btn dark @click="deleteDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
           <v-btn @click="deleteGroup()" color="primary">{{ $t('Delete') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <user-search-dialog ref="userSearchdialog" @user-selected="searchUserSelected($event)"></user-search-dialog>
   </v-container>
 </template>
 
 <script>
+import UserSearchDialog from '../select/UserSearchDialog'
 
 export default {
   name: 'p-groups',
+  components: {
+    UserSearchDialog
+  },
   computed: {
     instance: function () {
       return this.$store.state.instanceconfig
@@ -274,6 +262,12 @@ export default {
     }
   },
   methods: {
+    searchUserSelected: function(selectedUser) {
+      this.userSearchModel = {
+        uid: selectedUser.username
+      }
+      this.addMember()
+    },
     deleteGroupDialog: function (group) {
       this.groupToDelete = group
       this.deleteDialog = true

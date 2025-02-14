@@ -34,11 +34,11 @@
                   <v-spacer></v-spacer>
                   <v-dialog v-model="createDialog" max-width="500px">
                     <template v-slot:activator="{ on }">
-                      <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('New list') }}</v-btn>
+                      <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('Create new object list') }}</v-btn>
                     </template>
                     <v-card>
                       <v-card-title class="title font-weight-light grey white--text">
-                        {{ $t('Create new object list') }}
+                        {{ $t('New object list') }}
                       </v-card-title>
                       <v-card-text>
                         <v-text-field
@@ -72,7 +72,7 @@
                 {{ item.updated | unixtime }}
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-btn text class="mx-3" @click="loadedList = item">{{$t('Select')}}</v-btn>
+                <v-icon color="grey" class="mx-3" @click="loadedList = item">mdi-pencil</v-icon>
                 <v-icon color="grey" class="mx-3" @click="deleteListDialog(item)">mdi-delete</v-icon>
               </template>
             </v-data-table>
@@ -120,7 +120,7 @@
                 </v-toolbar>
               </template>
               <template v-slot:item.pid="{ item }">
-                <router-link :to="{ name: 'detail', params: { pid: item.pid } }">{{ item.pid }}</router-link>
+                <router-link :to="{ path: `detail/${item.pid}`, params: { pid: item.pid } }">{{ item.pid }}</router-link>
               </template>
               <template v-slot:item.title="{ item }">
                 {{ item.title | truncate(100) }}

@@ -28,11 +28,11 @@
         <v-row class="hidden-md-and-up">
           <v-bottom-sheet v-model="filterdialog" scrollable>
             <template v-slot:activator="{ on }">
-              <v-btn class="ml-4 mb-6" color="primary" v-on="on">Filters</v-btn>
+              <v-btn class="ml-4 mb-6" color="primary" v-on="on">{{ $t('Filters') }}</v-btn>
             </template>
             <v-card height="400px">
               <v-card-title class="border-bottom">
-                <h3 class="title font-weight-light primary--text pa-2">Filters</h3>
+                <h3 class="title font-weight-light primary--text pa-2">{{ $t('Filters') }}</h3>
                 <v-spacer></v-spacer>
                 <v-icon @click="filterdialog = !filterdialog">mdi-close</v-icon>
               </v-card-title>
@@ -51,7 +51,7 @@
           </v-bottom-sheet>
         </v-row>
         <v-row no-gutters>
-          <v-btn dark v-if="inCollection" class="mb-8 grey">{{ $t('Members of') }}<router-link class="ml-2 white--text" :to="localePath(`/detail/${inCollection}`)">{{ inCollection }}</router-link> <v-icon right @click.native="removeCollectionFilter()">mdi-close</v-icon></v-btn>
+          <v-btn v-if="inCollection" class="mb-8" color="primary">{{ $t('Members of') }}<router-link class="ml-1 white--text" :to="localePath(`/detail/${inCollection}`)">{{ inCollection }}</router-link><v-icon right @click.native="removeCollectionFilter()">mdi-close</v-icon></v-btn>
           <v-pagination v-if="total>pagesize" v-bind:length="totalPages" justify="center" total-visible="10" v-model="page" class="mb-8" />
           <p-search-results
             :docs="docs"
@@ -63,7 +63,7 @@
         </v-row>
       </v-col>
       <v-col cols="3" class="pa-2 hidden-sm-and-down">
-        <h3 class="title font-weight-light primary--text border-bottom pa-2">Filters</h3>
+        <h3 class="title font-weight-light primary--text border-bottom pa-2">{{ $t('Filters') }}</h3>
         <p-search-filters
           ref="searchFilters"
           :search="search"
@@ -240,7 +240,10 @@ export default {
         this.docs = response.data.response.docs
         this.total = response.data.response.numFound
         this.facet_counts = response.data.facet_counts
-        updateFacetQueries(response.data.facet_counts.facet_queries, this.facetQueries)
+        if(!this.isFacetCountUpdated){
+          updateFacetQueries(response.data.facet_counts.facet_queries, this.facetQueries)
+          this.isFacetCountUpdated = true
+        }
       } catch (error) {
         this.$store.commit('setLoading', false)
         console.log(error)
@@ -368,6 +371,7 @@ export default {
   data () {
     return {
       link: '',
+      isFacetCountUpdated: false,
       limitdialog: false,
       linkdialog: false,
       selectioncheck: false,
