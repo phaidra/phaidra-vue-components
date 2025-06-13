@@ -1,16 +1,17 @@
 <template>
-  <v-container v-if="form && (form.length > 0)">
+  <div v-if="form && (form.length > 0)">
     <v-card :outlined="!title">
-      <v-card-title v-if="title" class="font-weight-light grey white--text">{{ $t(title) }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
+      <v-card-title v-if="title" class="title font-weight-light white--text">{{ $t(title) }}<template v-if="targetpid">&nbsp;-&nbsp;<span class="text-lowercase">{{ targetpid }}</span></template></v-card-title>
       <v-alert dismissible :type="'error'" :value="!valid" transition="fade-transition">
         <span>{{ $t('Metadata validation failed') }}</span>
         <ul v-if="validationErrors.length > 0">
           <li v-for="(e, i) in this.validationErrors" :key="'valEre'+i">{{ e }}</li>
         </ul>
       </v-alert>
-      <v-tabs slider-color="primary" slider-size="20px" dark background-color="grey" vertical v-model="activetab">
+      <v-divider></v-divider>
+      <v-tabs slider-color="primary" slider-size="20px" background-color="grey darken-2" vertical v-model="activetab">
         <template v-for="(s, i) in this.form">
-          <v-tab :active-class="'primary'" v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tab'+i">
+          <v-tab class="white--text" :active-class="'primary'" v-if="(s.xmlname !== 'annotation') && (s.xmlname !== 'etheses')" :key="'tab'+i">
             <span v-t="s.labels[alpha2locale]"></span>
           </v-tab>
         </template>
@@ -25,10 +26,10 @@
       <v-divider v-if="targetpid"></v-divider>
       <v-card-actions v-if="targetpid">
         <v-spacer></v-spacer>
-        <v-btn @click="save()" :loading="loading" :disabled="loading" color="primary">{{ $t('Save') }}</v-btn>
+        <v-btn large @click="save()" :loading="loading" :disabled="loading" color="primary">{{ $t('Save') }}</v-btn>
       </v-card-actions>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -238,8 +239,18 @@ export default {
       }
       this.loading = true
       var httpFormData = new FormData()
+      const metadata = this.getMetadata()
+      metadata.metadata.uwmetadata.forEach(element => {
+        if(element.xmlname === 'histkult' && element.children.length > 0) {
+          element.children.forEach(child => {
+            if(child.xmlname === 'dimensions') {
+              child.ordered = 0
+            }
+          })
+        }
+      });
       httpFormData.append('mimetype', this.mimetype)
-      httpFormData.append('metadata', JSON.stringify(this.getMetadata()))
+      httpFormData.append('metadata', JSON.stringify(metadata))
       try {
         let response = await this.$axios.request({
           method: 'POST',

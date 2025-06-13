@@ -1,14 +1,14 @@
 <template>
-  <v-container fluid>
+  <div>
+    <h1 class="d-sr-only">{{ $t('Object lists') }}</h1>
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title class="title font-weight-light grey white--text">
+          <v-card-title class="title font-weight-light white--text">
             {{ $t('Manage object lists') }}
           </v-card-title>
           <v-card-text>
             <v-data-table
-              hide-default-header
               :headers="listsHeaders"
               :items="lists"
               :search="listsSearch"
@@ -23,21 +23,21 @@
               :no-results-text="$t('There were no search results')"
             >
               <template v-slot:top>
-                <v-toolbar flat>
-                  <!-- <v-text-field
+                <v-toolbar flat color="transparent" class="my-4">
+                  <v-text-field
                     v-model="listsSearch"
                     append-icon="mdi-magnify"
                     :label="$t('Search...')"
                     single-line
                     hide-details
-                  ></v-text-field> -->
+                  ></v-text-field>
                   <v-spacer></v-spacer>
                   <v-dialog v-model="createDialog" max-width="500px">
                     <template v-slot:activator="{ on }">
                       <v-btn color="primary" dark class="mb-2" v-on="on">{{ $t('Create new object list') }}</v-btn>
                     </template>
                     <v-card>
-                      <v-card-title class="title font-weight-light grey white--text">
+                      <v-card-title class="title font-weight-light white--text">
                         {{ $t('New object list') }}
                       </v-card-title>
                       <v-card-text>
@@ -50,7 +50,7 @@
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn dark @click="createDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
+                        <v-btn outlined @click="createDialog = false">{{ $t('Cancel') }}</v-btn>
                         <v-btn @click="createList()" color="primary">{{ $t('Create') }}</v-btn>
                       </v-card-actions>
                     </v-card>
@@ -59,8 +59,8 @@
               </template>
               <template v-slot:item.name="{ item }">
                 <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <span v-on="on">{{ item.name }}</span>
+                  <template v-slot:activator="{ on, attrs }">
+                    <span v-on="on" v-bind="attrs">{{ item.name }}</span>
                   </template>
                   <span>{{ item.listid }}</span>
                 </v-tooltip>
@@ -72,8 +72,22 @@
                 {{ item.updated | unixtime }}
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon color="grey" class="mx-3" @click="loadedList = item">mdi-pencil</v-icon>
-                <v-icon color="grey" class="mx-3" @click="deleteListDialog(item)">mdi-delete</v-icon>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn icon class="mx-3" color="primary" @click="loadedList = item" v-on="on" v-bind="attrs" :aria-label="$t('Edit')">
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{ $t('Edit') }}</span>
+                </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn icon class="mx-3" color="btnred" @click="deleteListDialog(item)" v-on="on" v-bind="attrs" :aria-label="$t('Delete')">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{ $t('Delete') }}</span>
+                </v-tooltip>
               </template>
             </v-data-table>
           </v-card-text>
@@ -83,14 +97,13 @@
     <v-row v-if="loadedList">
       <v-col cols="12">
         <v-card>
-          <v-card-title class="title font-weight-light grey white--text">
+          <v-card-title class="title font-weight-light white--text">
             <span>{{ loadedList.name }}</span>
             <v-spacer></v-spacer>
             <template v-if="token && token.length > 0"><a class="pl-2 white--text" target="_blank" :href="'/list/' + token">{{ instance.baseurl + '/list/' + token }}</a></template>
           </v-card-title>
           <v-card-text>
             <v-data-table
-              hide-default-header
               :headers="membersHeaders"
               :items="members"
               :search="membersSearch"
@@ -105,7 +118,7 @@
               :no-results-text="$t('There were no search results')"
             >
               <template v-slot:top>
-                <v-toolbar flat>
+                <v-toolbar flat color="transparent" class="mt-4">
                   <v-spacer></v-spacer>
                   <!-- <v-text-field
                     v-model="membersSearch"
@@ -114,19 +127,26 @@
                     single-line
                     hide-details
                   ></v-text-field> -->
-                  <v-btn v-if="token && token.length > 0" color="primary" dark class="mb-2 ml-2"  @click="deleteToken(loadedList.listid)">{{ $t('Remove public link') }}</v-btn>
+                  <v-btn v-if="token && token.length > 0" color="btnred" dark class="mb-2 ml-2"  @click="deleteToken(loadedList.listid)">{{ $t('Remove public link') }}</v-btn>
                   <v-btn v-else color="primary" dark class="mb-2 ml-2"  @click="createToken(loadedList.listid)">{{ $t('Create public link') }}</v-btn>
                   <v-btn v-if="members.length > 0" color="primary" dark class="mb-2 ml-2"  @click="$refs.collectiondialog.open()">{{ $t('Add objects to collection') }}</v-btn>
                 </v-toolbar>
               </template>
               <template v-slot:item.pid="{ item }">
-                <router-link :to="{ path: `detail/${item.pid}`, params: { pid: item.pid } }">{{ item.pid }}</router-link>
+                <nuxt-link :to="{ path: `detail/${item.pid}`, params: { pid: item.pid } }">{{ item.pid }}</nuxt-link>
               </template>
               <template v-slot:item.title="{ item }">
                 {{ item.title | truncate(100) }}
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon color="grey" class="mx-3" @click="removeMember(item.pid)">mdi-delete</v-icon>
+                <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn icon class="mx-3" color="btnred" @click="removeMember(item.pid)" v-on="on" v-bind="attrs" :aria-label="$t('Remove')">
+                        <v-icon>mdi-delete</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>{{ $t('Remove') }}</span>
+                </v-tooltip>                
               </template>
             </v-data-table>
           </v-card-text>
@@ -135,21 +155,21 @@
     </v-row>
     <v-dialog v-model="deleteDialog" max-width="500px" v-if="listToDelete">
       <v-card>
-        <v-card-title class="title font-weight-light grey white--text">
+        <v-card-title class="title font-weight-light white--text">
           {{ $t('Delete object list') }}
         </v-card-title>
-        <v-card-text>
-          <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('Delete object list') + ' ' + listToDelete.name + '?' }}</p>
+        <v-card-text class="mt-4">
+          <p class="title font-weight-light">{{ $t('Delete object list') + ' ' + listToDelete.name + '?' }}</p>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn dark @click="deleteDialog = false" color="grey">{{ $t('Cancel') }}</v-btn>
-          <v-btn @click="deleteList()" color="primary">{{ $t('Delete') }}</v-btn>
+          <v-btn outlined @click="deleteDialog = false">{{ $t('Cancel') }}</v-btn>
+          <v-btn dark @click="deleteList()" color="btnred">{{ $t('Delete') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <collection-dialog ref="collectiondialog" @collection-selected="addToCollection($event)"></collection-dialog>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -165,16 +185,6 @@ export default {
       return this.$store.state.instanceconfig
     }
   },
-  watch: {
-    loadedList: {
-      handler: async function () {
-        if (this.loadedList) {
-          await this.refreshLoadedList()
-        }
-      },
-      deep: true
-    }
-  },
   data () {
     return {
       createDialog: false,
@@ -186,25 +196,42 @@ export default {
       listsLoading: false,
       listsSearch: '',
       deleteListConfirm: false,
-      listsHeaders: [
-        { text: 'Name', align: 'left', value: 'name' },
-        { text: 'Created', align: 'right', value: 'created' },
-        { text: 'Updated', align: 'right', value: 'updated' },
-        { text: 'Actions', align: 'right', value: 'actions', sortable: false }
-      ],
+      listsHeaders: [],
       lists: [],
       loadedList: null,
       membersLoading: false,
       membersSearch: '',
       deleteMembersConfirm: false,
-      membersHeaders: [
-        { text: 'PID', align: 'left', value: 'pid' },
-        { text: 'Title', align: 'left', value: 'title' },
-        { text: 'Actions', align: 'right', value: 'actions', sortable: false }
-      ],
+      membersHeaders: [],
       members: [],
       token: null
     }
+  },
+  watch: {
+     '$i18n.locale': {
+        immediate: true, // Ensure it's set on load
+        handler() {
+          this.listsHeaders = [
+            { text: this.$t('Name'), align: 'left', value: 'name' },
+            { text: this.$t('Created'), align: 'right', value: 'created' },
+            { text: this.$t('Modified'), align: 'right', value: 'updated' },
+            { text: this.$t('Actions'), align: 'right', value: 'actions', sortable: false }
+          ];
+          this.membersHeaders = [
+            { text: this.$t('PID'), align: 'left', value: 'pid' },
+            { text: this.$t('Title'), align: 'left', value: 'title' },
+            { text: this.$t('Actions'), align: 'right', value: 'actions', sortable: false }
+          ];
+        }
+     },
+     loadedList: {
+      handler: async function () {
+        if (this.loadedList) {
+          await this.refreshLoadedList()
+        }
+      },
+      deep: true
+    },
   },
   methods: {
     refreshLoadedList: async function () {
@@ -239,7 +266,7 @@ export default {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        this.$store.commit('setAlerts', [ { msg: this.$t('Share link successfuly created'), type: 'success' } ])
+        this.$store.commit('setAlerts', [ { msg: this.$t('Share link successfully created'), type: 'success' } ])
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
@@ -262,7 +289,7 @@ export default {
             'X-XSRF-TOKEN': this.$store.state.user.token
           }
         })
-        this.$store.commit('setAlerts', [ { msg: this.$t('Share link successfuly deleted'), type: 'success' } ])
+        this.$store.commit('setAlerts', [ { msg: this.$t('Share link successfully deleted'), type: 'success' } ])
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)
         }
@@ -287,7 +314,7 @@ export default {
           },
           data: httpFormData
         })
-        this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
+        this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfully updated'), type: 'success' } ])
         this.$router.push({ path: `detail/${collection.pid}` })
         if (response.data.alerts && response.data.alerts.length > 0) {
           this.$store.commit('setAlerts', response.data.alerts)

@@ -4,12 +4,12 @@
     <v-col cols="12">
 
       <v-card class="mb-8">
-        <v-card-title class="title font-weight-light grey white--text">
+        <v-card-title class="title font-weight-light white--text">
             <span>{{ $t('Project') }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <template v-slot:activator="{ on }">
-                <v-btn v-on="on" icon dark>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-on="on" v-bind="attrs" icon dark>
                   <v-icon dark>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
@@ -37,7 +37,7 @@
               </v-col>
               <v-col cols="1" v-if="multilingual">
                 <v-btn text @click="$refs.langdialogname.open()">
-                  <span class="grey--text text--darken-1">
+                  <span>
                     ({{ nameLanguage ? nameLanguage : '--' }})
                   </span>
                 </v-btn>
@@ -58,7 +58,7 @@
               </v-col>
               <v-col cols="1" v-if="multilingual">
                 <v-btn text @click="$refs.langdialogdesc.open()">
-                  <span class="grey--text text--darken-1">
+                  <span>
                     ({{ descriptionLanguage ? descriptionLanguage : '--' }})
                   </span>
                 </v-btn>
@@ -88,15 +88,16 @@
                             max-width="290px"
                             min-width="290px"
                           >
-                            <template v-slot:activator="{ on }">
-                              <v-icon v-on="on">mdi-calendar</v-icon>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-icon v-on="on" v-bind="attrs">mdi-calendar</v-icon>
                             </template>
                             <v-date-picker
                               color="primary"
                               :value="dateFrom"
                               :show-current="false"
                               v-model="pickerFromModel"
-                              :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                              :first-day-of-week="1"
+                              :locale="alpha2bcp47($i18n.locale)"
                               v-on:input="dateFromMenu = false; $emit('input-date-from', $event)"
                             ></v-date-picker>
                           </v-menu>
@@ -126,15 +127,16 @@
                             max-width="290px"
                             min-width="290px"
                           >
-                            <template v-slot:activator="{ on }">
-                              <v-icon v-on="on">mdi-calendar</v-icon>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-icon v-on="on" v-bind="attrs">mdi-calendar</v-icon>
                             </template>
                             <v-date-picker
                               color="primary"
                               :value="dateTo"
                               :show-current="false"
                               v-model="pickerToModel"
-                              :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                              :first-day-of-week="1"
+                              :locale="alpha2bcp47($i18n.locale)"
                               v-on:input="dateToMenu = false; $emit('input-date-to', $event)"
                             ></v-date-picker>
                           </v-menu>
@@ -225,7 +227,7 @@
           </v-col>
           <v-col cols="1" v-if="multilingual">
             <v-btn text @click="$refs.langdialogfunder.open()">
-              <span class="grey--text text--darken-1">
+              <span>
                 ({{ funderNameLanguage ? funderNameLanguage : '--' }})
               </span>
             </v-btn>
@@ -278,13 +280,14 @@
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import datepickerproperties from '../../mixins/datepickerproperties'
 import { fieldproperties } from '../../mixins/fieldproperties'
 import { validationrules } from '../../mixins/validationrules'
 import SelectLanguage from '../select/SelectLanguage'
 
 export default {
   name: 'p-i-project',
-  mixins: [vocabulary, fieldproperties, validationrules],
+  mixins: [vocabulary, fieldproperties, validationrules, datepickerproperties],
   components: {
     SelectLanguage
   },

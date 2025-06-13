@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters>
-      <v-col md="9" cols="12" class="border-right pr-2" >
-        <v-row align="start" class="my-2">
+      <v-col md="9" cols="12" class="pr-2">
+        <v-row align="start" class="pt-2 pb-4">
           <v-col md="6" cols="9">
             <p-search-autocomplete
               :placeholder="$t('SEARCH_PLACEHOLDER')"
@@ -13,6 +13,7 @@
               solo
               :messages="[ total + ' ' + $t('objects') ]"
             ></p-search-autocomplete>
+             <a href="#filters" class="skip-link d-sr-only-focusable">{{ $t('Go to Search Filters') }}</a>
           </v-col>
           <v-spacer></v-spacer>
           <v-col  md="6" cols="12">
@@ -31,10 +32,12 @@
               <v-btn class="ml-4 mb-6" color="primary" v-on="on">{{ $t('Filters') }}</v-btn>
             </template>
             <v-card height="400px">
-              <v-card-title class="border-bottom">
-                <h3 class="title font-weight-light primary--text pa-2">{{ $t('Filters') }}</h3>
+              <v-card-title>
+                <h2 class="title font-weight-light white--text">{{ $t('Filters') }}</h2>
                 <v-spacer></v-spacer>
-                <v-icon @click="filterdialog = !filterdialog">mdi-close</v-icon>
+                <v-btn icon dark @click="filterdialog = !filterdialog" :aria-label="$t('Close')">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
               </v-card-title>
               <v-card-text>
                 <p-search-filters
@@ -51,19 +54,33 @@
           </v-bottom-sheet>
         </v-row>
         <v-row no-gutters>
-          <v-btn v-if="inCollection" class="mb-8" color="primary">{{ $t('Members of') }}<router-link class="ml-1 white--text" :to="localePath(`/detail/${inCollection}`)">{{ inCollection }}</router-link><v-icon right @click.native="removeCollectionFilter()">mdi-close</v-icon></v-btn>
-          <v-pagination v-if="total>pagesize" v-bind:length="totalPages" justify="center" total-visible="10" v-model="page" class="mb-8" />
+          <v-btn v-if="inCollection" class="mb-8" color="primary">{{ $t('Members of') }}<nuxt-link class="ml-1 white--text" :to="localePath(`/detail/${inCollection}`)">{{ inCollection }}</nuxt-link><v-icon right @click.native="removeCollectionFilter()">mdi-close</v-icon></v-btn>
+          <v-pagination
+          :wrapper-aria-label="$t('pagination')"
+          :page-aria-label="$t('page')"
+          :previous-aria-label="$t('previous')"
+          :next-aria-label="$t('next')"
+          :current-page-aria-label="$t('currentPage')" 
+          v-if="total>pagesize" v-bind:length="totalPages" justify="center" total-visible="10" v-model="page" class="mb-8" />
           <p-search-results
             :docs="docs"
             :total="total"
             :selectioncheck="selectioncheck"
             :getallresults="getAllResults">
           </p-search-results>
-          <v-pagination v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
+          <v-pagination
+          :wrapper-aria-label="$t('pagination')"
+          :page-aria-label="$t('page')"
+          :previous-aria-label="$t('previous')"
+          :next-aria-label="$t('next')"
+          :current-page-aria-label="$t('currentPage')"
+          v-if="total>pagesize" v-bind:length="totalPages" total-visible="10" v-model="page" class="mb-3" />
         </v-row>
       </v-col>
-      <v-col cols="3" class="pa-2 hidden-sm-and-down">
-        <h3 class="title font-weight-light primary--text border-bottom pa-2">{{ $t('Filters') }}</h3>
+      <v-divider vertical class="divider hidden-sm-and-down"></v-divider>
+      <v-col cols="3" class="pa-3 pt-2 hidden-sm-and-down">
+        <h2 id="filters" class="h5 font-weight-light">{{ $t('Filters') }}</h2>
+        <v-divider class="mt-3 divider"></v-divider>
         <p-search-filters
           ref="searchFilters"
           :search="search"
@@ -76,16 +93,13 @@
       </v-col>
       <v-dialog v-model="limitdialog" width="500">
         <v-card>
-          <v-card-title class="grey white--text">{{ $t('Selection limit' ) }}</v-card-title>
-          <v-card-text>
-            <p class="mt-6 title font-weight-light grey--text text--darken-3">{{ $t('SELECTION_LIMIT', { limit: appconfig.search.selectionlimit }) }}</p>
+          <v-card-title class="title font-weight-light white--text">{{ $t('Selection limit') }}</v-card-title>
+          <v-card-text class="mt-4">
+            {{ $t('SELECTION_LIMIT', { limit: appconfig.search.selectionlimit }) }}
           </v-card-text>
           <v-card-actions>
-            <v-container fluid>
-              <v-row justify="end" class="px-4">
-                <v-btn color="grey" dark @click="limitdialog = false">{{ $t('Ok') }}</v-btn>
-              </v-row>
-            </v-container>
+            <v-spacer></v-spacer>
+            <v-btn outlined @click="limitdialog = false">{{ $t("Close") }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -173,7 +187,7 @@ export default {
         params.rows = response.data.response.numFound
         params.indent = 'on'
         params.wt = 'csv'
-        params.fl = ['pid', 'dc_title', 'dc_creator', 'dc_contributor', 'dc_description', 'dc_language', 'keywords:keyword_suggest', 'dc_rights', 'bib_published', 'dc_identifier', 'owner', 'dc_format','edm_hastype','resourcetype','created', 'modified', 'size','is_in_container:ismemberof','is_in_collection:ispartof']
+        params.fl = ['pid', 'dc_title', 'dc_creator', 'bib_published']
         params['fl.alias'] = ''
         const csvquery = qs.stringify(params, { encodeValuesOnly: true, indices: false })
         this.$axios.request('/search/select?' + csvquery, {
@@ -219,7 +233,10 @@ export default {
       let params = buildParams(this, ands)
       if (this.inCollection) {
         const pid = this.inCollection.replace(/[o:]/g, '')
-        params.sort = `pos_in_o_${pid} asc`
+        const activeSortLength = this.sortdef.filter(x => x.active).length
+        if(!activeSortLength){
+          params.sort = `pos_in_o_${pid} asc`
+        }
       }
       if (process.browser) {
         this.link = location.protocol + '//' + location.host + location.pathname + '?' + searchdefarr.join('&')
@@ -240,10 +257,10 @@ export default {
         this.docs = response.data.response.docs
         this.total = response.data.response.numFound
         this.facet_counts = response.data.facet_counts
-        if(!this.isFacetCountUpdated){
-          updateFacetQueries(response.data.facet_counts.facet_queries, this.facetQueries)
-          this.isFacetCountUpdated = true
-        }
+        updateFacetQueries(response.data.facet_counts.facet_queries, this.facetQueries)
+        this.$nextTick(() => {
+          this.$forceUpdate()
+        })
       } catch (error) {
         this.$store.commit('setLoading', false)
         console.log(error)
@@ -371,7 +388,6 @@ export default {
   data () {
     return {
       link: '',
-      isFacetCountUpdated: false,
       limitdialog: false,
       linkdialog: false,
       selectioncheck: false,
@@ -456,12 +472,8 @@ export default {
 </script>
 
 <style scoped>
-.border-right {
-  border-right: 1px solid #bdbdbd;
-}
-
-.border-bottom {
-  border-bottom: 1px solid #bdbdbd;
+.divider {
+  border-color: #bdbdbd;
 }
 
 svg {
@@ -471,5 +483,11 @@ svg {
 .theme--light.v-pagination .v-pagination__item--active {
   box-shadow: none;
   -webkit-box-shadow: none;
+  }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 10px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid v-if="form && form.sections" >
+  <div v-if="form && form.sections" >
     <v-alert
       v-model="serverSubmitError"
       dismissible
@@ -48,12 +48,12 @@
     </v-tabs>
 
     <v-tabs-items v-model="activetab">
-      <v-tab-item class="pa-3" v-if="form">
+      <v-tab-item class="pa-4" v-if="form">
 
         <v-row v-for="(s) in this.form.sections" :key="s.id" class="ma-3">
 
           <v-card v-if="s.type === 'resourcelink'" width="100%" class="mb-6">
-            <v-card-title class="title font-weight-light grey white--text">
+            <v-card-title class="title font-weight-light white--text">
               <span>{{s.title}}</span>
               <v-spacer></v-spacer>
             </v-card-title>
@@ -69,17 +69,17 @@
           </v-card>
 
           <v-card :outlined="s.outlined" :flat="(!s.title || (s.mode === 'expansion' && s.collapsed) || s.flat)" v-else-if="(s.type !== 'accessrights')" width="100%">
-            <v-card-title v-if="s.title" class="title font-weight-light" :class="{ 'grey white--text': (s.mode !== 'expansion' || !s.collapsed) }">
+            <v-card-title v-if="s.title" class="title font-weight-light white--text">
               <span v-t="s.title"></span>
               <v-spacer></v-spacer>
               <v-checkbox dark color="white" v-if="s.type === 'member'" v-model="previewMember" :label="$t('Container thumbnail')" :value="s.id"></v-checkbox>
               <v-spacer></v-spacer>
-              <v-btn :dark="!s.collapsed" icon @click="s.collapsed = !s.collapsed">
+              <v-btn dark icon @click="s.collapsed = !s.collapsed">
                 <v-icon>{{ s.collapsed ? 'mdi-chevron-down' : 'mdi-chevron-up' }}</v-icon>
               </v-btn>
               <v-menu open-on-hover bottom offset-y v-if="!s.disablemenu">
-                <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" icon dark>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn v-on="on" v-bind="attrs" icon dark>
                     <v-icon dark>mdi-dots-vertical</v-icon>
                   </v-btn>
                 </template>
@@ -104,12 +104,12 @@
             </v-card-title>
             <v-expand-transition>
               <div v-show="!s.collapsed">
-                <v-card-text class="mt-4 pb-0">
+                <v-card-text class="pb-0">
 
                   <div v-for="(f) in s.fields" :key="'dv'+f.id">
                     <v-tooltip :disabled="!mouseoverfielddef" open-delay="1700" bottom >
-                      <template v-slot:activator="{ on }">
-                        <v-row v-on="on" no-gutters>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-row v-on="on" v-bind="attrs" no-gutters>
                           <template v-if="f.component === 'p-text-field'">
                             <p-i-text-field
                               v-bind.sync="f"
@@ -355,6 +355,7 @@
                               v-on:up-role="sortContainedInRoleUp(f.roles, $event)"
                               v-on:down-role="sortContainedInRoleDown(f.roles, $event)"
                               v-on:configure="editFieldProps(f)"
+                              v-on:remove="removeField(s.fields, f)"
                               :configurable="enablefieldconfig || f.configurable"
                             ></p-i-contained-in>
                           </template>
@@ -383,6 +384,8 @@
                               v-bind.sync="f"
                               v-on:change-type="f.type = $event"
                               v-on:input-firstname="f.firstname = $event"
+                              v-on:input-birthdate="f.birthdate = $event"
+                              v-on:input-deathdate="f.deathdate = $event"
                               v-on:input-lastname="f.lastname = $event"
                               v-on:input-name="f.name = $event"
                               v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
@@ -430,6 +433,7 @@
                               v-on:remove="removeField(s.fields, f)"
                               v-on:configure="editFieldProps(f)"
                               :configurable="enablefieldconfig || f.configurable"
+                              :prefLabel="f['skos:prefLabel']"
                             ></p-i-subject-gnd>
                           </template>
 
@@ -639,6 +643,19 @@
                             ></p-i-association>
                           </template>
 
+                          <template v-else-if="f.component === 'p-association-text'">
+                            <p-i-association-text
+                              v-bind.sync="f"
+                              v-on:input="f.value=$event"
+                              v-on:input-association-type="setSelected(f, 'type', $event)"
+                              v-on:input-language="setSelected(f, 'language', $event)"
+                              v-on:add="addField(s.fields, f)"
+                              v-on:remove="removeField(s.fields, f)"
+                              v-on:configure="editFieldProps(f)"
+                              :configurable="enablefieldconfig || f.configurable"
+                            ></p-i-association-text>
+                          </template>
+
                           <template v-else-if="f.component === 'p-filename'">
                             <p-i-filename
                               v-bind.sync="f"
@@ -730,7 +747,7 @@
                           </v-btn>
                         </template>
                         <v-card>
-                          <v-card-title class="grey white--text"><span v-t="'Add metadata fields'"></span><v-spacer></v-spacer><v-btn target='_blank' :to="'/metadata-fields-help'">{{ $t('Help') }}</v-btn></v-card-title>
+                          <v-card-title class="title font-weight-light white--text"><span v-t="'Add metadata fields'"></span><v-spacer></v-spacer><v-btn class="grey--text text--darken-2" color="white" target='_blank' :to="'/metadata-fields-help'"><v-icon class="mr-2" aria-hidden="true">mdi-help-circle-outline</v-icon>{{ $t('Help') }}</v-btn></v-card-title>
                           <v-card-text>
                             <v-list three-line >
                               <v-text-field clearable :label="$t('Search...')" append-icon="mdi-magnify" v-model="searchfieldsinput"></v-text-field>
@@ -750,12 +767,12 @@
                             <v-container fluid>
                               <v-row>
                                 <v-col v-if="addfieldselection.length > 0">
-                                  <span v-t="$t('Selected fields:')" class="mr-2"></span> <v-chip class="mx-1" :key="'addflds'+index" v-for="(ch, index) in addfieldselection" close @click:close="removeField(addfieldselection, ch)">{{ ch.fieldname }}</v-chip>
+                                  <span v-t="$t('Selected fields:')" class="mr-2"></span> <v-chip class="mx-1" :key="'addflds'+index" v-for="(ch, index) in addfieldselection" close @click:close="removeField(addfieldselection, ch)">{{ $t(ch.fieldname) }}</v-chip>
                                 </v-col>
                                 <v-col v-else><span v-t="'Please select metadata fields from the list'"></span></v-col>
                               </v-row>
                               <v-row justify="end">
-                                <v-btn class="mx-1" color="grey" dark @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
+                                <v-btn class="mx-1" outlined @click="addfieldselection = []; s['adddialogue'] = false"><span v-t="'Cancel'"></span></v-btn>
                                 <v-btn class="mx-1" color="primary" @click="addFields(s)"><span v-t="'Add'"></span></v-btn>
                               </v-row>
                             </v-container>
@@ -790,13 +807,13 @@
                 <v-btn class="mr-3 float-left" v-on="on" large raised :loading="loading" :disabled="loading" color="primary"><span v-t="'Save as new template'"></span></v-btn>
               </template>
               <v-card>
-                <v-card-title class="title font-weight-light grey lighten-2" primary-title><span v-t="'Save as new template'"></span></v-card-title>
+                <v-card-title class="title font-weight-light white--text"><span v-t="'Save as new template'"></span></v-card-title>
                 <v-card-text>
                   <v-text-field class="mt-4" hide-details filled single-line v-model="templatename" :label="$t('Template name')" ></v-text-field>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn :loading="loading" :disabled="loading" color="grey" dark @click="templatedialog= false"><span v-t="'Cancel'"></span></v-btn>
+                  <v-btn :loading="loading" :disabled="loading" outlined @click="templatedialog= false"><span v-t="'Cancel'"></span></v-btn>
                   <v-btn :loading="loading" :disabled="loading" color="primary" @click="saveAsNewTemplate()"><span v-t="'Save'"></span></v-btn>
                 </v-card-actions>
               </v-card>
@@ -806,26 +823,28 @@
             <template v-if="!disablesave">
               <v-btn large fixed bottom right v-if="targetpid && floatingsavebutton" raised :loading="loading" :disabled="loading" color="primary" @click="save()"><span v-t="'Save'"></span></v-btn>
               <v-btn v-else-if="targetpid && !floatingsavebutton" large raised :loading="loading" :disabled="loading" class="primary float-right" @click="save()"><span v-t="'Save'"></span></v-btn>
+              <v-btn v-else-if="forcePreview" large raised :loading="loading" :disabled="loading" class="primary float-right" @click="showForcePreview()"><span v-t="'Preview'"></span></v-btn>
               <v-btn v-else large raised :loading="loading" :disabled="loading" class="primary float-right" @click="submit()"><span v-t="'Upload'"></span></v-btn>
             </template>
+            <v-switch :hide-details="true" class="float-right mt-1 mx-2" v-if="$store.state.user.isadmin" v-model="skipValidation" :label="$t('Skip validation')"></v-switch>
           </v-col>
         </v-row>
 
       </v-tab-item>
-      <v-tab-item v-if="debug" class="pa-3">
+      <v-tab-item v-if="debug" class="pa-4">
         <div style="white-space: pre;">{{ JSON.stringify(metadatapreview, null, 2) }}</div>
       </v-tab-item>
-      <v-tab-item v-if="templating" class="ma-4">
+      <v-tab-item v-if="templating" class="pa-4">
         <p-templates ref="templates" v-on:load-template="loadTemplate($event)"></p-templates>
       </v-tab-item>
-      <v-tab-item  v-if="importing">
+      <v-tab-item v-if="importing" class="pa-4">
         <v-row no-gutters>
           <v-col cols="12">
             <object-from-search :title="$t('Import metadata from existing object')" v-on:object-selected="importFromObject($event)" :jsonld-only="true"></object-from-search>
           </v-col>
         </v-row>
       </v-tab-item>
-      <v-tab-item v-if="enablerights && !targetpid">
+      <v-tab-item v-if="enablerights && !targetpid" class="pa-4">
         <v-row no-gutters>
           <v-col cols="12">
             <p-m-rights 
@@ -847,20 +866,21 @@
           </v-col>
         </v-row>
       </v-tab-item>
-      <v-tab-item v-if="(submittype !== 'container') && enablepreview" class="pa-3">
+      <v-tab-item v-if="(submittype !== 'container') && enablepreview" class="pa-4">
         <p-d-jsonld :jsonld="jsonld"></p-d-jsonld>
+        <v-btn large raised :loading="loading" :disabled="loading" class="primary float-right" @click="submit()"><span v-t="'Upload'"></span></v-btn>
       </v-tab-item>
-      <v-tab-item v-if="help" class="pa-3">
+      <v-tab-item v-if="help" class="pa-4">
         <p-help></p-help>
       </v-tab-item>
-      <v-tab-item v-if="feedback" class="pa-3">
+      <v-tab-item v-if="feedback" class="pa-4">
         <p-feedback :firstname="feedbackUser.firstname" :lastname="feedbackUser.lastname" :email="feedbackUser.email" :context="feedbackContext"></p-feedback>
       </v-tab-item>
     </v-tabs-items>
     <v-dialog v-model="showEditFieldPopup" max-width="600px" scrollable>
       <v-card>
-        <v-card-title>
-          <span class="text-h5">Field Settings</span>
+        <v-card-title class="title font-weight-light white--text">
+          {{ $t("Field Settings") }}
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -875,17 +895,17 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="showEditFieldPopup = false">
-            Close
+          <v-btn outlined @click="showEditFieldPopup = false">
+            {{ $t("Cancel") }}
           </v-btn>
           <v-btn color="primary" @click="saveFieldProp()">
-            Save
+            {{ $t("Save") }}
           </v-btn>
         </v-card-actions>
       </v-card>
 </v-dialog>
 
-  </v-container>
+  </div>
 
 </template>
 
@@ -914,6 +934,7 @@ import PIProject from './PIProject'
 import PIEvent from './PIEvent'
 import PIFunder from './PIFunder'
 import PIAssociation from './PIAssociation'
+import PIAssociationText from './PIAssociationText'
 import PISeries from './PISeries'
 import PIContainedIn from './PIContainedIn'
 import PICitation from './PICitation'
@@ -964,6 +985,7 @@ export default {
     PIEvent,
     PIFunder,
     PIAssociation,
+    PIAssociationText,
     PISeries,
     PIContainedIn,
     PICitation,
@@ -1014,6 +1036,10 @@ export default {
       type: Boolean,
       default: true
     },
+    forcePreview: {
+      type: Boolean,
+      default: false
+    },
     mouseoverfielddef: {
       type: Boolean,
       default: false
@@ -1027,6 +1053,10 @@ export default {
       default: true
     },
     importing: {
+      type: Boolean,
+      default: true
+    },
+    enableLicenseAdd: {
       type: Boolean,
       default: true
     },
@@ -1059,7 +1089,7 @@ export default {
       default: false
     },
     validationfnc: {
-      type: Function
+      type: [Function, String]
     },
     help: {
       type: Boolean,
@@ -1107,9 +1137,9 @@ export default {
     },
     filteredMetadatafields () {
       if (this.searchfieldsinput) {
-        return this.$store.state.vocabulary.fields.filter(f => (this.$t(f.fieldname).toLowerCase().includes(this.searchfieldsinput.toLowerCase()) || (this.$t(f.definition).toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
+        return this.$store.state.vocabulary.fields.filter(f => this.enableLicenseAdd || f.id !== "license").filter(f => (this.$t(f.fieldname).toLowerCase().includes(this.searchfieldsinput.toLowerCase()) || (this.$t(f.definition).toLowerCase().includes(this.searchfieldsinput.toLowerCase()))))
       } else {
-        return this.$store.state.vocabulary.fields
+        return this.$store.state.vocabulary.fields.filter(f => this.enableLicenseAdd || f.id !== "license")
       }
     },
     instanceconfig: function () {
@@ -1118,6 +1148,7 @@ export default {
   },
   data () {
     return {
+      skipValidation: false,
       activetab: null,
       loadedMetadata: [],
       loading: false,
@@ -1148,6 +1179,12 @@ export default {
           this.markMandatory()
         }
       }
+    },
+    showForcePreview: function() {
+      this.validationError = false
+      this.updateJsonld()
+      this.activetab = 2
+      window.scrollTo(0,0);
     },
     editFieldProps: function(fieldDet) {
       this.fieldPropForm = []
@@ -1421,7 +1458,10 @@ export default {
       if (this.validationfnc instanceof Function) {
         console.log('passed validationfnc')
         return this.validationfnc(this.targetpid)
-      } else {
+      } else if (typeof(this.validationfnc) === 'string') {
+        return this[this.validationfnc](this.targetpid)
+      }
+      else {
         if (this.instanceconfig.validationfnc) {
           console.log('configured validation: ' + this.instanceconfig.validationfnc)
           return this[this.instanceconfig.validationfnc](this.targetpid)
@@ -1434,8 +1474,11 @@ export default {
     submit: async function () {
       this.serverSubmitError = false
       this.serverSubmitErrors = []
-      if (!this.formIsValid()) {
+      if (!this.skipValidation && !this.formIsValid()) {
         this.validationError = true
+        if(this.forcePreview){
+          this.activetab = 0
+        }
         return
       }
       this.loading = true
@@ -1840,9 +1883,7 @@ export default {
       }
     },
     setSelected: function (f, property, event) {
-      if (event) {
-        this.$set(f, property, event['@id'])
-      }
+      this.$set(f, property, event['@id'])
       this.$emit('form-input-' + f.component, f)
       // eg on
       // v-on:input-identifier-type="setSelected(f, 'identifierType', $event)"
@@ -2078,7 +2119,11 @@ export default {
       for (var i = 0; i < this.addfieldselection.length; i++) {
         let f = fields.getField(this.addfieldselection[i].id)
         f.removable = true
-        section.fields.push(f)
+        if(f.id.includes("phaidra:Subject")) {
+          this.form.sections.push(f)
+        } else {
+          section.fields.push(f)
+        }
       }
       this.addfieldselection = []
       section['adddialogue'] = false
@@ -2086,7 +2131,7 @@ export default {
   },
   mounted: function () {
     this.$store.dispatch('vocabulary/loadLanguages', this.$i18n.locale)
-    this.$store.dispatch('vocabulary/sortFields', this.$i18n.locale)
+    this.$store.dispatch('vocabulary/sortFields', {locale: this.$i18n.locale, i18nInstance: this.$i18n})
   }
 }
 </script>

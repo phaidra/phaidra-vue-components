@@ -1,10 +1,13 @@
 <template>
   <v-card :flat="!title">
-    <v-card-title v-if="title" class="title font-weight-light grey white--text">{{ title }}</v-card-title>
+    <v-card-title v-if="title" class="title font-weight-light white--text">{{ title }}</v-card-title>
     <v-divider v-if="title"></v-divider>
-    <v-card-text class="mt-4">
-      <v-container fluid>
-        <v-row class="title font-weight-light">{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</v-row>
+    <v-card-text>
+        <v-row>
+          <v-col>
+            <h2 class="title font-weight-light">{{ $t('Here you can add or remove relationships to other objects inside this repository.') }}</h2>
+          </v-col>
+        </v-row>
         <v-row>
           <v-col cols="12">
             <v-data-table
@@ -29,7 +32,14 @@
                 <a target="_blank" :href="instance.baseurl + '/' + item.object">{{ item.object }}</a>
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-icon :disabled="loading" color="grey" class="mx-3" @click="removeRelationship(item)">mdi-delete</v-icon>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn :disabled="loading" icon class="mx-3" color="btnred" @click="removeRelationship(item)" v-on="on" v-bind="attrs" :aria-label="$t('Remove')">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{ $t('Remove') }}</span>
+                </v-tooltip>                
               </template>
             </v-data-table>
           </v-col>
@@ -37,7 +47,7 @@
         <v-row>
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('Add new relationship of object') + ' ' + pid }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ $t('Add new relationship of object') + ' ' + pid }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
                 <v-container fluid>
@@ -89,7 +99,6 @@
             </v-card>
           </v-col>
         </v-row>
-      </v-container>
     </v-card-text>
   </v-card>
 </template>
@@ -141,12 +150,7 @@ export default {
     return {
       loading: false,
       relationshipsArray: [],
-      relationshipsHeaders: [
-        { text: this.$t('Relation'), align: 'left', value: 'relation' },
-        { text: this.$t('Object'), align: 'left', value: 'object' },
-        { text: this.$t('Title'), align: 'left', value: 'title' },
-        { text: '', align: 'right', value: 'actions', sortable: false }
-      ],
+      relationshipsHeaders: [],
       selectedRelationship: null,
       objectSearch: null,
       objectSearchModel: null,
@@ -155,6 +159,17 @@ export default {
     }
   },
   watch: {
+    '$i18n.locale': {
+      immediate: true, // Ensure it's set on load
+      handler() {
+        this.relationshipsHeaders = [
+          { text: this.$t('Relation'), align: 'left', value: 'relation' },
+          { text: this.$t('Object'), align: 'left', value: 'object' },
+          { text: this.$t('Title'), align: 'left', value: 'title' },
+          { text: this.$t('Actions'), align: 'right', value: 'actions', sortable: false }
+        ]
+      }
+    },
     relationships: {
       handler: async function (val) {
         this.loading = true
@@ -274,7 +289,7 @@ export default {
               data: httpFormData
             })
             if (response.status === 200) {
-              this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly added' }])
+              this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfully added' }])
             } else {
               if (response.data.alerts && response.data.alerts.length > 0) {
                 this.$store.commit('setAlerts', response.data.alerts)
@@ -309,7 +324,7 @@ export default {
             data: httpFormData
           })
           if (response.status === 200) {
-            this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfuly removed' }])
+            this.$store.commit('setAlerts', [{ type: 'success', msg: 'Relationship successfully removed' }])
           } else {
             if (response.data.alerts && response.data.alerts.length > 0) {
               this.$store.commit('setAlerts', response.data.alerts)

@@ -9,7 +9,7 @@ const fields = [
     type: 'ids:doi',
     showType: true,
     disableType: false,
-    multiplicable: false,
+    multiplicable: true,
     identifierLabel: 'Identifier',
     valueErrorMessages: [],
     value: '',
@@ -53,6 +53,20 @@ const fields = [
     predicate: 'edm:hasType',
     component: 'p-select',
     vocabulary: 'objecttype',
+    multiplicable: true,
+    label: 'Object type',
+    value: '',
+    'skos:prefLabel': [],
+    errorMessages: [],
+    definition: 'This property relates a resource with the concepts it belongs to. It does not capture aboutness. Example: Photography',
+    helptext: 'An object type represents real-world entity. For example, an object type can represent a photography, an interview, a lecture or a letter.'
+  },
+  {
+    id: 'object-type-oer',
+    fieldname: 'OER Object type (Higher Education Resource Types)',
+    predicate: 'edm:hasType',
+    component: 'p-select',
+    vocabulary: 'oerobjecttype',
     multiplicable: true,
     label: 'Object type',
     value: '',
@@ -604,7 +618,7 @@ const fields = [
     issn: '',
     idnetifierType: '',
     identifier: '',
-    hidePages: true,
+    hidePages: false,
     pageStart: '',
     pageEnd: '',
     pageStartLabel: 'Page start',
@@ -729,6 +743,16 @@ const fields = [
     definition: 'Events, all real or fictional.'
   },
   {
+    title: 'SUBJECT_SECTION',
+    type: 'phaidra:Subject',
+    id: 'phaidra:Subject',
+    removable: true,
+    multiplicable: true,
+    fields: [],
+    fieldname: 'SUBJECT_SECTION',
+    definition: "A metadata level describing the represented object. You can use 'Level of description' field to indicate the level."
+  },
+  {
     id: 'project',
     fieldname: 'Project',
     predicate: 'frapo:isOutputOf',
@@ -764,6 +788,20 @@ const fields = [
     predicate: 'rdax:P00009',
     component: 'p-association',
     multiplicable: true,
+    label: 'Association',
+    value: '',
+    'skos:prefLabel': [],
+    definition: 'Relates an object to a corporate body who is associated with an object.'
+  },
+  {
+    id: 'association-text',
+    fieldname: 'Association (Text)',
+    predicate: 'rdax:P00009',
+    type: 'foaf:Organization',
+    component: 'p-association-text',
+    showtype: true,
+    multiplicable: true,
+    multilingual: true,
     label: 'Association',
     value: '',
     'skos:prefLabel': [],
@@ -847,7 +885,7 @@ const fields = [
     id: 'temporal-coverage',
     fieldname: 'Temporal coverage',
     predicate: 'dcterms:temporal',
-    type: 'skos:Concept',
+    type: 'edm:TimeSpan',
     component: 'p-text-field',
     label: 'Temporal coverage',
     multilingual: true,
@@ -926,7 +964,8 @@ const fields = [
     component: 'p-text-field',
     label: 'Volume',
     value: '',
-    definition: 'A volume number.'
+    definition: 'A volume number.',
+    allowLanguageCancel: true
   },
   {
     id: 'issue',
@@ -935,7 +974,8 @@ const fields = [
     component: 'p-text-field',
     label: 'Issue',
     value: '',
-    definition: 'An issue number.'
+    definition: 'An issue number.',
+    allowLanguageCancel: true
   },
   {
     id: 'extent',
@@ -1208,7 +1248,7 @@ const fields = [
     predicate: 'dcterms:spatial',
     component: 'p-spatial-geonames',
     multiplicable: true,
-    label: 'Depicted/Represented place',
+    label: 'Depicted/Represented place (Geonames)',
     searchlabel: 'Search...',
     hint: 'Press Enter to initiate search',
     value: '',
@@ -1239,8 +1279,8 @@ const fields = [
     predicate: 'vra:placeOfCreation',
     component: 'p-spatial-geonames',
     multiplicable: true,
-    label: 'Place of creation',
-    searchlabel: 'Wien, Großvenediger, Donau Kanal, ...',
+    label: 'Place of creation (Geonames)',
+    searchlabel: 'Search...',
     value: '',
     type: 'schema:Place',
     disabletype: false,
@@ -1268,8 +1308,8 @@ const fields = [
     predicate: 'vra:placeOfRepository',
     component: 'p-spatial-geonames',
     multiplicable: true,
-    label: 'Place of repository',
-    searchlabel: 'Wien, Großvenediger, Donau Kanal, ...',
+    label: 'Place of repository (Geonames)',
+    searchlabel: 'Search...',
     value: '',
     type: 'schema:Place',
     disabletype: false,
@@ -1297,8 +1337,8 @@ const fields = [
     predicate: 'vra:placeOfSite',
     component: 'p-spatial-geonames',
     multiplicable: true,
-    label: 'Place of site',
-    searchlabel: 'Wien, Großvenediger, Donau Kanal, ...',
+    label: 'Place of site (Geonames)',
+    searchlabel: 'Search...',
     value: '',
     type: 'schema:Place',
     disabletype: false,
@@ -1330,6 +1370,8 @@ const fields = [
     value: '',
     'skos:prefLabel': [],
     errorMessages: [],
+    removable: false,
+    multiplicable: false,
     definition: 'The definition of the container if available as a MIME type.'
   },
   {
@@ -1611,9 +1653,14 @@ export default {
     for (let f of fields) {
       switch (f.id) {
         case 'sociocultural-category':
+        case 'physical-location-select-text':
         case 'physical-location-select-text-pool':
         case 'subject':
         case 'fixedrole-person':
+        case 'alert':
+        case 'note-checkbox':
+        case 'note-checkbox-with-link':
+        case 'mime-type':
           break
         default:
           fieldsNew.push(f)
@@ -1629,9 +1676,14 @@ export default {
     for (var i = 0; i < editable.length; i++) {
       switch (editable[i].id) {
         case 'sociocultural-category':
+        case 'physical-location-select-text':
         case 'physical-location-select-text-pool':
         case 'subject':
         case 'fixedrole-person':
+        case 'alert':
+        case 'note-checkbox':
+        case 'note-checkbox-with-link':
+        case 'mime-type':
           break
         default:
           var field = JSON.parse(JSON.stringify(editable[i]))

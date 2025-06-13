@@ -1,7 +1,7 @@
 <template>
-  <v-card>
-    <v-card-title class="grey white--text">
-      <span class="title font-weight-light">{{ title ? title : $t('Select an object') }}</span>
+  <v-card class="mt-4">
+    <v-card-title class="title font-weight-light white--text">
+      {{ title ? title : $t('Select an object') }}
       <v-spacer></v-spacer>
       <v-switch
         dark
@@ -21,7 +21,6 @@
         v-on:blur="search()"
       ></v-text-field>
       <v-data-table
-        hide-default-header
         :headers="objectsHeaders"
         :items="objects"
         :loading="loading"
@@ -86,17 +85,23 @@ export default {
         // mustSort: boolean
       },
       objectsSearch: '',
-      objectsHeaders: [
-        { text: 'Pid', align: 'left', value: 'pid' },
-        { text: 'Title', align: 'left', value: 'title' },
-        { text: 'Created', align: 'right', value: 'created' },
-        { text: 'Actions', align: 'right', value: 'actions', sortable: false }
-      ],
+      objectsHeaders: [],
       objects: [],
       totalObjects: 0
     }
   },
   watch: {
+    '$i18n.locale': {
+      immediate: true, // Ensure it's set on load
+      handler() {
+        this.objectsHeaders = [
+        { text: this.$t('Pid'), align: 'left', value: 'pid' },
+        { text: this.$t('Title'), align: 'left', value: 'title' },
+        { text: this.$t('Created'), align: 'right', value: 'created' },
+        { text: this.$t('Actions'), align: 'right', value: 'actions', sortable: false }
+      ];
+      }
+    },
     options: {
       handler () {
         this.search()

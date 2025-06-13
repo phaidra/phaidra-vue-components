@@ -4,12 +4,12 @@
       <v-row>
         <v-col cols="12">
           <v-card outlined class="mb-8">
-            <v-card-title class="title font-weight-light grey white--text">
+            <v-card-title class="title font-weight-light white--text">
               <span>{{ $t(label) }}</span>
               <v-spacer></v-spacer>
               <v-menu open-on-hover bottom offset-y v-if="actions.length">
-                <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" icon dark>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn v-on="on" v-bind="attrs" icon dark>
                     <v-icon dark>mdi-dots-vertical</v-icon>
                   </v-btn>
                 </template>
@@ -116,6 +116,10 @@ export default {
     dividerbottom: {
       type: Boolean,
       default: false
+    },
+    prefLabel: {
+      type: Array,
+      default: false
     }
   },
   watch: {
@@ -127,6 +131,12 @@ export default {
     },
     selected (item) {
       (item !== null) && this.resolve(item)
+    }
+  },
+  mounted() {
+    if(this.prefLabel?.length){
+      this.resolved = '<a href="' + this.value + '" target="_blank">' + this.prefLabel[0]['@value'] + '</a>'
+      this.q = this.prefLabel[0]['@value']
     }
   },
   data () {

@@ -2,24 +2,26 @@
   <v-row v-if="!hidden">
     <v-col cols="12">
       <v-card class="mb-8" width="100%">
-        <v-card-title class="title font-weight-light grey white--text">
+        <v-card-title class="title font-weight-light white--text">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
-          <v-btn icon dark @click="$emit('add', $event)">
-            <v-icon>mdi-content-duplicate</v-icon>
-          </v-btn>
-          <v-btn icon dark @click="$emit('add-clear', $event)">
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-          <v-btn icon dark @click="$emit('remove', $event)">
-            <v-icon>mdi-minus</v-icon>
-          </v-btn>
-          <v-btn icon dark @click="$emit('up', $event)">
-            <v-icon>mdi-chevron-up</v-icon>
-          </v-btn>
-          <v-btn icon dark @click="$emit('down', $event)">
-            <v-icon>mdi-chevron-down</v-icon>
-          </v-btn>
+          <template v-if="showActions">
+            <v-btn icon dark @click="$emit('add', $event)">
+              <v-icon>mdi-content-duplicate</v-icon>
+            </v-btn>
+            <v-btn icon dark @click="$emit('add-clear', $event)">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <v-btn icon dark @click="$emit('remove', $event)">
+              <v-icon>mdi-minus</v-icon>
+            </v-btn>
+            <v-btn icon dark @click="$emit('up', $event)">
+              <v-icon>mdi-chevron-up</v-icon>
+            </v-btn>
+            <v-btn icon dark @click="$emit('down', $event)">
+              <v-icon>mdi-chevron-down</v-icon>
+            </v-btn>
+          </template>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-4">
@@ -123,6 +125,34 @@
                       :rules="identifierType ? [validationrules[getIdentifierRuleName(identifierType)]] : [validationrules['noop']]"
                       :filled="inputStyle==='filled'"
                       :outlined="inputStyle==='outlined'"
+                    ></v-text-field>
+                  </v-col>
+                </template>
+                <template v-if="showBirthAndDeathDate">
+                  <v-col cols="12" md="6">
+                    <v-text-field
+                      :value="birthdate"
+                      :label="$t(birthDateLabel ? birthDateLabel : 'Birth Date')"
+                      v-on:blur="$emit('input-birthdate',$event.target.value)"
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
+                      :rules="[validationrules.date]"
+                      :hint="$t('Format YYYY-MM-DD')"
+                      :background-color="birthDateBackgroundColor ? birthDateBackgroundColor : undefined"
+                      :error-messages="birthDateErrorMessages"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field
+                      :value="deathdate"
+                      :label="$t(deathDateLabel ? deathDateLabel : 'Death Date')"
+                      v-on:blur="$emit('input-deathdate',$event.target.value)"
+                      :filled="inputStyle==='filled'"
+                      :outlined="inputStyle==='outlined'"
+                      :rules="[validationrules.date]"
+                      :hint="$t('Format YYYY-MM-DD')"
+                      :background-color="deathDateBackgroundColor ? deathDateBackgroundColor : undefined"
+                      :error-messages="deathDateErrorMessages"
                     ></v-text-field>
                   </v-col>
                 </template>
@@ -241,7 +271,7 @@
                 </v-col>
               </v-row>
             </template>
-            <v-row v-if="typeModel === 'schema:Person'">
+            <v-row v-if="(typeModel === 'schema:Person') && showAffiliation">
               <v-col cols="2">
                 <v-radio-group v-model="affiliationRadio" class="mt-0" @change="$emit('change-affiliation-type', $event)">
                   <v-radio color="primary" :label="$t(instanceconfig.institution)" :value="'select'"></v-radio>
@@ -338,6 +368,12 @@ export default {
     lastname: {
       type: String
     },
+    birthdate: {
+      type: String
+    },
+    deathdate: {
+      type: String
+    },
     name: {
       type: String
     },
@@ -348,6 +384,12 @@ export default {
       type: String
     },
     lastnameLabel: {
+      type: String
+    },
+    birthDateLabel: {
+      type: String
+    },
+    deathDateLabel: {
       type: String
     },
     nameLabel: {
@@ -420,6 +462,12 @@ export default {
     lastnameErrorMessages: {
       type: Array
     },
+    birthDateErrorMessages: {
+      type: Array
+    },
+    deathDateErrorMessages: {
+      type: Array
+    },
     roleErrorMessages: {
       type: Array
     },
@@ -455,6 +503,18 @@ export default {
       type: Boolean,
       default: false
     },
+    showBirthAndDeathDate: {
+      type: Boolean,
+      default: true
+    },
+    showActions: {
+      type: Boolean,
+      default: true
+    },
+    showAffiliation: {
+      type: Boolean,
+      default: true
+    },
     enableTypeSelect: {
       type: Boolean,
       default: true
@@ -476,6 +536,14 @@ export default {
       default: undefined
     },
     firstnameBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    birthDateBackgroundColor: {
+      type: String,
+      default: undefined
+    },
+    deathDateBackgroundColor: {
       type: String,
       default: undefined
     },

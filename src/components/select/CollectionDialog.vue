@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="dialog" width="700px">
     <v-card>
-      <v-card-title class="grey white--text">{{ $t('Select a collection') }}</v-card-title>
-      <v-card-text>
+      <v-card-title class="title font-weight-light white--text">{{ $t('Select a collection') }}</v-card-title>
+      <v-card-text class="mt-4">
         <v-text-field
           v-model="collectionsSearch"
           append-icon="mdi-magnify"
@@ -43,7 +43,7 @@
       <v-card-actions>
         <v-container fluid>
           <v-row justify="end" class="px-4">
-            <v-btn color="grey" dark @click="dialog = false">{{ $t('Cancel') }}</v-btn>
+            <v-btn outlined @click="dialog = false">{{ $t('Cancel') }}</v-btn>
           </v-row>
         </v-container>
       </v-card-actions>

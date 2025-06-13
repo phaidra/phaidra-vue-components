@@ -51,15 +51,16 @@
                 max-width="290px"
                 min-width="290px"
               >
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on">mdi-calendar</v-icon>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon v-on="on" v-bind="attrs">mdi-calendar</v-icon>
                 </template>
                 <v-date-picker
                   color="primary"
                   :value="value"
                   :show-current="false"
                   v-model="pickerModel"
-                  :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                  :first-day-of-week="1"
+                  :locale="alpha2bcp47($i18n.locale)"
                   v-on:input="dateMenu = false; $emit('input-date', $event)"
                 ></v-date-picker>
               </v-menu>
@@ -74,18 +75,27 @@
           :background-color="backgroundColor ? backgroundColor : undefined"
           :label="$t(dateLabel ? dateLabel : 'Date')"
           :required="required"
-          :hint="dateFormatHint"
+          :hint="$t(dateFormatHint)"
           :rules="[validationrules.date]"
           :filled="inputStyle==='filled'"
           :outlined="inputStyle==='outlined'"
           :error-messages="valueErrorMessages"
-        ></v-text-field>
+        >
+          <template v-slot:append-outer>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-icon v-on="on">mdi-help-circle-outline</v-icon>
+              </template>
+              <span>{{ $t('EDTF Examples: 1984~ (approximately 1984), 1964/2008 (range), 2001-21 (Spring 2001), 156u (1560s), 1984-03-12~ (uncertain date in 1984)') }}</span>
+            </v-tooltip>
+          </template>
+        </v-text-field>
       </template>
     </v-col>
     <v-col cols="2" v-if="actions.length">
       <v-menu open-on-hover bottom offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on" icon>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-on="on" v-bind="attrs" icon>
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
@@ -100,13 +110,14 @@
 </template>
 
 <script>
+import datepickerproperties from '../../mixins/datepickerproperties'
 import { vocabulary } from '../../mixins/vocabulary'
 import { fieldproperties } from '../../mixins/fieldproperties'
 import { validationrules } from '../../mixins/validationrules'
 
 export default {
   name: 'p-i-date-edtf',
-  mixins: [vocabulary, fieldproperties, validationrules],
+  mixins: [vocabulary, fieldproperties, validationrules, datepickerproperties],
   props: {
     value: {
       type: String
@@ -138,7 +149,7 @@ export default {
     },
     dateFormatHint: {
       type: String,
-      default: 'Format YYYY-MM-DD'
+      default: 'Format: YYYY-MM-DD or EDTF (e.g. 1984~, 1964/2008, 2001-21)'
     }
   },
   data () {

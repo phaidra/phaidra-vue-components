@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-col>
     <slot name="phaidra:levelOfDescription"></slot>
     <!-- basics -->
     <slot name="dce:title"></slot>
@@ -106,18 +106,19 @@
     <!-- error message -->
     <slot name="unknown-predicate"></slot>
 
-    <v-card flat outlined class="pb-4 my-4" v-if="jsonld.hasOwnProperty('cito:cites') || jsonld.hasOwnProperty('cito:citesAsDataSource') || jsonld.hasOwnProperty('cito:isCitedBy') || jsonld.hasOwnProperty('rdfs:seeAlso')">
-      <v-card-title class="title font-weight-light grey white--text">{{ $t('Bibliography') }}</v-card-title>
-      <v-divider class="mb-4"></v-divider>
-      <slot name="cito:cites"></slot>
-      <slot name="cito:citesAsDataSource"></slot>
-      <slot name="cito:isCitedBy"></slot>
-      <slot name="rdfs:seeAlso"></slot>
+    <v-card outlined class="mt-4" v-if="jsonld.hasOwnProperty('cito:cites') || jsonld.hasOwnProperty('cito:citesAsDataSource') || jsonld.hasOwnProperty('cito:isCitedBy') || jsonld.hasOwnProperty('rdfs:seeAlso')">
+      <v-card-text>
+        <div class="overline mb-4">{{ $t('Bibliography') }}</div>
+        <slot name="cito:cites"></slot>
+        <slot name="cito:citesAsDataSource"></slot>
+        <slot name="cito:isCitedBy"></slot>
+        <slot name="rdfs:seeAlso"></slot>
+      </v-card-text>
     </v-card>
 
     <!-- recursion starts here -->
     <slot name="phaidra:Subject"></slot><!-- dcterms:subject @type=phaidra:Subject -->
-  </v-container>
+  </v-col>
 </template>
 <script>
 export default {

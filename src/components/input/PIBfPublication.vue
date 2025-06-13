@@ -2,12 +2,12 @@
   <v-row v-if="!hidden">
     <v-col cols="12">
       <v-card class="mb-8">
-        <v-card-title class="title font-weight-light grey white--text">
+        <v-card-title class="title font-weight-light white--text">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
           <v-menu open-on-hover bottom offset-y v-if="actions.length">
-            <template v-slot:activator="{ on }">
-              <v-btn v-on="on" icon dark>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn v-on="on" v-bind="attrs" icon dark>
                 <v-icon dark>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
@@ -149,15 +149,16 @@
                         max-width="290px"
                         min-width="290px"
                       >
-                        <template v-slot:activator="{ on }">
-                          <v-icon v-on="on">mdi-calendar</v-icon>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon v-on="on" v-bind="attrs">mdi-calendar</v-icon>
                         </template>
                         <v-date-picker
                           color="primary"
                           :value="publishingDate"
                           :show-current="false"
                           v-model="pickerModel"
-                          :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                          :first-day-of-week="1"
+                          :locale="alpha2bcp47($i18n.locale)"
                           v-on:input="dateMenu = false; $emit('input-publishing-date', $event)"
                         ></v-date-picker>
                       </v-menu>
@@ -171,7 +172,7 @@
                   v-on:blur="$emit('input-publishing-date',$event.target.value)"
                   :label="$t(publishingDateLabel ? publishingDateLabel : 'Date')"
                   :required="required"
-                  :hint="dateFormatHint"
+                  :hint="$t(dateFormatHint)"
                   :rules="[validationrules.date]"
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
@@ -190,6 +191,7 @@
 <script>
 import { fieldproperties } from '../../mixins/fieldproperties'
 import { validationrules } from '../../mixins/validationrules'
+import datepickerproperties from '../../mixins/datepickerproperties'
 import { vocabulary } from '../../mixins/vocabulary'
 import xmlUtils from '../../utils/xml'
 import qs from 'qs'
@@ -198,7 +200,7 @@ var iconv = require('iconv-lite')
 
 export default {
   name: 'p-i-bf-publication',
-  mixins: [validationrules, fieldproperties, vocabulary],
+  mixins: [validationrules, fieldproperties, vocabulary, datepickerproperties],
   components: {
     OrgUnitsTreeDialog
   },

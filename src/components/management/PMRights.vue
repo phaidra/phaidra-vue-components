@@ -1,15 +1,14 @@
 <template>
   <v-card :flat="!title">
-    <v-card-title v-if="title" class="title font-weight-light grey white--text">{{ title }}</v-card-title>
+    <v-card-title v-if="title" class="title font-weight-light white--text">{{ title }}</v-card-title>
     <v-divider v-if="title"></v-divider>
-    <v-card-text class="mt-4">
-      <v-container fluid>
+    <v-card-text>
         <v-row>
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ (rightsArray.length > 0) ? $t('The following entities have access to the object') : $t('This object is worldwide accessible') }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ (rightsArray.length > 0) ? $t('The following entities have access to the object') : $t('This object is worldwide accessible') }}</v-card-title>
               <v-divider></v-divider>
-              <v-card-text class="mt-4">
+              <v-card-text class="pt-4">
                 <v-data-table
                   hide-default-footer
                   :items="rightsArray"
@@ -26,15 +25,15 @@
                   :no-results-text="$t('There were no search results')"
                 >
                   <template v-slot:item.description="{ item }">
-                    <span :title="item.notation">{{ item.description }}</span>
+                    <span :title="item.notation">{{item.notation}} {{ item.description }}</span>
                   </template>
                   <template v-slot:item.expires="{ item }">
                     {{ item.expires | date }}
                   </template>
                   <template v-slot:item.actions="{ item }">
                     <v-btn text color="primary" @click="openDateDialog(item)">{{ $t('Edit expiration date') }}</v-btn>
-                    <v-btn v-if="item.expires" text color="primary" @click="removeExpires(item)">{{ $t('Remove expiration date') }}</v-btn>
-                    <v-btn text color="error" @click="removeRight(item)">{{ $t('Remove right') }}</v-btn>
+                    <v-btn v-if="item.expires" text color="btnred" @click="removeExpires(item)">{{ $t('Remove expiration date') }}</v-btn>
+                    <v-btn text color="btnred" @click="removeRight(item)">{{ $t('Remove right') }}</v-btn>
                   </template>
                 </v-data-table>
               </v-card-text>
@@ -44,7 +43,7 @@
         <v-row>
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to the owner of the object') }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ $t('Restrict access rights to the owner of the object') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
                 <v-container fluid>
@@ -65,7 +64,7 @@
         <v-row v-if="showPersons">
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular persons') }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ $t('Restrict access rights to particular persons') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
                 <v-container fluid>
@@ -109,51 +108,24 @@
         <v-row v-if="showAccounts">
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular account') }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ $t('Restrict access rights to particular account') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
-                <v-btn class="mb-4 mt-4 primary" @click="$refs.userSearchdialog.open()">
-                  {{ $t('Username search') }}
-                <v-icon
-                  right
-                  dark
-                >
-                  mdi-database-search
-                </v-icon>
-              </v-btn>
-                <!-- <v-container fluid>
+                <v-container fluid>
                   <v-row>
-                    <v-col cols="8">
-                      <v-autocomplete
-                        v-model="userSearchExactModel"
-                        :items="userSearchExactItems.length > 0 ? userSearchExactItems : []"
-                        :loading="userSearchExactLoading"
-                        :search-input.sync="userSearchExact"
-                        :label="$t('Username search')"
-                        :placeholder="$t('Start typing to search')"
-                        item-value="uid"
-                        item-text="uid"
-                        prepend-icon="mdi-database-search"
-                        hide-no-data
-                        hide-selected
-                        return-object
-                        clearable
-                        @click:clear="userSearchExactItems=[]"
-                      >
-                        <template slot="item" slot-scope="{ item }">
-                          <template v-if="item">
-                            <v-list-item-content two-line>
-                              <v-list-item-title>{{ item.uid }}</v-list-item-title>
-                            </v-list-item-content>
-                          </template>
-                        </template>
-                      </v-autocomplete>
-                    </v-col>
-                    <v-col cols="1" class="pt-6">
-                      <v-btn class="primary" :disabled="loading || userSearchExactLoading" @click="addUserExact()">{{ $t('Apply') }}</v-btn>
+                    <v-col>
+                      <v-btn class="mb-4 mt-4 primary" @click="$refs.userSearchdialog.open()">
+                        {{ $t('Username search') }}
+                        <v-icon
+                          right
+                          dark
+                        >
+                          mdi-database-search
+                        </v-icon>
+                      </v-btn>
                     </v-col>
                   </v-row>
-                </v-container> -->
+                </v-container>
               </v-card-text>
             </v-card>
           </v-col>
@@ -161,7 +133,7 @@
         <v-row v-if="showEduPersonAffiliation">
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular eduPersonAffiliation values') }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ $t('Restrict access rights to particular eduPersonAffiliation values') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
                 <v-container fluid>
@@ -186,7 +158,7 @@
         <v-row v-if="showOrgUnits">
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to organisational units/subunits') }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ $t('Restrict access rights to organisational units/subunits') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
                 <v-container fluid>
@@ -234,7 +206,7 @@
         <v-row v-if="showGroups">
           <v-col cols="12">
             <v-card>
-              <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular groups') }}</v-card-title>
+              <v-card-title class="title font-weight-light white--text">{{ $t('Restrict access rights to particular groups') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
                 <v-data-table
@@ -268,28 +240,34 @@
           persistent
           width="290px"
         >
-          <v-date-picker v-model="dateModel" scrollable>
+          <v-date-picker
+            color="primary"
+            v-model="dateModel"
+            :first-day-of-week="1"
+            :locale="alpha2bcp47($i18n.locale)"              
+            scrollable
+          >
             <v-spacer></v-spacer>
-            <v-btn dark color="grey" @click="dateDialog = false">{{ $t('Cancel') }}</v-btn>
+            <v-btn outlined @click="dateDialog = false">{{ $t('Cancel') }}</v-btn>
             <v-btn color="primary" @click="setExpires()">OK</v-btn>
           </v-date-picker>
         </v-dialog>
-      </v-container>
+        <user-search-dialog ref="userSearchdialog" @user-selected="searchUserSelected($event)"></user-search-dialog>
     </v-card-text>
-    <user-search-dialog ref="userSearchdialog" @user-selected="searchUserSelected($event)"></user-search-dialog>
   </v-card>
 </template>
 
 <script>
 import qs from 'qs'
 import arrays from '../../utils/arrays'
+import datepickerproperties from '../../mixins/datepickerproperties'
 import { vocabulary } from '../../mixins/vocabulary'
 import OrgUnitsTreeDialog from '../select/OrgUnitsTreeDialog'
 import UserSearchDialog from '../select/UserSearchDialog'
 
 export default {
   name: 'p-m-rights',
-  mixins: [vocabulary],
+  mixins: [vocabulary, datepickerproperties],
   components: {
     OrgUnitsTreeDialog,
     UserSearchDialog
@@ -485,21 +463,23 @@ export default {
         this.saveRights()
       }
     },
-    // addUser: function () {
-    //   if (this.userSearchModel) {
-    //     this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
-    //     this.saveRights()
-    //   }
-    // },
-    // addUserExact: function () {
-    //   if (this.userSearchExactModel) {
-    //     this.rightsArray.push({ type: 'username', notation: this.userSearchExactModel.uid, description: this.userSearchExactModel.value, expires: null })
-    //     this.saveRights()
-    //   }
-    // },
-    searchUserSelected: function (val) {
-      this.rightsArray.push({ type: 'username', notation: val.username, description: 'user ' + val.username, expires: null })
+    addUser: function () {
+      if (this.userSearchModel) {
+        this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
         this.saveRights()
+      }
+    },
+    searchUserSelected: function(selectedUser) {
+      if(selectedUser) {
+        this.rightsArray.push({ type: 'username', notation: selectedUser.username, expires: null })
+        this.saveRights()
+      }
+    },
+    addUserExact: function () {
+      if (this.userSearchExactModel) {
+        this.rightsArray.push({ type: 'username', notation: this.userSearchExactModel.uid, description: this.userSearchExactModel.value, expires: null })
+        this.saveRights()
+      }
     },
     addGroup: function (group) {
       this.rightsArray.push({ type: 'gruppe', notation: group.groupid, description: group.name, expires: null })
@@ -597,7 +577,7 @@ export default {
             }
           })
           if (response.status === 200) {
-            this.$store.commit('setAlerts', [{ type: 'success', msg: 'Rights for object ' + this.pid + ' saved' }])
+            this.$store.commit('setAlerts', [{ type: 'success', key: 'object_rights_saved_success', params: { o: this.pid }}])
           } else {
             if (response.data.alerts && response.data.alerts.length > 0) {
               this.$store.commit('setAlerts', response.data.alerts)

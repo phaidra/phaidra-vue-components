@@ -3,7 +3,7 @@
   <v-row v-if="!hidden">
     <v-col cols="12">
       <v-card class="mb-8">
-        <v-card-title class="title font-weight-light grey white--text">
+        <v-card-title class="title font-weight-light white--text">
           <span>{{ $t(label) }}</span>
           <v-spacer></v-spacer>
           <v-btn v-if="multiplicable" icon dark @click="$emit('add', $event)">
@@ -67,7 +67,7 @@
             </v-col>
             <v-col cols="12" md="2" v-if="multilingual">
               <v-btn text @click="$refs.langdialog.open()">
-                <span class="grey--text text--darken-1">
+                <span>
                   ({{ titleLanguage ? titleLanguage : '--' }})
                 </span>
               </v-btn>
@@ -119,15 +119,16 @@
                         max-width="290px"
                         min-width="290px"
                       >
-                        <template v-slot:activator="{ on }">
-                          <v-icon v-on="on">mdi-calendar</v-icon>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon v-on="on" v-bind="attrs">mdi-calendar</v-icon>
                         </template>
                         <v-date-picker
                           color="primary"
                           :value="issued"
                           :show-current="false"
                           v-model="pickerModel"
-                          :locale="$i18n.locale === 'deu' ? 'de-AT' : 'en-GB' "
+                          :first-day-of-week="1"
+                          :locale="alpha2bcp47($i18n.locale)"
                           v-on:input="dateMenu = false; $emit('input-issued', $event)"
                         ></v-date-picker>
                       </v-menu>
@@ -140,7 +141,7 @@
                   :value="issued"
                   v-on:blur="$emit('input-issued',$event.target.value)"
                   :label="$t(issuedDateLabel ? issuedDateLabel : 'Issued')"
-                  :hint="dateFormatHint"
+                  :hint="$t(dateFormatHint)"
                   :rules="[validationrules.date]"
                   :filled="inputStyle==='filled'"
                   :outlined="inputStyle==='outlined'"
@@ -229,6 +230,7 @@
 
 <script>
 import { vocabulary } from '../../mixins/vocabulary'
+import datepickerproperties from '../../mixins/datepickerproperties'
 import { fieldproperties } from '../../mixins/fieldproperties'
 import { validationrules } from '../../mixins/validationrules'
 import SelectLanguage from '../select/SelectLanguage'
@@ -238,7 +240,7 @@ var iconv = require('iconv-lite')
 
 export default {
   name: 'p-i-series',
-  mixins: [vocabulary, fieldproperties, validationrules],
+  mixins: [vocabulary, fieldproperties, validationrules, datepickerproperties],
   components: {
     SelectLanguage
   },

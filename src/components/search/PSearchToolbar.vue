@@ -3,8 +3,8 @@
     <v-row>
       <v-col>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn icon @click="setSort('title asc')" :color="sortIsActive('title asc') ? 'primary' : 'grey darken-1'" v-on="on">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="toolbar-btn" @click="setSort('title asc')" :color="sortIsActive('title asc') ? 'primary' : ''" v-on="on" v-bind="attrs" :aria-label="$t('Title ascending')">
               <icon width="16px" height="16px" name="fontello-sort-name-up"></icon>
             </v-btn>
           </template>
@@ -13,8 +13,8 @@
       </v-col>
       <v-col>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn icon @click="setSort('title desc')" :color="sortIsActive('title desc') ? 'primary' : 'grey darken-1'" v-on="on">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="toolbar-btn" @click="setSort('title desc')" :color="sortIsActive('title desc') ? 'primary' : ''" v-on="on" v-bind="attrs" :aria-label="$t('Title descending')">
               <icon width="16px" height="16px" name="fontello-sort-name-down"></icon>
             </v-btn>
           </template>
@@ -23,8 +23,8 @@
       </v-col>
       <v-col>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn icon @click="setSort('created asc')" :color="sortIsActive('created asc') ? 'primary' : 'grey darken-1'" v-on="on">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="toolbar-btn" @click="setSort('created asc')" :color="sortIsActive('created asc') ? 'primary' : ''" v-on="on" v-bind="attrs" :aria-label="$t('Upload date ascending')">
               <icon width="16px" height="16px" name="fontello-sort-number-up"></icon>
             </v-btn>
           </template>
@@ -33,8 +33,8 @@
       </v-col>
       <v-col>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn icon @click="setSort('created desc')" :color="sortIsActive('created desc') ? 'primary' : 'grey darken-1'" v-on="on">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="toolbar-btn" @click="setSort('created desc')" :color="sortIsActive('created desc') ? 'primary' : ''" v-on="on" v-bind="attrs" :aria-label="$t('Upload date descending')">
               <icon width="16px" height="16px" name="fontello-sort-number-down"></icon>
             </v-btn>
           </template>
@@ -44,20 +44,37 @@
       <v-col>
         <v-dialog v-model="linkdialog" max-width="800px">
           <v-card>
-            <v-card-title class="title font-weight-light grey white--text mb-6">
+            <v-card-title class="title font-weight-light white--text mb-6">
               {{ $t('Link to search results') }}
             </v-card-title>
-            <v-card-text>{{ link }} <v-btn class="ml-4" icon @click="copyToClipboard()"><v-icon>mdi-content-copy</v-icon></v-btn></v-card-text>
+            <v-card-text>
+              {{ link }}
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    v-on="on"
+                    v-bind="attrs"
+                    icon
+                    @click="copyToClipboard()"
+                    class="ml-1"
+                    :aria-label="$t('Copy to clipboard')"
+                  >
+                    <v-icon>mdi-content-copy</v-icon>
+                  </v-btn>
+                </template>
+                <span>{{ $t('Copy to clipboard') }}</span>
+              </v-tooltip>
+            </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn dark color="grey" @click.stop="linkdialog=false">{{ $t('Close') }}</v-btn>
+              <v-btn outlined @click.stop="linkdialog=false">{{ $t("Close") }}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn icon @click="linkdialog=true" :color="'grey darken-1'" v-on="on">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="toolbar-btn" @click="linkdialog=true" v-on="on" v-bind="attrs" :aria-label="$t('Link to search results')">
               <icon width="18px" height="18px" name="material-content-link"></icon>
             </v-btn>
           </template>
@@ -66,18 +83,18 @@
       </v-col>
       <v-col>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <div v-on="on" style="width:35px"><!-- div: vuetify tooltip vs checkbox fix -->
-              <v-checkbox hide-details class="mr-2 mt-1" color="primary" @click.stop="toggleSelection()" v-model="selectioncheck" v-on="on">            </v-checkbox>
+          <template v-slot:activator="{ on, attrs }">
+            <div v-on="on" v-bind="attrs" style="width:35px"><!-- div: vuetify tooltip vs checkbox fix -->
+              <v-checkbox :aria-label="$t('Select results')" hide-details class="mr-2 mt-1" color="primary" @click.stop="toggleSelection()" v-model="selectioncheck" v-on="on">            </v-checkbox>
             </div>
           </template>
           <span>{{ $t('Select results')}}</span>
         </v-tooltip>
       </v-col>
       <v-col>
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn icon :color="'grey darken-1'" v-on="on" @click.native="csvExport()">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon class="toolbar-btn" v-on="on" v-bind="attrs" @click.native="csvExport()" :aria-label="$t('Download search results as a CSV file')">
               <v-icon>mdi-download</v-icon>
             </v-btn>
           </template>
@@ -132,4 +149,18 @@ export default {
 .container .toolbar {
   padding: 0px;
 }
+
+.toolbar-btn.theme--light.v-btn:focus::before {
+    opacity: 0.5;
+    outline-style: auto;
+}
+
+.v-icon:focus::before {
+  opacity: 0.7 !important;
+}
+
+.v-icon:focus::after {
+  opacity: 0.7 !important;
+}
+
 </style>

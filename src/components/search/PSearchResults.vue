@@ -1,13 +1,13 @@
 <template>
-  <v-container fluid>
+  <v-container class="text-break" fluid>
     <v-divider v-if="selectioncheck"></v-divider>
     <v-slide-y-transition hide-on-leave>
       <v-row v-if="selectioncheck" no-gutters class="my-4">
         <span class="mt-2"><a @click="selectPage()">{{ $t('Select this page') }}</a><span class="mx-2">/</span><a @click="unselectPage()">{{ $t('Unselect this page') }}</a><span class="mx-2">/</span><a @click="selectAllResults()">{{ $t('Select all results') }}</a><span class="mx-2">/</span><a @click="selection = []">{{ $t('Clear selection') }}</a></span>
         <v-spacer></v-spacer>
         <v-menu offset-y>
-          <template v-slot:activator="{ on: menu }">
-            <v-btn v-on="{ ...menu }" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
+          <template v-slot:activator="{ on: menu, attrs }">
+            <v-btn v-on="{ ...menu }" v-bind="attrs" text outlined color="primary" class="mx-4" :disabled="!selection.length">{{ $t('Selected results') }} ({{ selection.length }})</v-btn>
           </template>
           <v-list>
             <v-list-item @click="$refs.addlistdialog.open()">
@@ -38,25 +38,25 @@
         <v-col :cols="selectioncheck ? 11 : 12">
           <v-row :key="'prev'+doc.pid">
             <v-col cols="2" >
-              <router-link :to="{ path: `detail/${doc.pid}`, params: { pid: doc.pid } }">
-                <p-img :src="instance.api + '/object/' + doc.pid + '/thumbnail'" class="preview-maxwidth elevation-1 mt-2">
+              <nuxt-link :to="{ path: `detail/${doc.pid}`, params: { pid: doc.pid } }">
+                <p-img :src="instance.api + '/object/' + doc.pid + '/thumbnail'" class="preview-maxwidth elevation-1 mt-2" :alt="doc.dc_title ? doc.dc_title[0] : doc.pid">
                   <template v-slot:placeholder>
                     <div class="fill-height ma-0" align="center" justify="center" >
                       <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
                     </div>
                   </template>
                 </p-img>
-              </router-link>
+              </nuxt-link>
             </v-col>
             <v-col cols="10">
               <v-row >
-                <v-col cols="9">
-                  <h3 class="title font-weight-light primary--text" @click.stop v-if="doc.dc_title">
-                    <router-link :to="{ path: `detail/${doc.pid}`, params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</router-link>
-                  </h3>
+                <v-col cols="12" md="9">
+                  <h2 class="title font-weight-light primary--text" @click.stop v-if="doc.dc_title">
+                    <nuxt-link :to="{ path: `detail/${doc.pid}`, params: { pid: doc.pid } }">{{ doc.dc_title[0] }}</nuxt-link>
+                  </h2>
                 </v-col>
-                <v-col cols="3" class="text-right">
-                  <v-chip v-if="doc.created" color="white" class="grey--text text--darken-4">{{ doc.created | date }}
+                <v-col cols="12" md="3" class="text-right">
+                  <v-chip class="pointer-disabled" v-if="doc.created" color="transparent">{{ doc.created | date }}
                     <v-icon v-if="doc.cmodel == 'Video'" class="mx-2" color="grey">mdi-video</v-icon>
                     <v-icon v-else-if="doc.cmodel == 'Picture'" class="mx-2" color="grey">mdi-image</v-icon>
                     <v-icon v-else-if="doc.cmodel == 'Audio'" class="mx-2" color="grey">mdi-volume-high</v-icon>
@@ -65,14 +65,15 @@
                     <v-icon v-else-if="doc.cmodel == 'Resource'" class="mx-2" color="grey">mdi-link</v-icon>
                     <v-icon v-else-if="doc.cmodel == 'Collection'" class="mx-2" color="grey">mdi-folder-open</v-icon>
                     <v-icon v-else-if="doc.cmodel == 'Container'" class="mx-2" color="grey">mdi-folder</v-icon>
+                    <v-icon v-else-if="doc.cmodel == 'Book'" class="mx-2" color="grey">mdi-book-open-variant</v-icon>
                   </v-chip>
                 </v-col>
               </v-row>
               <v-row class="my-4 mr-2">
                 <v-col>
-                  <span class="grey--text text--darken-4">
-                    <span v-for="(aut,i) in doc.bib_roles_pers_aut" :key="'pers'+i">
-                      {{aut}}<span v-if="(i+1) < doc.bib_roles_pers_aut.length">; </span>
+                  <span>
+                    <span v-for="(roleDoc,i) in getRoleList(doc)" :key="'pers'+i">
+                      {{roleDoc}}<span v-if="(i+1) < getRoleList(doc).length">; </span>
                     </span>
                     <!-- <span v-for="(aut,i) in doc.bib_roles_corp_aut" :key="'corp'+i">
                       {{aut}}<span v-if="(i+1) < doc.bib_roles_corp_aut.length">; </span>
@@ -82,19 +83,19 @@
               </v-row>
               <v-row class="my-4 mr-2" v-if="doc.dc_description">
                 <v-col>
-                  <span class="grey--text text--darken-4"><p-expand-text :text="doc.dc_description[0]" :moreStr="$t('read more')"/></span>
+                  <p-expand-text :text="doc.dc_description[0]" :moreStr="$t('read more')" :lang="getDescriptionLanguage(doc)" />
                 </v-col>
               </v-row>
               <v-row v-if="doc.isrestricted">
                 <v-col>
-                  <v-chip label dark color="red lighten-1 font-weight-regular"><v-icon small left>mdi-lock</v-icon>{{ $t('Restricted access') }}</v-chip>
+                  <v-chip class="pointer-disabled" label dark color="btnred"><v-icon small left>mdi-lock</v-icon>{{ $t('Restricted access') }}</v-chip>
                 </v-col>
               </v-row>
               <v-row >
-                <v-col cols="9">
-                  <span>{{ instance.baseurl }}/{{ doc.pid }}</span>
+                <v-col cols="12" md="9">
+                  <a class="font-weight-light" :href="`${instance.baseurl}/${doc.pid}`">{{ instance.baseurl }}/{{ doc.pid }}</a>
                 </v-col>
-                <v-col cols="3" class="text-right pr-5">
+                <v-col cols="12" md="3" class="text-right pr-5">
                   <p-d-license v-if="doc.dc_rights" :hideLabel="true" :o="doc.dc_rights[0]"></p-d-license>
                 </v-col>
               </v-row>
@@ -153,6 +154,36 @@ export default {
     }
   },
   methods: {
+    getRoleList: function (doc) {
+      let roles = []
+      if (doc.bib_roles_pers_aut) {
+        roles = roles.concat(doc.bib_roles_pers_aut)
+      }
+      if (doc.bib_roles_pers_edt) {
+        roles = roles.concat(doc.bib_roles_pers_edt)
+      }
+      if (doc.bib_roles_pers_cmp) {
+        roles = roles.concat(doc.bib_roles_pers_cmp)
+      }
+      if (doc.bib_roles_pers_art) {
+        roles = roles.concat(doc.bib_roles_pers_art)
+      }
+      return roles
+    },
+    getDescriptionLanguage: function (item) {
+      let description = item.dc_description[0];
+      let lang = 'en';
+      for (const key in item) {
+          if (key.startsWith('dc_description_')) {
+              const element = item[key];
+              if(element && element[0] && element[0] === description && key.substr(15,2) !== 'en'){
+                lang = key.substr(15,2);
+                break;
+              }
+          }
+      }
+      return lang;
+    },
     selectionIncludes: function (doc) {
       for (let s of this.selection) {
         if (s.pid === doc.pid) {
@@ -176,7 +207,7 @@ export default {
           data: httpFormData
         })
         if (response.data.status === 200) {
-          this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
+          this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfully updated'), type: 'success' } ])
           this.$router.push({ path: `detail/${collection.pid}`, params: { pid: collection.pid } })
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
@@ -205,7 +236,7 @@ export default {
           data: httpFormData
         })
         if (response.data.status === 200) {
-          this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfuly updated'), type: 'success' } ])
+          this.$store.commit('setAlerts', [ { msg: this.$t('Collection successfully updated'), type: 'success' } ])
           this.$router.push({ path: `detail/${collection.pid}`, params: { pid: collection.pid } })
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
@@ -234,7 +265,7 @@ export default {
           data: httpFormData
         })
         if (response.data.status === 200) {
-          this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
+          this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfully updated'), type: 'success' } ])
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
             this.$store.commit('setAlerts', response.data.alerts)
@@ -262,7 +293,7 @@ export default {
           data: httpFormData
         })
         if (response.data.status === 200) {
-          this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfuly updated'), type: 'success' } ])
+          this.$store.commit('setAlerts', [ { msg: this.$t('Object list successfully updated'), type: 'success' } ])
         } else {
           if (response.data.alerts && response.data.alerts.length > 0) {
             this.$store.commit('setAlerts', response.data.alerts)
@@ -380,8 +411,5 @@ export default {
   padding: 0;
 }
 
-.v-application a {
-  text-decoration: none;
-}
 
 </style>

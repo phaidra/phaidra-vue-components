@@ -4,8 +4,8 @@
 
     <template v-if="pid && !predicatesToHide.includes('pid')" slot="pid">
       <v-row>
-        <v-col :md="labelColMd" cols="12" class="pdlabel primary--text text-md-right">{{ $t('Persistent identifier') }}</v-col>
-        <v-col :md="valueColMd" cols="12">{{ instance.baseurl }}/{{ pid }}</v-col>
+        <v-col :md="labelColMd" cols="12" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('Persistent identifier') }}</v-col>
+        <v-col :md="valueColMd" cols="12"><a :href="`${instance.baseurl}/${pid}`">{{ instance.baseurl }}/{{ pid }}</a></v-col>
       </v-row>
     </template>
 
@@ -27,7 +27,6 @@
     <template slot="overallAccessibility" v-if="overallAccessibility">
         <p-d-accessibility :p="'overallAccessibility'" :o="overallAccessibility" v-bind.sync="displayProperties"></p-d-accessibility>
     </template>
-
     <template v-for="(o, p) in jsonld">
 
       <template v-if="!predicatesToHide.includes(p)">
@@ -150,7 +149,7 @@
         </template>
 
         <template v-else-if="p==='dcterms:temporal'" slot="dcterms:temporal">
-          <p-d-lang-value :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'temporal'+j" v-bind.sync="displayProperties"></p-d-lang-value>
+          <p-d-date :p="p" :o="item" v-for="(item, j) in o" :key="componentid+'temporal'+j" v-bind.sync="displayProperties"></p-d-date>
         </template>
 
         <template v-else-if="p==='rdau:P60193'" slot="rdau:P60193">
@@ -366,11 +365,9 @@
         <template v-else-if="p==='dcterms:subject'">
 
           <template v-for="(subject, j) in o">
-            <v-card class="my-4" v-if="subject['@type']==='phaidra:Subject'" slot="phaidra:Subject" :key="componentid+'psubject'+j">
-              <v-card-title class="title font-weight-light grey white--text">
-                <span>{{ $t('SUBJECT_SECTION') }}</span>
-              </v-card-title>
-              <v-card-text class="ma-2">
+            <v-card outlined class="mt-4" v-if="subject['@type']==='phaidra:Subject'" slot="phaidra:Subject" :key="componentid+'psubject'+j">
+              <v-card-text>
+                <div class="overline mb-4">{{ $t('SUBJECT_SECTION') }}</div>
                 <p-d-jsonld :jsonld="subject" v-bind.sync="displayProperties"></p-d-jsonld>
               </v-card-text>
             </v-card>
@@ -547,7 +544,7 @@ export default {
       entitiesLimited: {},
       projectIds: [],
       shownAllProjectIds: true,
-      overallAccessibility: null
+      overallAccessibility: null,
     }
   },
   methods: {
@@ -625,13 +622,8 @@ export default {
 .valuefield {
   white-space: pre-wrap;
 }
-
-.v-card__subtitle, .v-card__text {
-  font-weight: 300;
-}
-
-.theme--light.v-card > .v-card__text {
-  color: black;
+.pdlabel {
+  word-wrap: break-word;
 }
 </style>
 

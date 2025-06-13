@@ -40,8 +40,8 @@
         </v-col>
         <v-col cols="1" v-if="actions.length">
           <v-menu open-on-hover bottom offset-y>
-            <template v-slot:activator="{ on }">
-              <v-btn v-on="on" icon>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn v-on="on" v-bind="attrs" icon>
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
@@ -87,13 +87,29 @@ export default {
           this.getBicPath(term, this.vocabularies['bic'].tree, pathArr)
           for (let i = pathArr.length; i--; i === 0) {
             pathLabels.push(pathArr[i]['skos:notation'][0] + '. ' + pathArr[i]['skos:prefLabel'][this.$i18n.locale])
-            pathLabelsDeu.push(pathArr[i]['skos:prefLabel']['deu'] + ' (' + pathArr[i]['skos:notation'][0] + ')')
-            pathLabelsEng.push(pathArr[i]['skos:prefLabel']['eng'] + ' (' + pathArr[i]['skos:notation'][0] + ')')
+            if(pathArr[i]['skos:prefLabel']['deu']) {
+              pathLabelsDeu.push(pathArr[i]['skos:prefLabel']['deu'] + ' (' + pathArr[i]['skos:notation'][0] + ')')
+            }
+            if(pathArr[i]['skos:prefLabel']['eng']) {
+              pathLabelsEng.push(pathArr[i]['skos:prefLabel']['eng'] + ' (' + pathArr[i]['skos:notation'][0] + ')')
+            }
           }
           this.path = pathLabels.join(' -- ')
         }
         this.$emit('input', term['@id'])
-        this.$emit('resolve', { '@id': term['@id'], 'skos:prefLabel': term['skos:prefLabel'], 'rdfs:label': { 'deu': 'BIC Klassifizierung -- ' + pathLabelsDeu.join(' -- '), 'eng': 'Bic Subject Codes -- ' + pathLabelsEng.join(' -- ') }, 'skos:notation': term['skos:notation'] })
+        let rdfsLabelObj = {}
+        if(pathLabelsDeu && pathLabelsDeu.length){
+          rdfsLabelObj['deu'] = 'BIC Klassifizierung -- ' + pathLabelsDeu.join(' -- ')
+        }
+        if(pathLabelsEng && pathLabelsEng.length){
+          rdfsLabelObj['eng'] = 'Bic Subject Codes -- ' + pathLabelsEng.join(' -- ')
+        }
+        this.$emit('resolve', {
+          '@id': term['@id'],
+          'skos:prefLabel': term['skos:prefLabel'],
+          'rdfs:label': rdfsLabelObj,
+          'skos:notation': term['skos:notation']
+        })
       } else {
         this.$emit('input', null)
       }

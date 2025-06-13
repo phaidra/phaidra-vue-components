@@ -1,6 +1,32 @@
 <template>
   <v-row v-if="!hidden">
-    <v-col cols="12" :md="multilingual ? (actions.length ? 8 : 10) : (actions.length ? 10 : 12)">
+    <v-col cols="4" v-if="showtype">
+      <v-autocomplete
+        v-on:input="$emit('input-association-type', $event)"
+        :label="$t('Type')"
+        :items="vocabularies['orgtypes'].terms"
+        :item-value="'@id'"
+        :value="getTerm('orgtypes', type)"
+        :filter="autocompleteFilter"
+        :filled="inputStyle==='filled'"
+        :outlined="inputStyle==='outlined'"
+        return-object
+        clearable
+      >
+        <template slot="item" slot-scope="{ item }">
+          <v-list-item-content two-line>
+            <v-list-item-title  v-html="`${getLocalizedTermLabel('orgtypes', item['@id'])}`"></v-list-item-title>
+            <v-list-item-subtitle v-if="showIds" v-html="`${item['@id']}`"></v-list-item-subtitle>
+          </v-list-item-content>
+        </template>
+        <template slot="selection" slot-scope="{ item }">
+          <v-list-item-content>
+            <v-list-item-title v-html="`${getLocalizedTermLabel('orgtypes', item['@id'])}`"></v-list-item-title>
+          </v-list-item-content>
+        </template>
+      </v-autocomplete>
+    </v-col>
+    <v-col cols="12" :md="multilingual ? (actions.length ? 6 : 8) : (actions.length ? 8 : 10)">
       <v-text-field v-if="!multiline"
         :value="value"
         v-on:blur="$emit('input',$event.target.value)"
@@ -57,7 +83,7 @@ import { fieldproperties } from '../../mixins/fieldproperties'
 import SelectLanguage from '../select/SelectLanguage'
 
 export default {
-  name: 'p-i-text-field',
+  name: 'p-i-association-text',
   mixins: [vocabulary, fieldproperties],
   components: {
     SelectLanguage
@@ -69,6 +95,9 @@ export default {
     },
     errorMessages: {
       type: Array
+    },
+    type: {
+      type: String
     },
     language: {
       type: String
@@ -93,6 +122,11 @@ export default {
     allowLanguageCancel: {
       type: Boolean,
       default: false
+    },
+    showtype: {
+      type: Boolean,
+      required: true,
+      default: true
     }
   }
 }

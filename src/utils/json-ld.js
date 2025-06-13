@@ -417,6 +417,16 @@ export default {
                         entity.firstname = firstname['@value']
                       }
                     }
+                    if (role['schema:birthDate']) {
+                      for (let birthDate of role['schema:birthDate']) {
+                        entity.birthdate = birthDate
+                      }
+                    }
+                    if (role['schema:deathDate']) {
+                      for (let deathDate of role['schema:deathDate']) {
+                        entity.deathdate = deathDate
+                      }
+                    }
                     f.roles.push(entity)
                   }
                 }
@@ -797,6 +807,16 @@ export default {
                           f.firstname = firstname['@value']
                         }
                       }
+                      if (role['schema:birthDate']) {
+                        for (let birthDate of role['schema:birthDate']) {
+                          f.birthdate = birthDate
+                        }
+                      }
+                      if (role['schema:deathDate']) {
+                        for (let deathDate of role['schema:deathDate']) {
+                          f.deathdate = deathDate
+                        }
+                      }
                     }
                   }
                 }
@@ -1002,9 +1022,18 @@ export default {
 
             // rdax:P00009
             case 'rdax:P00009':
-              f = fields.getField('association')
-              for (let em of obj['skos:exactMatch']) {
-                f.value = em
+              if (obj['skos:exactMatch']) {
+                f = fields.getField('association')
+                for (let em of obj['skos:exactMatch']) {
+                  f.value = em
+                }
+              } else {
+                f = fields.getField('association-text')
+                f.type = obj['@type']
+                for (let pl of obj['skos:prefLabel']) {
+                  f.value = pl['@value']
+                  f.language = pl['@language'] ? pl['@language'] : 'eng'
+                }
               }
               components.push(f)
               break
@@ -1371,6 +1400,16 @@ export default {
                       f.firstname = firstname['@value']
                     }
                   }
+                  if (role['schema:birthDate']) {
+                    for (let birthDate of role['schema:birthDate']) {
+                      f.birthdate = birthDate
+                    }
+                  }
+                  if (role['schema:deathDate']) {
+                    for (let deathDate of role['schema:deathDate']) {
+                      f.deathdate = deathDate
+                    }
+                  }
                   if (role['skos:exactMatch']) {
                     for (let id of role['skos:exactMatch']) {
                       f.identifierType = id['@type']
@@ -1525,7 +1564,8 @@ export default {
       {
         title: 'General metadata',
         id: 1,
-        fields: digitalFields
+        fields: digitalFields,
+        disablemenu: true
       }
     )
 
@@ -1725,6 +1765,12 @@ export default {
             '@value': f.firstname
           }
         ]
+      }
+      if (f.birthdate) {
+        h['schema:birthDate'] = [f.birthdate]
+      }
+      if (f.deathdate) {
+        h['schema:deathDate'] = [f.deathdate]
       }
       if (f.lastname) {
         h['schema:familyName'] = [
@@ -2000,6 +2046,12 @@ export default {
                   '@value': role.firstname
                 }
               ]
+            }
+            if (role.birthdate) {
+              entity['schema:birthDate'] = [role.birthdate]
+            }
+            if (role.deathdate) {
+              entity['schema:deathDate'] = [role.deathdate]
             }
             if (role.lastname) {
               entity['schema:familyName'] = [
@@ -2322,7 +2374,7 @@ export default {
   },
   validate_object (object) {
     if (!object['@type']) {
-      // console.error('JSON-LD validation: missing @type attribute', object)
+      console.log('Object validation: missing @type attribute', object)
       return false
     }
     return true
@@ -2432,7 +2484,8 @@ export default {
   fields2json (jsonld, formData) {
     for (var j = 0; j < formData.fields.length; j++) {
       var f = formData.fields[j]
-
+      console.log(f.predicate)
+      console.log(f)
       switch (f.predicate) {
         case 'rdam:P30004':
           if (f.value) {
@@ -2498,8 +2551,12 @@ export default {
           break
 
         case 'rdax:P00009':
-          if (f.value) {
+          if (f.value.startsWith('https://')) {
             this.push_object(jsonld, f.predicate, this.get_json_object(f['skos:prefLabel'], null, f.type, [f.value]))
+          } else {
+            if (f.value) {
+              this.push_object(jsonld, f.predicate, this.get_json_object([{ '@value': f.value, '@language': f.language }], null, f.type))
+            }
           }
           break
 
@@ -2620,10 +2677,12 @@ export default {
           } else {
             // project
             if (f.type === 'foaf:Project') {
-              if (f.funderName, f.funderIdentifier) {
-                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.acronym, f.nameLanguage, f.description, f.descriptionLanguage, f.code, f.identifier, f.identifierType, f.homepage, f.dateFrom, f.dateTo, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier, f.funderIdentifierType)))
-              } else {
-                this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.acronym, f.nameLanguage, f.description, f.descriptionLanguage, f.code, f.identifier, f.identifierType, f.homepage, f.dateFrom, f.dateTo))
+              if (f.name || f.acronym || f.code || f.identifier || f.description || f.homepage || f.funderName || f.funderIdentifier) {
+                if (f.funderName, f.funderIdentifier) {
+                  this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.acronym, f.nameLanguage, f.description, f.descriptionLanguage, f.code, f.identifier, f.identifierType, f.homepage, f.dateFrom, f.dateTo, this.get_json_funder(f.funderName, f.funderNameLanguage, f.funderIdentifier, f.funderIdentifierType)))
+                } else {
+                  this.push_object(jsonld, f.predicate, this.get_json_project(f.name, f.acronym, f.nameLanguage, f.description, f.descriptionLanguage, f.code, f.identifier, f.identifierType, f.homepage, f.dateFrom, f.dateTo))
+                }
               }
             }
           }

@@ -3,12 +3,12 @@
     <v-col cols="12">
 
       <v-card class="mb-8">
-        <v-card-title class="title font-weight-light grey white--text">
+        <v-card-title class="title font-weight-light white--text">
             <span>{{ $t('Study plan') }}</span>
             <v-spacer></v-spacer>
             <v-menu open-on-hover bottom offset-y v-if="actions.length">
-              <template v-slot:activator="{ on }">
-                <v-btn v-on="on" icon dark>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-on="on" v-bind="attrs" icon dark>
                   <v-icon dark>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
@@ -35,7 +35,7 @@
             </v-col>
             <v-col cols="4" v-if="multilingual">
               <v-btn text @click="$refs.langdialog.open()">
-                <span class="grey--text text--darken-1">
+                <span>
                   ({{ nameLanguage ? nameLanguage : '--' }})
                 </span>
               </v-btn>

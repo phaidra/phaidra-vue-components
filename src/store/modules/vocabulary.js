@@ -193,11 +193,11 @@ const vocabularies = {
     terms: [
       { '@id': 'http://purl.org/dc/terms/references', 'skos:prefLabel': { 'eng': 'References', 'deu': 'bezieht sich auf', 'ita': 'Si riferisce a' }, 'skos:notation': ['references'] },
       { '@id': 'http://phaidra.org/XML/V1.0/relations#isBackSideOf', 'skos:prefLabel': { 'eng': 'Is back side of', 'deu': 'ist Rückseite von', 'ita': 'È verso di' }, 'skos:notation': ['isBackSideOf'] },
-      { '@id': 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', 'skos:prefLabel': { 'eng': 'Is thumbnail for', 'deu': 'ist Vorschaubild von', 'ita': 'È l\'anteprima di' }, 'skos:notation': ['isThumbnailFor'] },
+      { '@id': 'http://phaidra.org/XML/V1.0/relations#isThumbnailFor', 'skos:prefLabel': { 'eng': 'Is thumbnail for', 'deu': 'ist Vorschaubild von', 'ita': 'È anteprima di' }, 'skos:notation': ['isThumbnailFor'] },
       { '@id': 'http://phaidra.univie.ac.at/XML/V1.0/relations#hasSuccessor', 'skos:prefLabel': { 'eng': 'Is older version of', 'deu': 'ist ältere Version von', 'ita': 'È versione precedente di' }, 'skos:notation': ['hasSuccessor'] },
       { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeFormatOf', 'skos:prefLabel': { 'eng': 'Is alternative format of', 'deu': 'ist alternatives Format von', 'ita': 'È formato alternativo di' }, 'skos:notation': ['isAlternativeFormatOf'] },
       { '@id': 'http://phaidra.org/XML/V1.0/relations#isAlternativeVersionOf', 'skos:prefLabel': { 'eng': 'Is alternative version of', 'deu': 'ist alternative Version von', 'ita': 'È versione alternativa di' }, 'skos:notation': ['isAlternativeVersionOf'] },
-      { '@id': 'info:fedora/fedora-system:def/relations-external#hasCollectionMember', 'skos:prefLabel': { 'eng': 'Has part', 'deu': 'hat Collection Mitglieder', 'ita': 'È membro' }, 'skos:notation': ['hasCollectionMember'] },
+      { '@id': 'info:fedora/fedora-system:def/relations-external#hasCollectionMember', 'skos:prefLabel': { 'eng': 'Has part', 'deu': 'hat Collection Mitglieder', 'ita': 'È membro di' }, 'skos:notation': ['hasCollectionMember'] },
       { '@id': 'http://pcdm.org/models#hasMember', 'skos:prefLabel': { 'eng': 'Has member', 'deu': 'hat Mitglieder', 'ita': 'Ha membro' }, 'skos:notation': ['hasMember'] },
       { '@id': 'http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasTrack', 'skos:prefLabel': { 'eng': 'Has track', 'deu': 'hat Track (zb. Untertitel)', 'ita': 'Ha traccia (es. sottotitoli)' }, 'skos:notation': ['hasTrack'] }
     ],
@@ -302,6 +302,17 @@ const vocabularies = {
       { '@id': 'ids:lcnaf', 'skos:prefLabel': { 'eng': 'LCNAF' }, 'skos:example': 'n79021164' },
       { '@id': 'ids:isni', 'skos:prefLabel': { 'eng': 'ISNI' }, 'skos:example': '0000000121174585' },
       { '@id': 'ids:uri', 'skos:prefLabel': { 'eng': 'URI' }, 'skos:example': 'https://authority.example.com/path/resource' }
+    ],
+    loaded: true
+  },
+  'orgtypes': {
+    terms: [
+      { '@id': 'foaf:Organization', 'skos:prefLabel': { 'eng': 'Organization', 'deu': 'Organisation', 'ita': 'Organizzazione' } },
+      { '@id': 'aiiso:Division', 'skos:prefLabel': { 'eng': 'Division', 'deu': 'Organisationseinheit', 'ita': 'Divisione' } },
+      { '@id': 'aiiso:Faculty', 'skos:prefLabel': { 'eng': 'Faculty', 'deu': 'Fakultät', 'ita': 'Facoltà' } },
+      { '@id': 'aiiso:Institute', 'skos:prefLabel': { 'eng': 'Institute', 'deu': 'Institut', 'ita': 'Istituto' } },
+      { '@id': 'aiiso:Department', 'skos:prefLabel': { 'eng': 'Abteilung', 'deu': 'Zitiert von', 'ita': 'Dipartimento' } },
+      { '@id': 'aiiso:ResearchGroup', 'skos:prefLabel': { 'eng': 'Forschungsgruppe', 'deu': 'Zitiert von', 'ita': 'Gruppo di ricerca' } }
     ],
     loaded: true
   },
@@ -637,6 +648,7 @@ const vocabularies = {
   },
   'mimetypes': {
     terms: [
+      { '@id': 'model/obj', 'skos:notation': ['obj'], 'skos:prefLabel': { 'eng': 'OBJ' } },
       { '@id': 'image/jpeg', 'skos:notation': ['jpeg', 'jpg'], 'skos:prefLabel': { 'eng': 'JPG/JPEG' } },
       { '@id': 'image/tiff', 'skos:notation': ['tiff', 'tif'], 'skos:prefLabel': { 'eng': 'TIFF' } },
       { '@id': 'image/gif', 'skos:notation': ['gif'], 'skos:prefLabel': { 'eng': 'GIF' } },
@@ -2022,11 +2034,11 @@ const mutations = {
       state.vocabularies['bic']['loaded'] = true
     }
   },
-  sortFields(state, locale) {
+  sortFields(state, {locale, i18nInstance}) {
     i18n.locale = locale
     if (state.fields) {
       state.fields.sort(function (a, b) {
-        return i18n.t(a.fieldname).localeCompare(i18n.t(b.fieldname), locale)
+        return i18nInstance.t(a.fieldname).localeCompare(i18nInstance.t(b.fieldname), locale)
       })
     }
   },
@@ -2100,8 +2112,8 @@ const actions = {
   setInstanceConfig({ commit }, config) {
     commit('setInstanceConfig', config)
   },
-  sortFields({ commit }, locale) {
-    commit('sortFields', locale)
+  sortFields({ commit }, {locale, i18nInstance}) {
+    commit('sortFields', {locale, i18nInstance})
   },
   sortRoles({ commit }, locale) {
     commit('sortRoles', locale)
