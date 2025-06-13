@@ -112,7 +112,16 @@
               <v-card-title class="title font-weight-light grey white--text">{{ $t('Restrict access rights to particular account') }}</v-card-title>
               <v-divider></v-divider>
               <v-card-text class="mt-4">
-                <v-container fluid>
+                <v-btn class="mb-4 mt-4 primary" @click="$refs.userSearchdialog.open()">
+                  {{ $t('Username search') }}
+                <v-icon
+                  right
+                  dark
+                >
+                  mdi-database-search
+                </v-icon>
+              </v-btn>
+                <!-- <v-container fluid>
                   <v-row>
                     <v-col cols="8">
                       <v-autocomplete
@@ -144,7 +153,7 @@
                       <v-btn class="primary" :disabled="loading || userSearchExactLoading" @click="addUserExact()">{{ $t('Apply') }}</v-btn>
                     </v-col>
                   </v-row>
-                </v-container>
+                </v-container> -->
               </v-card-text>
             </v-card>
           </v-col>
@@ -267,6 +276,7 @@
         </v-dialog>
       </v-container>
     </v-card-text>
+    <user-search-dialog ref="userSearchdialog" @user-selected="searchUserSelected($event)"></user-search-dialog>
   </v-card>
 </template>
 
@@ -275,12 +285,14 @@ import qs from 'qs'
 import arrays from '../../utils/arrays'
 import { vocabulary } from '../../mixins/vocabulary'
 import OrgUnitsTreeDialog from '../select/OrgUnitsTreeDialog'
+import UserSearchDialog from '../select/UserSearchDialog'
 
 export default {
   name: 'p-m-rights',
   mixins: [vocabulary],
   components: {
-    OrgUnitsTreeDialog
+    OrgUnitsTreeDialog,
+    UserSearchDialog
   },
   props: {
     pid: {
@@ -473,17 +485,21 @@ export default {
         this.saveRights()
       }
     },
-    addUser: function () {
-      if (this.userSearchModel) {
-        this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
+    // addUser: function () {
+    //   if (this.userSearchModel) {
+    //     this.rightsArray.push({ type: 'username', notation: this.userSearchModel.uid, description: this.userSearchModel.value, expires: null })
+    //     this.saveRights()
+    //   }
+    // },
+    // addUserExact: function () {
+    //   if (this.userSearchExactModel) {
+    //     this.rightsArray.push({ type: 'username', notation: this.userSearchExactModel.uid, description: this.userSearchExactModel.value, expires: null })
+    //     this.saveRights()
+    //   }
+    // },
+    searchUserSelected: function (val) {
+      this.rightsArray.push({ type: 'username', notation: val.username, description: 'user ' + val.username, expires: null })
         this.saveRights()
-      }
-    },
-    addUserExact: function () {
-      if (this.userSearchExactModel) {
-        this.rightsArray.push({ type: 'username', notation: this.userSearchExactModel.uid, description: this.userSearchExactModel.value, expires: null })
-        this.saveRights()
-      }
     },
     addGroup: function (group) {
       this.rightsArray.push({ type: 'gruppe', notation: group.groupid, description: group.name, expires: null })
