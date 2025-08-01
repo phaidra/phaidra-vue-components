@@ -1638,6 +1638,7 @@ export default {
       newRole.lastname = f.lastname
       newRole.role = f.role
       newRole.showDefinitions = f.showDefinitions
+      newRole.isParentSelectionDisabled = f.isParentSelectionDisabled
       arr.splice(arr.indexOf(f), 1, newRole)
     },
     removeField: function (arr, f) {
