@@ -60,7 +60,14 @@
         <template v-else-if="ch.xmlname === 'license'">
           <template v-if="(cmodel !== 'Collection') && (cmodel !== 'Resource')">
             <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t(nodePath(ch)) }}</v-col>
-            <v-col cols="12" md="10" class="wiv">{{ ch.labels[alpha2locale] }}</v-col>
+            <v-col cols="12" md="10" class="wiv">
+              <span v-if="dc_rights && dc_rights.length > 0">
+                <a :href="dc_rights[1]" target="_blank">{{ ch.labels[alpha2locale] }}</a>
+              </span>
+              <span v-else>
+                {{ ch.labels[alpha2locale] }}
+              </span>
+            </v-col>
           </template>
         </template>
         <template v-else>
@@ -70,7 +77,7 @@
       </template>
       <template v-else-if="ch.input_type === 'node'">
         <template v-if="ch.xmlname === 'identifiers'">
-          <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ getChildLabel(ch, 'resource') }}</v-col>
+          <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ getChildLabel(ch, 'resource') || $t("Other identifier") }}</v-col>
           <v-col cols="12" md="10">{{ getChildValue(ch, 'identifier') }}</v-col>
         </template>
         <template v-else-if="nodePath(ch) === 'uwm_lifecycle_contribute'">
@@ -111,9 +118,9 @@
                 <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_resource') }}</v-col>
                 <v-col cols="12" md="10">{{ getChildLabel(ch, 'resource') }}</v-col>
               </v-row>
-              <v-row v-if="getChildValue(ch, 'comment')">
-                <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_comment') }}<template v-if="getLangAttr(getChild(ch, 'comment'))"> ({{getLangAttr(getChild(ch, 'comment'))}})</template></v-col>
-                <v-col cols="12" md="10"><span v-html="link(getChildValue(ch, 'comment'))"></span></v-col>
+              <v-row v-for="(child, i) in getMultipleChild(ch, 'comment')" :key="'comment'+i">
+                <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_comment') }}<template v-if="getLangAttr(child)"> ({{getLangAttr(child)}})</template></v-col>
+                <v-col cols="12" md="10"><span v-html="link(child.ui_value)"></span></v-col>
               </v-row>
               <v-row v-if="getChildValue(ch, 'role')">
                 <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ getChildLabel(ch, 'role') }}</v-col>
@@ -136,13 +143,13 @@
                 <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_date_to') }}</v-col>
                 <v-col cols="12" md="10">{{ getChildValue(ch, 'date_to') | date }}</v-col>
               </v-row>
-              <v-row v-if="getChildValue(ch, 'chronological')">
-                <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_chronological') }}<template v-if="getLangAttr(getChild(ch, 'chronological'))"> ({{getLangAttr(getChild(ch, 'chronological'))}})</template></v-col>
-                <v-col cols="12" md="10">{{ getChildValue(ch, 'chronological') }}</v-col>
+              <v-row v-for="(child, i) in getMultipleChild(ch, 'chronological')" :key="'chron'+i">
+                <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_chronological') }}<template v-if="getLangAttr(child)"> ({{getLangAttr(child)}})</template></v-col>
+                <v-col cols="12" md="10">{{ child.ui_value }}</v-col>
               </v-row>
-              <v-row  v-if="getChildValue(ch, 'location')">
-                <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_location') }}<template v-if="getLangAttr(getChild(ch, 'location'))"> ({{getLangAttr(getChild(ch, 'location'))}})</template></v-col>
-                <v-col cols="12" md="10">{{ getChildValue(ch, 'location') }}</v-col>
+              <v-row v-for="(child, i) in getMultipleChild(ch, 'location')" :key="'loc'+i">
+                <v-col cols="12" md="2" class="pdlabel secondary--text font-weight-bold text-md-right">{{ $t('uwm_provenience_contribute_location') }}<template v-if="getLangAttr(child)"> ({{getLangAttr(child)}})</template></v-col>
+                <v-col cols="12" md="10">{{ child.ui_value }}</v-col>
               </v-row>
             </v-card-text>
           </v-card>
@@ -174,12 +181,12 @@
           </v-col>
         </template>
         <template v-else-if="hideNodeBorder(nodePath(ch))">
-          <p-d-uwm-rec v-if="ch.children" :children="ch.children" :cmodel="cmodel" :path="nodePath(ch)"></p-d-uwm-rec>
+          <p-d-uwm-rec v-if="ch.children" :children="ch.children" :cmodel="cmodel" :dc_rights="dc_rights" :path="nodePath(ch)"></p-d-uwm-rec>
         </template>
         <v-card v-else outlined class="mt-4" :width="'100%'">
           <v-card-text>
             <div class="overline mb-4">{{ $t(nodePath(ch)) }}</div>
-            <p-d-uwm-rec v-if="ch.children" :children="ch.children" :cmodel="cmodel" :path="nodePath(ch)"></p-d-uwm-rec>
+            <p-d-uwm-rec v-if="ch.children" :children="ch.children" :cmodel="cmodel" :dc_rights="dc_rights" :path="nodePath(ch)"></p-d-uwm-rec>
           </v-card-text>
         </v-card>
       </template>
@@ -209,6 +216,9 @@ export default {
     },
     cmodel: {
       type: String
+    },
+    dc_rights: {
+      type: Array
     }
   },
   computed: {
@@ -399,6 +409,17 @@ export default {
             return ch.ui_value
           }
         }
+      }
+    },
+    getMultipleChild: function (id, xmlname) {
+      if (id.children) {
+        let values = []
+        for (let ch of id.children) {
+          if (ch.xmlname === xmlname) {
+            values.push(ch)
+          }
+        }
+        return values
       }
     },
     getChild: function (id, xmlname) {

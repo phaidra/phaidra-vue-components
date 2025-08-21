@@ -747,7 +747,8 @@ const vocabularies = {
           '16'
         ],
         'skos:prefLabel': {
-          'eng': 'CC BY 4.0 International'
+          'eng': 'CC BY 4.0 International',
+          'ita': 'CC BY 4.0 Internazionale'
         },
         'img': 'cc-by.png',
         'skos:definition': {
@@ -2168,7 +2169,7 @@ const actions = {
         commit('sortOefos', locale)
       } catch (error) {
         console.log(error)
-        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch oefos: ' + error }])
+        commit('setAlerts', [{ type: 'danger', msg: 'Failed to fetch oefos: ' + error }], { root: true })
       }
     } else {
       if (state.vocabularies['oefos']['locale'] !== locale) {

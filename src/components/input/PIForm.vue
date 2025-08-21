@@ -188,6 +188,9 @@
                               v-on:configure="editFieldProps(f)"
                               :configurable="enablefieldconfig || f.configurable"
                             ></p-i-select>
+                            <v-col class="mb-8" cols="12" v-if="f.predicate === 'edm:rights'">
+                              <span v-html="$t('LICENSE_NOTE')"></span>
+                            </v-col>
                             <v-col cols="12" v-if="(f.predicate === 'edm:rights') && f.showValueDefinition && license">
                               <p-d-license-info :license="license"></p-d-license-info>
                             </v-col>
@@ -287,6 +290,7 @@
                               v-on:input-publisher-name="f.publisherName=$event"
                               v-on:change-type="f.publisherType = $event"
                               v-on:input-publisher-select="publisherSelectInput(f, $event)"
+                              v-on:input-publisher-ror="publisherRorInput(f, $event)"
                               v-on:input-publishing-place="f.publishingPlace=$event"
                               v-on:input-publishing-date="f.publishingDate=$event"
                               v-on:add="addField(s.fields, f)"
@@ -742,7 +746,7 @@
                     <v-col>
                       <v-dialog v-if="addbutton && (s.addbutton != false)" class="pb-4" v-model="s['adddialogue']" scrollable width="700px">
                         <template v-slot:activator="{ on }">
-                          <v-btn v-on="on" color="primary" large elevation="4" class="mb-4 font-weight-black">
+                          <v-btn v-on="on" color="primary" large elevation="4" class="my-4">
                             <v-icon class="mr-4" color="white" size="24" right dark>mdi-plus-circle</v-icon>{{ $t('Add metadata field') }}
                           </v-btn>
                         </template>
@@ -1636,9 +1640,9 @@ export default {
       newRole.identifierType = 'ids:orcid'
       newRole.firstname = f.firstname
       newRole.lastname = f.lastname
+      newRole.isParentSelectionDisabled = f.isParentSelectionDisabled
       newRole.role = f.role
       newRole.showDefinitions = f.showDefinitions
-      newRole.isParentSelectionDisabled = f.isParentSelectionDisabled
       arr.splice(arr.indexOf(f), 1, newRole)
     },
     removeField: function (arr, f) {
@@ -1810,6 +1814,16 @@ export default {
         Object.entries(preflabels).forEach(([key, value]) => {
           f.publisherSelectedName.push({ '@value': value, '@language': key })
         })
+      }
+    },
+    publisherRorInput: function (f, event) {
+      f.publisherRor = ''
+      f.publisherSelectedName = []
+      if (event) {
+        for (const id of event['skos:exactMatch']) {
+          f.publisherRor = id
+        }
+        f.publisherSelectedName = event['schema:name']
       }
     },
     publisherSuggestInput: function (f, event) {

@@ -2,7 +2,7 @@
     <v-row no-gutters>
       <v-col md="9" cols="12" class="pr-2">
         <v-row align="start" class="pt-2 pb-4">
-          <v-col md="6" cols="9">
+          <v-col md="6" cols="12">
             <p-search-autocomplete
               :placeholder="$t('SEARCH_PLACEHOLDER')"
               name="autocomplete"
@@ -23,7 +23,9 @@
               :link="link"
               :toggleSelection="toggleSelection"
               :selectioncheck="selectioncheck"
-              :csvExport="csvExport" />
+              :csvExport="csvExport"
+              :signedin="signedin"
+            />
           </v-col>
         </v-row>
         <v-row class="hidden-md-and-up">
@@ -154,6 +156,10 @@ export default {
     }
   },
   props: {
+    signedin: {
+      type: Number,
+      default: 0
+    },
     collection: {
       type: String,
       default: ''
