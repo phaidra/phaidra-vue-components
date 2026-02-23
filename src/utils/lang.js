@@ -1,7 +1,6 @@
 export default {
-  get_lang () {
-    return [
-      {
+  get_lang() {
+    return [{
         '@id': 'asq',
         'skos:prefLabel': {
           'eng': 'Austrian Sign Language',
@@ -4410,8 +4409,7 @@ export default {
           'fra': 'vénète',
           'ita': 'Venetico'
         }
-      }
-      ,
+      },
       {
         '@id': 'ndv',
         'skos:prefLabel': {
@@ -4429,7 +4427,7 @@ export default {
           'fra': 'Palor',
           'ita': 'Palor'
         }
-      },{
+      }, {
         '@id': 'bun',
         'skos:prefLabel': {
           'eng': 'Sherbro',
@@ -4437,7 +4435,7 @@ export default {
           'fra': 'Sherbro',
           'ita': 'Sherbro'
         }
-      },{
+      }, {
         '@id': 'bgo',
         'skos:prefLabel': {
           'eng': 'Baga Koga',
@@ -4445,7 +4443,7 @@ export default {
           'fra': 'Baga Koga',
           'ita': 'Baga Koga'
         }
-      },{
+      }, {
         '@id': 'lia',
         'skos:prefLabel': {
           'eng': 'Limba (West-Zentral)',
@@ -4453,7 +4451,7 @@ export default {
           'fra': 'Limba (occidental)',
           'ita': 'Limba (occidentale)'
         }
-      },{
+      }, {
         '@id': 'lma',
         'skos:prefLabel': {
           'eng': 'Limba (Ost)',
@@ -4461,7 +4459,7 @@ export default {
           'fra': 'Limba (oriental)',
           'ita': 'Limba (orientale)'
         }
-      },{
+      }, {
         '@id': 'klu',
         'skos:prefLabel': {
           'eng': 'Klao',
@@ -4469,7 +4467,7 @@ export default {
           'fra': 'Klao',
           'ita': 'Klao'
         }
-      },{
+      }, {
         '@id': 'cae',
         'skos:prefLabel': {
           'eng': 'Laalaa',
@@ -4477,7 +4475,7 @@ export default {
           'fra': 'Laalaa',
           'ita': 'Laalaa'
         }
-      },{
+      }, {
         '@id': 'kiz',
         'skos:prefLabel': {
           'eng': 'Kisi',
@@ -4485,7 +4483,7 @@ export default {
           'fra': 'Kisi',
           'ita': 'Kisi'
         }
-      },{
+      }, {
         '@id': 'bda',
         'skos:prefLabel': {
           'eng': 'Bayot',
@@ -4493,15 +4491,15 @@ export default {
           'fra': 'Bayot',
           'ita': 'Bayot'
         }
-      },{
+      }, {
         '@id': 'bcz',
         'skos:prefLabel': {
-          'eng': 'Banyun | Bainouk)',
-          'deu': 'Banyun | Bainouk)',
-          'fra': 'Banyun | Bainouk)',
-          'ita': 'Banyun | Bainouk)'
+          'eng': 'Banyun | Bainouk',
+          'deu': 'Banyun | Bainouk',
+          'fra': 'Banyun | Bainouk',
+          'ita': 'Banyun | Bainouk'
         }
-      },{
+      }, {
         '@id': 'knf',
         'skos:prefLabel': {
           'eng': 'Mankanya',
@@ -4509,7 +4507,7 @@ export default {
           'fra': 'Mankanya',
           'ita': 'Mankanya'
         }
-      },{
+      }, {
         '@id': 'snf',
         'skos:prefLabel': {
           'eng': 'Noon',
@@ -4517,13 +4515,29 @@ export default {
           'fra': 'Noon',
           'ita': 'Noon'
         }
-      },{
+      }, {
         '@id': 'bmf',
         'skos:prefLabel': {
           'eng': 'Krim',
           'deu': 'Krim',
           'fra': 'Krim',
           'ita': 'Krim'
+        }
+      }, {
+        '@id': 'kqs',
+        'skos:prefLabel': {
+          'eng': 'Northern Kissi',
+          'deu': 'Nord-Kissi',
+          'fra': 'Kissi du Nord',
+          'ita': 'Kissi settentrionale'
+        }
+      }, {
+        '@id': 'kss',
+        'skos:prefLabel': {
+          'eng': 'Southern Kissi',
+          'deu': 'Süd-Kissi',
+          'fra': 'Kissi du Sud',
+          'ita': 'Kissi meridionale'
         }
       }
     ]
